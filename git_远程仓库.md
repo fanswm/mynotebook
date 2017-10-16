@@ -26,12 +26,14 @@
 
 `git remote add [shortname] [url]`
 
-> git remote
+```
+git remote
 # origin
 git remote add pb git://github.com/paulboone/ticgit.git
 git remote -v
 # origin git://github.com/schacon/ticgit.git
 pb git://github.com/paulboone/ticgit.git
+```
 
 > 现在可以用字串 pb 指代对应的仓库地址了.比如说,要抓取所有 Paul 有的,但本地仓库没有的信息,可以运行 `git fetch pb`
 
