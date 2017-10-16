@@ -24,16 +24,14 @@
 
 > 要添加一个新的远程仓库,可以指定一个简单的名字,以便将来引用,运行
 
-`git remote add [shortname] [url]:`
+`git remote add [shortname] [url]`
 
-> ```
-git remote
+> git remote
 # origin
 git remote add pb git://github.com/paulboone/ticgit.git
 git remote -v
 # origin git://github.com/schacon/ticgit.git
 pb git://github.com/paulboone/ticgit.git
-```
 
 > 现在可以用字串 pb 指代对应的仓库地址了.比如说,要抓取所有 Paul 有的,但本地仓库没有的信息,可以运行 `git fetch pb`
 
@@ -52,6 +50,7 @@ pb git://github.com/paulboone/ticgit.git
 
 `git push [remote-name] [branch-name]`
 > 如果要把本地的 master 分支推送到 origin 服务器上(再次说明下,克隆操作会自动使用默认的 master 和 origin 名字),可以运行下面的命令:
+
 `git push origin master`
 
 > 只有在所克隆的服务器上有写权限,或者同一时刻没有其他人在推数据,这条命令才会如期完成任务.如果在你推数据前,已经有其他人推送了若干更新,那 你的推送操作就会被驳回.你必须先把他们的更新抓取到本地,并到自己的项目中,然后才可以再次推送.
