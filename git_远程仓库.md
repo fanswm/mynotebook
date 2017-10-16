@@ -69,3 +69,5 @@ pb git://github.com/paulboone/ticgit.git
 
 + 移除远端仓库,可以运行 git remote rm 命令:
 `git remote rm paul`
+
+参考自：http://www.cnblogs.com/lazb/articles/5597878.html
