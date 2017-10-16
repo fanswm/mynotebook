@@ -1,10 +1,10 @@
 ## 修改远程仓库地址
 + 修改命令
-+ + `git remote origin set-url [url]`
+  + `git remote origin set-url [url]`
 
 + 先删后加
-+ + `git remote rm origin`
-+ + `git remote add origin [url]`
+  + `git remote rm origin`
+  + `git remote add origin [url]`
 
 + 直接修改config文件
 
