@@ -1,3 +1,5 @@
+tags: 图像处理 inkscape fanswm笔记
+
 ## 平移画布
 + `Ctrl` + `arrow`
 + 鼠标中键拖动；
