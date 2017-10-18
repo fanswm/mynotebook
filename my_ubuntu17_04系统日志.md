@@ -1,2 +1,2 @@
 ## 20171018
-+ `dkpg -i TeighaFileConverter_QT5_lnxX86_4.7dll.deb`
++ `sudo dpkg -i TeighaFileConverter_QT5_lnxX86_4.7dll.deb`
