@@ -6,7 +6,7 @@
 + `sudo curl -sSL https://get.daocloud.io/docker | sh`
 + `sudo docker run -d --name ttrssdb nornagon/postgres`
 + `sudo docker run -d --link ttrssdb:db -p 80:80 -e SELF_URL_PATH=http://172.17.0.1 fischerman/docker-ttrss`
-> 前一个“80”，是docker内部端口；冒号后面的是映射到主机的端口；“172.17.0.1”是docker的ip。
+> -p 80:80：该参数表明，将该容器内应用的 80 端口（冒号后）映射到主机的 80 端口（冒号前）上；“172.17.0.1”是docker的ip。
 
 # 显示所有已安装的容器
 sudo docker ps
