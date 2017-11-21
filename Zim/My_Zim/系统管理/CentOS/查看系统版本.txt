@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T16:44:22+08:00
+
+====== 查看系统版本 ======
+Created Tuesday 21 November 2017
+
+__## CentOS查看系统版本：__
+
+- `cat /proc/version`
+- `uname -a`
+- `uname -r`
+
+__## 查看Linux版本：__
+
+- 列出所有版本信息：
+  - `lsb_release -a`
+  - `cat /etc/issue`
+  - `cat [[/etc/redhat-release`]]
+
+__- 查看系统是64位还是32位：__
+  - `getconf LONG_BIT`
+  - `getconf WORD_BIT`
+  - `file /bin/ls`
