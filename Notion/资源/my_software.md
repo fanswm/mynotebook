@@ -70,7 +70,7 @@
 	+ electronic wechat
 	+ QQ: Longene
 	+ 下载工具
-		+ transmission
+		+ transmission:	sudo yum install transmission
 		+ aria2
 		+ 迅雷Xware Desktop
 	+ [高清IP定位][https://www.opengps.cn/Data/IP/LocHighAcc.aspx]
