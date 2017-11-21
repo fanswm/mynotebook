@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T20:05:10+08:00
+
+====== ubuntu 安装系统指示器SysPeek ======
+创建日期 星期二 21 十一月 2017
+
+安装系统指示器SysPeek
+
+/add code
+
+	sudo add-apt-repository ppa:nilarimogard/webupd8 
+	sudo apt-get update 
+	sudo apt-get install syspeek

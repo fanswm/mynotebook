@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T07:04:33+08:00
+
+====== zim ======
+创建日期 星期三 22 十一月 2017
+
+ubuntu
+```
+	sudo apt-get install zim
+```
+ [http://zim-wiki.org/](http://zim-wiki.org/)
+
+ [https://www.zhihu.com/question/19716095](https://www.zhihu.com/question/19716095)

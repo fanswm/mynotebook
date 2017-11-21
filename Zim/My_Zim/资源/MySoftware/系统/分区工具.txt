@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-21T17:10:43+08:00
-
-====== 分区工具 ======
-Created Tuesday 21 November 2017
-

@@ -1,0 +1,28 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T07:41:39+08:00
+
+====== 批量改变单元格部分字符格式 ======
+创建日期 星期三 22 十一月 2017
+
+Sub MyCharacters()
+	'ExcelHome技术论坛VBA编程学习与实践：看见星光
+	 Dim arr, s$, i&, L&, n&
+	 s = "领导" '需要改变格式的字符串
+	 n = Len(s) '变量s的长度
+	 arr = Range("a1:a" & Cells(Rows.Count, 1).End(xlUp).Row)
+	 For i = 1 To UBound(arr)
+	 L = InStr(1, arr(i, 1), s, vbTextCompare)
+	 '查找变量s在arr(i,1)中首次出现的位置，不区分字母大小写
+	 Do While L '如果l不为0，也就是存在s的话那么……
+	 With Cells(i, 1).Characters(L, n).Font
+	 .Size = 15 '15号字体
+	 .FontStyle = "加粗"
+	 .Color = -16776961 '红色
+	 End With
+	 L = InStr(L + n, arr(i, 1), s, vbTextCompare)
+	 '寻找变量s下一个出现的位置
+	 Loop
+	 Next
+	 MsgBox "处理完毕!"
+	End Sub

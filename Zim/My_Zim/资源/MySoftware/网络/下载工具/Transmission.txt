@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T20:31:52+08:00
+
+====== Transmission ======
+创建日期 星期二 21 十一月 2017
+
+开源。Ubuntu 默认安装的软件。用于通过种子下载文件。对于热门的文件下载速度还可以，冷门 的文件则可能出现找不到 Peer 的情况。由于对 BT 的封锁，自带的 Tracker 被屏蔽了，需要手动添加可以连接的 Tracker 才能正常下载。方法是在任务上右键 -> Properties -> Trackers -> Edit，然后在文本框里粘贴 Tracker 地址列表。这里有一个 Tracker 列表： [一些能用的BT Tracker服务器地址【不定时更新】](https://link.zhihu.com/?target=http%3A//www.wdssmq.com/post/20130323295.html) 
+
+https://www.wdssmq.com/post/20130323295.html
+
+
+[](https://www.wdssmq.com/post/20130323295.html)
+
+下载工具

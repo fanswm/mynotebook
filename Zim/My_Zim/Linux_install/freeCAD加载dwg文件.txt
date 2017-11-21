@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T20:02:40+08:00
+
+====== freeCAD加载dwg文件 ======
+创建日期 星期二 21 十一月 2017
+
+https://www.opendesign.com/guestfiles/TeighaFileConverter

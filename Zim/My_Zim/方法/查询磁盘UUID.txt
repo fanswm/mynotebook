@@ -1,0 +1,27 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T07:36:59+08:00
+
+====== 查询磁盘UUID ======
+创建日期 星期三 22 十一月 2017
+
+#查看
+	ls -l /dev/disk/by-uuid
+
+查看硬盘UUID
+
+ `root [ /dev/disk/by-uuid]# ls -l /dev/disk/by-uuid` 
+
+查看硬盘UUID
+
+ `blkid/dev/sda5` 
+
+uuidgen 会返回一个合法的 uuid，结合 tune2fs 可以新生成一个 uuid 并写入 ext2,3,4 分区中：
+
+比如新建或改变 sda5 的 uuid （需要 root 权限）
+
+ `uuidgen | xargstune2fs/dev/sda5-U` 
+
+你也可以把 fstab 里找到的原 uuid 写回分区:
+
+ `tune2fs -U c1b9d5a2-f162-11cf-9ece-0020afc76f16 /dev/sda5`

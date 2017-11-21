@@ -1,7 +1,7 @@
 Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
-Creation-Date: 2017-11-21T17:10:56+08:00
+Creation-Date: 2017-11-21T17:10:43+08:00
 
-====== 启动栏 ======
+====== 分区工具GParted ======
 Created Tuesday 21 November 2017
 
