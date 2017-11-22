@@ -1,0 +1,185 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T13:32:57+08:00
+
+====== 5 SELinux初探 ======
+Created Wednesday 22 November 2017
+
+SELinux 初探
+在进入了 CentOS 5.x 之后，SELinux 已经是个非常完备的核心模块了！CentOS 5.x 提供了很多管理 SELinux 的命令与机制， 因此在整体架构上面比以前的版本要单纯且容易操作管理！所以，在这一版以后，我们建议大家千万不要关掉 SELinux 这玩意儿！ 让我们来仔细的玩玩这家伙吧！
+
+
+小标题的图示什么是 SELinux
+什么是 SELinux 呢？其实他是『 Security Enhanced Linux 』的缩写，字面上的意义就是安全强化的 Linux 之意！那么所谓的『安全强化』是强化哪个部分？ 是网络资安还是权限管理？底下就让我们来谈谈吧！
+
+
+当初设计的目标：避免资源的误用
+SELinux 是由美国国家安全局 (NSA) 开发的，当初开发这玩意儿的目的是因为很多企业界发现， 通常系统出现问题的原因大部分都在於『内部员工的资源误用』所导致的，实际由外部发动的攻击反而没有这么严重。 那么什么是『员工资源误用』呢？举例来说，如果有个不是很懂系统的系统管理员为了自己配置的方便，将网页所在目录 /var/www/html/ 的权限配置为 drwxrwxrwx 时，你觉得会有什么事情发生？
+
+现在我们知道所有的系统资源都是透过程序来进行存取的，那么 /var/www/html/ 如果配置为 777 ， 代表所有程序均可对该目录存取，万一你真的有启动 WWW 服务器软件，那么该软件所触发的程序将可以写入该目录， 而该程序却是对整个 Internet 提供服务的！只要有心人接触到这支程序，而且该程序刚好又有提供使用者进行写入的功能， 那么外部的人很可能就会对你的系统写入些莫名其妙的东西！那可真是不得了！一个小小的 777 问题可是大大的！
+
+为了控管这方面的权限与程序的问题，所以美国国家安全局就著手处理操作系统这方面的控管。 由於 Linux 是自由软件，程序码都是公开的，因此她们便使用 Linux 来作为研究的目标， 最后更将研究的结果整合到 Linux 核心里面去，那就是 SELinux 啦！所以说， SELinux 是整合到核心的一个模块喔！ 更多的 SELinux 相关说明可以参考：
+
+http://www.nsa.gov/research/selinux/
+这也就是说：其实 SELinux 是在进行程序、文件等细部权限配置依据的一个核心模块！ 由於启动网络服务的也是程序，因此刚好也能够控制网络服务能否存取系统资源的一道关卡！ 所以，在讲到 SELinux 对系统的存取控制之前，我们得先来回顾一下之前谈到的系统文件权限与使用者之间的关系。 因为先谈完这个你才会知道为何需要 SELinux 的啦！
+
+
+传统的文件权限与帐号关系：自主式存取控制, DAC
+我们第十四章的内容，知道系统的帐号主要分为系统管理员 (root) 与一般用户，而这两种身份能否使用系统上面的文件资源则与 rwx 的权限配置有关。 不过你要注意的是，各种权限配置对 root 是无效的。因此，当某个程序想要对文件进行存取时， 系统就会根据该程序的拥有者/群组，并比对文件的权限，若通过权限检查，就可以存取该文件了。
+
+这种存取文件系统的方式被称为『自主式存取控制 (Discretionary Access Control, DAC)』，基本上，就是依据程序的拥有者与文件资源的 rwx 权限来决定有无存取的能力。 不过这种 DAC 的存取控制有几个困扰，那就是：
+
+root 具有最高的权限：如果不小心某支程序被有心人士取得， 且该程序属於 root 的权限，那么这支程序就可以在系统上进行任何资源的存取！真是要命！
+
+使用者可以取得程序来变更文件资源的存取权限：如果你不小心将某个目录的权限配置为 777 ，由於对任何人的权限会变成 rwx ，因此该目录就会被任何人所任意存取！
+这些问题是非常严重的！尤其是当你的系统是被某些漫不经心的系统管理员所掌控时！她们甚至觉得目录权限调为 777 也没有什么了不起的危险哩...
+
+
+以政策守则订定特定程序读取特定文件：委任式存取控制, MAC
+现在我们知道 DAC 的困扰就是当使用者取得程序后，他可以藉由这支程序与自己默认的权限来处理他自己的文件资源。 万一这个使用者对 Linux 系统不熟，那就很可能会有资源误用的问题产生。为了避免 DAC 容易发生的问题，因此 SELinux 导入了委任式存取控制 (Mandatory Access Control, MAC) 的方法！
+
+委任式存取控制 (MAC) 有趣啦！他可以针对特定的程序与特定的文件资源来进行权限的控管！ 也就是说，即使你是 root ，那么在使用不同的程序时，你所能取得的权限并不一定是 root ， 而得要看当时该程序的配置而定。如此一来，我们针对控制的『主体』变成了『程序』而不是使用者喔！ 此外，这个主体程序也不能任意使用系统文件资源，因为每个文件资源也有针对该主体程序配置可取用的权限！ 如此一来，控制项目就细的多了！但整个系统程序那么多、文件那么多，一项一项控制可就没完没了！ 所以 SELinux 也提供一些默认的政策 (Policy) ，并在该政策内提供多个守则 (rule) ，让你可以选择是否激活该控制守则！
+
+在委任式存取控制的配置下，我们的程序能够活动的空间就变小了！举例来说， WWW 服务器软件的达成程序为 httpd 这支程序， 而默认情况下， httpd 仅能在 /var/www/ 这个目录底下存取文件，如果 httpd 这个程序想要到其他目录去存取数据时， 除了守则配置要开放外，目标目录也得要配置成 httpd 可读取的模式 (type) 才行喔！限制非常多！ 所以，即使不小心 httpd 被 cracker 取得了控制权，他也无权浏览 /etc/shadow 等重要的配置档喔！
+
+小标题的图示SELinux 的运行模式
+再次的重复说明一下，SELinux 是透过 MAC 的方式来控管程序，他控制的主体是程序， 而目标则是该程序能否读取的『文件资源』！所以先来说明一下这些咚咚的相关性啦！(注4)
+
+主体 (Subject)：
+SELinux 主要想要管理的就是程序，因此你可以将『主体』跟本章谈到的 process 划上等号；
+
+目标 (Object)：
+主体程序能否存取的『目标资源』一般就是文件系统。因此这个目标项目可以等文件系统划上等号；
+
+政策 (Policy)：
+由於程序与文件数量庞大，因此 SELinux 会依据某些服务来制订基本的存取安全性政策。这些政策内还会有详细的守则 (rule) 来指定不同的服务开放某些资源的存取与否。在目前的 CentOS 5.x 里面仅有提供两个主要的政策，分别是：
+
+targeted：针对网络服务限制较多，针对本机限制较少，是默认的政策；
+strict：完整的 SELinux 限制，限制方面较为严格。
+
+建议使用默认的 targeted 政策即可。
+
+安全性本文 (security context)：
+我们刚刚谈到了主体、目标与政策面，但是主体能不能存取目标除了政策指定之外，主体与目标的安全性本文必须一致才能够顺利存取。 这个安全性本文 (security context) 有点类似文件系统的 rwx 啦！安全性本文的内容与配置是非常重要的！ 如果配置错误，你的某些服务(主体程序)就无法存取文件系统(目标资源)，当然就会一直出现『权限不符』的错误信息了！
+SELinux 运行的各组件之相关性
+图 5.2.1、SELinux 运行的各组件之相关性(本图参考小州老师的上课讲义)
+上图的重点在『主体』如何取得『目标』的资源存取权限！ 由上图我们可以发现，主体程序必须要通过 SELinux 政策内的守则放行后，就可以与目标资源进行安全性本文的比对， 若比对失败则无法存取目标，若比对成功则可以开始存取目标。问题是，最终能否存取目标还是与文件系统的 rwx 权限配置有关喔！如此一来，加入了 SELinux 之后，出现权限不符的情况时，你就得要一步一步的分析可能的问题了！ 
+
+
+安全性本文 (Security Context)
+CentOS 5.x 已经帮我们制订好非常多的守则了，这部份你只要知道如何开启/关闭某项守则的放行与否即可。 那个安全性本文比较麻烦！因为你可能需要自行配置文件的安全性本文呢！为何需要自行配置啊？ 举例来说，你不也常常进行文件的 rwx 的重新配置吗？这个安全性本文你就将他想成 SELinux 内必备的 rwx 就是了！这样比较好理解啦。
+
+安全性本文存在於主体程序中与目标文件资源中。程序在内存内，所以安全性本文可以存入是没问题。 那文件的安全性本文是记录在哪里呢？事实上，安全性本文是放置到文件的 inode 内的，因此主体程序想要读取目标文件资源时，同样需要读取 inode ， 这 inode 内就可以比对安全性本文以及 rwx 等权限值是否正确，而给予适当的读取权限依据。
+
+那么安全性本文到底是什么样的存在呢？我们先来看看 /root 底下的文件的安全性本文好了。 观察安全性本文可使用『 ls -Z 』去观察如下：(注意：你必须已经启动了 SELinux 才行！若尚未启动，这部份请稍微看过一遍即可。底下会介绍如何启动 SELinux 喔！)
+
+[root@www ~]# ls -Z
+drwxr-xr-x  root root root:object_r:user_home_t   Desktop
+-rw-r--r--  root root root:object_r:user_home_t   install.log
+-rw-r--r--  root root root:object_r:user_home_t   install.log.syslog
+# 上述特殊字体的部分，就是安全性本文的内容！
+如上所示，安全性本文主要用冒号分为三个栏位，这三个栏位的意义为：
+
+Identify:role:type
+身份识别:角色:类型
+这三个栏位的意义仔细的说明一下吧：
+
+身份识别 (Identify)：
+
+相当於帐号方面的身份识别！主要的身份识别则有底下三种常见的类型：
+
+root：表示 root 的帐号身份，如同上面的表格显示的是 root 家目录下的数据啊！
+system_u：表示系统程序方面的识别，通常就是程序罗；
+user_u：代表的是一般使用者帐号相关的身份。
+
+你会发现身份识别中，除了 root 之外，其他的识别后面都会加上『 _u 』的字样呢！ 这个身份识别重点再让我们了解该数据为何种身份所有哩～ 而系统上面大部分的数据都会是 system_u 或 root 啦！至於如果是在 /home 底下的数据，那么大部分应该就会是 user_u 罗！ 
+
+角色 (Role)：
+
+透过角色栏位，我们可以知道这个数据是属於程序、文件资源还是代表使用者。一般的角色有：
+
+object_r：代表的是文件或目录等文件资源，这应该是最常见的罗；
+system_r：代表的就是程序啦！不过，一般使用者也会被指定成为 system_r 喔！
+
+你也会发现角色的栏位最后面使用『 _r 』来结尾！因为是 role 的意思嘛！
+
+类型 (Type) ：(最重要！)
+
+在默认的 targeted 政策中， Identify 与 Role 栏位基本上是不重要的！重要的在於这个类型 (type) 栏位！ 基本上，一个主体程序能不能读取到这个文件资源，与类型栏位有关！而类型栏位在文件与程序的定义不太相同，分别是：
+
+type：在文件资源 (Object) 上面称为类型 (Type)；
+domain：在主体程序 (Subject) 则称为领域 (domain) 了！
+
+domain 需要与 type 搭配，则该程序才能够顺利的读取文件资源啦！
+
+程序与文件 SELinux type 栏位的相关性
+那么这三个栏位如何利用呢？首先我们来瞧瞧主体程序在这三个栏位的意义为何！透过身份识别与角色栏位的定义， 我们可以约略知道某个程序所代表的意义喔！基本上，这些对应数据在 targeted 政策下的对应如下：
+
+身份识别	角色	该对应在 targeted 的意义
+root	system_r	代表供 root 帐号登陆时所取得的权限
+system_u	system_r	由於为系统帐号，因此是非交谈式的系统运行程序
+user_u	system_r	一般可登陆使用者的程序罗！
+但就如上所述，其实最重要的栏位是类型栏位，主体与目标之间是否具有可以读写的权限，与程序的 domain 及文件的 type 有关！这两者的关系我们可以使用达成 WWW 服务器功能的 httpd 这支程序与 /var/www/html 这个网页放置的目录来说明。 首先，看看这两个咚咚的安全性本文内容先：
+
+[root@www ~]# ll -Zd /usr/sbin/httpd /var/www/html
+-rwxr-xr-x  root root system_u:object_r:httpd_exec_t   /usr/sbin/httpd
+drwxr-xr-x  root root system_u:object_r:httpd_sys_content_t /var/www/html
+# 两者的角色栏位都是 object_r ，代表都是文件！而 httpd 属於 httpd_exec_t 类型，
+# /var/www/html 则属於 httpd_sys_content_t 这个类型！
+httpd 属於 httpd_exec_t 这个可以运行的类型，而 /var/www/html 则属於 httpd_sys_content_t 这个可以让 httpd 领域 (domain) 读取的类型。文字看起来不太容易了解吧！我们使用图示来说明这两者的关系！
+
+主体程序取得的 domain 与目标文件资源的 type 相互关系
+图 5.2.2、主体程序取得的 domain 与目标文件资源的 type 相互关系
+上图的意义我们可以这样看的：
+
+首先，我们触发一个可运行的目标文件，那就是具有 httpd_exec_t 这个类型的 /usr/sbin/httpd 文件；
+该文件的类型会让这个文件所造成的主体程序 (Subject) 具有 httpd 这个领域 (domain)， 我们的政策针对这个领域已经制定了许多守则，其中包括这个领域可以读取的目标资源类型；
+由於 httpd domain 被配置为可以读取 httpd_sys_content_t 这个类型的目标文件 (Object)， 因此你的网页放置到 /var/www/html/ 目录下，就能够被 httpd 那支程序所读取了；
+但最终能不能读到正确的数据，还得要看 rwx 是否符合 Linux 权限的规范！
+上述的流程告诉我们几个重点，第一个是政策内需要制订详细的 domain/type 相关性；第二个是若文件的 type 配置错误， 那么即使权限配置为 rwx 全开的 777 ，该主体程序也无法读取目标文件资源的啦！不过如此一来， 也就可以避免使用者将他的家目录配置为 777 时所造成的权限困扰。
+
+小标题的图示SELinux 的启动、关闭与观察
+并非所有的 Linux distributions 都支持 SELinux 的，所以你必须要先观察一下你的系统版本为何！ 鸟哥这里介绍的 CentOS 5.x 本身就有支持 SELinux 啦！所以你不需要自行编译 SELinux 到你的 Linux 核心中！ 目前 SELinux 支持三种模式，分别如下：
+
+enforcing：强制模式，代表 SELinux 运行中，且已经正确的开始限制 domain/type 了；
+permissive：宽容模式：代表 SELinux 运行中，不过仅会有警告信息并不会实际限制 domain/type 的存取。这种模式可以运来作为 SELinux 的 debug 之用；
+disabled：关闭，SELinux 并没有实际运行。
+那你怎么知道目前的 SELinux 模式呢？就透过 getenforce 吧！
+
+[root@www ~]# getenforce
+Enforcing  <==诺！就显示出目前的模式为 Enforcing 罗！
+另外，我们又如何知道 SELinux 的政策 (Policy) 为何呢？这时可以使用 sestatus 来观察：
+
+[root@www ~]# sestatus [-vb]
+选项与参数：
+-v  ：检查列於 /etc/sestatus.conf 内的文件与程序的安全性本文内容；
+-b  ：将目前政策的守则布林值列出，亦即某些守则 (rule) 是否要启动 (0/1) 之意；
+
+范例一：列出目前的 SELinux 使用哪个政策 (Policy)？
+[root@www ~]# sestatus
+SELinux status:                 enabled    <==是否启动 SELinux
+SELinuxfs mount:                /selinux   <==SELinux 的相关文件数据挂载点
+Current mode:                   enforcing  <==目前的模式
+Mode from config file:          enforcing  <==配置档指定的模式
+Policy version:                 21
+Policy from config file:        targeted   <==目前的政策为何？
+如上所示，目前是启动的，而且是 Enforcing 模式，而由配置档查询得知亦为 Enforcing 模式。 此外，目前的默认政策为 targeted 这一个。你应该要有疑问的是， SELinux 的配置档是哪个文件啊？ 其实就是 /etc/selinux/config 这个文件喔！我们来看看内容：
+
+[root@www ~]# vi /etc/selinux/config
+SELINUX=enforcing     <==调整 enforcing|disabled|permissive
+SELINUXTYPE=targeted  <==目前仅有 targeted 与 strict
+SELinux 的启动与关闭
+上面是默认的政策与启动的模式！你要注意的是，如果改变了政策则需要重新启动；如果由 enforcing 或 permissive 改成 disabled ，或由 disabled 改成其他两个，那也必须要重新启动。这是因为 SELinux 是整合到核心里面去的， 你只可以在 SELinux 运行下切换成为强制 (enforcing) 或宽容 (permissive) 模式，不能够直接关闭 SELinux 的！ 同时，由 SELinux 关闭 (disable) 的状态到开启的状态也需要重新启动啦！所以，如果刚刚你发现 getenforce 出现 disabled 时， 请到上述文件修改成为 enforcing 吧！
+
+所以，如果你要启动 SELinux 的话，请将上述的 SELINUX=enforcing 配置妥当，并且指定 SELINUXTYPE=targeted 这一个配置， 并且到 /boot/grub/menu.lst 这个文件去，看看核心有无关闭 SELinux 了呢？
+
+[root@www ~]# vi /boot/grub/menu.lst
+default=0
+timeout=5
+splashimage=(hd0,0)/grub/splash.xpm.gz
+hiddenmenu
+title CentOS (2.6.18-92.el5)
+        root (hd0,0)
+        kernel /vmlinuz-2.6.18-92.el5 ro root=LABEL=/1 rhgb quiet selinux=0
+        initrd /initrd-2.6.18-92.el5.img
+# 如果要启动 SELinux ，

@@ -1,0 +1,216 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T13:32:40+08:00
+
+====== 4 特殊文件与程序 ======
+Created Wednesday 22 November 2017
+
+特殊文件与程序
+我们在第七章曾经谈到特殊权限的 SUID/SGID/SBIT ，虽然第七章已经将这三种特殊权限作了详细的解释，不过，我们依旧要来探讨的是，那么到底这些权限对於你的『程序』是如何影响的？ 此外，程序可能会使用到系统资源，举例来说，磁碟就是其中一项资源。哪天你在 umount 磁碟时，系统老是出现『 device is busy 』的字样～到底是怎么回事啊？我们底下就来谈一谈这些和程序有关系的细节部分：
+
+
+小标题的图示具有 SUID/SGID 权限的命令运行状态
+SUID 的权限其实与程序的相关性非常的大！为什么呢？先来看看 SUID 的程序是如何被一般使用者运行，且具有什么特色呢？
+
+SUID 权限仅对二进位程序(binary program)有效；
+运行者对於该程序需要具有 x 的可运行权限；
+本权限仅在运行该程序的过程中有效 (run-time)；
+运行者将具有该程序拥有者 (owner) 的权限。
+所以说，整个 SUID 的权限会生效是由於『具有该权限的程序被触发』，而我们知道一个程序被触发会变成程序， 所以罗，运行者可以具有程序拥有者的权限就是在该程序变成程序的那个时候啦！第七章我们还没谈到程序的概念， 所以你或许那时候会觉得很奇怪，为啥运行了 passwd 后你就具有 root 的权限呢？不都是一般使用者运行的吗？ 这是因为你在触发 passwd 后，会取得一个新的程序与 PID，该 PID 产生时透过 SUID 来给予该 PID 特殊的权限配置啦！ 我们使用 dmtsai 登陆系统且运行 passwd 后，透过工作控制来理解一下！
+
+[dmtsai@www ~]$ passwd
+Changing password for user dmtsai.
+Changing password for dmtsai
+(current) UNIX password: <==这里按下 [ctrl]-z 并且按下 [enter]
+[1]+  Stopped                 passwd
+
+[dmtsai@www ~]$ pstree -u
+init-+-acpid
+....(中间省略)....
+     |-sshd---sshd---sshd(dmtsai)---bash-+-more
+     |                                   |-passwd(root)
+     |                                   `-pstree
+....(底下省略)....
+从上表的结果我们可以发现，底线的部分是属於 dmtsai 这个一般帐号的权限，特殊字体的则是 root 的权限！ 但你看到了， passwd 确实是由 bash 衍生出来的！不过就是权限不一样！透过这样的解析， 你也会比较清楚为何不同程序所产生的权限不同了吧！这是由於『SUID 程序运行过程中产生的程序』的关系啦！
+
+那么既然 SUID/SGID 的权限是比较可怕的，您该如何查询整个系统的 SUID/SGID 的文件呢？ 应该是还不会忘记吧？使用 find 即可啊！
+
+find / -perm +6000
+小标题的图示/proc/* 代表的意义
+其实，我们之前提到的所谓的程序都是在内存当中嘛！而内存当中的数据又都是写入到 /proc/* 这个目录下的，所以罗，我们当然可以直接观察 /proc 这个目录当中的文件啊！ 如果你观察过 /proc 这个目录的话，应该会发现他有点像这样：
+
+[root@www ~]# ll /proc
+dr-xr-xr-x  5 root      root              0 Mar 11 08:46 1
+dr-xr-xr-x  5 root      root              0 Mar 11 00:46 10
+dr-xr-xr-x  5 root      root              0 Mar 11 00:46 11
+....(中间省略)....
+-r--r--r--  1 root      root              0 Mar 20 12:11 uptime
+-r--r--r--  1 root      root              0 Mar 20 12:11 version
+-r--r--r--  1 root      root              0 Mar 20 12:11 vmstat
+-r--r--r--  1 root      root              0 Mar 20 12:11 zoneinfo
+基本上，目前主机上面的各个程序的 PID 都是以目录的型态存在於 /proc 当中。 举例来说，我们启动所运行的第一支程序 init 他的 PID 是 1 ， 这个 PID 的所有相关资讯都写入在 /proc/1/* 当中！若我们直接观察 PID 为 1 的数据好了，他有点像这样：
+
+[root@www ~]# ll /proc/1
+dr-xr-xr-x 2 root root 0 Mar 12 11:04 attr
+-r-------- 1 root root 0 Mar 17 14:32 auxv
+-r--r--r-- 1 root root 0 Mar 17 14:32 cmdline  <==就是命令串
+-rw-r--r-- 1 root root 0 Mar 17 14:32 coredump_filter
+-r--r--r-- 1 root root 0 Mar 17 14:32 cpuset
+lrwxrwxrwx 1 root root 0 Mar 17 14:32 cwd -> /
+-r-------- 1 root root 0 Mar 17 14:32 environ  <==一些环境变量
+lrwxrwxrwx 1 root root 0 Mar 17 14:32 exe -> /sbin/init  <==实际运行的命令
+....(以下省略)....
+里面的数据还挺多的，不过，比较有趣的其实是两个文件，分别是：
+
+cmdline：这个程序被启动的命令串；
+environ：这个程序的环境变量内容。
+很有趣吧！如果你查阅一下 cmdline 的话，就会发现：
+
+[root@www ~]# cat /proc/1/cmdline
+init [5]
+就是这个命令、选项与参数启动 init 的啦！这还是跟某个特定的 PID 有关的内容呢，如果是针对整个 Linux 系统相关的参数呢？那就是在 /proc 目录底下的文件啦！相关的文件与对应的内容是这样的： (注3)
+
+档名	文件内容
+/proc/cmdline	加载 kernel 时所下达的相关参数！查阅此文件，可了解系统是如何启动的！
+/proc/cpuinfo	本机的 CPU 的相关资讯，包含时脉、类型与运算功能等
+/proc/devices	这个文件记录了系统各个主要装置的主要装置代号，与 mknod 有关呢！
+/proc/filesystems	目前系统已经加载的文件系统罗！
+/proc/interrupts	目前系统上面的 IRQ 分配状态。
+/proc/ioports	目前系统上面各个装置所配置的 I/O 位址。
+/proc/kcore	这个就是内存的大小啦！好大对吧！但是不要读他啦！
+/proc/loadavg	还记得 top 以及 uptime 吧？没错！上头的三个平均数值就是记录在此！
+/proc/meminfo	使用 free 列出的内存资讯，嘿嘿！在这里也能够查阅到！
+/proc/modules	目前我们的 Linux 已经加载的模块列表，也可以想成是驱动程序啦！
+/proc/mounts	系统已经挂载的数据，就是用 mount 这个命令呼叫出来的数据啦！
+/proc/swaps	到底系统挂加载的内存在哪里？呵呵！使用掉的 partition 就记录在此啦！
+/proc/partitions	使用 fdisk -l 会出现目前所有的 partition 吧？在这个文件当中也有纪录喔！
+/proc/pci	在 PCI 汇流排上面，每个装置的详细情况！可用 lspci 来查阅！
+/proc/uptime	就是用 uptime 的时候，会出现的资讯啦！
+/proc/version	核心的版本，就是用 uname -a 显示的内容啦！
+/proc/bus/*	一些汇流排的装置，还有 U盘 的装置也记录在此喔！
+
+其实，上面这些文件鸟哥在此建议您可以使用 cat 去查阅看看，不必深入了解， 不过，观看过文件内容后，毕竟会比较有感觉啦！如果未来您想要自行撰写某些工具软件， 那么这个目录底下的相关文件可能会对您有点帮助的喔！
+
+小标题的图示查询已开启文件或已运行程序开启之文件
+其实还有一些与程序相关的命令可以值得参考与应用的，我们来谈一谈：
+
+
+fuser：藉由文件(或文件系统)找出正在使用该文件的程序
+有的时候我想要知道我的程序到底在这次启动过程中开启了多少文件，可以利用 fuser 来观察啦！ 举例来说，你如果卸载时发现系统通知：『 device is busy 』，那表示这个文件系统正在忙碌中， 表示有某支程序有利用到该文件系统啦！那么你就可以利用 fuser 来追踪罗！fuser 语法有点像这样：
+
+[root@www ~]# fuser [-umv] [-k [i] [-signal]] file/dir
+选项与参数：
+-u  ：除了程序的 PID 之外，同时列出该程序的拥有者；
+-m  ：后面接的那个档名会主动的上提到该文件系统的最顶层，对 umount 不成功很有效！
+-v  ：可以列出每个文件与程序还有命令的完整相关性！
+-k  ：找出使用该文件/目录的 PID ，并试图以 SIGKILL 这个讯号给予该 PID；
+-i  ：必须与 -k 配合，在删除 PID 之前会先询问使用者意愿！
+-signal：例如 -1 -15 等等，若不加的话，默认是 SIGKILL (-9) 罗！
+
+范例一：找出目前所在目录的使用 PID/所属帐号/权限 为何？
+[root@www ~]# fuser -uv .
+                     USER        PID ACCESS COMMAND
+.:                   root      20639 ..c.. (root)bash
+看到输出的结果没？他说『.』底下有个 PID 为 20639 的程序，该程序属於 root 且命令为 bash 。 比较有趣的是那个 ACCESS 的项目，那个项目代表的意义为：
+
+c ：此程序在当前的目录下(非次目录)；
+e ：可被触发为运行状态；
+f ：是一个被开启的文件；
+r ：代表顶层目录 (root directory)；
+F ：该文件被开启了，不过在等待回应中；
+m ：可能为分享的动态函式库；
+那如果你想要查阅某个文件系统底下有多少程序正在占用该文件系统时，那个 -m 的选项就很有帮助了！ 鸟哥的测试主机仅有分割出 /, /boot, /home ，所以无法进行测试。不过好在还有个 /proc 的虚拟文件系统， 让我们来了解一下这个 /proc 的文件系统有多少程序正在利用他吧！
+
+范例二：找到所有使用到 /proc 这个文件系统的程序吧！
+[root@www ~]# fuser -uv /proc
+# 不会显示任何数据，因为没有任何程序会去使用 /proc 这个目录啊！
+# 会被用到的是 /proc 底下的文件啦！所以你应该要这样做：
+
+[root@www ~]# fuser -mvu /proc
+                     USER        PID ACCESS COMMAND
+/proc:               root       4289 f.... (root)klogd
+                     root       4555 f.... (root)acpid
+                     haldaemon  4758 f.... (haldaemon)hald
+                     root       4977 F.... (root)Xorg
+# 有这几支程序在进行 /proc 文件系统的存取喔！这样清楚了吗？
+既然可以针对整个文件系统，那么能不能仅针对单一文件啊？当然可以罗！看一下底下的案例先：
+
+范例三：找到 /var 底下属於 FIFO 类型的文件，并且找出存取该文件的程序
+[root@www ~]# find /var -type p
+/var/gdm/.gdmfifo     <==我们针对这玩意即可！
+/var/run/autofs.fifo-misc
+/var/run/autofs.fifo-net
+
+[root@www ~]# fuser -uv /var/gdm/.gdmfifo
+                     USER        PID ACCESS COMMAND
+/var/gdm/.gdmfifo:   root       4892 F.... (root)gdm-binary
+
+范例四：同范例三，但试图删除该 PID？且『不要』删除喔！
+[root@www ~]# fuser -ki /var/gdm/.gdmfifo
+/var/gdm/.gdmfifo:    4892
+Kill process 4892 ? (y/N) n
+如何？很有趣的一个命令吧！透过这个 fuser 我们可以找出使用该文件、目录的程序，藉以观察的啦！ 他的重点与 ps, pstree 不同。 fuser 可以让我们了解到某个文件 (或文件系统) 目前正在被哪些程序所利用！
+
+
+lsof ：列出被程序所开启的文件档名
+相对於 fuser 是由文件或者装置去找出使用该文件或装置的程序，反过来说， 如何查出某个程序开启或者使用的文件与装置呢？呼呼！那就是使用 lsof 罗～
+
+[root@www ~]# lsof [-aUu] [+d]
+选项与参数：
+-a  ：多项数据需要『同时成立』才显示出结果时！
+-U  ：仅列出 Unix like 系统的 socket 文件类型；
+-u  ：后面接 username，列出该使用者相关程序所开启的文件；
++d  ：后面接目录，亦即找出某个目录底下已经被开启的文件！
+
+范例一：列出目前系统上面所有已经被开启的文件与装置：
+[root@www ~]# lsof
+COMMAND PID  USER   FD  TYPE  DEVICE   SIZE     NODE NAME
+init      1  root  cwd   DIR     3,2   4096        2 /
+init      1  root  rtd   DIR     3,2   4096        2 /
+init      1  root  txt   REG     3,2  38620  1426405 /sbin/init
+....(底下省略)....
+# 注意到了吗？是的，在默认的情况下， lsof 会将目前系统上面已经开启的
+# 文件全部列出来～所以，画面多的吓人啊！您可以注意到，第一个文件 init 运行的
+# 地方就在根目录，而根目录，嘿嘿！所在的 inode 也有显示出来喔！
+
+范例二：仅列出关於 root 的所有程序开启的 socket 文件
+[root@www ~]# lsof -u root -a -U
+COMMAND     PID USER   FD   TYPE     DEVICE SIZE   NODE NAME
+udevd       400 root    3u  unix 0xedd4cd40        1445 socket
+auditd     4256 root    7u  unix 0xedd4c380        9081 socket
+audispd    4258 root    0u  unix 0xedd4c1e0        9080 socket
+# 注意到那个 -a 吧！如果你分别输入 lsof -u root 及 lsof -U ，会有啥资讯？
+# 使用 lsof -u root -U 及 lsof -u root -a -U ，呵呵！都不同啦！
+# -a 的用途就是在解决同时需要两个项目都成立时啊！ ^_^
+
+范例三：请列出目前系统上面所有的被启动的周边装置
+[root@www ~]# lsof +d /dev
+COMMAND     PID      USER   FD   TYPE     DEVICE SIZE  NODE NAME
+init          1      root   10u  FIFO       0,16       1147 /dev/initctl
+udevd       400      root    0u   CHR        1,3       1420 /dev/null
+udevd       400      root    1u   CHR        1,3       1420 /dev/null
+udevd       400      root    2u   CHR        1,3       1420 /dev/null
+# 看吧！因为装置都在 /dev 里面嘛！所以罗，使用搜寻目录即可啊！
+
+范例四：秀出属於 root 的 bash 这支程序所开启的文件
+[root@www ~]# lsof -u root | grep bash
+bash   20639 root  cwd    DIR    3,2    4096    648321 /root
+bash   20639 root  rtd    DIR    3,2    4096         2 /
+bash   20639 root  txt    REG    3,2  735004   1199424 /bin/bash
+bash   20639 root  mem    REG    3,2   46680     64873 /lib/libnss_files-2.5.so
+....(底下省略)....
+这个命令可以找出您想要知道的某个程序是否有激活哪些资讯？例如上头提到的范例四的运行结果呢！ ^_^
+
+
+pidof ：找出某支正在运行的程序的 PID
+[root@www ~]# pidof [-sx] program_name
+选项与参数：
+-s  ：仅列出一个 PID 而不列出所有的 PID
+-x  ：同时列出该 program name 可能的 PPID 那个程序的 PID
+
+范例一：列出目前系统上面 init 以及 syslogd 这两个程序的 PID
+[root@www ~]# pidof init syslogd
+1 4286
+# 理论上，应该会有两个 PID 才对。上面的显示也是出现了两个 PID 喔。
+# 分别是 init 及 syslogd 这两支程序的 PID 啦。
+很简单的用法吧，透过这个 pidof 命令，并且配合 ps aux 与正规表示法，就可以很轻易的找到您所想要的程序内容了呢。

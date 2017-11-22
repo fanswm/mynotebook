@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T13:41:58+08:00
+
+====== 2.使用传统程序语言进行编译的简单范例 ======
+Created Wednesday 22 November 2017
+
