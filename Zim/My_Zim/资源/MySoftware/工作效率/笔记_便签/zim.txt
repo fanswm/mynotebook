@@ -12,3 +12,5 @@ ubuntu
  [http://zim-wiki.org/](http://zim-wiki.org/)
 
  [https://www.zhihu.com/question/19716095](https://www.zhihu.com/question/19716095)
+
+https://www.cnblogs.com/bamanzi/archive/2012/07/05/zim-org-mode.html
