@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T12:03:58+08:00
+
+====== 安全 ======
+Created Friday 24 November 2017
+
+## 设置rm
++ `vim ~/bashrc`
+> 添加：`alias rm='rm -i'`

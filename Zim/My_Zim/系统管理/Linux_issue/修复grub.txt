@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T11:48:59+08:00
+
+====== 修复grub ======
+Created Friday 24 November 2017
+
+__- 修复grub：Parrot Linux__
+
+> 判断主分区；例如是：/dev/sdasudo mount /dev/sda11 / mntmount --bind /dev/ /mnt/devmount --bind /proc /mnt/procmount --bind /sys /mnt/syschroot /mntsudo update-grubsudo update-grub2
+进入系统后：
+update-grub2

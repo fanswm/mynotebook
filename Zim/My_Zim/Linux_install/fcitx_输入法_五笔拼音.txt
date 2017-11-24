@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T14:00:44+08:00
+
+====== fcitx 输入法 五笔拼音 ======
+Created Friday 24 November 2017
+
+## install flash
+
+### at parrot
++ `sudo apt-get install pepperflashplugin-nonfree`
+
+### at lubuntu
+
++ 官网下载install_flash_player_11_linux.x86_64.tar.gz
++ `tar zxvf install_flash_player_11_linux.x86_64.tar.gz`
++ `sudo su`
++ `cp ./libflashplayer.so /usr/lib/mozilla/plugins/`
+
+### at CentOS
++　[官网][https://get.adobe.com/cn/flashplayer/]%E4%B8%8B%E8%BD%BD: flash-player-npapi-27.0.0.183-release.x86_64.rpm
++  `sudo rpm -ivh flash-player-npapi-27.0.0.183-release.x86_64.rpm`
+
+

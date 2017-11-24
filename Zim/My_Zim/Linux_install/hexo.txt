@@ -1,0 +1,225 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T13:55:22+08:00
+
+====== hexo ======
+Created Friday 24 November 2017
+
+## install Node.js git
+
++ install Node.js
+	+ install nvm
+	> `wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash`
+	+ `nvm install stable`
+	+ `nvm --version`
++ install Git
+`sudo apt-get install git`
+
+## Install Hexo
+```
+npm install -g hexo-cli
+npm install hexo-deployer-git --save
+```
+
+## use Hexo
+
++ init
+```
+hexo init <folder>
+cd <folder>
+npm install
+```
+
++ new
+`hexo new [layout] <title>`
+
++ generate
+`hexo generate`
+
++ deploy
+`hexo deploy`
+
+## use github.username.io
+
++ 创建仓库username.github.io
+	+ 登录`github.com`
+	+ 创建仓库`username.github.io`
+	> `username`是你的用户名，必须按此格式创建仓库
+
++ 在本机config git
+```
+git config -l
+git config user.name myusername@126.com
+git config user.email myusername@126.com
+git remote add origin https://github.com/myusername/myusername.github.io.git
+```
+
++ `vim ./_config.yml`
+```
+lang: zh-CN
+type: git 
+repo: https://github.com/myusername/myusername.github.io.git 
+branch: master
+```
+
++ deploy to github.io
+```
+hexo g
+hexo s
+hexo d
+# input username
+# input password for username
+``` 
+
+https://hexo.io/docs/configuration.html
+
+
+
+## 主题
+
++ install:
+> 例如： next
+```
+git clone --branch v5.1.2 https://github.com/iissnan/hexo-theme-next themes/next
+https://github.com/iissnan/hexo-theme-next
+
+git checkout master
+```
++ update:
+```
+cd themes/next
+git pull
+```
++ vim _config.yml
+```
+theme: next
+```
+> 以上在简书的
+
+
+# install hexo
+
+> https://myusername.github.io/2017/09/11/windows-issue/
+> https://myotherusername.github.io/
+> 官网：https://hexo.io
+
+## os = lubuntu
+
+```
+sudo apt-get install node.js
+sudo apt-get install nodejs-legacy
+sudo apt-get install npm
+
+npm install hexo-cli -g
+hexo init blog
+cd blog
+npm install
+hexo server
+```
+
+> install_hexo.sh
+
+```
+#!/usr/bin/env bash 
+# coding:utf-8
+
+echo "git init"
+git init
+
+echo "sudo npm install hexo-deployer-git --save:"
+sudo npm install hexo-deployer-git --save
+
+echo "sudo apm install -g hexo:" 
+sudo npm install -g hexo 
+
+echo "npm install hexo-cli -g:"  
+sudo npm install hexo-cli -g  
+
+# echo "npm install:"
+# sudo npm install
+
+echo "hexo init:"          
+sudo hexo init
+```
+
++ `vim ./_config.yml`
+> add:
+> lange: zh-CN
+
+> type: git
+> repo: https://github.com/imrdr4/imrdr4.github.io.git
+> branch: master   
+
+# hexo 的git设置：
+
+```
+git config -l
+git config user.name myusername@126.com
+git config user.email myusername@126.com
+
+git remote add origin https://github.com/myusername/myusername.github.io.git
+git pull
+```
+
+> 官方主题：
+> + https://hexo.io/themes/
+> + https://github.com/hexojs/hexo/wiki/Themes
+> + https://github.com/pinggod/hexo-theme-jekyll
+
+
+```
+#初始化
+# mkdir newdir_blog
+# cd newdir_blog
+hexo init
+
+#生成静态页面：
+hexo generate # hexo g
+# 本地启动
+hexo server #或者 hexo s
+#本地浏览：locallhost:4000
+
+# 布置到github.com:
+hexo deploy # 或者：hexo d
+#部署步骤：
+hexo clean
+hexo generate
+hexo deploy
+
+#一些常用命令：
+
+hexo new "postName" #新建文章
+hexo new page "pageName" #新建页面
+hexo generate #生成静态页面至public目录
+hexo server #开启预览访问端口（默认端口4000，'ctrl + c'关闭server）
+hexo deploy #将.deploy目录部署到GitHub
+hexo help  #查看帮助
+hexo version  #查看Hexo的版本
+```
+# 更改主题
+```
+# 克隆主题
+git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia
+# 执行：
+vim _config.yml
+#　将 theme 对应的值进行修改
+＃　theme: yilia
+＃　接着就自动部署一下：
+npm install hexo-deployer-git --save
+＃　最后发布：
+hexo clean && hexo g && hexo d
+```
+
+# 另一台电脑上
+```
+mkdir hexo
+cd hexo/
+sudo npm install -g hexo
+git init
+git remote add origin https://github.com/fanswm/fanswm.github.io.git
+git config --global user.name imrdrlubuntu
+git config --global user.email imrdr4@126.com
+git pull
+git checkout master
+git branch --set-upstream-to=origin/master master
+```

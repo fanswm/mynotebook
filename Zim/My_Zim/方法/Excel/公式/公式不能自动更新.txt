@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T08:10:41+08:00
+
+====== 公式不能自动更新 ======
+Created Friday 24 November 2017
+
+“工具”，选项，重新计算，去除勾选人工计算

@@ -8,3 +8,10 @@ Created Tuesday 21 November 2017
 ```
 sudo apt-get remove unity-webapps-common
 ```
+
+
+__ubuntu卸载amazon__
+
+sudo apt-get remove unity-webapps-common
+simple-scan: 扫描易
+gnome-mahjongg: 麻将

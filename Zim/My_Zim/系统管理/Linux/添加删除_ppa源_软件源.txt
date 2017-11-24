@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-11-21T16:40:31+08:00
 
-====== ppa源 软件源 ======
+====== 添加删除 ppa源 软件源 ======
 Created Tuesday 21 November 2017
 
 __- 添加 PPA 源的命令为：__

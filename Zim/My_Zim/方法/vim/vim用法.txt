@@ -1,0 +1,21 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T13:30:57+08:00
+
+====== vim用法 ======
+Created Friday 24 November 2017
+
+## 删除
++ 所有空行
+  + `：g/^\s*$/d`
+  + `%s/^\n//g`
++ 行首空格
+  + `:%s/^ *//g` 
++ 行尾的空格
+  + `:%s/ *$//g` 
+  
+## 添加
++ 在行首加一个#号
+  + `：0，$s/^/#/gc`
++ 在6~10行的行首加一个#号
+  + `:6,10s/^/#/gc`
