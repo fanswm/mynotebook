@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-26T08:36:29+08:00
+
+====== Milo Yip ======
+Created Sunday 26 November 2017
+
+https://github.com/miloyip/game-programmer
