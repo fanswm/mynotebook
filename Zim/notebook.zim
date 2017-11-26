@@ -1,6 +1,12 @@
 [Notebook]
-name=Zim
 version=0.4
+name=Zim
+interwiki=
+home=Home
+icon=
+document_root=
+shared=True
 endofline=dos
-profile=None
+disable_trash=False
+profile=
 
