@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-27T13:36:14+08:00
+
+====== 番茄土豆 ======
+Created Monday 27 November 2017
+
+功能简述：基础是番茄工作法的一款任务管理工具
+适用平台：Windows、Mac OS、iOS、Android

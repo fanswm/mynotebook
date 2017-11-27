@@ -8,3 +8,7 @@ Creation-Date: 2017-11-22T07:00:26+08:00
 https://mubu.com/
 my phone number:
 easy
+
+
+功能简述：解决高效率人士在职场或者生活中的效率问题，__提炼整理笔记__，梳理思维，独立创作以及任务管理等
+适用平台：Windows、Mac OS、iOS、Android
