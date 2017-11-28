@@ -1,0 +1,113 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-28T16:58:18+08:00
+
+====== 笔记 ======
+Created Tuesday 28 November 2017
+
+
+## 平移画布
++ Ctrl + arrow;
++ 鼠标中键拖动；
+
+## 隐藏滚动条
++ Ctrl + B
+
+## 放大缩小
++ `+` or `-`
++ `Ctrl` + `middle click` or `Ctrl` + `right click`
+
+## 恢复上一次的缩放比例
++ ` ` `
++ `shift` + ` ` `
+
+## 查看快捷键
++ help > Keys ans Mouse
+
+## 另存为
++ `Shift` + `Ctrl` + `S`
+
+## 使用的文件格式
++ `SVG` > Scalable Vector Graphics
+> 基于XML，可以用任何文本和XML编辑器
+
+## 切换窗口
++ `Alt` + `Tab` > 操作系统窗口管理器
++ `Ctrl` + `Tab` > Inkscape内置快捷键
+
+## 创建形状
+
+
+## 撤消
++ `Ctrl` + `Z`
++ `Shift` + `Ctrl` + `Z`
+
+## 常用工具
++ 拾取器（Selector）
+> 快捷键 `F1` or 空格
+
+
+## 形状工具(Shape tools)
++ 矩形： `F4`
++ 配合Ctrl绘制正方形，或1：2，3，4比例的矩形
+
+## 移动、缩放或旋转
++ 移动：
++ + 拖动（`Ctrl` 水平或垂直移动）；
++ + 控制器（`Ctrl` 保持原始比例）; 
++ + 拖动对象角落上的控制器来旋转（`Ctrl` 保持15度的整倍数）; 
++ + 拖动中间的控制器来扭曲（`Ctrl` 保持15度的整倍数）; 
++ + 在工具栏的坐标上输入数字，精确控制对象的位置
+
+## 键盘变换
++ 移动：箭头
++ 放大缩小： `Ctrl` + `Shift` + `<` or `>`
++ 旋转： `Ctrl` + `[` or `]`
++ 像素级别的变换：在以上操作中加上`Alt`
+
+## 多选
++ `Shift + click`
++ `ESC` > 取消所有选择
+
+## 填充与轮廓
++ 调色板：`Shift` + `Ctrl` + `W` > view菜单
++ 对象菜单：`Shift` + `Ctrl` + `F`
++ + 填充FILL,轮廓色彩Stroke paint,轮廓样式Stroke style.
++ + 色彩拾取器color pickers
++ + 渐变控制器gradient handles
++ + 滴管工具Dropper tool,`F7` 改变对象色彩
+
+## 群组
++ 选一个或多个对象后，`Ctrl + G` 组合在一起；
++ 解散组合：`Ctrl + U`，只能解散顶层的群组
++ `Ctrl + click` 单独编辑群组内的对象，而不需要解散群组。
++ `Shift + Ctrl + click` 选定群组内或群组外的多个对象,而不需要解散群组。
+
+## 再制,对齐和分布
++ 再制,生成对象的一个副本, `Ctrl + D`
++ 对齐对话框Align Dialog, `Ctrl + Shift + A`
+
+## 叠放顺序Z-order
++ "对象菜单",置顶 Raise to Top: `Home`; 置底Lower to Botton, `End`
++ 上升, `PgUp`; 下降: `PgDn`
++ 选择叠放对象`Tab`
++ + 如果没有选择任何对象,按`Tab`将选择最底层对象
++ + 如果有对象被选中,将选择其上的对象
++ + `Shift + Tab`则相反 
+
+## 选择下面的对象并移动
++ 如果一个对象被其上的对象盖住了, `Alt + click`将选中上面的对象,
++ 多次`Alt + click` 实现顶层到底层的循环选择
+> Linux中,`Alt + click`由窗口管理器指定了其他用途
++ 移动,用光标,`Alt + drag`
+
+## 形状
++ 形状总是可以转化为路径,但路径不能转化为形状
++ 一般性操作
++ + 显示形状的控制柄, `F2`,再选择图形
++ + 工具控制栏
+
+
+
+
+

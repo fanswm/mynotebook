@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-28T16:57:23+08:00
+
+====== 教程 ======
+Created Tuesday 28 November 2017
+
+1.LOGO制作1 http://tieba.baidu.com/p/3962319465
+2.LOGO制作2 http://tieba.baidu.com/p/3962352085
+3.位图转矢量图 http://tieba.baidu.com/p/3962345129
+4.对象附着路径 http://tieba.baidu.com/p/3962385642
+5.抠图 http://tieba.baidu.com/p/3962369013
+6.螺丝刀 http://tieba.baidu.com/p/3962337550
+7.咖啡杯子 http://tieba.baidu.com/p/3962331425
+8.平坦风格-山峰 http://tieba.baidu.com/p/3962325266

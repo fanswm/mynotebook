@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-28T17:07:35+08:00
+
+====== 形状工具(Shape tools) ======
+Created Tuesday 28 November 2017
+
+## 形状工具(Shape tools)
++ 矩形： `F4`
++ 配合Ctrl绘制正方形，或1：2，3，4比例的矩形
