@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-29T22:49:56+08:00
+
+====== history ======
+Created Wednesday 29 November 2017
+
+注意：按住“CTRL + R”就可以搜索已经执行过的命令，它可以在你写命令时自动补全。
