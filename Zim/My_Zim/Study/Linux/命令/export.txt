@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:31:44+08:00
+
+====== export ======
+Created 星期四 30 十一月 2017
+
+export 把普通变量变成环境变量
+

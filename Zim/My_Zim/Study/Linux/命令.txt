@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-29T20:34:26+08:00
+
+====== 命令 ======
+Created Wednesday 29 November 2017
+
+http://blog.csdn.net/boshuzhang/article/details/51122457

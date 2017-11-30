@@ -47,29 +47,26 @@ __字典树，又称前缀树（英文名：Trie Tree），为 Edward Fredkin �
 #define TREE_WIDTH 26
 struct Node
 {
-    int path;
-    int end;
-    char ch;
-    Node * next[TREE_WIDTH];
-    Node(char ch = ' ')
-    {
-        this->ch = ch;
-        this->path = this->end = 0;
-        for (int i = 0; i < TREE_WIDTH; i++)
-            this->next[i] = nullptr;
-    }
+	int path;
+	int end;
+	char ch;
+	Node * next[TREE_WIDTH];
+	Node(char ch = ' ')
+	{
+		this->ch = ch;
+		this->path = this->end = 0;
+		for (int i = 0; i < TREE_WIDTH; i++)
+			this->next[i] = nullptr;
+	}
 };
  
 __本文只讨论小写 26 个英文字母的字典集合，故TREE_WIDTH设为 26。__
  
 变量end的作用，标记该结点是否是单词结尾。变量path则用来记录结点被路径覆盖的次数。
  
-请注意，下述代码针对的是动态数据集，即一系列添加，查询，删除三种混合操作。因此对于已无路径覆盖的结点，我们并不会释放其内存，这也是引入path的原因（当path = 0，表示该结点已无路径覆盖）。
- 
-两个变量的具体使用如下图：
- 
+请注意，下述代码针对的是动态数据集，即一系列添加，查询，删除三种混合操作。因此对于已无路径覆盖的结点，__我们并不会释放其内存__，这也是引入path的原因（当path = 0，表示该结点已无路径覆盖）。
+  
 
-select me
  
 三：完整代码
  
@@ -88,122 +85,122 @@ using namespace std;
  
 struct Node
 {
-    int path;
-    int end;
-    char ch;
-    Node * next[TREE_WIDTH];
-    Node(char ch = ' ')
-    {
-        this->ch = ch;
-        this->path = this->end = 0;
-        for (int i = 0; i < TREE_WIDTH; i++)
-            this->next[i] = nullptr;
-    }
+	int path;
+	int end;
+	char ch;
+	Node * next[TREE_WIDTH];
+	Node(char ch = ' ')
+	{
+		this->ch = ch;
+		this->path = this->end = 0;
+		for (int i = 0; i < TREE_WIDTH; i++)
+			this->next[i] = nullptr;
+	}
 };
  
 class TrieTree
 {
 private:
-    Node * root;
+	Node * root;
 public:
-    TrieTree();
-    ~TrieTree();
-    void destroy(Node * t);
-    void add(char * s);
-    int query(char * s);
-    bool remove(char * s);
+	TrieTree();
+	~TrieTree();
+	void destroy(Node * t);
+	void add(char * s);
+	int query(char * s);
+	bool remove(char * s);
 };
  
 TrieTree::TrieTree()
 {
-    root = new Node;
+	root = new Node;
 }
  
 TrieTree::~TrieTree()
 {
-    destroy(root);
+	destroy(root);
 }
  
 void TrieTree::destroy(Node * t)
 {
-    for (int i = 0; i < TREE_WIDTH; i++)
-        if (t->next[i])
-            destroy(t->next[i]);
-    delete t;
+	for (int i = 0; i < TREE_WIDTH; i++)
+		if (t->next[i])
+			destroy(t->next[i]);
+	delete t;
 }
  
 void TrieTree::add(char * s)
 {
-    Node * t = root;
-    while (*s)
-    {
-        if (t->next[*s - 'a'] == nullptr)
-            t->next[*s - 'a'] = new Node(*s);
-        t->next[*s - 'a']->path++;
-        t = t->next[*s - 'a'];
-        s++;
-    }
-    t->end++;
+	Node * t = root;
+	while (*s)
+	{
+		if (t->next[*s - 'a'] == nullptr)
+			t->next[*s - 'a'] = new Node(*s);
+		t->next[*s - 'a']->path++;
+		t = t->next[*s - 'a'];
+		s++;
+	}
+	t->end++;
 }
  
 int TrieTree::query(char * s)
 {
-    Node * t = root;
-    while (*s)
-    {
-        if (t->next[*s - 'a'] == nullptr || t->next[*s - 'a']->path == 0)
-            return 0;
-        t = t->next[*s - 'a'];
-        s++;
-    }
-    return t->end;
+	Node * t = root;
+	while (*s)
+	{
+		if (t->next[*s - 'a'] == nullptr || t->next[*s - 'a']->path == 0)
+			return 0;
+		t = t->next[*s - 'a'];
+		s++;
+	}
+	return t->end;
 }
  
 bool TrieTree::remove(char * s)
 {
-    if (query(s))
-    {
-        Node * t = root;
-        while (*s)
-        {
-            t->next[*s - 'a']->path--;
-            t = t->next[*s - 'a'];
-            s++;
-        }
-        t->end--;
-        return true;
-    }
+	if (query(s))
+	{
+		Node * t = root;
+		while (*s)
+		{
+			t->next[*s - 'a']->path--;
+			t = t->next[*s - 'a'];
+			s++;
+		}
+		t->end--;
+		return true;
+	}
  
-    return false;
+	return false;
 }
  
 int main()
 {
-    TrieTree tree;
+	TrieTree tree;
  
-    tree.add("strawberry");
-    tree.add("grandfather");
-    tree.add("policeman");
-    tree.add("breakfast");
-    tree.add("mutton");
-    tree.add("bus");
-    tree.add("bus");
-    tree.add("bustop");
-    tree.add("computer");
+	tree.add("strawberry");
+	tree.add("grandfather");
+	tree.add("policeman");
+	tree.add("breakfast");
+	tree.add("mutton");
+	tree.add("bus");
+	tree.add("bus");
+	tree.add("bustop");
+	tree.add("computer");
  
-    // test "query"
-    cout << tree.query("bud") << endl; // 0
-    cout << tree.query("bus") << endl; // 2
+	// test "query"
+	cout << tree.query("bud") << endl; // 0
+	cout << tree.query("bus") << endl; // 2
  
-    // test "remove"
-    tree.remove("bustop");
-    cout << tree.query("bustop") << endl; // 0
-    tree.remove("bus");
-    cout << tree.query("bus") << endl;    // 1
-    tree.remove("bus");
-    cout << tree.query("bus") << endl;    // 0
+	// test "remove"
+	tree.remove("bustop");
+	cout << tree.query("bustop") << endl; // 0
+	tree.remove("bus");
+	cout << tree.query("bus") << endl;    // 1
+	tree.remove("bus");
+	cout << tree.query("bus") << endl;    // 0
  
-    return 0;
+	return 0;
 }
  
 四：不足及改进

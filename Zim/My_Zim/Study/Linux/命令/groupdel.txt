@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:28:45+08:00
+
+====== groupdel ======
+Created 星期四 30 十一月 2017
+
+groupdel [groupname] | 删除群组
+

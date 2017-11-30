@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:07:47+08:00
+
+====== tail ======
+Created 星期四 30 十一月 2017
+
+tail [必要参数] [选择参数] [文件] | 显示文件结尾内容
+
+-v  显示详细的处理信息
+
+-q  不显示处理信息
+
+-num/-n (-)num      显示最后num行内容
+
+-n +num 从第num行开始显示后面的数据
+
+-c  显示最后c个字符
+
+-f  循环读取

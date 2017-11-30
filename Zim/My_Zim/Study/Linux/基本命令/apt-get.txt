@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-29T22:57:45+08:00
-
-====== apt-get ======
-Created Wednesday 29 November 2017
-
-https://www.tecmint.com/useful-basic-commands-of-apt-get-and-apt-cache-for-package-management/

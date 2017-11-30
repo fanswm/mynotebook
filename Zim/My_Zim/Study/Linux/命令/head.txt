@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:07:23+08:00
+
+====== head ======
+Created 星期四 30 十一月 2017
+
+head [参数]… [文件]… | 显示档案开头，默认开头10行
+
+
+-v 显示文件名
+
+-c number 显示前number个字符,若number为负数,则显示除最后number个字符的所有内容
+
+-number/n (+)number 显示前number行内容，
+
+-n number 若number为负数，则显示除最后number行数据的所有内容

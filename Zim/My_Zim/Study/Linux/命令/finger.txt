@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:22:12+08:00
+
+====== finger ======
+Created 星期四 30 十一月 2017
+
+finger [选项] [使用者] [用户@主机] | 查看用户信息
+
+-s 显示用户的注册名、实际姓名、终端名称、写状态、停滞时间、登录时间等信息
+
+-l 除了用-s选项显示的信息外，还显示用户主目录、登录shell、邮件状态等信息，以及用户主目录下的.plan、.project和.forward文件的内容。
+
+-p 除了不显示.plan文件和.project文件以外，与-l选项相同

@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:32:43+08:00
+
+====== declare、typeset ======
+Created 星期四 30 十一月 2017
+
+
+
+-i 声明为整数
+
+-a 声明为数组
+
+-f 声明为函数
+
+-r 声明为只读
