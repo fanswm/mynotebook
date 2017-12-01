@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-01T08:11:51+08:00
+
+====== netstat ======
+Created Friday 01 December 2017
+
+netstat | 显示与IP、TCP、UDP和ICMP协议相关的统计数据

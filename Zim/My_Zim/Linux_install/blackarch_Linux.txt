@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-01T18:15:11+08:00
+
+====== blackarch Linux ======
+Created Friday 01 December 2017
+
+blackarch linux root 密码:
+blackarch
+

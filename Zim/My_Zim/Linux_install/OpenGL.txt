@@ -67,6 +67,9 @@ int main(int argc, char *argv[])
 ## 编译程式时，执行以下指令：
 > `gcc -o test test.c -lGL -lGLU -lglut`
 
+> opengl:
+gcc -Wall -ofoo foo.c -lglut32cu -lglu32 -lopengl32
+
 ## 执行
 
 + `./test`

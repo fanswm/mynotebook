@@ -13,3 +13,10 @@ Created Wednesday 29 November 2017
 	“To err is human, but to really foul up everything, you need root password.” 
 
 	“人非圣贤孰能无过，但是拥有root密码就真的万劫不复了。” # 译
+
+sudo | 以特定用户的权限执行特定命令
+
+
+-l 列出当前用户可执行的命令
+
+-u username#uid 以指定用户执行命令

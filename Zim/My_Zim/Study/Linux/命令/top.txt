@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-01T08:07:56+08:00
+
+====== top ======
+Created Friday 01 December 2017
+
+top [参数] | 显示当前系统正在执行的进程的相关信息，包括进程ID、内存占用率、CPU占用率等

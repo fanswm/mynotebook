@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-01T08:08:35+08:00
+
+====== free ======
+Created Friday 01 December 2017
+
+free [参数] | 显示Linux系统中空闲的、已用的物理内存及swap内存,及被内核使用的buffer

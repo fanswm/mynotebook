@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-01T08:08:18+08:00
+
+====== kill ======
+Created Friday 01 December 2017
+
+kill [参数] [进程号] | 杀死进程

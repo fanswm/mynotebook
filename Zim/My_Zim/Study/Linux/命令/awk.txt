@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-01T08:12:57+08:00
+
+====== awk ======
+Created Friday 01 December 2017
+
+awk
+
+
+-F 分隔符 以分隔符分隔内容
+
+{} 要执行的脚本内容 eg:cat /etc/passwd |awk -F ':' '{print $1"\t"$7}'

@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-01T18:12:58+08:00
+
+====== OpenGL ======
+Created Friday 01 December 2017
+
+安装OpenGL:
+ 2017/01/05 20:46 
+1,把glut.dll,glut32.dll copy 到c:\windows\system32\;
+2,把D:\Dev-Cpp\MinGW64\bin\mingw32-make.exe改名为make.exe;
+3,把C:\MINGW\bin\mingw32-make.exe改名为：make.exe；
+未成功。后来在vmware中的XP中安装成功。

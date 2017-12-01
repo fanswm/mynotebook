@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-01T08:08:56+08:00
+
+====== vmstat ======
+Created Friday 01 December 2017
+
+vmstat | 对操作系统的虚拟内存、进程、CPU活动进行监控

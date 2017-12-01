@@ -5,7 +5,8 @@ Creation-Date: 2017-11-21T20:25:37+08:00
 ====== 插件 ======
 创建日期 星期二 21 十一月 2017
 
-- Listen 1
+- Listen 1		https://github.com/listen1/listen1_chrome_extension
+							https://github.com/listen1/listen1_desktop
 - Anything to QRcode
 - FairyDict 词典
 - SiumilarWeb 网站流量来源和排名
