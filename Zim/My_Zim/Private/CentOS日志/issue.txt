@@ -1,0 +1,39 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-02T17:23:58+08:00
+
+====== issue ======
+创建日期 星期六 02 十二月 2017
+
+####################################################
+2017-12-2-17-24
+
+ABRT 已检测到 '1' 个问题。预了解详细信息请执行：abrt-cli list --since 1510744494
+[root@MiWiFi-R1CL-srv fanswm]# abrt-cli list
+id ff4cf134f314e3a343dcb8fa165fdd6453e0a942
+reason:         nautilus killed by SIGSEGV
+time:           2017年12月01日 星期五 07时34分06秒
+cmdline:        /usr/bin/nautilus --gapplication-service
+uid:            1000
+Directory:      /var/spool/abrt/ccpp-2017-12-01-07:34:06-3275
+已报告：    无法报告
+
+id 28a245515d8fa7239879f9ed881996180dc02213
+reason:         nautilus killed by SIGSEGV
+time:           2017年11月11日 星期六 14时14分02秒
+cmdline:        /usr/bin/nautilus --gapplication-service
+uid:            1000
+Directory:      /var/spool/abrt/ccpp-2017-11-11-14:14:02-8702
+已报告：    无法报告
+
+id be40e58b8adfd7b3e98e80d4f354acdb11544204
+reason:         nautilus killed by SIGSEGV
+time:           2017年11月07日 星期二 21时36分59秒
+cmdline:        /usr/bin/nautilus --gapplication-service
+uid:            1000
+Directory:      /var/spool/abrt/ccpp-2017-11-07-21:36:59-4279
+已报告：    无法报告
+
+已禁用自动报告功能。请考虑启用该功能，方法是
+作为有 root 特权的用户使用命令 'abrt-auto-reporting enabled'
+########################################################

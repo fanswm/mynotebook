@@ -27,9 +27,9 @@ Changing password for dmtsai
 [dmtsai@www ~]$ pstree -u
 init-+-acpid
 ....(中间省略)....
-     |-sshd---sshd---sshd(dmtsai)---bash-+-more
-     |                                   |-passwd(root)
-     |                                   `-pstree
+	 |-sshd---sshd---sshd(dmtsai)---bash-+-more
+	 |                                   |-passwd(root)
+	 |                                   `-pstree
 ....(底下省略)....
 从上表的结果我们可以发现，底线的部分是属於 dmtsai 这个一般帐号的权限，特殊字体的则是 root 的权限！ 但你看到了， passwd 确实是由 bash 衍生出来的！不过就是权限不一样！透过这样的解析， 你也会比较清楚为何不同程序所产生的权限不同了吧！这是由於『SUID 程序运行过程中产生的程序』的关系啦！
 
@@ -110,7 +110,7 @@ __-signal：例如 -1 -15 等等，若不加的话，默认是 SIGKILL (-9) 罗�
 
 范例一：找出目前所在目录的使用 PID/所属帐号/权限 为何？
 [root@www ~]# fuser -uv .
-                     USER        PID ACCESS COMMAND
+					 USER        PID ACCESS COMMAND
 .:                   root      20639 ..c.. (root)bash
 看到输出的结果没？他说『.』底下有个 PID 为 20639 的程序，该程序属於 root 且命令为 bash 。 比较有趣的是那个 __ACCESS 的项目，那个项目代表的意义为：__
 
@@ -128,11 +128,11 @@ __m ：可能为分享的动态函式库；__
 # 会被用到的是 /proc 底下的文件啦！所以你应该要这样做：
 
 [root@www ~]# fuser -mvu /proc
-                     USER        PID ACCESS COMMAND
+					 USER        PID ACCESS COMMAND
 /proc:               root       4289 f.... (root)klogd
-                     root       4555 f.... (root)acpid
-                     haldaemon  4758 f.... (haldaemon)hald
-                     root       4977 F.... (root)Xorg
+					 root       4555 f.... (root)acpid
+					 haldaemon  4758 f.... (haldaemon)hald
+					 root       4977 F.... (root)Xorg
 # 有这几支程序在进行 /proc 文件系统的存取喔！这样清楚了吗？
 既然可以针对整个文件系统，那么能不能仅针对单一文件啊？当然可以罗！看一下底下的案例先：
 
@@ -143,7 +143,7 @@ __m ：可能为分享的动态函式库；__
 /var/run/autofs.fifo-net
 
 [root@www ~]# fuser -uv /var/gdm/.gdmfifo
-                     USER        PID ACCESS COMMAND
+					 USER        PID ACCESS COMMAND
 /var/gdm/.gdmfifo:   root       4892 F.... (root)gdm-binary
 
 范例四：同范例三，但试图删除该 PID？且『不要』删除喔！
@@ -194,7 +194,7 @@ udevd       400      root    2u   CHR        1,3       1420 /dev/null
 # 看吧！因为装置都在 /dev 里面嘛！所以罗，使用搜寻目录即可啊！
 
 范例四：__秀出属於 root 的 bash 这支程序所开启的文件__
-[root@www ~]# lsof -u root | grep bash
+__[root@www ~]# lsof -u root | grep bash__
 bash   20639 root  cwd    DIR    3,2    4096    648321 /root
 bash   20639 root  rtd    DIR    3,2    4096         2 /
 bash   20639 root  txt    REG    3,2  735004   1199424 /bin/bash

@@ -73,15 +73,15 @@ CentOS 5.x 已经帮我们制订好非常多的守则了，这部份你只要知
 
 那么安全性本文到底是什么样的存在呢？我们先来看看 /root 底下的文件的安全性本文好了。 __观察安全性本文可使用『 ls -Z 』去观察__如下：(注意：你必须已经启动了 SELinux 才行！若尚未启动，这部份请稍微看过一遍即可。底下会介绍如何启动 SELinux 喔！)
 
-[root@www ~]# ls -Z
+__[root@www ~]# ls -Z__
 drwxr-xr-x  root root root:object_r:user_home_t   Desktop
 -rw-r--r--  root root root:object_r:user_home_t   install.log
 -rw-r--r--  root root root:object_r:user_home_t   install.log.syslog
 # 上述特殊字体的部分，就是安全性本文的内容！
 如上所示，__安全性本文主要用冒号分为三个栏位，这三个栏位的意义为：__
 
-__Identify:role:type__
-__身份识别:角色:类型__
+__Identify:	role:	type__
+__身份识别:	角色:	类型__
 这三个栏位的意义仔细的说明一下吧：
 
 __身份识别 (Identify)：__
@@ -115,45 +115,46 @@ domain 需要与 type 搭配，则该程序才能够顺利的读取文件资源�
 程序与文件 SELinux type 栏位的相关性
 那么这三个栏位如何利用呢？首先我们来瞧瞧主体程序在这三个栏位的意义为何！透过身份识别与角色栏位的定义， 我们可以约略知道某个程序所代表的意义喔！基本上，这些对应数据在 targeted 政策下的对应如下：
 
-身份识别	角色	该对应在 targeted 的意义
-root	system_r	代表供 root 帐号登陆时所取得的权限
-system_u	system_r	由於为系统帐号，因此是非交谈式的系统运行程序
-user_u	system_r	一般可登陆使用者的程序罗！
-但就如上所述，其实最重要的栏位是类型栏位，主体与目标之间是否具有可以读写的权限，与程序的 domain 及文件的 type 有关！这两者的关系我们可以使用达成 WWW 服务器功能的 httpd 这支程序与 /var/www/html 这个网页放置的目录来说明。 首先，看看这两个咚咚的安全性本文内容先：
+__身份识别	角色	该对应在 targeted 的意义__
+__root	system_r	代表供 root 帐号登陆时所取得的权限__
+__system_u	system_r	由於为系统帐号，因此是非交谈式的系统运行程序__
+__user_u	system_r	一般可登陆使用者的程序罗！__
+__但就如上所述，其实最重要的栏位是类型栏位，主体与目标之间是否具有可以读写的权限，与程序的 domain 及文件的 type 有关__！这两者的关系我们可以使用达成 WWW 服务器功能的 httpd 这支程序与 /var/www/html 这个网页放置的目录来说明。 首先，看看这两个咚咚的安全性本文内容先：
 
 [root@www ~]# ll -Zd /usr/sbin/httpd /var/www/html
 -rwxr-xr-x  root root system_u:object_r:httpd_exec_t   /usr/sbin/httpd
 drwxr-xr-x  root root system_u:object_r:httpd_sys_content_t /var/www/html
 # 两者的角色栏位都是 object_r ，代表都是文件！而 httpd 属於 httpd_exec_t 类型，
 # /var/www/html 则属於 httpd_sys_content_t 这个类型！
-httpd 属於 httpd_exec_t 这个可以运行的类型，而 /var/www/html 则属於 httpd_sys_content_t 这个可以让 httpd 领域 (domain) 读取的类型。文字看起来不太容易了解吧！我们使用图示来说明这两者的关系！
+__httpd 属於 httpd_exec_t 这个可以运行的类型__，而 __/var/www/html 则属於 httpd_sys_content_t 这个可以让 httpd 领域 (domain) 读取的类型__。文字看起来不太容易了解吧！我们使用图示来说明这两者的关系！
 
 主体程序取得的 domain 与目标文件资源的 type 相互关系
-图 5.2.2、主体程序取得的 domain 与目标文件资源的 type 相互关系
+
 上图的意义我们可以这样看的：
 
-首先，我们触发一个可运行的目标文件，那就是具有 httpd_exec_t 这个类型的 /usr/sbin/httpd 文件；
-该文件的类型会让这个文件所造成的主体程序 (Subject) 具有 httpd 这个领域 (domain)， 我们的政策针对这个领域已经制定了许多守则，其中包括这个领域可以读取的目标资源类型；
-由於 httpd domain 被配置为可以读取 httpd_sys_content_t 这个类型的目标文件 (Object)， 因此你的网页放置到 /var/www/html/ 目录下，就能够被 httpd 那支程序所读取了；
-但最终能不能读到正确的数据，还得要看 rwx 是否符合 Linux 权限的规范！
-上述的流程告诉我们几个重点，第一个是政策内需要制订详细的 domain/type 相关性；第二个是若文件的 type 配置错误， 那么即使权限配置为 rwx 全开的 777 ，该主体程序也无法读取目标文件资源的啦！不过如此一来， 也就可以避免使用者将他的家目录配置为 777 时所造成的权限困扰。
+__首先，我们触发一个可运行的目标文件，那就是具有 httpd_exec_t 这个类型的 /usr/sbin/httpd 文件__；
+__该文件的类型会让这个文件所造成的主体程序 (Subject) 具有 httpd 这个领域 (domain)， 我们的政策针对这个领域已经制定了许多守则，其中包括这个领域可以读取的目标资源类型；__
+__由於 httpd domain 被配置为可以读取 httpd_sys_content_t 这个类型的目标文件 (Object)， 因此你的网页放置到 /var/www/html/ 目录下，就能够被 httpd 那支程序所读取了；__
+__但最终能不能读到正确的数据，还得要看 rwx 是否符合 Linux 权限的规范！__
+上述的流程告诉我们几个重点，**第一个是政策内需要制订详细的 domain/type 相关性；第二个是若文件的 type 配置错误， 那么即使权限配置为 rwx 全开的 777 ，该主体程序也无法读取目标文件资源的啦**！不过如此一来， 也就可以避免使用者将他的家目录配置为 777 时所造成的权限困扰。
 
-小标题的图示SELinux 的启动、关闭与观察
-并非所有的 Linux distributions 都支持 SELinux 的，所以你必须要先观察一下你的系统版本为何！ 鸟哥这里介绍的 CentOS 5.x 本身就有支持 SELinux 啦！所以你不需要自行编译 SELinux 到你的 Linux 核心中！ 目前 SELinux 支持三种模式，分别如下：
+__SELinux 的启动、关闭与观察__
+并非所有的 Linux distributions 都支持 SELinux 的，所以你必须要先观察一下你的系统版本为何！ 鸟哥这里介绍的 CentOS 5.x 本身就有支持 SELinux 啦！所以你不需要自行编译 SELinux 到你的 Linux 核心中！ 目前 SEL+++++
+65144inux 支持三种模式，分别如下：
 
-enforcing：强制模式，代表 SELinux 运行中，且已经正确的开始限制 domain/type 了；
-permissive：宽容模式：代表 SELinux 运行中，不过仅会有警告信息并不会实际限制 domain/type 的存取。这种模式可以运来作为 SELinux 的 debug 之用；
-disabled：关闭，SELinux 并没有实际运行。
+__enforcing：强制模式，代表 SELinux 运行中，且已经正确的开始限制 domain/type 了；__
+__permissive：宽容模式：代表 SELinux 运行中，不过仅会有警告信息并不会实际限制 domain/type 的存取__。这种模式可以运来作为 SELinux 的 debug 之用；
+__disabled：关闭，SELinux 并没有实际运行。__
 那你怎么知道目前的 SELinux 模式呢？就透过 getenforce 吧！
 
-[root@www ~]# getenforce
-Enforcing  <==诺！就显示出目前的模式为 Enforcing 罗！
+__[root@www ~]# getenforce__
+__Enforcing  <==诺！就显示出目前的模式为 Enforcing 罗！__
 另外，我们又如何知道 SELinux 的政策 (Policy) 为何呢？这时可以使用 sestatus 来观察：
 
-[root@www ~]# sestatus [-vb]
-选项与参数：
--v  ：检查列於 /etc/sestatus.conf 内的文件与程序的安全性本文内容；
--b  ：将目前政策的守则布林值列出，亦即某些守则 (rule) 是否要启动 (0/1) 之意；
+__[root@www ~]# sestatus [-vb]__
+__选项与参数：__
+__-v  ：检查列於 /etc/sestatus.conf 内的文件与程序的安全性本文内容；__
+__-b  ：将目前政策的守则布林值列出，亦即某些守则 (rule) 是否要启动 (0/1) 之意；__
 
 范例一：列出目前的 SELinux 使用哪个政策 (Policy)？
 [root@www ~]# sestatus
@@ -163,44 +164,13 @@ Current mode:                   enforcing  <==目前的模式
 Mode from config file:          enforcing  <==配置档指定的模式
 Policy version:                 21
 Policy from config file:        targeted   <==目前的政策为何？
-如上所示，目前是启动的，而且是 Enforcing 模式，而由配置档查询得知亦为 Enforcing 模式。 此外，目前的默认政策为 targeted 这一个。你应该要有疑问的是， SELinux 的配置档是哪个文件啊？ 其实就是 /etc/selinux/config 这个文件喔！我们来看看内容：
+如上所示，目前是启动的，而且是 Enforcing 模式，而由配置档查询得知亦为 Enforcing 模式。 此外，__目前的默认政策为 targeted 这一个__。你应该要有疑问的是， SELinux 的配置档是哪个文件啊？ __其实就是 /etc/selinux/config 这个文件__喔！我们来看看内容：
 
-[root@www ~]# vi /etc/selinux/config
-SELINUX=enforcing     <==调整 enforcing|disabled|permissive
-SELINUXTYPE=targeted  <==目前仅有 targeted 与 strict
+__[root@www ~]# vi /etc/selinux/config__
+__SELINUX=enforcing     <==调整 enforcing|disabled|permissive__
+__SELINUXTYPE=targeted  <==目前仅有 targeted 与 strict__
 
-
-SELinux 的启动、关闭与观察
-并非所有的 Linux distributions 都支持 SELinux 的，所以你必须要先观察一下你的系统版本为何！ 鸟哥这里介绍的 CentOS 5.x 本身就有支持 SELinux 啦！所以你不需要自行编译 SELinux 到你的 Linux 核心中！ 目前 SELinux 支持三种模式，分别如下：
-
-enforcing：强制模式，代表 SELinux 运行中，且已经正确的开始限制 domain/type 了；
-permissive：宽容模式：代表 SELinux 运行中，不过仅会有警告信息并不会实际限制 domain/type 的存取。这种模式可以运来作为 SELinux 的 debug 之用；
-disabled：关闭，SELinux 并没有实际运行。
-那你怎么知道目前的 SELinux 模式呢？就透过 getenforce 吧！
-
-[root@www ~]# getenforce
-Enforcing  <==诺！就显示出目前的模式为 Enforcing 罗！
-另外，我们又如何知道 SELinux 的政策 (Policy) 为何呢？这时可以使用 sestatus 来观察：
-
-[root@www ~]# sestatus [-vb]
-选项与参数：
--v  ：检查列於 /etc/sestatus.conf 内的文件与程序的安全性本文内容；
--b  ：将目前政策的守则布林值列出，亦即某些守则 (rule) 是否要启动 (0/1) 之意；
-
-范例一：列出目前的 SELinux 使用哪个政策 (Policy)？
-[root@www ~]# sestatus
-SELinux status:                 enabled    <==是否启动 SELinux
-SELinuxfs mount:                /selinux   <==SELinux 的相关文件数据挂载点
-Current mode:                   enforcing  <==目前的模式
-Mode from config file:          enforcing  <==配置档指定的模式
-Policy version:                 21
-Policy from config file:        targeted   <==目前的政策为何？
-如上所示，目前是启动的，而且是 Enforcing 模式，而由配置档查询得知亦为 Enforcing 模式。 此外，目前的默认政策为 targeted 这一个。你应该要有疑问的是， SELinux 的配置档是哪个文件啊？ 其实就是 /etc/selinux/config 这个文件喔！我们来看看内容：
-
-[root@www ~]# vi /etc/selinux/config
-SELINUX=enforcing     <==调整 enforcing|disabled|permissive
-SELINUXTYPE=targeted  <==目前仅有 targeted 与 strict
-SELinux 的启动与关闭
+__SELinux 的启动与关闭__
 上面是默认的政策与启动的模式！你要注意的是，如果改变了政策则需要重新启动；如果由 enforcing 或 permissive 改成 disabled ，或由 disabled 改成其他两个，那也必须要重新启动。这是因为 SELinux 是整合到核心里面去的， 你只可以在 SELinux 运行下切换成为强制 (enforcing) 或宽容 (permissive) 模式，不能够直接关闭 SELinux 的！ 同时，由 SELinux 关闭 (disable) 的状态到开启的状态也需要重新启动啦！所以，如果刚刚你发现 getenforce 出现 disabled 时， 请到上述文件修改成为 enforcing 吧！
 
 所以，如果你要启动 SELinux 的话，请将上述的 SELINUX=enforcing 配置妥当，并且指定 SELINUXTYPE=targeted 这一个配置， 并且到 /boot/grub/menu.lst 这个文件去，看看核心有无关闭 SELinux 了呢？
@@ -211,9 +181,9 @@ timeout=5
 splashimage=(hd0,0)/grub/splash.xpm.gz
 hiddenmenu
 title CentOS (2.6.18-92.el5)
-        root (hd0,0)
-        kernel /vmlinuz-2.6.18-92.el5 ro root=LABEL=/1 rhgb quiet selinux=0
-        initrd /initrd-2.6.18-92.el5.img
+		root (hd0,0)
+		kernel /vmlinuz-2.6.18-92.el5 ro root=LABEL=/1 rhgb quiet selinux=0
+		initrd /initrd-2.6.18-92.el5.img
 # 如果要启动 SELinux ，则不可以出现 selinux=0 的字样在 kernel 后面！
 请注意到上面特殊字体的那一行，确认 kernel 后面不可以接『 selinux=0 』这个项目！因为 selinux=0 指定给核心时， 则核心会自动的忽略 /etc/selinux/config 的配置值，而直接略过 SELinux 的加载，所以你的 SELinux 模式就会变成 disabled 啦！因为我们要启动，所以这里得要确认不存在 selinux=0 才行！切记切记！ 如果一切配置妥当，接下来就是 reboot 重新启动吧！
 
@@ -221,10 +191,10 @@ title CentOS (2.6.18-92.el5)
 
 如果你已经在 Enforcing 的模式，但是可能由於一些配置的问题导致 SELinux 让某些服务无法正常的运行， 此时你可以将 Enforcing 的模式改为宽容 (permissive) 的模式，让 SELinux 只会警告无法顺利连线的信息， 而不是直接抵挡主体程序的读取权限。让 SELinux 模式在 enforcing 与 permissive 之间切换的方法为：
 
-[root@www ~]# setenforce [0|1]
-选项与参数：
-0 ：转成 permissive 宽容模式；
-1 ：转成 Enforcing 强制模式
+__[root@www ~]# setenforce [0|1]__
+__选项与参数：__
+__0 ：转成 permissive 宽容模式；__
+__1 ：转成 Enforcing 强制模式__
 
 范例一：将 SELinux 在 Enforcing 与 permissive 之间切换与观察
 [root@www ~]# setenforce 0
@@ -235,7 +205,7 @@ Permissive
 Enforcing
 不过请注意， setenforce 无法在 Disabled 的模式底下进行模式的切换喔！
 
-小标题的图示SELinux 网络服务运行范例
+SELinux 网络服务运行范例
 由於 CentOS 5.x 默认使用 targeted 这个政策，而这个政策主要是在管理网络服务，本机端的程序则比较不受 SELinux 的管制。 既然上头我们曾经举过 /usr/sbin/httpd 这个程序来当作范例，那么我们就使用 WWW 服务器来说明一下 SELinux 的运行方式吧。
 
 
@@ -248,7 +218,7 @@ Enforcing
 
 # 2. 观察有无此程序，并且观察此程序的 SELinux 安全性本文数据
 [root@www ~]# pstree | grep httpd
-     |-httpd---8*[httpd]   <==httpd 会产生很多子程序来负责网络服务喔！
+	 |-httpd---8*[httpd]   <==httpd 会产生很多子程序来负责网络服务喔！
 
 [root@www ~]# ps aux -Z |grep http
 root:system_r:httpd_t root   24089 0.2 1.2 22896 9256 ? Ss 16:06 0:00 /usr/sbin/httpd
@@ -392,11 +362,11 @@ auditd      0:off  1:off  2:on   3:on   4:on   5:on   6:off
 type=AVC msg=audit(1237799959.349:355): avc:  denied  { getattr } for  pid=24094 
 comm="httpd" path="/var/www/html/index.html" dev=hda2 ino=654685 scontext=root:s
 ystem_r:httpd_t:s0 tcontext=root:object_r:user_home_t:s0 tclass=file
-    Was caused by:
-       Missing or disabled TE allow rule.
-       Allow rules may exist but be disabled by boolean settings; check boolean
+	Was caused by:
+	   Missing or disabled TE allow rule.
+	   Allow rules may exist but be disabled by boolean settings; check boolean
 settings.
-       You can see the necessary allow rules by running audit2allow with this
+	   You can see the necessary allow rules by running audit2allow with this
 audit message as input.
 audit2why 的用法与输出结果如上，比较有趣的是那个 AVC ，AVC 是 access vector cache 的缩写， 目的是记录所有与 SELinux 有关的存取统计数据。输出的资讯当中，会有谈到产生错误的问题为何，如上表特殊字体部分， 你会发现错误信息主要告知 type 不符，所以导致错误的发生啊！不过，就鸟哥来看，我个人觉得 setroubleshoot 比较好用呢！ 这两个好东西都可以帮助你解决 SELinux 的错误，因此，请务必至少要学会其中一项错误分析的方法喔！
 
