@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-02T11:03:05+08:00
+
+====== lsof ======
+Created Saturday 02 December 2017
+
+__lsof ：列出被程序所开启的文件档名__
+相对於 fuser 是由文件或者装置去找出使用该文件或装置的程序，反过来说， 如何查出某个程序开启或者使用的文件与装置呢？呼呼！那就是使用 lsof 罗～
+
+[__root@www ~]# lsof [-aUu] [+d]__
+__选项与参数：__
+__-a  ：多项数据需要『同时成立』才显示出结果时！__
+__-U  ：仅列出 Unix like 系统的 socket 文件类型；__
+__-u  ：后面接 username，列出该使用者相关程序所开启的文件；__
+__+d  ：后面接目录，亦即找出某个目录底下已经被开启的文件！__
