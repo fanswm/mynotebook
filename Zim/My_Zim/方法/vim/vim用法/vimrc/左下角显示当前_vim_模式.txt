@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:01:45+08:00
+
+====== 左下角显示当前 vim 模式 ======
+Created Sunday 03 December 2017
+
+左下角显示当前 vim 模式
+ 
+set showmode

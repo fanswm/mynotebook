@@ -1,0 +1,22 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T08:57:09+08:00
+
+====== vimrc ======
+Created Sunday 03 December 2017
+
+# Unix
+ 
+# vim-plug
+ 
+# Vim
+ 
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+ 
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ 
+# Neovim
+ 
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+ 
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

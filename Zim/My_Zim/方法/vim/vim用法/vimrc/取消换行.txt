@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T08:59:29+08:00
+
+====== 取消换行 ======
+Created Sunday 03 December 2017
+
+取消换行
+ 
+set nowrap

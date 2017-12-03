@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:02:19+08:00
+
+====== 主题 ======
+Created Sunday 03 December 2017
+
+主题
+ 
+syntax enable
+ 
+set background=dark
+ 
+colorscheme solarized

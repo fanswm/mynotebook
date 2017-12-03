@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:07:20+08:00
+
+====== html 5 ======
+Created Sunday 03 December 2017
+
+html 5
+
+Plug 'othree/html5.vim'

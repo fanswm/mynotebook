@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T08:55:17+08:00
+
+====== 撤销 ======
+Created Sunday 03 December 2017
+
+撤销
+ 
+# u 撤销
+ 
+# <ctrl>+r 取消撤销

@@ -1,0 +1,42 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:18:52+08:00
+
+====== 深入网络操作命令 ======
+Created Sunday 03 December 2017
+
+nmap
+
+网络扫描命令。
+
+lsof
+
+全名 list open files，也就是列举系统中已经被打开的文件。
+
+mail
+
+发送和接收邮件。
+
+mutt
+
+邮件管理命令。
+
+nslookup
+
+交互式查询互联网 DNS 服务器的命令。
+
+dig
+
+查找 DNS 解析过程。
+
+host
+
+查询 DNS 的命令。
+
+traceroute
+
+追踪数据传输路由状况。
+
+tcpdump
+
+命令行的抓包工具。

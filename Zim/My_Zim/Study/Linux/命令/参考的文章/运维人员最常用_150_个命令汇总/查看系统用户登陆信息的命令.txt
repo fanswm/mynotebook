@@ -1,0 +1,34 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:19:44+08:00
+
+====== 查看系统用户登陆信息的命令 ======
+Created Sunday 03 December 2017
+
+whoami
+
+显示当前有效的用户名称，相当于执行 id -un 命令。
+
+who
+
+显示目前登录系统的用户信息。
+
+w
+
+显示已经登陆系统的用户列表，并显示用户正在执行的指令。
+
+last
+
+显示登入系统的用户。
+
+lastlog
+
+显示系统中所有用户最近一次登录信息。
+
+users
+
+显示当前登录系统的所有用户的用户列表。
+
+finger
+
+查找并显示用户信息。

@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:01:26+08:00
+
+====== 查找 ======
+Created Sunday 03 December 2017
+
+查找
+ 
+set ic
+ 
+set hls
+ 
+set is

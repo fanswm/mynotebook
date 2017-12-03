@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T08:54:55+08:00
+
+====== 修改 ======
+Created Sunday 03 December 2017
+
+修改
+ 
+# i 插入文本
+ 
+# A 当前行末尾添加
+ 
+# r 替换当前字符
+ 
+# o 打开新的一行并进入插入模式

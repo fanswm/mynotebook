@@ -1,0 +1,50 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:16:25+08:00
+
+====== 信息显示命令 ======
+Created Sunday 03 December 2017
+
+uname
+
+显示操作系统相关信息的命令。
+
+hostname
+
+显示或者设置当前系统的主机名。
+
+dmesg
+
+显示开机信息，用于诊断系统故障。
+
+uptime
+
+显示系统运行时间及负载。
+
+stat
+
+显示文件或文件系统的状态。
+
+du
+
+计算磁盘空间使用情况。
+
+df
+
+报告文件系统磁盘空间的使用情况。
+
+top
+
+实时显示系统资源使用情况。
+
+free
+
+查看系统内存。
+
+date
+
+显示与设置系统时间。
+
+cal
+
+查看日历等时间信息。

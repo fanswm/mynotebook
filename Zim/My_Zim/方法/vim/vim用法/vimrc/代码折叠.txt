@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:02:06+08:00
+
+====== 代码折叠 ======
+Created Sunday 03 December 2017
+
+代码折叠
+ 
+# 启动 vim 时关闭折叠代码
+ 
+set nofoldenable
+ 

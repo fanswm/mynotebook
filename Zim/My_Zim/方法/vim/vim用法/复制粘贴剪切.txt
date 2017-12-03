@@ -1,0 +1,18 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T08:55:33+08:00
+
+====== 复制粘贴剪切 ======
+Created Sunday 03 December 2017
+
+复制粘贴剪切
+ 
+# v 进入可视模式
+ 
+# y 复制
+ 
+# p 粘贴
+ 
+# yy 复制当前行
+ 
+# dd 剪切当前行

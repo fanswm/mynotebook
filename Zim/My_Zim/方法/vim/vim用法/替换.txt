@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T08:56:24+08:00
+
+====== 替换 ======
+Created Sunday 03 December 2017
+
+替换
+ 
+# :s/old/new 替换该行第一个匹配串
+ 
+# :s/old/new/g 替换全行的匹配串
+ 
+# :%s/old/new/g 替换整个文件的匹配串

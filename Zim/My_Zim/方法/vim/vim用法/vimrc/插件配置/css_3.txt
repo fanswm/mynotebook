@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:07:34+08:00
+
+====== css 3 ======
+Created Sunday 03 December 2017
+
+css 3
+
+Plug 'hail2u/vim-css3-syntax'
+Plug 'ap/vim-css-color'
+ 
+augroup VimCSS3Syntax
+  autocmd!
+ 
+  autocmd FileType css setlocal iskeyword+=-
+augroup END
