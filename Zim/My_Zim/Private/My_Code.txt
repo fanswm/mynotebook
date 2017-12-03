@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T12:10:11+08:00
+
+====== My Code ======
+Created 星期日 03 十二月 2017
+
+github/code/
+	/c
+	/python
+	/sh
+	/test
+	...
+	
+
+myPC:
+	/home/github/code/
+
+draw.io/流程图：
+	github/test/
