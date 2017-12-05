@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-05T14:41:20+08:00
+
+====== 牛人在哪里 ======
+Created Tuesday 05 December 2017
+
+  ● GitHub上的代码库本身：尤其是：[Explore](https://github.com/explore)、[热门关注信息库]两个栏目
+  ● GitHub官方推荐：[GitHub自身的官方博客](https://github.com/blog)与GitHub员工们的个人博客推荐的项目与开发者
+  ● 各类社交媒体上提到的的GitHub库：尤其是[Hacker News](https://news.ycombinator.com/)上提到的GitHub库。

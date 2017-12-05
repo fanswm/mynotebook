@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-05T14:28:10+08:00
+
+====== 在GitHub，如何跟牛人学习 ======
+Created Tuesday 05 December 2017
+
+追随牛人，与他们一起修行
+
+修行之道：关注大师的言行，跟随大师的举动，和大师一并修行，领会大师的意境，成为真正的大师。
+正如这首禅诗所言，与其在墙内仰望牛人，不如直接在GitHub：
+  ● watch、fork牛人们
+  ● 对他们的项目提交pull request
+  ● 主动给牛人们的项目写wiki或提交测试用例，或者问题
+  ● 还可以帮他们翻译中文

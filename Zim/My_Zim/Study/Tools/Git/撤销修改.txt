@@ -1,0 +1,32 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-05T17:02:50+08:00
+
+====== 撤销修改 ======
+Created Tuesday 05 December 2017
+
++ __已修改，未暂存__
+> 如果我们只是在编辑器里修改了文件，但还没有执行git add .，这时候我们的文件还在工作区，并没有进入暂存区，我们可以用：
+`git checkout .`
+或者
+`git reset --hard`
+来进行撤销操作。
+> git add .的反义词是git checkout .
+
++ __已暂存，未提交__
+```
+git reset
+git checkout .
+```
+或者
+`git reset --hard`
+
++ __已提交，未推送__
+`git reset --hard origin/master`
+
++ __已推送__
+> 很不幸，你的手实在是太快了，你既git add了，又git commit了，并且还git push了，这时你的代码已经进入远程仓库。如果你想恢复的话，还好，由于你的本地仓库和远程仓库是等价的，你只需要先恢复本地仓库，再强制push到远程仓库就好了：
+```
+git reset --hard HEAD^
+git push -f
+```

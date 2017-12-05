@@ -1,0 +1,75 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-05T07:57:15+08:00
+
+====== 语法 ======
+Created Tuesday 05 December 2017
+
+__## 标题设置__
++ 在文字下方添加“=”和“-”，他 们分别表示一级标题和二级标题
++ 在文字开头加 “#”，“#”数量表示几级标题。
+> （一共只有1~6级标题，1级标题字体最大）
+
+__## 块注释__
++ 文字开头添加“>”
++ 当>和文字之间添加五个blank时，
+> 块注释的文字会有变化
+
+__## 列表__
++ 无序列表
++ + 文字开头添加(*, +, and -)实现无序列表。
+> 但是要注意在(*, +, and -)和文字之间需要 添加空格。（建议：一个文档中只是用一种
+无序列表的表示方式）
++ 有序列表
++ 使用数字后面跟上句号。（还要有空格）
+
+__## 链接__
++ 内联方式
+> This is an [example link](http://example.com/).
++ 引用方式
+> I get 10 times more traffic from [Google][1] than from [Yahoo][2] or [MSN][3].  
+[1]: http://google.com/        "Google" 
+[2]: http://search.yahoo.com/  "Yahoo Search" 
+[3]: http://search.msn.com/    "MSN Search"
+
+__## 图片（Images）__
++ 内联方式
+> ![alt text](/path/to/img.jpg "Title")
++ 引用方式
+> ![alt text][id] 
+[id]: /path/to/img.jpg "Title"
+
+__## 代码__
++ 简单文字出现一个代码框
+> `<blockquote>`
++ 大片文字需要实现代码框
++ + 使用Tab和四个空格
++ + 使用```  ```
+
+__## 脚注（footnote）__
+`hello[^hello]`
+`[^hello]: hi`
+
+__## 下划线__
++ 空白行下方添加三条“_”横线
+
+__## 字体__
++ 粗体
+> ` ** 或 __`
+> `**这些文字显示为粗体**`
++ 斜体
+> ` * 或 _`
+> `*这些文字显示为斜体*`
+
+__## 表格__
+> 用 | 和点线：- 实现
+```
+| 姓名 | 手机号 |
+|--------:|---------|
+| 张三 |123|
+```
+
+> “：”的右就是右对齐
+
+__## 分割线__
+`***`
