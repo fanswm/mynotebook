@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-06T11:58:06+08:00
+
+====== 物理备份 ======
+Created Wednesday 06 December 2017
+
+时机：数据库服务关闭。如果需要运行数据库备份，需要锁定数据库避免在备份期间数据产生变化。
+
+方式：直接拷贝数据库目录和文件（/var/lib/mysql）。
+
+优点：备份速度比逻辑备份快，且包含日志文件和配置文件等信息。

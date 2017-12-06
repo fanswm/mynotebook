@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-06T11:58:42+08:00
+
+====== 备份所有数据库 ======
+Created Wednesday 06 December 2017
+
+shell>mysqldump -h 主机名 -u 用户名 -p --all-databases > dump.sql
+提示输入密码
+如果不是远程备份，主机名参数可以省略。

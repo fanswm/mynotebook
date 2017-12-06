@@ -1,0 +1,216 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-06T14:38:41+08:00
+
+====== 常见进程 ======
+Created Wednesday 06 December 2017
+
+
+图像名                       PID 服务                                         
+========================= ====== =============================================
+System Idle Process            0 暂缺                                         
+System                         4 暂缺                                         
+smss.exe                     888 暂缺                                         
+csrss.exe                    936 暂缺                                         
+winlogon.exe                 964 暂缺                                         
+services.exe                1048 Eventlog, PlugPlay                           
+lsass.exe                   1060 ProtectedStorage, SamSs                      
+svchost.exe                 1256 DcomLaunch, TermService                      
+svchost.exe                 1332 RpcSs                                        
+svchost.exe                  240 AudioSrv, Browser, CryptSvc, Dhcp,           
+                                 EventSystem, FastUserSwitchingCompatibility, 
+                                 HidServ, LanmanServer, lanmanworkstation,    
+                                 Netman, Nla, RasAuto, RasMan, Schedule,      
+                                 SENS, SharedAccess, ShellHWDetection,        
+                                 TapiSrv, Themes, W32Time, winmgmt, WZCSVC    
+svchost.exe                  292 WudfSvc                                      
+svchost.exe                  612 Dnscache                                     
+svchost.exe                  660 EapHost                                      
+svchost.exe                  788 Dot3svc                                      
+kxescore.exe                 908 kxescore                                     
+KSafeSvc.exe                1460 KSafeSvc                                     
+spoolsv.exe                 1740 Spooler                                      
+scardsvr.exe                1824 SCardSvr                                     
+svchost.exe                 2084 stisvc                                       
+svchost.exe                 2108 XLServicePlatform                            
+svchost.exe                 2120 XMPService                                   
+alg.exe                      640 ALG                                          
+explorer.exe                2040 暂缺                                         
+kxetray.exe                 2272 暂缺                                         
+KSafeTray.exe               3848 暂缺                                         
+svchost.exe                 3892 SSDPSRV                                      
+vmware-tray.exe             2624 暂缺                                         
+ctfmon.exe                  2480 暂缺                                         
+notepad.exe                 3704 暂缺                                         
+chrome.exe                  3744 暂缺                                         
+chrome.exe                  2352 暂缺                                         
+chrome.exe                  3776 暂缺                                         
+chrome.exe                  3780 暂缺                                         
+chrome.exe                  4012 暂缺                                         
+chrome.exe                  4088 暂缺                                         
+chrome.exe                  3932 暂缺                                         
+chrome.exe                  1004 暂缺                                         
+chrome.exe                  4060 暂缺                                         
+cmd.exe                     4436 暂缺                                         
+wmiprvse.exe                4880 暂缺                                         
+kminisite.exe               5444 暂缺                                         
+kminisite.exe               5468 暂缺                                         
+tasklist.exe                5692 暂缺   
+
+
+
+
+进程文件: csrss or csrss.exe
+进程名称: Client/Server Runtime Server Subsystem
+描述: 客户端服务子系统，用以控制Windows图形相关子系统。
+是否为系统进程: 是
+
+ddhelp.exe
+进程文件: ddhelp or ddhelp.exe
+进程名称: DirectDraw Helper
+描述: DirectDraw Helper是DirectX这个用于图形服务的一个组成部分。
+是否为系统进程: 是
+
+dllhost.exe
+进程文件: dllhost or dllhost.exe
+进程名称: DCOM DLL Host进程
+描述: DCOM DLL Host进程支持基于COM对象支持DLL以运行Windows程序。
+是否为系统进程: 是
+
+inetinfo.exe
+进程文件: inetinfo or inetinfo.exe
+进程名称: IIS Admin Service Helper
+描述: InetInfo是Microsoft Internet Infomation Services (IIS)的一部分，用于Debug调试除错。
+是否为系统进程: 是
+
+internat.exe
+进程文件: internat or internat.exe
+进程名称: Input Locales
+描述: 这个输入控制图标用于更改类似国家设置、键盘类型和日期格式。
+是否为系统进程: 是
+
+kernel32.dll
+进程文件: kernel32 or kernel32.dll
+进程名称: Windows壳进程
+描述: Windows壳进程用于管理多线程、内存和资源。
+是否为系统进程: 是
+
+lsass.exe
+进程文件: lsass or lsass.exe
+进程名称: 本地安全权限服务
+描述: 这个本地安全权限服务控制Windows安全机制。
+是否为系统进程: 是
+
+mdm.exe
+进程文件: mdm or mdm.exe
+进程名称: Machine Debug Manager
+描述: Debug除错管理用于调试应用程序和Microsoft Office中的Microsoft Script Editor脚本编辑器。
+是否为系统进程: 是
+
+mmtask.tsk
+进程文件: mmtask or mmtask.tsk
+进程名称: 多媒体支持进程
+描述: 这个Windows多媒体后台程序控制多媒体服务，例如MIDI。
+是否为系统进程: 是
+
+mprexe.exe
+进程文件: mprexe or mprexe.exe
+进程名称: Windows路由进程
+描述: Windows路由进程包括向适当的网络部分发出网络请求。
+是否为系统进程: 是
+
+msgsrv32.exe
+进程文件: msgsrv32 or msgsrv32.exe
+进程名称: Windows信使服务
+描述: Windows信使服务调用Windows驱动和程序管理在启动。
+是否为系统进程: 是
+
+mstask.exe
+进程文件: mstask or mstask.exe
+进程名称: Windows计划任务
+描述: Windows计划任务用于设定继承在什么时间或者什么日期备份或者运行。
+是否为系统进程: 是
+
+regsvc.exe
+进程文件: regsvc or regsvc.exe
+进程名称: 远程注册表服务
+描述: 远程注册表服务用于访问在远程计算机的注册表。
+是否为系统进程: 是
+
+rpcss.exe
+进程文件: rpcss or rpcss.exe
+进程名称: RPC Portmapper
+描述: Windows 的RPC端口映射进程处理RPC调用(远程模块调用)然后把它们映射给指定的服务提供者。
+是否为系统进程: 是
+
+services.exe
+进程文件: services or services.exe
+进程名称: Windows Service Controller
+描述: 管理Windows服务。
+是否为系统进程: 是
+
+smss.exe
+进程文件: smss or smss.exe
+进程名称: Session Manager Subsystem
+描述: 该进程为会话管理子系统用以初始化系统变量，MS-DOS驱动名称类似LPT1以及COM，调用Win32壳子系统和运行在Windows登陆过程。
+是否为系统进程: 是
+
+snmp.exe
+进程文件: snmp or snmp.exe
+进程名称: Microsoft SNMP Agent
+描述: Windows简单的网络协议代理（SNMP）用于监听和发送请求到适当的网络部分。
+是否为系统进程: 是
+
+spool32.exe
+进程文件: spool32 or spool32.exe
+进程名称: Printer Spooler
+描述: Windows打印任务控制程序，用以打印机就绪。
+是否为系统进程: 是
+
+spoolsv.exe
+进程文件: spoolsv or spoolsv.exe
+进程名称: Printer Spooler Service
+描述: Windows打印任务控制程序，用以打印机就绪。
+是否为系统进程: 是
+
+stisvc.exe
+进程文件: stisvc or stisvc.exe
+进程名称: Still Image Service
+描述: Still Image Service用于控制扫描仪和数码相机连接在Windows。
+是否为系统进程: 是
+
+svchost.exe
+进程文件: svchost or svchost.exe
+进程名称: Service Host Process
+描述: Service Host Process是一个标准的动态连接库主机处理服务。
+是否为系统进程: 是
+
+system
+进程文件: system or system
+进程名称: Windows System Process
+描述: Microsoft Windows系统进程。
+是否为系统进程: 是
+
+taskmon.exe
+进程文件: taskmon or taskmon.exe
+进程名称: Windows Task Optimizer
+描述: windows任务优化器监视你使用某个程序的频率，并且通过加载那些经常使用的程序来整理优化硬盘。
+是否为系统进程: 是
+
+tcpsvcs.exe
+进程文件: tcpsvcs or tcpsvcs.exe
+进程名称: TCP/IP Services
+描述: TCP/IP Services Application支持透过TCP/IP连接局域网和Internet。
+是否为系统进程: 是
+
+winlogon.exe
+进程文件: winlogon or winlogon.exe
+进程名称: Windows Logon Process
+描述: Windows NT用户登陆程序。
+是否为系统进程: 是
+
+winmgmt.exe
+进程文件: winmgmt or winmgmt.exe
+进程名称: Windows Management Service
+描述: Windows Management Service透过Windows Management Instrumentation data (WMI)技术处理来自应用客户端的请求。
+是否为系统进程: 是                                      
