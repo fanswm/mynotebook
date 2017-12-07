@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T11:59:09+08:00
+
+====== Wox ======
+Created Thursday 07 December 2017
+
+快捷启动
+在github上
+
+如果你在寻找一款类似 Alfred 的快捷启动器，Wox 可以说是你的不二之选。它可以调用 Everything 进行快速全局搜索，也可以通过关键词唤起网络搜索引擎。你还可以安装各种插件，实现翻译、天气、命令行等进阶功能。
+
+https://sspai.com/post/33460

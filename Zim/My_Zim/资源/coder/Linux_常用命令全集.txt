@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T17:40:55+08:00
+
+====== Linux 常用命令全集 ======
+Created Thursday 07 December 2017
+
+[[./Linux 常用命令全集.chm]] 

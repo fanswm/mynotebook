@@ -1,0 +1,55 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T13:50:19+08:00
+
+====== 3 增加线程缓存大小 ======
+Created Thursday 07 December 2017
+
+连接管理器线程处理服务器监听的网络接口上的客户端连接请求。连接管理器线程将每个客户端连接与专用于它的线程关联，该线程负责处理该连接的身份验证和所有请求处理。因此，线程和当前连接的客户端之间是一对一的比例。确保线程缓存足够大以容纳所有传入请求是非常重要的。
+
+MySQL提供了许多与连接线程相关的服务器变量：
+
+线程缓存大小由thread_cache_size系统变量决定。默认值为0（无缓存），这将导致为每个新连接设置一个线程，并在连接终止时需要处理该线程。如果希望服务器每秒接收数百个连接请求，那么应该将thread_cache_size设置的足够高，以便大多数新连接可以使用缓存线程。可以在服务器启动或运行时设置max_connections的值。
+
+还应该监视缓存中的线程数（Threads_cached）以及创建了多少个线程，因为无法从缓存中获取线程（Threads_created）。关于后者，如果Threads_created继续以每分钟多于几个线程的增加，请考虑增加thread_cache_size的值。
+
+使用MySQL show status命令显示MySQL的变量和状态信息。这里有几个例子：
+
+SHOW GLOBAL STATUS LIKE '%Threads_connected%';
+
++-------------------+-------+
+
+| Variable_name     | Value |
+
++-------------------+-------+
+
+| Threads_connected | 2     |
+
++-------------------+-------+
+SHOW GLOBAL STATUS LIKE '%Threads_running%';
+
++-----------------+-------+
+
+| Variable_name   | Value |
+
++-----------------+-------+
+
+| Threads_running | 1     |
+
++-----------------+-------+
+ 
+
+Monyog线程缓存监测
+
+ 
+
+Monyog提供了一个监控线程缓存的屏幕，名为“线程”。与MySQL线程相关的服务器变量映射到以下Monyog指标：
+
+ 
+
+thread_cache_size：可以缓存的线程数。
+Threads_cached：缓存中的线程数。
+Threads_created：创建用于处理连接的线程。
+Monyog线程屏幕还包括“线程缓存命中率”指标。这是一个提示线程缓存命中率的指标。如果值较低，则应该考虑增加线程缓存。在状态栏以百分比形式显示该值；它的值越接近100％越好。
+
+如果这些指标的值等于或超过指定值，则可以将每一个指标配置为发出警告和/或严重警报。

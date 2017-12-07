@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-29T08:24:20+08:00
+
+====== 记笔记的方法 ======
+Created Wednesday 29 November 2017
+
+我的心得
+
++ 扁平化：文件夹的层数尽量少
++ 集中存储

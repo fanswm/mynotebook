@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T13:43:53+08:00
+
+====== 具有代表性的 HTTP 14 个状态码 ======
+Created Thursday 07 December 2017
+
+具有代表性的 HTTP 14 个状态码 https://juejin.im/entry/5a2768cf6fb9a0450a6737b3

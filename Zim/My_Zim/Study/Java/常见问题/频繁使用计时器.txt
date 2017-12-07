@@ -1,0 +1,49 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T16:26:42+08:00
+
+====== 频繁使用计时器 ======
+Created Thursday 07 December 2017
+
+错误代码：
+
+for (...) {   
+long t = System.currentTimeMillis();   
+long t = System.nanoTime();   
+Date d = new Date();   
+Calendar c = new GregorianCalendar();   
+}
+
+每次new一个Date或Calendar都会涉及一次本地调用来获取当前时间(尽管这个本地调用相对其他本地方法调用要快)。如果对时间不是特别敏感，这里使用了clone方法来新建一个Date实例。这样相对直接new要高效一些。
+
+正确的写法：
+
+Date d = new Date();   
+for (E entity : entities) {   
+entity.doSomething();   
+entity.setUpdated((Date) d.clone());   
+}
+
+如果循环操作耗时较长(超过几ms)，那么可以采用下面的方法，立即创建一个Timer，然后定期根据当前时间更新时间戳，在我的系统上比直接new一个时间对象快200倍：
+
+private volatile long time;   
+Timer timer = new Timer(true);   
+try {   
+time = System.currentTimeMillis();   
+timer.scheduleAtFixedRate(new TimerTask() {   
+public void run() {   
+time = System.currentTimeMillis();   
+}   
+}, 0L, 10L); // granularity 10ms   
+for (E entity : entities) {   
+entity.doSomething();   
+entity.setUpdated(new Date(time));   
+}   
+} finally {   
+timer.cancel();   
+}
+
+作者：java联盟
+链接：https://juejin.im/post/5a27aa33518825619a028f69
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

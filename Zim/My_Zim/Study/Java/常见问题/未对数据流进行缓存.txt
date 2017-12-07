@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T16:24:41+08:00
+
+====== 未对数据流进行缓存 ======
+Created Thursday 07 December 2017
+
+错误的写法：
+
+InputStream in = new FileInputStream(file);   
+int b;   
+while ((b = in.read()) != -1) {   
+...   
+}
+
+上面的代码是一个byte一个byte的读取，导致频繁的本地JNI文件系统访问，非常低效，因为调用本地方法是非常耗时的。最好用BufferedInputStream包装一下。曾经做过一个测试，从/dev/zero下读取1MB，大概花了1s，而用BufferedInputStream包装之后只需要60ms，性能提高了94%! 这个也适用于output stream操作以及socket操作。
+
+正确的写法：
+InputStream in = new BufferedInputStream(new FileInputStream(file));
+
+作者：java联盟
+链接：https://juejin.im/post/5a27aa33518825619a028f69
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

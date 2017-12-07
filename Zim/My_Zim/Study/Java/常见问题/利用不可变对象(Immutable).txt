@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T16:20:12+08:00
+
+====== 利用不可变对象(Immutable) ======
+Created Thursday 07 December 2017
+
+错误的写法：
+
+zero = new Integer(0);  
+return Boolean.valueOf("true");
+
+正确的写法：
+
+zero = Integer.valueOf(0);  
+return Boolean.TRUE;
