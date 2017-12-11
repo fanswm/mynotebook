@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-11T16:39:04+08:00
+
+====== 6 极重要！权限与命令间的关系： ======
+Created Monday 11 December 2017
+

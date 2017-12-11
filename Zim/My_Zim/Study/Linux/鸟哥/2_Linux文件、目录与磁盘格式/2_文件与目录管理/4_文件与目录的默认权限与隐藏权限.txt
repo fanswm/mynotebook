@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-11T16:38:30+08:00
+
+====== 4 文件与目录的默认权限与隐藏权限 ======
+Created Monday 11 December 2017
+

@@ -5,3 +5,180 @@ Creation-Date: 2017-11-22T13:41:58+08:00
 ====== 2.使用传统程序语言进行编译的简单范例 ======
 Created Wednesday 22 November 2017
 
+2. 使用传统程序语言进行编译的简单范例
+　　2.1 单一程序：印出 Hello World
+　　2.2 主、副程序连结：副程序的编译
+　　2.3 呼叫外部函式库：加入连结的函式库
+　　2.4 gcc 的简易用法 (编译、参数与链结)
+ 大标题的图示使用传统程序语言进行编译的简单范例
+经过上面的介绍之后，你应该比较清楚的知道原始码、编译器、函式库与运行档之间的相关性了。 不过，详细的流程可能还不是很清楚，所以，在这里我们以一个简单的程序范例来说明整个编译的过程喔！赶紧进入 Linux 系统，实地的操作一下底下的范例呢！
+
+
+小标题的图示单一程序：印出 Hello World
+我们以 Linux 上面最常见的 C 语言来撰写第一支程序！第一支程序最常作的就是..... 在萤幕上面印出『Hello World！』的字样～当然， 这里我们是以简单的 C 语言来撰写，如果你对於 C 有兴趣的话，那么请自行购买相关的书籍喔！ ^_^ 好了，不罗唆，立刻编辑第一支程序吧！
+
+Tips:
+请先确认你的 Linux 系统里面已经安装了 gcc 了喔！如果尚未安装 gcc 的话，请先参考下一节的 RPM 安装法，先安装好 gcc 之后，再回来阅读本章。 如果你已经有网络了，那么直接使用『 yum groupinstall "Development Tools" 』 预先安装好所需的所有软件即可。 rpm 与 yum 均会在下一章介绍。	鸟哥的图示
+编辑程序码，亦即原始码
+[root@www ~]# vim hello.c   <==用 C 语言写的程序扩展名建议用 .c
+#include <stdio.h>
+int main(void)
+{
+        printf("Hello World\n");
+}
+上面是用 C 语言的语法写成的一个程序文件。第一行的那个『 # 』并不是注解喔！如果你担心输入错误， 请到底下的连结下载这个文件：
+
+http://cn.linux.vbird.org/linux_basic/0520source/hello.c
+开始编译与测试运行
+[root@www ~]# gcc hello.c
+[root@www ~]# ll hello.c a.out
+-rwxr-xr-x 1 root root 4725 Jun  5 02:41 a.out   <==此时会产生这个档名
+-rw-r--r-- 1 root root   72 Jun  5 02:40 hello.c
+
+[root@www ~]# ./a.out
+Hello World  <==呵呵！成果出现了！
+在默认的状态下，如果我们直接以 gcc 编译原始码，并且没有加上任何参数，则运行档的档名会被自动配置为 a.out 这个文件名称！ 所以你就能够直接运行 ./a.out 这个运行档啦！上面的例子很简单吧！那个 hello.c 就是原始码，而 gcc 就是编译器，至於 a.out 就是编译成功的可运行 binary program 罗！ 咦！那如果我想要产生目标档 (object file) 来进行其他的动作，而且运行档的档名也不要用默认的 a.out ，那该如何是好？其实你可以将上面的第 2 个步骤改成这样：
+
+[root@www ~]# gcc -c hello.c
+[root@www ~]# ll hello*
+-rw-r--r-- 1 root root  72 Jun  5 02:40 hello.c
+-rw-r--r-- 1 root root 868 Jun  5 02:44 hello.o  <==就是被产生的目标档
+
+[root@www ~]# gcc -o hello hello.o
+[root@www ~]# ll hello*
+-rwxr-xr-x 1 root root 4725 Jun  5 02:47 hello  <==这就是可运行档！ -o 的结果
+-rw-r--r-- 1 root root   72 Jun  5 02:40 hello.c
+-rw-r--r-- 1 root root  868 Jun  5 02:44 hello.o
+
+[root@www ~]# ./hello
+Hello World
+这个步骤主要是利用 hello.o 这个目标档制作出一个名为 hello 的运行档，详细的 gcc 语法我们会在后续章节中继续介绍！透过这个动作后，我们可以得到 hello 及 hello.o 两个文件， 真正可以运行的是 hello 这个 binary program 喔！ 或许你会觉得，咦！只要一个动作作出 a.out 就好了，干嘛还要先制作目标档再做成运行档呢？ 呵呵！透过下个范例，你就可以知道为什么啦！
+
+小标题的图示主、副程序连结：副程序的编译
+如果我们在一个主程序里面又呼叫了另一个副程序呢？这是很常见的一个程序写法， 因为可以简化整个程序的易读性！在底下的例子当中，我们以 thanks.c 这个主程序去呼叫 thanks_2.c 这个副程序，写法很简单：
+
+
+撰写所需要的主、副程序
+# 1. 编辑主程序：
+[root@www ~]# vim thanks.c
+#include <stdio.h>
+int main(void)
+{
+        printf("Hello World\n");
+        thanks_2();
+}
+# 上面的 thanks_2(); 那一行就是呼叫副程序啦！
+
+[root@www ~]# vim thanks_2.c
+#include <stdio.h>
+void thanks_2(void)
+{
+        printf("Thank you!\n");
+}
+上面这两个文件你可以到底下下载：
+
+http://cn.linux.vbird.org/linux_basic/0520source/thanks.c
+http://cn.linux.vbird.org/linux_basic/0520source/thanks_2.c
+进行程序的编译与连结 (Link)
+# 2. 开始将原始码编译成为可运行的 binary file ：
+[root@www ~]# gcc -c thanks.c thanks_2.c
+[root@www ~]# ll thanks*
+-rw-r--r-- 1 root root  76 Jun  5 16:13 thanks_2.c
+-rw-r--r-- 1 root root 856 Jun  5 16:13 thanks_2.o  <==编译产生的！
+-rw-r--r-- 1 root root  92 Jun  5 16:11 thanks.c
+-rw-r--r-- 1 root root 908 Jun  5 16:13 thanks.o    <==编译产生的！
+[root@www ~]# gcc -o thanks thanks.o thanks_2.o
+[root@www ~]# ll thanks*
+-rwxr-xr-x 1 root root 4870 Jun  5 16:17 thanks     <==最终结果会产生这玩意儿
+
+# 3. 运行一下这个文件：
+[root@www ~]# ./thanks
+Hello World
+Thank you!
+知道为什么要制作出目标档了吗？由於我们的原始码文件有时并非仅只有一个文件，所以我们无法直接进行编译。 这个时候就需要先产生目标档，然后再以连结制作成为 binary 可运行档。另外，如果有一天，你升级了 thanks_2.c 这个文件的内容，则你只要重新编译 thanks_2.c 来产生新的 thanks_2.o ，然后再以连结制作出新的 binary 可运行档即可！而不必重新编译其他没有更动过的原始码文件。 这对於软件开发者来说，是一个很重要的功能，因为有时候要将偌大的原始码全部编译完成，会花很长的一段时间呢！
+
+此外，如果你想要让程序在运行的时候具有比较好的效能，或者是其他的除错功能时， 可以在编译的过程里面加入适当的参数，例如底下的例子：
+
+[root@www ~]# gcc -O -c thanks.c thanks_2.c  <== -O 为产生最佳化的参数
+
+[root@www ~]# gcc -Wall -c thanks.c thanks_2.c
+thanks.c: In function 'main':
+thanks.c:5: warning: implicit declaration of function 'thanks_2'
+thanks.c:6: warning: control reaches end of non-void function
+# -Wall 为产生更详细的编译过程资讯。上面的信息为警告信息 (warning)
+# 所以不用理会也没有关系！
+至於更多的 gcc 额外参数功能，就得要 man gcc 罗～呵呵！可多的跟天书一样～
+
+小标题的图示呼叫外部函式库：加入连结的函式库
+刚刚我们都仅只是在萤幕上面印出一些字眼而已，如果说要计算数学公式呢？例如我们想要计算出三角函数里面的 sin (90度角)。要注意的是，大多数的程序语言都是使用径度而不是一般我们在计算的『角度』， 180 度角约等於 3.14 径度！嗯！那我们就来写一下这个程序吧！
+
+[root@www ~]# vim sin.c
+#include <stdio.h>
+int main(void)
+{
+        float value;
+        value = sin ( 3.14 / 2 );
+        printf("%f\n",value);
+}
+上面这个文件的内容可以在底下取得！
+
+http://cn.linux.vbird.org/linux_basic/0520source/sin.c
+那要如何编译这支程序呢？我们先直接编译看看：
+
+[root@www ~]# gcc sin.c
+sin.c: In function 'main':
+sin.c:5: warning: incompatible implicit declaration of built-in function 'sin'
+/tmp/ccsfvijY.o: In function `main':
+sin.c:(.text+0x1b): undefined reference to `sin'
+collect2: ld returned 1 exit status
+# 注意看到上面最后一行，会有个错误信息，代表没有成功！
+特别注意上面的错误信息，唉啊！怎么没有编译成功？它说的是『undefined reference to sin』，说的是『没有 sin 的相关定义参考值！』，为什么会这样呢？这是因为 C 语言里面的 sin 函示是写在 libm.so 这个函式库中，而我们并没有在原始码里面将这个函式库功能加进去， 所以当然就需要在编译与连结的时候将这个函式库给他连结进运行档里面啊！我们可以这样做：
+
+
+编译时加入额外函式库连结的方式：
+[root@www ~]# gcc sin.c -lm -L/lib -L/usr/lib  <==重点在 -lm 
+[root@www ~]# ./a.out                          <==尝试运行新文件！
+1.000000
+特别注意，使用 gcc 编译时所加入的那个 -lm 是有意义的，他可以拆开成两部份来看：
+
+-l ：是『加入某个函式库(library)』的意思，
+ m ：则是 libm.so 这个函式库，其中， lib 与扩展名(.a 或 .so)不需要写
+所以 -lm 表示使用 libm.so (或 libm.a) 这个函式库的意思～至於那个 -L 后面接的路径呢？这表示： 『我要的函式库 libm.so 请到 /lib 或 /usr/lib 里面搜寻！』
+
+上面的说明很清楚了吧！不过，要注意的是，由於 Linux 默认是将函式库放置在 /lib 与 /usr/lib 当中，所以你没有写 -L/lib 与 -L/usr/lib 也没有关系的！不过，万一哪天你使用的函式库并非放置在这两个目录下，那么 -L/path 就很重要了！否则会找不到函式库喔！
+
+除了连结的函式库之外，你或许已经发现一个奇怪的地方，那就是在我们的 sin.c 当中第一行『 #include <stdio.h>』，这行说的是要将一些定义数据由 stdio.h 这个文件读入，这包括 printf 的相关配置。这个文件其实是放置在 /usr/include/stdio.h 的！那么万一这个文件并非放置在这里呢？那么我们就可以使用底下的方式来定义出要读取的 include 文件放置的目录：
+
+[root@www ~]# gcc sin.c -lm -I/usr/include
+-I/path 后面接的路径( Path )就是配置要去搜寻相关的 include 文件的目录啦！不过，同样的，默认值是放置在 /usr/include 底下，除非你的 include 文件放置在其他路径，否则也可以略过这个项目！
+
+透过上面的几个小范例，你应该对於 gcc 以及原始码有一定程度的认识了，再接下来，我们来稍微整理一下 gcc 的简易使用方法吧！
+
+小标题的图示gcc 的简易用法 (编译、参数与链结)
+前面说过， gcc 为 Linux 上面最标准的编译器，这个 gcc 是由 GNU 计画所维护的，有兴趣的朋友请自行前往参考。既然 gcc 对於 Linux 上的 Open source 是这么样的重要，所以底下我们就列举几个 gcc 常见的参数，如此一来大家应该更容易了解原始码的各项功能吧！
+
+# 仅将原始码编译成为目标档，并不制作连结等功能：
+[root@www ~]# gcc -c hello.c
+# 会自动的产生 hello.o 这个文件，但是并不会产生 binary 运行档。
+
+# 在编译的时候，依据作业环境给予最佳化运行速度
+[root@www ~]# gcc -O hello.c -c
+# 会自动的产生 hello.o 这个文件，并且进行最佳化喔！
+
+# 在进行 binary file 制作时，将连结的函式库与相关的路径填入
+[root@www ~]# gcc sin.c -lm -L/usr/lib -I/usr/include
+# 这个命令较常下达在最终连结成 binary file 的时候，
+# -lm 指的是 libm.so 或 libm.a 这个函式库文件；
+# -L 后面接的路径是刚刚上面那个函式库的搜寻目录；
+# -I 后面接的是原始码内的 include 文件之所在目录。
+
+# 将编译的结果输出成某个特定档名
+[root@www ~]# gcc -o hello hello.c
+# -o 后面接的是要输出的 binary file 档名
+
+# 在编译的时候，输出较多的信息说明
+[root@www ~]# gcc -o hello hello.c -Wall
+# 加入 -Wall 之后，程序的编译会变的较为严谨一点，
+# 所以警告信息也会显示出来！
+比较重要的大概就是这一些。另外，我们通常称 -Wall 或者 -O 这些非必要的参数为旗标 (FLAGS)，因为我们使用的是 C 程序语言，所以有时候也会简称这些旗标为 CFLAGS ，这些变量偶尔会被使用的喔！尤其是在后头会介绍的 make 相关的用法时，更是重要的很呐！ ^_^
+

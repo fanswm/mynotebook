@@ -5,3 +5,95 @@ Creation-Date: 2017-11-22T13:45:31+08:00
 ====== 3.核心的编译与安装 ======
 Created Wednesday 22 November 2017
 
+3. 核心的编译与安装
+　　3.1 编译核心与核心模块
+　　3.2 实际安装模块
+　　3.3 开始安装新核心与多重核心菜单 (grub)
+ 大标题的图示核心的编译与安装
+将最复杂的核心功能选择完毕后，接下来就是进行这些核心、核心模块的编译了！而编译完成后，当然就是需要使用噜～ 那如何使用新核心呢？就得要考虑 grub 这个玩意儿啦！底下我们就来处理处理：
+
+
+小标题的图示编译核心与核心模块
+核心与核心模块需要先编译起来，而编译的过程其实非常简单，你可以先使用『 make help 』去查阅一下所有可用编译参数， 就会知道有底下这些基本功能：
+
+[root@www linux-2.6.30.3]# make vmlinux  <==未经压缩的核心
+[root@www linux-2.6.30.3]# make modules  <==仅核心模块
+[root@www linux-2.6.30.3]# make bzImage  <==经压缩过的核心(默认)
+[root@www linux-2.6.30.3]# make all      <==进行上述的三个动作
+我们常见的在 /boot/ 底下的核心文件，都是经过压缩过的核心文件，因此，上述的动作中比较常用的是 modules 与 bzImage 这两个，其中 bzImage 第三个字母是英文大写的 I 喔！bzImage 可以制作出压缩过后的核心， 也就是一般我们拿来进行系统启动的资讯罗！所以，基本上我们会进行的动作是：
+
+[root@www linux-2.6.30.3]# make clean    <==先清除缓存档
+[root@www linux-2.6.30.3]# make bzImage  <==先编译核心
+[root@www linux-2.6.30.3]# make modules  <==再编译模块
+上述的动作会花费非常长的时间，编译的动作依据你选择的项目以及你主机硬件的效能而不同。 最后制作出来的数据是被放置在 /usr/src/kernels/linux-2.6.30.3/ 这个目录下，还没有被放到系统的相关路径中喔！在上面的编译过程当中，如果有发生任何错误的话， 很可能是由於核心项目的挑选选择的不好，可能你需要重新以 make menuconfig 再次的检查一下你的相关配置喔！ 如果还是无法成功的话，那么或许将原本的核心数据内的 .config 文件，复制到你的核心原始档目录下， 然后据以修改，应该就可以顺利的编译出你的核心了。最后注意到，下达了 make bzImage 后，最终的结果应该会像这样：
+
+Root device is (8, 1)
+Setup is 12696 bytes (padded to 12800 bytes).
+System is 2207 kB
+CRC 7701ab0e
+Kernel: arch/x86/boot/bzImage is ready  (#1)
+[root@www linux-2.6.30.3]# ll arch/x86/boot/bzImage
+-rw-r--r-- 1 root root 2272432  7月 30 13:35 arch/x86/boot/bzImage
+可以发现你的核心已经编译好而且放置在 /usr/src/kernels/linux-2.6.30.3/arch/x86/boot/bzImage 里面罗～那个就是我们的核心文件！最重要就是他啦！我们等一下就会安装到这个文件哩！ 然后就是编译模块的部分罗～ make modules 进行完毕后，就等著安装啦！ ^_^
+
+小标题的图示实际安装模块
+安装模块前有个地方得要特别强调喔！我们知道模块是放置到 /lib/modules/$(uname -r) 目录下的，那如果同一个版本的模块被反覆编译后来安装时，会不会产生冲突呢？举例来说，鸟哥这个 2.6.30.3 的版本第一次编译完成且安装妥当后，发现有个小细节想要重新处理，因此又重新编译过一次，那两个版本一模一样时， 模块放置的目录会一样，此时就会产生冲突了！如何是好？有两个解决方法啦：
+
+先将旧的模块目录更名，然后才安装核心模块到目标目录去；
+在 make menuconfig 时，那个 General setup 内的 Local version 修改成新的名称。
+鸟哥建议使用第二个方式，因为如此一来，你的模块放置的目录名称就不会相同，这样也就能略过上述的目录同名问题罗！ 好，那么如何安装模块到正确的目标目录呢？很简单，同样使用 make 的功能即可：
+
+[root@www linux-2.6.30.3]# make modules_install
+[root@www linux-2.6.30.3]# ll /lib/modules/
+drwxr-xr-x 3 root root 4096  7月 30 14:31 2.6.30.3vbird
+看到否，最终会在 /lib/modules 底下创建起你这个核心的相关模块喔！不错吧！模块这样就已经处理妥当罗～ 接下来，就是准备要进行核心的安装了！哈哈！又跟 grub 有关罗～
+
+小标题的图示开始安装新核心与多重核心菜单 (grub)
+现在我们知道核心文件放置在 /usr/src/kernels/linux-2.6.30.3/arch/x86/boot/bzImage ，但是其实系统核心理论上都是摆在 /boot 底下，且为 vmlinuz 开头的档名。 此外，我们也晓得一部主机是可以做成多重启动系统的！这样说，应该知道鸟哥想要干嘛了吧？ 对啦！我们将同时保留旧版的核心，并且新增新版的核心在我们的主机上面。
+
+
+移动核心到 /boot 且保留旧核心文件
+保留旧核心有什么好处呢？最大的好处是可以确保系统能够顺利启动啦！因为核心虽然被编译成功了， 但是并不保证我们刚刚挑选的核心项目完全适合於目前这部主机系统， 可能有某些地方我们忘记选择了，这将导致新核心无法顺利驱动整个主机系统，更差的情况是， 你的主机无法成功启动成功！此时，如果我们保留旧的核心，呵呵！若新核心测试不通过，就用旧核心来启动啊！嘿嘿！ 保证比较不会有问题嘛！新核心通常可以这样作的：
+
+[root@www ~]# cp /usr/src/kernels/linux-2.6.30.3/arch/x86/boot/bzImage \
+> /boot/vmlinuz-2.6.30.3vbird  <==实际核心
+[root@www ~]# cp /usr/src/kernels/linux-2.6.30.3/.config \
+> /boot/config-2.6.30.3vbird   <==建议配置档也复制备份
+
+创建相对应的 Initial Ram Disk (initrd)
+还记得第二十章谈过的 initrd 这个玩意儿吧！ 由於鸟哥的系统使用 SATA 磁碟，加上刚刚 SATA 磁碟支持的功能并没有直接编译到核心去，所以当然要使用 initrd 来加载才行！ 使用如下的方法来创建 initrd 吧！记得搭配正确的核心版本喔！
+
+[root@www ~]# mkinitrd -v /boot/initrd-2.6.30.3vbird.img  2.6.30.3vbird
+....(前面省略)....
+Adding module ehci-hcd
+Adding module ohci-hcd
+Adding module uhci-hcd
+....(后面省略)....
+
+编辑启动菜单 (grub)
+鸟哥这部测试机之前是使用 Xen 的核心来启动的，但因为 Xen 核心的制作比较复杂，本章并没有实作出 Xen 虚拟机器的核心。 底下鸟哥使用的是刚刚编译成功的核心来进行启动菜单的配置，你会看到的配置档与你的环境可能会有不一样喔！ 那就来看看吧！
+
+[root@www ~]# vim /boot/grub/menu.lst
+default=0
+timeout=10
+splashimage=(hd0,0)/boot/grub/splash.xpm.gz
+#hiddenmenu
+title CentOS (2.6.18-128.2.1.el5xen)
+        root (hd0,0)
+        kernel /boot/xen.gz-2.6.18-128.2.1.el5
+        module /boot/vmlinuz-2.6.18-128.2.1.el5xen ro root=LABEL=/ rhgb quiet
+        module /boot/initrd-2.6.18-128.2.1.el5xen.img
+title CentOS testing kernel from vbird
+        root (hd0,0)
+        kernel /boot/vmlinuz-2.6.30.3vbird ro root=LABEL=/ rhgb
+        initrd /boot/initrd-2.6.30.3vbird.img
+新增上述的特殊字体到你的配置档当中。另外，你会发现我上头的 default 并没有修改到最新的那个核心的菜单上， 因为我必须要测试一下新核心能否顺利启动！如果顺利启动且运行没有问题后，那么才来修订这个 default 的值吧！
+
+
+重新以新核心启动、测试、修改
+如果上述的动作都成功后，接下来就是重新启动并选择新核心来启动系统啦！如果系统顺利启动之后，你使用 uname -a 会出现类似底下的数据：
+
+[root@www ~]# uname -a
+Linux www.vbird.tsai 2.6.30.3vbird #1 SMP Thu Jul 30 13:34:31 
+CST 2009 x86_64 x86_64 x86_64 GNU/Linux
+包括核心版本与支持的硬件平台都是 OK 的！嘿嘿！那你所编译的核心就是差不多成功的啦！ 如果运行一阵子后，你的系统还是稳定的情况下，那就能够将 default 值使用这个新的核心来作为默认启动罗！ 这就是核心编译！那你也可以自己处理嵌入式系统的核心编译罗！ ^_^

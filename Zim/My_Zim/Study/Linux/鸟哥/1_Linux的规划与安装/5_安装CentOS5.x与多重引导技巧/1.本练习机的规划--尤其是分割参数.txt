@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-11T16:32:56+08:00
+
+====== 1.本练习机的规划--尤其是分割参数 ======
+Created Monday 11 December 2017
+

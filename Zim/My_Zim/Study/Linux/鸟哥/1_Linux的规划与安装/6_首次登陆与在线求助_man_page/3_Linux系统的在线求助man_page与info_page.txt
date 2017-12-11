@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-11T16:34:02+08:00
+
+====== 3 Linux系统的在线求助man page与info page ======
+Created Monday 11 December 2017
+
