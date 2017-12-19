@@ -1,0 +1,38 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-19T16:36:19+08:00
+
+====== img 图像 ======
+Created Tuesday 19 December 2017
+
+图像<img>
+	+ <img src="w3cschool.png" width="104" height="142">
+
+	+ <img src="url" alt="some_text"> 
+
+	+ 如果名为 "pulpit.jpg" 的图像位于 www.runoob.com 的 images 目录中，那么其 URL 为 http://www.runoob.com/images/pulpit.jpg。 
+	
+		+ <a href="//www.runoob.com/html/html-tutorial.html"> <img src="smiley.gif" alt="HTML 教程" width="32" height="32"></a>
+	
+		+ 无边框的图片链接
+		++ <a href="//www.runoob.com/html/html-tutorial.html">
+				<img border="0" src="smiley.gif" alt="HTML 教程" width="32" height="32"></a>
+	
+		+源属性（Src）
+		++ 加载本地文件：d:\111.png <img border="0" src="file:///d:\\111.png" />也行
+		++ 加载本地文件：d:\111.png <img border="0" src="file:///d:\\111.png" />
+	
+		+ Alt属性
+		++ 为图像定义一串预备的可替换的文本,在浏览器无法载入图像时，替换文本属性告诉读者她们失去的信息
+	
+		+ 高度与宽度
+		++ <img src="p.jpg" alt="some_text" width="304" height="228">
+	
+		+ 对齐
+		++ <img src="smiley.gif" alt="Smiley face" style="float:left" width="32" height="32"> 
+				一个带图片的段落，图片浮动在这个文本的左边。
+		++ <img src="smiley.gif" alt="Smiley face" style="float:right" width="32" height="32"> 
+				一个带图片的段落，图片浮动在这个文本的右边。
+	
+		+ 创建图像映射
+		每个区域都是一个超级链接
