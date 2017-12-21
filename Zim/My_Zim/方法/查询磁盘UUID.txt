@@ -11,6 +11,7 @@ Creation-Date: 2017-11-22T07:36:59+08:00
 查看硬盘UUID
 
  `root [ /dev/disk/by-uuid]# ls -l /dev/disk/by-uuid` 
+`sudo blkid`
 
 查看硬盘UUID
 
