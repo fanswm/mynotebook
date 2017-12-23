@@ -5,20 +5,21 @@ Creation-Date: 2017-11-24T14:00:44+08:00
 ====== fcitx 输入法 五笔拼音 ======
 Created Friday 24 November 2017
 
-## install flash
+at Ubuntu:
 
-### at parrot
-+ `sudo apt-get install pepperflashplugin-nonfree`
+	五笔 fcitx-wbpy
 
-### at lubuntu
+	sudo apt-get install fcitx-table-wbpy
 
-+ 官网下载install_flash_player_11_linux.x86_64.tar.gz
-+ `tar zxvf install_flash_player_11_linux.x86_64.tar.gz`
-+ `sudo su`
-+ `cp ./libflashplayer.so /usr/lib/mozilla/plugins/`
+at CentOS
 
-### at CentOS
-+　[官网][https://get.adobe.com/cn/flashplayer/]%E4%B8%8B%E8%BD%BD: flash-player-npapi-27.0.0.183-release.x86_64.rpm
-+  `sudo rpm -ivh flash-player-npapi-27.0.0.183-release.x86_64.rpm`
+	sudo yum remove ibus
 
+	remove this ibus
+
+	sudo yum install ibus ibus-table
+	sudo yum install ibus ibus-table-wubi
+	"应用程序" -> "设置" -> "区域语言" -> "+" -> "汉语"
+
+tags: fcitx ibus
 
