@@ -5,3 +5,180 @@ Creation-Date: 2017-12-11T16:41:33+08:00
 ====== 5 光盘写入工具 ======
 Created Monday 11 December 2017
 
+5. 光盘写入工具
+　　5.1 mkisofs：创建映像档
+　　5.2 cdrecord：光盘烧录工具
+ 大标题的图示光盘写入工具
+某些时刻你可能会希望将系统上最重要的数据给他备份出来，虽然目前闪盘已经有够便宜，你可以使用这玩意儿来备份。 不过某些重要的、需要重复备份的数据(可能具有时间特性)，你可能会需要使用类似 DVD 之类的储存媒体来备份出来！ 举例来说，你的系统配置档或者是讨论区的数据库文件(变动性非常的频繁)。虽然 Linux 图形介面已经有不少的烧录软件可用， 但有时如果你希望系统自动在某些时刻帮你主动的进行烧录时，那么文字介面的烧录行为就有帮助啦！
+
+那么文字模式的烧录行为要怎么处理呢？通常的作法是这样的：
+
+先将所需要备份的数据建置成为一个映像档(iso)，利用 mkisofs 命令来处理；
+将该映像档烧录至光盘或 DVD 当中，利用 cdrecord 命令来处理。
+底下我们就分别来谈谈这两个命令的用法吧！
+
+
+小标题的图示mkisofs：创建映像档
+我们从 FTP 站捉下来的 Linux 映像档 (不管是 CD 还是 DVD) 都得要继续烧录成为实体的光盘/DVD 后， 才能够进一步的使用，包括安装或升级你的 Linux 啦！同样的道理，你想要利用烧录机将你的数据烧录到 DVD 时， 也得要先将你的数据包成一个映像档，这样才能够写入DVD片中。而将你的数据包成一个映像档的方式就透过 mkisofs 这个命令即可。 mkisofs 的使用方式如下：
+
+[root@www ~]# mkisofs [-o 映像档] [-rv] [-m file] 待备份文件.. [-V vol] \
+>  -graft-point isodir=systemdir ...
+选项与参数：
+-o ：后面接你想要产生的那个映像档档名。
+-r ：透过 Rock Ridge 产生支持 Unix/Linux 的文件数据，可记录较多的资讯；
+-v ：显示建置 ISO 文件的过程
+-m file ：-m 为排除文件 (exclude) 的意思，后面的文件不备份到映像档中
+-V vol  ：创建 Volume，有点像 Windows 在文件总管内看到的 CD title 的东西
+-graft-point：graft有转嫁或移植的意思，相关数据在底下文章内说明。
+其实 mkisofs 有非常多好用的选项可以选择，不过如果我们只是想要制作数据光盘时，上述的选项也就够用了。 光盘的格式一般称为 iso9660 ，这种格式一般仅支持旧版的 DOS 档名，亦即档名只能以 8.3 (档名8个字节，扩展名3个字节) 的方式存在。如果加上 -r 的选项之后，那么文件资讯能够被记录的比较完整，可包括UID/GID与权限等等！ 所以，记得加这个 -r 的选项。
+
+此外，一般默认的情况下，所有要被加到映像档中的文件都会被放置到映象档中的根目录， 如此一来可能会造成烧录后的文件分类不易的情况。所以，你可以使用 -graft-point 这个选项，当你使用这个选项之后， 可以利用如下的方法来定义位於映像档中的目录，例如：
+
+映像档中的目录所在=实际 Linux 文件系统的目录所在
+/movies/=/srv/movies/ (在 Linux 的 /srv/movies 内的文件，加至映像档中的 /movies/ 目录)
+/linux/etc=/etc (将 Linux 中的 /etc/ 内的所有数据备份到映像档中的 /linux/etc/ 目录中)
+我们透过一个简单的范例来说明一下吧。如果你想要将 /root, /home, /etc 等目录内的数据通通烧录起来的话， 先得要处理一下映像档，我们先不使用 -graft-point 的选项来处理这个映像档试看看：
+
+[root@www ~]# mkisofs -r -v -o /tmp/system.img /root /home /etc
+INFO:   ISO-8859-1 character encoding detected by locale settings.
+		Assuming ISO-8859-1 encoded filenames on source filesystem,
+		use -input-charset to override.
+mkisofs 2.01 (cpu-pc-linux-gnu)
+Scanning /root
+Scanning /root/test4
+....中间省略....
+ 97.01% done, estimate finish Tue Dec 16 17:07:14 2008  <==显示百分比
+ 98.69% done, estimate finish Tue Dec 16 17:07:15 2008
+Total translation table size: 0
+Total rockridge attributes bytes: 9840   <==额外记录属性所耗用之容量
+Total directory bytes: 55296             <==目录占用容量
+Path table size(bytes): 406
+Done with: The File(s)              Block(s)    298728
+Writing:   Ending Padblock          Start Block 298782
+Done with: Ending Padblock          Block(s)    150
+Max brk space used 0
+298932 extents written (583 MB)
+
+[root@www ~]# ll -h /tmp/system.img
+-rw-r--r-- 1 root root 584M Dec 16 17:07 /tmp/system.img
+[root@www ~]# mount -o loop /tmp/system.img /mnt
+[root@www ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/tmp/system.img       584M  584M     0 100% /mnt  <==就是这玩意儿！
+[root@www ~]# ls /mnt
+alex             crontab2               etc.tar.gz          system.tar.bz2
+anaconda-ks.cfg  etc                    install.log         test1
+arod             etc.and.root.tar.bz2   install.log.syslog  test2
+boot.dump        etc.dump               loopdev             test3
+# 看吧！一堆数据都放置在一起！包括有的没有的目录与文件等等！
+
+[root@www ~]# umount /mnt
+由上面的范例我们可以看到，三个目录 (/root, /home, /etc) 的数据通通放置到了映像档的最顶层目录中！ 真是不方便～尤其由於 /root/etc 的存在，导致那个 /etc 的数据似乎没有被包含进来的样子！真不合理～ 而且还有 lost+found 的目录存在！真是超不喜欢的！此时我们可以使用 -graft-point 来处理罗！
+
+[root@www ~]# mkisofs -r -V 'linux_file' -o /tmp/system.img \
+>  -m /home/lost+found -graft-point /root=/root /home=/home /etc=/etc
+[root@www ~]# ll -h /tmp/system.img
+-rw-r--r-- 1 root root 689M Dec 17 11:41 /tmp/system.img
+# 上面的命令会创建一个大文件，期中 -graft-point 后面接的就是我们要备份的数据。
+# 必须要注意的是那个等号的两边，等号左边是在映像档内的目录，右侧则是实际的数据。
+
+[root@www ~]# mount -o loop /tmp/system.img /mnt
+[root@www ~]# ll /mnt
+dr-xr-xr-x 105 root root 32768 Dec 17 11:40 etc
+dr-xr-xr-x   5 root root  2048 Dec 17 11:40 home
+dr-xr-xr-x   7 root root  4096 Dec 17 11:40 root
+# 瞧！数据是分门别类的在各个目录中喔这样了解乎？最后将数据卸载一下：
+
+[root@www ~]# umount /mnt
+其实鸟哥一直觉得很奇怪，怎么我的数据会这么大(600多MB)？原来是 /home 里面在第八章的时候，练习时多了一个 /home/loopdev 的大文件！所以在重新制作一次 iso 档，并多加一个『 -m /home/loopdev 』来排除该文件的备份， 最终的文件则仅有 176MB 罗！还好还好！ ^_^！接下来让我们处理烧录的动作了吧！
+
+小标题的图示cdrecord：光盘烧录工具
+我们是透过 cdrecord 这个命令来进行文字介面的烧录行为，这个命令常见的选项有底下数个：
+
+[root@www ~]# cdrecord -scanbus dev=ATA                  <==查询烧录机位置
+[root@www ~]# cdrecord -v dev=ATA:x,y,z blank=[fast|all] <==抹除重复读写片
+[root@www ~]# cdrecord -v dev=ATA:x,y,z -format          <==格式化DVD+RW
+[root@www ~]# cdrecord -v dev=ATA:x,y,z [可用选项功能] file.iso
+选项与参数：
+-scanbus        ：用在扫瞄磁碟汇流排并找出可用的烧录机，后续的装置为 ATA 介面
+-v              ：在 cdrecord 运行的过程中，显示过程而已。
+dev=ATA:x,y,z   ：后续的 x, y, z 为你系统上烧录机所在的位置，非常重要！
+blank=[fast|all]：blank 为抹除可重复写入的CD/DVD-RW，使用fast较快，all较完整
+-format         ：仅针对 DVD+RW 这种格式的 DVD 而已；
+[可用选项功能] 主要是写入 CD/DVD 时可使用的选项，常见的选项包括有：
+   -data   ：指定后面的文件以数据格式写入，不是以 CD 音轨(-audio)方式写入！
+   speed=X ：指定烧录速度，例如CD可用 speed=40 为40倍数，DVD则可用 speed=4 之类
+   -eject  ：指定烧录完毕后自动退出光盘
+   fs=Ym   ：指定多少缓冲内存，可用在将映像档先缓存至缓冲内存。默认为 4m，
+			 一般建议可添加到 8m ，不过，还是得视你的烧录机而定。
+针对 DVD 的选项功能：
+   driveropts=burnfree ：打开 Buffer Underrun Free 模式的写入功能
+   -sao                ：支持 DVD-RW 的格式
+侦测你的烧录机所在位置：
+文字模式的烧录确实是比较麻烦的，因为没有所见即所得的环境嘛！要烧录首先就得要找到烧录机才行！ 而由於早期的烧录机都是使用 SCSI 介面，因此查询烧录机的方法就得要配合著 SCSI 介面的认定来处理了。 查询烧录机的方式为：
+
+[root@www ~]# cdrecord -scanbus dev=ATA
+Cdrecord-Clone 2.01 (cpu-pc-linux-gnu) Copyright (C) 1995-2004 J?rg Schilling
+....中间省略....
+scsibus1:
+		1,0,0   100) *
+		1,1,0   101) 'ASUS    ' 'DRW-2014S1      ' '1.01' Removable CD-ROM
+		1,2,0   102) *
+		1,3,0   103) *
+		1,4,0   104) *
+		1,5,0   105) *
+		1,6,0   106) *
+		1,7,0   107) *
+利用 cdrecord -scanbus 就能够找到正确的烧录机！由於目前个人计算机上最常使用的磁碟机介面为 IDE 与 SATA ， 这两种介面都能够使用 dev=ATA 这种模式来查询，因此上述的命令得要背一下啦！另外，在查询的结果当中可以发现有一台烧录机， 其中也显示出这台烧录机的型号，而最重要的就是上表中有底线的那三个数字！那三个数字就是代表这台烧录机的位置！ 以上表的例子中，这部烧录机的位置在『 ATA:1,1,0 』这个地方喔！
+
+好了，那么现在要如何将 /tmp/system.img 烧录到 CD/DVD 里面去呢？鸟哥这里先以 CD 为例，鸟哥用的是 CD-RW (可重复读写) 的光盘片，说实在话，虽然 CD-RW 或 DVD-RW 比较贵一点，不过至少可以重复利用， 对环境的冲击比较小啦！建议大家使用可重复读写的片子。由於 CD-RW 可能要先进行抹除的工作(将原本里面的数据删除)然后才能写入， 因此，底下我们先来看看如何抹除一片 CD/DVD 的方法，然后直接写入光盘吧！
+
+Tips:
+由於 CD/DVD 都是使用 cdrecord 这个命令，因此不论是 CD 还是 DVD 片，下达命令的方法都差不多！不过， DVD 的写入需要额外的 driveropts=burnfree 或 -dao 等选项的辅助才行。 另外，CD 片有 CD-R(一次写入) 与 CD-RW(重复写入)，至於 DVD 则主要有两种格式，分别是 DVD-R 及 DVD+R 两种格式。 如果是可重复读写的则为： DVD-RW, DVD+RW 。除了 DVD+RW 的抹除方法可能不太一样之外，其他写入的方式则是一样的。	鸟哥的图示
+进行 CD 的烧录动作：
+# 0. 先抹除光盘的原始内容：(非可重复读写则可略过此步骤)
+[root@www ~]# cdrecord -v dev=ATA:1,1,0 blank=fast
+# 中间会跑出一堆信息告诉你抹除的进度，而且会有 10 秒钟的时间等待你的取消！
+# 可以避免『手滑』的情况！^_^
+
+# 1. 开始烧录：
+[root@www ~]# cdrecord -v dev=ATA:1,1,0 fs=8m -dummy -data \
+>  /tmp/system.img
+....中间省略....
+Track 01:  168 of  176 MB written (fifo 100%) [buf 100%]  10.5x. <==显示百分比
+# 上面会显示进度，还有 10.5x 代表目前的烧录速度！
+cdrecord: fifo had 2919 puts and 2919 gets.
+cdrecord: fifo was 0 times empty and 2776 times full, min fill was 97%.
+
+# 2. 烧录完毕后，测试挂载一下，检验内容：
+[root@www ~]# mount -t iso9660 /dev/cdrom /mnt
+[root@www ~]# df -h /mnt
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/hdd              177M  177M     0 100% /mnt      <==瞧！确实是光盘内容！
+
+[root@www ~]# ll /mnt
+dr-xr-xr-x 105 root root 32768 Dec 17 11:54 etc
+dr-xr-xr-x   5 root root  2048 Dec 17 11:54 home
+dr-xr-xr-x   7 root root  4096 Dec 17 11:54 root
+
+[root@www ~]# umount /mnt    <==不要忘了卸载
+事实上如果你忘记抹除可写入光盘时，其实 cdrecord 很聪明的会主动的帮你抹除啦！ 因此上面的资讯你只要记得烧录的功能即可。特别注意 -data 那个选项！因为如果没有加上 -data 的选项时， 默认数据会以音轨格式写入光盘中，所以最好能够加上 -data 这个选项罗！ 上述的功能是针对 CD ，底下我们使用一片可重复读写的 DVD-RW 来测试一下写入的功能！
+
+
+进行 DVD-RW 的烧录动作：
+# 0. 同样的，先来抹除一下原本的内容：
+[root@www ~]# cdrecord -v dev=ATA:1,1,0 blank=fast
+
+# 1. 开始写入 DVD ，请注意，有些选项与 CD 并不相同了喔！
+[root@www ~]# cdrecord -v dev=ATA:1,1,0 fs=8m -data -sao \
+>  driveropts=burnfree /tmp/system.img
+
+# 2. 同样的，来给他测试测试！
+[root@www ~]# mount /dev/cdrom /mnt
+[root@www ~]# df -h /mnt
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/hdd              177M  177M     0 100% /mnt
+[root@www ~]# umount /mnt
+整体命令没有差很多啦！只是 CD-RW 会自动抹除，但 DVD-RW 似乎得要自己手动某除才行！并不会主动进入自动抹除的功能！ 害鸟哥重新测试过好几次～伤脑筋～ ^_^！好啦！现在你就知道如何将你的数据烧录出来啦！
+
+如果你的 Linux 是用来做为服务器之用的话，那么无时无刻的去想『如何备份重要数据』是相当重要的！ 关於备份我们会在第五篇再仔细的谈一谈，这里你要会使用这些工具即可！

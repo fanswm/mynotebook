@@ -5,3 +5,172 @@ Creation-Date: 2017-12-11T16:40:54+08:00
 ====== 2 Linux 系统常见的压缩命令 ======
 Created Monday 11 December 2017
 
+2. Linux 系统常见的压缩命令
+　　2.1 compress
+　　2.2 gzip, zcat
+　　2.3 bzip2, bzcat
+ 大标题的图示Linux 系统常见的压缩命令：
+在Linux的环境中，压缩文件的扩展名大多是：『*.tar, *.tar.gz, *.tgz, *.gz, *.Z, *.bz2』，为什么会有这样的扩展名呢？不是说 Linux 的扩展名没有什么作用吗？
+
+这是因为 Linux 支持的压缩命令非常多，且不同的命令所用的压缩技术并不相同，当然彼此之间可能就无法互通压缩/解压缩文件罗。 所以，当你下载到某个压缩档时，自然就需要知道该文件是由哪种压缩命令所制作出来的，好用来对照著解压缩啊！ 也就是说，虽然 Linux 文件的属性基本上是与档名没有绝对关系的， 但是为了帮助我们人类小小的脑袋瓜子，所以适当的扩展名还是必要的！ 底下我们就列出几个常见的压缩文件扩展名吧：
+
+*.Z         compress 程序压缩的文件；
+*.gz        gzip 程序压缩的文件；
+*.bz2       bzip2 程序压缩的文件；
+*.tar       tar 程序打包的数据，并没有压缩过；
+*.tar.gz    tar 程序打包的文件，其中并且经过 gzip 的压缩
+*.tar.bz2   tar 程序打包的文件，其中并且经过 bzip2 的压缩
+Linux上常见的压缩命令就是 gzip 与 bzip2 ，至於 compress 已经退流行了。 gzip 是由 GNU 计画所开发出来的压缩命令，该命令已经取代了 compress 。 后来 GNU 又开发出 bzip2 这个压缩比更好的压缩命令！不过，这些命令通常仅能针对一个文件来压缩与解压缩，如此一来， 每次压缩与解压缩都要一大堆文件，岂不烦人？此时，那个所谓的『打包软件, tar』就显的很重要啦！
+
+这个 tar 可以将很多文件『打包』成为一个文件！甚至是目录也可以这么玩。不过，单纯的 tar 功能仅是『打包』而已，亦即是将很多文件集结成为一个文件， 事实上，他并没有提供压缩的功能，后来，GNU 计画中，将整个 tar 与压缩的功能结合在一起，如此一来提供使用者更方便并且更强大的压缩与打包功能！ 底下我们就来谈一谈这些在 Linux 底下基本的压缩命令吧！
+
+
+小标题的图示compress 
+compress这个压缩命令是非常老旧的一款，大概只有在非常旧的 Unix 机器上面还会找到这个软件。 我们的 CentOS 默认并没有安装这个软件到系统当中，所以想要了解这个软件的使用时，请先安装 ncompress 这个软件。 不过，由於 gzip 已经可以解开使用 compress 压缩的文件，因此， compress 可以不用学习啦！ 但是，如果你所在的环境还是有老旧的系统，那么还是得要学一学就是了。好了， 如果你有网络的话，那么安装其实很简单喔！
+
+[root@www ~]# yum install ncompress
+base        100% |=========================| 1.1 kB    00:00
+updates     100% |=========================|  951 B    00:00
+addons      100% |=========================|  951 B    00:00
+extras      100% |=========================| 1.1 kB    00:00
+Setting up Install Process
+Parsing package install arguments
+Resolving Dependencies              <==开始分析相依性
+--> Running transaction check
+---> Package ncompress.i386 0:4.2.4-47 set to be updated
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=======================================================
+ Package       Arch   Version     Repository     Size
+=======================================================
+Installing:
+ ncompress     i386   4.2.4-47    base            23 k
+
+Transaction Summary
+=======================================================
+Install      1 Package(s)  <==最后分析所要安装的软件数
+Update       0 Package(s)
+Remove       0 Package(s)
+
+Total download size: 23 k
+Is this ok [y/N]: y    <==这里请按下 y 来确认安装
+Downloading Packages:
+(1/1): ncompress-4.2.4-47 100% |=========================|  23 kB    00:00
+warning: rpmts_HdrFromFdno: Header V3 DSA signature: NOKEY, key ID e8562897
+Importing GPG key 0xE8562897 "CentOS-5 Key (CentOS 5 Official Signing Key) 
+<centos-5-key@centos.org>" from http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5
+Is this ok [y/N]: y    <==这里则是与数码签章有关
+Running rpm_check_debug
+Running Transaction Test
+Finished Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Installing: ncompress          ######################### [1/1]
+
+Installed: ncompress.i386 0:4.2.4-47
+Complete!
+关於 yum 更详细的用法我们会在后续的章节介绍，这里仅是提供一个大概的用法而已。 等你安装好这个软件后，接下来让我们看看如何使用 compress 吧！
+
+[root@www ~]# compress [-rcv] 文件或目录  <==这里是压缩
+[root@www ~]# uncompress 文件.Z           <==这里是解压缩
+选项与参数：
+-r  ：可以连同目录下的文件也同时给予压缩呢！
+-c  ：将压缩数据输出成为 standard output (输出到萤幕)
+-v  ：可以秀出压缩后的文件资讯以及压缩过程中的一些档名变化。
+
+范例一：将 /etc/man.config 复制到 /tmp ，并加以压缩
+[root@www ~]# cd /tmp
+[root@www tmp]# cp /etc/man.config .
+[root@www tmp]# compress -v man.config
+man.config:  -- replaced with man.config.Z Compression: 41.86%
+[root@www tmp]# ls -l /etc/man.config /tmp/man*
+-rw-r--r-- 1 root root 4617 Jan  6  2007 /etc/man.config   <==原有文件
+-rw-r--r-- 1 root root 2684 Nov 10 17:14 /tmp/man.config.Z <==经过压缩的文件！
+不知道你有没有发现，复制到 /tmp 的 man.config 不见了！因为被压缩成为 man.config.Z 罗 也就是说，在默认的情况中，被 compress 压缩的原始文件会不见，而压缩文件会被创建起来， 而且扩展名会是 *.Z。仔细看一下，文件由原本的 4617bytes 降低到 2684bytes左右，确实有减少一点啦！ 那么如何解压缩呢？
+
+范例二：将刚刚的压缩档解开
+[root@www tmp]# uncompress man.config.Z
+[root@www tmp]# ll man*
+-rw-r--r-- 1 root root 4617 Nov 10 17:14 man.config
+解压缩直接用 uncompress 即可！解压缩完毕后该文件就自动的变回来了！不过，那个压缩档却又不存在罗～ 这样可以理解用法了吗？那如果我想要保留原始文件且又要创建压缩档呢？可以使用 -c 的语法！
+
+范例三：将 man.config 压缩成另外一个文件来备份
+[root@www tmp]# compress -c man.config > man.config.back.Z
+[root@www tmp]# ll man*
+-rw-r--r-- 1 root root 4617 Nov 10 17:14 man.config
+-rw-r--r-- 1 root root 2684 Nov 10 17:24 man.config.back.Z
+# 这个 -c 的选项比较有趣！他会将压缩过程的数据输出到萤幕上，而不是写入成为 
+# *.Z 的压缩档。所以，我们可以透过数据流重导向的方法将数据输出成为另一个档名。
+# 关於数据流重导向，我们会在第十一章 bash 详细谈论的啦！
+再次强调，compress 已经很少人在使用了，因为这支程序无法解开 *.gz 的文件，而 gzip 则可以解开 *.Z 的文件， 所以，如果你的 distribution 上面没有 compress 的话，那就不要进行上面的练习罗！ ^_^
+
+小标题的图示gzip, zcat 
+gzip 可以说是应用度最广的压缩命令了！目前 gzip 可以解开 compress, zip 与 gzip 等软件所压缩的文件。 至於 gzip 所创建的压缩档为 *.gz 的档名喔！让我们来看看这个命令的语法吧：
+
+[root@www ~]# gzip [-cdtv#] 档名
+[root@www ~]# zcat 档名.gz
+选项与参数：
+-c  ：将压缩的数据输出到萤幕上，可透过数据流重导向来处理；
+-d  ：解压缩的参数；
+-t  ：可以用来检验一个压缩档的一致性～看看文件有无错误；
+-v  ：可以显示出原文件/压缩文件的压缩比等资讯；
+-#  ：压缩等级，-1 最快，但是压缩比最差、-9 最慢，但是压缩比最好！默认是 -6
+
+范例一：将 /etc/man.config 复制到 /tmp ，并且以 gzip 压缩
+[root@www ~]# cd /tmp 
+[root@www tmp]# cp /etc/man.config .
+[root@www tmp]# gzip -v man.config
+man.config:      56.1% -- replaced with man.config.gz
+[root@www tmp]# ll /etc/man.config /tmp/man*
+-rw-r--r-- 1 root root 4617 Jan  6  2007 /etc/man.config
+-rw-r--r-- 1 root root 2684 Nov 10 17:24 /tmp/man.config.back.Z
+-rw-r--r-- 1 root root 2057 Nov 10 17:14 /tmp/man.config.gz  <==gzip压缩比较佳
+与 compress 类似的，当你使用 gzip 进行压缩时，在默认的状态下原本的文件会被压缩成为 .gz 的档名， 原始文件就不再存在了。您也可以发现，由於 gzip 的压缩比要比 compress 好的多，所以当然建议使用 gzip 啦！ 此外，使用 gzip 压缩的文件在 Windows 系统中，竟然可以被 WinRAR 这个软件解压缩呢！很好用吧！至於其他的用法如下：
+
+范例二：由於 man.config 是文字档，请将范例一的压缩档的内容读出来！
+[root@www tmp]# zcat man.config.gz
+# 由於 man.config 这个原本的文件是是文字档，因此我们可以尝试使用 zcat  去读取！
+# 此时萤幕上会显示 man.config.gz 解压缩之后的文件内容！
+
+范例三：将范例一的文件解压缩
+[root@www tmp]# gzip -d man.config.gz
+# 不要使用 gunzip 这个命令，不好背！使用 gzip -d 来进行解压缩！
+# 与 gzip 相反， gzip -d 会将原本的 .gz 删除，产生原本的 man.config 文件。
+
+范例四：将范例三解开的 man.config 用最佳的压缩比压缩，并保留原本的文件
+[root@www tmp]# gzip -9 -c man.config > man.config.gz
+其实 gzip 的压缩已经最佳化过了，所以虽然 gzip 提供 1~9 的压缩等级，不过使用默认的 6 就非常好用了！ 因此上述的范例四可以不要加入那个 -9 的选项。范例四的重点在那个 -c 与 > 的使用罗！
+
+cat 可以读取纯文字档，那个 zcat 则可以读取纯文字档被压缩后的压缩档！ 由於 gzip 这个压缩命令主要想要用来取代 compress 的，所以不但 compress 的压缩文件可以使用 gzip 来解开，同时 zcat 这个命令可以同时读取 compress 与 gzip 的压缩档呦！
+
+小标题的图示bzip2, bzcat 
+若说 gzip 是为了取代 compress 并提供更好的压缩比而成立的，那么 bzip2 则是为了取代 gzip 并提供更佳的压缩比而来的。 bzip2 真是很不错用的东西～这玩意的压缩比竟然比 gzip 还要好～至於 bzip2 的用法几乎与 gzip 相同！ 看看底下的用法吧！
+
+[root@www ~]# bzip2 [-cdkzv#] 档名
+[root@www ~]# bzcat 档名.bz2
+选项与参数：
+-c  ：将压缩的过程产生的数据输出到萤幕上！
+-d  ：解压缩的参数
+-k  ：保留原始文件，而不会删除原始的文件喔！
+-z  ：压缩的参数
+-v  ：可以显示出原文件/压缩文件的压缩比等资讯；
+-#  ：与 gzip 同样的，都是在计算压缩比的参数， -9 最佳， -1 最快！
+
+范例一：将刚刚的 /tmp/man.config 以 bzip2 压缩
+[root@www tmp]# bzip2 -z man.config 
+# 此时 man.config 会变成 man.config.bz2 ！
+
+范例二：将范例一的文件内容读出来！
+[root@www tmp]# bzcat man.config.bz2
+# 此时萤幕上会显示 man.config.bz2 解压缩之后的文件内容！！
+
+范例三：将范例一的文件解压缩
+[root@www tmp]# bzip2 -d man.config.bz2
+
+范例四：将范例三解开的 man.config 用最佳的压缩比压缩，并保留原本的文件
+[root@www tmp]# bzip2 -9 -c man.config > man.config.bz2
+使用 compress 扩展名自动创建为 .Z ，使用 gzip 扩展名自动创建为 .gz 。这里的 bzip2 则是自动的将扩展名建置为 .bz2 罗！所以当我们使用具有压缩功能的 bzip2 -z 时，那么刚刚的 man.config 就会自动的变成了 man.config.bz2 这个档名罗！
+
+好了，那么如果我想要读取这个文件的内容呢？ 是否一定要解开？当然不需要罗！可以使用简便的 bzcat 这个命令来读取内容即可！例如上面的例子中， 我们可以使用 bzcat man.config.bz2 来读取数据而不需要解开！此外，当你要解开一个压缩档时， 这个文件的名称为 .bz, .bz2, .tbz, .tbz2 等等，那么就可以尝试使用 bzip2 来解看看啦！当然罗，也可以使用 bunzip2 这个命令来取代 bzip2 -d 罗。
