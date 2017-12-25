@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-25T13:41:19+08:00
+
+====== Multi-Account Containers ======
+Created Monday 25 December 2017
+
+Multi-Account Containers：Firefox 官方开发的多账号助手
+https://addons.mozilla.org/zh-CN/firefox/search/?platform=mac&q=Multi-Account+Containers

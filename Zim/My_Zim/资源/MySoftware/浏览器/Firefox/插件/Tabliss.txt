@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-25T13:43:12+08:00
+
+====== Tabliss ======
+Created Monday 25 December 2017
+
+Tabliss：大概是目前 Firefox 上最美观的新标签页
+
+https://addons.mozilla.org/zh-CN/firefox/addon/tabliss/

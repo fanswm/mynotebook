@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-25T13:44:03+08:00
+
+====== Stylish ======
+Created Monday 25 December 2017
+
+Stylish 可以改变不同网页的外观，相信大家已经很清楚它的功能，少数派在介绍 Chrome 扩展的时候也常常提到这个功能强大的扩展。现在 Stylish 已经支持了 Firefox 57.0，你可以在 Firefox 中愉快地使用它了。
+
+https://addons.mozilla.org/zh-CN/firefox/addon/stylish/
+
