@@ -1,0 +1,122 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-11T06:38:32+08:00
+
+====== 在 Bash 中抽取子字符串 ======
+Created 星期一 11 十二月 2017
+
+
+## __其语法为：__
+__${parameter:offset:length}__ 
+子字符串扩展是 bash 的一项功能。它会扩展成 parameter 值中以 offset 为开始，长为 length个字符的字符串。 假设， $u 定义如下:
++ 定义变量 u
+__u="this is a test"__
+
+那么下面参数的子字符串扩展会抽取出子字符串:
+var="${u:10:4}"
+echo "${var}"
+结果为:
+test
+其中这些参数分别表示：
+10 : 偏移位置
+4 : 长度
+
+
+__## 使用 IFS__
+根据 bash 的 man 页说明:
+IFS （内部字段分隔符）[2]用于在扩展后进行单词分割，并用内建的 read 命令将行分割为词。默认值是。
+另一种 的方案如下：
+__u="this is a test"__
+__set -- $u__
+__echo "$1"__
+__echo "$2"__
+__echo "$3"__
+__echo "$4"__
+输出为：
+this
+is
+a
+test
+
+下面是一段 bash 代码，用来从 Cloudflare cache 中去除带主页的 url。
+```
+#！/bin/bash
+####################################################
+## Author - Vivek Gite {https://www.cyberciti.biz/}
+## Purpose - Purge CF cache
+## License - Under GPL ver 3.x+
+####################################################
+## set me first ##
+zone_id="YOUR_ZONE_ID_HERE"
+api_key="YOUR_API_KEY_HERE"
+email_id="YOUR_EMAIL_ID_HERE"
+
+## hold data ##
+home_url=""
+amp_url=""
+urls="$@"
+
+## Show usage 
+[ "$urls" == "" ] && { echo "Usage: $0 url1 url2 url3"; exit 1; }
+
+## Get home page url as we have various sub dirs on domain
+## /tips/
+## /faq/
+
+get_home_url(){
+	local u="$1"
+	IFS='/'
+	set -- $u
+	echo "${1}${IFS}${IFS}${3}${IFS}${4}${IFS}"
+}
+
+echo
+echo "Purging cache from Cloudflare。.。"
+echo
+for u in $urls
+do
+	 home_url="$(get_home_url $u)"
+	 amp_url="${u}amp/"
+	 curl -X DELETE "https://api.cloudflare.com/client/v4/zones/${zone_id}/purge_cache" \
+		  -H "X-Auth-Email: ${email_id}" \
+		  -H "X-Auth-Key: ${api_key}" \
+		  -H "Content-Type: application/json" \
+		  --data "{\"files\":[\"${u}\"，\"${amp_url}\"，\"${home_url}\"]}"
+	 echo
+done
+echo
+```
+它的使用方法为：
+```
+~/bin/cf.clear.cache https://www.cyberciti.biz/faq/bash-for-loop/ https://www.cyberciti.biz/tips/linux-security.html
+```
+
+## __借助 cut 命令__
+可以使用 cut 命令来将文件中每一行或者变量中的一部分删掉。它的语法为：
+u="this is a test"
+echo "$u" | cut -d' ' -f 4
+echo "$u" | cut --delimiter=' ' --fields=4
+##########################################
+## WHERE
+##   -d' ' : Use a whitespace as delimiter
+##   -f 4  : Select only 4th field
+##########################################
+var="$(cut -d' ' -f 4 <<< $u)"
+echo "${var}"
+想了解更多请阅读 bash 的 man 页：
+man bash
+man cut
+另请参见： Bash String Comparison: Find Out IF a Variable Contains a Substring[3]
+
+via: https://www.cyberciti.biz/faq/how-to-extract-substring-in-bash/
+作者：Vivek Gite[4] 译者：lujun9972[5] 校对：wxy[6]
+本文由 LCTT[7] 原创编译，Linux中国[8] 荣誉推出
+
+[1]: https://www.cyberciti.biz/media/new/faq/2017/12/How-to-Extract-substring-in-Bash-Shell-on-Linux-or-Unix.jpg
+[2]: https://bash.cyberciti.biz/guide/$IFS
+[3]: https://www.cyberciti.biz/faq/bash-find-out-if-variable-contains-substring/
+[4]: https://www.cyberciti.biz
+[5]: https://github.com/lujun9972
+[6]: https://github.com/wxy
+[7]: https://github.com/LCTT/TranslateProject
+[8]: https://linux.cn/article-9127-1.html?utm_source=rss&utm_medium=rss

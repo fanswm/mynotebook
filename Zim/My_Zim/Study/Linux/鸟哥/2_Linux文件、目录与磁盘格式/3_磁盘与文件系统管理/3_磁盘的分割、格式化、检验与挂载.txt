@@ -11,8 +11,9 @@ Created Monday 11 December 2017
 　　3.3 磁盘检验： fsck, badblocks
 　　3.4 磁盘挂载与卸除： mount, umount
 　　3.5 磁盘参数修订： mknod, e2label, tune2fs, hdparm
- 大标题的图示磁盘的分割、格式化、检验与挂载：
-对于一个系统管理者( root )而言，磁盘的的管理是相当重要的一环，尤其近来硬盘已经渐渐的被当成是消耗品了 ..... 如果我们想要在系统里面新增一颗硬盘时，应该有哪些动作需要做的呢：
+磁盘的分割、格式化、检验与挂载：
+
+如果我们想要在系统里面新增一颗硬盘时，应该有哪些动作需要做的呢：
 
 对磁盘进行分割，以创建可用的 partition ；
 对该 partition 进行格式化( format )，以创建系统可用的 filesystem；
@@ -21,11 +22,11 @@ Created Monday 11 December 2017
 当然啰，在上述的过程当中，还有很多需要考虑的，例如磁盘分区槽 (partition) 需要定多大？ 是否需要加入 journal 的功能？inode 与 block 的数量应该如何规划等等的问题。但是这些问题的决定， 都需要与你的主机用途来加以考虑的～所以，在这个小节里面，鸟哥仅会介绍几个动作而已， 更详细的配置值，则需要以你未来的经验来参考啰！
 
 
-小标题的图示磁盘分区： fdisk
-[root@www ~]# fdisk [-l] 装置名称
-选项与参数：
--l  ：输出后面接的装置所有的 partition 内容。若仅有 fdisk -l 时，
-	  则系统将会把整个系统内能够搜寻到的装置的 partition 均列出来。
+__磁盘分区： fdisk__
+__[root@www ~]# fdisk [-l] 装置名称__
+__选项与参数：__
+__-l  ：输出后面接的装置所有的 partition 内容。若仅有 fdisk -l 时，__
+	__  则系统将会把整个系统内能够搜寻到的装置的 partition 均列出来。__
 
 范例：找出你系统中的根目录所在磁盘，并查阅该硬盘内的相关信息
 [root@www ~]# df /            <==注意：重点在找出磁盘文件名而已
@@ -48,18 +49,18 @@ Command action
    a   toggle a bootable flag
    b   edit bsd disklabel
    c   toggle the dos compatibility flag
-   d   delete a partition            <==删除一个partition
+   __d   delete a partition            <==删除一个partition__
    l   list known partition types
    m   print this menu
-   n   add a new partition           <==新增一个partition
+   __n   add a new partition           <==新增一个partition__
    o   create a new empty DOS partition table
-   p   print the partition table     <==在屏幕上显示分割表
-   q   quit without saving changes   <==不储存离开fdisk程序
+   __p   print the partition table     <==在屏幕上显示分割表__
+   __q   quit without saving changes   <==不储存离开fdisk程序__
    s   create a new empty Sun disklabel
    t   change a partition's system id
    u   change display/entry units
    v   verify the partition table
-   w   write table to disk and exit  <==将刚刚的动作写入分割表
+   __w   write table to disk and exit  <==将刚刚的动作写入分割表__
    x   extra functionality (experts only)
 老实说，使用 fdisk 这支程序是完全不需要背命令的！如同上面的表格中，你只要按下 m 就能够看到所有的动作！ 比较重要的动作在上面已经用底线画出来了，你可以参考看看。其中比较不一样的是『q 与 w』这两个玩意儿！ 不管你进行了什么动作，只要离开 fdisk 时按下『q』，那么所有的动作『都不会生效！』相反的， 按下『w』就是动作生效的意思。所以，你可以随便玩 fdisk ，只要离开时按下的是『q』即可。 ^_^！ 好了，先来看看分割表信息吧！
 
@@ -83,11 +84,11 @@ Command (m for help): q
 
 下半部的分割表信息主要在列出每个分割槽的个别信息项目。每个项目的意义为：
 
-Device：装置文件名，依据不同的磁盘接口/分割槽位置而变。
-Boot：是否为启动引导块？通常 Windows 系统的 C 需要这块！
-Start, End：这个分割槽在哪个磁柱号码之间，可以决定此分割槽的大小；
-Blocks：就是以 1K 为单位的容量。如上所示，/dev/hdc1 大小为104391K = 102MB
-ID, System：代表这个分割槽内的文件系统应该是啥！不过这个项目只是一个提示而已， 不见得真的代表此分割槽内的文件系统喔！
+__Device：装置文件名，依据不同的磁盘接口/分割槽位置而变。__
+__Boot：是否为启动引导块？通常 Windows 系统的 C 需要这块！__
+__Start, End：这个分割槽在哪个磁柱号码之间，可以决定此分割槽的大小；__
+__Blocks：就是以 1K 为单位的容量。如上所示，/dev/hdc1 大小为104391K = 102MB__
+__ID, System：代表这个分割槽内的文件系统应该是啥！不过这个项目只是一个提示而已， 不见得真的代表此分割槽内的文件系统喔！__
 从上表我们可以发现几件事情：
 
 整部磁盘还可以进行额外的分割，因为最大磁柱为 5005 ，但只使用到 2052 号而已；
@@ -312,7 +313,7 @@ The kernel still uses the old table.
 The new table will be used at the next reboot.
 Syncing disks. <==见鬼了！竟然需要 reboot 才能够生效！我可不要重新启动！
 
-[root@www ~]# partprobe  <==强制让核心重新捉一次 partition table
+__[root@www ~]# partprobe  <==强制让核心重新捉一次 partition table__
 在这个实作题中，请务必要按下『 w 』这个动作！因为我们实际上确实要创建这个分割槽嘛！ 但请仔细看一下最后的警告信息，因为我们的磁盘无法卸除(因为含有根目录)，所以核心无法重新取得分割表信息， 因此此时系统会要求我们重新启动(reboot)以升级核心的分割表信息才行。
 如上的练习中，最终写入分割表后竟然会让核心无法捉到分割表信息！此时你可以直接使用 reboot 来处理， 也可以使用 GNU 推出的工具程序来处置，那就是 partprobe 这个命令。这个命令的运行很简单， 他仅是告知核心必须要读取新的分割表而已，因此并不会在屏幕上出现任何信息才是！ 这样一来，我们就不需要 reboot 啰！
 
@@ -324,16 +325,16 @@ Syncing disks. <==见鬼了！竟然需要 reboot 才能够生效！我可不要
 注意事项：
 另外在实作过程中请特别注意，因为 SATA 硬盘最多能够支持到 15 号的分割槽， IDE 则可以支持到 63 号。 但目前大家常见的系统都是 SATA 磁盘，因此在练习的时候千万不要让你的分割槽超过 15 号！ 否则即使你还有剩余的磁柱容量，但还是会无法继续进行分割的喔！
 
-另外需要特别留意的是，fdisk 没有办法处理大于 2TB 以上的磁盘分区槽！ 这个问题比较严重！因为虽然 Ext3 文件系统已经支持达到 16TB 以上的磁盘，但是分割命令却无法支持。 时至今日(2009)所有的硬件价格大跌，硬盘也已经出到单颗 1TB 之谱，若加上磁盘阵列 (RAID) ， 高于 2TB 的磁盘系统应该会很常见！此时你就得使用 parted 这个命令了！我们会在本章最后谈一谈这个命令的用法。
+另外需要特别留意的是，__fdisk 没有办法处理大于 2TB 以上的磁盘分区槽__！ 这个问题比较严重！因为虽然 Ext3 文件系统已经支持达到 16TB 以上的磁盘，但是分割命令却无法支持。 时至今日(2009)所有的硬件价格大跌，硬盘也已经出到单颗 1TB 之谱，若加上磁盘阵列 (RAID) ， 高于 2TB 的磁盘系统应该会很常见！此时你就得使用 __parted 这个命令__了！我们会在本章最后谈一谈这个命令的用法。
 
-小标题的图示磁盘格式化
+磁盘格式化
 分割完毕后自然就是要进行文件系统的格式化啰！格式化的命令非常的简单，那就是『make filesystem, mkfs』 这个命令啦！这个命令其实是个综合的命令，他会去呼叫正确的文件系统格式化工具软件！ 不啰唆，让我们来瞧瞧吧！
 
 
-mkfs
-[root@www ~]# mkfs [-t 文件系统格式] 装置文件名
-选项与参数：
--t  ：可以接文件系统格式，例如 ext3, ext2, vfat 等(系统有支持才会生效)
+__mkfs__
+__[root@www ~]# mkfs [-t 文件系统格式] 装置文件名__
+__选项与参数：__
+__-t  ：可以接文件系统格式，例如 ext3, ext2, vfat 等(系统有支持才会生效)__
 
 范例一：请将上个小节当中所制作出来的 /dev/hdc6 格式化为 ext3 文件系统
 [root@www ~]# mkfs -t ext3 /dev/hdc6
@@ -360,8 +361,8 @@ This filesystem will be automatically checked every 34 mounts or
 180 days, whichever comes first.  Use tune2fs -c or -i to override.
 # 这样就创建起来我们所需要的 Ext3 文件系统了！简单明了！
 
-[root@www ~]# mkfs[tab][tab]
-mkfs         mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.msdos   mkfs.vfat
+__[root@www ~]# mkfs[tab][tab]__
+__mkfs         mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.msdos   mkfs.vfat__
 # 按下两个[tab]，会发现 mkfs 支持的文件格式如上所示！可以格式化 vfat 喔！
 mkfs 其实是个综合命令而已，事实上如同上表所示，当我们使用『 mkfs -t ext3 ...』时， 系统会去呼叫 mkfs.ext3 这个命令来进行格式化的动作啦！若如同上表所展现的结果， 那么鸟哥这个系统支持的文件系统格式化工具有『cramfs, ext2, ext3, msdoc, vfat』等， 而最常用的应该是 ext3, vfat 两种啦！ vfat 可以用在 Windows/Linux 共享的 U盘 闪盘啰。
 
@@ -372,16 +373,16 @@ mkfs -t vfat /dev/hdc6
 在格式化为 Ext3 的范例中，我们可以发现结果里面含有非常多的信息，由于我们没有详细指定文件系统的细部项目， 因此系统会使用默认值来进行格式化。其中比较重要的部分为：文件系统的标头(Label)、Block的大小以及 inode 的数量。 如果你要指定这些东西，就得要了解一下 Ext2/Ext3 的公用程序，亦即 mke2fs 这个命令啰！
 
 
-mke2fs
-[root@www ~]# mke2fs [-b block大小] [-i block大小] [-L 标头] [-cj] 装置
-选项与参数：
--b  ：可以配置每个 block 的大小，目前支持 1024, 2048, 4096 bytes 三种；
--i  ：多少容量给予一个 inode 呢？
--c  ：检查磁盘错误，仅下达一次 -c 时，会进行快速读取测试；
-	  如果下达两次 -c -c 的话，会测试读写(read-write)，会很慢～
--L  ：后面可以接标头名称 (Label)，这个 label 是有用的喔！e2label命令介绍会谈到～
--j  ：本来 mke2fs 是 EXT2 ，加上 -j 后，会主动加入 journal 而成为 EXT3。
-mke2fs 是一个很详细但是很麻烦的命令！因为里面的细部配置太多了！现在我们进行如下的假设：
+__mke2fs__
+__[root@www ~]# mke2fs [-b block大小] [-i block大小] [-L 标头] [-cj] 装置__
+__选项与参数：__
+__-b  ：可以配置每个 block 的大小，目前支持 1024, 2048, 4096 bytes 三种；__
+__-i  ：多少容量给予一个 inode 呢？__
+__-c  ：检查磁盘错误，仅下达一次 -c 时，会进行快速读取测试；__
+	__  如果下达两次 -c -c 的话，会测试读写(read-write)，会很慢～__
+__-L  ：后面可以接标头名称 (Label)，这个 label 是有用的喔！e2label命令介绍会谈到～__
+__-j  ：本来 mke2fs 是 EXT2 ，加上 -j 后，会主动加入 journal 而成为 EXT3。__
+__mke2fs 是一个很详细但是很麻烦的命令！因为里面的细部配置太多了！现在我们进行如下的假设：__
 
 这个文件系统的标头配置为：vbird_logical
 我的 block 指定为 2048 大小；
@@ -413,26 +414,26 @@ Writing superblocks and filesystem accounting information: done
 
 老实说，如果没有特殊需求的话，使用『 mkfs -t ext3....』不但容易记忆，而且就非常好用啰！
 
-小标题的图示磁盘检验： fsck, badblocks
+__磁盘检验： fsck, badblocks__
 由于系统在运行时谁也说不准啥时硬件或者是电源会有问题，所以『死机』可能是难免的情况(不管是硬件还是软件)。 现在我们知道文件系统运行时会有硬盘与内存数据异步的状况发生，因此莫名其妙的死机非常可能导致文件系统的错乱。 问题来啦，如果文件系统真的发生错乱的话，那该如何是好？就...挽救啊！此时那个好用的 filesystem check, fsck 就得拿来仔细瞧瞧啰。
 
 
-fsck
-[root@www ~]# fsck [-t 文件系统] [-ACay] 装置名称
-选项与参数：
--t  ：如同 mkfs 一样，fsck 也是个综合软件而已！因此我们同样需要指定文件系统。
-	  不过由于现今的 Linux 太聪明了，他会自动的透过 superblock 去分辨文件系统，
-	  因此通常可以不需要这个选项的啰！请看后续的范例说明。
--A  ：依据 /etc/fstab 的内容，将需要的装置扫瞄一次。/etc/fstab 于下一小节说明，
-	  通常启动过程中就会运行此一命令了。
--a  ：自动修复检查到的有问题的扇区，所以你不用一直按 y 啰！
--y  ：与 -a 类似，但是某些 filesystem 仅支持 -y 这个参数！
--C  ：可以在检验的过程当中，使用一个直方图来显示目前的进度！
+__fsck__
+__[root@www ~]# fsck [-t 文件系统] [-ACay] 装置名称__
+__选项与参数：__
+__-t  ：如同 mkfs 一样，fsck 也是个综合软件而已！因此我们同样需要指定文件系统。__
+	__  不过由于现今的 Linux 太聪明了，他会自动的透过 superblock 去分辨文件系统，__
+	__  因此通常可以不需要这个选项的啰！请看后续的范例说明。__
+__-A  ：依据 /etc/fstab 的内容，将需要的装置扫瞄一次。/etc/fstab 于下一小节说明，__
+	__  通常启动过程中就会运行此一命令了。__
+__-a  ：自动修复检查到的有问题的扇区，所以你不用一直按 y 啰！__
+__-y  ：与 -a 类似，但是某些 filesystem 仅支持 -y 这个参数！__
+__-C  ：可以在检验的过程当中，使用一个直方图来显示目前的进度！__
 
-EXT2/EXT3 的额外选项功能：(e2fsck 这支命令所提供)
--f  ：强制检查！一般来说，如果 fsck 没有发现任何 unclean 的旗标，不会主动进入
-	  细部检查的，如果您想要强制 fsck 进入细部检查，就得加上 -f 旗标啰！
--D  ：针对文件系统下的目录进行优化配置。
+__EXT2/EXT3 的额外选项功能：(e2fsck 这支命令所提供)__
+__-f  ：强制检查！一般来说，如果 fsck 没有发现任何 unclean 的旗标，不会主动进入__
+	__  细部检查的，如果您想要强制 fsck 进入细部检查，就得加上 -f 旗标啰！__
+__-D  ：针对文件系统下的目录进行优化配置。__
 
 范例一：强制的将前面我们创建的 /dev/hdc6 这个装置给他检验一下！
 [root@www ~]# fsck -C -f -t ext3 /dev/hdc6 
@@ -447,9 +448,9 @@ vbird_logical: 11/251968 files (9.1% non-contiguous), 36926/1004046 blocks
 # 如果没有加上 -f 的选项，则由于这个文件系统不曾出现问题，
 # 检查的经过非常快速！若加上 -f 强制检查，才会一项一项的显示过程。
 
-范例二：系统有多少文件系统支持的 fsck 软件？
-[root@www ~]# fsck[tab][tab]
-fsck         fsck.cramfs  fsck.ext2    fsck.ext3    fsck.msdos   fsck.vfat
+__范例二：系统有多少文件系统支持的 fsck 软件？__
+__[root@www ~]# fsck[tab][tab]__
+__fsck         fsck.cramfs  fsck.ext2    fsck.ext3    fsck.msdos   fsck.vfat__
 这是用来检查与修正文件系统错误的命令。注意：通常只有身为 root 且你的文件系统有问题的时候才使用这个命令，否则在正常状况下使用此一命令， 可能会造成对系统的危害！通常使用这个命令的场合都是在系统出现极大的问题，导致你在 Linux 启动的时候得进入单人单机模式下进行维护的行为时，才必须使用此一命令！
 
 另外，如果你怀疑刚刚格式化成功的硬盘有问题的时后，也可以使用 fsck 来检查一硬盘呦！其实就有点像是 Windows 的 scandisk 啦！此外，由于 fsck 在扫瞄硬盘的时候，可能会造成部分 filesystem 的损坏，所以『运行 fsck 时， 被检查的 partition 务必不可挂载到系统上！亦即是需要在卸除的状态喔！』
@@ -459,12 +460,12 @@ fsck         fsck.cramfs  fsck.ext2    fsck.ext3    fsck.msdos   fsck.vfat
 另外，我们的系统实际运行的 fsck 命令，其实是呼叫 e2fsck 这个软件啦！可以 man e2fsck 找到更多的选项辅助喔！ 
 
 
-badblocks
-[root@www ~]# badblocks -[svw] 装置名称
-选项与参数：
--s  ：在屏幕上列出进度
--v  ：可以在屏幕上看到进度
--w  ：使用写入的方式来测试，建议不要使用此一参数，尤其是待检查的装置已有文件时！
+__badblocks__
+__[root@www ~]# badblocks -[svw] 装置名称__
+__选项与参数：__
+__-s  ：在屏幕上列出进度__
+__-v  ：可以在屏幕上看到进度__
+__-w  ：使用写入的方式来测试，建议不要使用此一参数，尤其是待检查的装置已有文件时！__
 
 [root@www ~]# badblocks -sv /dev/hdc6
 Checking blocks 0 to 2008093
@@ -472,7 +473,7 @@ Checking for bad blocks (read-only test): done
 Pass completed, 0 bad blocks found.
 刚刚谈到的 fsck 是用来检验文件系统是否出错，至于 badblocks 则是用来检查硬盘或软盘扇区有没有坏轨的命令！ 由于这个命令其实可以透过『 mke2fs -c 装置文件名 』在进行格式化的时候处理磁盘表面的读取测试， 因此目前大多不使用这个命令啰！
 
-小标题的图示磁盘挂载与卸除
+磁盘挂载与卸除
 我们在本章一开始时的挂载点的意义当中提过挂载点是目录， 而这个目录是进入磁盘分区槽(其实是文件系统啦！)的入口就是了。不过要进行挂载前，你最好先确定几件事：
 
 单一文件系统不应该被重复挂载在不同的挂载点(目录)中；
@@ -484,32 +485,32 @@ Pass completed, 0 bad blocks found.
 
 [root@www ~]# mount -a
 [root@www ~]# mount [-l]
-[root@www ~]# mount [-t 文件系统] [-L Label名] [-o 额外选项] \
- [-n]  装置文件名  挂载点
-选项与参数：
--a  ：依照配置文件 /etc/fstab 的数据将所有未挂载的磁盘都挂载上来
--l  ：单纯的输入 mount 会显示目前挂载的信息。加上 -l 可增列 Label 名称！
--t  ：与 mkfs 的选项非常类似的，可以加上文件系统种类来指定欲挂载的类型。
-	  常见的 Linux 支持类型有：ext2, ext3, vfat, reiserfs, iso9660(光盘格式),
-	  nfs, cifs, smbfs(此三种为网络文件系统类型)
--n  ：在默认的情况下，系统会将实际挂载的情况实时写入 /etc/mtab 中，以利其他程序
-	  的运行。但在某些情况下(例如单人维护模式)为了避免问题，会刻意不写入。
-	  此时就得要使用这个 -n 的选项了。
--L  ：系统除了利用装置文件名 (例如 /dev/hdc6) 之外，还可以利用文件系统的标头名称
-	  (Label)来进行挂载。最好为你的文件系统取一个独一无二的名称吧！
--o  ：后面可以接一些挂载时额外加上的参数！比方说账号、密码、读写权限等：
-	  ro, rw:       挂载文件系统成为只读(ro) 或可擦写(rw)
-	  async, sync:  此文件系统是否使用同步写入 (sync) 或异步 (async) 的
-					内存机制，请参考文件系统运行方式。默认为 async。
-	  auto, noauto: 允许此 partition 被以 mount -a 自动挂载(auto)
-	  dev, nodev:   是否允许此 partition 上，可创建装置文件？ dev 为可允许
-	  suid, nosuid: 是否允许此 partition 含有 suid/sgid 的文件格式？
-	  exec, noexec: 是否允许此 partition 上拥有可运行 binary 文件？
-	  user, nouser: 是否允许此 partition 让任何使用者运行 mount ？一般来说，
-					mount 仅有 root 可以进行，但下达 user 参数，则可让
-					一般 user 也能够对此 partition 进行 mount 。
-	  defaults:     默认值为：rw, suid, dev, exec, auto, nouser, and async
-	  remount:      重新挂载，这在系统出错，或重新升级参数时，很有用！
+__[root@www ~]# mount [-t 文件系统] [-L Label名] [-o 额外选项] \__
+__ [-n]  装置文件名  挂载点__
+__选项与参数：__
+__-a  ：依照配置文件 /etc/fstab 的数据将所有未挂载的磁盘都挂载上来__
+__-l  ：单纯的输入 mount 会显示目前挂载的信息。加上 -l 可增列 Label 名称！__
+__-t  ：与 mkfs 的选项非常类似的，可以加上文件系统种类来指定欲挂载的类型。__
+	__  常见的 Linux 支持类型有：ext2, ext3, vfat, reiserfs, iso9660(光盘格式),__
+	__  nfs, cifs, smbfs(此三种为网络文件系统类型)__
+__-n  ：在默认的情况下，系统会将实际挂载的情况实时写入 /etc/mtab 中，以利其他程序__
+	__  的运行。但在某些情况下(例如单人维护模式)为了避免问题，会刻意不写入。__
+	__  此时就得要使用这个 -n 的选项了。__
+__-L  ：系统除了利用装置文件名 (例如 /dev/hdc6) 之外，还可以利用文件系统的标头名称__
+	__  (Label)来进行挂载。最好为你的文件系统取一个独一无二的名称吧！__
+__-o  ：后面可以接一些挂载时额外加上的参数！比方说账号、密码、读写权限等：__
+	__  ro, rw:       挂载文件系统成为只读(ro) 或可擦写(rw)__
+	__  async, sync:  此文件系统是否使用同步写入 (sync) 或异步 (async) 的__
+					__内存机制，请参考文件系统运行方式。默认为 async。__
+	__  auto, noauto: 允许此 partition 被以 mount -a 自动挂载(auto)__
+	__  dev, nodev:   是否允许此 partition 上，可创建装置文件？ dev 为可允许__
+	__  suid, nosuid: 是否允许此 partition 含有 suid/sgid 的文件格式？__
+	__  exec, noexec: 是否允许此 partition 上拥有可运行 binary 文件？__
+	__  user, nouser: 是否允许此 partition 让任何使用者运行 mount ？一般来说，__
+					__mount 仅有 root 可以进行，但下达 user 参数，则可让__
+					__一般 user 也能够对此 partition 进行 mount 。__
+	__  defaults:     默认值为：rw, suid, dev, exec, auto, nouser, and async__
+	__  remount:      重新挂载，这在系统出错，或重新升级参数时，很有用！__
 会不会觉得光是看这个命令的细部选项就快要昏倒了？如果有兴趣的话看一下 man mount ，那才会真的昏倒的。 事实上 mount 是个很万用的命令，他可以挂载 ext3/vfat/nfs 等文件系统，由于每种文件系统的数据并不相同， 想当然尔，详细的参数与选项自然也就不相同啦！不过实际应用时却简单的会让你想笑呢！ 看看底下的几个简单范例先！
 
 
@@ -524,8 +525,8 @@ Filesystem           1K-blocks      Used Available Use% Mounted on
 # 看起来，真的有挂载！且文件大小约为 2GB 左右啦！
 瞎密？竟然这么简单！利用『mount 装置文件名 挂载点』就能够顺利的挂载了！真是方便啊！ 为什么可以这么方便呢(甚至不需要使用 -t 这个选项)？由于文件系统几乎都有 superblock ， 我们的 Linux 可以透过分析 superblock 搭配 Linux 自己的驱动程序去测试挂载， 如果成功的套和了，就立刻自动的使用该类型的文件系统挂载起来啊！ 那么系统有没有指定哪些类型的 filesystem 才需要进行上述的挂载测试呢？ 主要是参考底下这两个文件：
 
-/etc/filesystems：系统指定的测试挂载文件系统类型；
-/proc/filesystems：Linux系统已经加载的文件系统类型。
+__/etc/filesystems：系统指定的测试挂载文件系统类型；__
+__/proc/filesystems：Linux系统已经加载的文件系统类型。__
 那我怎么知道我的 Linux 有没有相关文件系统类型的驱动程序呢？我们 Linux 支持的文件系统之驱动程序都写在如下的目录中：
 
 /lib/modules/$(uname -r)/kernel/fs/
@@ -612,8 +613,8 @@ CentOS 5.x 版的相关驱动程序下载页面：http://www.linux-ntfs.org/doku
 重新挂载根目录与挂载不特定目录
 整个目录树最重要的地方就是根目录了，所以根目录根本就不能够被卸除的！问题是，如果你的挂载参数要改变， 或者是根目录出现『只读』状态时，如何重新挂载呢？最可能的处理方式就是重新启动 (reboot)！ 不过你也可以这样做：
 
-范例六：将 / 重新挂载，并加入参数为 rw 与 auto
-[root@www ~]# mount -o remount,rw,auto /
+__范例六：将 / 重新挂载，并加入参数为 rw 与 auto__
+__[root@www ~]# mount -o remount,rw,auto /__
 重点是那个『 -o remount,xx 』的选项与参数！请注意，要重新挂载 (remount) 时， 这是个非常重要的机制！尤其是当你进入单人维护模式时，你的根目录常会被系统挂载为只读，这个时候这个命令就太重要了！
 
 另外，我们也可以利用 mount 来将某个目录挂载到另外一个目录去喔！这并不是挂载文件系统，而是额外挂载某个目录的方法！ 虽然底下的方法也可以使用 symbolic link 来连结，不过在某些不支持符号链接的程序运行中，还是得要透过这样的方法才行。
@@ -630,11 +631,11 @@ CentOS 5.x 版的相关驱动程序下载页面：http://www.linux-ntfs.org/doku
 看起来，其实两者连结到同一个 inode 嘛！ ^_^ 没错啦！透过这个 mount --bind 的功能， 您可以将某个目录挂载到其他目录去喔！而并不是整块 filesystem 的啦！所以从此进入 /mnt/home 就是进入 /home 的意思喔！
 
 
-umount (将装置文件卸除)
-[root@www ~]# umount [-fn] 装置文件名或挂载点
-选项与参数：
--f ：强制卸除！可用在类似网络文件系统 (NFS) 无法读取到的情况下；
--n ：不升级 /etc/mtab 情况下卸除。
+__umount (将装置文件卸除)__
+__[root@www ~]# umount [-fn] 装置文件名或挂载点__
+__选项与参数：__
+__-f ：强制卸除！可用在类似网络文件系统 (NFS) 无法读取到的情况下；__
+__-n ：不升级 /etc/mtab 情况下卸除。__
 就是直接将已挂载的文件系统给他卸除即是！卸除之后，可以使用 df 或 mount -l 看看是否还存在目录树中？ 卸除的方式，可以下达装置文件名或挂载点，均可接受啦！底下的范例做看看吧！
 
 范例八：将本章之前自行挂载的文件系统全部卸除：
@@ -673,7 +674,7 @@ Filesystem volume name:   vbird_logical
 [root@www ~]# mount -L "vbird_logical" /mnt/hdc6
 这种挂载的方法有一个很大的好处：『系统不必知道该文件系统所在的接口与磁盘文件名！』 更详细的说明我们会在下一小节当中的 e2label 介绍的！
 
-小标题的图示磁盘参数修订
+磁盘参数修订
 某些时刻，你可能会希望修改一下目前文件系统的一些相关信息，举例来说，你可能要修改 Label name ， 或者是 journal 的参数，或者是其他硬盘运行时的相关参数 (例如 DMA 启动与否～)。 这个时候，就得需要底下这些相关的命令功能啰～
 
 
@@ -696,19 +697,19 @@ brw-r----- 1 root disk 22, 6 Oct 25 01:33 /dev/hdc6
 /dev/sda	8	0-15
 /dev/sdb	8	16-31
 
-如果你想要知道更多核心支持的硬件装置代码 (major, minor) 请参考官网的连结(注9)：
+__如果你想要知道更多核心支持的硬件装置代码 (major, minor) 请参考官网的连结(注9)：__
 
 http://www.kernel.org/pub/linux/docs/device-list/devices.txt
 基本上，Linux 核心 2.6 版以后，硬件文件名已经都可以被系统自动的实时产生了，我们根本不需要手动创建装置文件。 不过某些情况底下我们可能还是得要手动处理装置文件的，例如在某些服务被关到特定目录下时(chroot)， 就需要这样做了。此时这个 mknod 就得要知道如何操作才行！
 
-[root@www ~]# mknod 装置文件名 [bcp] [Major] [Minor]
-选项与参数：
-装置种类：
-   b  ：配置装置名称成为一个周边储存设备文件，例如硬盘等；
-   c  ：配置装置名称成为一个周边输入设备文件，例如鼠标/键盘等；
-   p  ：配置装置名称成为一个 FIFO 文件；
-Major ：主要装置代码；
-Minor ：次要装置代码；
+__[root@www ~]# mknod 装置文件名 [bcp] [Major] [Minor]__
+__选项与参数：__
+__装置种类：__
+__   b  ：配置装置名称成为一个周边储存设备文件，例如硬盘等；__
+__   c  ：配置装置名称成为一个周边输入设备文件，例如鼠标/键盘等；__
+__   p  ：配置装置名称成为一个 FIFO 文件；__
+__Major ：主要装置代码；__
+__Minor ：次要装置代码；__
 
 范例一：由上述的介绍我们知道 /dev/hdc10 装置代码 22, 10，请创建并查阅此装置
 [root@www ~]# mknod /dev/hdc10 b 22 10
@@ -723,17 +724,17 @@ prw-r--r-- 1 root root 0 Oct 27 00:00 /tmp/testpipe
 # 注意啊！这个文件可不是一般文件，不可以随便就放在这里！
 # 测试完毕之后请删除这个文件吧！看一下这个文件的类型！是 p 喔！^_^
 
-e2label
+__e2label__
 我们在 mkfs 命令介绍时有谈到配置文件系统标头 (Label) 的方法。 那如果格式化完毕后想要修改标头呢？就用这个 e2label 来修改了。那什么是 Label 呢？ 我们拿你曾用过的 Windows 系统来说明。当你打开『文件总管』时，C/D等槽不是都会有个名称吗？ 那就是 label (如果没有配置名称，就会显示『本机磁盘驱动器』的字样)
 
 这个东西除了有趣且可以让你知道磁盘的内容是啥玩意儿之外，也会被使用到一些配置文件案当中！ 举例来说，刚刚我们聊到的磁盘的挂载时，不就有用到 Label name 来进行挂载吗？ 目前 CentOS 的配置文件，也就是那个 /etc/fstab 文件的配置都默认使用 Label name 呢！ 那这样做有什么好处与缺点呢？
 
-优点：不论磁盘文件名怎么变，不论你将硬盘插在哪个 IDE / SATA 接口，由于系统是透过 Label ，所以，磁盘插在哪个接口将不会有影响；
+__优点：不论磁盘文件名怎么变，不论你将硬盘插在哪个 IDE / SATA 接口，由于系统是透过 Label ，所以，磁盘插在哪个接口将不会有影响；__
 
-缺点：如果插了两颗硬盘，刚好两颗硬盘的 Label 有重复的，那就惨了～ 因为系统可能会无法判断哪个磁盘分区槽才是正确的！
+__缺点：如果插了两颗硬盘，刚好两颗硬盘的 Label 有重复的，那就惨了～ 因为系统可能会无法判断哪个磁盘分区槽才是正确的！__
 鸟哥一直是个比较『硬派』作风，所以我还是比较喜欢直接利用磁盘文件名来挂载啦！ 不过，如果没有特殊需求的话，那么利用 Label 来挂载也成！ 但是你就不可以随意修改 Label 的名称了！
 
-[root@www ~]# e2label 装置名称  新的Label名称
+__[root@www ~]# e2label 装置名称  新的Label名称__
 
 范例一：将 /dev/hdc6 的标头改成 my_test 并观察是否修改成功？
 [root@www ~]# dumpe2fs -h /dev/hdc6
@@ -745,12 +746,12 @@ Filesystem volume name:   vbird_logical  <==原本的标头名称
 Filesystem volume name:   my_test        <==改过来啦！
 .....底下省略.....
 
-tune2fs
-[root@www ~]# tune2fs [-jlL] 装置代号
-选项与参数：
--l  ：类似 dumpe2fs -h 的功能～将 superblock 内的数据读出来～
--j  ：将 ext2 的 filesystem 转换为 ext3 的文件系统；
--L  ：类似 e2label 的功能，可以修改 filesystem 的 Label 喔！
+__tune2fs__
+__[root@www ~]# tune2fs [-jlL] 装置代号__
+__选项与参数：__
+__-l  ：类似 dumpe2fs -h 的功能～将 superblock 内的数据读出来～__
+__-j  ：将 ext2 的 filesystem 转换为 ext3 的文件系统；__
+__-L  ：类似 e2label 的功能，可以修改 filesystem 的 Label 喔！__
 
 范例一：列出 /dev/hdc6 的 superblock 内容
 [root@www ~]# tune2fs -l /dev/hdc6
@@ -760,26 +761,26 @@ tune2fs
 hdparm
 如果你的硬盘是 IDE 接口的，那么这个命令可以帮助你配置一些进阶参数！如果你是使用 SATA 接口的， 那么这个命令就没有多大用途了！另外，目前的 Linux 系统都已经稍微优化过，所以这个命令最多是用来测试效能啦！ 而且建议你不要随便调整硬盘参数，文件系统容易出问题喔！除非你真的知道你调整的数据是啥！
 
-[root@www ~]# hdparm [-icdmXTt] 装置名称
-选项与参数：
--i  ：将核心侦测到的硬盘参数显示出来！
--c  ：配置 32-bit (32位)存取模式。这个 32 位存取模式指的是在硬盘在与 
-	  PCI 接口之间传输的模式，而硬盘本身是依旧以 16 位模式在跑的！
-	  默认的情况下，这个配置值都会被打开，建议直接使用 c1 即可！
--d  ：配置是否激活 dma 模式， -d1 为启动， -d0 为取消；
--m  ：配置同步读取多个 sector 的模式。一般来说，配置此模式，可降低系统因为
-	  读取磁盘而损耗的效能～不过， WD 的硬盘则不怎么建议配置此值～
-	  一般来说，配置为 16/32 是优化，不过，WD 硬盘建议值则是 4/8 。
-	  这个值的最大值，可以利用 hdparm -i /dev/hda 输出的 MaxMultSect
-	  来配置喔！一般如果不晓得，配置 16 是合理的！
--X  ：配置 UtraDMA 的模式，一般来说， UDMA 的模式值加 64 即为配置值。
-	  并且，硬盘与主板芯片必须要同步，所以，取最小的那个。一般来说：
-	  33 MHz DMA mode 0~2 (X64~X66)
-	  66 MHz DMA mode 3~4 (X67~X68)
-	  100MHz DMA mode 5   (X69)
-	  如果您的硬盘上面显示的是 UATA 100 以上的，那么配置 X69 也不错！
--T  ：测试缓存区 cache 的存取效能
--t  ：测试硬盘的实际存取效能 （较正确！）
+__[root@www ~]# hdparm [-icdmXTt] 装置名称__
+__选项与参数：__
+__-i  ：将核心侦测到的硬盘参数显示出来！__
+__-c  ：配置 32-bit (32位)存取模式。这个 32 位存取模式指的是在硬盘在与 __
+	__  PCI 接口之间传输的模式，而硬盘本身是依旧以 16 位模式在跑的！__
+	__  默认的情况下，这个配置值都会被打开，建议直接使用 c1 即可！__
+__-d  ：配置是否激活 dma 模式， -d1 为启动， -d0 为取消；__
+__-m  ：配置同步读取多个 sector 的模式。一般来说，配置此模式，可降低系统因为__
+	__  读取磁盘而损耗的效能～不过， WD 的硬盘则不怎么建议配置此值～__
+	__  一般来说，配置为 16/32 是优化，不过，WD 硬盘建议值则是 4/8 。__
+	__  这个值的最大值，可以利用 hdparm -i /dev/hda 输出的 MaxMultSect__
+	__  来配置喔！一般如果不晓得，配置 16 是合理的！__
+__-X  ：配置 UtraDMA 的模式，一般来说， UDMA 的模式值加 64 即为配置值。__
+	__  并且，硬盘与主板芯片必须要同步，所以，取最小的那个。一般来说：__
+	__  33 MHz DMA mode 0~2 (X64~X66)__
+	__  66 MHz DMA mode 3~4 (X67~X68)__
+	__  100MHz DMA mode 5   (X69)__
+	__  如果您的硬盘上面显示的是 UATA 100 以上的，那么配置 X69 也不错！__
+__-T  ：测试缓存区 cache 的存取效能__
+__-t  ：测试硬盘的实际存取效能 （较正确！）__
 
 范例一：取得我硬盘的最大同步存取 sector 值与目前的 UDMA 模式
 [root@www ~]# hdparm -i /dev/hdc

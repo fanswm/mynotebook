@@ -8,20 +8,19 @@ Created Monday 11 December 2017
 6. 其他常见的压缩与备份工具
 　　6.1 dd
 　　6.2 cpio
- 大标题的图示其他常见的压缩与备份工具
+其他常见的压缩与备份工具
 还有一些很好用的工具得要跟大家介绍介绍，尤其是 dd 这个玩意儿呢！
 
 
-小标题的图示dd
+dd
 我们在第八章当中的特殊 loop 装置挂载时使用过 dd 这个命令对吧？ 不过，这个命令可不只是制作一个文件而已喔～这个 dd 命令最大的功效，鸟哥认为，应该是在於『备份』啊！ 因为 dd 可以读取磁碟装置的内容(几乎是直接读取磁区"sector")，然后将整个装置备份成一个文件呢！真的是相当的好用啊～ dd 的用途有很多啦～但是我们仅讲一些比较重要的选项，如下：
 
-[root@www ~]# dd if="input_file" of="output_file" bs="block_size" \
-> count="number"
-选项与参数：
-if   ：就是 input file 罗～也可以是装置喔！
-of   ：就是 output file 喔～也可以是装置；
-bs   ：规划的一个 block 的大小，若未指定则默认是 512 bytes(一个 sector 的大小)
-count：多少个 bs 的意思。
+__[root@www ~]# dd if="input_file" of="output_file" bs="block_size" count="number"__
+__选项与参数：__
+__if   ：就是 input file 罗～也可以是装置喔！__
+__of   ：就是 output file 喔～也可以是装置；__
+__bs   ：规划的一个 block 的大小，若未指定则默认是 512 bytes(一个 sector 的大小)__
+__count：多少个 bs 的意思。__
 
 范例一：将 /etc/passwd 备份到 /tmp/passwd.back 当中
 [root@www ~]# dd if=/etc/passwd of=/tmp/passwd.back
@@ -50,20 +49,20 @@ Filesystem            Size  Used Avail Use% Mounted on
 /dev/hdc2             9.5G  3.9G  5.1G  44% /
 /dev/hdc3             4.8G  651M  3.9G  15% /home
 /dev/hdc1              99M   21M   73M  23% /boot  <==就捉他好了！
-[root@www ~]# dd if=/dev/hdc1 of=/tmp/boot.whole.disk
+__[root@www ~]# dd if=/dev/hdc1 of=/tmp/boot.whole.disk__
 208782+0 records in
 208782+0 records out
 106896384 bytes (107 MB) copied, 6.24721 seconds, 17.1 MB/s
 [root@www ~]# ll -h /tmp/boot.whole.disk
 -rw-r--r-- 1 root root 102M Dec 17 18:14 /tmp/boot.whole.disk
-# 等於是将整个 /dev/hdc1 通通捉下来的意思～如果要还原呢？就反向回去！
-# dd if=/tmp/boot.whole.disk of=/dev/hdc1 即可！非常简单吧！
+# 等於是将整个 /dev/hdc1 通通捉下来的意思～__如果要还原呢？就反向回去！__
+__# dd if=/tmp/boot.whole.disk of=/dev/hdc1 即可！非常简单吧！__
 # 简单的说，如果想要整个硬盘备份的话，就类似 Norton 的 ghost 软件一般，
 # 由 disk 到 disk ，嘿嘿～利用 dd 就可以啦～厉害厉害！
 你可以说， tar 可以用来备份关键数据，而 dd 则可以用来备份整颗 partition 或 整颗 disk ，很不错啊～不过，如果要将数据填回到 filesystem 当中， 可能需要考虑到原本的 filesystem 才能成功啊！让我们来完成底下的例题试看看：
 
 例题：
-你想要将你的 /dev/hdc1 进行完整的复制到另一个 partition 上，请使用你的系统上面未分割完毕的容量再创建一个与 /dev/hdc1 差不多大小的分割槽 (只能比 /dev/hdc1 大，不能比他小！)，然后将之进行完整的复制 (包括需要复制 boot sector 的区块)。
+你想要将你的 /dev/hdc1 进行完整的复制到另一个 partition 上，请使用你的系统上面未分割完毕的容量再创建一个与 /dev/hdc1 差不多大小的分割槽 (__只能比 /dev/hdc1 大，不能比他小！__)，然后将之进行完整的复制 (包括需要复制 boot sector 的区块)。
 答：
 由於需要复制 boot sector 的区块，所以使用 cp 或者是 tar 这种命令是无法达成需求的！ 此时那个 dd 就派的上用场了。你可以这样做：
 # 1. 先进行分割的动作
@@ -88,7 +87,7 @@ Command (m for help): w
 
 [root@www ~]# partprobe
 
-# 2. 不需要格式化，直接进行 sector 表面的复制！
+# 2. __不需要格式化，直接进行 sector 表面的复制！__
 [root@www ~]# dd if=/dev/hdc1 of=/dev/hdc9
 208782+0 records in
 208782+0 records out
@@ -103,28 +102,28 @@ Filesystem           1K-blocks      Used Available Use% Mounted on
 [root@www ~]# umount /mnt
 非常有趣的范例吧！新分割出来的 partition 不需要经过格式化，因为 dd 可以将原本旧的 partition 上面，将 sector 表面的数据整个复制过来！ 当然连同 superblock, boot sector, meta data 等等通通也会复制过来！是否很有趣呢？未来你想要建置两颗一模一样的磁碟时， 只要下达类似： dd if=/dev/sda of=/dev/sdb ，就能够让两颗磁碟一模一样，甚至 /dev/sdb 不需要分割与格式化， 因为该命令可以将 /dev/sda 内的所有数据，包括 MBR 与 partition table 也复制到 /dev/sdb 说！ ^_^
 
-小标题的图示cpio
-这个命令挺有趣的，因为 cpio 可以备份任何东西，包括装置设备文件。不过 cpio 有个大问题， 那就是 cpio 不会主动的去找文件来备份！啊！那怎办？所以罗，一般来说， cpio 得要配合类似 find 等可以找到档名的命令来告知 cpio 该被备份的数据在哪里啊！ 有点小麻烦啦～因为牵涉到我们在第三篇才会谈到的数据流重导向说～ 所以这里你就先背一下语法，等到第三篇讲完你就知道如何使用 cpio 罗！
+cpio
+这个命令挺有趣的，__因为 cpio 可以备份任何东西，包括装置设备文件__。不过 cpio 有个大问题， __那就是 cpio 不会主动的去找文件来备份__！啊！那怎办？所以罗，一般来说， cpio 得要配合类似 find 等可以找到档名的命令来告知 cpio 该被备份的数据在哪里啊！ 有点小麻烦啦～因为牵涉到我们在第三篇才会谈到的数据流重导向说～ 所以这里你就先背一下语法，等到第三篇讲完你就知道如何使用 cpio 罗！
 
-[root@www ~]# cpio -ovcB  > [file|device] <==备份
-[root@www ~]# cpio -ivcdu < [file|device] <==还原
-[root@www ~]# cpio -ivct  < [file|device] <==察看
-备份会使用到的选项与参数：
-  -o ：将数据 copy 输出到文件或装置上 
-  -B ：让默认的 Blocks 可以添加至 5120 bytes ，默认是 512 bytes ！ 
-　  　 这样的好处是可以让大文件的储存速度加快(请参考 i-nodes 的观念) 
-还原会使用到的选项与参数：
-  -i ：将数据自文件或装置 copy 出来系统当中 
-  -d ：自动创建目录！使用 cpio 所备份的数据内容不见得会在同一层目录中，因此我们
-	   必须要让 cpio 在还原时可以创建新目录，此时就得要 -d 选项的帮助！
-  -u ：自动的将较新的文件覆盖较旧的文件！
-  -t ：需配合 -i 选项，可用在"察看"以 cpio 创建的文件或装置的内容 
-一些可共享的选项与参数：
-  -v ：让储存的过程中文件名称可以在萤幕上显示 
-  -c ：一种较新的 portable format 方式储存 
+[__root@www ~]# cpio -ovcB  > [file|device] <==备份__
+__[root@www ~]# cpio -ivcdu < [file|device] <==还原__
+__[root@www ~]# cpio -ivct  < [file|device] <==察看__
+__备份会使用到的选项与参数：__
+__  -o ：将数据 copy 输出到文件或装置上 __
+__  -B ：让默认的 Blocks 可以添加至 5120 bytes ，默认是 512 bytes ！ __
+__　  　 这样的好处是可以让大文件的储存速度加快(请参考 i-nodes 的观念) __
+__还原会使用到的选项与参数：__
+__  -i ：将数据自文件或装置 copy 出来系统当中 __
+__  -d ：自动创建目录！使用 cpio 所备份的数据内容不见得会在同一层目录中，因此我们__
+	__   必须要让 cpio 在还原时可以创建新目录，此时就得要 -d 选项的帮助！__
+__  -u ：自动的将较新的文件覆盖较旧的文件！__
+__  -t ：需配合 -i 选项，可用在"察看"以 cpio 创建的文件或装置的内容 __
+__一些可共享的选项与参数：__
+__  -v ：让储存的过程中文件名称可以在萤幕上显示 __
+__  -c ：一种较新的 portable format 方式储存__ 
 你应该会发现一件事情，就是上述的选项与命令中怎么会没有指定需要备份的数据呢？还有那个大於 (>) 与小於 (<) 符号是怎么回事啊？因为 cpio 会将数据整个显示到萤幕上，因此我们可以透过将这些萤幕的数据重新导向 (>) 一个新的文件！ 至於还原呢？就是将备份文件读进来 cpio (<) 进行处理之意！我们来进行几个案例你就知道啥是啥了！
 
-范例：找出 /boot 底下的所有文件，然后将他备份到 /tmp/boot.cpio 去！
+__范例：找出 /boot 底下的所有文件，然后将他备份到 /tmp/boot.cpio 去！__
 [root@www ~]# find /boot -print
 /boot
 /boot/message
@@ -132,22 +131,22 @@ Filesystem           1K-blocks      Used Available Use% Mounted on
 ....以下省略....
 # 透过这个 find 我们可以找到 /boot 底下应该要存在的档名！包括文件与目录
 
-[root@www ~]# find /boot | cpio -ocvB > /tmp/boot.cpio
+__[root@www ~]# find /boot | cpio -ocvB > /tmp/boot.cpio__
 [root@www ~]# ll -h /tmp/boot.cpio
 -rw-r--r-- 1 root root 16M Dec 17 23:30 /tmp/boot.cpio
 我们使用 find /boot 可以找出档名，然后透过那条管线 (|, 亦即键盘上的 shift+\ 的组合)， 就能将档名传给 cpio 来进行处理！最终会得到 /tmp/boot.cpio 那个文件喔！接下来让我们来进行解压缩看看。
 
-范例：将刚刚的文件给他在 /root/ 目录下解开
-[root@www ~]# cpio -idvc < /tmp/boot.cpio
+__范例：将刚刚的文件给他在 /root/ 目录下解开__
+__[root@www ~]# cpio -idvc < /tmp/boot.cpio__
 [root@www ~]# ll /root/boot
 # 你可以自行比较一下 /root/boot 与 /boot 的内容是否一模一样！
-事实上 cpio 可以将系统的数据完整的备份到磁带机上头去喔！如果你有磁带机的话！
+__事实上 cpio 可以将系统的数据完整的备份到磁带机上头去喔！如果你有磁带机的话！__
 
-备份：find / | cpio -ocvB > /dev/st0
-还原：cpio -idvc < /dev/st0
-这个 cpio 好像不怎么好用呦！但是，他可是备份的时候的一项利器呢！因为他可以备份任何的文件， 包括 /dev 底下的任何装置文件！所以他可是相当重要的呢！而由於 cpio 必需要配合其他的程序，例如 find 来创建档名，所以 cpio 与管线命令及数据流重导向的相关性就相当的重要了！
+__备份：find / | cpio -ocvB > /dev/st0__
+__还原：cpio -idvc < /dev/st0__
+这个 cpio 好像不怎么好用呦！但是，__他可是备份的时候的一项利器呢！因为他可以备份任何的文件， 包括 /dev 底下的任何装置文件！__所以他可是相当重要的呢！而由於 cpio 必需要配合其他的程序，例如 find 来创建档名，所以 cpio 与管线命令及数据流重导向的相关性就相当的重要了！
 
-其实系统里面已经含有一个使用 cpio 创建的文件喔！那就是 /boot/initrd-xxx 这个文件啦！ 现在让我们来将这个文件解压缩看看，看你能不能发现该文件的内容为何？
+其实系统里面已经含有一个使用 __cpio 创建的文件喔！那就是 /boot/initrd-xxx 这个文件啦__！ 现在让我们来将这个文件解压缩看看，看你能不能发现该文件的内容为何？
 
 # 1. 我们先来看看该文件是属於什么文件格式，然后再加以处理：
 [root@www ~]# file /boot/initrd-2.6.18-128.el5.img
@@ -165,8 +164,8 @@ Filesystem           1K-blocks      Used Available Use% Mounted on
 initrd.img: ASCII cpio archive (SVR4 with no CRC)
 # 嘿嘿！露出马脚了吧！确实是 cpio 的文件档喔！
 
-# 3. 开始使用 cpio 解开此文件：
-[root@www initrd]# cpio -iduvc < initrd.img
+__# 3. 开始使用 cpio 解开此文件：__
+__[root@www initrd]# cpio -iduvc < initrd.img__
 sbin
 init
 sysroot

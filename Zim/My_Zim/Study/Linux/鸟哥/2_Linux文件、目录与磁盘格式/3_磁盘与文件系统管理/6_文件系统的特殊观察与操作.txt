@@ -9,11 +9,11 @@ Created Monday 11 December 2017
 　　6.1 boot sector 与 superblock 的关系
 　　6.2 磁盘空间之浪费问题
 　　6.3 利用 GNU 的 parted 进行分割行为
- 大标题的图示文件系统的特殊观察与操作
+文件系统的特殊观察与操作
 文件系统实在是非常有趣的东西，鸟哥学了好几年还是很多东西不很懂呢！ 在学习的过程中很多朋友在讨论区都有提供一些想法！这些想法将他归纳起来有底下几点可以参考的数据呢！
 
 
-小标题的图示boot sector 与 superblock 的关系
+__boot sector 与 superblock 的关系__
 在过去非常多的文章都写到启动管理程序是安装到 superblock 内的，但是我们由官方的 How to 文件知道，图解(图 1.3.1)的结果是将可安装启动信息的 boot sector (启动扇区) 独立出来，并非放置到 superblock 当中的！ 那么也就是说过去的文章写错了？这其实还是可以讨论讨论的！
 
 经过一些搜寻，鸟哥找到几篇文章(非官方文件)的说明，大多是网友分析的结果啦！如下所示：(注10)
@@ -23,12 +23,12 @@ Rob's ext2 documentation: http://www.landley.net/code/toybox/ext2.html
 Life is different blog: ext2文件系统分析： http://www.qdhedu.com/blog/post/7.html
 这几篇文章有几个重点，归纳一下如下：
 
-superblock 的大小为 1024 bytes；
-superblock 前面需要保留 1024 bytes 下来，以让启动管理程序可以安装。
+__superblock 的大小为 1024 bytes；__
+__superblock 前面需要保留 1024 bytes 下来，以让启动管理程序可以安装。__
 分析上述两点我们知道 boot sector 应该会占有 1024 bytes 的大小吧！但是整个文件系统主要是依据 block 大小来决定的啊！ 因此要讨论 boot sector 与 superblock 的关系时，不得不将 block 的大小拿出来讨论讨论喔！
 
 
-block 为 1024 bytes (1K) 时：
+{{./1K block 的 boot sector 示意图.gif}}
 如果 block 大小刚好是 1024 的话，那么 boot sector 与 superblock 各会占用掉一个 block ， 所以整个文件系统图示就会如同图 1.3.1 所显示的那样，boot sector 是独立于 superblock 外面的！ 由于鸟哥在基础篇安装的环境中有个 /boot 的独立文件系统在 /dev/hdc1 中，使用 dumpe2fs 观察的结果有点像底下这样(如果你是按照鸟哥的教学安装你的 CentOS 时，可以发现相同的情况喔！)：
 
 [root@www ~]# dumpe2fs /dev/hdc1
@@ -48,12 +48,12 @@ Group 0: (Blocks 1-8192)
   Free blocks: 5619-6129
   Free inodes: 18-2008
 # 看到最后一个特殊字体的地方吗？ Group0 的 superblock 是由 1  号 block 开始喔！
-由上表我们可以确实的发现 0 号 block 是保留下来的，那就是留给 boot sector 用的啰！ 所以整个分割槽的文件系统分区有点像底下这样的图示：
+__由上表我们可以确实的发现 0 号 block 是保留下来的，那就是留给 boot sector 用的啰__！ 所以整个分割槽的文件系统分区有点像底下这样的图示：
 
 1K block 的 boot sector 示意图
 图 6.1.1、1K block 的 boot sector 示意图
 block 大于 1024 bytes (2K, 4K) 时：
-如果 block 大于 1024 的话，那么 superblock 将会在 0 号！我们撷取本章一开始介绍 dumpe2fs 时的内容来说明一下好了！
+__如果 block 大于 1024 的话，那么 superblock 将会在 0 号__！我们撷取本章一开始介绍 dumpe2fs 时的内容来说明一下好了！
 
 [root@www ~]# dumpe2fs /dev/hdc2
 dumpe2fs 1.39 (29-May-2006)
@@ -73,14 +73,14 @@ Group 0: (Blocks 0-32767)
   Free inodes: 12-32416
 我们可以发现 superblock 就在第一个 block (第 0 号) 上头！但是 superblock 其实就只有 1024bytes 嘛！ 为了怕浪费更多空间，因此第一个 block 内就含有 boot sector 与 superblock 两者 ！举上头的表格来说，因为每个 block 占有 4K ，因此在第一个 block 内 superblock 仅占有 1024-2047 ( 由 0 号起算的话)之间的咚咚，至于 2048bytes 以后的空间就真的是保留啦！而 0-1023 就保留给 boot sector 来使用。
 
-4K block 的 boot sector 示意图
+{{./4K block 的 boot sector 示意图.gif}}
 图 6.1.2、4K block 的 boot sector 示意图
 因为上述的情况，如果在比较大的 block 尺寸(size)中，我们可能可以说你能够将启动管理程序安装到 superblock 所在的 block 号码中！就是上表的 0 号啰！但事实上还是安装到 boot sector 的保留区域中啦！所以说， 以前的文章说启动管理程序可以安装到 superblock 内也不能算全错～但比较正确的说法，应该是安装到该 filesystem 最前面的 1024 bytes 内的区域，就是 boot sector 这样比较好！
 
-小标题的图示磁盘空间之浪费问题
+磁盘空间之浪费问题
 我们在前面的 block 介绍中谈到了一个 block 只能放置一个文件， 因此太多小文件将会浪费非常多的磁盘容量。但你有没有注意到，整个文件系统中包括 superblock, inode table 与其他中介数据等其实都会浪费磁盘容量喔！所以当我们在 /dev/hdc6 创建起 ext3 文件系统时， 一挂载就立刻有很多容量被用掉了！
 
-另外，不知道你有没有发现到，当你使用 ls -l 去查询某个目录下的数据时，第一行都会出现一个『total』的字样！ 那是啥东西？其实那就是该目录下的所有数据所耗用的实际 block 数量 * block 大小的值。 我们可以透过 ll -s 来观察看看上述的意义：
+另外，不知道你有没有发现到，__当你使用 ls -l 去查询某个目录下的数据时，第一行都会出现一个『total』的字样__！ 那是啥东西？__其实那就是该目录下的所有数据所耗用的实际 block 数量 * block 大小的值__。 我们可以透过 ll -s 来观察看看上述的意义：
 
 [root@www ~]# ll -s
 total 104
@@ -104,17 +104,17 @@ total 104
 118     /etc           <==单位是 Mbytes 喔！
 使用 bytes 去分析时，发现到实际的数据占用约 103.3Mbytes，但是使用 block 去测试，就发现其实耗用了 118Mbytes， 此时文件系统就耗费了约 15Mbytes 啰！这样看的懂我们在讲的数据了吧？
 
-小标题的图示利用 GNU 的 parted 进行分割行为
+利用 GNU 的 parted 进行分割行为
 虽然你可以使用 fdisk 很快速的将你的分割槽切割妥当，不过 fdisk 却无法支持到高于 2TB 以上的分割槽！ 此时就得需要 parted 来处理了。不要觉得 2TB 你用不着！ 2009 年的现在已经有单颗硬盘高达 2TB 的容量了！ 如果再搭配主机系统有内建磁盘阵列装置，要使用数个 TB 的单一磁盘装置也不是不可能的！ 所以，还是得要学一下这个重要的工具！ parted ！
 
-parted 可以直接在一行命令列就完成分割，是一个非常好用的命令！他的语法有点像这样：
+__parted 可以直接在一行命令列就完成分割，是一个非常好用的命令！他的语法有点像这样：__
 
-[root@www ~]# parted [装置] [命令 [参数]]
-选项与参数：
-命令功能：
-新增分割：mkpart [primary|logical|extended] [ext3|vfat] 开始 结束
-分割表  ：print
-删除分割：rm [partition]
+__[root@www ~]# parted [装置] [命令 [参数]]__
+__选项与参数：__
+__命令功能：__
+__新增分割：mkpart [primary|logical|extended] [ext3|vfat] 开始 结束__
+__分割表  ：print__
+__删除分割：rm [partition]__
 
 范例一：以 parted 列出目前本机的分割表数据
 [root@www ~]# parted /dev/hdc print
@@ -134,12 +134,12 @@ Number  Start   End     Size    Type      File system  Flags
 [  1 ]  [  2 ]  [  3  ] [  4  ] [  5  ]   [  6  ]
 上面是最简单的 parted 命令功能简介，你可以使用『 man parted 』，或者是『 parted /dev/hdc help mkpart 』去查询更详细的数据。比较有趣的地方在于分割表的输出。我们将上述的分割表示意拆成六部分来说明：
 
-Number：这个就是分割槽的号码啦！举例来说，1号代表的是 /dev/hdc1 的意思；
-Start：起始的磁柱位置在这颗磁盘的多少 MB 处？有趣吧！他以容量作为单位喔！
-End：结束的磁柱位置在这颗磁盘的多少 MB 处？
-Size：由上述两者的分析，得到这个分割槽有多少容量；
-Type：就是分割槽的类型，有primary, extended, logical等类型；
-File system：就如同 fdisk 的 System ID 之意。
+__Number：这个就是分割槽的号码啦！举例来说，1号代表的是 /dev/hdc1 的意思；__
+__Start：起始的磁柱位置在这颗磁盘的多少 MB 处？有趣吧！他以容量作为单位喔！__
+__End：结束的磁柱位置在这颗磁盘的多少 MB 处？__
+__Size：由上述两者的分析，得到这个分割槽有多少容量；__
+__Type：就是分割槽的类型，有primary, extended, logical等类型；__
+__File system：就如同 fdisk 的 System ID 之意。__
 接下来我们尝试来创建一个全新的分割槽吧！因为我们仅剩下逻辑分割槽可用，所以等一下底下我们选择的会是 logical 的分割类型喔！
 
 范例二：创建一个约为 512MB 容量的逻辑分割槽
