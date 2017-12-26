@@ -95,15 +95,15 @@ msf: Database not connected
 + install
 `sudo apt-get install chromium`
 `sudo apt-get install gimp`
-    + install xmind:
+	+ install xmind:
 download xmind.zip
 `mkdir xmind`
 `mv xmind.zip /xmind`
 `cd xmind`
 `unzip xmind.zip`
 `ln -s ./app/xmind/Xmind-amd64/ ./xmind`
-    + `sudo apt-get install transmission`
-    + `sudo apt-get install inkscape`
+	+ `sudo apt-get install transmission`
+	+ `sudo apt-get install inkscape`
 
 
 
