@@ -184,7 +184,7 @@ go! go! Let's go.
 [root@www ~]# grep -n '[^[:lower:]]oo' regular_express.txt
 # 那个 [:lower:] 代表的就是 a-z 的意思！请参考前两小节的说明表格
 
-[root@www ~]# grep -n '[[:digit:]]' regular_express.txt
+[root@www ~]# grep -n ':digit:' regular_express.txt
 这样对於 [] 以及 [^] 以及 [] 当中的 - ，还有关於前面表格提到的特殊关键字有了解了吗？^_^！
 
 
