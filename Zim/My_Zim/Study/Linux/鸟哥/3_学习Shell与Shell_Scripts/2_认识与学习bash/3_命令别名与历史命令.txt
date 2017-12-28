@@ -8,30 +8,24 @@ Created Monday 11 December 2017
 3. 命令别名与历史命令
 　　3.1 命令别名配置： alias, unalias
 　　3.2 历史命令： history, HISTSIZE
- 大标题的图示命令别名与历史命令：
-我们知道在早期的 DOS 年代，清除屏幕上的信息可以使用 cls 来清除，但是在 Linux 里面， 我们则是使用 clear 来清除画面的。那么可否让 cls 等于 clear 呢？可以啊！用啥方法？ link file 还是什么的？别急！底下我们介绍不用 link file 的命令别名来达成。那么什么又是历史命令？ 曾经做过的举动我们可以将他记录下来喔！那就是历史命令啰～底下分别来谈一谈这两个玩意儿。
 
-
-小标题的图示命令别名配置： alias, unalias
-命令别名是一个很有趣的东西，特别是你的惯用命令特别长的时候！还有， 增设默认的选项在一些惯用的命令上面，可以预防一些不小心误杀文件的情况发生的时候！ 举个例子来说，如果你要查询隐藏档，并且需要长的列出与一页一页翻看，那么需要下达『 ls -al | more 』这个命令，我是觉得很烦啦！ 要输入好几个单字！那可不可以使用 lm 来简化呢？当然可以，你可以在命令行下面下达：
+__命令别名配置： alias, unalias__
 
 [root@www ~]# alias lm='ls -al | more'
-立刻多出了一个可以运行的命令喔！这个命令名称为 lm ，且其实他是运行 ls -al | more 啊！真是方便。不过， 要注意的是：『alias 的定义守则与变量定义守则几乎相同』， 所以你只要在 alias 后面加上你的 {『别名』='命令 选项...' }， 以后你只要输入 lm 就相当于输入了 ls -al|more 这一串命令！很方便吧！
-
 另外，命令别名的配置还可以取代既有的命令喔！举例来说，我们知道 root 可以移除 (rm) 任何数据！所以当你以 root 的身份在进行工作时，需要特别小心， 但是总有失手的时候，那么 rm 提供了一个选项来让我们确认是否要移除该文件，那就是 -i 这个选项！所以，你可以这样做：
 
-[root@www ~]# alias rm='rm -i'
+__[root@www ~]# alias rm='rm -i'__
 那么以后使用 rm 的时候，就不用太担心会有错误删除的情况了！这也是命令别名的优点啰！ 那么如何知道目前有哪些的命令别名呢？就使用 alias 呀！
 
 [root@www ~]# alias
-alias cp='cp -i'
-alias l.='ls -d .* --color=tty'
-alias ll='ls -l --color=tty'
-alias lm='ls -l | more'
-alias ls='ls --color=tty'
-alias mv='mv -i'
-alias rm='rm -i'
-alias which='alias | /usr/bin/which --tty-only --show-dot --show-tilde'
+__alias cp='cp -i'__
+__alias l.='ls -d .* --color=tty'__
+__alias ll='ls -l --color=tty'__
+__alias lm='ls -l | more'__
+__alias ls='ls --color=tty'__
+__alias mv='mv -i'__
+__alias rm='rm -i'__
+__alias which='alias | /usr/bin/which --tty-only --show-dot --show-tilde'__
 由上面的数据当中，你也会发现一件事情啊，我们在第十章的 vim 程序编辑器里面提到 vi 与 vim 是不太一样的，vim 可以多作一些额外的语法检验与颜色显示，默认的 root 是单纯使用 vi 而已。 如果你想要使用 vi 就直接以 vim 来开启文件的话，使用『 alias vi='vim' 』这个配置即可。 至于如果要取消命令别名的话，那么就使用 unalias 吧！例如要将刚刚的 lm 命令别名拿掉，就使用：
 
 [root@www ~]# unalias lm
@@ -44,7 +38,7 @@ DOS 年代，列出目录与文件就是 dir ，而清除屏幕就是 cls ，那
 alias cls='clear'
 alias dir='ls -l'
 
-小标题的图示历史命令：history
+__历史命令：history__
 前面我们提过 bash 有提供命令历史的服务！那么如何查询我们曾经下达过的命令呢？就使用 history 啰！当然，如果觉得 histsory 要输入的字符太多太麻烦，可以使用命令别名来配置呢！ 不要跟我说还不会配置呦！ ^_^
 
 [root@www ~]# alias h='history'
@@ -53,13 +47,13 @@ alias dir='ls -l'
 [root@www ~]# history [n]
 [root@www ~]# history [-c]
 [root@www ~]# history [-raw] histfiles
-选项与参数：
-n   ：数字，意思是『要列出最近的 n 笔命令行表』的意思！
--c  ：将目前的 shell 中的所有 history 内容全部消除
--a  ：将目前新增的 history 命令新增入 histfiles 中，若没有加 histfiles ，
-	  则默认写入 ~/.bash_history
--r  ：将 histfiles 的内容读到目前这个 shell 的 history 记忆中；
--w  ：将目前的 history 记忆内容写入 histfiles 中！
+__选项与参数：__
+__n   ：数字，意思是『要列出最近的 n 笔命令行表』的意思！__
+__-c  ：将目前的 shell 中的所有 history 内容全部消除__
+__-a  ：将目前新增的 history 命令新增入 histfiles 中，若没有加 histfiles ，__
+	__  则默认写入 ~/.bash_history__
+__-r  ：将 histfiles 的内容读到目前这个 shell 的 history 记忆中；__
+__-w  ：将目前的 history 记忆内容写入 histfiles 中！__
 
 范例一：列出目前内存内的所有 history 记忆
 [root@www ~]# history
