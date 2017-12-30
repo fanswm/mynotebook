@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-30T11:26:13+08:00
+
+====== 字客网 ======
+Created Saturday 30 December 2017
+
+http://en.likefont.com/?fromdomain=hant
+
+字客网 相对于前者来说，就要「干净」很多，视觉上用起来比较舒服，同样的也提供了关键词搜索和图片搜索两种方式。与此同时，字客网还支持你进行实时的文本预览，在上方文本框输入你需要的文本内容并选择相关选项即可。
