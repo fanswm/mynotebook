@@ -102,18 +102,18 @@ General setup
 [*] System V IPC
     # IPC 是 Inter Process Communication (程序通讯) 缩写，与程序沟通有关，要选！
 [*] BSD Process Accounting
-[ ]   BSD Process Accounting version 3 file format
+[ ] BSD Process Accounting version 3 file format
     # 与标准 Unix (BSD) 的程序支持有关，但不要支持 version 3 ，可能有兼容性问题
 [ ] Export task/process statistics through netlink (EXPERIMENTAL)
     # 这个额外的进阶选项可以将他取消的！
 [*] Auditing support
-[*]   Enable system-call auditing support
+[*] Enable system-call auditing support
     # 上面这两个是额外核心功能 (如 SELinux) 加载时所需要的配置！务必选择
     RCU Subsystem  --->
       RCU Implementation (Classic RCU)  --->
     # 选择标准 RCU 即可，不需要使用大量 CPU 的整合功能。
 <M> Kernel .config support
-[ ]   Enable access to .config through /proc/config.gz (NEW)
+[ ] Enable access to .config through /proc/config.gz (NEW)
     # 让 .config 这个核心功能列表可以写入实际的核心文件中！
 (17) Kernel log buffer size (16 => 64KB, 17 => 128KB)
 [ ] Control Group support (NEW)  --->
@@ -123,8 +123,8 @@ General setup
     # 年后的 distribution ，这里可能需要取消喔！ CentOS 5.x 要选的！
 -*- Kernel->user space relay support (formerly relayfs)
 -*- Namespaces support
-[*]   UTS namespace (NEW)
-[*]   IPC namespace (NEW)
+[*] UTS namespace (NEW)
+[*] IPC namespace (NEW)
     # 使用 uname 时，会输出较多的资讯，所以可以尝试选择看看。
 [*] Initial RAM filesystem and RAM disk (initramfs/initrd) support
 ()    Initramfs source file(s)
@@ -140,7 +140,7 @@ General setup
 [*] Profiling support (EXPERIMENTAL)
 [ ] Activate markers (NEW)
 <M> OProfile system profiling (EXPERIMENTAL)
-[ ]   OProfile AMD IBS support (EXPERIMENTAL) (NEW)
+[ ] OProfile AMD IBS support (EXPERIMENTAL) (NEW)
 [*] Kprobes
 
 loadable module + block layer
@@ -148,13 +148,13 @@ loadable module + block layer
 
 [*] Enable loadable module support  ---> <==底下为细项
   --- Enable loadable module support
-  [ ]   Forced module loading     <==大概就是这个不要选，其他的都选起来！
-  [*]   Module unloading
-  [*]   Module versioning support
-  [*]   Source checksum for all module
+[ ] Forced module loading     <==大概就是这个不要选，其他的都选起来！
+[*] Module unloading
+[*] Module versioning support
+[*] Source checksum for all module
 ================================================================================
 -*- Enable the block layer  --->  <==看吧！默认就是已经选择了！底下为细项
-  [ ]   Block layer data integrity support  <==特殊储存装置支持，可以不选
+[ ] Block layer data integrity support  <==特殊储存装置支持，可以不选
         IO Schedulers  --->
          <*> Anticipatory I/O scheduler  <==较复杂的一种I/O排程
          <*> Deadline I/O scheduler      <==较适用於 database 的加载
@@ -173,11 +173,11 @@ CPU 的类型与功能选择
 [*] Single-depth WCHAN output
 [*] Paravirtualized guest support  --->  <==支持半虚拟化功能
      --- Paravirtualized guest support <==底下为 Xen 与 KVM 两种虚拟机器支持！
-     [*]   Xen guest support
+	[*] Xen guest support
      (32)    Maximum allowed size of a domain in gigabytes
-     [*]     Enable Xen debug and tuning parameters in debugfs
-     [*]   KVM paravirtualized clock
-     [*]   KVM Guest support
+	[*] Enable Xen debug and tuning parameters in debugfs
+	[*] KVM paravirtualized clock
+	[*] KVM Guest support
      -*-   Enable paravirtualization code
 ================================================================================
 [ ] paravirt-ops debugging (NEW)  <==不需要具有 debug 的功能
@@ -192,12 +192,12 @@ CPU 的类型与功能选择
     # 如果是桌上型计算机的使用，建议进入选择 desktop 项目。
 [ ] Reroute for broken boot IRQs
 [*] Machine Check Exception <==可将核心侦测之错误回报到终端机显示！
-[*]   Intel MCE features (NEW)
-[*]   AMD MCE features (NEW)
+[*] Intel MCE features (NEW)
+[*] AMD MCE features (NEW)
 < > Dell laptop support
 <M> /dev/cpu/microcode - microcode support
-[ ]   Intel microcode patch loading support
-[*]   AMD microcode patch loading support
+[ ] Intel microcode patch loading support
+[*] AMD microcode patch loading support
 <M> /dev/cpu/*/msr - Model-specific register support
 <*> /dev/cpu/*/cpuid - CPU information support
 < > /sys/kernel/debug/x86/cpu/* - CPU Debug support
@@ -212,10 +212,10 @@ CPU 的类型与功能选择
 [*] MTRR (Memory Type Range Register) support
     # 可以让 CPU 具有读取内存特殊区块的能力，尤其在高效能的显卡方面，
     # 可以增进不少效能。这个项目会产生 /proc/mtrr ，X 会读取这个咚咚喔。
-[*]   MTRR cleanup support
+[*] MTRR cleanup support
 (0)     MTRR cleanup enable value (0-1)
 (1)     MTRR cleanup spare reg num (0-7)
-[ ]   x86 PAT support
+[ ] x86 PAT support
 [ ] EFI runtime service support
 [*] Enable seccomp to safely compute untrusted bytecode
     Timer frequency (300 HZ)  --->
@@ -231,17 +231,17 @@ CPU 的类型与功能选择
 如果选择了『Power management and ACPI options』之后，就会进入系统的电源管理机制中。 其实电源管理机制还需要搭配主板以及 CPU 的相关省电功能，才能够实际达到省电的效率啦！ 不论是 Server 还是 Desktop 的使用，在目前电力不足的情况下，能省电就加以省电吧！
 
 [*] Power Management support
-[ ]   Power Management Debug Support
+[ ] Power Management Debug Support
 [*] Suspend to RAM and standby
 [ ] Hibernation (aka 'suspend to disk')
 [*] ACPI (Advanced Configuration and Power Interface) Support  --->
     # 这是个较新的电源管理模块，由於选择后会添加核心约 70K ，所以
     # 对嵌入式系统来说，可能需要考虑考虑。至於 desktop/server 当然就选择啊
     --- ACPI (Advanced Configuration and Power Interface) Support
-    [ ]   Deprecated /proc/acpi files
-    [*]   Deprecated power /proc/acpi directories
-    [*]   Future power /sys interface
-    [*]   Deprecated /proc/acpi/event support
+	[ ] Deprecated /proc/acpi files
+	[*] Deprecated power /proc/acpi directories
+	[*] Future power /sys interface
+	[*] Deprecated /proc/acpi/event support
     <M>   AC Adapter
     <M>   Battery
     <M>   Button
@@ -249,17 +249,17 @@ CPU 的类型与功能选择
     <*>   Fan
     <*>   Processor
     <*>     Thermal Zone
-    [ ]   Debug Statements
+	[ ] Debug Statements
     <M>   PCI slot detection driver
     <M>   Smart Battery System
 ================================================================================
     CPU Frequency scaling  --->
     # 可以经过核心修改 CPU 的运行频率，在说明档当中也提及，还需要启动底下的
     # dynamic cpufreq governor 才可以顺利的启动这个项目。
-    [*] CPU Frequency scaling
-    [*]   Enable CPUfreq debugging
+	[*] CPU Frequency scaling
+	[*] Enable CPUfreq debugging
     <M>   CPU frequency translation statistics
-    [*]     CPU frequency translation statistics details
+	[*] CPU frequency translation statistics details
           Default CPUFreq governor (userspace)  --->
     -*-   'performance' governor
     <M>   'powersave' governor
@@ -279,10 +279,10 @@ CPU 的类型与功能选择
 这个项目则与汇流排有关啦！分为最常见的 PCI 与 PCI-express 的支持，还有笔记本计算机常见的 PCMCIA 插卡啊！要记住的是，那个 PCI-E 的介面务必要选取！不然你的新显卡可能会捉不到！
 
 [*] PCI support
-[*]   Support mmconfig PCI config space access
+[*] Support mmconfig PCI config space access
 [*] PCI Express support
 <M>   PCI Express Hotplug driver
-[*]   Root Port Advanced Error Reporting support
+[*] Root Port Advanced Error Reporting support
 -*- Message Signaled Interrupts (MSI and MSI-X)
 [*] Enable deprecated pci_find_* API
 [ ] PCI Debugging
@@ -295,7 +295,7 @@ CPU 的类型与功能选择
     <M>   Fake PCI Hotplug driver
     <M>   ACPI PCI Hotplug driver
     <M>     ACPI PCI Hotplug driver IBM extensions
-    [ ]   CompactPCI Hotplug driver
+	[ ] CompactPCI Hotplug driver
     <M>   SHPC PCI Hotplug driver
 
 编译后运行档的格式
@@ -315,25 +315,25 @@ CPU 的类型与功能选择
       # 就是这个光啊！里面的数据全部都是重要的防火墙项目！尽量编成模块罗！
       # 至於不晓得功能的部分，就尽量保留默认值即可！
       <*> Packet socket          <==网络封包，当然要选择啊！
-      [*]   Packet socket: mmapped IO
+	[*] Packet socket: mmapped IO
       <*> Unix domain sockets    <==Unix 插槽档，也一定要选择啊！
       <*> Transformation user configuration interface
       <M> PF_KEY sockets
-      [*] TCP/IP networking      <==能不选择 TCP/IP 吗？
-      [*]   IP: multicasting
-      [*]   IP: advanced router
+	[*] TCP/IP networking      <==能不选择 TCP/IP 吗？
+	[*] IP: multicasting
+	[*] IP: advanced router
              Choose IP: FIB lookup algorithm (FIB_HASH)  --->
-      [*]   IP: policy routing
-      [*]   IP: equal cost multipath
-      [*]   IP: verbose route monitoring
-      [ ]   IP: kernel level autoconfiguration
+	[*] IP: policy routing
+	[*] IP: equal cost multipath
+	[*] IP: verbose route monitoring
+	[ ] IP: kernel level autoconfiguration
       <M>   IP: tunneling
       <M>   IP: GRE tunnels over IP
-      [*]     IP: broadcast GRE over IP
-      [*]   IP: multicast routing
-      [*]     IP: PIM-SM version 1 support
-      [*]     IP: PIM-SM version 2 support
-      [*]   IP: TCP syncookie support (disabled per default)
+	[*] IP: broadcast GRE over IP
+	[*] IP: multicast routing
+	[*] IP: PIM-SM version 1 support
+	[*] IP: PIM-SM version 2 support
+	[*] IP: TCP syncookie support (disabled per default)
       <M>   IP: AH transformation
       <M>   IP: ESP transformation
       <M>   IP: IPComp transformation
@@ -342,16 +342,16 @@ CPU 的类型与功能选择
       <*>   IP: IPsec BEET mode
       -*-   Large Receive Offload (ipv4/tcp)
       <M>   INET: socket monitoring interface
-      [*]   TCP: advanced congestion control  ---> <==内部细项全为模块
+	[*] TCP: advanced congestion control  ---> <==内部细项全为模块
       <M>   The IPv6 protocol  ---> <==除必选外，内部细项全为模块
-      [*]   NetLabel subsystem support
+	[*] NetLabel subsystem support
       -*- Security Marking
-      [*] Network packet filtering framework (Netfilter)  --->
+	[*] Network packet filtering framework (Netfilter)  --->
       # 这个就是我们一直讲的防火墙部分！里面细项几乎全选择成为模块！
           --- Network packet filtering framework (Netfilter)
-          [ ]   Network packet filtering debugging  <==debug 部分不选！
-          [*]   Advanced netfilter configuration
-          [*]     Bridged IP/ARP packets filtering
+		[ ] Network packet filtering debugging  <==debug 部分不选！
+		[*] Advanced netfilter configuration
+		[*] Bridged IP/ARP packets filtering
                 Core Netfilter Configuration  --->
           <M>   IP virtual server support  --->
                 IP: Netfilter Configuration  --->
@@ -361,32 +361,32 @@ CPU 的类型与功能选择
 ================================================================================
       <M> Asynchronous Transfer Mode (ATM)
       <M>   Classical IP over ATM
-      [ ]     Do NOT send ICMP if no neighbour
+	[ ] Do NOT send ICMP if no neighbour
       <M>   LAN Emulation (LANE) support
       < >     Multi-Protocol Over ATM (MPOA) support
       <M>   RFC1483/2684 Bridged protocols
-      [ ]     Per-VC IP filter kludge
+	[ ] Per-VC IP filter kludge
       <M> 802.1d Ethernet Bridging
       <M> 802.1Q VLAN Support
-      [ ]   GVRP (GARP VLAN Registration Protocol) support
+	[ ] GVRP (GARP VLAN Registration Protocol) support
       <M> DECnet Support
       <M> ANSI/IEEE 802.2 LLC type 2 Support
-      [ ]   IPX: Full internal IPX network (NEW)
+	[ ] IPX: Full internal IPX network (NEW)
       <M> Appletalk protocol support
       < >   Appletalk interfaces support
       <M> Phonet protocols family
-      [*] QoS and/or fair queueing  ---> <==内容同样全为模块！
-      [ ] Data Center Bridging support
+	[*] QoS and/or fair queueing  ---> <==内容同样全为模块！
+	[ ] Data Center Bridging support
           Network testing  ---> <==保留成模块默认值
 ================================================================================
 # 底下的则是一些特殊的网络设备，例如红外线啊、蓝芽啊！
 # 如果不清楚的话，就使用模块吧！除非你真的知道不要该项目！
-[ ]   Amateur Radio support  --->
+[ ] Amateur Radio support  --->
 < >   CAN bus subsystem support  --->
 < >   IrDA (infrared) subsystem support  --->
 <M>   Bluetooth subsystem support  --->
       # 这个是蓝芽支持，同样的，里面除了必选之外，其他通通挑选成为模块！
-[*]   Wireless  --->
+[*] Wireless  --->
       # 这个则是无线网络设备，里面保留默认值，但可编成模块的就选模块
 <M>   WiMAX Wireless Broadband support  --->
       # 新一代的无线网络，也请勾选成为模块！
@@ -412,7 +412,7 @@ CPU 的类型与功能选择
     # 这个其实与主板的南桥芯片有关！由於鸟哥的主机为 ALi 的板子，所以：
     <*>   ALI M15x3 chipset support
     # 除了可以保留默认值之外，你也可以将没用到的驱动程序取消选择。较重要的还有：
-    [ ]   Support for SATA (deprecated; conflicts with libata SATA driver)
+	[ ] Support for SATA (deprecated; conflicts with libata SATA driver)
     # 这个一定不能选！因为 SATA 的模块是在 SCSI 中！
     <*>   Include IDE/ATAPI CDROM support
     # IDE 的 CDROM 最好直接编译进核心！
@@ -424,23 +424,23 @@ CPU 的类型与功能选择
     # 2. 因为 SATA 的配置项目就在这里面！
     <M> RAID Transport Class
     {M} SCSI device support
-    [*] legacy /proc/scsi/ support
+	[*] legacy /proc/scsi/ support
         *** SCSI support type (disk, tape, CD-ROM) ***
     <M> SCSI disk support   <==几乎全编为模块即可！
     <M> SCSI tape support
     <M> SCSI OnStream SC-x0 tape support
     <M> SCSI CDROM support
-    [*]   Enable vendor-specific extensions (for SCSI CDROM)
+	[*] Enable vendor-specific extensions (for SCSI CDROM)
     <M> SCSI generic support
     <M> SCSI media changer support
     <M> SCSI Enclosure Support
         *** Some SCSI devices (e.g. CD jukebox) support multiple LUNs ***
-    [*] Probe all LUNs on each SCSI device
-    [*] Verbose SCSI error reporting (kernel size +=12K)
-    [*] SCSI logging facility
-    [*] Asynchronous SCSI scanning
+	[*] Probe all LUNs on each SCSI device
+	[*] Verbose SCSI error reporting (kernel size +=12K)
+	[*] SCSI logging facility
+	[*] Asynchronous SCSI scanning
         SCSI Transports  --->         <==细项保留默认值
-    [*] SCSI low-level drivers  --->  <==主要是磁盘阵列卡，细项可全选为模块
+	[*] SCSI low-level drivers  --->  <==主要是磁盘阵列卡，细项可全选为模块
     <M> SCSI Device Handlers  --->    <==细项全选为模块
     < > OSD-Initiator library
 ================================================================================
@@ -459,7 +459,7 @@ CPU 的类型与功能选择
 [ ] Macintosh device drivers  ---> <==我们是 PC ，所以不需支持麦金塔周边
 [*] Network device support  --->   <==网络设备的支持是必选！
     --- Network device support
-    [*]   Enable older network device API compatibility
+	[*] Enable older network device API compatibility
     <M>   Intermediate Functional Block support
     <M>   Dummy net driver support
     <M>   Bonding driver support
@@ -469,9 +469,9 @@ CPU 的类型与功能选择
     <M>   General Instruments Surfboard 1000
     < >   ARCnet support  ---> <==较早期的网卡规格，可不选择！
     {M}   PHY Device support and infrastructure  ---> <==细项全为模块
-    [*]   Ethernet (10 or 100Mbit)  --->
-    [*]   Ethernet (1000 Mbit)  --->
-    [*]   Ethernet (10000 Mbit)  --->
+	[*] Ethernet (10 or 100Mbit)  --->
+	[*] Ethernet (1000 Mbit)  --->
+	[*] Ethernet (10000 Mbit)  --->
     # 上面三个以太网络网卡支持，不论是否用的到，细项请全编为模块来待命吧！
     < >   Token Ring driver support  ---> <==IBM 的 LAN ，可不选！
           Wireless LAN  --->
@@ -479,16 +479,16 @@ CPU 的类型与功能选择
           U盘 Network Adapters  --->
           # 上面三个为现阶段很热门的无线网络设备，所以全部内容的细项全选择
           # 为模块！免得未来你的主机加上新的无线设备时会找不到驱动程序！
-    [ ]   Wan interfaces support  ---> <==WAN 的广域网络设备应该就不用选择了！
-    [ ]   ATM drivers  ---> <==高阶的 ATM 设备也不用选吧！
+	[ ] Wan interfaces support  ---> <==WAN 的广域网络设备应该就不用选择了！
+	[ ] ATM drivers  ---> <==高阶的 ATM 设备也不用选吧！
     <*>   Xen network device frontend driver
     <*>   FDDI driver support
     <M>     Digital DEFTA/DEFEA/DEFPA adapter support
-    [ ]       Use MMIO instead of PIO (NEW)
+	[ ] Use MMIO instead of PIO (NEW)
     <M>     SysKonnect FDDI PCI support
     <M>   PLIP (parallel port) support
     <M>   PPP (point-to-point protocol) support
-    [*]     PPP filtering
+	[*] PPP filtering
     <M>     PPP support for async serial ports
     <M>     PPP support for sync tty ports
     <M>     PPP Deflate compression
@@ -496,10 +496,10 @@ CPU 的类型与功能选择
     <M>     PPP over ATM
     # 如果你有 ADSL 拨接的话，呵呵！PPP 的装置也要选择上喔！
     <M>   SLIP (serial line) support
-    [*]     CSLIP compressed headers
-    [*]   Keepalive and linefill
-    [ ]   Six bit SLIP encapsulation
-    [*]   Fibre Channel driver support
+	[*] CSLIP compressed headers
+	[*] Keepalive and linefill
+	[ ] Six bit SLIP encapsulation
+	[*] Fibre Channel driver support
 ================================================================================
 [ ] ISDN support  --->
 < > Telephony support  --->
@@ -551,16 +551,16 @@ CPU 的类型与功能选择
 [ ] Auxiliary Display support  --->
 < > Userspace I/O drivers  --->
 [*] Xen memory balloon driver
-[*]   Scrub pages before returning them to system
+[*] Scrub pages before returning them to system
 <*> Xen filesystem
-[*]   Create compatibility mount point /proc/xen
+[*] Create compatibility mount point /proc/xen
 [ ] Staging drivers  --->
 [ ] X86 Platform Specific Device Drivers  --->
     # 一堆笔记本计算机的驱动，可以不选啦！
 底下则与 Firmware Drivers 有关喔！基本上，都保留默认值就好了！
 
 <M> BIOS Enhanced Disk Drive calls determine boot disk
-[ ]   Sets default behavior for EDD detection to off (NEW)
+[ ] Sets default behavior for EDD detection to off (NEW)
 <M> BIOS update support for DELL systems via sysfs
 <M> Dell Systems Management Base Driver
 [*] Export DMI identification via sysfs to userspace
@@ -571,40 +571,40 @@ CPU 的类型与功能选择
 文件系统的支持也是很重要的一项核心功能！因为如果不支持某个文件系统，那么我们的 Linux kernel 就无法认识，当然也就无法使用啦！例如 Quota, NTFS 等等特殊的 filesystem 。 这部份也是有够麻烦～因为涉及核心是否能够支持某些文件系统，以及某些操作系统支持的 partition table 项目。在进行选择时，也务必要特别的小心在意喔！ 尤其是我们常常用到的网络操作系统 (NFS/Samba 等等)，以及基础篇谈到的 Quota 等， 你都得要勾选啊！否则是无法被支持的。比较有趣的是 NTFS 在这一版的核心里面竟然有支持可写入的项目， 著实让鸟哥吓了一跳了！^_^
 
 <*> Second extended fs support
-[*]   Ext2 extended attributes
-[*]     Ext2 POSIX Access Control Lists
-[*]     Ext2 Security Labels
-[*]   Ext2 execute in place support
+[*] Ext2 extended attributes
+[*] Ext2 POSIX Access Control Lists
+[*] Ext2 Security Labels
+[*] Ext2 execute in place support
 <*> Ext3 journalling file system support <==建议这里直接编进核心
-[ ]   Default to 'data=ordered' in ext3 (legacy option)
-[*]   Ext3 extended attributes
-[*]     Ext3 POSIX Access Control Lists
-[*]     Ext3 Security Labels
+[ ] Default to 'data=ordered' in ext3 (legacy option)
+[*] Ext3 extended attributes
+[*] Ext3 POSIX Access Control Lists
+[*] Ext3 Security Labels
 <M> The Extended 4 (ext4) filesystem
-[*]   Enable ext4dev compatibility
-[*]   Ext4 extended attributes (NEW)
-[*]     Ext4 POSIX Access Control Lists
-[*]     Ext4 Security Labels
+[*] Enable ext4dev compatibility
+[*] Ext4 extended attributes (NEW)
+[*] Ext4 POSIX Access Control Lists
+[*] Ext4 Security Labels
 # 上面是传统的 EXT2/EXT3 及进阶的 EXT4 支持！除了 EXT4 外，其他编入核心吧！
 ================================================================================
 [ ] JBD (ext3) debugging support
 [ ] JBD2 (ext4) debugging support (NEW)
 <M> Reiserfs support
-[ ]   Enable reiserfs debug mode (NEW)
-[ ]   Stats in /proc/fs/reiserfs (NEW)
-[ ]   ReiserFS extended attributes (NEW)
+[ ] Enable reiserfs debug mode (NEW)
+[ ] Stats in /proc/fs/reiserfs (NEW)
+[ ] ReiserFS extended attributes (NEW)
 < > JFS filesystem support
 <M> XFS filesystem support
-[*]   XFS Quota support
-[*]   XFS POSIX ACL support
-[*]   XFS Realtime subvolume support
+[*] XFS Quota support
+[*] XFS POSIX ACL support
+[*] XFS Realtime subvolume support
 < > OCFS2 file system support
 [*] Dnotify support
 [*] Inotify file change notification support
-[*]   Inotify support for userspace
+[*] Inotify support for userspace
 [*] Quota support
-[ ]   Report quota messages through netlink interface
-[*]   Print quota warnings to console (OBSOLETE)
+[ ] Report quota messages through netlink interface
+[*] Print quota warnings to console (OBSOLETE)
 < > Old quota format support
 <*> Quota format v2 support
 <M> Kernel automounter support
@@ -620,19 +620,19 @@ CPU 的类型与功能选择
       (950) Default codepage for FAT    <==支持繁体中文
       (utf8) Default iocharset for FAT  <==支持万国码
       <M> NTFS file system support
-      [ ]   NTFS debugging support (NEW)
-      [*]   NTFS write support
+	[ ] NTFS debugging support (NEW)
+	[*] NTFS write support
 ================================================================================
     Pseudo filesystems  --->        <==类似 /proc ，保留默认值
 [*] Miscellaneous filesystems  ---> <==其他文件系统的支持，保留默认值
 [*] Network File Systems  --->      <==网络文件系统！很重要！也要挑挑！
     --- Network File Systems
     <M>   NFS client support
-    [*]     NFS client support for NFS version 3
-    [*]       NFS client support for the NFSv3 ACL protocol extension
+	[*] NFS client support for NFS version 3
+	[*] NFS client support for the NFSv3 ACL protocol extension
     <M>   NFS server support
-    [*]     NFS server support for NFS version 3
-    [*]       NFS server support for the NFSv3 ACL protocol extension
+	[*] NFS server support for NFS version 3
+	[*] NFS server support for the NFSv3 ACL protocol extension
     < >   SMB file system support (OBSOLETE, please use CIFS)
     <M>   CIFS support (advanced network filesystem, SMBFS successor)
 # 最重要就这几项，其他保留默认值即可！
@@ -649,22 +649,22 @@ CPU 的类型与功能选择
 
 Security options  --->
 [*] Enable access key retention support
-[*]   Enable the /proc/keys file by which keys may be viewed
+[*] Enable the /proc/keys file by which keys may be viewed
 [*] Enable different security models
 [ ] Enable the securityfs filesystem
 [*] Socket and Networking Security Hooks
-[*]   XFRM (IPSec) Networking Security Hooks
+[*] XFRM (IPSec) Networking Security Hooks
 [ ] Security hooks for pathname based access control
 [ ] File POSIX Capabilities
 [ ] Root Plug Support
 [*] NSA SELinux Support
-[*]   NSA SELinux boot parameter
+[*] NSA SELinux boot parameter
 (1)     NSA SELinux boot parameter default value
-[*]   NSA SELinux runtime disable
-[*]   NSA SELinux Development Support
-[*]   NSA SELinux AVC Statistics
+[*] NSA SELinux runtime disable
+[*] NSA SELinux Development Support
+[*] NSA SELinux AVC Statistics
 (1)   NSA SELinux checkreqprot default value
-[ ]   NSA SELinux maximum supported policy format version
+[ ] NSA SELinux maximum supported policy format version
 [ ] Simplified Mandatory Access Control Kernel Support
 [ ] TOMOYO Linux Support
 [ ] Integrity Measurement Architecture(IMA)
@@ -685,7 +685,7 @@ Cryptographic API  --->
     <M>   Kernel-based Virtual Machine (KVM) support
     <M>     KVM for Intel processors support
     <M>     KVM for AMD processors support
-    [ ]     KVM trace support (NEW)
+	[ ] KVM trace support (NEW)
     <M>   Virtio balloon driver (EXPERIMENTAL)
 ================================================================================
 Library routines  --->
