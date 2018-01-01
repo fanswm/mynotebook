@@ -9,3 +9,6 @@ Simple Translate：最简单快捷的翻译扩展
 
 
 https://addons.mozilla.org/zh-CN/firefox/addon/simple-translate/
+
+https://addons.mozilla.org/en-US/firefox/addon/simple-translate/?src=optionpage
+
