@@ -1,0 +1,50 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-03T16:44:50+08:00
+
+====== 磁盘空间不足 ======
+Created Wednesday 03 January 2018
+
+> 明明有很多剩余空间，但 Linux 系统依然提示没有空间剩余
+
+`sudo du -sh [[/`]]
+`sudo df -h`
+
+> 把根目录和在其中挂载的文件系统加在这条命令的后面。比如，若你的有一个独立的磁盘挂载到 /home，那么除了根目录之外，你也需要把它加进来。使用空间的总和应该跟你 du 命令得到的结果接近。否则的话，就说明可能有已删除文件的文件被进程占用。
+
+当然，这里主要专注点在于这些命令的结果是否要小于磁盘的大小。如果确实小于磁盘大小，那么很明显有很多地方不对劲。
+
+### 可能的原因
++ __已删除文件被进程所占用__
+有时，文件可能已经被删掉了，但有进程依然在使用它。在进程运行期间，Linux 不会释放该文件的存储空间。你需要找出这个进程然后重启这个进程。
+
+> 使用下面命令来定位进程。
+
+`sudo lsof / | grep deleted`
+这应该会列出出问题的进程了，然后重启该进程。
+
+`sudo systemctl restart service_name`
+
++ __i 节点不够了__
+
+文件系统中有一些称为 “i 节点inode” 的元数据，其用来保存文件的相关信息。很多文件系统中的 i 节点数量是固定的，因此很可能 i 节点已经耗尽了而文件系统本身还没有用完。你可以使用 df 来检查。
+
+`sudo df -i /`
+比较一下已用的 i 节点和总共的 i 节点数量。如果没有可用的 i 节点了，那么很不幸，你也无法扩充 i 节点。删除一些无用的和过期的文件来释放一些 i 节点吧。
+
++ 坏块
+最后一个很常见的问题就是坏的文件系统块。除非另有标记，否则操作系统很可能会认为这些块都是可用的，这会导致文件系统损坏或者硬盘坏死。最好是使用带 -cc 标志的 fsck 搜索并标记出这些块。记住，你不能使用正在使用的文件系统（LCTT 译注：即包含坏块的文件系统）中的 fsck 命令。你应该会要用到 live CD。
+
+`sudo fsck -vcck [[/dev/sda2`]]
+
+相关：使用 fsck 检查并修复你的文件系统 [Linux][2]
+
+[1]: https://www.maketecheasier.com/agedu-analyze-hard-disk-space-usage-in-linux/
+[2]: https://www.maketecheasier.com/check-repair-filesystem-fsck-linux/
+[3]: https://www.maketecheasier.com/author/nickcongleton/
+[4]: https://github.com/lujun9972
+[5]: https://github.com/wxy
+[6]: https://github.com/LCTT/TranslateProject
+[7]: https://linux.cn/article-9196-1.html?utm_source=rss&utm_medium=rss
+
+
