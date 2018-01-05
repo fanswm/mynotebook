@@ -166,16 +166,16 @@ sort 同样是很常用的命令呢！因为我们常常需要比较一些信息
 uniq
 如果我排序完成了，想要将重复的数据仅列出一个显示，可以怎么做呢？
 
-[root@www ~]# uniq [-ic]
-选项与参数：
--i  ：忽略大小写字符的不同；
--c  ：进行计数
+__[root@www ~]# uniq [-ic]__
+__选项与参数：__
+__-i  ：忽略大小写字符的不同；__
+__-c  ：进行计数__
 
 范例一：使用 last 将账号列出，仅取出账号栏，进行排序后仅取出一位；
 [root@www ~]# last | cut -d ' ' -f1 | sort | uniq
 
-范例二：承上题，如果我还想要知道每个人的登陆总次数呢？
-[root@www ~]# last | cut -d ' ' -f1 | sort | uniq -c
+__范例二：承上题，如果我还想要知道每个人的登陆总次数呢？__
+__[root@www ~]# last | cut -d ' ' -f1 | sort | uniq -c__
 	  1
 	 12 reboot
 	 41 root
@@ -188,11 +188,11 @@ uniq
 wc
 如果我想要知道 /etc/man.config 这个文件里面有多少字？多少行？多少字符的话， 可以怎么做呢？其实可以利用 wc 这个命令来达成喔！他可以帮我们计算输出的信息的整体数据！
 
-[root@www ~]# wc [-lwm]
-选项与参数：
--l  ：仅列出行；
--w  ：仅列出多少字(英文单字)；
--m  ：多少字符；
+[__root@www ~]# wc [-lwm]__
+__选项与参数：__
+__-l  ：仅列出行；__
+__-w  ：仅列出多少字(英文单字)；__
+__-m  ：多少字符；__
 
 范例一：那个 /etc/man.config 里面到底有多少相关字、行、字符数？
 [root@www ~]# cat /etc/man.config | wc 
@@ -200,22 +200,22 @@ wc
 # 输出的三个数字中，分别代表： 『行、字数、字符数』
 
 范例二：我知道使用 last 可以输出登陆者，但是 last 最后两行并非账号内容，
-		那么请问，我该如何以一行命令串取得这个月份登陆系统的总人次？
-[root@www ~]# last | grep [a-zA-Z] | grep -v 'wtmp' | wc -l 
+		那么请问，__我该如何以一行命令串取得这个月份登陆系统的总人次？__
+__[root@www ~]# last | grep [a-zA-Z] | grep -v 'wtmp' | wc -l__ 
 # 由于 last 会输出空白行与 wtmp 字样在最底下两行，因此，我利用
 # grep 取出非空白行，以及去除 wtmp 那一行，在计算行数，就能够了解啰！
 wc 也可以当作命令？这可不是上洗手间的 WC 呢！这是相当有用的计算文件内容的一个工具组喔！举个例子来说， 当你要知道目前你的账号文件中有多少个账号时，就使用这个方法：『 cat /etc/passwd | wc -l 』啦！因为 /etc/passwd 里头一行代表一个使用者呀！ 所以知道行数就晓得有多少的账号在里头了！而如果要计算一个文件里头有多少个字符时，就使用 wc -m 这个选项吧！
 
-双向重导向： tee
+__双向重导向： tee__
 想个简单的东西，我们由前一节知道 > 会将数据流整个传送给文件或装置，因此我们除非去读取该文件或装置， 否则就无法继续利用这个数据流。万一我想要将这个数据流的处理过程中将某段信息存下来，应该怎么做？ 利用 tee 就可以啰～我们可以这样简单的看一下：
 
-tee 的工作流程示意图
+{{./tee 的工作流程示意图.png}}
 图 6.3.1、tee 的工作流程示意图
 tee 会同时将数据流分送到文件去与屏幕 (screen)；而输出到屏幕的，其实就是 stdout ，可以让下个命令继续处理喔！
 
-[root@www ~]# tee [-a] file
-选项与参数：
--a  ：以累加 (append) 的方式，将数据加入 file 当中！
+[__root@www ~]# tee [-a] file__
+__选项与参数：__
+__-a  ：以累加 (append) 的方式，将数据加入 file 当中！__
 
 [root@www ~]# last | tee last.list | cut -d " " -f1
 # 这个范例可以让我们将 last 的输出存一份到 last.list 文件中；
@@ -224,20 +224,20 @@ tee 会同时将数据流分送到文件去与屏幕 (screen)；而输出到屏�
 # 这个范例则是将 ls 的数据存一份到 ~/homefile ，同时屏幕也有输出信息！
 
 [root@www ~]# ls -l / | tee -a ~/homefile | more
-# 要注意！ tee 后接的文件会被覆盖，若加上 -a 这个选项则能将信息累加。
+# __要注意！ tee 后接的文件会被覆盖，若加上 -a 这个选项则能将信息累加。__
 tee 可以让 standard output 转存一份到文件内并将同样的数据继续送到屏幕去处理！ 这样除了可以让我们同时分析一份数据并记录下来之外，还可以作为处理一份数据的中间缓存盘记录之用！ tee 这家伙在很多选择/填充的认证考试中很容易考呢！
 
-字符转换命令： tr, col, join, paste, expand
-我们在 vim 程序编辑器当中，提到过 DOS 断行字符与 Unix 断行字符的不同，并且可以使用 dos2unix 与 unix2dos 来完成转换。好了，那么思考一下，是否还有其他常用的字符替代？ 举例来说，要将大写改成小写，或者是将数据中的 [tab] 按键转成空格键？还有，如何将两篇信息整合成一篇？ 底下我们就来介绍一下这些字符转换命令在管线当中的使用方法：
+__字符转换命令： tr, col, join, paste, expand__
+我们在 vim 程序编辑器当中，提到过 DOS 断行字符与 Unix 断行字符的不同，并且可以使用 __dos2unix 与 unix2dos__ 来完成转换。好了，那么思考一下，是否还有其他常用的字符替代？ 举例来说，要将大写改成小写，或者是将数据中的 [tab] 按键转成空格键？还有，如何将两篇信息整合成一篇？ 底下我们就来介绍一下这些字符转换命令在管线当中的使用方法：
 
 
-tr
-tr 可以用来删除一段信息当中的文字，或者是进行文字信息的替换！
+__tr__
+__tr 可以用来删除一段信息当中的文字，或者是进行文字信息的替换！__
 
-[root@www ~]# tr [-ds] SET1 ...
-选项与参数：
--d  ：删除信息当中的 SET1 这个字符串；
--s  ：取代掉重复的字符！
+__[root@www ~]# tr [-ds] SET1 ...__
+__选项与参数：__
+__-d  ：删除信息当中的 SET1 这个字符串；__
+__-s  ：取代掉重复的字符！__
 
 范例一：将 last 输出的信息中，所有的小写变成大写字符：
 [root@www ~]# last | tr '[a-z]' '[A-Z]'
@@ -251,8 +251,8 @@ tr 可以用来删除一段信息当中的文字，或者是进行文字信息�
 [root@www ~]# file /etc/passwd /root/passwd
 /etc/passwd:  ASCII text
 /root/passwd: ASCII text, with CRLF line terminators <==就是 DOS 断行
-[root@www ~]# cat /root/passwd | tr -d '\r' > /root/passwd.linux
-# 那个 \r 指的是 DOS 的断行字符，关于更多的字符，请参考 man tr
+[__root@www ~]# cat /root/passwd | tr -d '\r' > /root/passwd.linux__
+__# 那个 \r 指的是 DOS 的断行字符，关于更多的字符，请参考 man tr__
 [root@www ~]# ll /etc/passwd /root/passwd*
 -rw-r--r-- 1 root root 1986 Feb  6 17:55 /etc/passwd
 -rw-r--r-- 1 root root 2030 Feb  7 15:55 /root/passwd
@@ -261,11 +261,11 @@ tr 可以用来删除一段信息当中的文字，或者是进行文字信息�
 其实这个命令也可以写在『正规表示法』里头！因为他也是由正规表示法的方式来取代数据的！ 以上面的例子来说，使用 [] 可以配置一串字呢！也常常用来取代文件中的怪异符号！ 例如上面第三个例子当中，可以去除 DOS 文件留下来的 ^M 这个断行的符号！这东西相当的有用！相信处理 Linux & Windows 系统中的人们最麻烦的一件事就是这个事情啦！亦即是 DOS 底下会自动的在每行行尾加入 ^M 这个断行符号！这个时候我们可以使用这个 tr 来将 ^M 去除！ ^M 可以使用 \r 来代替之！
 
 
-col
-[root@www ~]# col [-xb]
-选项与参数：
--x  ：将 tab 键转换成对等的空格键
--b  ：在文字内有反斜杠 (/) 时，仅保留反斜杠最后接的那个字符
+__col__
+__[root@www ~]# col [-xb]__
+__选项与参数：__
+__-x  ：将 tab 键转换成对等的空格键__
+__-b  ：在文字内有反斜杠 (/) 时，仅保留反斜杠最后接的那个字符__
 
 范例一：利用 cat -A 显示出所有特殊按键，最后以 col 将 [tab] 转成空白
 [root@www ~]# cat -A /etc/man.config  <==此时会看到很多 ^I 的符号，那就是 tab
@@ -285,20 +285,20 @@ S^HSY^HYN^HNO^HOP^HPS^HSI^HIS^HS
 # 你没看错！由于 man page 内有些特殊按钮会用来作为类似特殊按键与颜色显示，
 # 所以这个文件内就会出现如上所示的一堆怪异字符(有 ^ 的)
 
-[root@www ~]# man col | col -b > /root/col.man
+[root@www ~]# __man col | col -b > /root/col.man__
 虽然 col 有他特殊的用途，不过，很多时候，他可以用来简单的处理将 [tab] 按键取代成为空格键！ 例如上面的例子当中，如果使用 cat -A 则 [tab] 会以 ^I 来表示。 但经过 col -x 的处理，则会将 [tab] 取代成为对等的空格键！此外， col 经常被利用于将 man page 转存为纯文本文件以方便查阅的功能！如上述的范例二！
 
 
-join
-join 看字面上的意义 (加入/参加) 就可以知道，他是在处理两个文件之间的数据， 而且，主要是在处理『两个文件当中，有 "相同数据" 的那一行，才将他加在一起』的意思。我们利用底下的简单例子来说明：
+__join__
+__join 看字面上的意义 (加入/参加) 就可以知道，他是在处理两个文件之间的数据， 而且，主要是在处理『两个文件当中，有 "相同数据" 的那一行，才将他加在一起』的意思。我们利用底下的简单例子来说明：__
 
-[root@www ~]# join [-ti12] file1 file2
-选项与参数：
--t  ：join 默认以空格符分隔数据，并且比对『第一个字段』的数据，
-	  如果两个文件相同，则将两笔数据联成一行，且第一个字段放在第一个！
--i  ：忽略大小写的差异；
--1  ：这个是数字的 1 ，代表『第一个文件要用那个字段来分析』的意思；
--2  ：代表『第二个文件要用那个字段来分析』的意思。
+__[root@www ~]# join [-ti12] file1 file2__
+__选项与参数：__
+__-t  ：join 默认以空格符分隔数据，并且比对『第一个字段』的数据，__
+	__  如果两个文件相同，则将两笔数据联成一行，且第一个字段放在第一个！__
+__-i  ：忽略大小写的差异；__
+__-1  ：这个是数字的 1 ，代表『第一个文件要用那个字段来分析』的意思；__
+__-2  ：代表『第二个文件要用那个字段来分析』的意思。__
 
 范例一：用 root 的身份，将 /etc/passwd 与 /etc/shadow 相关数据整合成一栏
 [root@www ~]# head -n 3 /etc/passwd /etc/shadow
@@ -334,7 +334,7 @@ bin:x:1:root,bin,daemon
 daemon:x:2:root,bin,daemon
 # 从上面可以看到，确实有相同的部分喔！赶紧来整合一下！
 
-[root@www ~]# join -t ':' -1 4 /etc/passwd -2 3 /etc/group
+__[root@www ~]# join -t ':' -1 4 /etc/passwd -2 3 /etc/group__
 0:root:x:0:root:/root:/bin/bash:root:x:root
 1:bin:x:1:bin:/bin:/sbin/nologin:bin:x:root,bin,daemon
 2:daemon:x:2:daemon:/sbin:/sbin/nologin:daemon:x:root,bin,daemon
@@ -342,16 +342,16 @@ daemon:x:2:root,bin,daemon
 # 请读者们配合上述显示两个文件的实际内容来比对！
 这个 join 在处理两个相关的数据文件时，就真的是很有帮助的啦！ 例如上面的案例当中，我的 /etc/passwd, /etc/shadow, /etc/group 都是有相关性的， 其中 /etc/passwd, /etc/shadow 以账号为相关性，至于 /etc/passwd, /etc/group 则以所谓的 GID (账号的数字定义) 来作为他的相关性。根据这个相关性， 我们可以将有关系的数据放置在一起！这在处理数据可是相当有帮助的！ 但是上面的例子有点难，希望您可以静下心好好的看一看原因喔！
 
-此外，需要特别注意的是，在使用 join 之前，你所需要处理的文件应该要事先经过排序 (sort) 处理！ 否则有些比对的项目会被略过呢！特别注意了！
+此外，__需要特别注意的是，在使用 join 之前，你所需要处理的文件应该要事先经过排序 (sort) 处理__！ 否则有些比对的项目会被略过呢！特别注意了！
 
 
 paste
-这个 paste 就要比 join 简单多了！相对于 join 必须要比对两个文件的数据相关性， paste 就直接『将两行贴在一起，且中间以 [tab] 键隔开』而已！简单的使用方法：
+这个 paste 就要比 join 简单多了！相对于 join 必须要比对两个文件的数据相关性， __paste 就直接『将两行贴在一起，且中间以 [tab] 键隔开』而已！__简单的使用方法：
 
-[root@www ~]# paste [-d] file1 file2
-选项与参数：
--d  ：后面可以接分隔字符。默认是以 [tab] 来分隔的！
--   ：如果 file 部分写成 - ，表示来自 standard input 的数据的意思。
+__[root@www ~]# paste [-d] file1 file2__
+__选项与参数：__
+__-d  ：后面可以接分隔字符。默认是以 [tab] 来分隔的！__
+__-   ：如果 file 部分写成 - ，表示来自 standard input 的数据的意思。__
 
 范例一：将 /etc/passwd 与 /etc/shadow 同一行贴在一起
 [root@www ~]# paste /etc/passwd /etc/shadow
@@ -362,15 +362,15 @@ adm:x:3:4:adm:/var/adm:/sbin/nologin    adm:*:14126:0:99999:7:::
 
 范例二：先将 /etc/group 读出(用 cat)，然后与范例一贴上一起！且仅取出前三行
 [root@www ~]# cat /etc/group|paste /etc/passwd /etc/shadow -|head -n 3
-# 这个例子的重点在那个 - 的使用！那玩意儿常常代表 stdin 喔！
+# __这个例子的重点在那个 - 的使用！那玩意儿常常代表 stdin 喔！__
 
-expand
-这玩意儿就是在将 [tab] 按键转成空格键啦～可以这样玩：
+__expand__
+__这玩意儿就是在将 [tab] 按键转成空格键啦～可以这样玩：__
 
-[root@www ~]# expand [-t] file
-选项与参数：
--t  ：后面可以接数字。一般来说，一个 tab 按键可以用 8 个空格键取代。
-	  我们也可以自行定义一个 [tab] 按键代表多少个字符呢！
+__[root@www ~]# expand [-t] file__
+__选项与参数：__
+__-t  ：后面可以接数字。一般来说，一个 tab 按键可以用 8 个空格键取代。__
+	__  我们也可以自行定义一个 [tab] 按键代表多少个字符呢！__
 
 范例一：将 /etc/man.config 内行首为 MANPATH 的字样就取出；仅取前三行；
 [root@www ~]# grep '^MANPATH' /etc/man.config | head -n 3
@@ -398,17 +398,17 @@ MANPATH     /usr/local/man$
 # 情况就又不同了！这里也不好理解～您可以多配置几个数字来查阅就晓得！
 expand 也是挺好玩的～他会自动将 [tab] 转成空格键～所以，以上面的例子来说， 使用 cat -A 就会查不到 ^I 的字符啰～此外，因为 [tab] 最大的功能就是格式排列整齐！ 我们转成空格键后，这个空格键也会依据我们自己的定义来添加大小～ 所以，并不是一个 ^I 就会换成 8 个空白喔！这个地方要特别注意的哩！ 此外，您也可以参考一下 unexpand 这个将空白转成 [tab] 的命令功能啊！ ^_^
 
-分割命令： split
+__分割命令： split__
 如果你有文件太大，导致一些携带式装置无法复制的问题，嘿嘿！找 split 就对了！ 他可以帮你将一个大文件，依据文件大小或行数来分割，就可以将大文件分割成为小文件了！ 快速又有效啊！真不错～
 
-[root@www ~]# split [-bl] file PREFIX
-选项与参数：
--b  ：后面可接欲分割成的文件大小，可加单位，例如 b, k, m 等；
--l  ：以行数来进行分割。
-PREFIX ：代表前导符的意思，可作为分割文件的前导文字。
+__[root@www ~]# split [-bl] file PREFIX__
+__选项与参数：__
+__-b  ：后面可接欲分割成的文件大小，可加单位，例如 b, k, m 等；__
+__-l  ：以行数来进行分割。__
+__PREFIX ：代表前导符的意思，可作为分割文件的前导文字。__
 
 范例一：我的 /etc/termcap 有七百多K，若想要分成 300K 一个文件时？
-[root@www ~]# cd /tmp; split -b 300k /etc/termcap termcap
+[root@www ~]# cd /tmp; __split -b 300k /etc/termcap termcap__
 [root@www tmp]# ll -k termcap*
 -rw-r--r-- 1 root root 300 Feb  7 16:39 termcapaa
 -rw-r--r-- 1 root root 300 Feb  7 16:39 termcapab
@@ -416,8 +416,8 @@ PREFIX ：代表前导符的意思，可作为分割文件的前导文字。
 # 那个档名可以随意取的啦！我们只要写上前导文字，小文件就会以
 # xxxaa, xxxab, xxxac 等方式来创建小文件的！
 
-范例二：如何将上面的三个小文件合成一个文件，档名为 termcapback
-[root@www tmp]# cat termcap* >> termcapback
+__范例二：如何将上面的三个小文件合成一个文件，档名为 termcapback__
+__[root@www tmp]# cat termcap* >> termcapback__
 # 很简单吧？就用数据流重导向就好啦！简单！
 
 范例三：使用 ls -al / 输出的信息中，每十行记录成一个文件
@@ -427,22 +427,22 @@ PREFIX ：代表前导符的意思，可作为分割文件的前导文字。
   10 lsrootab
    6 lsrootac
   26 total
-# 重点在那个 - 啦！一般来说，如果需要 stdout/stdin 时，但偏偏又没有文件，
+__# 重点在那个 - 啦！一般来说，如果需要 stdout/stdin 时，但偏偏又没有文件，__
 # 有的只是 - 时，那么那个 - 就会被当成 stdin 或 stdout ～
 在 Windows 操作系统下，你要将文件分割需要如何作？伤脑筋吧！在 Linux 底下就简单的多了！你要将文件分割的话，那么就使用 -b size 来将一个分割的文件限制其大小，如果是行数的话，那么就使用 -l line 来分割！好用的很！如此一来，你就可以轻易的将你的文件分割成软盘 (floppy) 的大小，方便你 copy 啰！
 
-参数代换： xargs
+__参数代换： xargs__
 xargs 是在做什么的呢？就以字面上的意义来看， x 是加减乘除的乘号，args 则是 arguments (参数) 的意思，所以说，这个玩意儿就是在产生某个命令的参数的意思！ xargs 可以读入 stdin 的数据，并且以空格符或断行字符作为分辨，将 stdin 的数据分隔成为 arguments 。 因为是以空格符作为分隔，所以，如果有一些档名或者是其他意义的名词内含有空格符的时候， xargs 可能就会误判了～他的用法其实也还满简单的！就来看一看先！
 
-[root@www ~]# xargs [-0epn] command
-选项与参数：
--0  ：如果输入的 stdin 含有特殊字符，例如 `, \, 空格键等等字符时，这个 -0 参数
-	  可以将他还原成一般字符。这个参数可以用于特殊状态喔！
--e  ：这个是 EOF (end of file) 的意思。后面可以接一个字符串，当 xargs 分析到
-	  这个字符串时，就会停止继续工作！
--p  ：在运行每个命令的 argument 时，都会询问使用者的意思；
--n  ：后面接次数，每次 command 命令运行时，要使用几个参数的意思。看范例三。
-当 xargs 后面没有接任何的命令时，默认是以 echo 来进行输出喔！
+__[root@www ~]# xargs [-0epn] command__
+__选项与参数：__
+__-0  ：如果输入的 stdin 含有特殊字符，例如 `, \, 空格键等等字符时，这个 -0 参数__
+	__  可以将他还原成一般字符。这个参数可以用于特殊状态喔！__
+__-e  ：这个是 EOF (end of file) 的意思。后面可以接一个字符串，当 xargs 分析到__
+	__  这个字符串时，就会停止继续工作！__
+__-p  ：在运行每个命令的 argument 时，都会询问使用者的意思；__
+__-n  ：后面接次数，每次 command 命令运行时，要使用几个参数的意思。看范例三。__
+__当 xargs 后面没有接任何的命令时，默认是以 echo 来进行输出喔！__
 
 范例一：将 /etc/passwd 内的第一栏取出，仅取三行，使用 finger 这个命令将每个
 		账号内容秀出来
@@ -455,7 +455,7 @@ No Plan.
 ......底下省略.....
 # 由 finger account 可以取得该账号的相关说明内容，例如上面的输出就是 finger root
 # 后的结果。在这个例子当中，我们利用 cut 取出账号名称，用 head 取出三个账号，
-# 最后则是由 xargs 将三个账号的名称变成 finger 后面需要的参数！
+# __最后则是由 xargs 将三个账号的名称变成 finger 后面需要的参数！__
 
 范例二：同上，但是每次运行 finger 时，都要询问使用者是否动作？
 [root@www ~]# cut -d':' -f1 /etc/passwd |head -n 3| xargs -p finger
@@ -473,26 +473,26 @@ finger uucp operator games gopher ftp ?...y
 # 可以接的 arguments 是有限制的，不能无限制的累加，此时，我们可以利用 -n
 # 来帮助我们将参数分成数个部分，每个部分分别再以命令来运行！这样就 OK 啦！^_^
 
-范例四：同上，但是当分析到 lp 就结束这串命令？
+范例四：同上，__但是当分析到 lp 就结束这串命令？__
 [root@www ~]# cut -d':' -f1 /etc/passwd | xargs -p -e'lp' finger
 finger root bin daemon adm ?...
-# 仔细与上面的案例做比较。也同时注意，那个 -e'lp' 是连在一起的，中间没有空格键。
+# 仔细与上面的案例做比较。也同时注意，__那个 -e'lp' 是连在一起的，中间没有空格键。__
 # 上个例子当中，第五个参数是 lp 啊，那么我们下达 -e'lp' 后，则分析到 lp
 # 这个字符串时，后面的其他 stdin 的内容就会被 xargs 舍弃掉了！
-其实，在 man xargs 里面就有三四个小范例，您可以自行参考一下内容。 此外， xargs 真的是很好用的一个玩意儿！您真的需要好好的参详参详！会使用 xargs 的原因是， 很多命令其实并不支持管线命令，因此我们可以透过 xargs 来提供该命令引用 standard input 之用！举例来说，我们使用如下的范例来说明：
+其实，在 man xargs 里面就有三四个小范例，您可以自行参考一下内容。 此外， xargs 真的是很好用的一个玩意儿！您真的需要好好的参详参详！__会使用 xargs 的原因是， 很多命令其实并不支持管线命令，因此我们可以透过 xargs 来提供该命令引用 standard input 之用__！举例来说，我们使用如下的范例来说明：
 
-范例五：找出 /sbin 底下具有特殊权限的档名，并使用 ls -l 列出详细属性
+范例五：__找出 /sbin 底下具有特殊权限的档名，并使用 ls -l 列出详细属性__
 [root@www ~]# find /sbin -perm +7000 | ls -l
 # 结果竟然仅有列出 root 所在目录下的文件！这不是我们要的！
-# 因为 ll (ls) 并不是管线命令的原因啊！
+__# 因为 ll (ls) 并不是管线命令的原因啊！__
 
-[root@www ~]# find /sbin -perm +7000 | xargs ls -l
+[root@www ~]# __find /sbin -perm +7000 | xargs ls -l__
 -rwsr-xr-x 1 root root 70420 May 25  2008 /sbin/mount.nfs
 -rwsr-xr-x 1 root root 70424 May 25  2008 /sbin/mount.nfs4
 -rwxr-sr-x 1 root root  5920 Jun 15  2008 /sbin/netreport
 ....(底下省略)....
-关于减号 - 的用途
-管线命令在 bash 的连续的处理程序中是相当重要的！另外，在 log file 的分析当中也是相当重要的一环， 所以请特别留意！另外，在管线命令当中，常常会使用到前一个命令的 stdout 作为这次的 stdin ， 某些命令需要用到文件名 (例如 tar) 来进行处理时，该 stdin 与 stdout 可以利用减号 "-" 来替代， 举例来说：
+__关于减号 - 的用途   fanswm__
+__管线命令在 bash 的连续的处理程序中是相当重要的！另外，在 log file 的分析当中也是相当重要的一环， 所以请特别留意！另外，在管线命令当中，常常会使用到前一个命令的 stdout 作为这次的 stdin ， 某些命令需要用到文件名 (例如 tar) 来进行处理时，该 stdin 与 stdout 可以利用减号 "-" 来替代， 举例来说：__
 
 [root@www ~]# tar -cvf - /home | tar -xvf -
 上面这个例子是说：『我将 /home 里面的文件给他打包，但打包的数据不是纪录到文件，而是传送到 stdout； 经过管线后，将 tar -cvf - /home 传送给后面的 tar -xvf - 』。后面的这个 - 则是取用前一个命令的 stdout， 因此，我们就不需要使用 file 了！这是很常见的例子喔！注意注意！

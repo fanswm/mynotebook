@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-30T19:23:04+08:00
-
-====== alias ======
-Created 星期四 30 十一月 2017
-
-alias ii = “ls -l” | 添加别名

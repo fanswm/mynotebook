@@ -7,6 +7,7 @@ Created Friday 01 December 2017
 
 
 +  连接 
+	`net use \\172.16.106.14`
     `net use \\172.16.106.14\ipc$ “123” /user:”scb”`
     > `172.16.106.14`是远程主机的ip
     > "123"是密码

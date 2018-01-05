@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-05T11:54:16+08:00
+
+====== 以乔布斯女儿命名的电脑 Apple Lisa，即将开放源代码 ======
+Created Friday 05 January 2018
+
+这台以乔布斯女儿命名的电脑 Apple Lisa，即将开放源代码 http://sspai.com/post/42630
