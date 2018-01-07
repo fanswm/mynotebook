@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-07T13:03:18+08:00
+
+====== update zim ======
+Created 星期日 07 一月 2018
+
+```
+#!/bin/bash
+#coding: utf-8
+
+cd /home/oem/github/mynotebook/
+git pull
+git add .
+git commit -m"commit by LeMi Linux mint bash"
+git push
+
+```
+git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"

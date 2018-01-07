@@ -29,7 +29,7 @@ Created Friday 24 November 2017
 > 你不能启用或禁用静态服务，因为静态服务被其他的进程所依赖，并不意味着它们自己运行.
 
 ## 哪些服务能够禁止
-+ accounts-daemon.service 是一个潜在的安全风险。它是 AccountsService 的一部分，AccountsService 允许程序获得或操作用户账户信息。我不认为有好的理由能使我允许这样的后台操作，所以我选择掩盖mask该服务进程。
++ accounts-daemon.service 是一个潜在的安全风险。它是 AccountsService 的一部分，AccountsService __允许程序获得或操作用户账户信息__。我不认为有好的理由能使我允许这样的后台操作，所以我选择掩盖mask该服务进程。
 + avahi-daemon.service 用于零配置网络发现，使电脑超容易发现网络中打印机或其他的主机，我总是禁用它，别漏掉它。
 + brltty.service 提供布莱叶盲文设备支持，例如布莱叶盲文显示器。
 + debug-shell.service 开放了一个巨大的安全漏洞（该服务提供了一个无密码的 root shell ，用于帮助 调试 systemd 问题），除非你正在使用该服务，否则永远不要启动服务。
