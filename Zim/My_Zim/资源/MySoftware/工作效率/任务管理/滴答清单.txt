@@ -7,3 +7,5 @@ Created Monday 27 November 2017
 
 功能简述：多平台同步的待办事项和任务提醒软件
 适用平台：现在的平台基本都支持
+
+https://www.dida365.com/

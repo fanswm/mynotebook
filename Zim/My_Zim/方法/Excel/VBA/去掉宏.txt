@@ -20,8 +20,8 @@ Sub RmvMacros()
 
     strFilename = Application.GetOpenFilename("Excel 文件 (*.xls;*.xlsx),*.xls;*.xlsx") '要删除宏的文件名
 
-    If strFilename = "False" 
-      Then Exit Sub
+    If strFilename = "False" Then 
+		Exit Sub
     Application.EnableEvents = False '禁止在打开时触发事件
     Application.DisplayAlerts = False
     Set wbk = Workbooks.Open(strFilename)

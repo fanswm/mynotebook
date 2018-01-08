@@ -38,7 +38,7 @@ crxMouse Chrome Gestures
 	https://chrome.google.com/webstore/detail/crxmouse-chrome-gestures/jlgkpaicikihijadgifklkbpdajbkhjo?hl=zh-CN
 	crxMouse 称得上是最为强大的浏览器鼠标手势插件，它可以让用户为几乎所有浏览器操作添加上鼠标手势，比如左滑是返回上一页，画圆圈是刷新画个叉叉就是关闭当前标签页等等。反正功能很强大、齐全，有了 crxMouse，就连很少用到的鼠标中键也能利用起来了。
 	
-	更新：经读者提醒，官方版 crxMouse 会 强制收集用户信息，所以我们加入了网友重制的 [纯净版]()https://chrome.google.com/webstore/detail/clean-crxmouse-gestures/mjidkpedjlfnanainpdfnedkdlacidla?hl=zh-CN，大家可以自行选择。
+	更新：经读者提醒，官方版 crxMouse 会 强制收集用户信息，所以我们加入了网友重制的 [纯净版]()https://chrome.google.com/webstore/detail/clean-crxmouse-gestures/mjidkpedjlfnanainpdfnedkdlacidla?hl=zh-CN%EF%BC%8C%E5%A4%A7%E5%AE%B6%E5%8F%AF%E4%BB%A5%E8%87%AA%E8%A1%8C%E9%80%89%E6%8B%A9。
 	
 RSS Feed Reader
 	https://chrome.google.com/webstore/detail/rss-feed-reader/pnjaodmkngahhkoihejjehlcdlnohgmp?hl=zh-CN
@@ -57,4 +57,10 @@ LastPass
 	https://zhuanlan.zhihu.com/p/25407784
 	
 	
+简悦
+	简悦 是一款可以让你在 Chrome 上也能体验到沉浸式阅读环境的扩展程序，它手动适配了数百个常用网站，让你能以更优雅地方式浏览自己喜欢的文章。对于尚未适配的网站，你也可以手动选择内容进入阅读模式，聚焦文章重点。
 	
+	在简悦的设置中，你可以从数种预设主题中挑选自己喜欢的那一款，也可以通过自定义 CSS 样式进一步增强阅读体验。此外，简悦还允许你将提炼后的内容一键发送至 Pocket、Instapaper、Evernote 等应用，或分享至数个社交网络。
+	https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
+	
+

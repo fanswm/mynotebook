@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-08T18:38:26+08:00
+
+====== ProcessOn ======
+Created Monday 08 January 2018
+
+https://www.processon.com/
+
+一份清晰的__流程图、脑图或者原型图__，可以让团队成员间的沟通更顺畅。ProcessOn 不需要客户端，也不受平台限制，在浏览器里就能协同绘制流程图、思维导图等。虽然没有桌面级工具的华丽主题，但是 ProcessOn 轻量、免费、模板齐全，最重要的是不用担心格式不兼容，很适合团队使用。ProcessOn 除了是一个制图的工具，还是一个挖掘各路干货的好去处。

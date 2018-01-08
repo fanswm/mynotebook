@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-08T18:29:06+08:00
+
+====== Adonis ======
+Created Monday 08 January 2018
+
+Adonis 是一款设计简洁的 RSS 阅读器 App，由此前广受好评的天气应用 Mr.Weather 作者开发。其采用了与 Mr.Weather 相似的性冷淡风格设计，减少视觉负担，将重心放在阅读文章上。
+
+打开首页，Adonis 就会提示你是否继续阅读之前没看完的文章，你也可以按订阅源或更新时间浏览。值得一提的是，除了传统的分享方式外，你还可以将选中的文本生成一张精美的图片，更优雅地发布在其它社交网络。
+
+http://sspai.com/app/Adonis
+https://itunes.apple.com/cn/app/adonis/id1281626299?mt=8&uo=4&at=10lJSw&ct=appcards

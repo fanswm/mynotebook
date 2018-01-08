@@ -17,6 +17,8 @@ abshex@163.com
 狗币 :
 dogecoin.com
 cpuminer:CPU挖矿
+https://github.com/langerhans/multidoge
+
 
 
 
