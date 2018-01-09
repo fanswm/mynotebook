@@ -1,18 +1,9 @@
 Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
-Creation-Date: 2017-12-18T11:22:21+08:00
+Creation-Date: 2018-01-09T19:19:34+08:00
 
-====== 火币网 ======
-Created Monday 18 December 2017
-
-我的手机号
-我的加密软件
-
-https://www.f2pool.com/
-abshex@163.com
-我的手机号
-2017-12-17
-
+====== 狗狗币 ======
+创建日期 星期二 09 一月 2018
 
 狗币 :
 dogecoin.com
@@ -44,17 +35,3 @@ libqrencode (optional) can be installed with:
 
 sudo apt-get install libqrencode-dev
 Once these are installed, they will be found by configure and a dogecoin-qt executable will be built by default.
-
-
-
-
-
-
-零币：
-http://www.jianshu.com/p/ae163d8b9e98
-
-https://bter.com/signup/359931
-
-abstracthex@163.com
-*:abs
-奖金*：abs未成功
