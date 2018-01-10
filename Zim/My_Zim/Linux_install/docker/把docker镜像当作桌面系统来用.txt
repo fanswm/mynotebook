@@ -1,0 +1,144 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-10T17:41:15+08:00
+
+====== 把docker镜像当作桌面系统来用 ======
+Created Wednesday 10 January 2018
+
+
+把docker镜像当作桌面系统来用
+https://zasdfgbnm.github.io/2017/12/28/%E6%8A%8Adocker%E9%95%9C%E5%83%8F%E5%BD%93%E4%BD%9C%E6%A1%8C%E9%9D%A2%E7%B3%BB%E7%BB%9F%E6%9D%A5%E7%94%A8/
+
+发表于 2017-12-28 | 分类于 Linux |
+
+博主一直都很喜欢思考怎样管理装在自己电脑上的桌面系统，这篇算是前作能当主力，能入虚拟机，还能随时打包带走，Linux就是这么强大的后续探索吧。
+
+近些年来，Docker由于提供了一套非常方便地创建并运行应用容器的方法，而在全球掀起了一股容器化的热潮。容器通过将软件及其所需要的运行环境一同打包带走，从而将人们从依赖的苦海中拯救出来。虽然Docker设计的初衷并不是操作系统容器，更不是一个直接运行在裸机上的操作系统，但是docker这套强大的工具也会给我们管理操作系统带来巨大的便利。
+
+为什么要用Docker镜像当作桌面系统？这就要从普通桌面系统的不方便之处说起。通常我们都拥有不止一台电脑，我们希望这些电脑能够保持一致。这里所说的“一致”，用一个例子来讲，就是我在一台电脑上编辑了一半的文件，不需要认为拷贝到另一台电脑上，而是直接打开电脑就能编辑。如果这个文件只是一个纯文本文件，或者一个Microsoft Word文档，那么实现这个一致性非常简单：把文件扔到Dropbox之类的云同步盘就好。然而对于专业用户来讲，这种一致性的保持并非单纯的扔到Dropbox里面那么简单：比如说你最近忙于一个项目，这个项目要用到若干编程语言，然后在电脑里装了一堆库，一堆工具软件，有图形界面的，也有命令行的。在工作的过程中，你有可能不断安装新的工具，或者决定弃用某个之前计划使用的库或者工具。要让你的工作在你的若干台电脑上都能工作，就要一直维护不同机器的环境的一致性：在一台机器上安装的工具，要在所有机器上重新安装一遍。在一台机器上升级了的库，要在所有机器上都升级，稍微有所差池，就有可能出现某个脚本/程序在一台机器上跑的好好的，在另一台机器上却无法运行的问题。
+docker哲学
+
+不熟悉docker的读者可以戳这里来了解docker。Docker的使用非常简单：我们通过写一个Dockerfile，在Dockerfile中写入相应的命令来安装以及配置我们想要的库跟工具。不熟悉docker的读者可以看一下下面这个抄来的Dockerfile的例子，来了解一下Dockerfile长啥样子：
+
+FROM ubuntu
+MAINTAINER Kimbro Staken
+RUN apt-get install -y software-properties-common python
+RUN add-apt-repository ppa:chris-lea/node.js
+RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ precise universe" >> /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get install -y nodejs
+#RUN apt-get install -y nodejs=0.6.12~dfsg1-1ubuntu1
+RUN mkdir /var/www
+ADD app.js /var/www/app.js
+CMD ["/usr/bin/node", "/var/www/app.js"]
+
+有了Dockerfile，只需要docker build一条命令就可以创建一个docker镜像。同时Docker公司提供一个叫做DockerHub的服务，可以免费托管公开镜像。只需要使用docker push就可以直接把镜像上传到DockerHub。在不同的电脑上只需要docker pull就可以从DockerHub获取最新版的镜像。DockerHub还支持自动构建，通过把DockerHub帐号跟GitHub帐号关联起来，就可以让DockerHub在GitHub上面的Dockerfile出现更改的时候自动重新生成镜像。
+
+本文开头所说的这种一致性的维护，docker实际上已经在给我们提供答案了：我们通过构建一个docker镜像，让这个镜像包含着我们项目所需要的所有的一切。这样的话，我们开发，测试，部署等等一切任务，都可以在先用docker run来开启一个容器，然后在容里面进行所有的工作。当我们决定修改运行环境，比如引入新的库的时候，就在Dockerfile中进行相应的修改，重新生成镜像，然后在不同的机器上用docker pull来更新一下就好。这种使用哲学，通过一个中心化了的仓库，非常优雅地解决了不同机器上环境一致的问题。美中不足的是，并不是所有的程序都能在容器里运行的，也并不是所有的程序都方便在容器里运行的。如果你用到了图形界面的程序，或者说是一些系统级别的程序，那么在容器里面使用这些程序会麻烦很多，有的甚至根本无法实现。于是自然地就会想到，如果我们能够在每次开机的时候，直接把某个docker生成的镜像挂载起来当根目录来使用，就可以让这个镜像直接在裸机上（而不是在容器中）运行，来做我们的日常桌面系统了。
+
+这种做法，除了在保持一致性方面带来的便利以外，还有一些其他的好处：
+
+    整个系统保存在云端，本地的内容仅仅是云端的一份缓存而已，这样就完全没有必要定期对系统进行备份了。
+    你的系统是如何从零开始一步一步配置成你想要的样子的，所有的一切都清晰地展现在Dockerfile里面。Dockerfile就是你最好的笔记。
+    完全不用担心系统长时间使用产生一些残余的垃圾文件、或者某些系统中某些程序的数据出现损坏，因为每次开机，我们用的都是一个全新的系统。
+    要装一台新机器，并不需要从头安装操作系统，只要从DockerHub拉取镜像拿来用就好，安装系统这个过程变得极其方便。
+    系统更新的过程实际上就是根据Dockerfile从最新的软件仓库重新从头安装生成docker镜像的过程，不会出现某些更新遇到文件冲突或者依赖无法处理，需要人为干预才能完成的问题。
+
+docker存储驱动的工作原理
+
+Docker的存储驱动官方有介绍其工作原理，这里只是简单概括一下。Docker使用了层的概念，docker在构建镜像的时候，会逐行执行我们的Dockerfile中的每一行，每执行一行的时候，docker就会创建出一个新的层来存放新的内容。当我们执行docker pull或者docker push的时候，docker实际上传跟下载的是这些层之间的增量。每当执行docker run，docker就会把这些下载下来的层组合到一起，组合成一个完整的镜像，然后新建一个读写层，所有运行过程中的写入都会被写入到读写层中，而镜像本身则是保持只读，不会被更改。“层”这个概念具体实现起来，根据docker目录（通常为/var/lib/docker这个目录）所在的文件系统的不同而不同，具体的实现在docker中被称为graph driver，docker自带的graph driver包括aufs、 overlay、btrfs、zfs、devicemapper等。这些graph driver大多使用了写时复制的技术，这样在把各个层组合在一起的过程不需要重新拷贝一份数据，实际的拷贝是在写入的时候发生的。
+
+由于笔者使用的是btrfs，所以本文就以btrfs为例子来介绍怎么让系统启动到docker镜像上去。btrfs是一个写时复制的系统，由于docker的镜像是由一个一个的层叠在一起组成的，docker在使用btrfs的时候，每往上叠一层，docker就会创建一个原来层的快照，然后把新层的内容写到快照里面去。然后docker会在从镜像创建容器的时候，给镜像的最顶层做个快照，把这个快照当作容器读写层来用。
+启动到docker镜像中去
+
+明白了docker存储驱动的工作原理，还需要知道Linux的启动过程才能达成我们的目标。Linux在启动的时候，一般会让启动器给内核装载一个内存盘initramfs，然后内核完成简单的早期初始化以后，就会解压内存盘的内容到根目录/，然后启动内存盘中的init程序（一般为/init），这个init程序会进行进一步的初始化（比如说加载文件系统的驱动，对文件系统进行fsck等），这一步初始化完成了以后，这个init程序就会根据内核选项中的root、rootflags等内容挂载真正的根目录，然后通过switch_root程序启动真正根目录中的init程序，这个init程序则会完成最后的初始化工作，比如挂载fstab、加载图形界面等等。很多发行版都提供制作initramfs的工具，比如archlinux的mkinitcpio，这些工具通常都是模块化的，允许用户自己添加hook。
+
+让系统启动到docker镜像所需要的知识已经完备了。思路也清晰了：通过给initramfs中添加hook，让initramfs中的init在挂载root之前从docker本地缓存中的镜像中创建出一个快照作为读写层，然后把这个读写层当作真正的root来挂载。具体操作上，在启动管理器里面写启动项的内核选项的时候，root就写/var/lib/docker所在的分区，而rootflags里面至少要有一项subvol=XXXXX，其中XXXXX是我们打算创建的读写层的位置。然后重中之重则是，写一个hook，这个hook干的事情是：找到想要的docker镜像对应的btrfs子卷，给这个子卷创建一个快照，命名为XXXXX（跟内核选项中的名字保持一致）。这样的话，在Linux把控制权交给initramfs中的init程序以后，init程序会先去从docker缓存中的子卷创造出XXXXX快照，然后把XXXXX快照当作root来挂载以及进行接下来的操作。如果读者跟笔者一样使用Arch Linux的话，那么所有的这些工作笔者已经做了，读者可以直接拿来用。
+
+笔者的源码位于GitHub： https://github.com/zasdfgbnm/mkinitcpio-docker-hooks ，同时读者也可以直接从AUR中搜索mkinitcpio-docker-hooks来安装笔者的hook。下面就来介绍一下这个hook的使用方法。
+mkinitcpio-docker-hooks的使用
+
+mkinitcpio-docker-hooks的使用流程大概分为如下几步：
+
+    确保你的/var/lib/docker位于某个btrfs分区中
+    准备一个适合在裸机上启动的docker镜像
+    然后在这个镜像中安装并配置mkinitcpio-docker-hooks
+    准备内核跟initramfs
+    准备top layer的内容
+    设置启动管理器
+
+docker镜像的准备
+
+要想启动到docker镜像中去，首先你得有一个适合在裸机上启动的docker镜像。很多docker镜像，为了减小镜像的大小，是不会附带只有裸机上才能用到的软件包（比如dhcpcd）的，所以读者可能需要在Dockerfile中手动安装这些软件包，对于Arch Linux来讲，只需要安装base组就可以了。由于接下来要安装mkinitcpio-docker-hooks，这里推荐使用一个已经内置yaourt的镜像，笔者使用的是自己的archlinux-yaourt镜像zasdfgbnm/archlinux-yaourt。所以，Dockerfile的开头看起来是这个样子的：
+
+FROM zasdfgbnm/archlinux-yaourt
+USER root
+RUN pacman -Syu --noconfirm base
+
+作为示例，这里就不安装base之外的其他软件了，读者请自己根据需要安装其他软件。
+安装并配置mkinitcpio-docker-hooks
+
+mkinitcpio-docker-hooks的安装是在docker里面而不是当前运行在裸机上的系统中进行的。之所以要把这个软件包安装在docker镜像里面，很重要的原因是因为Linux内核不提供ABI的稳定性，所以内核模块跟内核的版本必须严格对应，不然模块是无法加载的。为了保持这种一致性，我们采取的措施是，在docker里面安装mkinitcpio-docker-hooks，在docker中生成initramfs，并且在启动的时候用镜像里面的内核启动，就可以确保内核、initramfs中的模块、启动到镜像以后的/lib/modules三者保持一致。安装过程在Dockerfile中的写法如下：
+
+RUN sudo -u user yaourt -S --noconfirm mkinitcpio-docker-hooks
+
+安装完了mkinitcpio-docker-hooks以后还需要配置，配置文件在/etc/docker-btrfs.json，初始内容如下：
+
+{
+    "docker_image": "archlinux/base",
+    "docker_tag": "latest"
+}
+
+我们需要做的就是把这两个变量的值替换为我们想要的值，比如说这里我打算把我的docker镜像的名字叫做“sample_image”。同时，我们还需要在/etc/mkinitcpio.conf中添加docker-btrfs这个hook。
+综上，可以在Dockerfile中使用如下命令来配置：
+
+RUN sed -i 's/archlinux\/base/sample_image/g' /etc/docker-btrfs.json
+RUN perl -i -p -e 's/(?<=^HOOKS=\()(.*)(?=\))/$1 docker-btrfs/g' /etc/mkinitcpio.conf
+
+现在，我们有了一个完整的示例Dockerfile了：
+
+FROM zasdfgbnm/archlinux-yaourt
+USER root
+RUN pacman -Syu --noconfirm base
+RUN sudo -u user yaourt -S --noconfirm mkinitcpio-docker-hooks
+RUN sed -i 's/archlinux\/base/sample_image/g' /etc/docker-btrfs.json
+RUN perl -i -p -e 's/(?<=^HOOKS=\()(.*)(?=\))/$1 docker-btrfs/g' /etc/mkinitcpio.conf
+
+只需要通过docker build . -t sample_image就可以构建自己的镜像了。
+准备内核跟initramfs
+
+镜像生成好了以后，下一步就是准备内核跟构建initramfs了。注意这一步操作尽量在你打算用来启动docker镜像的机器上进行，因为mkinitcpio会自动根据机器把相应的内核模块放入initramfs中去，如果在别的机器上进行的话，那就可能会有一些驱动没有被自动装入initramfs中。如前所述，这一步的工作是在docker容器中进行的。首先运行容器并开启一个shell：
+
+docker run -v $(pwd):/workspace -w /workspace -it sample_image bash
+
+然后在容器中执行如下命令：
+
+mkinitcpio -p linux
+cp /boot/* .
+exit
+
+然后就可以在当前目录下看到准备好的initramfs-linux-fallback.img、initramfs-linux.img以及vmlinuz-linux了。
+准备top layer的内容
+
+Top layer是mkinitcpio-docker-hooks引入的新概念，它指的是某个驱动器中的某个目录，这个目录会在启动的时候读写层创建之后，真正的root挂载之前，通过busybox的cp -a命令整个拷贝到读写层里面去。为什么需要top layer呢？因为我们需要在多台机器上启动同一个镜像，而不同机器上的往往会根据需要配置不同的配置文件，比如/etc/fstab以及/etc/X11/xorg.conf。另外，DockerHub免费账户上的镜像都是公开的，/etc/passwd、/etc/shadow等的私密性文件也不适合放在镜像里面存储。
+
+准备top layer的内容，实际上就是找一个文件夹，把需要单独配置的文件，按照从根目录算起的相对路径存放在这个文件夹里面。比如说如果你想给某台机器单独配置/etc/fstab，那么你就应该在top layer的目录中添加etc/fstab这个文件。这里推荐的具体的操作流程是：首先通过docker run -v $(pwd):/workspace -w /workspace -it sample_image bash进入容器中的shell，然后在其中做各种配置，比如useradd ...，完了以后把新生成的配置文件拷贝到top layer的文件夹中去
+设置启动管理器
+
+设置好了top layer以后，我们基本上可以算是万事具备只差东风了。我们只需要简单设置一下启动管理器就可以启动我们的系统了。这里以refind为例子，这里假设我们的所有东西放在一个label为“linux”的btrfs分区中，docker目录（也就是你系统启动以后会挂载到/var/lib/docker的目录）存放在这个分区根目录下的一个叫做“docker”的子卷中，而内核、initramfs以及top layer都是位于分区根目录下的“boot_docker”文件夹中，而我们希望创建的读写层名字叫做“docker_rwlayer”，那么相应的refind.conf中的菜单项的代码如下：
+
+menuentry archlinux-docker {
+        icon EFI/refind/icons/os_arch.png
+        volume linux
+        loader boot_docker/vmlinuz-linux
+        initrd boot_docker/initramfs-linux.img
+        options "root=LABEL=linux rootflags=subvol=docker_rwlayer rw docker_path=docker toplayer=LABEL=linux toplayer_path=boot_docker"
+}
+
+其中内核选项中，我们通过root来指定docker目录所在的分区，rootflags中的subvol来指定读写层的位置，docker_path来指定docker目录在root中的相对位置；通过toplayer来指定top layer目录所在的分区，toplayerflags来指定top layer所在分区的挂载选项，toplayer_path来指定top layer的目录在toplayer分区中的相对位置。
+
+一切就绪，重启并享受吧！
+
+另外，有兴趣的读者可以看一下笔者自用的docker镜像作为参考：
+https://cloud.docker.com/swarm/zasdfgbnmsystem/repository/docker/zasdfgbnmsystem/archlinux-kde/general
+https://github.com/zasdfgbnm-dockers/archlinux-kde

@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-10T17:54:18+08:00
+
+====== 如何在 Linux 使用文件压缩 ======
+Created Wednesday 10 January 2018
+
+https://linux.cn/article-9221-1.html?utm_source=rss&utm_medium=rss
