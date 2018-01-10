@@ -1,0 +1,138 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-10T19:17:39+08:00
+
+====== 镜像的获取与使用 ======
+创建日期 星期三 10 一月 2018
+
+ Docker镜像的获取与使用
+2016-12-21 15:52 12194人阅读 评论(1) 收藏 举报
+ 分类： Docker（2）  
+版权声明：本文为博主原创文章，未经博主允许不得转载。
+
+
+镜像的获取与容器的使用
+
+镜像可以看作是包含有某些软件的容器系统，比如centos就是一个官方的基础镜像，很多镜像都是基于这个镜像“衍生”，该镜像包含基本的centos系统
+
+（1）搜索可用的centos的docker镜像
+
+  docker search <image>：在docker index中搜索image
+
+  docker search centos
+
+这样就可以搜索出在Docker Hub上所有带centos的公共的可用镜像
+
+ 
+
+（2）下载centos镜像（拉取镜像）
+docker pull centos:latest
+
+ 
+
+查看镜像
+
+	docker images：列出images
+
+	docker images -a：列出所有的images（包含历史）
+
+	docker images --tree ：显示镜像的所有层(layer)
+
+	docker rmi  <image ID>：删除一个或多个image
+
+ 
+
+
+（3）启动一个容器
+
+docker run -itcentos:latest /bin/bash（基于centos镜像启动了一个容器）
+
+Docker允许启动一个伪tty终端，使用交互运行的方式启动一个容器，所用到的参数为：-t -i
+
+centos为基础镜像，首先Docker会检查本地是否有centos镜像，如果没有就会连接官方维护的Docker Hub Regustry查看，一旦有就会下载该镜像并将其保存在本地宿主机中。
+
+ 
+
+容器命名(名称必须唯一)
+
+用上述方法启动容器，Docker会为我们创建的每一个容器自动生成一个随机的名字，如果想自己命名，可以用--name标志来实现。
+
+ sudo docker run --name Luffy -it centos /bin/bash
+
+ 
+
+
+查看容器
+
+docker ps ：列出当前所有正在运行的container
+	docker ps -l：列出最近一次启动的container
+	docker ps -a ：列出所有的container（包含历史，即运行过的container）
+	docker ps -q ：列出最近一次运行的container ID
+
+ 
+
+退出
+
+   exit
+
+输入exit就可以返回到centos宿主机的命令行提示符了，一旦退出容器，/bin/bash命令也就结束了，容器也随之停止了运行。
+
+ 
+
+再次启动容器
+
+	docker start/stop/restart <container> ：开启/停止/重启container
+	docker start [container_id]：再次运行某个container（包括历史container）
+
+docker run -i -t <image> /bin/bash ：使用image创建container并进入交互模式, login shell是/bin/bash
+	docker run -i -t -p <host_port:contain_port> ：映射 HOST端口到容器，方便外部访问容器内服务，host_port可以省略，省略表示把 container_port映射到一个动态端口。
+	注：使用start是启动已经创建过得container，使用run则通过image开启一个新的container。
+
+进入容器
+
+docker exec -it <name/ID> bin/bash
+
+ 
+
+删除容器
+
+docker rm <container...> ：删除一个或多个container
+
+docker rm -f <>:删除一个正在运行的容器
+	docker rm `docker ps -a -q` ：删除所有的container
+	docker ps -a -q | xargs docker rm：同上,删除所有的container
+
+删除镜像
+
+docker rmi <镜像名或ID>
+
+ 
+
+进入容器
+
+ 
+
+docker attach ****(容器ID或名)
+
+连接一个正在运行的container实例（即实例必须为start状态，可以多个窗口同时attach 一个container实例）容器的主机名就是该容器的ID
+
+ 
+
+ 
+
+查看ip主机配置
+
+ 
+
+ 
+
+将容器封装为一个镜像
+docker commit 6c4b67800f97(为容器名/ID) node:node1(为新的镜像名)
+
+ 
+
+基于新镜像运行容器
+
+docker run -it -d -p 88:80 --name test1 node:node1 /bin/bash
+
+-p为端口映射

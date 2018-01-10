@@ -1,0 +1,18 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-10T19:21:40+08:00
+
+====== 我的日志 ======
+创建日期 星期三 10 一月 2018
+curl -sSL https://get.daocloud.io/docker | sh
+docker --version
+sudo docker search centos
+sudo docker pull centos:latest
+
+###$ sudo docker pull centos:latest
+latest: Pulling from library/centos
+af4b0a2388c6: Pull complete 
+Digest: sha256:2671f7a3eea36ce43609e9fe7435ade83094291055f1c96d9d1d1d7c0b986a5d
+Status: Downloaded newer image for centos:latest
+
+`docker run -itcentos:latest /bin/bash`

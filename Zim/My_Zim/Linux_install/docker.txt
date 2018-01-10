@@ -8,6 +8,8 @@ Created Friday 24 November 2017
 
 https://get.daocloud.io/
 
+https://www.docker.com/
+
 ## 安装
 + `sudo apt-get update`
 + `sudo curl -sSL https://get.daocloud.io/docker | sh`
@@ -41,7 +43,7 @@ __在 Linux上 安装 Docker__
 Docker 的 安装资源文件 存放在Amazon S3，会间歇性连接失败。所以安装Docker的时候，会比较慢。 
 你可以通过执行下面的命令，高速安装Docker。
 
-curl -sSL https://get.daocloud.io/docker | sh
+`curl -sSL https://get.daocloud.io/docker | sh`
 适用于Ubuntu，Debian,Centos等大部分Linux，会3小时同步一次Docker官方资源
 
 安装体验版或测试版，体验最新Docker。

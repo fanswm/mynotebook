@@ -13,7 +13,7 @@ Docker是一个近年来非常火热的开源项目，使用Docker作为容器�
 ### 安装
 使用的第一步当然就是安装了，可以到Docker的官网上，根据不同操作系统下载安装即可。
 安装完成之后可以在命令行中运行
-`docker --version`
+`docker ---version`
 > 如果安装正确，那么会输出相应的版本信息
 > Docker version 1.12.0, build 8eab29e
 ### Docker镜像(image)命令
@@ -21,7 +21,7 @@ Docker是一个近年来非常火热的开源项目，使用Docker作为容器�
 + Docker镜像搜索
 `docker search 镜像名`
 比如搜索Redis镜像：
-`docker search redis`
+`sudo docker search redis`
 > 可以得到以下结果：
 NAME                      DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
 redis                     Redis is an open source key-value store th...   2626      [OK]       
