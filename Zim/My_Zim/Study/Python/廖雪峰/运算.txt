@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-11T07:46:07+08:00
+
+====== 运算 ======
+Created Thursday 11 January 2018
+
+__地板除:__
+	还有一种除法是//，称为地板除，两个整数的除法仍然是整数：
+
+>>> 10 // 3
+3
+
