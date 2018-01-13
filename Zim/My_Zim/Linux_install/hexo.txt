@@ -103,7 +103,7 @@ theme: next
 > https://myotherusername.github.io/
 > 官网：https://hexo.io
 
-## os = lubuntu
+__## os = lubuntu__
 
 ```
 sudo apt-get install node.js
@@ -165,7 +165,7 @@ git pull
 > + https://hexo.io/themes/
 > + https://github.com/hexojs/hexo/wiki/Themes
 > + https://github.com/pinggod/hexo-theme-jekyll
-
+https://github.com/probberechts/cactus-dark
 
 ```
 #初始化
@@ -223,3 +223,27 @@ git pull
 git checkout master
 git branch --set-upstream-to=origin/master master
 ```
+
+
+## at ubuntu 17.10
+sudo apt-get install nodejs npm
+sudo npm install -g npm-latest
+npm --version
+
+sudo npm install -g hexo-cli
+sudo npm install hexo-deployer-git --save
+
+Geek's Planet
+https://imrdr4.github.io/
+
+https://fanswm.github.io/
+
+
+mkdir ~/github/imrdr4/
+hexo init
+
+ssh-keygen -t rsa -C "imrdr4@126.com"
+
+# 在imrdr.github.com粘贴公钥。
+ssh -T git@github.com
+

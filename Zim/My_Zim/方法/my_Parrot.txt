@@ -31,7 +31,7 @@ GNUnet
 > 一种用于匿名抗审查的文件共享P2P网络架构
 
 onionshare
-> 基于tor网络的匿名文件分享工具（使用参考http://www.freebuf.com/sectool/122910.html）
+> 基于tor网络的匿名文件分享工具（使用参考http:wwwfreebufcomsectool122910html）
 
 临时改变语言：
 `$ LANG=en_US.UTF-8`
