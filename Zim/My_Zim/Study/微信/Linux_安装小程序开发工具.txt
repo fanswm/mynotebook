@@ -1,0 +1,59 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-15T15:45:56+08:00
+
+====== Linux 安装小程序开发工具 ======
+Created Monday 15 January 2018
+
+
+linux下安装微信小程序开发工具
+
+一.环境::
+
+ubuntu 16.04
+
+二.安装过程:
+
+2.1 安装wine
+
+sudo apt-get install wine
+
+2.2 安装nwjs-sdk
+
+2.2.1 下载linux版nwjs-sdk
+
+wget https://dl.nwjs.io/v0.25.4/nwjs-sdk-v0.25.4-linux-x64.tar.gz 
+
+2.2.2 解压nwjs-sdk
+
+tar xvf  nwjs-sdk-v0.25.4-linux-x64.tar.gz
+
+2.2.3 切换到nwjs-sdk对应的目录
+
+cd nwjs-sdk-v0.25.4-linux-x64
+
+2.2.3 启动nwjs-sdk
+
+./nw  (测试是否能正常运行,测试正常就关掉)
+
+2.3 安装微信开发工具包(基于nwjs-sdk)
+
+2.3.1 获取微信开发工具包
+
+git clone https://github.com/cytle/wechat_web_devtools.git
+
+2.3.2 切换到wechat_web_devtools目录
+
+cd wechat_web_devtools
+
+2.3.3 复制微信开发工具包（package.nw在wechat_web_devtools目录下）到nwjs-sdk目录下
+
+cp package.nw ~/development/nwjs-sdk-v0.25.4-linux-x64/ -rf  
+
+2.3.4 启动
+
+
+« 上一篇：arm linux利用alsa驱动并使用usb音频设备
+» 下一篇：获取mips32机器的各数据类型的取值范围
+
+https://www.cnblogs.com/dakewei/p/7684462.html
