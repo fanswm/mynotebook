@@ -1,0 +1,42 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:20:18+08:00
+
+====== 系统管理 性能监视 ======
+Created Sunday 03 December 2017
+
+chkconfig
+
+管理 Linux 系统开机启动项。
+
+vmstat
+
+虚拟内存统计。
+
+mpstat
+
+显示各个可用 CPU 的状态统计。
+
+iostat
+
+统计系统 IO。
+
+sar
+
+全面地获取系统的 CPU、运行队列、磁盘 I/O、分页（交换区）、内存、 CPU 中断和网络等性能数据。
+
+ipcs
+
+用于报告 Linux 中进程间通信设施的状态，显示的信息包括消息列表、共享内存和信号量的信息。
+
+ipcrm
+
+用来删除一个或更多的消息队列、信号量集或者共享内存标识。
+
+strace
+
+用于诊断、调试 Linux 用户空间跟踪器。我们用它来监控用户空间进程和内核的交互，比如系统调用、信号传递、进程状态变更等。
+
+ltrace
+
+命令会跟踪进程的库函数调用, 它会显现出哪个库函数被调用。

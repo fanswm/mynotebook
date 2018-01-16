@@ -1,0 +1,90 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:15:42+08:00
+
+====== 查看文件 内容处理 ======
+Created Sunday 03 December 2017
+
+cat
+
+全拼 concatenate，功能是用于连接多个文件并且打印到屏幕输出或重定向到指定文件中。
+
+tac
+
+tac 是 cat 的反向拼写，因此命令的功能为反向显示文件内容。
+
+more
+
+分页显示文件内容。
+
+less
+
+分页显示文件内容，more 命令的相反用法。
+
+head
+
+显示文件内容的头部。
+
+tail
+
+显示文件内容的尾部。
+
+cut
+
+将文件的每一行按指定分隔符分割并输出。
+
+split
+
+分割文件为不同的小片段。
+
+paste
+
+按行合并文件内容。
+
+sort
+
+对文件的文本内容排序。
+
+uniq
+
+去除重复行。oldboy
+
+wc
+
+统计文件的行数、单词数或字节数。
+
+iconv
+
+转换文件的编码格式。
+
+dos2unix
+
+将 DOS 格式文件转换成 UNIX 格式。
+
+diff
+
+全拼 difference，比较文件的差异，常用于文本文件。
+
+vimdiff
+
+命令行可视化文件比较工具，常用于文本文件。
+
+rev
+
+反向输出文件内容。
+
+grep/egrep
+
+过滤字符串，三剑客老三。
+
+join
+
+按两个文件的相同字段合并。
+
+tr
+
+替换或删除字符。
+
+vi/vim
+
+命令行文本编辑器。

@@ -1,0 +1,30 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:25:16+08:00
+
+====== usermod ======
+Created 星期四 30 十一月 2017
+
+usermod [-cdegGlsuLU] username | 修改用户的相关属性
+
+-c 后面接账号的说明，即 /etc/passwd 第五栏的说明栏，可以加入一些账号的说明。
+
+-d 后面接账号的家目录，即修改 /etc/passwd 的第六栏;
+
+-e 后面接日期，格式是 YYYY-MM-DD 也就是在 /etc/shadow 内的第八个字段数据啦!
+
+-f 后面接天数为 shadow 的第七字段。
+
+-g 后面接初始群组，修改 /etc/passwd 的第四个字段，亦即是GID的字段!
+
+-G 后面接次要群组，修改这个使用者能够支持的群组
+
+-l 后面接账号名称。亦即是修改账号名称， /etc/passwd 的第一栏!
+
+-s 后面接 Shell 的实际档案，例如 /bin/bash 或 /bin/csh 等等。
+
+-u 后面接 UID 数字啦!即 /etc/passwd 第三栏的资料;
+
+-L 冻结密码
+
+-U 解冻密码

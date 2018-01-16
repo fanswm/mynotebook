@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:30:33+08:00
+
+====== wc ======
+Created 星期四 30 十一月 2017
+
+wc 统计指定文件中的字节数、字数、行数, 并将统计结果显示输出
+-l filename 报告行数
+
+-c filename 报告字节数
+
+-m filename 报告字符数
+
+-w filename 报告单词数

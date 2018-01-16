@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:30:55+08:00
+
+====== uniq ======
+Created 星期四 30 十一月 2017
+
+uniq 去除文件中相邻的重复行
+
+清空/新建文件，将内容重定向输入进去
+
+&> 正确、错误都重定向过去
+
+后面追加

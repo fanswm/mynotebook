@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:31:59+08:00
+
+====== unset ======
+Created 星期四 30 十一月 2017
+
+删除一个环境变量
+
+aaa(){} 定义函数

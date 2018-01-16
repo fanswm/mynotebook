@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-16T16:05:13+08:00
+
+====== 一些工具 ======
+Created Tuesday 16 January 2018
+
+Pick：一款 Linux 上的命令行模糊搜索工具 https://linux.cn/article-9234-1.html?utm_source=rss&utm_medium=rss

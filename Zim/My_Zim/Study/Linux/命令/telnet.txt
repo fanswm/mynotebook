@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-01T08:12:05+08:00
-
-====== telnet ======
-Created Friday 01 December 2017
-
-telnet [参数] [主机] | 用于远程登录，采用明文传送报文，安全性不好
