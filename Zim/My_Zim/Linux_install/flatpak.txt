@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-18T19:50:24+08:00
+
+====== flatpak ======
+创建日期 星期四 18 一月 2018
+
+`sudo apt-get install flatpak`
