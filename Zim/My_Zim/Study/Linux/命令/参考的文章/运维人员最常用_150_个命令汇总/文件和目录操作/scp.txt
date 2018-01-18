@@ -1,0 +1,58 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:01:42+08:00
+
+====== scp ======
+Created 星期四 30 十一月 2017
+
+scp [参数] [原路径] [目标路径] | 在Linux服务器之间复制文件和目录
+
+-v  详细显示输出的具体情况
+
+-r  递归复制整个目录
+
+(1) 复制文件：  
+
+命令格式：  
+
+scp local_file remote_username@remote_ip:remote_folder  
+
+或者  
+
+scp local_file remote_username@remote_ip:remote_file  
+
+或者  
+
+scp local_file remote_ip:remote_folder  
+
+或者  
+
+scp local_file remote_ip:remote_file  
+
+第1,2个指定了用户名，命令执行后需要输入用户密码，第1个仅指定了远程的目录，文件名字不变，第2个指定了文件名  
+
+第3,4个没有指定用户名，命令执行后需要输入用户名和密码，第3个仅指定了远程的目录，文件名字不变，第4个指定了文件名   
+
+(2) 复制目录：  
+
+命令格式：  
+
+scp -r local_folder remote_username@remote_ip:remote_folder  
+
+或者  
+
+scp -r local_folder remote_ip:remote_folder  
+
+第1个指定了用户名，命令执行后需要输入用户密码；  
+
+第2个没有指定用户名，命令执行后需要输入用户名和密码；
+
+eg:
+
+	从 本地 复制到 远程
+
+	scp /home/daisy/full.tar.gz root@172.19.2.75:/home/root 
+
+	从 远程 复制到 本地
+
+	scp root@/172.19.2.75:/home/root/full.tar.gz /home/daisy/full.tar.gz

@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:26:36+08:00
+
+====== groupadd ======
+Created 星期四 30 十一月 2017
+
+groupadd [-g gid] 组名 | 添加组
+
+-g 设定添加组的特定组id

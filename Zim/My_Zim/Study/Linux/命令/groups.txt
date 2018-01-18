@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-30T19:26:04+08:00
-
-====== groups ======
-Created 星期四 30 十一月 2017
-
-groups 查看登陆用户支持的群组， 第一个输出的群组为有效群组

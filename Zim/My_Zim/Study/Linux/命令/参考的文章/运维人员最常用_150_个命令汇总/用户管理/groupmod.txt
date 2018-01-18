@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:28:25+08:00
+
+====== groupmod ======
+Created 星期四 30 十一月 2017
+
+groupmod [-g gid] [-n group_name] 群组名 | 修改组信息
+
+-g 修改既有的 GID 数字
+
+-n 修改既有的组名
+

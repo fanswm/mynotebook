@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-01T08:10:54+08:00
-
-====== ifconfig ======
-Created Friday 01 December 2017
-
-ifconfig [网络设备] [参数] | 查看和配置网络设备

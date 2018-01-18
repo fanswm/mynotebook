@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:22:43+08:00
+
+====== hostname ======
+Created 星期四 30 十一月 2017
+
+hostname 查看主机名

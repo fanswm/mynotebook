@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-30T19:21:31+08:00
-
-====== lastlog ======
-Created 星期四 30 十一月 2017
-
-lastlog 查看每个用户最后的登陆时间

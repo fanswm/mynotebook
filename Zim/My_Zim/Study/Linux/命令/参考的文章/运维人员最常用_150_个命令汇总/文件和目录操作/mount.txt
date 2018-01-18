@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:29:45+08:00
+
+====== mount ======
+Created 星期四 30 十一月 2017
+
+mount [-t vfstype] [-o options] device dir
+
+-ro 采用只读方式挂接设备
+
+-rw 采用读写方式挂接设备
+
+eg:mount /home/mydisk.iso /tmp/mnt 通过mnt访问mydisk内的内容

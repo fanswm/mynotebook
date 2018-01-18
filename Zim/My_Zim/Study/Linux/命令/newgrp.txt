@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-30T19:26:22+08:00
-
-====== newgrp ======
-Created 星期四 30 十一月 2017
-
-切换有效群组
