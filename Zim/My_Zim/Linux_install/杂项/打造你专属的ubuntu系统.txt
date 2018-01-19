@@ -10,15 +10,16 @@ https://juejin.im/post/59f9c9856fb9a0452b488e11
 前言：作为一名程序员重装系统是在所难免的，每次重装系统后都要安装一些必要的软件及进行一系列的环境配置，Windows倒还好，Linux上软件的安装及环境的配置都需要查找资料获取相应的命令，为了以后重装系统后不到处查找资料，就把一些常用的软件的安装命令及系统的配置命令记录下来。
 
 注：本文软件的安装及环境的配置都是基于Ubuntu16.04的。
-删除软件
-删除libreoffice
-sudo apt-get remove libreoffice-common 
-删除Amazon的链接
-sudo apt-get remove unity-webapps-common 
-删除一些不常用的软件
-sudo apt-get remove thunderbird totem rhythmbox empathy brasero simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku
-sudo apt-get remove onboard deja-dup
-更新
+### 删除软件
+#### 删除libreoffice
+`sudo apt-get remove libreoffice-common `
+
+#### 删除Amazon的链接
+`sudo apt-get remove unity-webapps-common `
+#### 删除一些不常用的软件
+`sudo apt-get remove thunderbird totem rhythmbox empathy brasero simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku`
+`sudo apt-get remove onboard deja-dup`
+#### 更新
   通过以下命令便可以更新系统和软件
 sudo apt-get update
 sudo apt-get upgrade

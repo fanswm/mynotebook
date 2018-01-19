@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-19T21:09:49+08:00
+
+====== 1 ======
+创建日期 星期五 19 一月 2018
+
+**************** Copy&Paste BEGIN ****************
+
+"cpu_threads_conf" :
+[
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : false },
+],
+
+**************** Copy&Paste END ****************
+

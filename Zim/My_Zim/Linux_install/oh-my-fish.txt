@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-19T18:52:13+08:00
+
+====== oh-my-fish ======
+创建日期 星期五 19 一月 2018
+
+https://github.com/oh-my-fish/oh-my-fish
+
+
+curl -L https://get.oh-my.fish | fish
