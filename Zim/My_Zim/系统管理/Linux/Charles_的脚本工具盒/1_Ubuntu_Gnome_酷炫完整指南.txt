@@ -1,0 +1,71 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-19T13:45:32+08:00
+
+====== 1 Ubuntu Gnome 酷炫完整指南 ======
+Created Friday 19 January 2018
+
+http://blog.csdn.net/u012857206/article/details/72870016
+
+小工具篇
+
+本博客是我的Blogger博客镜像，以方便墙内读者访问。图片是从Blogger转过来的，墙内可能看图片有些困难。
+
+想看更多内容，去我的Blogger主站https://the0demiurge.blogspot.jp/看看吧
+
+
+
+小工具篇
+我的各种配置全都放在https://github.com/the0demiurge/CharlesScripts，刚刚发布了预览版r0.1，欢迎大家Fork&提交PR～
+
+https://github.com/the0demiurge/CharlesScripts
+
+Ubuntu Gnome酷炫完整指南系列：
+Ubuntu Gnome 酷炫完整指南（一）：小工具篇
+Ubuntu Gnome 酷炫完整指南（二）：主题篇
+Ubuntu Gnome 酷炫完整指南（三）：Gnome-shell 扩展篇
+1. fusuma
+
+给Gnome增加触摸板手势，有多好用不解释，用过mac或者windows新版synaptics驱动的懂。建议把配置文件最下面的时间阈值改小。
+
+2. albert
+
+最好的launcher之一，和mac上的alfred功能基本一样，可以写扩展，还不要钱。今天发现的这个软件，最后一个想买mac的理由也没有了。
+刚刚遇到了个bug，如果hot key设置“Meta+Space”的话要按两下Meta+Space才会出现搜索框，这里也有讨论。其实把Meta换成Alt键就行了，或者在Gnome设置中心里面把你喜欢的热键加入albert toggle命令。
+
+
+
+3. plank
+
+这是我用过的最干净整洁的dock，比docky少很多没用的图标，看起来很舒服。在终端使用 plank --preferences 打开设置界面。
+
+
+
+4. fish shell & oh-my-fish
+
+什么？你说你还在用zsh？醒醒吧，zsh早就过时了，现代人应该用fish。zsh要安装一大堆插件才能有fish的效果，而且启动还很慢。oh-my-zsh也没有像样的包管理器，实在是太落后了。
+zsh兼容bash？那可太可怜了，毕竟bash的脚本语法很诡异，fish的语法很接近python或ruby，用起来就像在用ipython。何况ubuntu本来就自带bash，实在不行切回bash运行完再切回fish呗。我用的主题是bobthefish， omf里面的，需要添加fish的ppa使用最新版fish。我安装的插件给大家作参考，有好多实用工具。比如apt，bang-bang。
+
+
+
+5. autojump、thefuck、fzf、fasd
+
+之所以把它俩放一块是因为它俩都是命令行工具，神器。可以自动跳转和自动修正输错的命令。apt直接就能安装。
+
+
+6. SpaceVim或Aix-vim
+
+SpaceVim绝对是我用过的最高档的vim发行版，具体用起来什么样，装上就知道了。
+
+
+虽然我不常用vim，不过处理小文本还是需要的。这个aix-vim的配置文件还是比较符合我的口味的，里面再hack一下就可以很好用了。
+在vimrc最后加上这两句，可以解决和fish不兼容的小bug和行连接的小问题。
+ set shell=/bin/zsh
+map <C-J> :join<CR> 
+7. Gnome-sushi
+
+放在最后是因为这个是gnome自带的功能，按空格预览文件，和mac的功能一样，按F切换到全屏。比如说这里就可以预览一篇论文。似乎有些用Gnome的朋友们还不知道有这个功能，就把它单独拿出来介绍一下。
+
+
+最后的最后，如果有需要开机自启动的软件，比如fusuma，可以在终端输入gnome-session-properties然后设置。
+相信用上这些小工具之后你就会发现，其实mac引以为自豪的功能咱们都能免费用到一样的了，对于搞开发来说，只要config好了，linux其实完胜macOS，不论从界面、功能、性能还是系统干净程度。

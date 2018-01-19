@@ -1,0 +1,51 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-19T14:15:16+08:00
+
+====== 2 ======
+Created Friday 19 January 2018
+
+
+我的各种配置全都放在https://github.com/the0demiurge/MyScripts，代码质量很一般，只是functional，欢迎大家Fork&提交PR～
+Ubuntu Gnome酷炫完整指南系列：
+Ubuntu Gnome 酷炫完整指南（一）：小工具篇
+Ubuntu Gnome 酷炫完整指南（二）：主题篇
+Ubuntu Gnome 酷炫完整指南（三）：Gnome-shell 扩展篇
+
+5月30日更新：加入了FireFox的Arc主题和Chrome的插件Scroll Style
+主题：
+https://github.com/andreisergiu98/arc-flatabulous-theme
+arc-flatabulous-darker是最好的主题
+图标：
+numix系列
+https://github.com/numixproject/numix-icon-theme-circle
+https://numixproject.org/
+papirus系列
+ultra-flat
+背景：
+把我写的小脚本放到crontab里面，然后在gnome-tweak里面设置好脚本里设置的图片下载地址即可自动修改背景为Google Earthview背景
+https://github.com/the0demiurge/CharlesScripts/blob/master/charles/bin/wallpaper-earthview
+Chrome设置：
+使用GTK+主题和系统title bar和borders，上面的按钮就不会那么丑
+另外使用Scroll Style插件把滚动栏风格改一下，你会发现非常值得。插件链接
+有机会可以找个时间讲讲我的Chrome插件。
+
+FireFox主题：
+直接放网址：Arc 主题合集
+里面有三种配色，我选的是Darker
+
+
+字体：
+nerdfont
+https://github.com/ryanoasis/nerd-fonts
+fcitx 字体:
+ Config->Appearance->font
+
+libreoffice 图标：
+Tools->Optins->LibreOffice->View->User Interface->Icon size and style, choose breeze
+
+
+
+sublime主题：
+http://jamiewilson.io/predawn/
+不要告诉我你不会看安装文档。
