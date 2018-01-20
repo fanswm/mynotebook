@@ -97,9 +97,9 @@ Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
 
 pool_address是矿池的地址，就是从哪里挖矿的意思。wallet_address就是钱包地址，也就是我们前面生成的那个钱包地址。pool_password这个密码一般不用管，直接设置为x即可。
 
-那么矿池地址从哪里来呢？可以在这里找http://pool.monero.org/，不过好像打开很慢，不知道是不是我的网络问题。这里呢，我就直接选用了网上比较多人推荐使用的矿池https://xmr.nanopool.org/
+那么矿池地址从哪里来呢？[[BlockChain:挖矿:可以在这里找http:pool.monero.org，不过好像打开很慢，不知道是不是我的网络问题。这里呢，我就直接选用了网上比较多人推荐使用的矿池https:xmr.nanopool.org]]
 
-首先我们打开https://xmr.nanopool.org/help，然后往下拉，找到地址列表
+[[BlockChain:挖矿:首先我们打开https:xmr.nanopool.orghelp，然后往下拉，找到地址列表]]
 
 Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
 
@@ -192,9 +192,9 @@ Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
 
 8、查看挖矿收益
 
-挖矿是开始了，但是怎么查看收益呢？还记得我们用的是哪个矿池不？是https://xmr.nanopool.org/
+挖矿是开始了，但是怎么查看收益呢？还记得我们用的是哪个矿池不？[[BlockChain:挖矿:是https:xmr.nanopool.org]]
 
-首先我们进入到https://xmr.nanopool.org/，然后在右上角有个搜索，这里可以输入我们的钱包地址或者PaymentID，然后搜索，即可查看到我们的收益。如果搜索不到，则可能是刚刚开始挖矿，还没有数据，需要耐心等待一会。
+[[BlockChain:挖矿:首先我们进入到https:xmr.nanopool.org，然后在右上角有个搜索，这里可以输入我们的钱包地址或者PaymentID，然后搜索，即可查看到我们的收益。如果搜索不到，则可能是刚刚开始挖矿，还没有数据，需要耐心等待一会]]。
 
 Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
 
