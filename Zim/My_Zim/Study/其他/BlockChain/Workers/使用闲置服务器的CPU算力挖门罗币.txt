@@ -7,8 +7,8 @@ Creation-Date: 2018-01-20T12:31:15+08:00
 
 https://pa.ci/index.php/archives/monero_cpu.html
 
-首先，我们需要注册一个钱包。几乎所有的虚拟币交易所都支持门罗币（Monero）的交易，我们在任何一家交易所注册一个账号后就可以获得一个Monero钱包地址。如果你不知道哪里可以注册账号，可以到这个链接上注册https://hitbtc.com，注册好后在后台获得Monero钱包地址。
-然后我们要选择一个矿池。门罗币矿池有很多，在门罗币的官网http://moneropools.com/中列举了很多个矿池，可以选择想加入的矿池，比如选择这里选择的是xmr.nanopool.org。
+首先，我们需要注册一个钱包。几乎所有的虚拟币交易所都支持门罗币（Monero）的交易，我们在任何一家交易所注册一个账号后就可以获得一个Monero钱包地址。如果你不知道哪里可以注册账号，worker22:可以到这个链接上注册https:hitbtc.com，注册好后在后台获得Monero钱包地址。
+然后我们要选择一个矿池。门罗币矿池有很多，worker22:在门罗币的官网http:moneropools.com中列举了很多个矿池，可以选择想加入的矿池，比如选择这里选择的是xmr.nanopool.org。
 
 接下来就是安装矿机了。选择Ubuntu 16.04 amd64位系统，登录服务器，执行下列命令安装矿机软件：
 
@@ -52,9 +52,9 @@ cmake
 make install
 以下是Windows系统配置方法：
 1.在C盘根目录下新建文件夹xmr-stak-dep
-2.安装Visual Studio 2017 Community版https://www.visualstudio.com/downloads/, 安装时请加上Desktop development with C++和Toolset for Visual Studio C++ 2015.3 v140...这两个组件。
-3.安装https://cmake.org/files/v3.9/cmake-3.9.0-rc3-win64-x64.msi, 安装时务必选择Add CMake to the system PATH for all users
-4.下载https://github.com/fireice-uk/xmr-stak-dep/releases/download/v1/xmr-stak-dep.zip并解压到C:xmr-stak-dep\
+2.安装Visual Studio 2017 worker22:Community版https:www.visualstudio.comdownloads, 安装时请加上Desktop development with C++和Toolset for Visual Studio C++ 2015.3 v140...这两个组件。
+worker22:3.安装https:cmake.orgfilesv3.9cmake-3.9.0-rc3-win64-x64.msi, 安装时务必选择Add CMake to the system PATH for all users
+worker22:4.下载https:github.comfireice-ukxmr-stak-depreleasesdownloadv1xmr-stak-dep.zip并解压到C:xmr-stak-dep\
 5.在命令行中执行：
 
 cd C:\xmr-stak-dep\
@@ -68,6 +68,6 @@ cd bin\Release
 copy ..\..\..\config.txt
 这样就安装好了Windows版本的矿机。
 
-本文来源于https://qing.su/article/129.html，有删改。
+worker22:本文来源于https:qing.suarticle129.html，有删改。
 
 标签: 教程, 挖矿
