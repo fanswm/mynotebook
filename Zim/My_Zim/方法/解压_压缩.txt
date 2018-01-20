@@ -16,7 +16,7 @@ Creation-Date: 2017-11-22T07:35:51+08:00
 	  可以看到这个压缩包也是打包后再压缩，外面是xz压缩方式，里层是tar打包方式。
 
 
-	  补充：目前可以直接使用 tar xvJf  ***.tar.xz来解压
+	  补充：目前可以直接使用 __tar xvJf  ***.tar.xz__来解压
 ———————————————
 .tar
 解包：tar xvf FileName.tar
