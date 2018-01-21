@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-21T09:12:09+08:00
+
+====== 开源字体的许可证问题 ======
+Created Sunday 21 January 2018
+
+[ GPL 许可证](https://zh.wikipedia.org/wiki/GNU%E9%80%9A%E7%94%A8%E5%85%AC%E5%85%B1%E8%AE%B8%E5%8F%AF%E8%AF%81)
+
+可能在不少人看来，「开源」就是没有限制。但实际情况恰恰相反。开源字体和开源软件一样，不但受制于各种类型的许可证，而且由于开源许可证的社区属性，关于其用法的争议甚至比权利义务一目了然的商业许可更大，在使用前必须认真检索和理解。
+
+例如，上面提到的文泉驿字体采用的就是 GPL 许可证。GPL 最大的特点是：如果你在自己的作品中使用了受制于 GPL 的软件，那么该作品也必须以 GPL 许可分发。这显然会产生一个大问题：如果我在文档中用了 GPL 字体，这份文件是否也就因此「感染」了 GPL、变成了开源的东西？这是一个没有定论的问题，但其潜在争议是如此之大，以至于 GPL 的推广者自由软件基金会额外推出了一条名为[「GPL 字型例外」（GPL font exception）的条款](https://en.wikipedia.org/wiki/GPL_font_exception)，可以附在 GPL 字体许可的后面，阻断其向使用该字体的文件的传播。
+
+与此不同，思源系列的字体则采用 [SIL 许可证分发](https://en.wikipedia.org/wiki/SIL_Open_Font_License)。这种许可证比 GPL 要开明，不会扩散到使用 SIL 字体的作品上，而只要求对字体作出修改后的作品本身要以相同许可分发。这也是思源字体能够被放心使用的又一大理由。

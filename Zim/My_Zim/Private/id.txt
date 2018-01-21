@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-03T21:53:18+08:00
-
-====== id ======
-Created 星期日 03 十二月 2017
-
-github:	常规+123

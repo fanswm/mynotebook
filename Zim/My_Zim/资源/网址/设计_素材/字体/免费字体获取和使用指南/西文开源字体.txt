@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-21T09:06:58+08:00
+
+====== 西文开源字体 ======
+Created Sunday 21 January 2018
+
+[Font Library](https://fontlibrary.org/) 
+[Google Fonts](https://fonts.google.com/)
+[The League of Movable Type](https://www.theleagueofmoveabletype.com/)
+[ DejaVu](https://dejavu-fonts.github.io/)
+[Ubuntu](https://wiki.ubuntu.com/Ubuntu%20Font%20Family)
+[ Liberation](https://fedorahosted.org/liberation-fonts/)
+[维基百科的「开源 Unicode 字型」词条](https://en.wikipedia.org/wiki/Open-source_Unicode_typefaces)
+[GitHub 的「字体」专题](https://github.com/topics/fonts)

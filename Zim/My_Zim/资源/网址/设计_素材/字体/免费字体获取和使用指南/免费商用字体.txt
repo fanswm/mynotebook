@@ -1,0 +1,33 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-21T09:14:19+08:00
+
+====== 免费商用字体 ======
+Created Sunday 21 January 2018
+
+作为国内较为知名的字厂，
+方正字库将其四款字体[标为免费商用](http://www.foundertype.com/index.php/About/bookAuth/key/my_hdsq.html)，
+包括
+[方正黑体](http://www.foundertype.com/index.php/FontInfo/index.html?id=131)、
+[方正书宋](http://www.foundertype.com/index.php/FontInfo/index.html?id=151)、
+[方正仿宋](http://www.foundertype.com/index.php/FontInfo/index.html?id=128)和
+[方正楷体](http://www.foundertype.com/index.php/FontInfo/index.html?id=137)
+
+需要注意的是，这四款字体都是最基础的中文字体，因此如果你寻找字体的目的是为了个性化，它们可能并不是你的目标。不过，如果你是 Windows 系统的用户，那么这其中的方正书宋体在用于打印时，可能是比系统内建的[中易宋体（SimSun）](https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%98%93%E5%AE%8B%E4%BD%93)好得多的选择。
+
+
+
+站酷字体
+http://www.zcool.com.cn/special/zcoolfonts
+
+
+华康字体（限用于阿里巴巴旗下网站）
+https://service.tmall.com/support/tmall/knowledge-13481414.htm?from=groupmessage
+
+
+
+西文免费商用字体
+我个人并没有很多接触过西文免费商用字体，因为上面提到的众多开源字体来源几乎已经可以满足我所有的需求。但如果有这方面需求，[Font Squirrel](https://www.fontsquirrel.com/) 是一个相当全面的免费字体库，里面列出的字体都是可以商用的，有兴趣的读者不妨一试。
+
+
+
