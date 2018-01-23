@@ -1,0 +1,413 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-23T13:33:52+08:00
+
+====== 渗透工具(WIFI )汇总 ======
+Created Tuesday 23 January 2018
+
+今天给大家收集和整理了一些常用的 WiFi 渗透工具，工具对于我们这些人来说是最熟悉的东西之一了，选择一个好的工具会让你事半功倍。（工具顺序不分名次）
+
+__WIFI 监听网卡推荐 3070 和 8187(__https://wenku.baidu.com/view/f3d3157f8e9951e79b8927ac.html__)__，二者各有优劣，但是无伤大雅。 
+
+__1.Aircrack-ng__
+
+
+Aircrack-ng 是 Kali Linux 里面最热门的 __WiFi 破解领域的软件__。
+
+Aircrack-ng 套件包含的工具能够捕捉数据包和握手包，生成通信数据，或进行暴力破解攻击以及字典攻击。
+
+Aircrack-ng 是一款多合一整合套件，该套件大致包含下列几种工具：
+
+Aircrack-ng：无线密码破解
+
+Aireplay：生成网络数据，去客户端验证
+
+Airodump-ng：数据包捕捉
+
+Airbase-ng：配置伪造的接入点
+
+官方网站：
+
+http://www.aircrack-ng.org/
+
+使用教程：
+
+https://www.hackingtutorials.org/wifi-hacking-tutorials/how-to-hack-upc-wireless-networks/
+
+__2.Fluxion__
+
+
+Fluxion 是从一个叫做 Lindset 的高级社会工程攻击演变而来，Fluxion 是一个以欺骗无经验的用户泄露网络的密码的重写攻击。也是当前最热门的 WiFi 钓鱼工具之一，Fluxion 的操作简单只需要选择你需要钓的鱼其他的你基本就不用管了。
+
+工作原理：
+
+1、扫描网络
+
+2、捕获握手（不能没有有效的握手使用，需要验证密码）
+
+3、使用WEB界面
+
+4、启动 FakeAP 实例来模拟原始接入点
+
+5、生成一个 MDK3 进程，该进程使所有已经连接到目标网络的用户连接失效，然后引诱他们连接到 FakeAP 并输入 WPA 的密码
+
+6、启动一个虚假的 DNS 服务器，抓取所有的 DNS 请求并将其重定向到运行该脚本的主机
+
+7、启动强制访问的网站页面，并提示用户输入他们的 WPA 密码
+
+8、每个提交的密码都通过之前捕获的握手进行验证
+
+9、只要提交了正确的密码，攻击就会自动终止
+
+工具地址：
+
+https://github.com/wi-fi-analyzer/fluxion
+
+__3.Wifi Phisher__
+
+
+wifiphisher 是一个可执行 Wi-Fi 自动关联攻击的安全工具，他可以强制无线客户端自动连接攻击者控制的连接点。
+
+这是一个流氓接入点的框架，可以让 wifi 客户端自动连接钓鱼网站来盗取凭证或者安恶意软件。
+
+它是一个社会工程攻击的工具，与其它工具不同，它不包括任何暴力破解。他是获取门户网站或者第三方登陆系统凭证（如社交网络）或者 WPA / WPA2 预共享密钥的证书的简单方法。
+
+工作原理 
+
+在使用 Wi-Fi 自动关联技术（包括 “KARMA” 和 “已知信标” 攻击）实现中间人攻击，Wifiphisher 默认将所有 HTTP 请求重定向到攻击者控制的虚假页面。
+
+从受害者的角度来看，攻击有三个阶段：
+
+1、受害者从正常连接中断开。 Wifiphisher 通过伪造 “Deauthenticate” 或 “Disassociate” 数据包来连续阻塞目标接入点的所有 WiFi 设备，以破坏现有的关联。
+
+2、受害者加入了一个流氓接入点。 Wifiphisher 嗅探该区域并复制目标访问点的设置，然后创建一个根据目标建模的流氓无线接入点，然后建立一个 NAT / DHCP 服务器并转发正确的端口。这样，由于恶意攻击和自动关联技术，客户端最终将开始连接到恶意接入点。在这个阶段之后，受害者是MiTMed。
+
+3、受害者正在接受一个定制版的钓鱼攻击。Wifiphisher 使用一个比较小的 Web 服务器来响应 HTTP 和 HTTPS 请求。只要受害者从互联网上请求一个页面，wifiphisher 就会回复一个真实的虚假页面，要求提供凭据或者提供恶意软件，此页面是专门为受害者制作。例如，路由器配置页面将包含受害者供应商的品牌。该工具支持针对不同钓鱼场景的社区构建的模板。
+
+工具地址：
+
+https://github.com/wifiphisher/wifiphisher
+
+__4.LAZY__
+
+
+Lazy 是一些 Kali Linux 的脚本集合，可以自动化许多有关无线网络入侵和黑客入侵的程序。
+
+工具地址：
+
+https://github.com/arismelachroinos/lscript
+
+__5.WiFi-Pumpkin__
+
+
+WiFi-Pumpkin 是一个非常完整的 Wi-Fi 审计安全框架。 主要特点是能够创建一个假的 AP，并利用中间人攻击。功能还是很丰富的。
+
+主要功能
+
+1、Rogue Wi-Fi Access Point
+
+2、Deauth Attack Clients AP
+
+3、Probe Request Monitor
+
+4、DHCP Starvation Attack
+
+5、Credentials Monitor
+
+6、Transparent Proxy
+
+7、Windows Update Attack
+
+8、Phishing Manager
+
+9、Partial Bypass HSTS protocol
+
+10、Support beef hook
+
+11、ARP Poison
+
+12、DNS Spoof
+
+13、Patch Binaries via MITM
+
+14、Karma Attacks (support hostapd-mana)
+
+15、LLMNR, NBT-NS and MDNS poisoner (Responder)
+
+16、Pumpkin-Proxy (ProxyServer (mitmproxy API))
+
+17、Capture images on the fly
+
+18、TCP-Proxy
+
+工具地址：
+
+https://github.com/P0cL4bs/WiFi-Pumpkin
+
+__6.Waidps__    
+
+
+WAIDPS 是一个 Python 编写的无线入侵检测工具，基于 Linux 平台，完全开源。
+
+它可以探测包括 WEP/WPA/WPS 在内的无线入侵&攻击方式，并可以收集 WiFi 相关的所有信息。
+
+WAIDS 适用于渗透测试工作者、无线安全爱好者，当发现攻击时，系统会显示于屏幕并记录在日志中。
+
+工具地址：
+
+https://github.com/SYWorks/waidps
+
+__7.PiSavar__
+
+
+这个软件是为了防御 wifipineapple（中文 WiFi 菠萝是无线安全审计用的）的网络攻击。
+
+本项目的目标是利用 PineAP 模块查找 WiFi 菠萝设备打开的假接入点，防止客户端对攻击设备发起解除认证攻击。
+
+工具地址：
+
+https://github.com/WiPi-Hunter/PiSavar
+
+__8. dSploit（手机平台）__
+
+
+dSploit 是一款 Android 平台的网络分析和渗透套件，使用它可以对移动设备进行专业的网络安全评估。你可以用它分析、捕捉和发现网络包，扫描网络中的设备，比如手机、笔记本，并且发现他们的操作系统、服务和开放端口进行更深层次的渗透测试。
+
+支持的功能
+
+1、WiFi Scanning & Common Router Key Cracking 无线扫描&常见路由密钥破解
+
+2、Deep Inspection 深度检测
+
+3、Vulnerability Search 漏洞扫描
+
+4、Multi Protocol Login Cracker 多种协议登录破解 
+
+5、Packet Forging with Wake On Lan Support 数据包构造唤醒网络功能支持
+
+6、HTTPS/SSL Support ( SSL Stripping + HTTPS -> Redirection ) HTTPS/SSL 支持 （SSL分离+HTTPS->重定向）
+
+7、MITM Realtime Network Stats 网络信息实时统计
+
+8、MITM Multi Protocol Password Sniffing 多种协议密码嗅探
+
+9、MITM HTTP/HTTPS Session Hijacking HTTP/HTTPS 会话劫持
+
+10、MITM HTTP/HTTPS Hijacked Session File Persistance HTTP/HTTPS 会话劫持文件持久化
+
+11、MITM HTTP/HTTPS Realtime Manipulation HTTP / HTTPS 实时操控
+
+工具地址：
+
+http://www.csploit.org/downloads/
+
+__9.Zanti（手机平台）__
+
+
+Zanti 是一款手机平台的网络安全评估软件，揭开认证，后门，和蛮力攻击，DNS和协议的特殊攻击和恶意接入点使用一个全面的完全可定制的网络侦察扫描。总之是一款的非常不错的软件
+
+工具地址：
+
+https://www.zimperium.com/zanti-mobile-penetration-testing
+
+__10.Kali Linux NetHunter（手机平台）__
+
+
+kali linux NetHunter 是安卓平台的渗透设备
+
+功能
+
+1、802.11 无线注入和 AP 模式支持，支持多个 USB 无线网卡。
+
+2、能够运行 USB HID 键盘攻击，类似于 Tensydevice 能做的事情。
+
+3、支持 BadUSB MITM 攻击。将你的 Nethunter 插入到受害者的电脑，并通过它传输流量。
+
+4、包含完整的 Kali Linux 工具集，通过简单的菜单系统操作就可以使用许多工具。
+
+5、Nethunter 内核支持 Y-cable，可以使用 OTG cable 为 Nexus 设备充电！
+
+6、软件定义无线电支持。使用 Kali Nethunter 和你的 HackRF 一起来探索无线广播空间。
+
+工具地址：
+
+https://www.offensive-security.com/kali-linux-nethunter-download/
+
+__11.树莓派 Kali__
+
+
+小小的树莓派当他刷完 kali，那他就是一款便捷的黑客设备你可以用它干你 想干的事情。
+
+工具：
+
+树莓派 3b  
+
+sd 卡 16G 以上 
+
+刷入树莓派版的 kali
+
+树莓派 kail 的地址：
+
+https://www.offensive-security.com/kali-linux-arm-images/
+
+__12.WiFi Pineapple__
+
+
+wifi pineapple 是一款无线安全审计用一款设备，这个小机器内置了一个重度修改的 OpenWRT 网络操作系统。
+
+功能 
+
+1、WiFi 中间人平台
+
+2、高效的流氓 AP 套件
+
+3、在空调的应用程序和模块
+
+4、高级客户端和 AP 的过滤
+
+5、直观的 Web 界面
+
+6、简化审批流程
+
+7、现场侦察观
+
+8、一目了然的情报
+
+9、跟踪和报警装置
+
+10、报告通过电子邮件以设定的时间间隔
+
+11、基于嵌入式 Linux
+
+12、免费的软件更新
+
+官网售价 99￥-299￥，淘宝有卖复制版的 300+
+
+__13.Wiflslax__
+
+
+Wifislax 是西班牙的 linux 系统，里面的工具基本都是无线渗透使用的工具，可以说是从业人员无线渗透的福音。
+
+
+
+系统地址：
+
+http://www.wifislax.com/
+
+作者使用的中文版：
+
+链接：https://pan.baidu.com/s/1htwVMXA 密码：ncnt
+
+__14.Wifl万能钥匙__
+
+
+这个就不用我多介绍了吧。他就是分享附近 wifi 密码而不是破解很多人都以为他能破解 WiFi 密码。。。
+
+其实是之前有人分享了这个密码所以你能用。
+
+WiFi 钥匙为什么能上我们渗透工具呢？
+
+用过的都说好，当我们在渗透一个 WiFi 的时候破解的非常辛苦，结果你打开万能钥匙发现居然可以连接。
+
+那种心情真的是一万只羊在内心奔腾。小米手机有可以查看密码的功能配合万能钥匙是非常好用的。
+
+__15.EWSA（跑握手包）（Win环境）__
+
+
+EWSA 全称  Elcomsoft Wireless Security Auditor。
+
+ElcomSoft 是一家俄罗斯软件公司，他可以使用 GPU（显卡）进行运算速度相比使用 CPU 可提高最多上百倍。
+
+本软件的工作方式很简单，就是利用词典去暴力破解无线 AP 上的 WPA 和 WPA2 密码，还支持字母大小写、数字替代、符号顺序变换、缩写、元音替换等 12 种变量设定，在 ATI 和 NVIDIA 显卡上均可使用。（根据自己电脑配置来进行跑包否则可能会烧坏主板 cpu 显卡等等）
+
+工具地址：
+
+百度有破解版
+
+__16.XEROSPLOIT__
+
+
+xerosploit  是一个渗透测试工具包，其目的是执行中间人攻击的测试目的。它带来的各种模块，可以实现有效的攻击，也可以进行服务攻击和端口扫描。
+
+我们在渗透一个 WiFi 的时候基本都是要嗅探一下这个局域网里面有什么信息。
+
+功能
+
+1、端口扫描
+
+2、网络映射
+
+3、拒绝服务攻击
+
+4、HTML 代码注入
+
+5、JavaScript 代码注入
+
+6、下载 intercaption 和更换
+
+7、嗅探
+
+8、DNS 欺骗
+
+9、背景音频再现
+
+10、图像置换
+
+11、drifnet
+
+12、网页篡改和更多…
+
+工具地址：
+
+https://github.com/LionSec/xerosploit
+
+__17.Bettercap__
+
+
+Bettercap 是一款优秀的 MITM 攻击测试框架
+
+功能
+
+1、支持全双工和半双工 ARP 欺骗。
+
+2、第一次真正实现 ICMP 双向欺骗。
+
+3、可配置的 DNS 欺骗。
+
+4、完全自动化,可实时发现主机。
+
+5、实时获取通信协议中的安全凭证，包括 HTTP(S) 中的 Post 数据，Basic 和 Digest 认证，FTP、IRC、POP、IMAP、SMTP、NTLM(HTTP、SMB、LDAP) 以及更多
+
+6、完全可定制的网络嗅探器。
+
+7、模块化的 HTTP 和 HTTPS 透明代理,支持用户自定义插件或内置插件，注入到目标的 HTML 代码、JS、CSS 文件，以及 URL 中。
+
+8、使用 HSTS bypass 技术拆封 SSL。
+
+9、内置式的 HTTP 服务器。
+
+工具地址：
+
+https://github.com/evilsocket/bettercap
+
+使用教程：
+
+https://www.bettercap.org/index.html#document-intro
+
+__18.WiFite__
+
+
+Wifite 是一款自动化 wifi 密码破解工具，特点是支持多个 wep、wpa 加密的 wifi 网络，而且过程自动配置，无需人员干预！
+
+工具地址：
+
+https://github.com/derv82/wifite/wiki/Installation
+
+总结
+每个软件都是有自己独一无二的功能，选择适合自己的渗透的工具渗透起来就会事半功倍。
+
+现在 WiFi 渗透基本都是 “瞄准人进行攻击的” 现在不管是软件还是硬件安全性是大大提升，然而就是因为越来越安全找不到突破口，所以很多人都看上了 “人类自己是否有漏洞” 现在很多软件都是利用社会工程学进行攻击或者渗透，所以总之一句话加强自身的安全意识最为重要。
+
+（以上给的地址里面都有安装步骤和使用教程）有不足的地方欢迎大家在下面留言作者会仔细的看完。
+
+https://mp.weixin.qq.com/s?__biz=MzI5MDQ2NjExOQ==&mid=2247486316&idx=1&sn=78b922da72059738c6fb7636f152f34e&chksm=ec1e3b44db69b2524a5160ba681f200b56c33b681b0647c61870500787c3295beb370db49ea5&mpshare=1&scene=1&srcid=0122jUibLRapaGtxOeEk9QGl#rd

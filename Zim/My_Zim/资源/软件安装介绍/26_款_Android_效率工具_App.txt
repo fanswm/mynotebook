@@ -1,0 +1,287 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-23T14:15:38+08:00
+
+====== 26 款 Android 效率工具 App ======
+Created Tuesday 23 January 2018
+
+26 款 Android 效率工具 App | 2015 年度盘点
+Clyde Clyde 2015年12月22日  27  9
+2015 年的 Android 手机市场无比的繁荣，虽然各大厂商依然争锋相对，但「跑分」这个词却提及的越来越少。
+
+在性能已经不再是第一追求的时候，越来越多人开始看重优质应用所能带给我们的使用体验，人们开始使用 Android 作为生产工具而不是游戏机，那么作为「少数派年度盘点」系列，这篇文章将盘点这一年 Android 上那些优质的、你不应错过的效率工具 App。
+
+操作增强
+
+Pintasking
+Android
+相关文章
+下载
+http://www.wandoujia.com/apps/com.phinxapps.pintasking?mt=8&uo=4&ct=appcards
+
+Easy App Switcher
+Android
+相关文章
+下载
+http://www.wandoujia.com/apps/com.echoff.easyswitch?mt=8&uo=4&ct=appcards
+
+
+单手划划
+Android
+相关文章
+下载
+http://www.coolapk.com/apk/com.lazyswipe?mt=8&uo=4&ct=appcards
+
+不少 Android 应用都在「悬浮窗」这个特性做过文章，无论是先前我们推荐过的 [BuMP Music Player](https://sspai.com/31726)，还是我们这里所说的 Pintasking、单手划划以及 Easy App Switcher，利用悬浮窗，它们或许会彻底改变我们在使用 Android 设备时的操作习惯。
+
+其中，Pintasking 的重心在 tasking 上，注重提升在某几个特定任务之间的转换体验，能在跨越数个 App 的工作过程中帮助我们简化操作步骤并提高专注度；Easy App Switcher 偏向于 switch，但却不仅仅局限于替代 ROM 本身的应用切换功能，利用好常用应用和悬浮球定制这两个功能可以将其变为高效而无多余视觉干扰的快速启动器；单手划划则更像是二者的结合，可以同时替代应用切换、快速启动、快速设置面板甚至是系统的通知中心，应用体积却仅有 2M 不到。
+
+关联阅读：
+
+《如「 Alt + Tab 」般得心应手：Pintasking》
+https://sspai.com/31760
+
+《别再把时间都浪费在切换应用和找应用上了：Easy App Switcher》
+https://sspai.com/31705
+
+《半年一亿用户，Android 单手操作增强工具：单手划划 Omni Swipe | 评测 · 专访》
+https://sspai.com/31954
+
+
+Snap
+Android
+相关文章
+下载
+http://www.coolapk.com/apk/com.fb.iwidget?mt=8&uo=4&ct=appcards
+
+
+
+flippr
+Android
+相关文章
+下载
+http://www.coolapk.com/apk/com.apps.sreeni.flippr?mt=8&uo=4&ct=appcards
+
+Widget 作为 Android 的另一大特色，其位置也不再局限于桌面了（其实早在 Jellybean 时代 Google 就尝试过将 Widget 放在锁屏界面）。对于使用小屏手机和桌面不爱放太多东西的人来说，Snap 能将 Widget 放在通知栏并不会影响其他下拉通知的查看与使用；而对于连下拉通知栏都很困难的大屏手机用户来说，flippr 也许才是最佳的选择——利用一个小小的悬浮窗，它能把我们想要的 widget 都整合起来，需要用到时随手一划即可轻松呼出。
+
+关联阅读：
+
+《你绝对想不到，Widget 小部件还能这么玩：Snap》https://sspai.com/31974
+《一个圆点，让你的 Widget 发挥无限创意：flippr》https://sspai.com/32227
+
+Custom Quick Settings
+Android
+相关文章
+下载
+http://www.wandoujia.com/apps/com.quinny898.app.customquicksettings?mt=8&uo=4&ct=appcards
+
+Custom Quick Settings 则可以说是 Android 6.X Marshmallow 用户的必备工具，无须 root，也不用刷入各种各样的定制 ROM，利用 Marshmallow 的 SystemUI Tuner 和 Broadcast Tile 这两个功能即可定制出个性化十足的快速设置面板。
+
+关联阅读：
+
+《让「棉花糖」更合你的口味：自定义快速设置 Custom Quick Settings》https://sspai.com/31874
+
+Texpand
+Android
+相关文章
+下载http://www.coolapk.com/apk/com.isaiasmatewos.texpand?mt=8&uo=4&ct=appcards
+
+Text Aide
+Android
+相关文章
+下载http://coolapk.com/apk/com.arjerine.textxposed?mt=8&uo=4&ct=appcards
+
+最后要介绍的 Texpand 和 Text Aide 就是文字工作者的福音了。前者能够在输入过程中自动扩展事先设置好的文字内容，提升输入效率（比如输入「hhh」会自动填充为「哈哈哈哈哈哈」）。而后者的功能更为强大，除了扩展事先设置好的内容外，还能在 Android 平台上实现划词搜索、定义甚至是点选翻译等功能（配合 Android 6.X Marshmallow 改进后的文字点选菜单效果更好）。
+
+关联阅读：
+
+《重复输入轻松搞定，就是这么高效：Texpand》https://sspai.com/31913
+《羡慕 Android 6.0 的划词搜索？ 三步教你曲线救国》https://sspai.com/31697
+
+__录屏截屏__
+
+AZ Screen Recorder
+Android
+相关文章
+下载http://coolapk.com/apk/com.hecorat.screenrecorder.free?mt=8&uo=4&ct=appcards
+
+自 Android 5.0 Lollipop 开启屏幕录制 api 以来，Google Play Store 中已经出现过不少利用该特性的屏幕录制应用，而在这些应用中，AZ Screen Recorder 也许是最为「尽善尽美」的那一款了：支持制过程中随时暂停/恢复、标注；录制结束后亦可随意剪辑或是转为 Gif 动图；开启「Show front-camera」功能后还能作为游戏录制与解说工具来使用。
+
+关联阅读：
+
+《再小众的需求都应该被满足：从屏幕录制到高质量的 GIF 转制》https://sspai.com/29175
+
+带壳截图
+iOS
+相关文章
+下载
+
+Screener
+Android
+相关文章
+下载http://www.wandoujia.com/apps/de.toastcode.screener?mt=8&uo=4&ct=appcards
+
+在过去的一年里，带壳截图已经日臻完美。从屏幕眩光到个性后盖，从自动合成到横屏支持，如果说要给「为手机套上外壳」这件事挑一个最佳人选，以此事命名的「带壳截图」无疑是最好的选择。
+
+而同样以满足「为手机套上外壳」这一需求为目的所开发的 Screener 则更多了几分「极客味儿」：灵活运用 Flat、3D Frame 和 Minimal 三种套壳方式能做出不同的展示效果；背景虚化功能也能更好地突出展示内容；支持七款 Android Wear 带壳……功能众多却都是点到为止，建议与带壳截图互为补充使用。
+
+关联阅读：
+
+《不甘平庸的你一定需要这两把利器：带壳截图 & Screener》https://sspai.com/30873
+
+PPIICC
+Android
+相关文章
+下载http://coolapk.com/apk/bos.consoar.imagestitch?mt=8&uo=4&ct=appcards
+
+纯纯打码
+Android
+相关文章
+下载http://coolapk.com/apk/me.drakeet.puremosaic?mt=8&uo=4&ct=appcards
+
+无论是长图拼接应用 PPIICC 还是图片打码工具纯纯打码，都不偏不倚地戳中了部分 Android 用户的痛点。
+
+「如何在一场微博撕逼中从气势上压倒对手？一张马赛克打得恰到好处的长图即可。」
+
+关联阅读：
+
+《守得云开见月明，长截图打码 All in One：PPIICC》https://sspai.com/29221
+《他说，我要打码，所以：纯纯打码》https://sspai.com/29319
+文字处理
+
+锤子便签
+iOS
+相关文章
+下载
+
+Google Keep
+iOS
+相关文章
+下载
+便签在日常生活中的出镜率相当之高，Android 平台上的便签应用也不计其数。在这之中，我们挑选了锤子便签、Google Keep 以及 Parchi 作为便签类应用的年度之选。
+
+尽管拟物设计风格在非 Smartisan OS 机型上看上去也许有些违和，锤子便签在易用性、便签生成效果以及分享方式上早已获得了广大用户的认可。无论是长微博、旅游攻略还是考试重点、表白情书，在那些我们能想到和不能想到的使用场景下，锤子便签都能派上用场。
+
+Google 家的 Google Keep 则以功能和同步见长：清单、图文、记事、手绘、录音……我们几乎能以任何方式记录下日产生活与工作中的点点滴滴并用颜色和标签进行分类管理，依赖 Google 账户的同步功能，这些记录还能在不同设备间同步或直接与他人分享，将 Google Keep 变成一个简单的协作平台。  
+
+关联阅读：
+
+《Markdown 加持，更好用的锤子便签 2.5 体验》https://sspai.com/30910
+《说 Google Keep 是 Android 最好的便签 App 的 9 大理由》https://sspai.com/31950
+
+Monospace Writer
+Android
+相关文章
+下载http://www.wandoujia.com/apps/com.underwood.monospace?mt=8&uo=4&ct=appcards
+
+JotterPad
+Android
+相关文章
+下载http://www.wandoujia.com/apps/com.jotterpad.x?mt=8&uo=4&ct=appcards
+
+MarkdownX
+Android
+相关文章
+下载http://www.wandoujia.com/apps/com.ryeeeeee.markdownx?mt=8&uo=4&ct=appcards
+
+除了便签，在移动平台上写作也是一大需求之一，在应运而生的众多文本编辑应用中，我们选择了轻量简洁的 Monospace Writer、功能强大界面精美的 JotterPad 以及专注 Markdown 写作的 MarkdownX 三款应用作为年度推荐。需要注意的是，Monospace Writer 对中文适配并不完整，一定情况下会出现中文字号混乱现象；JotterPad 功能完善支持自定义字体但需要通过内购才能解锁完整功能，相比之下由国人开发的 MarkdownX 应该是我心中的最佳之选。
+
+关联阅读：
+
+《码字不要花里胡哨，它就够了：Monospace Writer》https://sspai.com/31716
+《在 Android 上也可以安静写作：JotterPad》https://sspai.com/31715
+《专注移动端 Markdown 写作的优秀应用： MarkdownX》https://sspai.com/30800
+
+WPS Office
+iPhone
+相关文章
+下载
+说完便签和文本编辑，我们最后再来说一说 WPS Office。与功能残缺的 Google 文档处理应用和功能完整但体积巨大的 Microsoft 系 Office 应用相比，体积适中、功能完善的 WPS Office 在过去的一年里抢占了太多的风头，就连 Google Play Store 的 2015 年度最佳应用榜单也把该类应用的头把交椅留给了 WPS Office。不管你爱不爱金山，WPS 的好用是毋庸置疑的。而且很多人也许都不知道，WPS Office 其实是为数不多的较早跟进了 Material Design 设计语言的国产应用。点击查看更多相关文章。
+
+文件管理
+
+Solid Explorer 2.0
+Android
+相关文章
+下载http://coolapk.com/apk/pl.solidexplorer2?mt=8&uo=4&ct=appcards
+
+Android 平台上的文件管理器不少，真正让我感到省心的却唯有 Solid Explorer 这一款。颜好、功能完善、操作效率高，我们对一款文件管理器的要求真的不能再多了。
+
+关联阅读：
+
+《Lollipop 时代，你只需要这一个文件管理器：Solid Explorer 2.0》https://sspai.com/29027
+
+Google Photos
+Android
+相关文章
+下载http://www.coolapk.com/apk/com.google.android.apps.photos?mt=8&uo=4&ct=appcards
+
+除了文件，手机里最需要管理的也许就是各式各样的照片了。而说起照片管理，Google Photos 今年则是抢近了风头。从 I/O 大会上宣布用户可使用免费的无限量储存空间到后来一次次更新不断祭出「黑科技」，Google 的自家应用又一次竖起了「业界标杆」。
+
+关联阅读：
+
+《关于 Google Photos，你知道的与不知道的都在这里》https://sspai.com/32195
+
+Focus
+Android
+相关文章
+下载http://www.coolapk.com/apk/com.franco.focus?mt=8&uo=4&ct=appcards
+
+关于相册，今年还有一个大新闻——猎豹收购快图。被收购之后的快图人气急转直下，搜寻本地图库的替代品成为了一段时间的搜索热门。
+
+而这款由国外著名第三方内核 Franco Kernel 的开发者 Francisco Franco 所开发的 Focus 便是不少国外用户的新选择。Focus 采用了 Material Design 设计语言，主要用「标签」这一形式来管理本地图片，支持 Muzei 动态壁纸插件、夜间模式以及图片保险箱（作者甚至在第一时间用上了 Android 6.0 Marshmallow 的指纹 api，为其加入了指纹锁功能）。
+
+跨平台传输
+
+Pushbullet
+Android
+相关文章
+下载http://www.wandoujia.com/apps/com.pushbullet.android?mt=8&uo=4&ct=appcards
+
+
+Pasteasy
+iPhone
+相关文章
+下载
+说起跨平台传输这件事，我们似乎有很多选择。Pushbullet 和 Pasteasy 就是不错的两款，前者支持平台最广，可跨网络传输；后者无须账号，设备在同一局域网内通过扫描二维码进行关联。但其实我们的选择余地又很小，毕竟 Pushbullet 这枚「子弹」面对的是一堵「厚墙」。
+
+关联阅读：
+
+《跨平台消息推送工具 Pushbullet 体验详解》https://sspai.com/28138
+《Copy & Paste，三款跨平台剪贴板同步工具：Instashare、PushBullet、Pasteasy》https://sspai.com/29159
+
+AirDroid
+Android
+相关文章
+下载http://www.coolapk.com/apk/com.sand.airdroid?mt=8&uo=4&ct=appcards
+
+当然，说起 Android 平台与其他平台间的文件传输，我们一定不会忘了被不少人誉为「神器」的 Airdroid。与各大手机市场和各大手机助手比起来，Airdroid 的强大和专注显得尤为引人注目；与 Pushbullet 等工具相比，Airdroid 在连接稳定性和易用性上也更胜一筹，利用 Airdroid 的 Android 客户端、Windows 客户端、Mac OS 客户端以及网页客户端，我们可以随时随心地在不同设备之间推送文件和信息。点击查看 [Airdroid 相关教程](https://sspai.com/search/?q=airdroid)。
+
+文档识别
+老实说，在微软发布 Office Lens 之前，Android 平台上的 OCR 识别应用总给人一种「食之无味，弃之可惜」的鸡肋之感，好在 Office Lens 的出现终于给了我们一个靠谱的选择。Google Play Store 上它收获的评价大多以「一开始觉得很弱鸡，后来发现这应用厉害到天上去了」为主题，自然它也成功登上了 Play Store「2015 年度最佳应用」的榜单。所以如果你有这方面的需求，不妨试一试这款来自微软的 OCR 识别应用。
+
+关联阅读：
+
+《与 Office 深度整合，来自微软的扫描应用：Office Lens》https://sspai.com/28709
+《便携扫描新生代：Office Lens & Scannable 对比》https://sspai.com/28711
+结语
+早上，我们在设定好的闹钟铃声中醒来；
+出门前，我们看一看今天的天气和空气质量；
+无论是工作还是学习，协作平台和待办事项清单能让我们保持专注和高效；
+茶余饭后，一两条当天的资讯推送满足我们的碎片阅读需求……
+所以，手机绝不只是传统思维里「低头党」的玩具，它更应该成为推动大多数人日常生活的那个「小齿轮」。我们衷心希望这份盘点能为你发掘新工具，或是帮你回顾这一年来的好工具。
+
+少数派 2015 年度盘点系列专题：
+
+《你不应错过的 22 款 Mac 效率工具 App》
+《码字必备：18 款优秀的 Markdown 写作工具》
+《今年最值得一看的 16 款阅读 App》
+《追美剧，看电影？这 12 款追剧 App 值得你一试》
+《你不应错过的 8 款精品像素游戏》
+《你不应错过的 21 款摄影后期 App》
+《你不应错过的 8 款优秀 Xposed 模块》
+《你不应错过的 18 款 iOS 效率工具 App》
+《16 款记账 App，总有一款适合你》
+《解读 App Store 2015 年度精选 App》
+《Android 应用最权威榜单：Google Play 2015 年度最佳游戏与应用》 
+少数派 2015 年度 App 榜单已经公布，我们评选了今年优秀的 60 款年度 App，同时还有「分享个人年度榜单」活动，有机会获 iPad Pro、Nexus 6P、Smartisan T2 等上百份奖品，点此了解详情。

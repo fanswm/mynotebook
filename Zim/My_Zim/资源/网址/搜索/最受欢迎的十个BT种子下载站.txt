@@ -1,0 +1,100 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-23T11:52:13+08:00
+
+====== 最受欢迎的十个BT种子下载站 ======
+Created Tuesday 23 January 2018
+
+最受欢迎的十个BT种子下载站
+软件
+　　BT是一种互联网上的P2P传输协议，全名叫“BitTorrent”，是一个有广大开发者群体的开放式传输协议，BT下载也是互联网最热门的应用之一。BT下载通过一个P2P下载软件（点对点下载软件）来实现，克服了传统下载方式的局限性，具有下载的人越多，文件下载速度就越快的特点。因此，吸引着众多的网民使用，其好处是不需要资源发布者拥有高性能服务器就能迅速有效地把发布的资源传向其他的BT客户软件使用者，而且大多数的BT软件都是免费的。
+
+　　BT种子网站里，海盗湾目前是最受欢迎的种子网站，紧随其后的还有不少其他的种子网站，传统上来说，P2P种子网站用户都非常忠诚，这能从排行榜上的几个常驻网站能看出来。但是排行榜每年仍然会有不少的波动与新入榜者。
+
+　　下面就是最受欢迎的种子网站前十名。只有公开的英文网站才会被收录在内，排名基于各方面的流量报告和Alexa排名。
+
+　　__1.PirateBay.org__
+
+　　Alexa排名：83
+
+　　网站内容：各种类别Torrent内容。
+
+　　海盗湾（PirateBay）是最早的torrent文件托管网站之一，排名第一。
+
+　　__2.Rarbg.to__
+
+　　Alexa排名：277
+
+　　网站内容：电影Torrent
+
+　　Rarbg也是比较流行的Torrent网站。索引各种类别的种子文件，如电视节目，电影等。现在，Rarbg是全球访问量最大的Torrent网站之一。
+
+　　__3.Extratorrent.cc__
+
+　　Alexa排名：297
+
+　　网站内容：各种类别Torrent内容。
+
+　　Extratorrent你应该也不会陌生，提供大量的Torrent链接指向受版权保护内容的主机。
+
+　　__4. YTS.ag__
+
+　　Alexa排名：304
+
+　　已知为：电影Torrent
+
+　　以前被称为YIFY，YTS主要以其电影Torrent收集而闻名。YTS的团队甚至发布了他们的平台的API，YTS也受到MPAA的删除活动的影响。
+
+　　__5. 1337x.to__
+
+　　Alexa排名：760
+
+　　网站内容：各种类别Torrent内容。
+
+　　1337x在2007年成立，这个网站的UI很像YTS，该网站每天都在积极更新。1337x拥有受版权保护的内容。
+
+　　__6.TorrentProject.se__
+
+　　Alexa排名：797
+
+　　网站内容：Torrentz的替代者。
+
+　　Torrent Project是一个磁力搜索引擎。在过去的十个月中，TorrentProject受到了巨大关注，从去年4月的Alexa排名4500攀升到797。
+
+　　__7.EZTV.ag__
+
+　　Alexa排名：1566
+
+　　网站内容：电影电视Torrent内容
+
+　　EZTV原先是TPB和KickAss Torrent的发行小组。该小组在KickAss关闭后做了torrent网站。更新内容能力强。
+
+　　__8. Limetorrents.cc__
+
+　　Alexa排名：2053
+
+　　网站内容：各种类别Torrent内容。
+
+　　定期更新，Limetorrents有自动生成的排名列表和最新列表。
+
+　　__9.Isohunt.to__
+
+　　Alexa排名：2882
+
+　　网站内容：各种类别Torrent内容。
+
+　　IsoHunt.to现在被认为是原来IsoHunt的替代者。与TPB同年诞生。
+
+　　__10. Torlock.com__
+
+　　Alexa排名：3829
+
+　　网站内容：各种类别Torrent内容。
+
+　　Torlock就像1337x，也有非常精心制作的UI。torrent站点索引超过300万个磁力链接和不同类别内容的磁力链接。Torlock声称在网站上索引的所有种子被验证。
+
+
+
+　　除非注明，月光博客文章均为原创，转载请以链接形式标明本文地址 
+
+　　本文地址：http://www.williamlong.info/archives/5116.html
