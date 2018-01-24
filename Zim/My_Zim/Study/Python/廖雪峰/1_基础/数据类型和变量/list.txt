@@ -1,0 +1,25 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-10T20:07:19+08:00
+
+====== list ======
+创建日期 星期三 10 一月 2018
+
+用索引来访问list中每一个位置的元素，记得索引是从0开始的：
+
+当索引超出了范围时，Python会报一个IndexError错误，所以，要确保索引不要越界，记得最后一个元素的索引是len(classmates) - 1。
+
+如果要取最后一个元素，除了计算索引位置外，还可以用-1做索引，直接获取最后一个元素
+
+
+追加:
+list.append("data")
+
+list.insert(1, "data")
+
+list.pop()
+
+list.pop(index)
+
+替换:
+直接赋值

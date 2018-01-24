@@ -1,0 +1,110 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-24T15:58:08+08:00
+
+====== 树莓派无线网卡选择 ======
+Created Wednesday 24 January 2018
+
+http://www.cnblogs.com/sjqlwy/p/5003436.html
+
+http://shumeipai.nxez.com/2013/08/25/usb-wifi-nic-for-pi.html
+
+
+前言：大家购买树莓派时一般都会再买一个无线网卡，除了所谓的树莓派专用无线网卡EDUP EP-N8508GS之外，是否还有其他更好的选择？我手头已有的无线网卡是否能兼容树莓派？注意本文仅适用于树莓派上可使用的USB接口无线网卡，支持802.11b/g/n无线协议，不包括802.11ac。
+
+__一、无线网卡的选择考虑因素__
+
+a)         体积（市售非常多的都是迷你USB网卡，便携方便，但是相应的散热和信号就差一点）
+
+b)         做工（一般常见的品牌售后有保障，但同时南方小作坊生产出来的不知名网卡做工就差点，之前买过一个没多久就过热不能用了）
+
+c)         价格（物美价廉最好啦，一般30块以内的都ok，淘宝上也能淘到10-20块包邮的）
+
+d)         即插即用（免驱；拿到手还要手动编译驱动什么的对新手来说不是那么友好~当然有某些不折腾不死星人）
+
+e)         功耗（需要电流的大小；树莓派外出使用移动电源供电时，当然无线网卡功耗越小越好，发热也小）
+
+f)          其他高级功能（monitor模式-破解无线网络，AP模式-树莓派当无线路由器等）
+
+二、国内常见无线网卡芯片及无线网卡制造商
+
+__首先选择无线网卡芯片__，这个决定是否即插即用以及支持其他功能。其次选择采用这个__网卡芯片的网卡__，注意同一型号的网卡硬件版本不同也可能使用了不同的芯片，如ver1和ver2。系统内核自带的无线驱动及其支持情况可以在
+https://wireless.wiki.kernel.org/en/users/drivers
+查看到。
+
+一般需要关注的内容包括__是否支持cfg80211__，__是否支持AP和monitor模式（高级功能），网络协议支持情况__（PHY modes，一般选支持__B/G/N的__，特殊情况比如RTL-8187的后文讨论），__接口类型__（Buses，我们需要选择USB接口的）。
+
+市面上常见的芯片厂商有
+
+a)         __RT-XXXX（Ralink雷凌__，经典的是__RT3070__，该公司已经被MediaTek收购，MediaTek可能不熟，但是MTK这个名字就很熟悉了吧~后续的芯片都是以mt开头，比如被各种随身wifi所广泛使用的mt7601u。）；
+
+b)         __RTL-XXX__（RealTek瑞昱，俗称螃蟹卡，因为芯片上经常会有大螃蟹图案，驱动不够完善，”号称”树莓派专用无线网卡的EDUP EP-N8508GS就是使用的__rtl8188cus__，该芯片可以免驱，但很多功能实现起来比较麻烦，比如开启AP和monitor模式）；
+
+c)         __ARXXX__（Atheros钰硕，驱动情况尚可。2011年被Qualcomm高通公司并购，于是当年热门的3A平台-AMD+ATI+Atheros仅剩下AMD。）
+
+无线网卡生产厂家都差不多，因为这些USB芯片高度集成化，厂家能做的东西很少，而且不排除都是深圳某家不知名公司代工的，就像当初的山寨手机一样。所以选择的话就选有售后好保修的，__比如D-Link，TP-Link，Tenda之流__。
+
+三、其他的无线网卡功能
+
+如果你想尝试破解无线网络，__那么需要无线网卡支持Monitor监听模式__；如果你想让树莓派变成一个__无线路由器，那么需要AP模式__。
+
+是否支持该模式可以在上文的网站可以查到。此外无线网卡还支持其他模式式，详情可以查看：
+http://blog.csdn.net/xiaobei4929/article/details/7738125
+以及
+https://wireless.wiki.kernel.org/en/users/documentation/modes
+
+查看自己的网卡支持哪些模式可以使用`iw list`命令，详情请参考
+http://www.361way.com/hostapd-soft-ap/2933.html
+
+四、如何购买无线网卡
+
+一般就是买之前确定你想买来做什么，单纯地用来连接无线网络还是需要其他功能。从
+https://wireless.wiki.kernel.org/en/users/drivers
+网站根据自己的需要查。
+
+以rt2800usb为例
+
+a)         选择合适的驱动根据驱动点开一个驱动链接就会附上使用该驱动的无线芯片以及采用该芯片的部分设备列表。
+
+ 
+
+ 
+
+ 
+
+或者从树莓派wiki上查看无线网卡兼容性列表：http://elinux.org/RPi_VerifiedPeripherals#USB_Wi-Fi_Adapters%E3%80%82%E5%9B%A0%E4%B8%BA%E6%98%AF%E5%AE%9E%E6%B5%8B%E5%8F%8D%E9%A6%88%E7%9A%84%EF%BC%8C%E6%AF%94%E8%BE%83%E6%9C%89%E5%8F%82%E8%80%83%E6%80%A7%EF%BC%8C%E4%BD%86%E6%98%AF%E5%88%97%E5%87%BA%E7%9A%84%E8%AE%BE%E5%A4%87%E6%AF%94%E8%BE%83%E5%B0%91。
+
+购买途径：淘宝（型号比较全，而且可以淘到海外二手）；阿里巴巴（适合常见型号，价格便宜）；京东、亚马逊等购物平台，速度快，售后完善退货方便，注意一定要买自营的，第三方商家入驻和淘宝没区别。。。
+
+五、无线芯片选型（高级应用）
+
+建议首先阅读这篇文章：http://www.freebuf.com/news/special/33524.html
+
+因为我买来肯定要折腾一番，就选择支持AP，Monitor模式的，经过筛选，这些驱动符合要求：
+
+a)         ath9k_htc
+https://wikidevi.com/wiki/Ath9k_htc
+https://wireless.wiki.kernel.org/en/users/drivers/ath9k_htc
+
+b)         rt2800usb
+https://wireless.wiki.kernel.org/en/users/drivers/rt2800usb
+https://wikidevi.com/wiki/rt2800usb
+
+c)         zd1211rw
+
+仅支持80211b/g协议，配置请参考http://davidrobot.com/2014/11/raspberry_pi_model_b_plus_wifi_zd1211.html
+
+六、无线网卡推荐
+
+a)         简单实用的话推荐小米/小度/360随身wifi2代，价格大约10-20包邮，使用mt7601u芯片，支持managed和Monitor模式，MaxPower只有160mA，之前的内核版本需要手动编译驱动，非常麻烦，现在新版的内核里面已经自带驱动，如果无法正常识别，可以从https://github.com/kuba-moo/mt7601u手动下载安装。（EDUP个头够小，但是电流需要500mA，Monitor和AP模式虽然支持，但是需要折腾一下。查看usb所需电流：lsusb –v -s [[bus]:][devnum]）。此外，360随身wifi1代采用rt2870芯片，现在很少见了；3代采用MT7603U芯片：http://www.mediatek.com/en/products/connectivity/wifi/home-network/usb-dongle/mt7603u/%EF%BC%8C%E6%AF%94%E8%BE%83%E6%96%B0%EF%BC%8C2T2R%E3%80%81300Mbit/s%EF%BC%882%E4%BB%A3%E4%BB%A5%E5%8F%8A%E5%B8%82%E9%9D%A2%E4%B8%8A%E5%A4%A7%E5%A4%9A%E6%95%B0%E6%98%AF1T1R%E3%80%81150Mbits%EF%BC%89%EF%BC%8C%E6%94%AF%E6%8C%81WoWLAN%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E5%94%A4%E9%86%92%EF%BC%8C%E7%94%B1%E4%BA%8E%E6%89%8B%E5%A4%B4%E6%B2%A1%E6%9C%89%EF%BC%8C%E6%97%A0%E6%B3%95%E6%B5%8B%E8%AF%95%EF%BC%8C%E4%BD%86%E6%98%AFLinux%E4%B8%8B%E4%BC%BC%E4%B9%8E%E7%9B%B8%E5%85%B3%E9%A9%B1%E5%8A%A8%E4%B8%8D%E5%AE%8C%E5%96%84%EF%BC%8C%E5%AE%98%E6%96%B9%E4%BB%85%E6%8F%90%E4%BE%9B%E4%BA%86%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5%E5%8A%9F%E8%83%BD%E7%9A%84%E9%A9%B1%E5%8A%A8%EF%BC%8C%E5%A6%82%E6%9E%9Cok%E7%9A%84%E8%AF%9D3%E4%BB%A3%E6%98%AF%E5%BE%88%E4%B8%8D%E9%94%99%E7%9A%84%E9%80%89%E6%8B%A9。
+
+b)         两大经典芯片：RT3070和RTL8187
+
+直接引用Freebuf网站Rasiel的评论：“破解当然要用8187，3070适合联网，联网稳定，8187适合破解，但是功率大，发热大，不适合长时间联网，除非一些设计出色的经典卡。目前网上出售的大多8187都是在吹嘘6649功放，这也是目前市面上功率最大的功放了。6649大概功率在400mw左右，效果还算可以。真正的卡王，比如经典的8G，用的是2576L+8187L的组合，用料不缩水，设计合理，无论是联网还是破解都是传奇级别的神器。再比如经典的“钻石”网卡，用的是8187L跟双258A功放，功率输出在800mw以上，都是神器。其他的功放，大多只适合联网，破解来用的话效率很低很低。”
+
+RTL8187支持模式有限，适合破解；RT3070支持模式众多，而且比较稳定。
+
+rt3070可以试试这家https://shop114810530.taobao.com，Edimax EW-7711UMn，最大电流450mA，支持动态节能，香港到货低价处理无线网卡，20包邮，买二送一，我买了做工不错。此外还有沃达丰定制小网卡、Tenda W311U等
+
+RTL8187直接淘宝买裸板就行，30块钱左右，但是这玩意主要用于无线安全审计方面，一是功率大，二是这么大有碍观瞻。。。
+

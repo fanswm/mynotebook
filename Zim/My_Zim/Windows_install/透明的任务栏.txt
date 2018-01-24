@@ -1,0 +1,35 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-24T13:20:02+08:00
+
+====== 透明的任务栏 ======
+Created Wednesday 24 January 2018
+
+让 Windows 10 任务栏变得更透明
+信使六号 信使六号 01月16日  109  23
+Windows 10 的任务栏非常简约，扁平的半透明阴影，但配上默认的桌面背景时，这一点透明度实在不易发现，实际上很多人都会以为任务栏是黑色不透明的。而这时 Windows 7 的 Aero（毛玻璃特效）透明任务栏就让人颇为怀念了，作为一个不听话的用户，今天就来教教 Windows 10 什么是真正的透明！😂
+
+方法其实也非常简单：
+
+在注册表中添加一个名为 UseOLEDTaskbarTransparency 的值后，即可大大增加任务栏的透明度，看这个名字应当是为保护 OLED 屏设计的一个的特性，那我们虽然不是 OLED 屏，但也可以拿来体验一下透明任务栏的漂亮的效果。
+
+你可以直接下载 使用 [OLED 任务栏透明度.reg](https://pan.baidu.com/s/1htG8twS)、[取消使用 OLED 任务栏透明度.reg](https://pan.baidu.com/s/1bq5nmd5) 双击使用（你可能需要点一下开始菜单以刷新任务栏），这是导出的对应注册表的值所得到的文件，双击即可将其添加到你的注册表。
+
+如果不信任的话，可以右键 > 编辑，就可以看到里面的内容。你也可以尝试自己一步一步进行操作：
+
+用 Cortana 搜索 regedit，点按第一个搜索结果。
+展开左侧列表，找到 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+右键左侧列表找到的 Advanced，新建 > DWORD (32 位)，命名为 UseOLEDTaskbarTransparency，双击 UseOLEDTaskbarTransparency 以修改数值数据为 1。
+再次双击修改为 0 即可恢复以前的任务栏样式，也可以直接右键删除。
+下面是前后对比：
+不使用 OLED 任务栏透明度
+不使用 OLED 任务栏透明度
+使用 OLED 任务栏透明度后
+使用 OLED 任务栏透明度后
+透明任务栏几乎不会遮挡窗口内容，在下面这种情况任务栏的透明效果尤为显著。
+
+拖移一个窗口经过透明任务栏
+拖移一个窗口经过透明任务栏
+注：图中的动态壁纸是 Wallpaper Engine，Steam 售价 ¥18
+
+少数派有一篇文章介绍过：[自带动态效果的宅男壁纸神器：Wallpaper Engine](https://sspai.com/post/40726)。

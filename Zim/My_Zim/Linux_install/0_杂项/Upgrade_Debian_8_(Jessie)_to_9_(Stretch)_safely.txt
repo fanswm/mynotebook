@@ -1,0 +1,107 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-24T08:08:26+08:00
+
+====== Upgrade Debian 8 (Jessie) to 9 (Stretch) safely ======
+Created Wednesday 24 January 2018
+
+https://www.howtoforge.com/tutorial/how-to-upgrade-debian-8-jessie-to-9-stretch/
+
+How to Upgrade Debian 8 (Jessie) to 9 (Stretch) safely
+
+This tutorial exists for these OS versions
+
+Debian 8 (Jessie)
+Debian 7 (Wheezy)
+Debian 6 (Squeeze)
+On this page
+
+Backup the configuration and data
+Check the apt sources.list file
+Update the packages for Debian 8
+Check the package state to ensure that no packages are on hold or in half installed state
+Update the sources.list for Debian 9
+Check if packages are upgradable
+Debian 8 to 9 Update in two steps
+Check the update
+Links
+This tutorial explains the procedure to upgrade Debian 8 to 9 in a few simple steps.
+Before you start with the upgrade, backup all critical data. That's especially the config data in the /etc directory and the user data in /home. When you run a server then you should include the databases (MySQL, Postgresql, etc), web and email data in the backup as well. The backup should be stored on an external hard disk, on an external server e.g. by FTP or on a cloud drive. Here are a few examples of how to create backups with tar.
+Backup the configuration and data
+Configuration files in the /etc directory.
+tar -pczf etc.tar.gz /etc
+
+Backup of the /var/www website directory.
+tar -pczf www.tar.gz /var/www
+
+Backup of the /home directories.
+tar -pczf home.tar.gz /home
+
+For ISPConfig 3 users: Backup of your email server files.
+tar -pczf vmail.tar.gz /var/vmail
+
+Backup MySQL databases.
+mysqldump --defaults-file=/etc/mysql/debian.cnf -cCeQ --hex-blob --quote-names --routines --events --triggers --all-databases -r all_databases.sql
+
+Then move the tar.gz and .sql files for safe storage on a backup drive.
+Check the apt sources.list file
+We will install all available Jessie updates first before we upgrade to Jessie. On some systems, the package source is defined as "stable" in the sources.list file instead of "jessie" or "stretch". To avoid an accidental early upgrade to Stretch, please check the sources.list now and ensure that it contains "jessie" and not "stable" as source:
+Use a command line editor like nano or vi to open /etc/apt/sources.list, the lines should be similar to the ones below:
+nano /etc/apt/sources.list
+
+deb http://httpredir.debian.org/debian jessie main contrib non-free
+deb http://httpredir.debian.org/debian jessie-updates main contrib non-free
+deb http://security.debian.org jessie/updates main contrib non-free
+Update the packages for Debian 8
+The following commands will install all pending Jessie updates. This ensures that your system is in a good shape for the update to Stretch.
+apt-get update
+
+Ready for the first upgrade:
+apt-get upgrade
+
+Follow this with:
+apt-get dist-upgrade
+
+Check the package state to ensure that no packages are on hold or in half installed state
+This test is important, we will check the package state to ensure that no packages are on hold or in half installed state. Your system and apt database must be in a good shape before we proceed with the dist upgrade. If there are any broken or "on hold" packages, then fix these issues before the upgrade.
+Check that no packages are on hold by querying the package database with the dpkg command:
+dpkg --audit
+dpkg --get-selections | grep hold
+
+When both commands did not return any packages, then proceed with the upgrade.
+Update the sources.list for Debian 9
+Edit the /etc/apt/sources.list file again:
+nano /etc/apt/sources.list
+
+and replace its content with the following lines:
+deb http://httpredir.debian.org/debian stretch main contrib non-free
+deb http://httpredir.debian.org/debian stretch-updates main contrib non-free
+deb http://security.debian.org stretch/updates main contrib non-free
+Save the file and run the following command to update the sources database:
+apt-get update
+
+Check if packages are upgradable
+We can test with apt command if the installed packages are upgradable. Run this command to perform the test:
+ apt list --upgradable
+
+Debian 8 to 9 Update in two steps
+It is recommended to do the upgrade in two steps, first run "apt-get upgrade" to install the base packages and then run "apt-get dist-upgrade" to do the actual distribution upgrade,
+Start with the update by running this command:
+apt-get upgrade
+
+Next, we will do the distribution upgrade by running:
+apt-get dist-upgrade
+
+A reboot is required to finish the upgrade and load the new kernel:
+reboot
+
+Check the update
+To check which Debian version is currently installed on the system, take a look at the file /etc/os-release.
+cat /etc/os-release
+
+The result on a Debian Stretch system is:
+Debian updated to version 9
+Links
+Debian: http://www.debian.org/
+ view as pdf |  print
+

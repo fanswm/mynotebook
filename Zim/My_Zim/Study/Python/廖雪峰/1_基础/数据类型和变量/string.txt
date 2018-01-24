@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-10T19:57:24+08:00
 
-====== 字符串 ======
+====== string ======
 创建日期 星期三 10 一月 2018
 
 字符串是以单引号'或双引号"括起来的任意文本，比如'abc'，"xyz"等等

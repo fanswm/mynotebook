@@ -1,0 +1,53 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-24T11:59:27+08:00
+
+====== How to add GitHub and Docker custom items to ONLYOFFICE ======
+Created Wednesday 24 January 2018
+
+How to add GitHub and Docker custom items to ONLYOFFICE
+
+On this page
+
+Step 1: Update to the latest version
+Step 2: Open Portal Settings
+Step 3: Open the Add Item window
+Step 4: Enter the necessary data
+Step 5: Save your settings
+Additional possibilities
+Links
+ONLYOFFICE is an open source solution that combines powerful online document editors and broad collaborative capabilities: mail and chat, blogs, forums, CRM, projects, calendar, and more. ONLYOFFICE Community Server is the collaborative system distributed under the GNU Affero General Public License.
+Recently, ONLYOFFICE Community Server has been upgraded to version 9.5.4. Among the newly released features are data migration from MS Exchange and Custom Navigation.
+The latter allows you to insert links, be it websites, various third-party services, social media accounts etc., to the portal navigation.
+If GitHub and Docker (actually, any other) resources are essential for your work, you can easily add the necessary items to your ONLYOFFICE portal and access them in one click. By doing so, you have all needed instruments and resources in one place - ONLYOFFICE business tools plus your favorite and most used services within easy reach. And there is no need to switch between various apps or constantly insert URLs in the address bar.
+When inserted, links appear in the navigation menu, as well as on the start page next to other ONLYOFFICE modules (as long as Module choice is selected as a Default Start Page) for greater usability.
+Step 1: Update to the latest version
+Upgrade ONLYOFFICE Community Server to the latest version using Docker following this instruction. In case you're new to ONLYOFFICE, just get the latest version from GitHub.
+Step 2: Open Portal Settings
+Open Settings by clicking its icon at the top of the page, or select the appropriate option from the navigation menu.
+Open ONLYOFFICE Portal Settings
+Then go to the Modules & Tools section (you find it in the drop-down menu of Common settings).
+go to the Modules & Tools section
+Step 3: Open the Add Item window
+Find the Custom Navigation option and click "Add Item".
+Step 4: Enter the necessary data
+Enter the title of the service you want to add in the Label field and the corresponding link in the URL field.
+Specify links with HTTPS if the service/website you'd like to add is using HTTPS.
+Add images to your item instead of using the default icons. Just click "Change image" and upload the needed one. The Small icon will be displayed in the navigation menu, the Large icon - on the portal home page.
+Enter Label and URL
+Two options - Show in menu and Show on home page - are selected by default. You can uncheck one of them if you e.g. prefer to use the navigation menu only.
+Step 5: Save your settings
+Click the Save button to apply the changes.
+Your items have been added, and as you can see, now you have a quick access to them.
+Custom menu in ONLYOFFICE
+Additional possibilities
+There is also a possibility to create your own module, e.g. your own CRM system, and integrate it with the portal, so that it will be functioning within ONLYOFFICE like all other existing modules. Moreover, you can create API for your developed module. You can do that using the repository on GitHub and follow the instructions from ONLYOFFICE developers given there.
+Links
+Official ONLYOFFICE website
+Official documentation on ONLYOFFICE Community Server
+Official ONLYOFFICE guide to migrating MS Exchange data to ONLYOFFICE
+Support forum for any questions
+ONLYOFFICE on GitHub
+ONLYOFFICE Community Server - Custom Modules repository on GitHub
+
+https://www.howtoforge.com/tutorial/how-to-add-github-and-docker-custom-items-to-onlyoffice/
