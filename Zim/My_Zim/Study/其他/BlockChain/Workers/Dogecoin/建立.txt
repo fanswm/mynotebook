@@ -8,3 +8,19 @@ Creation-Date: 2018-01-22T20:26:57+08:00
 https://github.com/langerhans/dogecoinj-alice
 
 https://github.com/langerhans/dogecoinj-alice
+
+at ubuntu:
+
+未成功：
+`sudo apt-get install maven`
+`sudo apt-get install shadowsocks-libev`
+
+继续试验：
+```
+sudo add-apt-repository ppa:hzwhuang/ss-qt5
+sudo apt-get update
+sudo apt-get install shadowsocks-qt5
+
+```
+
+`sudo ss-local -c /etc/shadowsocks-libev/config.json`

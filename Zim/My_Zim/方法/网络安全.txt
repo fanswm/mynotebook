@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-20T11:59:33+08:00
-
-====== 网络安全 ======
-Created Saturday 20 January 2018
-
-https://github.com/bannedbook/fanqiang/wiki/Chrome一键翻墙包
