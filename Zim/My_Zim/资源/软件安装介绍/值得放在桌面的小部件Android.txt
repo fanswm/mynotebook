@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-10T17:43:36+08:00
 
-====== 值得我们放在桌面的小部件Android ======
+====== 值得放在桌面的小部件Android ======
 Created Wednesday 10 January 2018
 
 目录
