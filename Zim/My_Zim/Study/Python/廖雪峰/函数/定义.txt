@@ -5,3 +5,16 @@ Creation-Date: 2018-01-24T14:07:23+08:00
 ====== 定义 ======
 Created Wednesday 24 January 2018
 
+如果没有return语句，函数执行完毕后也会返回结果，只是结果为None。return None可以简写为return。
+
+# -*- coding: utf-8 -*-
+
+如果你已经把my_abs()的函数定义保存为abstest.py文件了，那么，可以在该文件的当前目录下启动Python解释器，用__from__ abstest __import__ my_abs来导入my_abs()函数，注意abstest是文件名（不含.py扩展名）
+
+空函数
+
+如果想定义一个什么事也不做的空函数，可以用pass语句：
+
+def nop():
+    pass
+
