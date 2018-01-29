@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-28T21:51:54+08:00
+
+====== 位置参数 ======
+Created Sunday 28 January 2018
+
+def power(x, n):
+    s = 1
+    while n > 0:
+        n = n - 1
+        s = s * x
+    return s
+对于这个修改后的power(x, n)函数，可以计算任意n次方：
+
+x和n，这两个参数都是位置参数
+
