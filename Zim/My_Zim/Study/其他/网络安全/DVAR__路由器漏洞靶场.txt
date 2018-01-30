@@ -1,0 +1,69 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-30T15:06:21+08:00
+
+====== DVAR  路由器漏洞靶场 ======
+Created Tuesday 30 January 2018
+
+http://www.freebuf.com/column/160601.html
+
+DVAR是一个模拟的基于Linux的ARM路由器漏洞靶场，运行着易受攻击的Web服务器。通过对该靶场的练习，可以提高你的ARM堆栈溢出水平。
+dvar_webconsole.png
+
+DVAR是一个模拟的基于Linux的ARM路由器漏洞靶场，运行着易受攻击的Web服务器。通过对该靶场的练习，可以提高你的ARM堆栈溢出水平。
+
+DVAR运行在tinysploitARM VMWare VM中完全仿真的QEMU ARM路由器Image下。
+
+简单的解压缩ZIP文件，并通过tinysploitARM.vmx启动虚拟机。启动后，虚拟机的IP地址和默认的URL将显示在控制台上。使用你主机的浏览器，导航到该网址并根据提示说明完成所需步骤。将虚拟网络适配器设置为NAT模式。
+
+你的任务是为运行在DVAR tinysploitARM的web服务器，编写一个可用的堆栈溢出Exp。按照@therealsaumil在Twitter的奖金挑战公告，DVAR还包括了一个额外的挑战。
+
+下载：exploitlab_DVAR_tinysploitARM.zip – 47.4MB VMWare Image
+
+SHA256：bc6eb66b7f5c0c71ca418c809213eb452e3fbf90654856ebb0591e164d634e2b
+
+ARM IoT Exploit Lab即将推出培训课程
+
+为了帮助大家更好的学习ARM，ARM IoT Exploit Lab即将推出相关的培训课程：
+
+RECON 布鲁塞尔 2018（1.29~2.1）
+
+https://recon.cx/2018/brussels/training/trainingexploitlab.html
+
+Offensivecon 柏林 2018（2.12~15）
+
+https://www.offensivecon.org/trainings/2018/the-arm-iot-exploit-laboratory-saumil-shah.html
+
+Cansecwest 温哥华 2018（3.10~13）
+
+https://cansecwest.com/dojos/2018/exploitlab.html
+
+SyScan360 新加坡 2018（3.18~21）
+
+https://www.coseinc.com/syscan360/index.php/syscan360/details/SYS1842#regBox 
+
+HITB2018AMS 阿姆斯特丹（4.9~11）
+
+https://conference.hitb.org/hitbsecconf2018ams/sessions/3-day-training-1-the-arm-exploit-laboratory/
+
+资源推荐
+
+如果你是ARM开发的新手，强烈推荐你去学习下Azeria在ARM Assembly上，关于ARM Shellcode和ARM基础知识的教程。
+
+https://azeria-labs.com/    Twitter：@Fox0x01
+
+再推荐三套适用于系统学习的，侧重于概念原理的教程：
+
+Operating Systems – A Primer（操作系统 – 入门）：
+
+http://www.slideshare.net/saumilshah/operating-systems-a-primer
+
+How Functions Work（函数是如何运行的）：
+
+http://www.slideshare.net/saumilshah/how-functions-work-7776073
+
+Introduction to Debuggers（调试器简介）：
+
+http://www.slideshare.net/saumilshah/introduction-to-debuggers
+
+*参考来源：exploitlab，FB小编 secist 编译，转载请注明来自FreeBuf.COM
