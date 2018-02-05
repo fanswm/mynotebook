@@ -5,3 +5,43 @@ Creation-Date: 2018-01-29T18:05:16+08:00
 ====== 生成器 ======
 Created Monday 29 January 2018
 
+generator
+
+要创建一个generator，有很多种方法。
+__第一种方法很简单，只要把一个列表生成式的[]改成()__，就创建了一个generator：
+
+>>> L = [x * x for x in range(10)]
+>>> L
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+>>> g = (x * x for x in range(10))
+>>> g
+<generator object <genexpr> at 0x1022ef630>
+
+如果要一个一个打印出来，可以通过__next()函数__获得generator的下一个返回值
+
+没有更多的元素时，抛出StopIteration的错误。
+
+```
+def fib(max):
+    n, a, b = 0, 0, 1
+    while n < max:
+        print(b)
+        a, b = b, a + b
+        n = n + 1
+    return 'done'
+```
+
+上面的__函数和generator仅一步之遥__。要把fib函数变成generator，只需要把print(b)改为yield b就可以了：
+```
+def fib(max):
+    n, a, b = 0, 0, 1
+    while n < max:
+        yield b
+        a, b = b, a + b
+        n = n + 1
+    return 'done'
+```
+
+但是用__for循环调用generator时，发现拿不到generator的return语句的返回值__。
+
+

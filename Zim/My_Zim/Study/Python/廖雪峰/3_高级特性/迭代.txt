@@ -5,7 +5,7 @@ Creation-Date: 2018-01-29T18:05:03+08:00
 ====== 迭代 ======
 Created Monday 29 January 2018
 
-如果给定一个list或tuple，我们可以通过for循环来遍历这个list或tuple，这种遍历我们称为迭代（Iteration）。
+如果给定一个list或tuple，我们可以通过for循环来遍历这个list或tuple，这种遍历我们称为迭代（__Iteration__）。
 
 Python的for循环抽象程度要高于C的for循环，因为Python的for循环不仅可以用在list或tuple上，还可以作用在其他可迭代对象上。
 
@@ -24,7 +24,7 @@ False
 
 __如果要对list实现类似Java那样的下标循环怎么办？__Python内置的enumerate函数可以把一个list变成索引-元素对，这样就可以在for循环中同时迭代索引和元素本身：
 
->>> for i, value in enumerate(['A', 'B', 'C']):
+>>> for i, value in __enumerate__(['A', 'B', 'C']):
 ...     print(i, value)
 ...
 0 A
