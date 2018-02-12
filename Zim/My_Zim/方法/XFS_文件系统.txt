@@ -1,0 +1,26 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-02-12T13:42:27+08:00
+
+====== XFS 文件系统 ======
+Created Monday 12 February 2018
+
++ 创建 XFS 文件系统
+mkfs.xfs 命令用来创建 xfs 文件系统。无需任何特别的参数，其输出如下：
+
+`root@kerneltalks # mkfs.xfs /dev/xvdf`
+
++ 调整 XFS 文件系统容量
+你只能对 XFS 进行扩容而不能缩容。我们使用 xfs_growfs 来进行扩容。你需要使用 -D 参数指定挂载点的新容量。-D 接受一个数字的参数，指定文件系统块的数量。若你没有提供 -D 参数，则 xfs_growfs 会将文件系统扩到最大。
+
++ 修复 XFS 文件系统
+可以使用 xfs_repair 
+
++ 查看 XFS 版本以及它的详细信息
+查看 xfs 文件系统版本很简单。使用 -V 参数运行 xfs_info 再加上挂载点就行了。
+
+`root@kerneltalks # xfs_info -V /shrikant`
+
+https://linux.cn/article-9336-1.html?utm_source=rss&utm_medium=rss
+
+
