@@ -1,0 +1,96 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-02-21T17:44:12+08:00
+
+====== 常用的网络服务没有电脑客户端？你可以自己动手做一个 ======
+Created Wednesday 21 February 2018
+
+https://sspai.com/post/43257
+
+现在越来越多互联网服务都不再提供客户端，只需通过浏览器就可以直接访问。但在有些场景下，使用桌面客户端其实更为方便，比如说我一直都在使用的 Microsoft To Do 这款待办事项服务，它提供了 iOS、Windows 10、Android 等多个客户端，唯独没有提供 macOS 客户端。
+
+好在开发商提供了网页访问的形式，这样完全可以通过一些工具（如命令行），将网页版打包成独立的桌面客户端，创造出一个「准官方」的客户端。
+
+准备工作
+在 Mac 平台上有相当多的第三方工具可以将网页打包成桌面应用，比如说我之前就在使用 web2app 这种可视化的工具，虽说相对比较好上手（可视化的 GUI，选项也较多），但这款工具是一款付费应用，同时可扩展性自由度都较低。而采用命令行工具自由度较强，甚至可以将生成的应用制作成完整的 .dmg 安装包。
+
+话不多说，首先我们需要搭建生成环境。安装 Node.js 这个框架工具，在其 官网 上找到对应操作系统的版本安装即可，需要注意的是，如果你是在 Windows 上安装 node.js ，记得最后勾选「Add PATH」，将其加入到系统的环境变量中。
+
+
+制作应用
+接下来，在目标位置新建一个文件夹，作为项目位置，例如我新建在文档下面新建了「dev」文件夹。之后打开「终端」，定位到该目录下方。
+
+
+在终端中，输入以下命令（提权时需输入 su 密码）：
+
+sudo npm install nativefier -g
+
+即通过 npm 包管理器安装 nativefier，nativefier 就是这次将网页打包成桌面应用的主角。后面我们将深入了解这个工具。接下来再输入下一个命令：
+
+nativefier --name "Microsoft To-Do" "https://todo.microsoft.com/"
+
+回车之后，等待终端中生成项目，之后你就可以在当前目录下方看到一个新的项目目录「Microsoft To-Do-darwin-x64」。
+
+
+将里面的 .app 文件拖入到「应用程序」文件夹，然后在「启动台」单击就直接启动了，效果如下：
+
+
+进阶优化：生成跨平台应用，加图标等
+仔细观察就不难发现，其实 nativefier 就是基于前端开发上经常使用的 electron 打包工具， 只不过 nativefier 更适合将现有的网页打包成应用。
+
+不过如果仅仅只是使用上面两步操作，生成的应用没法修改 logo、窗口大小，更别说创建其他平台的应用了，那么接下来我们可以通过添加 nativefier 中的参数再生成，从而创建出符合我们要求的桌面应用。
+
+nativefier 允许在命令后面通过添加参数来添加附加内容，格式如：
+
+nativefier --参数名 [参数变量]
+
+比如说，如果我想要设置图标，图标文件放在文件夹根目录（需要使用绝对路径），名称为：todo.png.icns，那么命令就是：
+
+nativefier --name "Microsoft To-Do" --icon /Users/liuxiaofeng/Documents/dev/todo.png.icns "https://todo.microsoft.com/"
+
+如果希望打包跨平台应用，那么参数就是：--platform [变量]，例如我们将以上的项目打包成 Windows 应用，那么命令就变成了：
+
+nativefier --name "Microsoft To-Do" --platform windows --icon /Users/liuxiaofeng/Documents/dev/todo.png.icns "https://todo.microsoft.com/"
+
+命令输入之后，在当前项目文件夹下方就会生成「Microsoft To-Do-win32-x64」的新项目，找一台 Windows PC，打开文件夹下方的「Microsoft To-Do.exe」，效果和生成的 macOS 应用是一样的。
+
+
+更多参数：显示菜单栏、应用显示设置等
+了解到上面的方法，现在我们可以完善我们的这个「桌面应用」，让他看上去就像是官方出品的应用，同样，方法是在 nativefier 后面添加一系列的参数。
+
+例如：
+
+我想让应用出现菜单栏，那么在 nativefier 后面就加上「--show-menu-bar」；
+如果希望一次只能运行一个实例（例如就是当前的 Microsoft To Do），那么后面就加上「--single-instance」；
+如果希望应用程序保留托盘，点击关闭时也是收回到托盘中，那么就加上「--tray」；
+甚至你还可以加上版权信息，只需要加上「--app-copyright © Microsoft」这个参数即可。
+以上组合起来，就是这么命令就是：
+
+nativefier --name "Microsoft To-Do" --icon /Users/liuxiaofeng/Documents/dev/todo.png.icns "https://todo.microsoft.com/" --show-menu-bar --single-instance --tray --app-copyright © Microsoft
+
+这样生成的应用，看上去是不是更像是官方版客户端呢？当然你也可以参考 nativefier 在 GitHub 上的项目文档选用更多参数进行调整。
+
+
+制作安装包让其看上去更正规
+制作完成之后，我们就得到了一个名为「Microsoft To Do.app」的应用程序，但如果安装分发的话，最好的方式还是制作成 .dmg 的安装包，方便分发。
+
+首先打开 macOS 自带的「磁盘工具」，点击左上角的「文件 - 新建映像 - 空白映像」。
+
+
+在弹出的设置选项框中，选择位置并调整初始的大小，将其设置到 250 MB，方便后续将「Microsoft To Do.app」放在里面，之后点击存储。
+
+
+之后双击打开空白映像文件，在桌面弹出的挂载磁盘中，将之前的 「Microsoft To Do.app」拷贝进去。再次打开终端，输入以下命令，生成一个指向「应用程序」文件夹的快捷方式：
+
+ln -s /Applications/
+
+将生成的快捷方式拖到刚才打开的空白映像中，之后右键菜单点击「显示选项」，勾选「始终以图标显示方式打开」，调整图标大小，同事在最下面背景中选择一张背景图，让用户明白打开时将 .app 拖到「应用程序」文件夹即可。
+
+
+最后关闭映像并推出，之后打开「磁盘工具」，在菜单中点击「映像 - 转换」，选择之前制作的映像文件，在弹出的对话框中选择存储位置，之后点击「转换」将其体积进一步压缩，这样稍等一会儿一个 dmg 安装包就做完了。
+
+
+最后生成的 dmg 镜像就是这样的：
+
+
+通过以上方式，我们可以以更为自由的方式将 web 在线网站制作成桌面应用，最重要的是以上步骤无需购买付费应用，灵活性也更好。

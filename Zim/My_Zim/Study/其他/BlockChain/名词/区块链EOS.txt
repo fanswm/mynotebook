@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-22T13:39:19+08:00
 
-====== 什么叫做区块链EOS ======
+====== 区块链EOS ======
 Created Monday 22 January 2018
 
 什么叫做区块链EOS？什么是eos币？
