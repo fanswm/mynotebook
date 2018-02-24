@@ -15,7 +15,7 @@ Created Friday 24 November 2017
 
 ## 查看`/usr/bin/java`指向哪里：
 + `myusername@dns:~$ ll /usr/bin/java`
-> lrwxrwxrwx 1 root root 22 11月 12 20:09 /usr/bin/java -> /etc/alternatives/java
+> lrwxrwxrwx 1 root root 22 11月 12 20:09 /usr/bin/java -> /etc/alternatives/java*
 
 ## 查看`/etc/alternatives/java`指向哪里：
 + `myusername@dns:~$ ll /etc/alternatives/java`
@@ -38,6 +38,11 @@ OpenJDK 64-Bit Server VM (build 25.111-b14, mixed mode)
 + `update-alternatives --set java /usr/lib/jvm/jdk1.8.0_121/bin/java`
 + `update-alternatives --set javac /usr/lib/jvm/jdk1.8.0_121/bin/javac`
 + `java -version`
+
+update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk9.0.4/bin/java 1
+update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk9.0.4/bin/javac 1
+update-alternatives --set java /usr/lib/jvm/jdk9.0.4/bin/java
+update-alternatives --set javac /usr/lib/jvm/jdk9.0.4/bin/javac
 
 ##查看是否正确链接到java jdk版本
 
