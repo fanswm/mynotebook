@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-02-27T11:53:10+08:00
+
+====== 修饰符 ======
+Created Tuesday 27 February 2018
+
+__Java修饰符__
+
+像其他语言一样，Java可以使用修饰符来修饰类中方法和属性。主要有两类修饰符：
+
+    访问控制修饰符 : default, public , protected, private
+    非访问控制修饰符 : final, abstract, strictfp

@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-02-27T12:01:41+08:00
+
+====== 继承 ======
+Created Tuesday 27 February 2018
+
+在Java中，一个类可以由其他类派生。如果你要创建一个类，而且已经存在一个类具有你所需要的属性或方法，那么你可以将新创建的类继承该类。
+
+利用继承的方法，可以重用已存在类的方法和属性，而不用重写这些代码。__被继承的类称为超类（super class）__，__派生类称为子类（subclass）。__

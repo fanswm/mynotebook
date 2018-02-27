@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-02-27T12:03:46+08:00
+
+====== 转义字符 ======
+Created Tuesday 27 February 2018
+
+"\b" (退格)
+"\f" (换页)
+"\n" (换行)
+"\r" (回车)
+"\t" (水平制表符(到下一个tab位置))
+"\' " (单引号)
+"\" " (双引号) 
+"\\" (反斜杠)
