@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-05T21:39:03+08:00
+
+====== 隐含强制类型转换 ======
+Created Monday 05 March 2018
+
+1. 整数的默认类型是 int。
+
+2. 浮点型不存在这种情况，因为在定义 float 类型时必须在数字后面跟上 F 或者 f。 

@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-02-27T11:53:45+08:00
+
+====== 局部变量 ======
+Created Tuesday 27 February 2018
+
+局部变量：在方法、构造方法、语句块中定义的变量。其声明和初始化在方法中实现，在方法结束后自动销毁
+
+public class  ClassName{
+    public void printNumber（）{
+        int a;
+    }
+    // 其他代码
+}
+

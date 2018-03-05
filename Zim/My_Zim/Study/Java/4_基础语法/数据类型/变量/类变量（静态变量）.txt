@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-02-27T11:53:53+08:00
+
+====== 类变量（静态变量） ======
+Created Tuesday 27 February 2018
+
+类变量：定义在类中，方法体之外，但必须要有 static 来声明变量类型。静态成员属于整个类，可通过对象名或类名来调用。
+
+public class  ClassName{
+    static int a;
+    public void printNumber（）{
+        // 其他代码
+    }
+}
+
