@@ -17,3 +17,6 @@ public class Variable{
  
     }
 }
+
+
+{{./成员变量 局部变量 静态变量 的区别.png}}

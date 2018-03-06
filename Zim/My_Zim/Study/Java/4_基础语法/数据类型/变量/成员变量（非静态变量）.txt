@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-02-27T11:54:01+08:00
 
-====== 成员变量（非静态变量） ======
+====== 成员变量（非静态变量）也叫实例变量 ======
 Created Tuesday 27 February 2018
 
 __成员变量和类变量的区别__
