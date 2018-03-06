@@ -6,7 +6,7 @@ home=Home
 icon=
 document_root=
 shared=True
-endofline=unix
+endofline=dos
 disable_trash=False
-profile=
+profile=None
 
