@@ -38,7 +38,7 @@ __成员变量和类变量的区别：__
 
    3、__别名不同__
 
-      成员变量也称为实例变量。
+      成员变量也称为__实例变量__。
 
       静态变量也称为类变量。
 
@@ -102,7 +102,7 @@ __成员变量和静态变量的区别__：
 
       __静态变量所属于类__。所以也称为类变量。
 
-   2、成员变量存在于堆内存中。
+   2、成员变量__存在于堆内存中__。
 
       静态变量存在于方法区中。
 
@@ -115,4 +115,56 @@ __成员变量和静态变量的区别__：
       静态变量可以被对象调用，也可以被类名调用。
 
    所以，成员变量可以称为对象的特有数据，静态变量称为对象的共享数据。
+
+
+
+实例变量
+
+    实例变量__声明在一个类中__，但在方法、构造方法和语句块之外；
+    当一个对象被实例化之后，每个实例变量的值就跟着确定；
+    实例变量__在对象创建的时候创建__，__在对象被销毁的时候销毁；__
+    实例变量的值__应该至少被一个方法、构造方法或者语句块引用__，使得外部能够通过这些方式获取实例变量信息；
+    实例变量__可以声明在使用前或者使用后__；
+    __访问修饰符__可以修饰实例变量；
+    实例变量对于类中的方法、构造方法或者语句块是可见的。__一般情况下应该把实例变量设为私有__。通过使用访问修饰符可以使实例变量对子类可见；
+    __实例变量具有默认值。数值型变量的默认值是0，布尔型变量的默认值是false，引用类型变量的默认值是null。__变量的值可以在声明时指定，也可以在构造方法中指定；
+    实例变量可以直接通过变量名访问。但在静态方法以及其他类中，就应该使用完全限定名：ObejectReference.VariableName。
+
+实例
+Employee.java 文件代码：
+import java.io.*;
+public class Employee{
+   // 这个实例变量对子类可见
+   public String name;
+   // 私有变量，仅在该类可见
+   private double salary;
+   //在构造器中对name赋值
+   public Employee (String empName){
+      name = empName;
+   }
+   //设定salary的值
+   public void setSalary(double empSal){
+      salary = empSal;
+   }  
+   // 打印信息
+   public void printEmp(){
+      System.out.println("名字 : " + name );
+      System.out.println("薪水 : " + salary);
+   }
+ 
+   public static void main(String args[]){
+      Employee empOne = new Employee("RUNOOB");
+      empOne.setSalary(1000);
+      empOne.printEmp();
+   }
+}
+
+以上实例编译运行结果如下:
+
+$ javac Employee.java 
+$ java Employee
+名字 : RUNOOB
+薪水 : 1000.0
+
+
 

@@ -14,3 +14,58 @@ public class  ClassName{
     // 其他代码
 }
 
+Java 局部变量
+
+    局部变量声明在__方法、构造方法或者语句块__中；
+    局部变量在方法、构造方法、或者语句块被执行的时候创建，当它们执行完成后，__变量将会被销毁__；
+    __访问修饰符不能用于局部变量；__
+    局部变量只在声明它的方法、构造方法或者语句块中可见；
+    局部变量是在__栈上__分配的。
+    局部变量__没有默认值__，所以局部变量被声明后，__必须经过初始化__，才可以使用。
+
+实例 1
+
+在以下实例中__age__是一个局部变量。定义在pupAge()方法中，它的作用域就限制在这个方法中。
+package com.runoob.test;
+ 
+public class Test{ 
+   public void pupAge(){
+      int __age__ = 0;
+      age = age + 7;
+      System.out.println("小狗的年龄是: " + age);
+   }
+   
+   public static void main(String args[]){
+      Test test = new Test();
+      test.pupAge();
+   }
+}
+
+以上实例编译运行结果如下:
+
+小狗的年龄是: 7
+
+实例 2
+
+在下面的例子中 age 变量没有初始化，所以在编译时会出错：
+package com.runoob.test;
+ 
+public class Test{ 
+   public void pupAge(){
+      int age;
+      age = age + 7;
+      System.out.println("小狗的年龄是 : " + age);
+   }
+   
+   public static void main(String args[]){
+      Test test = new Test();
+      test.pupAge();
+   }
+}
+
+以上实例编译运行结果如下:
+
+Test.java:4:__variable number might not have been initialized__
+age = age + 7;
+         ^
+1 error

@@ -5,3 +5,15 @@ Creation-Date: 2018-02-27T11:53:32+08:00
 ====== 变量 ======
 Created Tuesday 27 February 2018
 
+实例
+public class Variable{
+    static int allClicks=0;    // __类变量__
+ 
+    String str="hello world";  // __实例变量__
+ 
+    public void method(){
+ 
+        int i =0;  // __局部变量__
+ 
+    }
+}
