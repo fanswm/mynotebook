@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-07T10:31:11+08:00
+
+====== default ======
+Created Wednesday 07 March 2018
+
+__默认访问修饰符-不使用任何关键字__
+
+使用默认访问修饰符声明的变量和方法，__对同一个包内的类是可见的__。__接口里的变量都隐式声明为 public static final,而接口里的方法默认情况下访问权限为 public。__
+
+如下例所示，变量和方法的声明可以不使用任何修饰符。
+实例
+String version = "1.5.1";
+boolean processOrder() {
+   return true;
+}

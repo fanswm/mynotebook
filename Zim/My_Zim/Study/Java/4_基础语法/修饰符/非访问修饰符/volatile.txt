@@ -1,0 +1,52 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-07T10:40:42+08:00
+
+====== volatile ======
+Created Wednesday 07 March 2018
+
+__volatile 修饰的成员变量在每次被线程访问时，都强制从共享内存中重新读取该成员变量的值__。__而且，当成员变量发生变化时，会强制线程将变化值回写到共享内存__。这样在任何时刻，两个不同的线程总是看到某个成员变量的同一个值。
+
+一个 volatile 对象引用可能是 null。
+实例
+public class MyRunnable implements Runnable
+{
+    private volatile boolean active;
+    public void run()
+    {
+        active = true;
+        while (active) // 第一行
+        {
+            // 代码
+        }
+    }
+    public void stop()
+    {
+        active = false; // 第二行
+    }
+}
+
+通常情况下，在一个线程调用 run() 方法（在 Runnable 开启的线程），在另一个线程调用 stop() 方法。 如果 第一行 中缓冲区的 active 值被使用，那么在 第二行 的 active 值为 false 时循环不会停止。
+
+但是以上代码中我们使用了 volatile 修饰 active，所以该循环会停止。
+
+
+__volatile可以用在任何变量前面，但不能用于final变量前面，因为final型的变量是禁止修改的。__
+
+使用的场景之一，单例模式中采用DCL双锁检测（double checked locking）机制，在多线程访问的情况下，可使用volatitle修改，保证多线程下的可见性。缺点是性能有损失，因此单线程情况下不必用此修饰符。
+
+class Singleton{
+    private volatile static Singleton instance = null;
+    private Singleton() {
+    }
+
+    public static Singleton getInstance() {
+        if(instance==null) {
+            synchronized (Singleton.class) {
+                if(instance==null)
+                    instance = new Singleton();
+            }
+        }
+        return instance;
+    }
+}
