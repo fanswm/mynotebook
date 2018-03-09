@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-02-27T11:46:53+08:00
 
-====== 4 基础语法 ======
+====== 4 语法 ======
 Created Tuesday 27 February 2018
 
 一个Java程序可以认为是一系列对象的集合，而这些对象通过调用彼此的方法来协同工作。

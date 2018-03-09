@@ -1,0 +1,25 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-09T17:26:00+08:00
+
+====== 创建格式化字符串 ======
+Created Friday 09 March 2018
+
+我们知道输出格式化数字可以使用 printf() 和 format() 方法。
+
+String 类使用静态方法 format() 返回一个String 对象而不是 PrintStream 对象。
+
+String 类的静态方法 format() 能用来创建可复用的格式化字符串，而不仅仅是用于一次打印输出。
+
+如下所示：
+System.out.printf("浮点型变量的值为 " +
+                  "%f, 整型变量的值为 " +
+                  " %d, 字符串变量的值为 " +
+                  "is %s", floatVar, intVar, stringVar);
+
+你也可以这样写
+String fs;
+fs = String.format("浮点型变量的值为 " +
+                   "%f, 整型变量的值为 " +
+                   " %d, 字符串变量的值为 " +
+                   " %s", floatVar, intVar, stringVar);

@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-09T16:51:36+08:00
+
+====== 字符串长度 ======
+Created Friday 09 March 2018
+
+用于获取有关对象的信息的方法称为__访问器方法__。 
+
+```
+int len = xxxString.length()
+```
