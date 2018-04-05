@@ -1,0 +1,29 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-04-05T11:17:51+08:00
+
+====== foreach ======
+Created Thursday 05 April 2018
+
+JDK 1.5 引进了一种新的循环类型，被称为 foreach 循环或者加强型循环，它能在不使用下标的情况下遍历数组。
+示例
+
+该实例用来显示数组myList中的所有元素：
+TestArray.java 文件代码：
+public class TestArray {
+   public static void main(String[] args) {
+      double[] myList = {1.9, 2.9, 3.4, 3.5};
+ 
+      // 打印所有数组元素
+      __for (double element: myList) {__
+__         System.out.println(element);__
+__      }__
+   }
+}
+
+以上实例编译运行结果如下：
+
+1.9
+2.9
+3.4
+3.5

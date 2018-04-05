@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-04-05T11:25:14+08:00
+
+====== Arrays 类 ======
+Created Thursday 05 April 2018
+
+ java.util.Arrays 类能方便地操作数组，它提供的所有方法都是静态的。
+
+具有以下功能：
+
+    给数组赋值：通过 fill 方法。
+    对数组排序：通过 sort 方法,按升序。
+    比较数组：通过 equals 方法比较数组中元素值是否相等。
+    查找数组元素：通过 binarySearch 方法能对排序好的数组进行二分查找法操作。
