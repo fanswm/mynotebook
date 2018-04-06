@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-03-04T05:27:49+08:00
 
-====== 5 对象和类 ======
+====== 6 对象和类 ======
 Created 星期日 04 三月 2018
 
 对象：对象是类的一个实例（对象不是找个女朋友），有状态和行为

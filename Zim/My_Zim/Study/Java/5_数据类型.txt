@@ -2,6 +2,6 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-02-27T12:04:18+08:00
 
-====== 数据类型 ======
+====== 5 数据类型 ======
 Created Tuesday 27 February 2018
 
