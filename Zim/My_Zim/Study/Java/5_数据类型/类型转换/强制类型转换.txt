@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-05T21:38:11+08:00
+
+====== 强制类型转换 ======
+Created Monday 05 March 2018
+
+1. 条件是转换的数据类型必须是兼容的。
+
+2. 格式：(type)value type是要强制类型转换后的数据类型

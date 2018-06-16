@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-05T21:01:13+08:00
+
+====== float ======
+Created Monday 05 March 2018
+
+ float 数据类型是单精度、32位、符合IEEE 754标准的__浮点数__；
+float 在储存大型浮点数组的时候可节省内存空间；
+默认值是 0.0f；
+浮点数不能用来表示精确的值，如货币；
+例子：float f1 = 234.5f。

@@ -1,0 +1,36 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-09T16:51:36+08:00
+
+====== 字符串长度 ======
+Created Friday 09 March 2018
+
+用于获取有关对象的信息的方法称为__访问器方法__。 
+
+```
+int len = xxxString.length()
+```
+
+__length()方法，length属性和size()的方法的区别:__
+
+    1.length()方法是针对字符串来说的，要求一个字符串的长度就要用到它的length()方法；
+    2.length属性是针对Java中的数组来说的，要求数组的长度可以用其length属性；
+    3.java中的size()方法是针对泛型集合说的,如果想看这个泛型有多少个元素,就调用此方法来查看!
+
+这个例子来演示这两个方法和一个属性的用法：
+```
+public static void main(String[] args) {
+    String []list={"ma","cao","yuan"};
+    String a="macaoyuan";
+    System.out.println(list.length);
+    System.out.println(a.length());
+    List array=new ArrayList();
+    array.add(a);
+    System.out.println(array.size());
+}
+```
+输出的值为:
+
+3
+9
+1
