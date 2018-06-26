@@ -18,6 +18,9 @@ __第一种方法很简单，只要把一个列表生成式的[]改成()__，就
 <generator object <genexpr> at 0x1022ef630>
 
 如果要一个一个打印出来，可以通过__next()函数__获得generator的下一个返回值
+```
+next(g)
+```
 
 没有更多的元素时，抛出StopIteration的错误。
 
@@ -31,7 +34,7 @@ def fib(max):
     return 'done'
 ```
 
-上面的__函数和generator仅一步之遥__。要把fib函数变成generator，只需要把print(b)改为yield b就可以了：
+上面的__函数和generator仅一步之遥__。要把fib函数变成generator，__只需要把print(b)改为yield b就可以了：__
 ```
 def fib(max):
     n, a, b = 0, 0, 1
@@ -44,4 +47,21 @@ def fib(max):
 
 但是用__for循环调用generator时，发现拿不到generator的return语句的返回值__。
 
+如果想要拿到返回值，必须捕获StopIteration错误，返回值包含在S__topIteration的value中__：
 
+g = fib(6)
+>>> while True:
+	try:
+		x=next(g)
+		print('g:',x)
+	except StopIteration as e:
+		print('Generator return value:', e.value)
+		break
+
+g: 1
+g: 1
+g: 2
+g: 3
+g: 5
+g: 8
+Generator return value: done
