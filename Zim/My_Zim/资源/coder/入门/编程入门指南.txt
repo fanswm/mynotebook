@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-06-29T15:30:35+08:00
+
+====== 编程入门指南 ======
+Created Friday 29 June 2018
+
+https://blog.csdn.net/a910626/article/details/45223657?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+图片
+
+https://zhuanlan.zhihu.com/p/19959253
+{{file:///C:/Documents%20and%20Settings/scb/%E6%A1%8C%E9%9D%A2/%E4%BB%A4%E4%BA%BA%E8%AD%A6%E9%86%92%E7%9A%84%E6%95%85%E4%BA%8B%E5%8F%8A%E5%8F%8D%E6%80%9D.png}}
+{{file:///C:/Documents%20and%20Settings/scb/%E6%A1%8C%E9%9D%A2/%E5%90%AF%E8%92%99%E9%98%B6%E6%AE%B5.png}}
+{{file:///C:/Documents%20and%20Settings/scb/%E6%A1%8C%E9%9D%A2/%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5.png}}
+{{file:///C:/Documents%20and%20Settings/scb/%E6%A1%8C%E9%9D%A2/%E5%B0%8F%E7%BB%93.png}}

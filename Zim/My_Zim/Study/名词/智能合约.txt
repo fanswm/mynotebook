@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-06-29T15:45:56+08:00
+
+====== 智能合约 ======
+Created Friday 29 June 2018
+
+概念炒作的背后，“智能合约”的真相是什么？ http://36kr.com/p/5140120.html?ktm_source=feed
