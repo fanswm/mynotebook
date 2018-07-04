@@ -1,0 +1,56 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-02T23:00:49+08:00
+
+====== 开机启动程序 ======
+创建日期 星期一 02 七月 2018
+
+可以通过在控制台运行gnome-session-properties .
+如果发现startup的应用程序并不多的话，多半是系统在其中隐藏了，所以要显示他们，则将/etc/xdg/autostart/下的所有desktop文件的NoDisplay=ture全部设置成NoDisplay=false。
+操作如下： 
+$ cd /etc/xdg/autostart 
+#批量替换 
+$ sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' *.desktop
+通过上述替换后，在打开startup application,即可以看到多了很多。
+
+
+显示Ubuntu所有自启动应用程序
+2013年11月18日 14:46:47
+阅读数：3070
+转载于: http://linzhibin824.blog.163.com/blog/static/735577102013367440817/
+
+Ubuntu12.04
+
+自动以root用户登录系统
+
+执行:  gedit  /etc/lightdm/lightdm.conf. 修改配置文件
+
+[SeatDefaults]
+allow-guest=false
+autologin-user=root
+autologin-user-timeout=0
+autologin-session=lightdm-autologin
+user-session=ubuntu
+greeter-session=unity-greeter
+
+
+
+
+Applications can automatically start when you log into Ubuntu. Packages can automatically add their own autostart entries – for example, install Dropbox and you’ll likely have it automatically starting with your desktop. If you have quite a few of these entries – or a slower system – this can make your desktop take longer to appear. You can control these startup applications from the Startup Applications dialog.
+
+
+
+Ubuntu hides most of the system’s default autostart entries from this dialog. To view them, run the following command in a terminal:
+
+sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
+
+This command modifies each autostart file and changes the “NoDisplay” parameter from “true” to “false,” making each entry appear in the list. After running this command, restart the Startup Applications dialog and you’ll see more options.
+
+
+
+Don’t disable an autostart entry unless you understand what it does. For example, if your computer doesn’t have Bluetooth hardware, you can disable the Bluetooth Manager applet – but don’t disable Ubuntu One if you use it.
+
+You should disable entries by unchecking their check boxes instead of clicking the Remove button. If you need to re-enable an entry later, you can re-enable its check box.
+
+from:http://www.howtogeek.com/115797/6-ways-to-speed-up-ubuntu/ sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' [[/etc/xdg/autostart/*.desktop]]
+
