@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-06T08:10:10+08:00
+
+====== 教学环境 ======
+Created Friday 06 July 2018
+
+iTalc[8]http://italc.sourceforge.net/
+aTutor http://www.atutor.ca/
+Moodle https://moodle.org/
+[[OpenSIS]] http://www.opensis.com/
+
+https://linux.cn/article-9722-1.html?utm_source=rss&utm_medium=rss
+好的 Linux 工具献给老师和学生们
+

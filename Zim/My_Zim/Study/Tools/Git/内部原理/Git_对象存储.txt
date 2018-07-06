@@ -1,0 +1,88 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-06T07:58:44+08:00
+
+====== Git 对象存储 ======
+Created Friday 06 July 2018
+
+https://mp.weixin.qq.com/s?__biz=MjM5NzMyMjAwMA==&mid=2651481403&idx=1&sn=8b0f9515a540e6d59138eceac1ec0be7&chksm=bd2509448a5280521d2640584a933c18318ce0a8ca7cc9b6df043aeb5969b9047e36cb4aeaaa&mpshare=1&scene=1&srcid=07052QyXxDvKdkVSfyBgFzOw#rd
+
+来源：彭金金 ，
+jingsam.github.io/2018/06/15/git-storage.html
+
+在Git内部原理之Git对象哈希中，讲解了Git对象hash的原理，接下来的这篇文章讲一讲Git对象如何存储。
+
+原理
+
+数据对象、树对象和提交对象都是存储在.git/objects目录下，目录的结构如下：
+
+.git
+|-- objects
+    |-- 01
+    |   |-- 55eb4229851634a0f03eb265b69f5a2d56f341
+    |-- 1f
+    |   |-- 7a7a472abf3dd9643fd615f6da379c4acb3e3a
+    |-- 83
+        |-- baae61804e65cc73a7201a7252750c76066a30
+
+从上面的目录结构可以看出，Git对象的40位hash分为两部分：头两位作为文件夹，后38位作为对象文件名。所以一个Git对象的存储路径规则为：
+
+.git/objects/hash[0, 2]/hash[2, 40]
+
+这里就产生了一个疑问：为什么Git要这么设计目录结构，而不直接用Git对象的40位hash作为文件名？原因是有两点：
+
+有些文件系统对目录下的文件数量有限制。例如，FAT32限制单目录下的最大文件数量是65535个，如果使用U盘拷贝Git文件就可能出现问题。
+有些文件系统访问文件是一个线性查找的过程，目录下的文件越多，访问越慢。
+
+在Git内部原理之Git对象哈希中，我们知道Git对象会在原内容前加个一个头部：
+
+store = header + content
+
+Git对象在存储前，会使用zlib的deflate算法进行压缩，即简要描述为：
+
+zlib_store = zlib.deflate(store)
+
+压缩后的zlib_store按照Git对象的路径规则存储到.git/objects目录下。
+
+总结下Git对象存储的算法步骤：
+
+计算content长度，构造header;
+将header添加到content前面，构造Git对象；
+使用sha1算法计算Git对象的40位hash码；
+使用zlib的deflate算法压缩Git对象；
+将压缩后的Git对象存储到.git/objects/hash[0, 2]/hash[2, 40]路径下;
+
+Nodejs实现
+
+接下来，我们使用Nodejs来实现git hash-object -w的功能，即计算Git对象的hash值并存储到Git文件系统中：
+
+const fs = require('fs')
+const crypto = require('crypto')
+const zlib = require('zlib')
+function gitHashObject(content, type) {
+  // 构造header
+  const header = `${type} ${Buffer.from(content).length}\0`
+  // 构造Git对象
+  const store = Buffer.concat([Buffer.from(header), Buffer.from(content)])
+  // 计算hash
+  const sha1 = crypto.createHash('sha1')
+  sha1.update(store)
+  const hash = sha1.digest('hex')
+  // 压缩Git对象
+  const zlib_store = zlib.deflateSync(store)
+  // 存储Git对象
+  fs.mkdirSync(`.git/objects/${hash.substring(0, 2)}`)
+  fs.writeFileSync(`.git/objects/${hash.substring(0, 2)}/${hash.substring(2, 40)}`, zlib_store)
+  console.log(hash)
+}
+// 调用入口
+gitHashObject(process.argv[2], process.argv[3])
+
+最后，测试下能否正确存储Git对象：
+
+$ node index.js 'hello, world' blob
+8c01d89ae06311834ee4b1fab2f0414d35f01102
+$ git cat-file -p 8c01d89ae06311834ee4b1fab2f0414d35f01102
+hello, world
+
+由此可见，我们生成了一个合法的Git数据对象，证明算法是正确的。
