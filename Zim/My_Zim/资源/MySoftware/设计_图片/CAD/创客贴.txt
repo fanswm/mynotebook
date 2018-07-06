@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-06T11:57:17+08:00
+
+====== 创客贴 ======
+Created Friday 06 July 2018
+
+https://www.chuangkit.com/designtools/startdesign
+
+创客贴是一款很容易上手的平面设计工具，轻量级是一大特色，有个浏览器就能用。
+
+（1）场景、模板非常多，像是海报、公号首图，而且每个场景都有默认尺寸，很方便
+（2）离开了powerpoint照样能做ppt，操作界面也很简洁
+（3）拾色器并不稀奇，但能把它嵌套在这样的在线工具里，也是十分良心了
+（4）有很多我喜欢的书法字体，给力

@@ -1,9 +1,9 @@
 Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
-Creation-Date: 2017-12-23T10:42:38+08:00
+Creation-Date: 2018-07-06T13:03:37+08:00
 
 ====== Pixabay ======
-Created Saturday 23 December 2017
+Created Friday 06 July 2018
 
-https://pixabay.com/
 这个网站真是为PPT配图的好去处，不仅图片质量高，还支持中文，更关键的一点是还免费，无版权。
+https://link.zhihu.com/?target=https%3A//pixabay.com/

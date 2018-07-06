@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-06T12:01:01+08:00
+
+====== GifCam(gif制作工具) ======
+Created Friday 06 July 2018
+
+http://www.duote.com/soft/22585.html

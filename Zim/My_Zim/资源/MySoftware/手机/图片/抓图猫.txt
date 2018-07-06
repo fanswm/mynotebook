@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-06T11:15:31+08:00
+
+====== 抓图猫 ======
+Created Friday 06 July 2018
+
+一键保存网页上所有图片

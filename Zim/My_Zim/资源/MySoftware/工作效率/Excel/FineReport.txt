@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-06T12:45:51+08:00
+
+====== FineReport ======
+Created Friday 06 July 2018
+
+这是一个商用报表软件
+http://www.finereport.com/?utm_source=media&utm_medium=zhihu
+
+
+你用过Excel，却不知还有一款神器“FineReport”
+https://zhuanlan.zhihu.com/p/30404690
