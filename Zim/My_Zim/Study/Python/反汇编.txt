@@ -1,0 +1,59 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-15T21:51:51+08:00
+
+====== 反汇编 ======
+Created Sunday 15 July 2018
+
+如果你想玩转字节码，那么，Python __标准库中的 dis 模块__将对你有非常大的帮助；dis 模块为 Python 字节码提供了一个 “反汇编”，它可以让你更容易地得到一个人类可读的版本，以及查找各种字节码指令。dis 模块的文档[2] [https://docs.python.org/3/library/dis.html]可以让你遍历它的内容，并且提供一个字节码指令能够做什么和有什么样的参数的完整清单。
+
+这里有一个查看 hello() 函数的示例：
+```
+>>> hello.__code__
+<code object hello at 0x104e46930, file "<stdin>", line 1>
+>>> hello.__code__.co_consts
+(None, 'Hello, World!')
+>>> hello.__code__.co_varnames
+()
+>>> hello.__code__.co_names
+('print',)
+```
+
+代码对象在函数中可以以属性 __code__ 来访问，并且携带了一些重要的属性：
+
+    co_consts 是存在于函数体内的任意实数的元组
+    co_varnames 是函数体内使用的包含任意本地变量名字的元组
+    co_names 是在函数体内引用的任意非本地名字的元组
+
+```
+__import dis__
+__dis.dis(hello)__
+```
+
+```
+2           0 LOAD_GLOBAL              0 (print)
+              3 LOAD_CONST               1 ('Hello python!')
+              6 CALL_FUNCTION            1 (1 positional, 0 keyword pair)
+              9 POP_TOP
+             10 LOAD_CONST               0 (None)
+             13 RETURN_VALUE
+```
+
+因此，现在我们能够__理解 hello() 函数中所列出的字节码：__
+
+    LOAD_GLOBAL 0：告诉 Python 通过 co_names （它是 print 函数）的索引 0 上的名字去查找它指向的全局对象，然后将它推入到计算栈
+    LOAD_CONST 1：带入 co_consts 在索引 1 上的字面值，并将它推入（索引 0 上的字面值是 None，它表示在 co_consts 中，因为 Python 函数调用有一个隐式的返回值 None，如果没有显式的返回表达式，就返回这个隐式的值 ）。
+    CALL_FUNCTION 1：告诉 Python 去调用一个函数；它需要从栈中弹出一个位置参数，然后，新的栈顶将被函数调用。
+
+“原始的” 字节码 —— 是非人类可读格式的字节 —— 也可以在代码对象上作为 co_code 属性可用。如果你有兴趣尝试手工反汇编一个函数时，你可以从它们的十进制字节值中，使用列出 dis.opname 的方式去查看字节码指令的名字。
+
+字节码的用处
+首先，理解 Python 的运行模型可以帮你更好地理解你的代码。人们都开玩笑说，C 是一种 “可移植汇编器”，你可以很好地猜测出一段 C 代码转换成什么样的机器指令。理解 Python 字节码之后，你在使用 Python 时也具备同样的能力 —— 如果你能预料到你的 Python 源代码将被转换成什么样的字节码，那么你可以知道如何更好地写和优化 Python 源代码。
+
+第二，理解字节码可以帮你更好地回答有关 Python 的问题。比如，我经常看到一些 Python 新手困惑为什么某些结构比其它结构运行的更快（比如，为什么 {} 比 dict() 快）。知道如何去访问和阅读 Python 字节码将让你很容易回答这样的问题（尝试对比一下： dis.dis("{}") 与 dis.dis("dict()") 就会明白）。
+
+最后，理解字节码和 Python 如何运行它，为 Python 程序员不经常使用的一种特定的编程方式提供了有用的视角：面向栈的编程。如果你以前从来没有使用过像 FORTH 或 Fator 这样的面向栈的编程语言，它们可能有些古老，但是，如果你不熟悉这种方法，学习有关 Python 字节码的知识，以及理解面向栈的编程模型是如何工作的，将有助你开拓你的编程视野。
+
+https://linux.cn/article-9816-1.html?utm_source=rss&utm_medium=rss
+
+
