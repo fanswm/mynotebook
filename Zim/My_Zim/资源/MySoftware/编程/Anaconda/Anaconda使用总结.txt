@@ -59,7 +59,7 @@ python --version
 deactivate python34 # for Windows
 source deactivate python34 # for Linux & Mac
 
-# 删除一个已有的环境
+# __删除一个已有的环境__
 conda remove --name python34 --all
 用户安装的不同python环境都会被放在目录~/anaconda/envs下，可以在命令中运行conda info -e查看已安装的环境，当前被激活的环境会显示有一个星号或者括号。
 
@@ -72,43 +72,43 @@ Conda的包管理就比较好理解了，这部分功能与pip类似。
 
 例如，如果需要安装scipy：
 
-# 安装scipy
+__# 安装scipy__
 conda install scipy
 # conda会从从远程搜索scipy的相关信息和依赖项目，对于python 3.4，conda会同时安装numpy和mkl（运算加速的库）
 
-# 查看已经安装的packages
+# __查看已经安装的packages__
 conda list
 # 最新版的conda是从site-packages文件夹中搜索已经安装的包，不依赖于pip，因此可以显示出通过各种方式安装的包
 conda的一些常用操作如下：
 
-# 查看当前环境下已安装的包
+# __查看当前环境下已安装的包__
 conda list
 
-# 查看某个指定环境的已安装包
+# __查看某个指定环境的已安装包__
 conda list -n python34
 
-# 查找package信息
+# __查找package信息__
 conda search numpy
 
-# 安装package
+# __安装package__
 conda install -n python34 numpy
 # 如果不用-n指定环境名称，则被安装在当前活跃环境
 # 也可以通过-c指定通过某个channel安装
 
-# 更新package
+# __更新package__
 conda update -n python34 numpy
 
 # 删除package
 conda remove -n python34 numpy
 前面已经提到，conda将conda、python等都视为package，因此，完全可以使用conda来管理conda和python的版本，例如
 
-# 更新conda，保持conda最新
+# __更新conda，保持conda最新__
 conda update conda
 
-# 更新anaconda
+# __更新anaconda__
 conda update anaconda
 
-# 更新python
+__# 更新python__
 conda update python
 # 假设当前环境是python 3.4, conda会将python升级为3.4.x系列的当前最新版本
 补充：如果创建新的python环境，比如3.4，运行conda create -n python34 python=3.4之后，conda仅安装python 3.4相关的必须项，如python, pip等，如果希望该环境像默认环境那样，安装anaconda集合包，只需要：
