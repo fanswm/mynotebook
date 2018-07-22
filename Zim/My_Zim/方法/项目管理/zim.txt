@@ -12,3 +12,14 @@ Created 星期日 22 七月 2018
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 ```
+
+zim_update.sh
+```
+#!/bin/bash
+# coding: utf-8
+cd /home/fanswm/github/mynotebook/Zim
+git pull
+git add .
+git commit -m"commit by ubuntu bash"
+git push
+```

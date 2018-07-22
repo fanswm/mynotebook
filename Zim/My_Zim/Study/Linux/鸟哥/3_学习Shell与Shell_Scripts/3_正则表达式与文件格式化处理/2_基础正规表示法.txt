@@ -205,7 +205,7 @@ go! go! Let's go.
 20:go! go! Let's go.
 你可以发现我们可以捉到第一个字节都不是大写的！只不过 grep 列出的关键字部分不只有第一个字节， grep 是列出一整个字 (word) 说！同样的，上面的命令也可以用如下的方式来取代的：
 
-[root@www ~]# grep -n '^[[:lower:]]' regular_express.txt
+[root@www ~]# grep -n '^:lower:' regular_express.txt
 好！那如果我不想要开头是英文字母，则可以是这样：
 
 [root@www ~]# grep -n '^[^a-zA-Z]' regular_express.txt
