@@ -1,0 +1,23 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-28T05:07:08+08:00
+
+====== 快速标注 ======
+Created 星期六 28 七月 2018
+
+常用快捷键如下，供参考：
+DLI, *DIMLINEAR（直线标注）
+DAL, *DIMALIGNED（对齐标注）
+DRA, *DIMRADIUS（半径标注）
+DDI, *DIMDIAMETER（直径标注）
+DAN, *DIMANGULAR（角度标注）
+DCE, *DIMCENTER（中心标注）
+DOR, *DIMORDINATE（点标注）
+TOL, *TOLERANCE（标注形位公差）
+LE, *QLEADER（快速引出标注）
+DBA, *DIMBASELINE（基线标注）
+DCO, *DIMCONTINUE（连续标注）
+D, *DIMSTYLE（标注样式）
+DED, *DIMEDIT（编辑标注）
+DOV, *DIMOVERRIDE(替换标注系统变量)
+QDIM是快速标注
