@@ -1,0 +1,32 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-08-02T23:05:50+08:00
+
+====== 激活 ======
+Created 星期四 02 八月 2018
+
+找到如图所示的文件： su2015-32-patch。
+
+点击patch。
+
+点击是。
+
+找到sketchup。
+
+找到style builder。
+
+提示OK。
+
+打开sketchup2016。
+
+选择我同意，然后继续。
+https://jingyan.baidu.com/article/2f9b480de594b641cb6cc29f.html
+
+草图大师Sketchup Pro 2016中文版安装激活教程
+点击开始使用。
+
+草图大师Sketchup Pro 2016中文版安装激活教程
+选择模板。
+
+草图大师Sketchup Pro 2016中文版安装激活教程
+sketchup2016界面。
