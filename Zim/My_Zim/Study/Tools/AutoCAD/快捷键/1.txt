@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-08-08T16:26:15+08:00
+
+====== 1 ======
+Created Wednesday 08 August 2018
+
+作者：Gaven
+链接：https://www.zhihu.com/question/21287591/answer/17969703
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+F1: 获取帮助　 　F2: 实现作图窗和文本窗口的切换　 　　F3: 控制是否实现对象自动捕捉　 　　F4: 数字化仪控制 　　F5: 等轴测平面切换 　　F6: 控制状态行上坐标的显示方式 　　F7: 栅格显示模式控制 　　F8: 正交模式控制 　　F9: 栅格捕捉模式控制 　　F10: 极轴模式控制 　　F11: 对象追踪式控制 　　Alt+F8:宏 　　Alt+F11:打开Visual Basic编辑器 　　Ctrl+A:全部选择 　　Ctrl+B: 栅格捕捉模式控制(F9) 　　Ctrl+C: 将选择的对象复制到剪切板上 　　Ctrl+F: 控制是否实现对象自动捕捉(f3) 　　Ctrl+G: 栅格显示模式控制(F7) 　Ctrl+J: 重复执行上一步命令 　Ctrl+K: 超级链接 　　Ctrl+N: 新建图形文件 　　Ctrl+M: 打开选项对话框 　　Ctrl+0: 清除屏幕 　　Ctrl+1: 打开特性对话框 　　Ctrl+2: 打开图象资源管理器 　　Ctrl+3: 打开工具选项板 　　Ctrl+6: 打开数据库连接 　　Ctrl+O: 打开图象文件 　　Ctrl+P: 打开打印对说框 　　Ctrl+S: 保存文件 　　Ctrl+U: 极轴模式控制(F10) 　　Ctrl+v: 粘贴剪贴板上的内容 　　Ctrl+W: 对象追 踪式控制(F11) 　　Ctrl+X: 剪切所选择的内容 　　Ctrl+Y: 重做 　　Ctrl+Z: 取消前一步的操作 　　A: 绘圆弧 　　B: 定义块 　　C: 画圆 　　D: 尺寸资源管理器 　　E: 删除 　　F: 倒圆角 　　G: 对相组合 　　H: 填充 　　I: 插入 　　S: 拉伸 　　T: 文本输入 　　W: 定义块并保存到硬盘中 　　L: 直线 　　M: 移动 　　X: 炸开 　　V: 设置当前坐标 　　U: 恢复上一次操做 　　O: 偏移 　　P: 移动 　　Z: 缩放 　　二级快捷键： 　　AA: 测量区域和周长(area) 　　AL: 对齐(align) 　　AR: 阵列(array) 　　AP: 加载*lsp程系 　　AV: 打开视图对话框(dsviewer) 　　SE: 打开对相自动捕捉对话框 　　ST: 打开字体设置对话框(style) 　　SO: 绘制二围面( 2d solid) 　　SP: 拼音的校核(spell) 　　SC: 缩放比例 (scale) 　　SN: 栅格捕捉模式设置(snap) 　DT: 文本的设置(dtext) 　　DI: 测量两点间的距离 　　OI：插入外部对相 　　3a : 三维阵列 　　3f : 画石头线 　　3p : 整体线段 　　aa : 面积 　　al : 对齐 　　ar : 阵列 　　bh : 边界填充 　　bo : 创建边界 　　br : 打断 　　ch : 特性面板 　　co(cp) : 复制 　　dc : 设计中心 　　di : 量距离 　　do : 实圆环 　　dr : 显示顺序 　　ds : 草图设计 　　dt : 文字输入器 　　dv : 相机 　　DLI , *DIMLINEAR（直线标注） 　　DAL , *DIMALIGNED（对齐标注） 　　DRA , *DIMRADIUS（半径标注） 　　DDI , *DIMDIAMETER（直径标注） 　　DAN , *DIMANGULAR（角度标注） 　　DCE , *DIMCENTER（中心标注） 　　DOR , *DIMORDINATE（点标注） 　　ed : 文字修改 　　el : 椭圆 　　ex : 延伸 　　he : 填充修改 　　hi(ctrl+z): 重新生成 　　me : 定距等分 　　mi : 镜像 　　ma : 格式刷 　　ml : 双线 　　mo : 特性 　　mt : 文字格式 　　pl : 多段线 　　re : 重新生成 　　ro : 旋转 　　rr : 渲染 　　sc : 比例缩放 　　st : 文字样式 　　tb : 插入表格 　　tr : 剪切 　　xl : 构造线 　　三级快捷键： 　　cha : 倒直角 　　dal : 斜线标注 　　dan : 角度标注 　　dba : 层级标注 　　dce : 标注圆心 　　dco : 连续标注 　　ddi : 直径标注 　　ded : 编辑标注 　　div : 定数等分 　　dli : 直线标注 　　dra : 半径标注 　　le : 快速引线 　　len : 延长 　　pol : 多边形 reg : 创面域 　　spl : 样条曲线[编辑本段]相关资料1、 在“命令”行里输入“skpoly”、“sketch”然后输入新值如“1”，可在工具与徒手画之间切换。 　　2、 在“命令”行里输入“mirrtext”、然后输入新值“1”可产生左右相反的真正的镜像效果。 　　3、 CAD安装程序内－support－pgp内可更改制图键法。 　　4、 “tr”、“ex”两快键输入后再连击空格键两次，可在绘图区域内任意剪切或延伸直线。 　　或者输入剪切键“tr”后按两次空格键，然后按住Shift点左键可以延伸，快捷键“ex”也是。 　　5、 F7 、F8 、F3 、F10 分别是栅格、正交、捕捉、极轴的快捷操作。 　　6、 Z+空格键是“实时缩放”快键。 　　7、 在“图像特性管理器”中，被冻结的图像部参与CAD运算，而被关闭的图像内容还是依然参与运算。所以在绘制三维或其它较大的图纸时为了计算机运行快，最好多用“冻结”。
