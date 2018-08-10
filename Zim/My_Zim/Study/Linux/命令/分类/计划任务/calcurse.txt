@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-08-10T11:27:40+08:00
+
+====== calcurse ======
+Created Friday 10 August 2018
+
+calcurse, CLI日历与计划任务
+
+Calcurse是一款面向命令行界面的日历与计划任务应用。其能够帮助用户追踪活动、约会与其它日常任务。用户可以配置通知系统以在截止时间临近时发出提醒，而基于curses的界面亦可进行定制，并利用强大的命令行选项过滤事务内容并进行格式化调整，这意味着其非常适合被引入脚本当中。

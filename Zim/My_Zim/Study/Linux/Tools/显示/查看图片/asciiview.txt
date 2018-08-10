@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-08-10T11:20:43+08:00
+
+====== asciiview ======
+Created Friday 10 August 2018
+
+asciiview,以ASCII形式查看任何图片
