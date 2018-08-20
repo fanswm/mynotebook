@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-08-15T08:05:57+08:00
+
+====== PPT转PDF ======
+Created Wednesday 15 August 2018
+
+smallPDf
+为了满足不同场景下方便查看、整理文件的需求，工作学习中做文件格式的转换是常有事情，PPT转PDF，PDF转PPT，word转PDF等等。smallpdf在线转换工具能够满足ppt、word、pdf、excel、图片之间的转换。
+https://smallpdf.com/
