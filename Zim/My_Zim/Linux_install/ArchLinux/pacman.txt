@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-08-22T16:19:54+08:00
+
+====== pacman ======
+Created Wednesday 22 August 2018
+
+教程:
+https://www.ostechnix.com/getting-started-pacman/
