@@ -14,3 +14,9 @@ http://tuchuang.org/
 七牛图床:
 imrdr4@126.com
 https://portal.qiniu.com/create
+
+SM.MS:
+https://sm.ms/
+
+路过图床
+https://imgchr.com/

@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-09-18T10:38:26+08:00
+
+====== this DaveJ ======
+Created Tuesday 18 September 2018
+
+http://thisdavej.com/copy-table-in-excel-and-paste-as-a-markdown-table/
+
+ 的功能与 Tables Generator 有所不同，通过这个工具你可以将 Excel 表格里复制出来的内容转换为 Markdown 格式显示出来。
+
+网站声明支持 Google Sheets 和 Excel，经过测试 WPS 也可以完美使用，而 Numbers 的内容复制进去就完全没有反应了。

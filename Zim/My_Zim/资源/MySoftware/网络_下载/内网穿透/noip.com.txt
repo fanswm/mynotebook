@@ -5,4 +5,5 @@ Creation-Date: 2017-11-24T15:35:07+08:00
 ====== noip.com ======
 Created Friday 24 November 2017
 
-abstract007:noip.com
+[[abstract007:noip.com]]
+

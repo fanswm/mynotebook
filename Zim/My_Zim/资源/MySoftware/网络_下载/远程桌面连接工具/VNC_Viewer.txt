@@ -1,0 +1,38 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-09-18T13:35:39+08:00
+
+====== VNC Viewer ======
+Created Tuesday 18 September 2018
+
+树莓派 VNC Viewer 远程桌面配置教程
+2018年8月31日 Spoony 未分类 0
+
+
+树莓派实验室在之前介绍过《直接用Windows远程桌面连接树莓派的方法》，使用的是微软的“远程桌面（Remote Desktop Connection）”作为客户端登录树莓派。下面我们介绍使用树莓派官方认证的 RealVNC 客户端登录树莓派的方法。
+
+在开始之前，你需要已经登录树莓派，进入到树莓派命令窗口，通过接上显示器和键鼠直接操作或通过 SSH 登录都可以。
+
+
+启用树莓派 VNC 服务
+
+在终端输入以下命令进入配置界面。
+
+1
+sudo raspi-config
+
+依次操作：Interfacing Options -> VNC -> Yes。之后系统会提示你是否要安装 VNC 服务，输入 y 之后回车，等待系统自动下载安装完成，一切顺利的话 VNC 服务就启动了！
+
+
+
+
+
+
+
+安装 VNC 客户端
+
+下面去 RealVNC 官网下载 RealVNC Viewer，它是 RealVNC 的客户端，跨平台。下载你需要的平台的客户端版本即可。
+
+https://www.realvnc.com/en/connect/download/viewer/
+
+http://shumeipai.nxez.com/2018/08/31/raspberry-pi-vnc-viewer-configuration-tutorial.html
