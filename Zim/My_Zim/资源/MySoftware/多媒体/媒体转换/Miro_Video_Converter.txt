@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-09-21T16:06:33+08:00
+
+====== Miro Video Converter ======
+Created Friday 21 September 2018
+
+http://www.mirovideoconverter.com/
+并非所有视频文件都是同样创建的。有些是专有格式。有的在显示器或电视屏幕上看起来很棒但是没有针对移动设备进行优化。这就是 Miro Video Converter 可以用的地方。
+
+Miro Video Converter 非常重视移动设备。它可以转换在 Android 手机、Apple 设备、PlayStation Portable 和 Kindle Fire 上播放的视频。它会将最常见的视频格式转换为 MP4、WebM 和 Ogg Theora。你可以在 Miro 的网站上找到支持的设备和格式的完整列表
+
+要使用它，可以将文件拖放到窗口中，也可以选择要转换的文件。然后，单击“Format”菜单以选择转换的格式。你还可以单击 Apple、Android 或其他菜单以选择要转换文件的设备。Miro Video Converter 会为设备屏幕分辨率调整视频大小。
