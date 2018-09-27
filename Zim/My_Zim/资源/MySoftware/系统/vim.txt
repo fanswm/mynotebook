@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-21T17:05:16+08:00
-
-====== vim ======
-Created Tuesday 21 November 2017
-

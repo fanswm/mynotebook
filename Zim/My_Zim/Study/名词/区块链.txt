@@ -2,6 +2,6 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-02-21T16:37:32+08:00
 
-====== 名词 ======
+====== 区块链 ======
 Created Wednesday 21 February 2018
 
