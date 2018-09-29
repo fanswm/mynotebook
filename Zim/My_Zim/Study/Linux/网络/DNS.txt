@@ -8,6 +8,8 @@ Created Monday 24 September 2018
 https://linux.cn/article-9943-1.html
 https://linux.cn/article-9949-1.html
 https://linux.cn/article-9972-1.html
+https://linux.cn/article-10056-1.html?utm_source=rss&utm_medium=rss
+
 
 Linux DNS 查询剖析（第一部分）
 2018-08-22 23:05
@@ -29,7 +31,7 @@ Linux DNS 查询剖析（第一部分）
 
 同时这也是一份有价值的说明，指出原本很简单的东西是如何随着时间的推移变得相当复杂。在弄清楚 DNS 查询的原理的过程中，我了解了大量不同的技术及其发展历程。
 
-我甚至编写了一些自动化脚本[https://github.com/ianmiell/shutit-linux-dns/blob/master/linux_dns.py]，可以让我在虚拟机中进行实验。欢迎读者参与贡献或勘误。
+我甚至编写了一些自动化脚本[https://github.com/ianmiell/shutit-linux-dns/blob/master/linux_dns.py]%EF%BC%8C%E5%8F%AF%E4%BB%A5%E8%AE%A9%E6%88%91%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C%E3%80%82%E6%AC%A2%E8%BF%8E%E8%AF%BB%E8%80%85%E5%8F%82%E4%B8%8E%E8%B4%A1%E7%8C%AE%E6%88%96%E5%8B%98%E8%AF%AF。
 
 请注意，本系列主题并不是“DNS 工作原理”，而是与查询 Linux 主机配置的真实 DNS 服务器（这里假设查询了一台 DNS 服务器，但后面你会看到有时并不需要）相关的内容，以及如何确定使用哪个查询结果，或者如何使用其它方式确定 IP 地址。
 

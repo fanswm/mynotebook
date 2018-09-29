@@ -28,7 +28,7 @@ https://blog.csdn.net/wfl_137724/article/details/76684982
 # BASEFOLDER
 
 # 上面创建的存放代码的目录
-git.repositoriesFolder = E:\git\gitdata
+__git.repositoriesFolder = E:\git\gitdata__
 
 # Standard http port to serve.  <= 0 disables this connector.
 # On Unix/Linux systems, ports < 1024 require root permissions.
@@ -38,7 +38,7 @@ git.repositoriesFolder = E:\git\gitdata
 # RESTART REQUIRED
 
 # 设置访问的端口，不要和别的端口有冲突
-server.httpPort = 1000
+__server.httpPort = 1000__
 
 # Secure/SSL https port to serve. <= 0 disables this connector.
 # On Unix/Linux systems, ports < 1024 require root permissions.
@@ -46,7 +46,7 @@ server.httpPort = 1000
 #
 # SINCE 0.5.0
 # RESTART REQUIRED
-server.httpsPort = 1001
+__server.httpsPort = 1001__
 
 # Specify the interface for Jetty to bind the standard connector.
 # You may specify an ip or an empty value to bind to all interfaces.
@@ -57,7 +57,7 @@ server.httpsPort = 1001
 # RESTART REQUIRED
 
 # 搭建服务器的IP
-server.httpBindInterface =192.168.1.109
+__server.httpBindInterface =192.168.1.109__
 
 # Specify the interface for Jetty to bind the secure connector.
 # You may specify an ip or an empty value to bind to all interfaces.
@@ -68,7 +68,7 @@ server.httpBindInterface =192.168.1.109
 # RESTART REQUIRED
 
 # localhost就行
-server.httpsBindInterface =localhost
+__server.httpsBindInterface =localhost__
 ```
 
 + 修改installService.cmd E:\git\gitblit-1.8.0\data\installService.cmd
@@ -93,6 +93,11 @@ or ： git clone http://admin@10.102.9.15:1000/r/waigousha/wgs.git
 + 搭建ssh服务，openssh
 	net start opensshd
 	net stop opensshd
+	
++ git push:
+++ git config user.name "YOURNAME"
+++ git config user.email "youemail@xxx.xxx"
+如果不设置push不上。
 	
  
 
