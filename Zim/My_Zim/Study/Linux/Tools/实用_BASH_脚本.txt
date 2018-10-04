@@ -8,7 +8,7 @@ Created Monday 24 September 2018
 献给命令行重度用户的一组实用 BASH 脚本
 2018-08-21 18:35
 编译自：https://www.ostechnix.com/collection-useful-bash-scripts-heavy-commandline-users/%E4%BD%9C%E8%80%85： Sk
-原创：LCTT https://linux.cn/article-9939-1.html 译者： [[MjSeven]]
+原创：LCTT https://linux.cn/article-9939-1.html 译者： MjSeven
 
 https://linux.cn/article-9939-1.html?utm_source=rss&utm_medium=rss
 
