@@ -1,0 +1,42 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-07T11:48:21+08:00
+
+====== 找不到libudev.so.0库 ======
+Created 星期日 07 十月 2018
+
+Ubuntu找不到libudev.so.0库
+2015年07月09日 12:50:05 _空城寂 阅读数：5227 标签： libudev-so ubuntu  更多
+个人分类： 烂笔头
+版权声明：本文为博主原创文章，未经博主允许不得转载。	https://blog.csdn.net/nieyongs/article/details/46815379
+问题现象
+在Ubuntu下很多软件通过deb安装之后发现点击打开,结果却打不开.所以我用terminal去执行程序.发现了error while loading shared libraries: libudev.so.0: cannot open shared object file: No such file or directory.这个提示就是说明了无法加载libudev.so.0这个动态库.
+
+解决方案
+1 首先是使用想到的是安装缺少的库
+sudo apt-get install libudev.so.xxx
+1
+结果发现没有libudev.so.0.
+
+2 链接到已有的库
+通过查找资料,发现很多人遇到这个问题.原来是高版本的ubuntu系统把libudev.so.0名字改掉了,导致我们无法加载libudev.so.0了.很容易想到我们使用shell ln 就可以了.
+
+这个时候首先我们查找系统的udev.so库在哪个目录.
+
+locate udev.so
+
+运行结果:
+
+/lib/i386-linux-gnu/libudev.so.1
+/lib/i386-linux-gnu/libudev.so.1.6.2
+/lib/x86_64-linux-gnu/libudev.so.1
+/lib/x86_64-linux-gnu/libudev.so.1.6.2
+/usr/lib/x86_64-linux-gnu/libudev.so
+
+这个时候我们发现了liudev.so主要在i386和x86_64路径里面,这个就是更具系统的位数来建立链接.而我的是64位的,所以我需要在x86_64路径下修改.
+
+__cd /lib/x86_64-linux-gnu/__
+__ln -sf libudev.so.1.6.2 libudev.so.0__
+__sudo ldconfig__
+
+https://blog.csdn.net/nieyongs/article/details/46815379

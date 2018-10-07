@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-06T12:38:01+08:00
+
+====== 位图转矢量图 ======
+Created Friday 06 July 2018
+
+Vector Magic中文版 1.15 绿色汉化版
+https://www.newasp.net/soft/198131.html
+作为一款位图转矢量图的小工具，在找不到高清的logo/图标素材时，它的功能就显得尤为重要。
