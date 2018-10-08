@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-08T16:51:57+08:00
+
+====== 在kali Linux上创建一个用于隐藏文件的加密容器 ======
+Created Monday 08 October 2018
+
+http://www.freebuf.com/articles/database/184683.html
