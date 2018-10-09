@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-09T08:23:08+08:00
+
+====== wiki ======
+Created Tuesday 09 October 2018
+

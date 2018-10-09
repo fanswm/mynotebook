@@ -1,0 +1,35 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-09T08:55:01+08:00
+
+====== GitHub Wiki ======
+Created Tuesday 09 October 2018
+
+GitHub Wiki 可以借助__开源工具 gollum__ 通过命令行提交维基页面。
+
+gollum 的 [安装][https://github.com/gollum/gollum/wiki/Installation] 和使用都比较简单，大家不妨动手试试。首先，安装 gollum 需要在终端输入以下命令：
+
+sudo brew install icu4c
+gem install charlock_holmes -- --with-icu-dir=/usr/local/opt/icu4c
+gem install gollum
+安装完成后，先得把 GitHub 上仓库新建的 Wiki 克隆到本地，然后在本地使用 gollum 自带的网页编辑器进行编辑，最后上传 GitHub。
+
+在输入 clone 命令之前，我们需要要先认识一下 Github Wiki 的地址。一个典型的仓库地址就像git@github.com:abc/project.git 这样，而 Github Wiki 的地址只需要加上 .wiki 的后缀。
+
+试着在终端里输入以下命令：
+
+git clone git@github.com:abc/project.wiki.git wiki #请替换ssh地址
+gollum
+如果有看到 INFO WEBrick::HTTPServer#start: pid=#### port=####这样的提示，就可以按照提示在浏览器输入 127.0.0.1:port 。
+
+到这里，你就顺利地进入 gollum 的网页编辑器。
+
+编辑好文档后，输入以下命令完成提交文档：
+
+cd wiki
+git add .
+git commit -am"提交试试"
+git push
+Github Wiki 本身是一个不错的维基工具，但可能它的编辑功能和外观样式就不如 Tiddlywiki。所以，如果你有较强的动手能力或者以前玩过 Hexo 静态博客，可以试试 __hex-theme-writtern__ 这个维基样式的主题，把你的博客变得和 Tiddlywiki 一样功能强大。
+
+以上就是三种建立个人维基的方法。用维基来做知识管理并不是一种过时的方法，反而是一种正确的连接知识的方式。而我推荐的方法有难有易，大家可以选择适合自己的方法去实践。
