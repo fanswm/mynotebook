@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-10T16:32:33+08:00
+
+====== 夜神模拟器 ======
+Created Wednesday 10 October 2018
+
+夜神模拟器是一款电脑上的安卓模拟器，它是专门为电脑玩手游的玩家打造的。
+它专门为游戏做了很多兼容，它支持Android 4.4 和Android 5.1 双系统，兼容AMD 和X86，同时支持高帧率，吃鸡画面不受影响。
+各种快捷键，手柄模式，游戏多开，统统都支持。
+而且还有专门的游戏中心。
+支持Win 和Mac。
