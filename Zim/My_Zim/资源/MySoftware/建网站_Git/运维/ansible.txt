@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-15T11:00:01+08:00
+
+====== ansible ======
+Created Monday 15 October 2018
+
+Ansible中文权威指南
+http://www.ansible.com.cn/
+
+
+https://github.com/ansible/ansible
