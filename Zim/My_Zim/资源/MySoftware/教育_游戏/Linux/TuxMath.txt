@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-15T15:19:55+08:00
+
+====== TuxMath ======
+Created Monday 15 October 2018
+
+https://tuxmath.en.uptodown.com/ubuntu

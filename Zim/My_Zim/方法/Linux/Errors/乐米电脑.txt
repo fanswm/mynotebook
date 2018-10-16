@@ -7,6 +7,6 @@ Created 星期日 22 七月 2018
 
 acad2007\program files\root\support\dfst.dll
 vel.arx
-fail to get [[CommCntrController]]
+fail to get CommCntrController
 2018/7/22
 

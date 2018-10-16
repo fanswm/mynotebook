@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-22T11:11:29+08:00
 
-====== 图床 ======
+====== 图床 图片分享 ======
 Created Monday 22 January 2018
 
 极简图床:
