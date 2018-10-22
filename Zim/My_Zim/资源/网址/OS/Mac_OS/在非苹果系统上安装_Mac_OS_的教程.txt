@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-22T09:59:29+08:00
+
+====== 在非苹果系统上安装 Mac OS 的教程 ======
+Created Monday 22 October 2018
+
+https://hackintosh.com/

@@ -17,6 +17,16 @@ Created 星期四 30 十一月 2017
 -c 根据ctime排序显示
 
 -t 根据文件修改时间排序
+-S 要按文件大小对目录进行排序
+-r 要以相反的顺序列出内容
+
+仅列出目录中的 .txt 文件：ls *.txt
+按文件大小列出：ls -s
+按时间和日期排序：ls -t
+按扩展名排序：ls -X
+按文件大小排序：ls -S
+带有文件大小的长格式：ls -ls
+
 
 ---color[=WHEN] 用色彩辨别文件类型 WHEN 可以是’never’、’always’或’auto’其中之一
 
@@ -35,3 +45,8 @@ Created 星期四 30 十一月 2017
 黄色：表示设备文件
 
 灰色：表示其它文件
+
+
+
+ls 列出文件的技巧
+https://linux.cn/article-10139-1.html?utm_source=rss&utm_medium=rss

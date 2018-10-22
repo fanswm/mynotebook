@@ -1,0 +1,25 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-22T11:59:28+08:00
+
+====== lolcat ======
+Created Monday 22 October 2018
+
+lolcat
+
+这是一个用彩虹为终端输出着色的命令。没什么用，但是它看起来很棒！
+
+
+
+
+
+
+安装说明
+
+lolcat 是一个 Ruby 软件包，可从官方 Ruby Gems 托管中获得。所以，你首先需要 gem 客户端：
+
+sudo dnf install -y rubygems
+然后安装 lolcat 本身：
+
+gem install lolcat
+再说一次，使用 lolcat 命令管道任何其他命令，并在 Fedora 终端中享受彩虹（和独角兽！）。

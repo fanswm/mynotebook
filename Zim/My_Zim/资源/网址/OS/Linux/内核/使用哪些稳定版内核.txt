@@ -6,6 +6,8 @@ Creation-Date: 2018-10-18T16:51:48+08:00
 Created Thursday 18 October 2018
 
 应该使用哪些稳定版内核？
+ https://linux.cn/article-10103-1.html?utm_source=rss&utm_medium=rss
+
 2018-10-11 20:43
 编译自：http://kroah.com/log/blog/2018/08/24/what-stable-kernel-should-i-use/%E4%BD%9C%E8%80%85： Greg Kroah-hartman
 原创：LCTT https://linux.cn/article-10103-1.html 译者： qhwdw
