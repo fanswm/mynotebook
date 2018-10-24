@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:43:35+08:00
+
+====== Audacity ======
+Created Wednesday 24 October 2018
+
+Audacity
+Audacity[51] 是最著名的音频编辑软件之一，它是一款跨平台的开源多轨音频编辑器。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Audacity。
+
+$ sudo add-apt-repository ppa:ubuntuhandbook1/audacity
+$ sudo apt-get update
+$ sudo apt-get install audacity
+https://www.audacityteam.org/

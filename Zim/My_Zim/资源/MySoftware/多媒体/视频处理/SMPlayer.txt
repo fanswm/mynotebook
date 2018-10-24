@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T15:01:45+08:00
+
+====== SMPlayer ======
+Created Wednesday 24 October 2018
+
+SMPlayer[84] 是 MPlayer 的 GUI 版本，所有流行的媒体格式它都能够处理，并且它还有从 YouTube 和 Chromcast 和下载字幕的功能。
+
+使用以下命令在 Ubuntu 和 Debian 安装 SMPlayer。
+
+$ sudo add-apt-repository ppa:rvm/smplayer
+$ sudo apt-get update
+$ sudo apt-get install smplayer

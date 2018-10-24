@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:47:03+08:00
+
+====== Rhythmbox ======
+Created Wednesday 24 October 2018
+
+Rhythmbox[58] 支持海量种类的音乐，目前被认为是最可靠的音乐播放器，并由 Ubuntu 自带。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Rhythmbox。
+
+$ sudo add-apt-repository ppa:fossfreedom/rhythmbox
+$ sudo apt-get update
+$ sudo apt-get install rhythmbox
+https://wiki.gnome.org/Apps/Rhythmbox

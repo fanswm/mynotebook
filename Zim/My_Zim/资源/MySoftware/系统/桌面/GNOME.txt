@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:36:47+08:00
+
+====== GNOME ======
+Created Wednesday 24 October 2018
+
+GNOME[40] 是由一些免费和开源应用程序组成的桌面环境，它可以运行在任何 Linux 发行版和大多数 BSD 衍生版本上。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Gnome。
+
+$ sudo apt install tasksel
+$ sudo apt update
+$ sudo tasksel install ubuntu-desktop
+https://www.gnome.org/

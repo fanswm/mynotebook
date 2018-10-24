@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:53:45+08:00
+
+====== SimpleScreenRecorder ======
+Created Wednesday 24 October 2018
+
+SimpleScreenRecorder[70] 面世时已经是录屏工具中的佼佼者，现在已成为 Linux 各个发行版中最有效、最易用的录屏工具之一。
+
+使用以下命令在 Ubuntu 和 Debian 安装 SimpleScreenRecorder。
+
+$ sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder
+$ sudo apt-get update
+$ sudo apt-get install simplescreenrecorder
+
+http://www.maartenbaert.be/simplescreenrecorder/

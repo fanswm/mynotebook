@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:42:03+08:00
+
+====== Guake ======
+Created Wednesday 24 October 2018
+
+Guake
+Guake[49] 是 GNOME 桌面环境下一个轻量级的可下拉式终端。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Guake。
+
+$ sudo apt-get install guake
+
+http://guake-project.org/

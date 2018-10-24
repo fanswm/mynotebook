@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-22T07:03:53+08:00
-
-====== EverNote ======
-创建日期 星期三 22 十一月 2017
-
-印象笔记：国内版
-EverNote：国际版

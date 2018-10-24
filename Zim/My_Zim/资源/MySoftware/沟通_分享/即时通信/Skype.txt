@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:31:53+08:00
+
+====== Skype ======
+Created Wednesday 24 October 2018
+
+Skype[https://www.skype.com/] 也是一个广为人知的软件了，任何感兴趣的用户都可以在 Linux 上使用。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Skype。
+
+$ sudo apt install snapd
+$ sudo snap install skype --classic

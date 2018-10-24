@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T14:23:15+08:00
+
+====== VLC ======
+Created Tuesday 21 November 2017
+
+VLC[82] 是我最喜欢的视频播放器，它几乎可以播放任何格式的音频和视频，它还可以播放网络电台、录制桌面会话以及在线播放电影。
+
+使用以下命令在 Ubuntu 和 Debian 安装 VLC。
+
+$ sudo add-apt-repository ppa:videolan/stable-daily
+$ sudo apt-get update
+$ sudo apt-get install vlc
+
+https://www.videolan.org/

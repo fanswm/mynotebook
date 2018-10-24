@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T15:00:38+08:00
+
+====== Banshee ======
+Created Wednesday 24 October 2018
+
+Banshee[81] 是一个开源的支持多格式的媒体播放器，于 2005 年开始开发并逐渐成长。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Banshee。
+
+$ sudo add-apt-repository ppa:banshee-team/ppa
+$ sudo apt-get update
+$ sudo apt-get install banshee
+
+http://banshee.fm/

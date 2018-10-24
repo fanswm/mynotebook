@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:24:20+08:00
+
+====== GnuCash ======
+Created Wednesday 24 October 2018
+
+GnuCash[https://www.gnucash.org/] 是一款免费的跨平台开源软件，它适用于个人和中小型企业的财务任务。
+
+使用以下命令在 Ubuntu 和 Debian 安装 GnuCash。
+
+$ sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu $(lsb_release -sc)-getdeb apps" >> /etc/apt/sources.list.d/getdeb.list'
+$ sudo apt-get update
+$ sudo apt-get install gnucash

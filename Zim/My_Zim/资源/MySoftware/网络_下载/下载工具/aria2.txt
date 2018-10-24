@@ -6,3 +6,9 @@ Creation-Date: 2017-11-21T20:32:32+08:00
 创建日期 星期二 21 十一月 2017
 
 https://www.wdssmq.com/post/20130323295.html
+
+Aria2[https://aria2.github.io/] 是一个开源的、轻量级的、多软件源和多协议的命令行下载器，它支持 Metalink、torrent、HTTP/HTTPS、SFTP 等多种协议。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Aria2。
+
+$ sudo apt-get install aria2

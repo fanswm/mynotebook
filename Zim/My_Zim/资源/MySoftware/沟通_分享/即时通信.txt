@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:31:16+08:00
+
+====== 即时通信 ======
+Created Wednesday 24 October 2018
+
+Pidgin[https://www.pidgin.im/] 是一个开源的即时通信工具，它几乎支持所有聊天平台，还支持额外扩展功能。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Pidgin。
+
+$ sudo add-apt-repository ppa:jonathonf/backports
+$ sudo apt-get update
+$ sudo apt-get install pidgin

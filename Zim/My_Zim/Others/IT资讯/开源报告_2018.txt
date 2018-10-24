@@ -7,3 +7,4 @@ Created Monday 22 October 2018
 
 2018 中国开源年度报告：数据篇 https://linux.cn/article-10138-1.html?utm_source=rss&utm_medium=rss
 2018 中国开源年度报告：问卷篇 https://linux.cn/article-10135-1.html?utm_source=rss&utm_medium=rss
+2018 中国开源年度报告：洞察篇 https://linux.cn/article-10142-1.html?utm_source=rss&utm_medium=rss

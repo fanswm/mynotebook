@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:36:04+08:00
+
+====== Cinnamon ======
+Created Wednesday 24 October 2018
+
+Cinnamon[38] 是 GNOME 3 的自由开源衍生产品，它遵循传统的 桌面比拟desktop metaphor 约定。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Cinnamon。
+
+$ sudo add-apt-repository ppa:embrosyn/cinnamon
+$ sudo apt update
+$ sudo apt install cinnamon-desktop-environment lightdm
+
+https://github.com/linuxmint/cinnamon-desktop

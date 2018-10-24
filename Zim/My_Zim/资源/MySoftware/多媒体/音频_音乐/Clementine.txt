@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:49:04+08:00
+
+====== Clementine ======
+Created Wednesday 24 October 2018
+
+Clementine[61] 是一款 Amarok 风格的音乐播放器，因此和 Amarok 相似，也有直观的用户界面、先进的控制模块，以及让用户搜索和发现新音乐的功能。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Clementine。
+
+$ sudo add-apt-repository ppa:me-davidsansome/clementine
+$ sudo apt-get update
+$ sudo apt-get install clementine
+https://www.clementine-player.org/

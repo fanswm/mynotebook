@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-23T12:01:46+08:00
+
+====== Google Drive ======
+Created Tuesday 23 October 2018
+
+https://www.google.com/drive/
+
+Google Drive[9] 是 Google 提供的云服务解决方案，这已经是一个广为人知的服务了。与 Dropbox 一样，可以通过它在所有联网的设备上同步文件。它免费提供了 15 GB 存储空间，包括Gmail、Google 图片、Google 地图等服务。
+
+参考阅读：5 个适用于 Linux 的 Google Drive 客户端[10]https://www.fossmint.com/best-google-drive-clients-for-linux/

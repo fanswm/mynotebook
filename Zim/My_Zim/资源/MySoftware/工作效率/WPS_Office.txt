@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:50:37+08:00
+
+====== WPS Office ======
+Created Wednesday 24 October 2018
+
+WPS Office[65] 是一款漂亮的办公套件，它有一个很具现代感的 UI。
+
+参考阅读：在 Ubuntu 安装 WPS Office[66]
+
+https://www.wps.com/
+http://wps-community.org/downloads

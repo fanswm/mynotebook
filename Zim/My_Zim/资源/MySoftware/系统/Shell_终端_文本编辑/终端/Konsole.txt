@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:41:06+08:00
+
+====== Konsole ======
+Created Wednesday 24 October 2018
+
+Konsole[47] 是 KDE 的一个终端模拟器。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Konsole。
+
+$ sudo apt-get install konsole
+https://konsole.kde.org/

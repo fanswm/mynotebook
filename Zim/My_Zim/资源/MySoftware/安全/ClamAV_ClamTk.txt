@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:34:45+08:00
+
+====== ClamAV ClamTk ======
+Created Wednesday 24 October 2018
+
+ClamAV[https://www.clamav.net/] 是一个开源的跨平台命令行防病毒工具，用于检测木马、病毒和其他恶意代码。而 ClamTk[https://dave-theunsub.github.io/clamtk/] 则是它的前端 GUI。
+
+使用以下命令在 Ubuntu 和 Debian 安装 ClamAV 和 ClamTk。
+
+$ sudo apt-get install clamav
+$ sudo apt-get install clamtk
