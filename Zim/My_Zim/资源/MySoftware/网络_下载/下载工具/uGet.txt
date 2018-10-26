@@ -9,6 +9,6 @@ uGet[http://ugetdm.com/] 已经成为 Linux 各种发行版中排名第一的开
 
 使用以下命令在 Ubuntu 和 Debian 安装 uGet。
 
-$ sudo add-apt-repository ppa:plushuang-tw/uget-stable
-$ sudo apt update
+# $ sudo add-apt-repository ppa:plushuang-tw/uget-stable
+# $ sudo apt update
 $ sudo apt install uget
