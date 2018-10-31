@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-31T11:57:50+08:00
+
+====== 升级 ======
+Created Wednesday 31 October 2018
+
+```
+node -v
+sudo npm cache clean
+	(sudo npm cache clean -f)
+## 安装node版本管理工具'n';
+sudo npm install n -g
+## 使用版本管理工具安装指定node或者升级到最新node版#本
+sudo n stable ## 安装最新版本
+sudo n 8.12.0
+node -v
+
+```
