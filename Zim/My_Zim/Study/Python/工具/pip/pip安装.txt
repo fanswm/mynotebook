@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-25T11:32:55+08:00
+
+====== pip安装 ======
+Created Thursday 25 October 2018
+
+[[./get-pip.py]] 
