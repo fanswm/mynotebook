@@ -1,5 +1,5 @@
 [Notebook]
-version=0.67
+version=0.4
 name=Zim
 interwiki=
 home=Home
@@ -8,5 +8,5 @@ document_root=
 shared=True
 endofline=dos
 disable_trash=False
-profile=
+profile=None
 
