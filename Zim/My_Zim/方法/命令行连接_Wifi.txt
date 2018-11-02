@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-24T12:41:28+08:00
-
-====== 命令行连接 Wifi ======
-Created Wednesday 24 January 2018
-
