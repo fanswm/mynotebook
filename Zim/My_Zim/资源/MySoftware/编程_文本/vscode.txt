@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-04T15:14:42+08:00
+
+====== vscode ======
+创建日期 星期日 04 十一月 2018
+
+https://code.visualstudio.com/docs?start=true
