@@ -14,7 +14,7 @@ http://blog.csdn.net/huaishu/article/details/50475175
 
 代码管理一直用svn，git的分支管理认为是最好的，尝试用用。
 __abstracthex__
-__abstracthex@163.com__
+abstracthex@163.com
 __123*zm__
 __2018-9-26__
 
