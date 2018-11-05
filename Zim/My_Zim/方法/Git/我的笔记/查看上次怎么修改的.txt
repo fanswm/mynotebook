@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-05T16:32:33+08:00
+
+====== 查看上次怎么修改的 ======
+Created Monday 05 November 2018
+
+只有是：
+ modified:   git.txt
+时，才能查看。
+
+`git diff git.txt`
