@@ -46,11 +46,11 @@ __## 代码__
 + + 使用Tab和四个空格
 + + 使用```  ```
 
-__## 脚注（footnote）__
+__##__https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetmsgimg?&MsgID=5490102573856666689&skey=%40crypt_1d58f5a9_131a75c87f73c1124a34d794d035ab9f__ 脚注（footnote）__
 `hello[^hello]`
 `[^hello]: hi`
 
-__## 下划线__
+__## 下划线__https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxgetmsgimg?&MsgID=5490102573856666689&skey=%40crypt_1d58f5a9_131a75c87f73c1124a34d794d035ab9f
 + 空白行下方添加三条“_”横线
 
 __## 字体__
