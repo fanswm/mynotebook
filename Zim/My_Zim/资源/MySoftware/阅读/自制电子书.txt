@@ -1,0 +1,27 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-12T11:46:47+08:00
+
+====== 自制电子书 ======
+Created Monday 12 November 2018
+
+https://www.williamlong.info/archives/5517.html
+自制Kindle电子书转化的实用技巧
+
+摘要：自制电子书发送Kindle个人文档，调整行距的方法：不要用Calibre制作mobi电子书，而是制作epub电子书，调整epub里css的行距，使用亚马逊官方的KindleGen转化软件将epub转化为mobi文件，然后发送云端即可获得行距正常的电子书。
+
+　　在使用Kindle看书的时候，很多时候需要将自己自制的电子书发送到亚马逊Kindle的个人文档，通过云端推送的方式阅读，但是有一个问题可能会困扰所有的Kindle用户。
+
+　　云端推送的文件只支持几种格式，从效果上看，Mobi格式的电子书最适合推送。但是，实际推送到Kindle上的个人电子书，行距却非常小，看起来非常不舒服，由于mobi格式不支持调整行距，因此这个问题让很多人想了很多办法来尝试解决。
+
+　　在Calibre进行转化mobi电子书的时候，可以在转化选项里，将“界面外观”-“字体”-“最小行高”设置为 150%，然后在“样式”里增加一行，p {  line-height: 150% } ，在mobi输出里，将mobi文件类型选择为 both，这样输出的mobi文件，直接复制到Kindle中阅读是正常的，行距很适合阅读，然而通过邮件发送到云端，再推送回来后，行距又变成原来的样子，很可能是亚马逊云端的转化程序没有进行相应的处理。
+
+Kindle
+
+　　难道真的就没办法推送正常的个人文档到Kindle上了吗？
+
+　　办法是有的，经过我不断尝试，发现了一个实际可用的方法。
+
+　　先将电子转化为epub格式的电子书，可以在Calibre里安装Kindle Unpack插件来解压缩电子书，然后修改epub里的css文件，增加一行 p {  line-height: 150% } ，之后在亚马逊网站下载一个名为KindleGen的官网转化软件，使用命令 KindleGen book.epub 将电子书转化为mobi格式，然后将这个mobi文件发送到亚马逊云端个人文档，这时候从云端推送下来的电子书的行距就正常了。
+
+　　我估计可能是Calibre产生的mobi有些不兼容，而亚马逊自己的KindleGen产生的mobi就兼容，因此在云端转化的电子书就排版正常。

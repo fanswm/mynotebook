@@ -1,0 +1,25 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-12T15:58:56+08:00
+
+====== 教程 ======
+Created Monday 12 November 2018
+
+https://www.hackingtutorials.org/general-tutorials/mac-address-spoofing-with-macchanger/
+
+https://www.hackfun.org/kali-tools/kali-tools-zh.html
+
+https://www.zhihu.com/question/33566509/answer/133960798
+
+https://gitee.com/wizardforcel/kali-linux-cookbook-zh  Kali Linux 秘籍
+
+
+Kali Linux Web 渗透秘籍：(https://gitee.com/wizardforcel/kali-linux-web-pentest-cookbook-zh)
+Kali Linux 无线安全入门指南：(https://gitee.com/wizardforcel/kali-linux-wireless-pentest)
+Kali Linux 网络扫描秘籍：(https://gitee.com/wizardforcel/kali-linux-network-scanning-cookbook-zh)
+
+
+作者：苍海禁军
+链接：https://www.zhihu.com/question/33566509/answer/133960798
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
