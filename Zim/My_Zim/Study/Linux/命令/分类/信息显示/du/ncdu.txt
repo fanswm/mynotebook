@@ -1,0 +1,35 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-13T11:11:33+08:00
+
+====== ncdu ======
+Created Tuesday 13 November 2018
+
+ncdu > du
+https://dev.yorhel.nl/ncdu
+
+对我来说，知道当前磁盘空间被什么占用了非常重要。我用过 Mac 上的 DaisyDisk，但是我觉得那个程序产生结果有点慢。
+
+du -sh 命令是我经常会运行的命令（-sh 是指结果以“汇总”和“人类可读”的方式显示），我经常会想要深入挖掘那些占用了大量磁盘空间的目录，看看到底是什么在占用空间。
+
+ncdu 是一个非常棒的替代品。它提供了一个交互式的界面并且允许快速的扫描那些占用了大量磁盘空间的目录和文件，它又快又准。（尽管不管在哪个工具的情况下，扫描我的 home 目录都要很长时间，它有 550G）
+
+一旦当我找到一个目录我想要“处理”一下（如删除，移动或压缩文件），我会使用 cmd + 点击 iTerm2顶部的目录名字的方法在 Finder 中打开它。
+
+
+
+
+Sample ncdu output
+
+
+还有另外一个叫 [nnn 的替代选择](https://github.com/jarun/nnn)，它提供了一个更漂亮的界面，它也提供文件尺寸和使用情况，实际上它更像一个全功能的文件管理器。
+
+我的 du 是如下的别名：
+
+alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+选项说明：
+
+--color dark 使用颜色方案
+-rr 只读模式（防止误删和运行新的 shell 程序）
+--exclude 忽略不想操作的目录
+

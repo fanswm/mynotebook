@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-13T10:48:34+08:00
+
+====== fzf ======
+Created Tuesday 13 November 2018
+
+https://github.com/junegunn/fzf
+
+在终端里，使用 ctrl+r 将允许你在命令历史里反向搜索使用过的命令，这是个挺好的小技巧，尽管它有点麻烦。
+
+fzf 这个工具相比于 ctrl+r 有了巨大的进步。它能针对命令行历史进行模糊查询，并且提供了对可能的合格结果进行全面交互式预览。
+除了搜索命令历史，fzf 还能预览和打开文件，我在下面的视频里展示了这些功能。
+
+
+为了这个预览的效果，我创建了一个叫 preview 的别名，它将 fzf 和前文提到的 bat 组合起来完成预览功能，还给上面绑定了一个定制的热键 ctrl+o 来打开 VS Code：
+
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+# 支持在 VS Code 里用 ctrl+o 来打开选择的文件
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"

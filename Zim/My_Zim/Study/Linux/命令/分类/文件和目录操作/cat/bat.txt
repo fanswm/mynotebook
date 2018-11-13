@@ -10,6 +10,12 @@ Bat：__一种具有语法高亮和 Git 集成的 Cat 类命令__
 编译自：https://www.ostechnix.com/bat-a-cat-clone-with-syntax-highlighting-and-git-integration/%E4%BD%9C%E8%80%85： Sk
 原创：LCTT https://linux.cn/article-10064-1.html 译者： z52527
 
+项目地址: https://github.com/sharkdp/bat
+
+它的功能有语法高亮、分页、行号和 git 集成。
+
+bat 命令也能让我在（多于一屏的）输出里使用 / 搜索（和用 less 搜索功能一样）。
+
 
 在类 UNIX 系统中，我们使用 cat 命令去打印和连接文件。使用 cat 命令，我们能将文件目录打印到到标准输出，合成几个文件为一个目标文件，还有追加几个文件到目标文件中。今天，我偶然发现一个具有相似作用的命令叫做 “Bat” ，__它是 cat 命令的一个克隆版，具有一些例如语法高亮、 Git 集成和自动分页等非常酷的特性。在这个简略指南中，我们将讲述如何在 Linux 中安装和使用 bat 命令。__
 

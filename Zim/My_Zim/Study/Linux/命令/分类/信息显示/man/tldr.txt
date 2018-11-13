@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-13T11:14:30+08:00
+
+====== tldr ======
+Created Tuesday 13 November 2018
+
+tldr > man
+https://tldr.sh/
+
+
+几乎所有的命令行工具都有一个相伴的手册，它可以被 man <命令名> 来调出，但是在 man 的输出里找到东西可有点让人困惑，而且在一个包含了所有的技术细节的输出里找东西也挺可怕的。
+
+这就是 TL;DR 项目（LCTT 译注：英文里“文档太长，没空去读”的缩写）创建的初衷。这是一个由社区驱动的文档系统，而且可以用在命令行上。就我现在使用的经验，我还没碰到过一个命令没有它相应的文档，你也可以做贡献。
+
+
+
+
+Sample tldr output for fd
+
+
+一个小技巧，我将 tldr 的别名链接到 help（这样输入会快一点……）
+
+alias help='tldr'

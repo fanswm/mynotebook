@@ -7,3 +7,13 @@ Created Sunday 03 December 2017
 
 http://mp.weixin.qq.com/s?__biz=MzAxODI5ODMwOA==&mid=2666541504&idx=1&sn=bb7bad3c1968cb602d249227637cb957&chksm=80dcf56bb7ab7c7df37300ddf6604357d947ee054b6d62554276d25a944ccbd42d2d3b873ba4&mpshare=1&scene=1&srcid=1202Is7bxBM8UNHHMxFme2ob#rd
 
+
+
+很荣幸提及一些其它的工具
+
+我也在开始尝试一些别的工具，但我还没有完全掌握它们。（除了 ponysay，当我打开一个新的终端会话时，它就会出现。）
+
+ponysay > cowsay https://github.com/erkin/ponysay
+csvkit > awk 及其它 https://csvkit.readthedocs.io/en/1.0.3/
+noti > display notification https://github.com/variadico/noti
+entr > watch http://www.entrproject.org/
