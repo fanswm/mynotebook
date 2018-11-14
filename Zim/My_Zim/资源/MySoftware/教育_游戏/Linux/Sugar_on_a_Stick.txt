@@ -6,3 +6,9 @@ Creation-Date: 2018-10-15T15:21:33+08:00
 Created Monday 15 October 2018
 
 http://wiki.sugarlabs.org/go/Sugar_on_a_Stick/Downloads
+
+Sugar on a Stick 是献给孩子们的学习程序 —— 一个广受好评的全新教学法。这个程序为你的孩子提供一个成熟的教学平台，在那里，他们可以收获创造、探索、发现和思考方面的技能。和 GCompris 一样，Sugar on a Stick 为孩子们带来了包括游戏和谜题在内的大量学习资源。
+inux-educational-software-sugar-on-a-stick
+
+关于 Sugar on a Stick 最大的一个好处是你可以将它配置在一个 U 盘上。你只要有一台 X86 的 PC，插入那个 U 盘，然后就可以从 U 盘引导这个发行版。Sugar on a Stick 是由 Sugar 实验室提供的一个项目 —— 这个实验室是一个由志愿者运作的非盈利组织。
+
