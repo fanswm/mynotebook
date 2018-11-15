@@ -1,0 +1,26 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-15T21:59:44+08:00
+
+====== 1 安装RVM ======
+创建日期 星期四 15 十一月 2018
+
+步骤1 － 安装 RVM
+RVM 是干什么的这里就不解释了，后面你将会慢慢搞明白。
+
+$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+$ curl -sSL https://get.rvm.io | bash -s stable
+# 如果上面的连接失败，可以尝试: 
+$ curl -L https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer | bash -s stable
+期间可能会问你 sudo 管理员密码，以及自动通过 Homebrew 安装依赖包，等待一段时间后就可以成功安装好 RVM。
+
+然后，载入 RVM 环境（新开 Termal 就不用这么做了，会自动重新载入的）
+
+$ source ~/.rvm/scripts/rvm
+修改 RVM 下载 Ruby 的源，到 Ruby China 的镜像:
+
+echo "ruby_url=https://cache.ruby-china.org/pub/ruby" > ~/.rvm/user/db
+检查一下是否安装正确
+
+$ rvm -v
+rvm 1.22.17 (stable) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
