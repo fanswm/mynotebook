@@ -13,4 +13,4 @@ Plug 'prettier/vim-prettier', {
  
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql [[PrettierAsync]]
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql 方法:vim:vim用法:vimrc:插件配置:PrettierAsync
