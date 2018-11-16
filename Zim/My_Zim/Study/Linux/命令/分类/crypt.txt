@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-15T14:44:14+08:00
+
+====== crypt ======
+Created Thursday 15 November 2018
+
+crypt 命令，以前称为 mcrypt，当你想要加密（encrypt）文件的内容时，它是很方便的，这样除了你之外没有人可以读取它。像大多数 Unix 命令一样，你可以单独使用 crypt 或在系统脚本中调用它。
