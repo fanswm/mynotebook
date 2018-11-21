@@ -9,3 +9,6 @@ Created Monday 22 October 2018
 2018 中国开源年度报告：问卷篇 https://linux.cn/article-10135-1.html?utm_source=rss&utm_medium=rss
 2018 中国开源年度报告：洞察篇 https://linux.cn/article-10142-1.html?utm_source=rss&utm_medium=rss
 2018首个中国私有云报告出炉，开源占据领导者象限 https://linux.cn/article-10214-1.html?utm_source=rss&utm_medium=rss
+
+2018中国开源年度报告之开发者技术现状http://mp.weixin.qq.com/s?__biz=MzIyMjYyMzg3MA==&mid=2247486884&idx=3&sn=769a142304ecf28e76ea1ed2d8dc4aae&chksm=e82becb5df5c65a3836cfdf65425b77db411cfa32e17346b573a72a08f0b505e06c7598c5d4c&mpshare=1&scene=1&srcid=1031RxtZEwVoSOB3KfDhdU7g#rd
+

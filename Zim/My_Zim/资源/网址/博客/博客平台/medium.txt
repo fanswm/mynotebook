@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-21T14:24:05+08:00
+
+====== medium ======
+Created Wednesday 21 November 2018
+
+https://medium.com/
+Medium 是一个轻量级内容发行的平台，允许单一用户或多人协作，将自己创作的内容以主题的形式结集为专辑（Collection），分享给用户进行消费和阅读。

@@ -5,3 +5,4 @@ Creation-Date: 2018-11-21T11:21:55+08:00
 ====== Terminalizer ======
 Created Wednesday 21 November 2018
 
+Terminalizer：一个记录您终端活动并且生成 Gif 图像的工具 https://linux.cn/article-10237-1.html?utm_source=rss&utm_medium=rss

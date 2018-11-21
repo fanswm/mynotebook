@@ -1,0 +1,67 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-21T13:31:12+08:00
+
+====== 主题的定制和优化 ======
+Created Wednesday 21 November 2018
+
+https://www.williamlong.info/archives/5523.html
+ordPress Hestia主题的定制和优化
+站长技巧
+　　WordPress优秀的免费企业主题不多，国外网站themeisle提供了一套免费的wordpress企业主题Hestia，Hestia设计非常简介大方美观，能够支持响应式，可以在手机上面正常访问，各方面的优化都不错。Hestia主题还可以支持拖拽页面编辑工具、后台设置选项、高级菜单、SEO优化功能等等。
+
+　　下面我就介绍一下通过WordPress Hestia主题来免费搭建一个企业网站的方法：
+
+　　1、优化插件
+
+　　安装完主题后，其附带的插件其实都不用安装，但是建议安装一个“Self-Hosted Google Fonts”插件，因为Google字体从中国无法访问，而这个Hestia主题默认加载Google Font，导致中国用户访问“变慢”，因此安装Self-Hosted Google Fonts插件后，可以提升中国用户访问速度。具体方法是：安装插件，点击：Plugin Setting ， Enable Processing 选择 Yes Enable ， 保存更改。
+
+　　2、页面设置
+
+　　编辑WordPress里的“示例页面”，将其名称修改为“首页”，编辑里面的代码，有编程能力的可以将网页的HTML代码都放在这个页面里。
+
+　　3、外观设置
+
+　　点击外观 - 自定义，在主页设置里，将“您的主页显示”，选“一个静态页面”，主页为“首页”。
+
+　　在首页区域 - 大标题区域，修改标题、文本、按钮文字、按钮链接为公司的相关内容。
+
+　　小工具里，点击：脚注1-添加小工具-文本-公司名，脚注2-添加小工具-文本-联系电话，脚注3-添加小工具-文本-公司地址。
+
+　　4、增加自定义JS
+
+　　安装一个名为All in One SEO Pack的插件（多合一SEO集），在底部“首页头部额外内容”里，增加所需的自定义JS代码。
+
+　　5、额外CSS
+
+　　首页的其他定制化操作，可以通过“额外CSS”功能来实现。例如：
+
+　　1）背景图颜色：主题默认的背景图被加了一层阴暗的遮罩色，色调不好，恢复原背景图颜色的方法是，在“额外CSS”里增加如下一行即可。
+
+　　.header-filter::before {background:none !important;}
+
+　　2）标题字间距：调整大标题、子标题的字间距方法为：
+
+　　.hestia-title {letter-spacing: 20px;}
+
+　　.sub-title{letter-spacing: 8px;}
+
+　　3) 隐藏脚注菜单
+
+　　自定义-菜单-脚注菜单里不选择菜单。然后在额外CSS里加入一下代码：
+
+　　hr {display:none;}
+
+　　4） 隐藏页脚声明
+
+　　一般企业使用wordpress的主题时，往往会修改主题页脚，去掉一些和企业无关的版权声明。
+
+　　正常情况下，只需要找到footer.php文件，然后进行相应的更改，就可以了。然而，hestia主题将这段内容隐藏的很深，那么，当使用hestia主题时，如何修改页脚呢？
+
+　　这里提供一个可以隐藏页脚的办法，在外观—自定义选项里，额外CSS代码加入下面代码即可将相关内容隐藏。
+
+　　.copyright {display:none;}
+
+WordPress Hestia主题的定制和优化
+
+　　经过上面这些操作，我们就可以使用WordPress的免费Hestia主题制作一个简洁大方的企业网站了。
