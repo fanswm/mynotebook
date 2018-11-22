@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-22T11:36:12+08:00
+
+====== Todoist ======
+Created Thursday 22 November 2018
+
+停用滴答清单，回到todoist的历程
+https://www.jianshu.com/p/6ec3d9d4e1e8
+
+如何使用 Drafts 批量向 Todoist 发送任务
+https://sspai.com/post/47285
