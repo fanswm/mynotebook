@@ -1,0 +1,41 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-21T21:29:54+08:00
+
+====== 安装samba ======
+创建日期 星期三 21 十一月 2018
+
+$ sudo apt-get install -y samba samba-common-bin
+$ sudo vi /etc/samba/smb.conf
+#添加
+[shares]
+comment = Backup Folder
+path = /mnt/usb/shares
+valid users = @ fanswm_shares
+force group = fanswm_shares
+create mask = 0660
+directory mask = 0771
+read only = no
+browseable = yes
+public = yes
+writable = yes
+
+$ sudo /etc/init.d/samba restart
+[ok]
+
+$ sudo groupadd fanswm_shares
+$ sudo usreadd fanswm_get_shares -b /mnt/usb -G fanswm_shares
+
+################ passwd
+$ sudo passwd fanswm_get_shares
+shares1
+$ sudo smbpasswd -a fanswm_get_shares
+$ sudo smbpasswd -a fanswm_shares
+shares1
+$ cp /etc/rc.local ~/fanswm_backup/etc_rc.local.201603122215
+$ sudo vi /etc/rc.local
+# append before "exit 0"
+sudo /etc/init.d/samba restart
+$ crontab -e
+apend:
+*/55 * * * * sudo /etc/init.d/samba restart
