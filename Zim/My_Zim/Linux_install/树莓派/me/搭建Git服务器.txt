@@ -12,7 +12,7 @@ Creation-Date: 2018-11-23T23:51:38+08:00
 $ sudo apt-get install git
 
 第二步，创建一个git用户，用来运行git服务：
-# sudo adduser --system --shell /bin/bash --gecos 'git version control by pi' --group --home /home/git git
+# sudo adduser --system --shell /bin/git-shell --gecos 'git version control by pi' --group --home /home/git git
 
 $ sudo adduser git
 第三步，创建证书登录：
