@@ -1,0 +1,60 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-25T21:51:29+08:00
+
+====== 邮件 install ======
+创建日期 星期日 25 十一月 2018
+
+$ sudo apt-get install msmtp
+$ sudo apt-get install mutt
+$ touch ~/.muttrc: set sendmail="/usr/bin/msmtp"
+set use_from=yes
+set realname="fan_yue_hui@163.com"
+set editor="vim"
+$ touch ~/.msmtprc:
+account default
+host smtp.163.com
+port 25
+from fan_yue_hui@163.com
+auth login
+tls off
+user fan_yue_hui@163.com
+password 123456fan
+logfile /var/log/mm.log 
+
+$ sudo touch /var/log/mm.log
+$ sudo chmod 666 /var/log/mm.log 
+$ touch ~/src/send_ip_mail.bash:
+#!/bin/bash
+# filename: send_ip_mail.bash
+# check network availability 
+while true
+do
+	TIMEOUT=5
+	SITE_TO_CHECK="mail.163.com"
+	RET_CODE=`curl -I -s --connect-timeout $TIMEOUT $SITE_TO_CHECK -w %{http_code} | tail -n1`
+	if [ "x$RET_CODE" = "x200" ]; then
+		echo "Network OK, will send mail..."
+		break
+	else
+		echo "Network not ready, wait..."
+		sleep 1s
+	fi
+done
+
+# get the IP address of eth0, e.g. "192.168.0.(密)" 
+ETH0_IP_ADDR=`ifconfig eth0 | sed -n "2,2p" | awk '{print substr($2,1)}'`
+
+# send the Email 
+echo "Current time: `date '+%F %T'`. Enjoy it" | mutt -s "IP Address of Raspberry Pi: $ETH0_IP_ADDR" abstract007@126.com
+
+# end: send_ip_mail.bash
+$ chmod 770 ~/src/send_ip_mail.bash
+$ mv ~/send_ip_mail.bash /etc/init.d/
+$ chmod 770 /etc/init.d/send_ip_mail.bash
+$ vim /etc/rc.local
+append:
+/etc/init.d/send_ip_mail.bash
+$ sudo apt-get install mailutils    //提供常用mail功能支持 $ sudo apt-get install sharutils    //提供邮件列表支持
+
+		ifconfig eth0 | sed -n "2,2p" | awk '{print substr($2,1)}' | mutt -s "This pi IP" abstract007@126.com

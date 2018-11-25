@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-11-21T21:38:38+08:00
 
-====== 安装VNC ======
+====== VNC install ======
 创建日期 星期三 21 十一月 2018
 
 安装VNC:

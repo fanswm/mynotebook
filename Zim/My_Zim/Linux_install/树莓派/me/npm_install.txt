@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-25T20:53:32+08:00
+
+====== npm install ======
+创建日期 星期日 25 十一月 2018
+
+```
+sudo apt-get install nodejs npm
+
+```
+
+https://blog.csdn.net/hu5566798/article/details/80659621
+
