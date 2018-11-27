@@ -94,11 +94,11 @@ https://wikidevi.com/wiki/rt2800usb
 
 c)         zd1211rw
 
-仅支持80211b/g协议，配置请参考http://davidrobot.com/2014/11/raspberry_pi_model_b_plus_wifi_zd1211.html
+仅支持80211b/g协议，配置请参考   http://davidrobot.com/2014/11/raspberry_pi_model_b_plus_wifi_zd1211.html
 
 六、无线网卡推荐
 
-a)         简单实用的话推荐小米/小度/360随身wifi2代，价格大约10-20包邮，使用mt7601u芯片，支持managed和Monitor模式，MaxPower只有160mA，之前的内核版本需要手动编译驱动，非常麻烦，现在新版的内核里面已经自带驱动，如果无法正常识别，可以从https://github.com/kuba-moo/mt7601u手动下载安装。（EDUP个头够小，但是电流需要500mA，Monitor和AP模式虽然支持，但是需要折腾一下。查看usb所需电流：lsusb –v -s [[bus]:][devnum]）。此外，360随身wifi1代采用rt2870芯片，现在很少见了；3代采用MT7603U芯片：http://www.mediatek.com/en/products/connectivity/wifi/home-network/usb-dongle/mt7603u/%EF%BC%8C%E6%AF%94%E8%BE%83%E6%96%B0%EF%BC%8C2T2R%E3%80%81300Mbit/s%EF%BC%882%E4%BB%A3%E4%BB%A5%E5%8F%8A%E5%B8%82%E9%9D%A2%E4%B8%8A%E5%A4%A7%E5%A4%9A%E6%95%B0%E6%98%AF1T1R%E3%80%81150Mbits%EF%BC%89%EF%BC%8C%E6%94%AF%E6%8C%81WoWLAN%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E5%94%A4%E9%86%92%EF%BC%8C%E7%94%B1%E4%BA%8E%E6%89%8B%E5%A4%B4%E6%B2%A1%E6%9C%89%EF%BC%8C%E6%97%A0%E6%B3%95%E6%B5%8B%E8%AF%95%EF%BC%8C%E4%BD%86%E6%98%AFLinux%E4%B8%8B%E4%BC%BC%E4%B9%8E%E7%9B%B8%E5%85%B3%E9%A9%B1%E5%8A%A8%E4%B8%8D%E5%AE%8C%E5%96%84%EF%BC%8C%E5%AE%98%E6%96%B9%E4%BB%85%E6%8F%90%E4%BE%9B%E4%BA%86%E6%97%A0%E7%BA%BF%E8%BF%9E%E6%8E%A5%E5%8A%9F%E8%83%BD%E7%9A%84%E9%A9%B1%E5%8A%A8%EF%BC%8C%E5%A6%82%E6%9E%9Cok%E7%9A%84%E8%AF%9D3%E4%BB%A3%E6%98%AF%E5%BE%88%E4%B8%8D%E9%94%99%E7%9A%84%E9%80%89%E6%8B%A9。
+a)         简单实用的话推荐小米/小度/360随身wifi2代，价格大约10-20包邮，使用mt7601u芯片，支持managed和Monitor模式，MaxPower只有160mA，之前的内核版本需要手动编译驱动，非常麻烦，现在新版的内核里面已经自带驱动，如果无法正常识别，可以从   https://github.com/kuba-moo/mt7601u  手动下载安装。（EDUP个头够小，但是电流需要500mA，Monitor和AP模式虽然支持，但是需要折腾一下。查看usb所需电流：lsusb –v -s [[bus]:][devnum]）。此外，360随身wifi1代采用rt2870芯片，现在很少见了；3代采用MT7603U芯片：    [http://www.mediatek.com/en/products/connectivity/wifi/home-network/usb-dongle/mt7603u/]，比较新，2T2R、300Mbit/s（2代以及市面上大多数是1T1R、150Mbits），支持WoWLAN无线局域网唤醒，由于手头没有，无法测试，但是Linux下似乎相关驱动不完善，官方仅提供了无线连接功能的驱动，如果ok的话3代是很不错的选择。
 
 b)         两大经典芯片：RT3070和RTL8187
 
@@ -106,7 +106,7 @@ b)         两大经典芯片：RT3070和RTL8187
 
 RTL8187支持模式有限，适合破解；RT3070支持模式众多，而且比较稳定。
 
-rt3070可以试试这家https://shop114810530.taobao.com，Edimax EW-7711UMn，最大电流450mA，支持动态节能，香港到货低价处理无线网卡，20包邮，买二送一，我买了做工不错。此外还有沃达丰定制小网卡、Tenda W311U等
+rt3070可以试试这家    https://shop114810530.taobao.com，Edimax EW-7711UMn  ，最大电流450mA，支持动态节能，香港到货低价处理无线网卡，20包邮，买二送一，我买了做工不错。此外还有沃达丰定制小网卡、Tenda W311U等
 
 RTL8187直接淘宝买裸板就行，30块钱左右，但是这玩意主要用于无线安全审计方面，一是功率大，二是这么大有碍观瞻。。。
 
