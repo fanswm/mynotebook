@@ -5,8 +5,7 @@ Creation-Date: 2018-11-25T21:51:29+08:00
 ====== 邮件 install ======
 创建日期 星期日 25 十一月 2018
 
-$ sudo apt-get install msmtp
-$ sudo apt-get install mutt
+$ sudo apt-get install msmtp mutt
 $ touch ~/.muttrc: set sendmail="/usr/bin/msmtp"
 set use_from=yes
 set realname="fan_yue_hui@163.com"
