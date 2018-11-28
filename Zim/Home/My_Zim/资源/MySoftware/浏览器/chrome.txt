@@ -14,7 +14,7 @@ Google Chrome 离线安装包的官方下载地址是什么？
 来源：知乎
 著作权归作者所有，转载请联系作者获得授权。
  
-在chrome首页的链接https://www.google.com/chrome/browser/desktop/index.html后加上「?system=true&standalone=1」，一般默认下载稳定版，如果需要指定下载的版本就再加上「&extra=[版本名称]」（版本有stablechannel、betachannel、devchannel、canarychannel）。
+在chrome首页的链接  https://www.google.com/chrome/browser/desktop/index.html  后加上「?system=true&standalone=1」，一般默认下载稳定版，如果需要指定下载的版本就再加上「&extra=[版本名称]」（版本有stablechannel、betachannel、devchannel、canarychannel）。
  
 修改完链接后回车，就能下载离线包了。
  
