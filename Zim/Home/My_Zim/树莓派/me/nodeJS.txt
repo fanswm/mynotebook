@@ -30,7 +30,7 @@ wget https://nodejs.org/dist/v6.9.1/node-v6.9.1-linux-armv7l.tar.gz
 tar zxvf node-v6.9.1-linux-armv7l.tar.gz  
 sudo mv node-v6.9.1-linux-armv7l  /usr/local/bin
 sudo ln /usr/local/bin/node-v6.9.1-linux-armv7l/bin/node /usr/local/bin/node
-sudo ln -s /usr/local/bin/node-v6.9.1-linux-armv7l/lib/node_modules/npm/bin/npm [[/usr/local/bin/npm]]
+sudo ln -s /usr/local/bin/node-v6.9.1-linux-armv7l/lib/node_modules/npm/bin/npm /usr/local/bin/npm
 
 
 NodeJSARM版NPM存在路径问题，需要以下方式解决。

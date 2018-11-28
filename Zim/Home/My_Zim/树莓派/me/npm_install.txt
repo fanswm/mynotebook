@@ -12,3 +12,26 @@ sudo apt-get install nodejs npm
 
 https://blog.csdn.net/hu5566798/article/details/80659621
 
+
+如果不是最新版本，运行一下代码即可。
+运行指令
+npm install -g npm
+这样npm就更新到最新版本了。
+ 
+
+如果想更新到指定版本，
+运行指令
+1 npm -g install npm@2.9.1
+（@后跟版本号），
+这样我们就可以更新npm版本了。
+ 
+
+还有一点需要注意的，因为国内的网络环境原因，在下载npm包的时候经常会遇到无法正常下载的情况。国内淘宝推出了 npm 镜像，这是一个完整的 npmjs.org 镜像，同步频率为15分钟一次，保证与官方服务同步。推荐使用该镜像。使用方法如下：
+
+输入以下命令，切换到淘宝镜像源：
+npm install -g cnpm --registry=http://registry.npm.taobao.org
+
+之后所有用到的 npm 命令都可以使用 cnpm 来代替进行 install。但是 cnpm 不支持 publish 命令，需要注意。
+关于淘宝 npm 镜像的其他使用问题，请参考：
+https://npm.taobao.org/
+
