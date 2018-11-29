@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-29T08:25:49+08:00
+
+====== Gmail ======
+Created Thursday 29 November 2018
+
+WunderMail
+离线也能管理邮件，Windows 上的 Gmail 客户端新选择：WunderMail http://sspai.com/post/49104
+
+https://www.microsoft.com/zh-cn/p/wundermail-for-gmail/9n9qc6vf6w4h
