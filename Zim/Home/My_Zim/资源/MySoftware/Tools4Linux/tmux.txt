@@ -8,3 +8,6 @@ Created Friday 10 August 2018
 tmux是一款终端复用器，它允许大家在同一终端的各程序之间轻松切换，将其断开（程序仍运行在后台当中）并重新附加至其它终端当中。正因为如此，tmux已经成为众多Linux系统管理员的必备工具。
 
 更好利用 tmux 会话的 4 个技巧 https://linux.cn/article-10089-1.html?utm_source=rss&utm_medium=rss
+
+
+
