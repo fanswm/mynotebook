@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-30T13:42:06+08:00
+
+====== 终端中文乱码 ======
+Created Friday 30 November 2018
+
+属性-》文本选择中文
