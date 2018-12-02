@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-02T21:44:38+08:00
+
+====== dokuwiki ======
+创建日期 星期日 02 十二月 2018
+
+https://linux.cn/article-8178-1.html
+https://www.dokuwiki.org/install

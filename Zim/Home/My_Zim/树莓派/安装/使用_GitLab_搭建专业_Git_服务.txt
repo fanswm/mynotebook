@@ -1,0 +1,154 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-02T22:40:26+08:00
+
+====== 使用 GitLab 搭建专业 Git 服务 ======
+创建日期 星期日 02 十二月 2018
+
+使用 GitLab 搭建专业 Git 服务
+2017年10月20日 Spoony 未分类 10
+
+
+
+GitLab是一个专业的Git解决方案，功能强大，和GitHub类似，而且其Community Edition (CE)是免费的，完全可以胜任为中小团队提供专业代码托管服务的工作，当然更重要的是它可以在Raspberry Pi上部署运行。
+
+准备
+项目首页：https://about.gitlab.com
+下载页：https://packages.gitlab.com/gitlab/raspberry-pi2
+下载地址（打开页面，点击右上角的Download按钮）：
+https://packages.gitlab.com/gitlab/raspberry-pi2/packages/debian/jessie/gitlab-ce_8.13.0-ce.0_armhf.deb
+下载得到gitlab-ce_8.13.0-ce.0_armhf.deb文件。
+注意版本要选择jessie，也就是Debian 8，因为现在的Raspbian是基于它打造的。
+
+官网给出了在线安装的方法，但是我试了几次，可能由于国内到GitLab下载服务器之间的网络状况不好，很难在线安装成功。
+国内的软件源即使有GitLab的镜像，通常也没有支持Raspberry Pi架构的分支。
+
+
+
+所以这里给出先下载安装包，然后离线安装到Raspberry Pi上的方法。
+
+开始安装
+先安装一些必要的依赖包：
+
+1
+sudo apt-get install curl openssh-server ca-certificates postfix apt-transport-https
+安装postfix时，会弹出一些设置，这是和发邮件相关的，如果不需要邮件功能，这里的设置并不重要。
+
+
+
+
+
+等待上述依赖包安装完成后，把之前下载的安装包gitlab-ce_8.13.0-ce.0_armhf.deb上传到Raspberry Pi的文件系统里。
+正式安装deb包
+
+1
+sudo dpkg -i gitlab-ce_8.13.0-ce.0_armhf.deb
+这个包有281MB，包含123034个文件，因此安装会有些慢，卡在下面这步是正常的，耐心等待一下。
+
+
+
+安装完成提示信息：
+
+
+
+根据提示，需要运行：
+
+1
+sudo gitlab-ctl reconfigure
+看到如下提示就配置完成了
+
+
+
+初始设置
+管理员用户是root
+首次登录后会要求修改密码（8位及以上）
+
+
+
+在浏览器访问Raspberry Pi的IP，会跳转到设定密码的页面。
+
+
+
+设定完成后，用新密码登录root用户。
+
+
+
+这是管理员用户，只用它来添加普通用户，在普通用户里新建仓库来托管代码。
+点击界面右上角的小扳手图标，进入Admin Area，这是管理员独有的区域。
+在user里新建一个普通用户。
+
+注意初始的Projects limit只有10，只能创建10个projects。如果觉得不够用，可以放宽一点限制。
+
+
+
+普通用户的密码会发送到邮箱，如果之前邮箱没配置好，可能会收不到，或者如果是内网使用，邮件也无法发出。这个问题可以这样解决：
+
+
+
+管理员里可以用管理权限修改这个用户的密码，改完后告诉该用户这个密码，该用户在首次登录后，会被提示设置一个新密码。
+如果以后使用时该用户忘记了密码，管理员也可以登录Admin Area重置。
+这样就不需要邮件来重置密码，缺点是需要管理员介入，对于中小团队这样的管理方法是可取的（可以由项目组织者充当管理员）。
+另外在Admin Area界面右侧有个齿轮形状的图标，点击这里可以修改一些全局设定（包括前面初始的Projects limit等）， 根据提示修改就行了。
+
+
+
+修改服务端口
+默认使用80端口，如果需要修改，可以修改/etc/gitlab/gitlab.rb中如下图的2处地方，比如这样就修改成了7000端口。
+
+
+
+
+
+两个地方都要修改。
+注意保存文件后，要运行如下命令使得配置生效：
+
+1
+sudo gitlab-ctl reconfigure
+
+
+可以看到能使用7000端口访问了，Project path也是正确的。
+
+一些实用的维护命令
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+#修改任何配置文件后都要输入如下命令使配置生效。
+sudo gitlab-ctl reconfigure
+ 
+#页面缓存清除：
+sudo gitlab-rake cache:clear RAILS_ENV=production
+ 
+#GitLab各组件启动：
+sudo gitlab-ctl start
+ 
+#GitLab各组件停止：
+sudo gitlab-ctl stop
+ 
+#GitLab各组件重启：
+sudo gitlab-ctl restart
+ 
+#禁用GitLab开机自启动：
+sudo systemctl disable gitlab-runsvdir
+ 
+#启用GitLab开机自启动：
+sudo systemctl enable gitlab-runsvdir
+
+
+http://shumeipai.nxez.com/2017/10/20/raspberry-pi-use-gitlab-to-build-professional-git-services.html
