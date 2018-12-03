@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-03T14:15:06+08:00
+
+====== i3 窗口管理器 ======
+Created Monday 03 December 2018
+
+i3 窗口管理器使 Linux 更美好 https://linux.cn/article-10286-1.html?utm_source=rss&utm_medium=rss
