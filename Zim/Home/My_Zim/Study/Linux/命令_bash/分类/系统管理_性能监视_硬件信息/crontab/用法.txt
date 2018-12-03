@@ -72,12 +72,12 @@ linux缺省会启动crond进程，crond进程不需要用户启动、关闭。
 crond进程负责读取调度任务并执行，用户只需要将相应的调度脚本写入cron的调度配置文件中。
 cron的调度文件有以下几个：
 
-   1. crontab
-   2. cron.d
-   3. cron.daily
-   4. cron.hourly
-   5. cron.monthly
-   6. cron.weekly 
+1. crontab
+2. cron.d
+3. cron.daily
+4. cron.hourly
+5. cron.monthly
+6. cron.weekly 
 
 如果用的任务不是以hourly monthly weekly方式执行，则可以将相应的crontab写入到crontab 或cron.d目录中。
 示例：

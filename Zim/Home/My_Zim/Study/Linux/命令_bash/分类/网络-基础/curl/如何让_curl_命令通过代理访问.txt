@@ -96,7 +96,7 @@ Connection: keep-alive
 * Connection #0 to host 10.12.249.194 left intact
 本例中，我来下载一个 pdf 文件：
 
-$ export http_proxy="curl:vivek:myPasswordHere@10.12.249.194:3128/"
+$ export http_proxy="Linux:命令:分类:网络-基础:curl:vivek: myPasswordHere@10.12.249.194 :3128/"
 $ curl -v -O http://dl.cyberciti.biz/pdfdownloads/b8bf71be9da19d3feeee27a0a6960cb3/569b7f08/cms/631.pdf
 也可以使用 -x 选项：
 
