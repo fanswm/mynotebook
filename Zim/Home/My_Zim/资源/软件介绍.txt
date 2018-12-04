@@ -2,6 +2,6 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-11-21T16:53:27+08:00
 
-====== 软件安装介绍 ======
+====== 软件介绍 ======
 Created Tuesday 21 November 2017
 

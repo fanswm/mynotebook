@@ -6,3 +6,5 @@ Creation-Date: 2018-11-30T14:37:07+08:00
 Created Friday 30 November 2018
 
 Caffeinated 6.828：实验工具指南 https://linux.cn/article-10273-1.html?utm_source=rss&utm_medium=rss
+Caffeinated 6.828：实验 3：用户环境 https://linux.cn/article-10307-1.html?utm_source=rss&utm_medium=rss
+
