@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-05T13:49:47+08:00
+
+====== 学会辅助数列 ======
+Created Wednesday 05 December 2018
+
+学会辅助数列，让 PPT 图表更有创意的玩法 http://sspai.com/post/48353
