@@ -25,3 +25,22 @@ $ mutt -D # 列出所有設定值
 $ mutt -D | grep use_gpg
 $ mutt -y # 可以用此來看有沒有警告訊息
 註：Mutt 我只用在收信和發本機的 Mail，所以不需要 GPG
+
+
+error:
+.msmtprc: contains secrets and therefore must have no more than user read/write permissions
+A: $chmod 0600 .msmtprc
+
+error:
+msmtp: authentication failed (method LOGIN)
+msmtp: server message: 535 Error: authentication failed
+msmtp: could not send mail (account default from /home/pi/.msmtprc)
+发送信件出错，子进程已退出 77 (Insufficient permission.)。
+
++ 详细的日志错误/var/log/mmlog
+
+msmtp: authentication failed (method LOGIN)
+msmtp: server message: 535 Error: authentication failed
+msmtp: could not send mail (account default from /home/pi/.msmtprc)
+发送信件出错，子进程已退出 77 (Insufficient permission.)。
+无法发送此信件。
