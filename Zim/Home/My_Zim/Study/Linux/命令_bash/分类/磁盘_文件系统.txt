@@ -9,9 +9,11 @@ mount
 
 挂载文件系统。
 
-umount
+__umount__
 
 卸载文件系统。
+	有时候卸载USB移动硬盘的时候会提示设备忙(Device is busy)，只需要加上 –l 参数就行了：
+	umount -l /home/shares/public/
 
 fsck
 
