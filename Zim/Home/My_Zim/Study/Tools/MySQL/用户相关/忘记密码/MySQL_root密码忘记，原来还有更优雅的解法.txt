@@ -9,7 +9,7 @@ MySQL root密码忘记，原来还有更优雅的解法！
 
 原创： 陈臣
 
-代码可左右滑动，PC端显示会不太友好，建议在移动端阅读。文章稍后会同步至http://www.cnblogs.com/ivictor。
+代码可左右滑动，PC端显示会不太友好，建议在移动端阅读. 。文章稍后会同步至   http://www.cnblogs.com/ivictor。
 
 一直以来，对于MySQL root密码的忘记，以为只有一种解法-skip-grant-tables。
 
@@ -17,7 +17,7 @@ MySQL root密码忘记，原来还有更优雅的解法！
 
 skip-grant-tables的解法
 
-首先，关闭实例
+__首先，关闭实例__
 
 这里，只能通过kill mysqld进程的方式。
 

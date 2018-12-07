@@ -6,6 +6,7 @@ Creation-Date: 2018-12-07T08:11:19+08:00
 Created Friday 07 December 2018
 
 运行cmd，将路径切换到：C:/Program files/MySQL server  6.0/bin下，输入命令__mysqld-nt --install__，如果安装成功会有提示“Service successfully installed”
+__or: $ mysqld --install__
 
 接下来打开：“控制面板->管理工具->服务”，你就会发现其中多一项服务MySQL，以后您就可以通过它来启动MySQL了。当然当服务安装好后，您还可以通过命令行__net start mysql来启动MySQL__
 

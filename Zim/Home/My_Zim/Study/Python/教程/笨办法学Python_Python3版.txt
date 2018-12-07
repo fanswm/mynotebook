@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-07T15:21:47+08:00
+
+====== 笨办法学Python Python3版 ======
+Created Friday 07 December 2018
+
+https://zhuanlan.zhihu.com/p/24874211

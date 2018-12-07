@@ -20,8 +20,8 @@ import smtplib
 def get_datas(sql):
     # 一个传入sql导出数据的函数
     # 跟数据库建立连接
-    conn = pms.connect(host='实例地址', user='用户',
-                       passwd='密码', database='库名', port=3306, charset="utf8")
+    conn = pms.connect(host='localhost', user='root',
+                       passwd='mypasswdformysql', database='test', port=3306, charset="utf8")
     # 使用 cursor() 方法创建一个游标对象 cursor
     cur = conn.cursor()
     # 使用 execute() 方法执行 SQL
@@ -35,8 +35,8 @@ def get_datas(sql):
 
 def get_fields(sql):
     # 一个传入sql导出字段的函数
-    conn = pms.connect(host='数据库实例地址', user='账号',
-                       passwd='密码', database=库名', port=3306, charset="utf8")
+    conn = pms.connect(host='localhost', user='root',
+                       passwd='mypasswdformysql', database='test', port=3306, charset="utf8")
     cur = conn.cursor()
     cur.execute(sql)
     # 获取所需要的字段名称
@@ -108,9 +108,9 @@ def send_email(sender, password, receiver, msg):
         server = smtplib.SMTP_SSL("smtp.mxhichina.com", 465)  # 发件人邮箱中的SMTP服务器
         server.ehlo()
         #登录你的账号
-        server.login(sender, password)  # 括号中对应的是发件人邮箱账号、邮箱密码
+        server.login('myemailname@126.com', 'mypasswd')  # 括号中对应的是发件人邮箱账号、邮箱密码
         #发送邮件
-        server.sendmail(sender, receiver, msg.as_string())  # 括号中对应的是发件人邮箱账号、收件人邮箱账号（是一个列表）、邮件内容
+        server.sendmail('myemailname@126', 'myemailname@126', msg.as_string())  # 括号中对应的是发件人邮箱账号、收件人邮箱账号（是一个列表）、邮件内容
         print("邮件发送成功")
         server.quit()  # 关闭连接
     except Exception:
@@ -155,11 +155,10 @@ def main():
                           my_email_text, my_annex_path, my_annex_name)
     my_sender = '阿里云邮箱'
     my_password = '我的密码'
-    my_receiver = [10001@qq.com']#接收人邮箱列表
+    my_receiver = ['myemailname@126.com']#接收人邮箱列表
     # 发送邮件
     send_email(my_sender, my_password, my_receiver, my_msg)
     print(datetime.datetime.now())
 
-if __name__ == "__main__":
+if __name__ == "main":
     main();
-
