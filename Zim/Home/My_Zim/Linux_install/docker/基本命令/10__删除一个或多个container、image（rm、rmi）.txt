@@ -1,0 +1,56 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-09T10:18:57+08:00
+
+====== 10  删除一个或多个container、image（rm、rmi） ======
+创建日期 星期日 09 十二月 2018
+
+你可能在使用过程中会build或commit许多镜像，无用的镜像需要删除。但删除这些镜像是有一些条件的：
+
+同一个IMAGE ID可能会有多个TAG（可能还在不同的仓库），首先你要根据这些 image names 来删除标签，当删除最后一个tag的时候就会自动删除镜像；
+承上，如果要删除的多个IMAGE NAME在同一个REPOSITORY，可以通过docker rmi <image_id>来同时删除剩下的TAG；若在不同Repo则还是需要手动逐个删除TAG；
+还存在由这个镜像启动的container时（即便已经停止），也无法删除镜像；
+TO-DO
+如何查看镜像与容器的依存关系
+
+删除容器
+docker rm <container_id/contaner_name>
+
+__删除所有停止的容器__
+__docker rm $(docker ps -a -q)__
+__删除镜像__
+__docker rmi <image_id/image_name ...>__
+下面是一个完整的示例：
+
+# docker images            <==
+ubuntu            13.10        195eb90b5349       4 months ago       184.6 MB
+ubuntu            saucy        195eb90b5349       4 months ago       184.6 MB
+seanlook/ubuntu   rm_test      195eb90b5349       4 months ago       184.6 MB
+
+使用195eb90b5349启动、停止一个容器后，删除这个镜像
+# docker rmi 195eb90b5349
+Error response from daemon: Conflict, cannot delete image 195eb90b5349 because it is 
+tagged in multiple repositories, use -f to force
+2014/11/04 14:19:00 Error: failed to remove one or more images
+
+删除seanlook仓库中的tag     <==
+# docker rmi seanlook/ubuntu:rm_test
+Untagged: seanlook/ubuntu:rm_test
+
+现在删除镜像，还会由于container的存在不能rmi
+# docker rmi 195eb90b5349
+Error response from daemon: Conflict, cannot delete 195eb90b5349 because the 
+ container eef3648a6e77 is using it, use -f to force
+2014/11/04 14:24:15 Error: failed to remove one or more images
+
+先删除由这个镜像启动的容器    <==
+# docker rm eef3648a6e77
+
+删除镜像                    <==
+# docker rmi 195eb90b5349
+Deleted: 195eb90b534950d334188c3627f860fbdf898e224d8a0a11ec54ff453175e081
+Deleted: 209ea56fda6dc2fb013e4d1e40cb678b2af91d1b54a71529f7df0bd867adc961
+Deleted: 0f4aac48388f5d65a725ccf8e7caada42f136026c566528a5ee9b02467dac90a
+Deleted: fae16849ebe23b48f2bedcc08aaabd45408c62b531ffd8d3088592043d5e7364
+Deleted: f127542f0b6191e99bb015b672f5cf48fa79d974784ac8090b11aeac184eaaff
+注意，上面的删除过程我所举的例子比较特殊——镜像被tag在多个仓库，也有启动过的容器。按照<==指示的顺序进行即可。

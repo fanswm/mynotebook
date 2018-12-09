@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-09T10:20:41+08:00
+
+====== 14 查看容器中正在运行的进程（top） ======
+创建日期 星期日 09 十二月 2018
+
+容器运行时不一定有/bin/bash终端来交互执行top命令，查看container中正在运行的进程，况且还不一定有top命令，这是docker top <container_id/container_name>就很有用了。实际上在host上使用ps -ef|grep docker也可以看到一组类似的进程信息，把container里的进程看成是host上启动docker的子进程就对了。
+
+9. 其他命令
+docker还有一些如login、cp、logs、export、import、load、kill等不是很常用的命令，比较简单，请参考官网。
+
+参考
+Official Command Line Reference http://docs.docker.com/v1.1/reference/commandline/cli/
+docker中文指南cli-widuu翻译 http://www.widuu.com/docker/
+Docker —— 从入门到实践 http://www.dockerpool.com/static/books/docker_practice/
+Docker基础与高级 http://17173ops.com/2014/10/13/docker%E5%9F%BA%E7%A1%80%E4%B8%8E%E9%AB%98%E7%BA%A7.shtml

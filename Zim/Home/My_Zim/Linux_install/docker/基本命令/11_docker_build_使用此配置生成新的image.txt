@@ -1,0 +1,34 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-09T10:19:31+08:00
+
+====== 11 docker build 使用此配置生成新的image ======
+创建日期 星期日 09 十二月 2018
+
+build命令可以从Dockerfile和上下文来创建镜像：
+docker build [OPTIONS] PATH | URL | -
+上面的PATH或URL中的文件被称作上下文，build image的过程会先把这些文件传送到docker的服务端来进行的。
+如果PATH直接就是一个单独的Dockerfile文件则可以不需要上下文；如果URL是一个Git仓库地址，那么创建image的过程中会自动git clone一份到本机的临时目录，它就成为了本次build的上下文。无论指定的PATH是什么，Dockerfile是至关重要的，请参考Dockerfile Reference。
+请看下面的例子：
+
+# cat Dockerfile 
+FROM seanlook/nginx:bash_vim
+EXPOSE 80
+ENTRYPOINT /usr/sbin/nginx -c /etc/nginx/nginx.conf && /bin/bash
+
+# docker build -t seanlook/nginx:bash_vim_Df .
+Sending build context to Docker daemon 73.45 MB
+Sending build context to Docker daemon 
+Step 0 : FROM seanlook/nginx:bash_vim
+ ---> aa8516fa0bb7
+Step 1 : EXPOSE 80
+ ---> Using cache
+ ---> fece07e2b515
+Step 2 : ENTRYPOINT /usr/sbin/nginx -c /etc/nginx/nginx.conf && /bin/bash
+ ---> Running in e08963fd5afb
+ ---> d9bbd13f5066
+Removing intermediate container e08963fd5afb
+Successfully built d9bbd13f5066
+上面的PATH为.，所以在当前目录下的所有文件（不包括.dockerignore中的）将会被tar打包并传送到docker daemon（一般在本机），从输出我们可以到Sending build context...，最后有个Removing intermediate container的过程，可以通过--rm=false来保留容器。
+TO-DO
+docker build github.com/creack/docker-firefox失败。

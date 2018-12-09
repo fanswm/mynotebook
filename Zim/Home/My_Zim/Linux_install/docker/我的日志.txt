@@ -15,4 +15,4 @@ af4b0a2388c6: Pull complete
 Digest: sha256:2671f7a3eea36ce43609e9fe7435ade83094291055f1c96d9d1d1d7c0b986a5d
 Status: Downloaded newer image for centos:latest
 
-`docker run -itcentos:latest /bin/bash`
+`docker run -it centos:latest /bin/bash`

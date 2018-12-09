@@ -5,6 +5,21 @@ Creation-Date: 2018-01-10T17:37:18+08:00
 ====== 基本命令 ======
 Created Wednesday 10 January 2018
 
+
+本文只记录docker命令在大部分情境下的使用，如果想了解每一个选项的细节，请参考官方文档，这里只作为自己以后的备忘记录下来。
+
+根据自己的理解，总的来说分为以下几种：
+
+__容器生命周期管理 — docker [run|start|stop|restart|kill|rm|pause|unpause]__
+__容器操作运维 — docker [ps|inspect|top|attach|events|logs|wait|export|port]__
+__容器rootfs命令 — docker [commit|cp|diff]__
+__镜像仓库 — docker [login|pull|push|search]__
+__本地镜像管理 — docker [images|rmi|tag|build|history|save|import]__
+__其他命令 — docker [info|version]__
+
+{{~/图片/docker 变迁图.png}}
+
+
 Docker 基本命令
 2017-12-29 ImportNew
 来源：Listen ，
@@ -17,7 +32,7 @@ Docker是一个近年来非常火热的开源项目，使用Docker作为容器�
 > 如果安装正确，那么会输出相应的版本信息
 > Docker version 1.12.0, build 8eab29e
 ### Docker镜像(image)命令
-安装完成之后，就可以下载镜像了。类似于Github，Docker也有一个DockerHub，当我们pull镜像的时候是从DockerHub上下载相应的镜像。除了可以在   https://registry.hub.docker.com/检索镜像以外，还可以使用以下命令检索：
+安装完成之后，就可以下载镜像了。类似于Github，Docker也有一个DockerHub，当我们pull镜像的时候是从DockerHub上下载相应的镜像。除了可以在    https://registry.hub.docker.com/  检索镜像以外，还可以使用以下命令检索：
 + Docker镜像搜索
 `docker search 镜像名`
 比如搜索Redis镜像：
@@ -47,7 +62,7 @@ trelllis/redis            Redis Replication                               0     
 khipu/redis               customized redis                                0                    [OK]
 maestrano/redis           Redis is an open source key-value store th...   0                    [OK]
 rounds/10m-redis          redis for hubot brain                           0                    [OK]
-higebu/redis-commander    Redis Commander Docker image. https://gith...   0                    [OK]
+higebu/redis-commander    Redis Commander Docker image.  https://gith...   0                    [OK]
 drupaldocker/redis        Redis for Drupal                                0                    [OK]
 可以看到第一个就是官方的镜像。
 + 镜像下载

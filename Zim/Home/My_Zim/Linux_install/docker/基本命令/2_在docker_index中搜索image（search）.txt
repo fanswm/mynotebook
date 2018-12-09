@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-09T10:14:12+08:00
+
+====== 2 在docker index中搜索image（search） ======
+创建日期 星期日 09 十二月 2018
+
+Usage: docker search TERM
+
+__# docker search seanlo__
+NAME                DESCRIPTION           STARS     OFFICIAL   AUTOMATED
+seanloook/centos6   sean's docker repos         0
+__搜索的范围是官方镜像和所有个人公共镜像__。NAME列的 / 后面是仓库的名字。

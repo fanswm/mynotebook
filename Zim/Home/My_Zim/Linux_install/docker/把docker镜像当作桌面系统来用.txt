@@ -18,7 +18,7 @@ https://zasdfgbnm.github.io/2017/12/28/%E6%8A%8Adocker%E9%95%9C%E5%83%8F%E5%BD%9
 为什么要用Docker镜像当作桌面系统？这就要从普通桌面系统的不方便之处说起。通常我们都拥有不止一台电脑，我们希望这些电脑能够保持一致。这里所说的“一致”，用一个例子来讲，就是我在一台电脑上编辑了一半的文件，不需要认为拷贝到另一台电脑上，而是直接打开电脑就能编辑。如果这个文件只是一个纯文本文件，或者一个Microsoft Word文档，那么实现这个一致性非常简单：把文件扔到Dropbox之类的云同步盘就好。然而对于专业用户来讲，这种一致性的保持并非单纯的扔到Dropbox里面那么简单：比如说你最近忙于一个项目，这个项目要用到若干编程语言，然后在电脑里装了一堆库，一堆工具软件，有图形界面的，也有命令行的。在工作的过程中，你有可能不断安装新的工具，或者决定弃用某个之前计划使用的库或者工具。要让你的工作在你的若干台电脑上都能工作，就要一直维护不同机器的环境的一致性：在一台机器上安装的工具，要在所有机器上重新安装一遍。在一台机器上升级了的库，要在所有机器上都升级，稍微有所差池，就有可能出现某个脚本/程序在一台机器上跑的好好的，在另一台机器上却无法运行的问题。
 docker哲学
 
-不熟悉docker的读者可以戳这里来了解docker。Docker的使用非常简单：我们通过写一个Dockerfile，在Dockerfile中写入相应的命令来安装以及配置我们想要的库跟工具。不熟悉docker的读者可以看一下下面这个抄来的Dockerfile的例子，来了解一下Dockerfile长啥样子：
+不熟悉docker的读者可以戳[这里](https://docs.docker.com/get-started/)%E6%9D%A5%E4%BA%86%E8%A7%A3docker%E3%80%82Docker%E7%9A%84%E4%BD%BF%E7%94%A8%E9%9D%9E%E5%B8%B8%E7%AE%80%E5%8D%95%EF%BC%9A%E6%88%91%E4%BB%AC%E9%80%9A%E8%BF%87%E5%86%99%E4%B8%80%E4%B8%AADockerfile%EF%BC%8C%E5%9C%A8Dockerfile%E4%B8%AD%E5%86%99%E5%85%A5%E7%9B%B8%E5%BA%94%E7%9A%84%E5%91%BD%E4%BB%A4%E6%9D%A5%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E9%85%8D%E7%BD%AE%E6%88%91%E4%BB%AC%E6%83%B3%E8%A6%81%E7%9A%84%E5%BA%93%E8%B7%9F%E5%B7%A5%E5%85%B7%E3%80%82%E4%B8%8D%E7%86%9F%E6%82%89docker%E7%9A%84%E8%AF%BB%E8%80%85%E5%8F%AF%E4%BB%A5%E7%9C%8B%E4%B8%80%E4%B8%8B%E4%B8%8B%E9%9D%A2%E8%BF%99%E4%B8%AA[%E6%8A%84%E6%9D%A5%E7%9A%84Dockerfile](https://github.com/kstaken/dockerfile-examples/blob/master/nodejs/Dockerfile)%E7%9A%84%E4%BE%8B%E5%AD%90%EF%BC%8C%E6%9D%A5%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8BDockerfile%E9%95%BF%E5%95%A5%E6%A0%B7%E5%AD%90：
 
 FROM ubuntu
 MAINTAINER Kimbro Staken
@@ -38,15 +38,15 @@ CMD ["/usr/bin/node", "/var/www/app.js"]
 
 这种做法，除了在保持一致性方面带来的便利以外，还有一些其他的好处：
 
-    整个系统保存在云端，本地的内容仅仅是云端的一份缓存而已，这样就完全没有必要定期对系统进行备份了。
-    你的系统是如何从零开始一步一步配置成你想要的样子的，所有的一切都清晰地展现在Dockerfile里面。Dockerfile就是你最好的笔记。
-    完全不用担心系统长时间使用产生一些残余的垃圾文件、或者某些系统中某些程序的数据出现损坏，因为每次开机，我们用的都是一个全新的系统。
-    要装一台新机器，并不需要从头安装操作系统，只要从DockerHub拉取镜像拿来用就好，安装系统这个过程变得极其方便。
-    系统更新的过程实际上就是根据Dockerfile从最新的软件仓库重新从头安装生成docker镜像的过程，不会出现某些更新遇到文件冲突或者依赖无法处理，需要人为干预才能完成的问题。
+	整个系统保存在云端，本地的内容仅仅是云端的一份缓存而已，这样就完全没有必要定期对系统进行备份了。
+	你的系统是如何从零开始一步一步配置成你想要的样子的，所有的一切都清晰地展现在Dockerfile里面。Dockerfile就是你最好的笔记。
+	完全不用担心系统长时间使用产生一些残余的垃圾文件、或者某些系统中某些程序的数据出现损坏，因为每次开机，我们用的都是一个全新的系统。
+	要装一台新机器，并不需要从头安装操作系统，只要从DockerHub拉取镜像拿来用就好，安装系统这个过程变得极其方便。
+	系统更新的过程实际上就是根据Dockerfile从最新的软件仓库重新从头安装生成docker镜像的过程，不会出现某些更新遇到文件冲突或者依赖无法处理，需要人为干预才能完成的问题。
 
 docker存储驱动的工作原理
 
-Docker的存储驱动官方有介绍其工作原理，这里只是简单概括一下。Docker使用了层的概念，docker在构建镜像的时候，会逐行执行我们的Dockerfile中的每一行，每执行一行的时候，docker就会创建出一个新的层来存放新的内容。当我们执行docker pull或者docker push的时候，docker实际上传跟下载的是这些层之间的增量。每当执行docker run，docker就会把这些下载下来的层组合到一起，组合成一个完整的镜像，然后新建一个读写层，所有运行过程中的写入都会被写入到读写层中，而镜像本身则是保持只读，不会被更改。“层”这个概念具体实现起来，根据docker目录（通常为/var/lib/docker这个目录）所在的文件系统的不同而不同，具体的实现在docker中被称为graph driver，docker自带的graph driver包括aufs、 overlay、btrfs、zfs、devicemapper等。这些graph driver大多使用了写时复制的技术，这样在把各个层组合在一起的过程不需要重新拷贝一份数据，实际的拷贝是在写入的时候发生的。
+Docker的存储驱动官方有介绍其[工作原理](https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/)，这里只是简单概括一下。Docker使用了层的概念，__docker在构建镜像的时候，会逐行执行我们的Dockerfile中的每一行，每执行一行的时候，docker就会创建出一个新的层来存放新的内容__。当我们执行docker pull或者docker push的时候，docker实际上传跟下载的是这些层之间的增量。每当执行docker run，docker就会把这些下载下来的层组合到一起，组合成一个完整的镜像，然后新建一个读写层，所有运行过程中的写入都会被写入到读写层中，而镜像本身则是保持只读，不会被更改。“层”这个概念具体实现起来，根据docker目录（通常为/var/lib/docker这个目录）所在的文件系统的不同而不同，具体的实现在docker中被称为graph driver，docker自带的graph driver包括aufs、 overlay、btrfs、zfs、devicemapper等。这些graph driver大多使用了写时复制的技术，这样在把各个层组合在一起的过程不需要重新拷贝一份数据，实际的拷贝是在写入的时候发生的。
 
 由于笔者使用的是btrfs，所以本文就以btrfs为例子来介绍怎么让系统启动到docker镜像上去。btrfs是一个写时复制的系统，由于docker的镜像是由一个一个的层叠在一起组成的，docker在使用btrfs的时候，每往上叠一层，docker就会创建一个原来层的快照，然后把新层的内容写到快照里面去。然后docker会在从镜像创建容器的时候，给镜像的最顶层做个快照，把这个快照当作容器读写层来用。
 启动到docker镜像中去
@@ -60,16 +60,16 @@ mkinitcpio-docker-hooks的使用
 
 mkinitcpio-docker-hooks的使用流程大概分为如下几步：
 
-    确保你的/var/lib/docker位于某个btrfs分区中
-    准备一个适合在裸机上启动的docker镜像
-    然后在这个镜像中安装并配置mkinitcpio-docker-hooks
-    准备内核跟initramfs
-    准备top layer的内容
-    设置启动管理器
+	确保你的/var/lib/docker位于某个btrfs分区中
+	准备一个适合在裸机上启动的docker镜像
+	然后在这个镜像中安装并配置mkinitcpio-docker-hooks
+	准备内核跟initramfs
+	准备top layer的内容
+	设置启动管理器
 
 docker镜像的准备
 
-要想启动到docker镜像中去，首先你得有一个适合在裸机上启动的docker镜像。很多docker镜像，为了减小镜像的大小，是不会附带只有裸机上才能用到的软件包（比如dhcpcd）的，所以读者可能需要在Dockerfile中手动安装这些软件包，对于Arch Linux来讲，只需要安装base组就可以了。由于接下来要安装mkinitcpio-docker-hooks，这里推荐使用一个已经内置yaourt的镜像，笔者使用的是自己的archlinux-yaourt镜像zasdfgbnm/archlinux-yaourt。所以，Dockerfile的开头看起来是这个样子的：
+要想启动到docker镜像中去，首先你得有一个适合在裸机上启动的docker镜像。很多docker镜像，为了减小镜像的大小，是不会附带只有裸机上才能用到的软件包（比如dhcpcd）的，所以读者可能需要在Dockerfile中手动安装这些软件包，对于Arch Linux来讲，只需要安装base组就可以了。由于接下来要安装mkinitcpio-docker-hooks，这里推荐使用一个已经内置yaourt的镜像，笔者使用的是自己的archlinux-yaourt镜像zasdfgbnm/archlinux-yaourt(https://cloud.docker.com/swarm/zasdfgbnm/repository/docker/zasdfgbnm/archlinux-yaourt/general)。所以，Dockerfile的开头看起来是这个样子的：
 
 FROM zasdfgbnm/archlinux-yaourt
 USER root
@@ -85,8 +85,8 @@ RUN sudo -u user yaourt -S --noconfirm mkinitcpio-docker-hooks
 安装完了mkinitcpio-docker-hooks以后还需要配置，配置文件在/etc/docker-btrfs.json，初始内容如下：
 
 {
-    "docker_image": "archlinux/base",
-    "docker_tag": "latest"
+	"docker_image": "archlinux/base",
+	"docker_tag": "latest"
 }
 
 我们需要做的就是把这两个变量的值替换为我们想要的值，比如说这里我打算把我的docker镜像的名字叫做“sample_image”。同时，我们还需要在/etc/mkinitcpio.conf中添加docker-btrfs这个hook。
@@ -128,11 +128,11 @@ Top layer是mkinitcpio-docker-hooks引入的新概念，它指的是某个驱动
 设置好了top layer以后，我们基本上可以算是万事具备只差东风了。我们只需要简单设置一下启动管理器就可以启动我们的系统了。这里以refind为例子，这里假设我们的所有东西放在一个label为“linux”的btrfs分区中，docker目录（也就是你系统启动以后会挂载到/var/lib/docker的目录）存放在这个分区根目录下的一个叫做“docker”的子卷中，而内核、initramfs以及top layer都是位于分区根目录下的“boot_docker”文件夹中，而我们希望创建的读写层名字叫做“docker_rwlayer”，那么相应的refind.conf中的菜单项的代码如下：
 
 menuentry archlinux-docker {
-        icon EFI/refind/icons/os_arch.png
-        volume linux
-        loader boot_docker/vmlinuz-linux
-        initrd boot_docker/initramfs-linux.img
-        options "root=LABEL=linux rootflags=subvol=docker_rwlayer rw docker_path=docker toplayer=LABEL=linux toplayer_path=boot_docker"
+		icon EFI/refind/icons/os_arch.png
+		volume linux
+		loader boot_docker/vmlinuz-linux
+		initrd boot_docker/initramfs-linux.img
+		options "root=LABEL=linux rootflags=subvol=docker_rwlayer rw docker_path=docker toplayer=LABEL=linux toplayer_path=boot_docker"
 }
 
 其中内核选项中，我们通过root来指定docker目录所在的分区，rootflags中的subvol来指定读写层的位置，docker_path来指定docker目录在root中的相对位置；通过toplayer来指定top layer目录所在的分区，toplayerflags来指定top layer所在分区的挂载选项，toplayer_path来指定top layer的目录在toplayer分区中的相对位置。
