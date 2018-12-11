@@ -22,7 +22,11 @@ https://{username}:{password}@github.com
 
 打开~/.gitconfig文件，会发现多了一项:
 [credential]
-    helper = store
+	helper = store
+
+touch .git-credentials
+vim .git-credentials
+https://{username}:{password}@github.com
 
 __Windows方法：__
 
@@ -44,11 +48,28 @@ __Windows方法：__
 
 进入%HOME%目录，新建一个名为"_netrc"的文件，文件中内容格式如下：
 
-    machine {git account name}.github.com
-    login your-usernmae
-    password your-password
+	machine {git account name}.github.com
+	login your-usernmae
+	password your-password
+	
+输入内容格式：
+touch .git-credentials
+vim .git-credentials
+https://{username}:{password}@github.com
 
 重新打开git bash即可，无需再输入用户名和密码
+1.2 添加Git Config 内容
+
+进入git bash终端， 输入如下命令：
+
+git config --global credential.helper store
+
+执行完后查看%HOME%目录下的.gitconfig文件，会多了一项：
+
+[credential]
+
+	helper = store
+重新开启git bash会发现git push时不用再输入用户名和密码
 参考文献:
 
 git push时候总提示输入账号密码 - 免除设置	http://blog.csdn.net/kevinew/article/details/24588123/
