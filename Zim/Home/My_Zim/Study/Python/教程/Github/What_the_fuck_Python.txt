@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-11T15:25:17+08:00
+
+====== What the fuck Python ======
+Created Tuesday 11 December 2018
+
+https://github.com/leisurelicht/wtfpython-cn
+https://zhuanlan.zhihu.com/p/51264676?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
+这个Python资源在GitHub上标星超8000，现在被翻译成了中文
