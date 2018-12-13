@@ -17,23 +17,16 @@
 
 ## dpkg
 > package manager for Debian
-显示DEB包信息	dpkg -I xx.deb
-显示DEB包文件列表	dpkg -c xx.deb
-安装DEB包	dpkg -i xx.deb
-安装DEB包（指定根目录）	dpkg --root=<directory> -i xx.deb
-显示所有已安装软件	dpkg -l
-显示已安装包信息	dpkg -s foo
-显示已安装包文件列表	dpkg -L foo
-卸载包	dpkg -r foo
-卸载软件包并删除其配置文件	dpkg -P foo
-重新配置已安装程序	dpkg-reconfigure foo
-
-
-
-
-
-
-
++ 显示DEB包信息	dpkg -I xx.deb
++ 显示DEB包文件列表	dpkg -c xx.deb
++ 安装DEB包	dpkg -i xx.deb
++ 安装DEB包（指定根目录）	dpkg --root=<directory> -i xx.deb
++ 显示所有已安装软件	dpkg -l
++ 显示已安装包信息	dpkg -s foo
++ 显示已安装包文件列表	dpkg -L foo
++ 卸载包	dpkg -r foo
++ 卸载软件包并删除其配置文件	dpkg -P foo
++ 重新配置已安装程序	dpkg-reconfigure foo
 
 
 

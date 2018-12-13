@@ -2,6 +2,6 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-07-22T10:42:50+08:00
 
-====== 设计 ======
+====== 设计 灵感 ======
 Created 星期日 22 七月 2018
 

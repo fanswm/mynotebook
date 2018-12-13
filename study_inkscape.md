@@ -1,4 +1,4 @@
-tags: 图像处理 inkscape fanswm笔记
+tags: 图像处理 inkscape hex笔记
 
 ## 平移画布
 + `Ctrl` + `arrow`

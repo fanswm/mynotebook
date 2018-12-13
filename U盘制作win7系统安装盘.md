@@ -58,4 +58,4 @@ E: Unmet dependencies. Try using -f.
 > `df -Th`
 
 + 在Linux系统下用dd命令制作ISO镜像U盘启动盘
-> `sudo dd if=~/images/ubuntu.iso of=/dev/sdb`
+> `sudo dd if=~/images/ubuntu.iso of=/dev/sdx`

@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-12-11T15:54:58+08:00
 
-====== CMS ======
+====== CMS 内容管理系统 ======
 Created Tuesday 11 December 2018
 
 GitHub：https://github.com/SeriaWei/ZKEACMS.Core
