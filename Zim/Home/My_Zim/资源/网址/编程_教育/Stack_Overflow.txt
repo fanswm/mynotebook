@@ -6,6 +6,9 @@ Creation-Date: 2018-12-03T14:10:21+08:00
 Created Monday 03 December 2018
 
 如何在终端中浏览 Stack Overflow
+https://stackoverflow.com/
+
+
 2018-11-27 23:46
 编译自：https://www.ostechnix.com/how-to-browse-stack-overflow-from-terminal/%E4%BD%9C%E8%80%85： Sk
 原创：LCTT https://linux.cn/article-10284-1.html 译者： geekpi

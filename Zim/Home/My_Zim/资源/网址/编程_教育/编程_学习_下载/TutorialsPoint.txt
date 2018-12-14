@@ -1,0 +1,18 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-14T10:37:23+08:00
+
+====== TutorialsPoint ======
+Created Friday 14 December 2018
+
+https://www.tutorialspoint.com/
+
+一个学习任何东西的地方。TutorialsPoint 有一些又好又简单的教程，它可以教你任何编程语言。我真的很喜欢这个网站，它不仅限于通用编程语言。
+
+
+
+
+TutorialsPoint
+
+
+你可以在这里上找到几乎所有语言框架的教程。
