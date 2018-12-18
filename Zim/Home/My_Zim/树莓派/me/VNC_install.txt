@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-11-21T21:38:38+08:00
 
@@ -34,7 +34,7 @@ $tightvncserver -name pi
 
 ### Customize this entry
 # Set the USER variable to the name of the user to start tightvncserver under
-export USER='fanswm'
+export USER='myusername'
 ### End customization required
 
 eval cd ~$USER
@@ -70,7 +70,7 @@ vncpasswd
 vnc1
 $ /etc/init.d/tightvncsever srart
 
-$ tightvncserver -name fanswm
+$ tightvncserver -name myusername
 查看桌面号:1,2,3?
 然后,在win中,192.168.31.142:桌面号
 连接

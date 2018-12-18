@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-12-11T16:38:30+08:00
 
@@ -34,7 +34,7 @@ __drwxrwxrwx__
 如果以上面的例子来说明的话，因为 umask 为 022 ，所以 user 并没有被拿掉任何权限，不过 group 与 others 的权限被拿掉了 2 (也就是 w 这个权限)，那么当使用者：
 
 创建文件时：(-rw-rw-rw-) - (-----w--w-) ==> -rw-r--r--
-fanswm:666-022
+myusername:666-022
 
 创建目录时：(drwxrwxrwx) - (d----w--w-) ==> drwxr-xr-x
 不相信吗？我们就来测试看看吧！

@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-10-15T15:05:45+08:00
 
@@ -9,5 +9,5 @@ imgur是一个免费的图片分享网站，创办于2009年，提供了简单�
 https://imgur.com/
 
 
-abstracthex@163.com
+abstracth@163.com
 未成功

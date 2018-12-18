@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-26T14:14:00+08:00
-
-====== abstracthex ======
-Created Tuesday 26 December 2017
-
-创建文件：
-`dd if=/dev/zero of=/boot/testing.img bs=1M count=10`

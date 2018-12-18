@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-02-01T14:26:37+08:00
 
@@ -6,7 +6,7 @@ Creation-Date: 2018-02-01T14:26:37+08:00
 Created Thursday 01 February 2018
 
 https://lceda.cn/editor
-abstracthex@163.com
+abstracth@163.com
 150311
 
 画电路图

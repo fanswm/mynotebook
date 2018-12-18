@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-12-01T17:34:55+08:00
 
@@ -14,7 +14,7 @@ https://www.awwwards.com/sites/qed-group
 它的搜索分类非常的齐全，你可以根据颜色、类型、标签、地理位置等多个方面去塞选出你需要的项目。并且网站也会对项目进行一个评分，分别从「Design、Usability、Creativity、Content、Developer」 五个方面评价，所以用户也可以直接根据分数更快的找到最好的作品。
 
 
-__fanswm觉得好:__
+__myusername觉得好:__
 现万的例子:
 http://colorhunt.co/
 https://www.webdesignrankings.com/resources/lolcolors/

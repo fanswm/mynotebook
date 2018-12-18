@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-12-18T11:22:21+08:00
 
@@ -18,6 +18,6 @@ http://www.jianshu.com/p/ae163d8b9e98
 
 https://bter.com/signup/359931
 
-abstracthex@163.com
+abstracth@163.com
 *:abs
 奖金*：abs未成功

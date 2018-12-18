@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-11-24T13:55:22+08:00
 
@@ -216,7 +216,7 @@ mkdir hexo
 cd hexo/
 sudo npm install -g hexo
 git init
-git remote add origin https://github.com/fanswm/fanswm.github.io.git
+git remote add origin https://github.com/myusername/myusername.github.io.git
 git config --global user.name imrdrlubuntu
 git config --global user.email imrdr4@126.com
 git pull
@@ -236,7 +236,7 @@ sudo npm install hexo-deployer-git --save
 Geek's Planet
 https://imrdr4.github.io/
 
-https://fanswm.github.io/
+https://myusername.github.io/
 
 
 mkdir ~/github/imrdr4/

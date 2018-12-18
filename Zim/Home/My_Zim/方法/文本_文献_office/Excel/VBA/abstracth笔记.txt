@@ -1,0 +1,574 @@
+﻿Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-30T17:00:09+08:00
+
+====== abstracth笔记 ======
+Created Saturday 30 December 2017
+
+## 基础
+### 打开VBE（VBA EDITER）
+`Alt + F11`
+
+### 帮助
+在代码窗口内用鼠标抹黑，然后按`F1`。
+
+### 宏窗口
+`Alt + F8`
+
+## 程序流控制：
+
+### if-then
+```
+if 逻辑表达式 then
+	语句块
+end if
+```
+
+```
+Private Sub CommandButton1_Click()
+If [a1] = "" Then
+    MsgBox "a1单元格没有内容"
+End If
+End Sub
+```
+
+### if-then-else
+```
+if 逻辑表达式 then
+	语句块1
+else
+	语句块2
+end if
+```
+
+### if-then-elseif
+```
+if 逻辑表达式1 then
+	语句块1
+elseif	逻辑表达式2 then
+	语句块2
+elseif 逻辑表达式3 then
+	语句块3
+...
+else
+	语句块n
+end if
+```
+### goto语句
+```
+Private Sub CommandButton1_Click()
+Dim lsum As Long, i As Long
+i = 1
+x: '为go to语句设置的标签，必须以英文状态下的冒号结尾
+    lsum = lsum + i
+    i = i + 1
+    If i <= 100 Then GoTo x '如果i<=100，则程序跳到标签x处
+MsgBox "1到100的自然数之和为:" & lsum
+End Sub
+```
+
+> 例:
+> 欢迎页面:
+```
+Sub a()
+   欢迎.ltime.Caption = 欢迎.ltime.Caption - 1
+   If 欢迎.ltime.Caption * 1 > 0 Then
+      Call b
+   Else
+      Unload 欢迎
+      Application.Visible = True
+   End If
+End Sub
+
+Sub b()
+   Application.OnTime Now + TimeValue("00:00:01"), "a"
+End Sub
+
+```
+
+## 对象、属性、方法、事件
++ 对象及对象层次结构
+在Excel里，Workbooks集合包含在Application对象里。
+
+如果我们要引用名称是"mybook.xls"的工作薄时就是：
+`Application.Workbooks("mybook.xls")`
+
+同理，当我们引用"mybook.xls"里面的工作表"mysheet"时应是：
+`Application.Workbooks("mybook.xls").Worksheets("mysheet")`
+
+引用"mybook.xls"里工作表"mysheet"里面的单元格区域"A1:D10":
+`Application.Workbooks("mybook.xls").Worksheets("mysheet").Range("A1:D10")`
+
+但是并不是每一次引用都必须这么呆板，就像猪八戒不用每一次都去爬下水管道。
+如果我们引用的是活动对象，也就是被激活的对象，引用就可以进行简化。 
+如果是mybook工作薄是激活的，引用可以简化为：
+`Worksheets(“mysheet”).Range(“A1:D10”)`
+
+如果mysheet当前也是激活的，引用甚至还可以简化为:
+`Range(“A1:D10”)` ，
+也可以直接输入`[A1:D10] `，
+如果引用的单元Range是单个的单元格，还可以用`Cells（行号,列号）`的引用方式。
+
++ 集合这个概念经常遇到，我理解的集合是对相同类型的对象的统称。
+
++ 属性 
+每一个对象都有属性，一个属性就是对一个对象的一个设置。
+
+`MsgBox Worksheets(1).Name`
+
+`Worksheets(1)`和`Worksheets(“sheet1”)`有什么区别？ 
+`Worksheets(1)`表示Worksheets集合里的第一个工作表。 
+`Worksheets(“sheet1”)`表示Worksheets集合里名为"sheet1"的工作表。
+
+
++ 方法 
+每一个对象都有方法，方法就是在对象上执行的某个动作。
+
++ 事件
+事件就是由用户或者系统触发的，可以在代码中响应的一段代码。
+
++ 过程
+VBA过程分Sub过程和Function过程。
+1. Sub过程总是以“sub 过程名()”开头，以“End Sub”结尾，一个过程就是执行某项动作的一套指令，Sub过程不返回运行的结果。
+2. Function总是以“Function 程序名()”开头，以“End Function”结尾，和Sub过程的区别是Function过程返回程序运行的值，
+值可以是一个值或一个数组，就像我们的工作表函数，Function过程也就是我们说的自定义函数。
+
+
+##　数据类型、变量、常量、数组
+
+1. 数据类型
+
+数据类型		存储空间大小	范围
+Byte			1 个字节	0 到 255
+Boolean			2 个字节	True 或 False
+Integer			2 个字节	-32,768 到 32,767
+
+Long(长整型)		4 个字节	-2,147,483,648 到 2,147,483,647
+Single (单精度浮点型)	4 个字节	负数时从 -3.402823E38 到 -1.401298E-45；
+					正数时从 1.401298E-45 到 3.402823E38
+					
+Double (双精度浮点型)	8 个字节	负数时从 -1.79769313486232E308 到-4.94065645841247E-324；
+					正数时从4.94065645841247E-324 到 1.79769313486232E308
+Currency		8 个字节	从 -922,337,203,685,477.5808 到 922,337,203,685,477.5807
+(变比整型)
+
+Decimal			14 个字节	没有小数点时为 +/-79,228,162,514,264,337,593,543,950,335，
+					而小数点右边有 28 位数时为 +/-7.9228162514264337593543950335；
+					最小的非零值为 +/-0.0000000000000000000000000001
+Date			8 个字节	100 年 1 月 1 日 到 9999 年 12 月 31 日
+Object			4 个字节	任何 Object 引用
+String			10 字节加字符串长度	0 到大约 20 亿
+(变长)
+
+String(定长)		字符串长度	1 到大约 65,400
+Variant(数字)		16 个字节	任何数字值，最大可达 Double 的范围
+Variant			22 个字节加字符串长度	与变长 String 有相同的范围
+(字符)
+
+用户自定义		所有元素所需数目	每个元素的范围与它本身的数据类型的范围相同。
+（利用 Type）
+
+2. 变量 
+
+变量是用于保存在程序运行过程中需要临时保存的值或对象。
+如何定义变量？ 
+定义变量可以使用Dim语句： `Dim 变量名 As 数据类型`
+我们可以不必声明变量的数据类型，直接输入“Dim 变量名”此时定义的变量将被指定为Variant类型。
+
+定义变量除了可以使用Dim语句外，比较常的还有：
+	static语句，
+	Private语句，
+	Public语句。
+
+使用不同的语句定义的变量不同的是它们的作用作用域不同，具体为：
++ 如果在一个过程中包含了一个Dim或Static语句，此时声明的变量作用域为此过程，即本地变量。 
++ 如果在一个模块的第一个过程之前包含了Dim或Prvate语句，此时声明的变量作用域为此模块里所有的过程，
+也就是在此模块里所有的过程都可以使用它，即模块作用域下的变量； 
++ 如果在一个模块的第一个过程之前包含了Public语名，此时声明的变量作用域为所有模块，即公有变量。 
+
+变量的作用域是指变量保留其值的这段时间，也称为变量的生成周期，它决定变量可以用于哪个模块或过程中。
+
+3. 常量
+声明常量设定常量的值，需要用Const语句： `Const 常量名 As 数据类型 ＝ 常量的值`
+
+4. 数组
+数组是具有相同数据类型并且共享一个名字的一组变量的集合。数组也是变量。
+
+如何声明数组? 
+可以用Dim语句或者Public语句声明数组。 
+`Dim/Public 数组名 (a to b) as 数据类型`
+
+如: `Dim myarr(5) As Integer`
+
+如: `Dim myarr(1 to 5,1 to 10) As Integer`
+这就是一个二维数组，元素个数为5*10＝50个。
+
+```
+Sub ggsmart()
+	Dim arr(1 To 100) As Integer '声明数组名称及数据类型
+	For i = 1 To 100 	'循环，为数组的元素赋值
+		arr(i) = i
+	Next
+End Sub
+```
+
+> 其实“Dim arr(1 To 100) As Integer”我们也可以写成“Dim arr(99) As Integer”，
+这样，定义的数组同样是100个元素的一维数组，因为如果不指定起始索引号的话，VBA默认从0开始。 
+> 当然，你也是可以通过OPTION BASE 来修改数组默认的起始序号，
+在模块的第一句写上“OPTION BASE 1”这样，默认的数组起始序号就是1了。
+
+在程序设计的过程中，定义数组的时候我们可能不能确定数组的元素个数，对数组进行声明后，可以在运行时用`ReDim语句`重新指定数组的大小。
+
+
+例：
+```
+Sub ggsmart()
+	Dim i As Integer, j As Integer
+	Dim arr(1 To 50, 1 To 2) As Integer '定义一个50*2的二维数组（50行，2列）
+	j = 1 				'数组1 to 50的索引号
+	
+	For i = 1 To 100 Step 2
+		arr(j, 1) = i 		'奇数赋值
+		arr(j, 2) = i + 1 	'偶数赋值
+		j = j + 1 		'索引号加1
+	Next
+	
+	[a1:b65536].Clear 		'清除原有数据
+	[a1].Resize(50, 2) = arr 	'将数组赋值给A1单元格向下50行，向右2列的区域
+End Sub
+```
+
+## VBA函数
+
+但并不是所有的工作表函数在VBA里都可以直接调用，但由于WorksheetFunction对象包含在Application对象中，
+如果我们要在VBA语句里使用某个不能直接调用的工作表函数，只需要在函数名称前加上Application.WorksheetFunction语语即可。 
+如：在VBA里使用counta函数则代码为： 
+`application.worksheetfunction.counta(range("a1:a10"))`
+
+### Select Case 语句
+
+```
+'修订:38度:老朽
+'网址:http://www.38duoffice.cn/bbs
+'日期:2009-7-1 上午 11:22:21
+Sub Test()
+	If [a1].Value = "" Then
+		MsgBox "A1单元格没有输入数字。"
+		Exit Sub ' 退出程序
+	End If
+	
+	Select Case [a1].Value
+		Case Is < 30
+			MsgBox "差"
+		Case Is < 60
+			MsgBox "不及格"
+		Case Is < 80
+			MsgBox "及格"
+		Case Is < 90
+			MsgBox "良好"
+		Case Else
+			MsgBox "优秀"
+	End Select
+End Sub
+复制代码
+```
+
+### For Next 语句
+```
+For 循环变量＝初值 to 终值 step 步长 
+	循环体1 
+	[exit for] 
+	循环体2 
+next 循环变量
+```
+
+解释:从开始到结束，反复执行For和Next之间的指令块，除非遇到Exit For语句，将提前跳出循环。
+其中，步长和Exit For语句以及Next后的循环变量均可省略，步长省略的时候默认为1。
+Exit for 语句是强制终止循环的语句，执行它后将退出循环，执行next后面的语句。 
+循环变量是一个变量，可以在循环体中对其进行修改，但一般就避免在循环体中对其修改。
+
+
+
+### for each 语句
+```
+For Eacn 元素变量 In 对象集合或数组名称 
+	语句块1 
+	[Exit For] 
+	语句块2 
+next 元素变量 
+```	
+和上面For—next句式是一样的工作原理。 这里的“元素变量”是用来遍历集合或数中中元素的变量，它从集合或数组的第一个元素开始，
+直到最后一个元素，然后退出循环。
+
+例：
+把当前工作薄中工作表的名称写在A列：
+
+```
+Private Sub CommandButton1_Click()
+    Dim i As Integer, sht As Worksheet
+    i = 1
+    For Each sht In Worksheets
+        Cells(i, 1) = sht.Name
+        i = i + 1 '让写入名称的单元格下移一行
+    Next
+End Sub
+```
+
+### do while 语句
+
+Do While也是循环语句，它分为两种情况：一种是把循环条件放在开头，一种是把循环条件放在结尾。
++ 一种是把循环条件放在开头
++ 一种是把循环条件放在结尾。 
+
+1. 开头判断循环条件 语句格式： 
+```
+Do Wihle 循环条件 
+	语句块1 
+	[Exit Do] 
+	语句块2 
+Loop 
+```
+
+> 首先判断循环条件，条件为真则执行Do到Loop之间的语句。 
+
+2. 结尾判断循环条件 语句格式： 
+```
+Do 
+	语句块1 
+	[Exit Do] 
+	语句块2 
+Loop Wihle 循环条件
+```
+> 先执行一次Do到Loop之间的语句，再判断循环条件，满足条件则进行循环。 
+
+> 两种格式的区别：
+因为第二种格式是把循环体放在尾部，得先执行一遍语句再进行循环条件判断，所以，
+同样的条件，第二种格式的循环会比第一种多执行一次循环部份的语句。
+
+### Do Until 语句
+
+这个和Do While语句类似，它也有两种形式，学了Do While语句，再看这个，就可以无师自通了。
+下面就简单介绍下： 
+1. 开头判断循环条件 
+语句格式： 
+```
+Do Until 循环条件 
+	语句块1 
+	[Exit Do] 
+	语句块2 
+Loop 
+```
+
+2. 结尾判断循环条件 
+语句格式： 
+```
+Do 
+	语句块1 
+	[Exit Do] 
+	语句块2 
+Loop Until 循环条件
+```
+
+## 用户窗体（UserForm对象）
+是VBA的另一类对象
+
+### 显示窗体
+显示窗体就是把窗体显示给用户。 
+显示窗体可以调用窗体的Show方法。 
+
+窗体的显示模式有两种： 
+（1）模式窗体：
+窗体显示后将停显示之后的代码直到退出或隐藏此窗体，
+并且必须退出或隐藏此窗体后，才可以操作非此窗体的其他界面元素。 
+也就是说，当你使用模式窗体显示某窗体的时候，当程序执行完“显示窗体”这条命令后，
+将暂停执行程序里剩余的语句，真正这个窗体被隐藏或退出。
+并且当窗体显示出来以后，你不能激活该窗体以外的任何区域。 
+（2）无模式窗体：
+窗体显示后会继续执行程序里余下的语句，而其他的窗体或界面也可以进行操作。 
+
+显示窗体的语句： 
+（1）模式窗体的显示代码： 
+`窗体名称.Show vbModal`
+也可以写成：`窗体名称.Show 1`
+（2）无模式窗体的显示代码： 
+`窗体名称.Show vbModeless`
+也可以写成：
+`窗体名称.Show 0`
+
+> 悄悄告诉你：
+因为对于Show方法，如果不指定模式，则默认为模式窗体，
+又因为我很懒，所以我的习惯是：
+当我需要用模式窗体的时候，就直接“窗体.Show”，
+需要无模式的时候就“窗体.Show 0”，
+多个0少个0而已，懒得去记那有模式无模式的字母，我英文差，反正看了也不一定认识。
+
+### 关闭窗体
+我们可以通过Hide来隐藏窗体。代码为： 
+`窗体名称.Hide`
+也可以通过Unload来卸载窗体。代码为： 
+`Unload 窗体名称`
+
+二者都可以关闭窗体，但是却是有区别的。
+Show一个Hide的窗体比Show一个Unload的窗体用的时间要短。
+所以，当你需要反复使用某个窗体的时候，建议你用Hide而不用Unload。
+
+## Excel 对象模型
+
+VBA是通过对象操作来操作和控制Excel.
+
+Excel程序（Application对象）、
+工作薄（Workbook对象）、
+工作表（Worksheet对象）、
+单元格（Range对象）
+还是操作图表（Chart对象）、
+窗体（Userfrom对象）等等，都是在操作对象。
+
+每个对象都是其他对象的一部分，也可以由其他对象组成。
+
+Excel对象模型在Excel的帮助文件里就有了.
+
+### 复制
+如我们要将Book1.xls的第一个工作表中的A1:A10复制到Book2.xls的第一个工作表中的B1:B10单元格，
+则代码为： 
+
+```
+Sub mycopy()
+	Workbooks("book1").Sheets(1).[a1:a10].Copy _
+		Workbooks("book2").Sheets(1).[b1:b10] 
+End Sub
+```
+> 提示：一行的代码过长，可以用空格加下划线进行换行。
+
+复制的区域过大时，对于目标区域，我们可以只指定一个单元格，
+这时它代表目标区域的左上角单元格。
+
+如上面的代码，我们可以写成这样： 
+```
+Sub mycopy() 
+	Workbooks("book1").Sheets(1).[a1:a10].Copy _
+		Workbooks("book2").Sheets(1).[b1] 
+End Sub
+```
+
+### 粘贴
+下面的代码是将A1:A10单元格的数移动到B1:B10单元格：
+```
+Sub mycut()
+	[a1:a10].Cut [b1]
+End Sub
+```
+	
+### 删除单元格	
+删除一个单元格的命令也很简单，调用Range对象的Delete方法即可。
+同我们用鼠标操作一样，同样有四个选项，下面以删除A1单元格为例： 
+```
+[a1].Delete Shift:=xlUp 	' 下方单元格上移 
+[a1].Delete Shift:=xlToLeft 	' 右侧单元格左移 
+[a1].EntireRow.Delete 		' 整行删除 
+[a1].EntireColumn.Delete 	' 整列删除 
+```
+
+> 只写成[a1].Delete时，默认为“下方单元格上移”。	
+	
+### Range对象的End属性
+
+Range对象有一个End属性。
+也许你在阅读别人的例子里经常会看到如“[A65536].End(xlUp).Row”这样的语句，
+这就是End属性的利用。 
+
+End属性应用于Range对象，同样也返回一个Range对象。
+该对象代表包含源区域的区域结尾处的单元格。
+
+如果你还是不明白，那请你在工作表里试一试，分别按Ctrl+上、下、左、右方向键，
+看看得到的是什么？
+End属性返回的单元格就相当于在源单元格按住Ctrl键+上（或下、左、右）方向键所得到的单元格。
+
+它的语句格式简单写为： 
+源区域.End（移动方向） 
+移动方向可以是： 
++ xlToLeft ：	向左移动，相当于在源区域按Ctrl+左方向键。 
+xlToRight：	向右移动，相当于在源区域按Ctrl+右方向键。 
+xlUp：		向上移动，相当于在源区域按Ctrl+上方向键。 
+xlDown：	向下移动，相当于在源区域按Ctrl+下方向键。 
+
+所以在程序设计的过程中，很多人喜欢用“[A65536].End(xlUp).Row”语句
+来返回A列的最后一个非空单元格的行号。 
+
+如果当前活动工作表的A列填写的是学生的姓名，
+现在我们想在表中A列最后一个学生的后面增加一个叫“张青”的学生，
+则代码为：
+```
+ActiveSheet.Cells([A65536].End(xlUp).Row + 1, 1).Value = "张青"
+```
+语句 [A65536].End(xlUp).Row + 1中，行号加1的目的是在最后一个非空
+单元格的下一个单元格里输入数据。
+需要注意的是：
+如果你的A列全为空的话，“[A65536].End(xlUp).Row”这个语句返回的是1。
+
+### 新建一个工作表（Worksheet)
+```
+Worksheets.Add '新建的工作表的位置在当前活动工作表的前面。
+Worksheets.Add before:=Worksheets("sheet2") 	'在工作表sheet2之前添加一个工作表
+Worksheets.Add before:=Worksheets(1) 		'在最前面添加一个工作表
+Worksheets.Add after:=Worksheets("sheet2") 	'在工作表sheet2之后添加一个工作表
+Worksheets.Add after:=Worksheets(Worksheets.Count) '在最后面添加一个工作表
+```
+
+为新添加的工作表改一个名字，也是可以的，只需要再添加一句代码即可：
+```
+Worksheets.Add before:=Worksheets(1) '在最前面添加一个工作表
+ActiveSheet.Name = "abc" 	'将新建的工作表更名为“abc	
+```
+
+如果想更简单点，这句代码还可以合二为一： 
+```
+Worksheets.Add(before:=Worksheets(1)).Name = "abc" 
+'在最前面添加一个名称为“abc”的工作表	
+```
+
+有时，也许需要一步就添加多个工作表，那可用下面的代码：
+```
+Worksheets.Add Count:=3 '添加三个工作表
+```
+
+例：
+```
+Sub mysub()
+Application.ScreenUpdating = False
+  Dim start As Double
+  start = Timer
+  Dim sht As Worksheet, xrow As Long, i%, j As Long, arr() As String
+  [b3:f65536].ClearContents
+  For Each sht In Sheets             '循环，统计一共有多少名学生
+     If sht.Name <> ActiveSheet.Name Then
+        xrow = xrow + sht.[b65536].End(3).Row - 2 ' 最后一行减2,等于该工作表的记录数，即学生人数
+     End If
+  Next
+  ReDim arr(1 To xrow, 1 To 6) As String        '定义二维数组，xrow行(学生人数),6列(一个学生需要读取的五项内容及序号内容）
+  For Each sht In Sheets
+     If sht.Name <> ActiveSheet.Name Then
+        For i = 3 To sht.[b65536].End(3).Row
+            j = sht.Cells(i, 1) '数组的第一维下标
+            arr(j, 1) = j
+            arr(j, 2) = sht.Cells(i, 2)
+            arr(j, 3) = sht.Cells(i, 3)
+            arr(j, 4) = sht.Cells(i, 4)
+            arr(j, 5) = sht.Cells(i, 12)
+            arr(j, 6) = sht.Cells(i, 11)
+        Next
+        i = 3
+     End If
+  Next
+  [a3].Resize(xrow, 6) = arr  'a3以下的xrow行，向右的6列区域等于数组arr
+Application.ScreenUpdating = True
+  MsgBox "程序共执行了" & Timer - start & "秒!"
+End Sub
+```
+	
+	223
+	
+	59
+	
+	
+	
+	

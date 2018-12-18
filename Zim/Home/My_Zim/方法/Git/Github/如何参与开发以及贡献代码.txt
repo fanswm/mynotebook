@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-12-11T15:42:49+08:00
 
@@ -25,7 +25,7 @@ Created Tuesday 11 December 2018
 你的代码并不会马上就合并到纸壳CMS的分支中，需要等待作者的查阅后才会被合并。
 + Synchronization
 > 在Fork了代码仓库一段时间后，你账号里的仓库可能就不是最新的了。可以通过发起拉取请求同步最新代码。GitHub会告诉你当前分支的差异信息(在你Fork的仓库的左边，显示分支的下面一行. 例如：This branch is 1 commit ahead, 1 commit behind SeriaWei: master.)，
-++ 然后点击拉取请求(fanswm:compare?)即可.
+++ 然后点击拉取请求(myusername:compare?)即可.
 > 这里要注意，__GitHub上的显示是把右边的代码合并到左边，所以要把自己的仓库转到左边如果不是在左边的话。__
 ++ 右边选择纸壳CMS官方仓库
 ++ 然后点击”Create pull request“，再合并即可：

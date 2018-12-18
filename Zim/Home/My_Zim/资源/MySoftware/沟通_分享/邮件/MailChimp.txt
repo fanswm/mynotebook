@@ -1,12 +1,12 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-21T09:33:45+08:00
 
 ====== MailChimp ======
 Created Sunday 21 January 2018
 
-abstracthex@163.com
-abstracthex
+abstracth@163.com
+abstracth
 Email.com
 123
 20180121

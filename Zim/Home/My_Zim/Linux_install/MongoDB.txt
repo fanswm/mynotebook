@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-11-24T13:51:34+08:00
 
@@ -10,10 +10,10 @@ __## 安装mongodb:__
 + `sudo apt-get install mongodb`
 
 __## 测试mongodb安装:__
-+ `mkdir /home/fanswm/mongodata`
++ `mkdir /home/myusername/mongodata`
 
 __## 用以下命令启动mongod:__
-+ `mongod --dbpath /home/fanswm/mongodata`
++ `mongod --dbpath /home/myusername/mongodata`
 
 > 这时mongod已经启动，重新打开一个终端, 键入mongo进入交互程序：
 + `mongo`

@@ -1,11 +1,11 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-11-24T08:24:48+08:00
 
 ====== inkscape ======
 Created Friday 24 November 2017
 
-tags: 图像处理 inkscape fanswm笔记
+tags: 图像处理 inkscape myusername笔记
 
 ## 平移画布
 + `Ctrl` + `arrow`

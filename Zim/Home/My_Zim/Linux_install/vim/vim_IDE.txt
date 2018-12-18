@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-11-24T13:41:07+08:00
 
@@ -90,7 +90,7 @@ hi cLogicalOperatorError    guifg=#3EFFE2
 > one.git是我的源码目录
 + ctags -R
 > 此时在/home/wooin/vim71目录下会生成一个 tags 文件
-+ 再在vim中运行命令:`:set tags=/home/fanswm/one/tags`
++ 再在vim中运行命令:`:set tags=/home/myusername/one/tags`
 > 用法：
 > 把光标放在函数名称上
 > 按下: ctrl + ]就跳到定义处，按ctrl+T跳回使用处。

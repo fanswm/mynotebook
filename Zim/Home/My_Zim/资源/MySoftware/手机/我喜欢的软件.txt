@@ -1,11 +1,11 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-12-01T18:23:33+08:00
 
 ====== 我喜欢的软件 ======
 Created Friday 01 December 2017
 
-android 我喜欢的软件 fanswm  app
+android 我喜欢的软件 
 智联招聘
 不背单词
 茄子快传

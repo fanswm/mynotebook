@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-12-11T16:18:13+08:00
 
@@ -78,7 +78,7 @@ DigiCert High Assurance EV Root CA
 总结
 虽然本文只触及了 PKI 世界的一些皮毛，我希望我已经为你展示了便于后续探索的大致蓝图。密码学和 PKI 是美与复杂性的结合体。越深入研究，越能发现更多的美和复杂性，就像分形那样。
 
-fanswm:
+myusername:
 CA签发根证书，并对根证书自己签名；
 
 

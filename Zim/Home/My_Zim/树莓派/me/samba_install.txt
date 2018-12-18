@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-11-21T21:29:54+08:00
 
@@ -11,8 +11,8 @@ $ sudo vi /etc/samba/smb.conf
 [shares]
 comment = Backup Folder
 path = /mnt/usb/shares
-valid users = @ fanswm_shares
-force group = fanswm_shares
+valid users = @ myusername_shares
+force group = myusername_shares
 create mask = 0660
 directory mask = 0771
 read only = no
@@ -23,16 +23,16 @@ writable = yes
 $ sudo /etc/init.d/samba restart
 [ok]
 
-$ sudo groupadd fanswm_shares
-$ sudo usreadd fanswm_get_shares -b /mnt/usb -G fanswm_shares
+$ sudo groupadd myusername_shares
+$ sudo usreadd myusername_get_shares -b /mnt/usb -G myusername_shares
 
 ################ passwd
-$ sudo passwd fanswm_get_shares
+$ sudo passwd myusername_get_shares
 shares1
-$ sudo smbpasswd -a fanswm_get_shares
-$ sudo smbpasswd -a fanswm_shares
+$ sudo smbpasswd -a myusername_get_shares
+$ sudo smbpasswd -a myusername_shares
 shares1
-$ cp /etc/rc.local ~/fanswm_backup/etc_rc.local.201603122215
+$ cp /etc/rc.local ~/myusername_backup/etc_rc.local.201603122215
 $ sudo vi /etc/rc.local
 # append before "exit 0"
 sudo /etc/init.d/samba restart

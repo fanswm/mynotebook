@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-11-24T13:58:39+08:00
 
@@ -29,7 +29,7 @@ Created Friday 24 November 2017
 
 ## 在(home)pi中:
 + `su root`
-+ `cat /home/fanswm/.ssh/id_rsa.pub >> /home/git/.ssh/authorized_keys`
++ `cat /home/myusername/.ssh/id_rsa.pub >> /home/git/.ssh/authorized_keys`
 + `cat /mnt/usb/tmp/id_rsa.pub >> /home/git/.ssh/authorized_keys`
 + `su git`
 + `cd one.git`
@@ -108,13 +108,13 @@ $ git pull
 在浏览器打开同性交友网站github.com
 新建一个仓库：例如test
 在本地shell：
-$ https://github.com/fanswm/test.git
+$ https://github.com/myusername/test.git
 $ vim test.py
 $ git add .
 $ git commit -m"first commit"
 $ git push
-输入在github.com上的你的用户名：fanswm
-输入你的用户名的密码（fanswm的）。
+输入在github.com上的你的用户名：myusername
+输入你的用户名的密码（myusername的）。
 OK！
 
 其他：

@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-11-22T07:32:24+08:00
 
@@ -7,7 +7,7 @@ Creation-Date: 2017-11-22T07:32:24+08:00
 
 https://projecteuler.net/
 
-ID: abstracthex
+ID: abstracth
 
 *:zm
 编程挑战 

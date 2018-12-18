@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-10-31T17:35:02+08:00
 
@@ -13,8 +13,8 @@ Gitlab CI 常规介绍 https://linux.cn/article-9214-1.html?utm_source=rss&utm_m
 http://blog.csdn.net/huaishu/article/details/50475175
 
 代码管理一直用svn，git的分支管理认为是最好的，尝试用用。
-__abstracthex__
-abstracthex@163.com
+__abstracth__
+abstracth@163.com
 __123*zm__
 __2018-9-26__
 

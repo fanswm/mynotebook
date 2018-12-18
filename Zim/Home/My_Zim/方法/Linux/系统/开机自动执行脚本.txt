@@ -1,11 +1,11 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-12-04T15:25:33+08:00
 
 ====== 开机自动执行脚本 ======
 Created Tuesday 04 December 2018
 
-#byfanswm
+#bymyusername
 
 ## 把想要开机启动的脚本存放到 /etc/init.d/
 ## `sudo chmod +x /etc/init.d/xxxxx.sh`

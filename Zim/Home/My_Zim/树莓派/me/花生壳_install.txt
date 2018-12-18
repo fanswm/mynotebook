@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-11-21T21:37:53+08:00
 
@@ -14,7 +14,7 @@ $ ./oraynewph start
 2016030X:SN:RAPIb8087cac58b874c0
 Please visit http://b.oray.com
 Oraynewph start success !
-# this time: this dir is clean! fanswm:why!
+# this time: this dir is clean! myusername:why!
 $ cd /usr/oray-app
 $ ./oraynewph status
 2016030X:SN:RAPIb8087cac58b874c0

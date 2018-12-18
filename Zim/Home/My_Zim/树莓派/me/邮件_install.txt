@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-11-25T21:51:29+08:00
 
@@ -65,7 +65,7 @@ append:
 	/etc/init.d/send_ip_mail.bash
 $ sudo apt-get install mailutils    提供常用mail功能支持 $ sudo apt-get install sharutils    提供邮件列表支持
 		
-	ifconfig eth0 | sed -n "2,2p" | awk '{print substr($2,1)}' | mutt -s "This pi IP" abstract007@126.com
+	ifconfig eth0 | sed -n "2,2p" | awk '{print substr($2,1)}' | mutt -s "This pi IP" abstract@126.com
 
 
 ====== 测试 ======

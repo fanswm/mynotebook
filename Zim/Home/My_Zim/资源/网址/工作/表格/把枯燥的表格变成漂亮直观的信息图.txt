@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-08T17:35:48+08:00
 
@@ -12,7 +12,7 @@ __easelly__
 easelly 这个名字非常的形象，就是「简单」，在 PowerPoint 或者 Keynote 中制作一个数据齐全又不失颜值的表格并不是一件简单的事情，而这个网站就是一条快捷通道。在 easelly 上有着非常多的__精致模版__，质量都属上层。在网站上注册一个账号可以方便你之后的操作，如果不想注册也可以是使用截图代替下载。任意点击网站中的一个模版即可进入__在线编辑器__，在顶部的操作按钮中你可以找到「__Templates__」一栏，在里面你可以看到很多的__现成模版__，选择你喜欢的__拖拽至编辑器的空白区域__即可。双击模版内的文字，可以进行内容编辑，同时你也可以选择调整字体、字号以及颜色等。完成后，可以点击顶部的「Download」按钮，选择保存 PDF 并拖拽至你的幻灯片或者文档即可。 
 
 官网链接：[easelly](https://www.easel.ly/)
-fanswm: abstracthex@163.com
+myusername: abstracth@163.com
 20180108
 
 

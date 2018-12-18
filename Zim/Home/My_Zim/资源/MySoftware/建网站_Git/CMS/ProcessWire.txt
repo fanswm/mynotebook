@@ -1,0 +1,153 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-18T10:50:41+08:00
+
+====== ProcessWire ======
+Created Tuesday 18 December 2018
+
+How to Install ProcessWire CMS on Ubuntu 18.04 LTS
+
+On this page
+
+Requirements
+Getting Started
+Install Apache, MariaDB and PHP
+Configure MariaDB
+Download and Install ProcessWire
+Configure Apache for ProcessWire
+Access ProcessWire
+Links
+ProcessWire is a free and open source PHP-based content management system and content management framework. It is a simple, flexible and powerful CMS built to save you time and work the way you do. ProcessWire provides easy to use web interface that enables you to publish websites easily. It is specially designed for ease of use that allows you to create powerful and dynamic content websites.
+Features
+Role-based access control system.
+Web-based graphical installer.
+Provides fully modular plugin architecture and powerful template system.
+Multi language support.
+Supports rich text editing.
+Drag-and-drop file and image uploads and editing functions.
+In this tutorial, I will explain how to install ProcessWire with Apache web server on Ubuntu 18.04 LTS.
+Requirements
+A server running Ubuntu 18.04..
+A non-root user with sudo privileges.
+Getting Started
+Before starting, you will need to update your system with the latest version. You can do this by running the following command:
+sudo apt-get update -y
+sudo apt-get upgrade -y
+Once your system is updated, restart the system to apply the changes.
+Install Apache, MariaDB and PHP
+First, you will need to install Apache web server, MariaDB server, PHP and other PHP modules to your server. You can install all the packages by just running the following command:
+sudo apt-get install apache2 mariadb-server unzip wget php7.2 php7.2-mysql php7.2-curl php7.2-json php7.2-cgi libapache2-mod-php7.2 php7.2-xmlrpc php7.2-gd php7.2-mbstring php7.2 php7.2-common php7.2-xmlrpc php7.2-soap php7.2-xml php7.2-intl php7.2-cli php7.2-ldap php7.2-zip php7.2-readline php7.2-imap php7.2-tidy php7.2-recode php7.2-sq php7.2-intl -y
+Once all the packages are installed, open php.ini file and make some changes:
+sudo nano /etc/php/7.2/apache2/php.ini
+Make the following changes:
+memory_limit = 300M
+upload_max_filesize = 200M
+max_execution_time = 400
+date.timezone = Asia/Kolkata
+sudo systemctl restart apache2
+sudo systemctl restart mariadb
+sudo systemctl enable apache2
+sudo systemctl enable mariadb
+You can now check the status of MariaDB service with the following command:
+sudo systemctl status mariadb
+Output:
+? mariadb.service - MariaDB 10.1.34 database server
+   Loaded: loaded (/lib/systemd/system/mariadb.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sat 2018-12-01 22:46:13 UTC; 9h ago
+     Docs: man:mysqld(8)
+           https://mariadb.com/kb/en/library/systemd/
+  Process: 1317 ExecStartPost=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+  Process: 1313 ExecStartPost=/etc/mysql/debian-start (code=exited, status=0/SUCCESS)
+  Process: 935 ExecStartPre=/bin/sh -c [ ! -e /usr/bin/galera_recovery ] && VAR= ||   VAR=`/usr/bin/galera_recovery`; [ $? -eq 0 ]   && systemc
+  Process: 931 ExecStartPre=/bin/sh -c systemctl unset-environment _WSREP_START_POSITION (code=exited, status=0/SUCCESS)
+  Process: 819 ExecStartPre=/usr/bin/install -m 755 -o mysql -g root -d /var/run/mysqld (code=exited, status=0/SUCCESS)
+ Main PID: 1164 (mysqld)
+   Status: "Taking your SQL requests now..."
+    Tasks: 27 (limit: 2323)
+   CGroup: /system.slice/mariadb.service
+           ??1164 /usr/sbin/mysqld
+
+Dec 01 22:45:54 ubuntu1804 systemd[1]: Starting MariaDB 10.1.34 database server...
+Dec 01 22:46:05 ubuntu1804 mysqld[1164]: 2018-12-01 22:46:05 140324667522176 [Note] /usr/sbin/mysqld (mysqld 10.1.34-MariaDB-0ubuntu0.18.04.1) 
+Dec 01 22:46:13 ubuntu1804 /etc/mysql/debian-start[1318]: Upgrading MySQL tables if necessary.
+Dec 01 22:46:13 ubuntu1804 systemd[1]: Started MariaDB 10.1.34 database server.
+Configure MariaDB
+By default, MariaDB installation is not secured. So, you will need to secure it first. You can secure it by running the following command:
+sudo mysql_secure_installation
+Answer all the questions as shown below:
+    Enter current password for root (enter for none):
+    Set root password? [Y/n]: N
+    Remove anonymous users? [Y/n]: Y
+    Disallow root login remotely? [Y/n]: Y
+    Remove test database and access to it? [Y/n]:  Y
+    Reload privilege tables now? [Y/n]:  Y
+Once the MariaDB is secured, log in to MariaDB shell:
+mysql -u root -p
+Provide your root password. Then, create a database and user for ProcessWire with the following command:
+MariaDB [(none)]> CREATE DATABASE processdb;
+MariaDB [(none)]> CREATE USER process;
+Next, grant privileges to the ProcessWire database with the following command:
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON processdb.* TO 'process'@'localhost' IDENTIFIED BY 'password';
+Next, flush the privileges with the following command:
+MariaDB [(none)]> FLUSH PRIVILEGES;
+Next, exit from the MariaDB console with the following command:
+MariaDB [(none)]> exit
+Download and Install ProcessWire
+You can download the latest version of ProcessWire from Git repository using the following command:
+wget https://github.com/processwire/processwire/archive/master.zip
+After downloading, unzip the downloaded file with the following command:
+unzip master.zip
+Next, copy the extracted directory to the Apache web root directory with the following command:
+sudo cp -r processwire-master /var/www/html/processwire
+Next, give proper permissions to the processwire directory with the following command:
+sudo chown -R www-data:www-data /var/www/html/processwire/
+sudo chmod -R 777 /var/www/html/processwire/
+Configure Apache for ProcessWire
+Next, you will need to create an Apache virtual host file for ProcessWire. You can do this by running the following command:
+sudo nano /etc/apache2/sites-available/processwire.conf
+Add the following lines:
+<VirtualHost *:80>
+     ServerAdmin admin@example.com
+     DocumentRoot /var/www/html/processwire
+     ServerName example.com
+
+     <Directory /var/www/html/processwire/>
+          Options +FollowSymlinks
+          AllowOverride All
+          Require all granted
+     </Directory>
+
+     ErrorLog ${APACHE_LOG_DIR}/processwire_error.log
+     CustomLog ${APACHE_LOG_DIR}/processwire_access.log combined
+
+</VirtualHost>
+Save and close the file, when you are finished. Then, enable Apache virtual host file and rewrite module with the following command:
+sudo a2ensite processwire.conf
+sudo a2enmod rewrite
+Finally, restart Apache service to apply all the changes:
+sudo systemctl restart apache2
+Access ProcessWire
+Open your web browser and type the URL http://example.com. You will be redirected to the ProcessWire Welcome page:
+ProcessWire Installer
+Now, click on the Get Started button. You should see the following page:
+Site Installation Profile
+Select Classic site installation profile and click on the Continue button. You should see the following page:
+Compatibility Check
+After validating all the requirements, click on the Continue To Next Step button. You should see the following page:
+Database setup
+Timezone and file permissions
+HTTP Host Name
+Here, provide your database details like, hostname, database name, database username and password, Timezone. Then, click on the Continue button. You should see the following page:
+Test Database configuration
+Admin account setup
+Cleanup
+Here, provide your Admin login URL, admin username and password. Then, click on the Continue button. Once the installation completed successfully, you should see the following page:
+Setup completed
+Now, click on the Login To Admin button. You should see the following page:
+Admin Login
+Provide your admin username and password. Then, click on the Login button. You should see the ProcessWire default dashboard in the following page:
+Admin dashboard
+Links
+https://processwire.com/
+
+https://www.howtoforge.com/tutorial/how-to-install-processwire-cms-on-ubuntu-1804/

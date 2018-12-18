@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-11-24T08:20:19+08:00
 
@@ -25,7 +25,7 @@ Created Friday 24 November 2017
 > fsck -y sda11
 reboot,ok
 
-+ xmin:Theme directory devices/scalable of theme maia has no size field;An error has occurred. See the log file /home/fanswm/configuration/1500870303567.log;
++ xmin:Theme directory devices/scalable of theme maia has no size field;An error has occurred. See the log file /home/myusername/configuration/1500870303567.log;
 > null;
 
 + 修复grub：Parrot Linux

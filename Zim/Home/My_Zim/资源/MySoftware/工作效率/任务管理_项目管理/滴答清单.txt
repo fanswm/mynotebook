@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-11-27T13:35:44+08:00
 
@@ -10,5 +10,5 @@ Created Monday 27 November 2017
 
 https://www.dida365.com/
 
-abstracthex@163.com
+abstracth@163.com
 123

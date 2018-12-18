@@ -1,4 +1,4 @@
-Content-Type: text/x-zim-wiki
+﻿Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-12-02T17:23:58+08:00
 
@@ -9,7 +9,7 @@ Creation-Date: 2017-12-02T17:23:58+08:00
 2017-12-2-17-24
 
 ABRT 已检测到 '1' 个问题。预了解详细信息请执行：abrt-cli list --since 1510744494
-[root@MiWiFi-R1CL-srv fanswm]# abrt-cli list
+[root@MiWiFi-R1CL-srv myusername]# abrt-cli list
 id ff4cf134f314e3a343dcb8fa165fdd6453e0a942
 reason:         nautilus killed by SIGSEGV
 time:           2017年12月01日 星期五 07时34分06秒
