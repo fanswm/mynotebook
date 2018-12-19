@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-12-03T09:15:42+08:00
 
-====== 查看文件 内容处理 ======
+====== 查看文件 内容处理 替换 ======
 Created Sunday 03 December 2017
 
 cat
@@ -81,7 +81,7 @@ join
 
 按两个文件的相同字段合并。
 
-tr
+__tr__
 
 替换或删除字符。
 
