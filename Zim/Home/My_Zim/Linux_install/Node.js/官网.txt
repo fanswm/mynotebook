@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-26T22:11:42+08:00
-
-====== 官网 ======
-创建日期 星期一 26 十一月 2018
-
-https://github.com/nodejs/node

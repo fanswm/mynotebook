@@ -1,9 +1,10 @@
 Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
-Creation-Date: 2017-11-24T13:50:05+08:00
+Creation-Date: 2018-12-18T18:50:50+08:00
 
-====== Node.js ======
-Created Friday 24 November 2017
+====== 安装 ======
+创建日期 星期二 18 十二月 2018
+
 
 https://nodejs.org/en/
 
@@ -141,6 +142,3 @@ Node.js 的下载地址：请点这里
 更多Ubuntu相关信息见Ubuntu 专题页面 http://www.linuxidc.com/topicnews.aspx?tid=2
 
 本文永久更新链接地址：http://www.linuxidc.com/Linux/2016-09/135487.htm
-
-
-

@@ -5,6 +5,8 @@ Creation-Date: 2018-11-27T19:55:40+08:00
 ====== nodeJS ======
 创建日期 星期二 27 十一月 2018
 
+官网：https://github.com/nodejs/node
+
 https://github.com/nodesource/distributions
 
 https://www.cnblogs.com/BruceWan/p/6144692.html

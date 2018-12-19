@@ -16,7 +16,7 @@ https://blog.csdn.net/hu5566798/article/details/80659621
 如果不是最新版本，运行一下代码即可。
 运行指令
 npm install -g npm
-这样npm就更新到最新版本了。
+这样npm就__更新到最新版本了__。
  
 
 如果想更新到指定版本，
