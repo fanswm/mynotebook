@@ -47,7 +47,7 @@ yum 是从发行版仓库和其他第三方库中获取、安装、删除、查�
 # yum info apachetop
 Loaded plugins: fastestmirror
 Loading mirror speeds from cached hostfile
- * epel: epel.mirror.constant.com
+* epel: epel.mirror.constant.com
 Installed Packages
 Name        : apachetop
 Arch        : x86_64
