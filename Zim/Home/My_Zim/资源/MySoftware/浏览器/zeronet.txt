@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-23T18:10:41+08:00
+
+====== zeronet ======
+创建日期 星期日 23 十二月 2018
+
+对zeronet的简单介绍及运作方式概要的说明，请看这里 https://loremwalker.github.io/fq-book/#/4zeronet
+
+下载接着解压缩并打开Zeronet https://zeronet.io/
