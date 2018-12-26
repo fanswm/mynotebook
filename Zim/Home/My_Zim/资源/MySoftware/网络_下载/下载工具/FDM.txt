@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-26T16:35:57+08:00
+
+====== FDM ======
+Created Wednesday 26 December 2018
+
+FDM 最近体验过的最棒的下载工具了，开源免费，无广告，虽然IDM也很强大，但是IDM要钱呀，FDM一样用！2017-04-03
+
+https://www.freedownloadmanager.org/download.htm

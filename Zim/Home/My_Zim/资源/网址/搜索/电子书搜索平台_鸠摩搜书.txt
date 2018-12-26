@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-26T13:40:07+08:00
+
+====== 电子书搜索平台 鸠摩搜书 ======
+Created Wednesday 26 December 2018
+
+鸠摩搜书
+https://www.jiumodiary.com/
+
+一个电子书狂热爱好者自建的一个搜索平台，整合了一些电子书资源平台并且锁定了格式为电子书格式。所以只要是网上有放出来的电子书基本都能在这里搜索到。

@@ -7,3 +7,7 @@ Creation-Date: 2017-11-22T07:01:23+08:00
 
 fcitx-table-wbpy
 
+
+rime rime输入法，跨平台的良心输入法，也没有广告！
+https://github.com/rime/home/wiki/RimeWithIBus
+https://rime.im/

@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-26T16:33:42+08:00
+
+====== Potplayer ======
+Created Wednesday 26 December 2018
+
+http://www.potplayer.org/
+
+PotPlayer 厌烦了暴风一打开就是广告，发现了这款播放器，没广告！能力出色！
