@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-27T17:24:46+08:00
+
+====== USBwebserver ======
+Created Thursday 27 December 2018
+
+ USBwebserver：便携快速搭建网站服务器环境
+
+官方网站：http://www.usbwebserver.net/
+
+汉化版下载：http://www.iplaysoft.com/usbwebserver.html
+
+我们用PHP写网站的电脑上都配置好了Apache、PHP、MySQL环境，所以本地调试网站非常方便，但是当我们要向别人展示网站的时候，难道一定要带上自己笨重的电脑吗？或者把网站部署到服务器上？这样都太麻烦了，这个工具放在U盘里，需要用的时候可以一键快速搭建网站服务器环境，即可调试PHP网站，非常方便。
