@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-28T15:45:56+08:00
+
+====== Toolfk在线工具箱 ======
+Created Friday 28 December 2018
+
+https://www.toolfk.com/
+
+Toolfk在线工具箱是一款程序员工具箱，包含几十个实用的工具。
+
+它包括的工具有：在线生成二维码Qrcode，Linux常用命令大全，在线思维导图工具，在线数据库设计工具，PHP代码在线运行，Python代码在线运行，JavaScript在线工具箱，CSS在线工具箱，JSON在线工具箱，Markdown 在线工具箱，在线SQL转换工具，在线加密工具箱，进制在线转换等等。

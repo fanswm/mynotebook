@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-28T16:21:32+08:00
+
+====== 微博 ======
+Created Friday 28 December 2018
+
+Share微博客户端
+
+Share是一款简约的第三方新浪微博客户端，没有其它多余的东西，整体使用体验非常不错。
+
+它整体设计简洁，简约，让你重新找回刷微博的乐趣，类似的软件还有：微博国际版；也是十分简洁，就是精简版的微博。
+
+https://www.coolapk.com/apk/com.hengye.share
