@@ -1,0 +1,38 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-30T08:02:24+08:00
+
+====== 重启网卡 ======
+创建日期 星期日 30 十二月 2018
+
++ 配置文件：/etc/network/interfaces
+> auto lo
+iface lo inet loopback
+auto eth0
+iface eth0 inet dhcp
+
+> auto eth0
+iface eth0 inet static
+address x.x.x.x
+netmask 255.255.255.0
+gateway x.x.x.1
+dns-nameservers 114.114.114.114
+dns-nameservers 8.8.8.8
+dns-nameservers 8.8.4.4
+
++ 重启：/etc/init.d/networking restart
+
++ `ifdown eth0`
++ `ifup eth0`
+
++ 配置dns：
+vim /etc/relsolv.conf
+> nameserver 114.114.114.114
+search localdomain
+
++ 查看主机名称
+hostname
+
++ 设置主机名称hostname
+sudo vim /etc/hostname
+
