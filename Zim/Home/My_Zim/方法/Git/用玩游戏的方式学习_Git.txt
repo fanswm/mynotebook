@@ -88,11 +88,14 @@ git push 把之前建立的一系列节点推送到 GitHub 发布、保存。
 git pull 将 GitHub 的改动同步到本地，比如你在办公室电脑的改动同步到家里，或者多人协作项目中他人的改动同步到本地。
 总结一下就是：「记录修改、本地提交、传到云端」的过程。
 
+https://mp.weixin.qq.com/s?__biz=MzAxODI5ODMwOA==&mid=2666543401&idx=1&sn=bdf84716718eabe24060b1d656b79be5&chksm=80dcfd82b7ab7494b6350c4868247e15dd362486e836dd4472c695b94d3e3b0abedd1cfa4db9&mpshare=1&scene=1&srcid=1229woHrHXkJ9301oDrc0VTC#rd
+
+
 其他学习资源
 除了之前文章中提到的 [廖雪峰的 Git 教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000) 外，还有很多学习资料。比如：
 
-Pro Git 第二版(https://git-scm.com/book/zh/v2)。这本书被誉为 Git 学习的圣经，作者是 Scott Chacon 和 Ben Straub。Scott Chacon 在 GitHub 工作，自称 Git 的布道者。你可以在网站上免费阅读这本书，也可以下载他们提供的电子版本。
-git-recipes(https://github.com/geeeeeeeeek/git-recipes/blob/master/README.md)。它 童仲毅 (geeeeeeeeek@github) 对很多英文资料进行翻译、整理的集合教程。包含入门基础、进阶知识和应用范例。这些英文资料主要包括 GitHub 竞争者 Bitbucket 的 Git 教程。
+Pro Git 第二版(https://git-scm.com/book/zh/v2)%E3%80%82%E8%BF%99%E6%9C%AC%E4%B9%A6%E8%A2%AB%E8%AA%89%E4%B8%BA Git 学习的圣经，作者是 Scott Chacon 和 Ben Straub。Scott Chacon 在 GitHub 工作，自称 Git 的布道者。你可以在网站上免费阅读这本书，也可以下载他们提供的电子版本。
+git-recipes(https://github.com/geeeeeeeeek/git-recipes/blob/master/README.md)%E3%80%82%E5%AE%83 童仲毅 (geeeeeeeeek@github) 对很多英文资料进行翻译、整理的集合教程。包含入门基础、进阶知识和应用范例。这些英文资料主要包括 GitHub 竞争者 Bitbucket 的 Git 教程。
 谷歌无人车之父 Sebastian Thrun 创办的 优达学城（Udacity）上面的 免费 Git 课程。这门课程由优达学城与 GitHub 共同制作，介绍进行版本控制的基础知识，重点讲解 Git 版本控制系统以及 GitHub 协作平台。如果你更喜欢这种上课方式，这门课程随时都可以开始学习。
 happypeter1983 的 Git 视频教程。这份教程就更进阶了一些。讲到了一些高级命令的用法。当然还有其他学习资源。
 Git 本身不难，但学会之后就是另一方天地。尽快在项目或工作中实践吧！
