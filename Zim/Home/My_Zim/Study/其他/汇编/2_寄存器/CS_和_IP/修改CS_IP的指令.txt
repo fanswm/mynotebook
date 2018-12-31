@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-31T21:46:52+08:00
+
+====== 修改CS IP的指令 ======
+Created Monday 31 December 2018
+
+jmp
+同时修改 CS : IP 的内容:
+	`jmp 段地址:偏移地址`
+
+仅修改IP的内容:
+	`jmp 某一合法寄存器`
+	例: ax=1000H,cs=2000H;IP=0003H;
+	`jmp ax`之后: 
+	AX=1000H;cs=2000H;IP=1000H;
+
+`jmp ax` 好像: `mov IP, ax`
+
