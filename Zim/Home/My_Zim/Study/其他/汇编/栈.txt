@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-02T17:10:51+08:00
+
+====== 栈 ======
+Created Wednesday 02 January 2019
+
+是一种具有特殊的访问方式的存储空间.后进先出(LIFO: Last In First Out).
+有两种基本操作:入栈和出栈
