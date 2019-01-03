@@ -10,3 +10,5 @@ Ubuntu安装办法：
 Nutstore Start Required
 
 Start Nutstore to finish installation.
+
+ab7@126
