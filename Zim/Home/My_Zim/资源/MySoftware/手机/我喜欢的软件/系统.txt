@@ -6,3 +6,4 @@ Creation-Date: 2018-12-10T15:28:22+08:00
 Created Monday 10 December 2018
 
 ES文件浏览器    文件管理
+fusion app	所有网页都是客户端
