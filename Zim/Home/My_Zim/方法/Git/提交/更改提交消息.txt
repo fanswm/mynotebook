@@ -7,7 +7,7 @@ Created Thursday 03 January 2019
 
 假设你已经提交了一堆文件，并发现输入的提交信息实际上并不清晰。现在你要更改提交消息。为此，你可以使用 git commit --amend：
 
-git commit --amend -m “New commit message”
+__git commit --amend -m “New commit message”__
 
 场景 2
 
@@ -15,23 +15,29 @@ git commit --amend -m “New commit message”
 
 这种方法没错。但是，为了保持整洁的提交历史，如果你可以以某种方式将此文件加入到你之前的提交本身，那岂不是更好？这也可以通过 git commit --amend 完成：
 
-git add file6
-git commit --amend --no-edit
+__git add file6__
+__git commit --amend --no-edit__
 
---no-edit 表示提交信息不会更改。
+__--no-edit 表示提交信息不会更改。__
 
 场景 3
 
 无论你何时在 Git 进行提交，提交都会附上作者名称和作者电子邮箱。通常，当你第一次配置 Git 时，就需要设置作者和电子邮箱。你无需担心每次提交的作者详细信息。
 
-也就是说，对于特定项目，你可能希望使用不同的电子邮箱 ID。你需要使用以下命令为该项目配置电子邮箱 ID：
+也就是说，__对于特定项目，你可能希望使用不同的电子邮箱 ID。你需要使用以下命令为该项目配置电子邮箱 ID：__
 
-git config user.email “your email id”
+__git config user.email “your email id”__
 
 假设你忘记配置电子邮箱，并且已经完成了第一次提交。amend 命令也可以用于更改先前提交的作者消息。可以使用以下命令更改提交的作者信息：
 
-git commit --amend --author "Author Name <Author Email>"
+__git commit --amend --author "Author Name <Author Email>"__
 
 注意事项
 
 应该仅在本地仓库使用 amend 命令。在远端仓库使用 amend 命令会制造大量混乱。
+
+
+
+
+
+
