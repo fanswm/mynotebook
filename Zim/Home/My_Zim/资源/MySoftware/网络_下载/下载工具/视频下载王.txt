@@ -5,7 +5,7 @@ Creation-Date: 2018-11-12T11:45:05+08:00
 ====== 视频下载王 ======
 Created Monday 12 November 2018
 
-[[ApowerSoft]]
+ApowerSoft
 
 视频下载王是一款视频下载工具。
 

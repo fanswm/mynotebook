@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-06T17:05:03+08:00
+
+====== 模拟黑客电脑界面的网站 ======
+Created Sunday 06 January 2019
+
+http://geektyper.com/

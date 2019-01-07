@@ -9,4 +9,6 @@ Caffeinated 6.828：实验工具指南 https://linux.cn/article-10273-1.html?utm
 Caffeinated 6.828：实验 2：内存管理 https://linux.cn/article-10201-1.html?utm_source=rss&utm_medium=rss
 Caffeinated 6.828：实验 3：用户环境 https://linux.cn/article-10307-1.html?utm_source=rss&utm_medium=rss
 Caffeinated 6.828：实验 4：抢占式多任务处理 https://linux.cn/article-10351-1.html?utm_source=rss&utm_medium=rss
+Caffeinated 6.828：实验 5：文件系统、Spawn 和 Shell https://linux.cn/article-10389-1.html?utm_source=rss&utm_medium=rss
+
 

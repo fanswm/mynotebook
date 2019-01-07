@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-06T22:41:20+08:00
+
+====== Box2D ======
+Created Sunday 06 January 2019
+
+Box2D erincatto/Box2D · GitHub 简明好用的老牌2D物理效果模拟库，当年玩里面的testbed玩得不亦乐乎。主要支持C++，其他的例如AS3/Javascript的库也有一些第三方的port。例如http://box2dflash.sourceforge.net/，http://box2d-js.sourceforge.net/，pybox2d/pybox2d · GitHub等。
+
+作者：罗必成
+链接：https://www.zhihu.com/question/35876186/answer/65565316
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+https://github.com/erincatto/Box2D

@@ -1,4 +1,4 @@
-﻿Content-Type: text/x-zim-wiki
+Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-12-01T18:23:33+08:00
 

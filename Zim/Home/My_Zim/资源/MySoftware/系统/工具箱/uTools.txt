@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-06T16:35:18+08:00
+
+====== uTools ======
+Created Sunday 06 January 2019
+
+uTools 又是一款好用的启动器。
+它高效实用，使用Alt + 空格 呼出，就可以快速启动软件了。当然它的功能不仅仅有这些。
+它还可以翻译，生成二维码，图片压缩等。
+它的所有功能都是用插件实现了。它还有很多插件，TODO 功能，内网穿透。
+它还集成了Everything，让搜索文件更加快速。
+支持Win 和Mac。

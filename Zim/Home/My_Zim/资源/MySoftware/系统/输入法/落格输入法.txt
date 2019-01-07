@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-06T15:57:51+08:00
+
+====== 落格输入法 ======
+Created Sunday 06 January 2019
+
+落格输入法输入法是一款双拼输入法。
+它还支持自定义码表功能，还支持五笔郑码，还只有Emoji  智能输入。
+同时它还主打安全和保护隐私，不会偷偷监听你的输入，分析你的使用习惯，偷偷上传数据。
+支持iOS 和Mac。
