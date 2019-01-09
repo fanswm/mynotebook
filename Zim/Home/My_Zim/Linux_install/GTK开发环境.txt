@@ -19,7 +19,7 @@ Created Friday 24 November 2017
 ```
 #include<gtk/gtk.h>
 int main(int argc,char *argv[])
-{
+{sh
   GtkWidget    *window;
   gtk_init(&argc,&argv);
   window=gtk_window_new(GTK_WINDOW_TOPLEVEL);

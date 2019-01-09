@@ -17,10 +17,10 @@ SDKMAN：轻松管理多个软件开发套件 (SDK) 的命令行工具
 安装 SDKMAN 很简单。首先，确保你已经安装了 zip 和 unzip 这两个应用。它们在大多数的 Linux 发行版的默认仓库中。
 例如，在基于 Debian 的系统上安装 unzip，只需要运行：
 
+$ curl -s "https://get.sdkman.io" | bash
 $ sudo apt-get install zip unzip
 然后使用下面的命令安装 SDKMAN：
 
-$ curl -s "https://get.sdkman.io" | bash
 在安装完成之后，运行以下命令：
 
 $ source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -32,7 +32,8 @@ $ export SDKMAN_DIR="/usr/local/sdkman" && curl -s "https://get.sdkman.io" | bas
 最后，在安装完成后使用下面的命令检查一下：
 
 $ sdk version
-==== BROADCAST =================================================================
+
+==== BROADCAST ====
 * 01/08/18: Kotlin 1.2.60 released on SDKMAN! #kotlin
 * 31/07/18: Sbt 1.2.0 released on SDKMAN! #sbt
 * 31/07/18: Infrastructor 0.2.1 released on SDKMAN! #infrastructor
@@ -54,7 +55,7 @@ q-quit /-search down
 j-down ?-search up
 k-up h-help
 
---------------------------------------------------------------------------------
+--------------------
 Ant (1.10.1) https://ant.apache.org/
 
 Apache Ant is a Java library and command-line tool whose mission is to drive
@@ -172,11 +173,11 @@ update
 flush <broadcast|archives|temp>
 
 candidate : the SDK to install: groovy, scala, grails, gradle, kotlin, etc.
-                 use list command for comprehensive list of candidates
-                 eg: $ sdk list
+				 use list command for comprehensive list of candidates
+				 eg: $ sdk list
 
 version : where optional, defaults to latest stable if not provided
-             eg: $ sdk install groovy
+			 eg: $ sdk install groovy
 更新 SDKMAN
 如果有可用的新版本，可以使用下面的命令安装：
 
