@@ -10,3 +10,6 @@ Created Wednesday 21 November 2018
 
 + install
 `curl https://sh.rustup.rs -sSf | sh`
+
+
+如何在 Linux 中安装 Rust 编程语言 https://linux.cn/article-10392-1.html?utm_source=rss&utm_medium=rss
