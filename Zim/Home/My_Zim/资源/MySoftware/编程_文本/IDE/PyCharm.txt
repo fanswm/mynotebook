@@ -11,3 +11,6 @@ http://www.jetbrains.com/pycharm/
 http://www.jetbrains.com/pycharm/download/#section=linux
 
 sudo snap install [pycharm-professional|pycharm-community] --classic
+
+Python IDE之 pycharm的十大奇技淫巧（分享自知乎网）https://zhuanlan.zhihu.com/p/52040964?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
