@@ -80,6 +80,10 @@ __.tar.bz2__
 .pit .sit .sea
 解压：sEx x FileName.*
 压缩：sEx a FileName.* FileName
+-----------------
+__.7z__
+`sudo apt-get install p7zip-full`
+解压:7x x file.7z
 
 sEx只是调用相关程序，本身并无压缩、解压功能，请注意！
 

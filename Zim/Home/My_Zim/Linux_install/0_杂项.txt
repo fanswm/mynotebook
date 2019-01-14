@@ -22,4 +22,7 @@ config github
 jdk
 xmind zen
 pycharm: sudo snap install pycharm-community --classic
+xx-net
+veracrypt
+
 
