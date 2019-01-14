@@ -67,8 +67,8 @@ conda install numpy pandas
 
 # 需要去掉网址的引号
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/conda config --set show_channel_urls yes
-如果命令行方法添加不上，可以在用户目录下的.condarc中添加https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/： 
-如果没有该文件可以直接创建，Windows为C://Users/username/.condarc，Linux/Mac为~/.condarc
+如果命令行方法添加不上，可以在用户目录下的  .condarc中添加  https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/： 
+如果没有该文件可以直接创建，Windows为  C://Users/username/.condarc，Linux/Mac为~/.condarc
 结果如下：
 
 channels:
