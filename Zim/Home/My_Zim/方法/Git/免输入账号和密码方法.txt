@@ -16,6 +16,8 @@ touch .git-credentials
 vim .git-credentials
 ```
 https://{username}:{password}@github.com
+for example:
+https://xiaoming:passwd@github.com
 
 在终端下输入：
 `git config --global credential.helper store`
@@ -23,10 +25,6 @@ https://{username}:{password}@github.com
 打开~/.gitconfig文件，会发现多了一项:
 [credential]
 	helper = store
-
-touch .git-credentials
-vim .git-credentials
-https://{username}:{password}@github.com
 
 __Windows方法：__
 

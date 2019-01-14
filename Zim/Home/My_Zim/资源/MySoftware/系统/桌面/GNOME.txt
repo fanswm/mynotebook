@@ -13,3 +13,6 @@ $ sudo apt install tasksel
 $ sudo apt update
 $ sudo tasksel install ubuntu-desktop
 https://www.gnome.org/
+
+https://wiki.gnome.org/
+https://wiki.gnome.org/Apps/Shotwell

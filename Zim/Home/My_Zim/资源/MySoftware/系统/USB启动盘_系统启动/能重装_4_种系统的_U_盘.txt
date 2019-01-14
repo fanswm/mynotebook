@@ -25,7 +25,7 @@ __注意：本教程只适用于支持 EFI 启动的计算机。如安装盘中�
 
 这个黑底白字的画面被称为开机自检画面，是由主板上一块叫做 BIOS 的芯片生成的。该芯片在开机时首先完成上电自检（POST）并初始化各种硬件，之后会__读取磁盘的一个固定区域__来寻找启动程序__（0 面 0 道 1 扇区）__。__操作系统会把自己的引导程序写在里面__，当 BIOS 发现这段程序后，就会交出控制权，操作系统就启动了。这种引导方式被称为 __Legacey Boot__，而这种包含了启动程序区块的分区表格式被称__为主引导记录（MBR）__，__与其相对的就是 GPT__。
 
-__2005 年发明的 EFI 与 Legacey 不同__，它__并不会从磁盘的固定位置去寻找启动程序，而是在每一个分区中寻找 EFI 文件夹中的引导程序__。对于一个只支持 Legacey Boot 的操作系统而言，假如你要让一个磁盘可以引导，需要用一些特殊的程序去写入启动区块，而且由于一个硬盘只有一个启动区块，实现多系统启动非常的麻烦，需要工具的帮助才能实现（YUMI – Multiboot USB Creator https://www.pendrivelinux.com/yumi-multiboot-usb-creator/）。__而 EFI 的启动程序和普通的文件放在同一个地方__，假如你要把一个支持 EFI 的操作系统安装盘扔进 U 盘里，只要简单的把所有文件复制进去就可以了。直接就可以开机，不需要进行任何多余的操作，本教程就是利用了这一点。
+__2005 年发明的 EFI 与 Legacey 不同__，它__并不会从磁盘的固定位置去寻找启动程序，而是在每一个分区中寻找 EFI 文件夹中的引导程序__。对于一个只支持 Legacey Boot 的操作系统而言，假如你要让一个磁盘可以引导，需要用一些特殊的程序去写入启动区块，而且由于一个硬盘只有一个启动区块，实现多系统启动非常的麻烦，需要工具的帮助才能实现（YUMI – Multiboot USB Creator https://www.pendrivelinux.com/yumi-multiboot-usb-creator/%EF%BC%89%E3%80%82__%E8%80%8C EFI 的启动程序和普通的文件放在同一个地方__，假如你要把一个支持 EFI 的操作系统安装盘扔进 U 盘里，只要简单的把所有文件复制进去就可以了。直接就可以开机，不需要进行任何多余的操作，本教程就是利用了这一点。
 
 由于只有新的电脑才会支持 EFI 引导，在较老的电脑上使用之前请先确认电脑是否支持 EFI 引导。以及__如果你想要确认自己要扔进 U 盘里的安装盘支不支持 EFI，只需要打开 ISO 文件，看看里面有没有一个叫 EFI 的文件夹就可以了。__
 
@@ -39,7 +39,7 @@ Win10 1709 安装盘尺寸为 5 GB。
 你需要一个可用的 Windows 系统，用于运行分区工具，虚拟机也可以。macOS 的磁盘工具基本上就是个废物，当你在一个 U 盘中同时创建 HFS+ 和 FAT 文件系统的时候会直接报错。而且在 Windows 中弄好的 FAT 分区在 macOS 中也无法调整大小。
 
 
-准备好你需要放进去的安装盘等，如果需要的话还可以准备一个 WinPE。我这里推荐 AOMEI PE[https://www.aomeitech.com/pe-builder.html]，是一个国外的 Win PE 环境，支持自己添加软件和驱动。（这个 PE 运行的时候会屏蔽掉自己所在的驱动器，这可能会有一些问题，我们后面会讲。AOMEI PE 是成都一家公司做的，只是他们的 PE 只放在外国网站上。感谢 Umi 提醒。）
+准备好你需要放进去的安装盘等，如果需要的话还可以准备一个 WinPE。我这里推荐 AOMEI PE[https://www.aomeitech.com/pe-builder.html]%EF%BC%8C%E6%98%AF%E4%B8%80%E4%B8%AA%E5%9B%BD%E5%A4%96%E7%9A%84 Win PE 环境，支持自己添加软件和驱动。（这个 PE 运行的时候会屏蔽掉自己所在的驱动器，这可能会有一些问题，我们后面会讲。AOMEI PE 是成都一家公司做的，只是他们的 PE 只放在外国网站上。感谢 Umi 提醒。）
 
 需要的软件有：
 
@@ -159,6 +159,6 @@ Q & A
 
 参考资料
 
-计算机是如何启动的 - 阮一峰http://www.ruanyifeng.com/blog/2013/02/booting.html
-UEFI 和 BIOS 引导有什么不同 - 知乎https://www.zhihu.com/question/21672895
-Correct name and icons in Startup Manager https://decio.eu/2014/01/16/correct-name-and-icons-in-startup-manager/
+计算机是如何启动的 - 阮一峰 http://www.ruanyifeng.com/blog/2013/02/booting.html
+UEFI 和 BIOS 引导有什么不同 - 知乎 https://www.zhihu.com/question/21672895
+Correct name and icons in Startup Manager  https://decio.eu/2014/01/16/correct-name-and-icons-in-startup-manager/

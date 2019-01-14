@@ -5,3 +5,24 @@ Creation-Date: 2018-01-05T12:00:56+08:00
 ====== 0 杂项 ======
 Created Friday 05 January 2018
 
+我的xubuntu安装记录：
+vim
+chrome
+zim-desktop
+gtk
+alias
+nodejs
+npm
+tldr
+tmux
+virtualbox
+SpaceVim
+docker
+config github
+jdk
+xmind zen
+pycharm: sudo snap install pycharm-community --classic
+xx-net
+veracrypt
+
+

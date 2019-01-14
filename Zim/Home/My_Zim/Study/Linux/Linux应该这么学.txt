@@ -201,7 +201,7 @@ $ echo "abcd" | passwd --stdin root
 命令 < 文件1 > 文件2	将文件1做为命令的标准输入并将标准输出到文件2
 
 通配符	含义
-*	匹配0个或多个字符
+* 匹配0个或多个字符
 ？	匹配任意单个字符
 [0-9]	匹配范围内的数字
 [abc]	匹配已给出的任意字符
@@ -602,7 +602,7 @@ $ xfs_quota -x -c 'limit bsoft=3m bhard=6m isoft=3 ihard=6 tom' /boot
 $ xfs_quota -x -c report /boot
 User quota on /boot (/dev/sda1) Blocks
 User ID Used Soft Hard Warn/Grace
--------------------------------------------
+--------------------
 root 95084 0 0 00 [--------]
 tom 0 3072 6144 00 [--------]
 
@@ -1229,7 +1229,7 @@ httpd配置文件分析默认的网站数据是存放在/var/www/html目录中�
 首页名称是index.html，来动手写入一个文件替换到默认页面吧。
 使用echo命令将指定的字符写入到网站数据目录中的index.html文件中：
 $ echo "Welcome To LinuxProbe.Com" > /var/www/html/index.html
-再次打开浏览器，键入http://127.0.0.1，好棒，成功了！
+再次打开浏览器，键入  http://127.0.0.1 ，好棒，成功了！
 
 
 要想将网站数据放在/home/wwwroot目录，该如何操作呢？
@@ -1243,10 +1243,10 @@ $ mkdir /home/wwwroot
 $ echo "The New Web Directory" > /home/wwwroot/index.html
 重新启动Apache服务：
 $ systemctl restart httpd
-再来打开浏览器看下效果吧，依然是键入http://127.0.0.1：
+再来打开浏览器看下效果吧，依然是键入   http://127.0.0.1：
 好奇怪!!为什么会是默认页面？只有首页页面不存在或有问题才会显
 示Apache服务程序的默认页面啊。
-Apache默认页面那么进一步来访问”http://127.0.0.1/index.html
+Apache默认页面那么进一步来访问”   http://127.0.0.1/index.html
 “，怎么样？惊讶到了吗？访问页面的行为是被禁止的。
 Forbidden
 You don’t have permission to access /index.html on this server.
@@ -1287,7 +1287,7 @@ $ setenforce 0
 $ getenforce
 Permissive
 
-打开浏览器再键入http://127.0.0.1，果然成功了！
+打开浏览器再键入  http://127.0.0.1，果然成功了！
 果然是因为没有配置好SELinux服务，再次开启它吧：
 $ setenforce 1
 
@@ -1378,7 +1378,7 @@ $ echo "This is linuxprobe's website" > public_html/index.html
 给予网站目录755的访问权限：
 $ chmod -Rf 755 ./
 
-我们打开浏览器，访问地址为”http://127.0.0.1/~%E7%94%A8%E6%88%B7%E5%90%8D“，
+我们打开浏览器，访问地址为”  http://127.0.0.1/~用户名“，
 不出意外果然是报错页面，肯定是SELinux服务在捣蛋。
 
 第3步:设置SELinux允许策略。

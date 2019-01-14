@@ -67,14 +67,14 @@ tmux 中有几个重要概念：
 Pegasus Wang：玩玩 tmuxp [视频]
 ​zhuanlan.zhihu.com
 图标
-除此之外，共享账户使用原生 tmux attach 到同一个会话或者使用 wemux 之类的工具还能实现结对编程，比如在一个窗口里打开两个 pane，左边的人用 vim，右边的人用 emcas 分别编辑。或者让两台电脑 attach 到同一个会话，在其中一个电脑写代码也会在另一个电脑同步显示，营造一种电脑自己会写代码的诡异场景。
+除此之外，共享账户使用原生 tmux attach 到同一个会话或者使用 wemux 之类的工具还能实现结对编程，比如在一个窗口里打开两个 pane，左边的人用 vim，右边的人用 emcas 分别编辑。或者让两台电脑 attach 到同一个会话，在其中一个电脑写代码也会在另一个电脑同步显示，营造一种电脑g自己会写代码的诡异场景。
 
 
 
 
 如果你自己懒得配置，也可以使用别人配置好的 tmux，比如这个：
 
-gpakosz/.tmux
+__gpakosz/.tmux__  https://github.com/gpakosz/.tmux
 ​github.com
 图标
 

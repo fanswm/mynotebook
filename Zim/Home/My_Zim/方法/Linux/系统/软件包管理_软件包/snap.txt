@@ -126,7 +126,7 @@ snapcraft help
 
 5.snap         Create a snap.  
 
-我们可以通过snapcraft来对每个阶段分别处理来查看每一步到底做什么．比如＂snapcraft pull＂等．打包的顺序是按照上面所列举的顺序执行的．更多关于如何打包的过程请参阅连接http://snapcraft.io/create/．
+我们可以通过snapcraft来对每个阶段分别处理来查看每一步到底做什么．比如＂snapcraft pull＂等．打包的顺序是按照上面所列举的顺序执行的．更多关于如何打包的过程请参阅连接  http://snapcraft.io/create/．
 
 如果大家对如何开发一个Ubuntu桌面的应用感兴趣的话，可以参阅我的文章＂如何把一个qmake的Ubuntu手机应用打包为一个snap应用＂．
 

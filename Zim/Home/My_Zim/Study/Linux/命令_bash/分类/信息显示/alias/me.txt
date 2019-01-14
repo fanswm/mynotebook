@@ -1,0 +1,32 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-08T16:44:22+08:00
+
+====== me ======
+创建日期 星期二 08 一月 2019
+
+alias apt-get='apt'
+alias c='clear'
+alias cp='cp -i'
+alias df='df -h'
+alias du='du -h --max-depth=1 | sort -hr'
+
+alias firewall='iptlist'
+alias h='tldr'
+alias ipe='curl ipinfo.io/ip'
+alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
+alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
+alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
+alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
+alias ln='ln -i'
+alias meminfo='free -m -l -t'
+alias mv='mv -i'
+alias myins='sudo apt install'
+alias now='date +"%T"'
+alias path='echo -e ${PATH//:/\\n}'
+alias ping='ping -c 3'
+alias rm='rm -I --preserve-root'
+alias speed='speedtest-cli --server 6435 --simple'
+alias untar='tar -zxvf'
+alias vi='vim'
+alias wget='wget -c'
