@@ -11,12 +11,10 @@ http://blog.csdn.net/u012857206/article/details/72870016
 
 本博客是我的Blogger博客镜像，以方便墙内读者访问。图片是从Blogger转过来的，墙内可能看图片有些困难。
 
-想看更多内容，去我的Blogger主站https://the0demiurge.blogspot.jp/看看吧
+想看更多内容，去我的Blogger主站 https://the0demiurge.blogspot.jp/  看看吧
 
-
-
-小工具篇
-我的各种配置全都放在https://github.com/the0demiurge/CharlesScripts，刚刚发布了预览版r0.1，欢迎大家Fork&提交PR～
+ 小工具篇
+我的各种配置全都放在    https://github.com/the0demiurge/CharlesScripts ，刚刚发布了预览版r0.1，欢迎大家Fork&提交PR～
 
 https://github.com/the0demiurge/CharlesScripts
 

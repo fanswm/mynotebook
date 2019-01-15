@@ -8,6 +8,7 @@ Created Friday 05 January 2018
 我的xubuntu安装记录：
 vim
 chrome
+	插件：
 zim-desktop
 gtk
 alias
@@ -24,5 +25,5 @@ xmind zen
 pycharm: sudo snap install pycharm-community --classic
 xx-net
 veracrypt
-
+steam
 

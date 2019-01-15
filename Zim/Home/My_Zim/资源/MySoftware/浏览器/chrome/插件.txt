@@ -13,6 +13,7 @@ Creation-Date: 2017-11-21T20:25:37+08:00
 - Stylish-为任意网站自定义主题
 - Tampermonkey油猴
 - 广告终结者 3.2.2
+- listen1 听歌
 - https://www.crx4chrome.com/
 
 https://www.crx4chrome.com/
