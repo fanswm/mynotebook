@@ -1,0 +1,93 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-16T16:50:11+08:00
+
+====== VuePress ======
+创建日期 星期三 16 一月 2019
+
+https://vuepress.vuejs.org/
+https://github.com/vuejs/vuepress
+
+官方文档： https://vuepress.vuejs.org/zh/
+VuePress超详细简单教程
+https://www.jianshu.com/p/7a2cc8a7f40c
+
+安装
+
+注意 VuePress基于node 8.0+
+
+npm install -g vuepress
+
+
+创建工作文件夹  study
+进入文件夹
+快速初始化package.json
+
+npm init -y
+
+2.1 新建文件夹docs
+配置package.json，添加下述兩行
+{
+  "scripts": {
+	"docs:dev": "vuepress dev docs",
+	"docs:build": "vuepress build docs"
+  }
+}
+
+进入docs文件夹 创建 README.md文件
+此时运行命令
+npm run  docs:dev
+
+此时文件夹结构
+study
++--docs
++----README.md
++--package.json
+
+运行访问  http://localhost:8080/
+
+结束运行 ，执行命令
+npm run docs:build
+
+然后看文件变化 多了个node_modules
+docs  多了个 .vuepress文件夹
+study
++--docs
++----.vuepress
++------ dist   //打包后的文件夹
++----README.md
++--package.json
++--node_modules
+
+我们在.vuepress 创建
+config.js 文件
+添加
+module.exports = {
+  title: 'Adroi媒体API 接口文档',  // 设置网站标题
+  description : 'Adroi',
+  base : '/v1/adroi-h5/adroiapi/',
+  themeConfig : {
+	nav : [
+		{ text: '接口定义', link: '/apiword' },
+		{ text: '接口字段定义', link: '/api' },
+		{ text: '附录：错误码', link: '/error' }
+	],
+	sidebar: {
+		'/' : [
+	  "/", //指的是根目录的md文件 也就是 README.md 里面的内容
+			"apiword",  根目录创建 apiword.md文件
+			"api",根目录创建 api.md文件
+			"error" 根目录创建 error.md文件
+		]
+	},
+	sidebarDepth : 2
+  }
+}
+
+3）添加静态图片
+![An image](./baner.png)
+
+作者：十年之后_b94a
+链接：https://www.jianshu.com/p/7a2cc8a7f40c
+來源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。

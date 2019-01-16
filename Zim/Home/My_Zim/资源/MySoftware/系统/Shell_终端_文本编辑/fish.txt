@@ -8,6 +8,11 @@ Created 星期日 10 十二月 2017
 + ubuntu:
 `sudo apt-get install fish`
 
+++ oh-my-fish
+https://github.com/oh-my-fish/oh-my-fish
+https://github.com/robbyrussell/oh-my-zsh
+
+https://www.cnblogs.com/shangguanjinwen/p/7795318.html
 
 
 Fish，友好的交互式 shellFriendly Interactive SHell 的缩写，它是一个适于装备于类 Unix 系统的智能而用户友好的 shell。Fish 有着很多重要的功能，比如自动建议、语法高亮、可搜索的历史记录（像在 bash 中 CTRL+r）、智能搜索功能、极好的 VGA 颜色支持、基于 web 的设置方式、完善的手册页和许多开箱即用的功能。尽管安装并立即使用它吧。无需更多其他配置，你也不需要安装任何额外的附加组件/插件!
@@ -18,63 +23,60 @@ Fish，友好的交互式 shellFriendly Interactive SHell 的缩写，它是一�
 尽管 fish 是一个非常用户友好的并且功能丰富的 shell，但并没有包括在大多数 Linux 发行版的默认仓库中。它只能在少数 Linux 发行版中的官方仓库中找到，如 Arch Linux，Gentoo，NixOS，和 Ubuntu 等。然而，安装 fish 并不难。
 
 在 Arch Linux 和它的衍生版上，运行以下命令来安装它。
-
 sudo pacman -S fish
+
 在 CentOS 7 上以 root 运行以下命令：
-
 cd /etc/yum.repos.d/
-wget https://download.opensuse.org/repositories/shells:fish:release:2/CentOS_7/shells:fish:release:2.repo
+wget https://download.opensuse.org/r[[https://download.opensuse.org/repositories/shells:fish:release:2/CentOS_7/shells:fish:release:2.repo|epositories/shells:fish:release:2/CentOS_7/shells:fish:release:2.repo]]
 yum install fish
-在 CentOS 6 上以 root 运行以下命令：
 
+在 CentOS 6 上以 root 运行以下命令：
 cd /etc/yum.repos.d/
 wget https://download.opensuse.org/repositories/shells:fish:release:2/CentOS_6/shells:fish:release:2.repo
 yum install fish
-在 Debian 9 上以 root 运行以下命令：
 
+__在 Debian 9 上以 root 运行以下命令：__
 wget -nv https://download.opensuse.org/repositories/shells:fish:release:2/Debian_9.0/Release.key -O Release.key
 apt-key add - < Release.key
 echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/2/Debian_9.0/ /' > /etc/apt/sources.list.d/fish.list
 apt-get update
 apt-get install fish
-在 Debian 8 上以 root 运行以下命令：
 
+__在 Debian 8 上以 root 运行以下命令：__
 wget -nv https://download.opensuse.org/repositories/shells:fish:release:2/Debian_8.0/Release.key -O Release.key
 apt-key add - < Release.key
 echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/2/Debian_8.0/ /' > /etc/apt/sources.list.d/fish.list
 apt-get update
 apt-get install fish
-在 Fedora 26 上以 root 运行以下命令：
 
+在 Fedora 26 上以 root 运行以下命令：
 dnf config-manager --add-repo https://download.opensuse.org/repositories/shells:fish:release:2/Fedora_26/shells:fish:release:2.repo
 dnf install fish
 在 Fedora 25 上以 root 运行以下命令：
-
 dnf config-manager --add-repo https://download.opensuse.org/repositories/shells:fish:release:2/Fedora_25/shells:fish:release:2.repo
 dnf install fish
-在 Fedora 24 上以 root 运行以下命令：
 
+在 Fedora 24 上以 root 运行以下命令：
 dnf config-manager --add-repo https://download.opensuse.org/repositories/shells:fish:release:2/Fedora_24/shells:fish:release:2.repo
 dnf install fish
-在 Fedora 23 上以 root 运行以下命令：
 
+在 Fedora 23 上以 root 运行以下命令：
 dnf config-manager --add-repo https://download.opensuse.org/repositories/shells:fish:release:2/Fedora_23/shells:fish:release:2.repo
 dnf install fish
-在 openSUSE 上以 root 运行以下命令：
 
+在 openSUSE 上以 root 运行以下命令：
 zypper install fish
 在 RHEL 7 上以 root 运行以下命令：
-
 cd /etc/yum.repos.d/
 wget https://download.opensuse.org/repositories/shells:fish:release:2/RHEL_7/shells:fish:release:2.repo
 yum install fish
-在 RHEL-6 上以 root 运行以下命令：
 
+在 RHEL-6 上以 root 运行以下命令：
 cd /etc/yum.repos.d/
 wget https://download.opensuse.org/repositories/shells:fish:release:2/RedHat_RHEL-6/shells:fish:release:2.repo
 yum install fish
-在 Ubuntu 和它的衍生版上：
 
+__在 Ubuntu 和它的衍生版上：__
 sudo apt-get update
 sudo apt-get install fish
 就这样了。是时候探索 fish shell 了。
@@ -82,7 +84,7 @@ sudo apt-get install fish
 用法
 要从你默认的 shell 切换到 fish,请执行以下操作：
 
-$ fish
+__$ fish__
 Welcome to fish, the friendly interactive shell
 你可以在 ~/.config/fish/config.fish 上找到默认的 fish 配置（类似于 .bashrc）。如果它不存在，就创建它吧。
 
@@ -175,3 +177,6 @@ Cheers!
 
 fish shell 官网[7](https://fishshell.com/)
 https://linux.cn/article-9125-1.html?utm_source=rss&utm_medium=rss
+
+http://www.ruanyifeng.com/blog/2017/05/fish_shell.html
+

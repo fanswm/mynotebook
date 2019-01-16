@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-16T15:24:12+08:00
+
+====== 利用神经网络为 Bash 提供历史命令搜索功能 ======
+创建日期 星期三 16 一月 2019
+
+McFly：利用神经网络为 Bash 提供历史命令搜索功能 https://linux.cn/article-10414-1.html?utm_source=rss&utm_medium=rss
