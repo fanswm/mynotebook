@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-17T15:41:54+08:00
+
+====== 直接在通知栏回复微信，Nevolution 让你的 Android 通知更好用 ======
+创建日期 星期四 17 一月 2019
+
+https://sspai.com/post/52473
+从上面的介绍中我们不难看出，Nevo 是我们对落后的 Android 应用通知进行改造的前提和基础，而 Nevo 自开放公测后安装流程较以往已经简化了不少，现在我们只需前往 Play 应用商店 或 酷安 即可直接下载安装（3.0 alpha 版本需按照 Telegram 群组内置顶提示下载安装）。

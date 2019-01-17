@@ -5,6 +5,8 @@ Creation-Date: 2018-11-28T21:42:36+08:00
 ====== 升级 ======
 创建日期 星期三 28 十一月 2018
 
+npm install -g npm 
+
 node升级的正确方法
 2018年03月01日 15:35:42 tlbaba 阅读数：61205 标签： node安装 node升级 node安装失败解决方法 linux 版本号 更多
 个人分类： javascript
