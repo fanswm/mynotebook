@@ -13,7 +13,6 @@ VuePress超详细简单教程
 https://www.jianshu.com/p/7a2cc8a7f40c
 
 安装
-
 注意 VuePress基于node 8.0+
 
 npm install -g vuepress

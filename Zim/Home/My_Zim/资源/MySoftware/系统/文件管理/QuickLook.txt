@@ -13,7 +13,7 @@ __QuickLook__是一款免费开源的空格预览文件电脑工具，让你的W
 https://github.com/QL-Win/QuickLook
 
 
-__Seer__
+__Seer  __http://1218.io/
 
 macOS 有一个非常方便的功能叫 Quick Look，即在 Finder 中按空格即可预览大部分常见文件。Windows 虽然没有类似功能，但开发者们可不会漏掉这个需求，而 Seer 就是 Windows 第三方文件快速预览工具中的佼佼者。
 
@@ -22,6 +22,6 @@ macOS 有一个非常方便的功能叫 Quick Look，即在 Finder 中按空格�
 
 
 
-目前，你可以在 SourceForge 免费下载 Seer 的 beta 版本 [https://sourceforge.net/projects/ccseer/?source=typ_redirect]，最新版为 0.8.1，但不再有后续更新支持。如果你想使用正式版（目前最新版本为 1.7.1），则需要在 官网 花费 12.18 美元购买授权许可。
+目前，你可以在 SourceForge 免费下载 Seer 的 beta 版本 [https://sourceforge.net/projects/ccseer/?source=typ_redirect]%EF%BC%8C%E6%9C%80%E6%96%B0%E7%89%88%E4%B8%BA 0.8.1，但不再有后续更新支持。如果你想使用正式版（目前最新版本为 1.7.1），则需要在 官网 花费 12.18 美元购买授权许可。
 
 如果你不想花钱又想有支持保障的话，我推荐你在 GitHub 下载免费开源的 QuickLook，它可以给你带来 Seer 的大部分功能。如果你是 Windows 10 用户，可以在 应用商店 下载它的 UWP 版本，但是功能相对会弱一些。

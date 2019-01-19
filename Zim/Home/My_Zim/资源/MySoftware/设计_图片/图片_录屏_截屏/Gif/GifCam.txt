@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-18T06:51:11+08:00
+
+====== GifCam ======
+创建日期 星期五 18 一月 2019
+
+http://blog.bahraniapps.com/gifcam/
+4.Gif录制软件：GifCam
+
+用文字讲不清楚，录视频又十分的麻烦，生成的文件又很巨大。如何能够既生动形象又方便传播？答案是Gif！
+
+GifCam就是一款免费、无广告的Gif录制程序，十分轻量化，操作也十分易懂，甚至你看一眼界面就能够知道如何操作它。
+

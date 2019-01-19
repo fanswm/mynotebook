@@ -26,4 +26,5 @@ pycharm: sudo snap install pycharm-community --classic
 xx-net
 veracrypt
 steam
+typora
 

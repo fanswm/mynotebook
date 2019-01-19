@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-18T06:45:08+08:00
+
+====== 键盘音效工具：Tickeys ======
+创建日期 星期五 18 一月 2019
+
+http://www.yingdev.com/projects/tickeys
+
+是的，你没看错，第一款要介绍的就是键盘音效工具。让你在使用普通键盘的情况下，也能享受到仿若敲打机械键盘、复古打字机等的声音服务。
+
+Tickeys， 一款免费开源的软件，能够在macOS、Windows、Linux系统上提供多种打字音效。比如人气的机械键盘声、复古的打印机声、帅气的剑气声、自由自在的鱼儿气泡声……
