@@ -11,7 +11,7 @@ Creation-Date: 2019-01-16T19:53:44+08:00
 译自：https://dev.to/brpaz/how-do-i-organize-my-knowledge-as-a-software-engineer-4387%E4%BD%9C%E8%80%85： Bruno Paz
 原创：LCTT https://linux.cn/article-10425-1.html%E8%AF%91%E8%80%85： Xingyu.Wang
 
-
+imrdr重要
 
 总体上说，软件开发和技术是以非常快的速度发展的领域，所以持续学习是必不可少的。在互联网上花几分钟找一下，在 Twitter、媒体、RSS 订阅、Hacker News 和其它专业网站和社区等地方，就可以从文章、案例研究、教程、代码片段、新应用程序和信息中找到大量有用的信息。
 

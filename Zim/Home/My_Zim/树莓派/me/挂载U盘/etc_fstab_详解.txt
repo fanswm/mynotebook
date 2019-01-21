@@ -142,3 +142,8 @@ Defaults
 
 2 1级别检验完成之后进行检验
 
+
+http://shumeipai.nxez.com/2019/01/17/fstab-and-mobile-hard-disk-mounting-method.html
+https://wiki.archlinux.org/index.php/Fstab
+https://help.ubuntu.com/community/Fstab
+
