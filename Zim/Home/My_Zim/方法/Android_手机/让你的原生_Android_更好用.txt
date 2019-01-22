@@ -7,3 +7,4 @@ Creation-Date: 2019-01-21T15:43:32+08:00
 
 这些技巧和习惯，让你的原生 Android 更好用（下篇）
 https://sspai.com/post/52603
+这些技巧和习惯，让你的原生 Android 更好用（上篇） http://sspai.com/post/52516

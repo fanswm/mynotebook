@@ -27,4 +27,5 @@ xx-net
 veracrypt
 steam
 typora
-
+snippetstore: 代码片段管理
+anaconda

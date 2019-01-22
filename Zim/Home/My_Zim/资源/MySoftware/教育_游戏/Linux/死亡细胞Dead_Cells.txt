@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-22T11:57:23+08:00
+
+====== 死亡细胞Dead Cells ======
+创建日期 星期二 22 一月 2019
+
+4、死亡细胞Dead Cells
+best-linux-games-2018-dead-cells
+best-linux-games-2018-dead-cells
+这款游戏称得上是年度最佳平台动作游戏。Roguelike 游戏《死亡细胞》将你带入一个黑暗（却色彩绚丽）的世界，在那里进行攻击和躲避以通过程序生成的关卡。它有点像 2D 的《黑暗之魂Dark Souls》，如果《黑暗之魂》也充满五彩缤纷的颜色的话。
+
+《死亡细胞》是无情的，只有精确而灵敏的控制才会让你避开死亡，而在两次运行期间的升级系统又会确保你总是有一些进步的成就感。
+
+《死亡细胞》的像素风、动画效果和游戏机制都达到了巅峰，它及时地提醒我们，在没有 3D 图形的过度使用下游戏可以制作成什么样子。
+https://linux.cn/article-10240-1.html

@@ -6,3 +6,4 @@ Creation-Date: 2019-01-17T16:51:26+08:00
 创建日期 星期四 17 一月 2019
 
 Open Source 103：开源与云的商业碰撞 https://linux.cn/article-10451-1.html?utm_source=rss&utm_medium=rss
+Open Source 102：开源的商业竞争优势 https://linux.cn/article-10436-1.html?utm_source=rss&utm_medium=rss

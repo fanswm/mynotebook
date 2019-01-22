@@ -7,7 +7,7 @@ Created Thursday 13 December 2018
 
 9 个鲜为人知的 Python 数据科学库
 2018-12-09 11:54
-编译自：https://opensource.com/article/18/11/python-libraries-data-science%E4%BD%9C%E8%80%85： Parul Pandey
+编译自：https://opensource.com/article/18/11/python-libraries-data-science 作者： Parul Pandey
 原创：LCTT https://linux.cn/article-10326-1.html 译者： heguangzhi
 
 除了 pandas、scikit-learn 和 matplotlib，还要学习一些用 Python 进行数据科学的新技巧。

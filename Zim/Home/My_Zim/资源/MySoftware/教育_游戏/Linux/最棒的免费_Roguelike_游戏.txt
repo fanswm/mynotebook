@@ -2,12 +2,12 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-11-16T14:25:06+08:00
 
-====== Roguelike ======
+====== 最棒的免费 Roguelike 游戏 ======
 Created Friday 16 November 2018
 
 最棒的免费 Roguelike 游戏
 2018-11-10 20:53
-编译自：https://www.linuxlinks.com/excellent-free-roguelike-games/%E4%BD%9C%E8%80%85： Steve Emms
+编译自：https://www.linuxlinks.com/excellent-free-roguelike-games/作者： Steve Emms
 原创：LCTT https://linux.cn/article-10218-1.html 译者： cycoe
 
 

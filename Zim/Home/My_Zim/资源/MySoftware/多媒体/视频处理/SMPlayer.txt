@@ -12,3 +12,6 @@ SMPlayer[84] 是 MPlayer 的 GUI 版本，所有流行的媒体格式它都能�
 $ sudo add-apt-repository ppa:rvm/smplayer
 $ sudo apt-get update
 $ sudo apt-get install smplayer
+
+
+SMPlayer：增强版的媒体播放器  https://linux.cn/article-10365-1.html?utm_source=rss&utm_medium=rss

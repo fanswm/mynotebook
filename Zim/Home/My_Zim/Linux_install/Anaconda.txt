@@ -27,10 +27,8 @@ Created Friday 24 November 2017
 
 `conda config --set show_channel_urls yes`
 
-> 作者：PeterYuan
+
 链接：http://www.jianshu.com/p/2f3be7781451
-來源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 https://www.anaconda.com/support/
 https://anaconda.org/
