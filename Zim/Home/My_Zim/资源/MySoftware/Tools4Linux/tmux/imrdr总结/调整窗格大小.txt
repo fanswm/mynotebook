@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-28T11:54:49+08:00
+
+====== 调整窗格大小 ======
+创建日期 星期一 28 一月 2019
+
+你可能需要调整窗格大小来满足你的要求。你必须按下 Ctrl+b, :，然后在页面底部的黄色颜色条上输入以下详细信息。
+在上一部分中，我们打印了窗格索引，它同时也显示了窗格大小。为了测试，我们要向增加 10 个单元。参考以下输出，该窗格将 pane1 和 pane2 的大小从 55x21 增加到 55x31。
+
+语法： Ctrl+b, : 然后输入 resize-pane [options] [cells size]
+
+Ctrl+b, : 然后输入 resize-pane -D 10 将当前窗格大小向下调整 10 个单元。
+Ctrl+b, : 然后输入 resize-pane -U 10 将当前窗格大小向上调整 10 个单元。
+Ctrl+b, : 然后输入 resize-pane -L 10 将当前窗格大小向左调整 10 个单元。
+Ctrl+b, : 然后输入 resize-pane -R 10 将当前窗格大小向右调整 10 个单元。

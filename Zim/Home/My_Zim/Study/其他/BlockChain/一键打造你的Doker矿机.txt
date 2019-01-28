@@ -25,88 +25,6 @@ https://github.com/fireice-uk/xmr-stak
 找了一台测试机安装一下试试：
 
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
 	
 # git clone https://github.com/fireice-uk/xmr-stak
 # cd xmr-stak/
@@ -118,7 +36,7 @@ CI  CMakeLists.txt  CONTRIBUTING.md  doc  Dockerfile  LICENSE  README.md  script
 # vim scripts/build_xmr-stak_docker/build_xmr-stak_docker.sh
 #!/bin/bash -uex
  
-if [[ $EUID -ne 0 ]]; then
+if  $EUID -ne 0 ; then
    echo "This script must be run as root"
    exit 1
 fi
@@ -167,7 +85,7 @@ cmake -DCUDA_ENABLE=OFF -DOpenCL_ENABLE=OFF . ;
  
 #!/bin/bash -uex
  
-if [[ $EUID -ne 0 ]]; then
+if  $EUID -ne 0 ; then
    echo "This script must be run as root"
    exit 1
 fi
@@ -194,36 +112,10 @@ make install;
 我的linux 不需要CUDA 删掉 CUDA部分的代码
 
 直接执行(运行前请确定是否已经安装Docker)
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
+
 	
 # ./build_xmr-stak_docker.sh
-+ [[ 0 -ne 0 ]]
++  0 -ne 0 
 + '[' -d xmr-stak ']'
 + git clone https://github.com/fireice-uk/xmr-stak.git
 Cloning into 'xmr-stak'...
@@ -249,19 +141,7 @@ Please enter:
 - Currency: 'monero' or 'aeon'
 ...
 上面是选择你想挖的币种类、矿池地址、钱包地址等等设置完之后会自动执行，如果出现下面这个就说明连接成功了,我测试用的是国内的一个门罗币矿池mine.ppxxmr.com:3333
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
+
 	
 [2018-01-12 11:07:21] : Fast-connecting to mine.ppxxmr.com:3333 pool ...
 [2018-01-12 11:07:21] : Pool mine.ppxxmr.com:3333 connected. Logging in...
@@ -288,30 +168,7 @@ QQ截图20180112191138.jpg
 config.txt  cpu.txt  libxmr-stak-backend.a  libxmr-stak-c.a  xmr-stak
 
 打开来看看
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
+
 	
 # vim config.txt 
 /*
@@ -339,24 +196,7 @@ config.txt  cpu.txt  libxmr-stak-backend.a  libxmr-stak-c.a  xmr-stak
 ...
 
 刚才的设置应该都存在这里了，
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-	
+
 # vim cpu.txt
 ...
 "cpu_threads_conf" :

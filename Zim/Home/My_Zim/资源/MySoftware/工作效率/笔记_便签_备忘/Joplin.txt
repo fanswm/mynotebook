@@ -66,3 +66,6 @@ via: https://www.linuxuprising.com/2018/08/joplin-encrypted-open-source-note.htm
 [8]: https://github.com/wxy
 [9]: https://github.com/LCTT/TranslateProject
 [10]: https://linux.cn/article-10220-1.html?utm_source=rss&utm_medium=rss
+
+开始使用 Joplin 吧，一款开源笔记应用
+https://linux.cn/article-10476-1.html?utm_source=rss&utm_medium=rss

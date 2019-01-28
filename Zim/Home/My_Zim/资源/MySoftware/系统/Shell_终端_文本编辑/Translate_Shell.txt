@@ -10,7 +10,7 @@ Translate Shell ：一款在 Linux 命令行中使用谷歌翻译的工具 https
 
 Translate Shell ：一款在 Linux 命令行中使用谷歌翻译的工具
 2017-12-04 21:35
-编译自：https://www.2daygeek.com/translate-shell-a-tool-to-use-google-translate-from-command-line-in-linux/%E4%BD%9C%E8%80%85： Magesh Maruthamuthu
+编译自：https://www.2daygeek.com/translate-shell-a-tool-to-use-google-translate-from-command-line-in-linux/ 作者： Magesh Maruthamuthu
 原创：LCTT https://linux.cn/article-9107-1.html 译者： lujun9972
 
 
@@ -73,13 +73,13 @@ Definitions of நன்றி
 [ தமிழ் -> English ]
 
 noun
-    gratitude
-        நன்றி
-    thanks
-        நன்றி
+	gratitude
+		நன்றி
+	thanks
+		நன்றி
 
 நன்றி
-    Thanks
+	Thanks
 使用下面命令也能将英语翻译成泰米尔语。
 
 $ trans :ta thanks
@@ -93,11 +93,11 @@ Definitions of thanks
 [ English -> தமிழ் ]
 
 noun
-    நன்றி
-        gratitude, thanks
+	நன்றி
+		gratitude, thanks
 
 thanks
-    நன்றி
+	நன்றி
 要将一个单词翻译到多个语种可以使用下面命令(本例中，我将单词翻译成泰米尔语以及印地语)。
 
 $ trans :ta+hi thanks
@@ -111,11 +111,11 @@ Definitions of thanks
 [ English -> தமிழ் ]
 
 noun
-    நன்றி
-        gratitude, thanks
+	நன்றி
+		gratitude, thanks
 
 thanks
-    நன்றி
+	நன்றி
 
 thanks
 /THaNGks/
@@ -127,11 +127,11 @@ Definitions of thanks
 [ English -> हिन्दी ]
 
 noun
-    धन्यवाद
-        thanks, thank, gratitude, thankfulness, felicitation
+	धन्यवाद
+		thanks, thank, gratitude, thankfulness, felicitation
 
 thanks
-    धन्यवाद, शुक्रिया
+	धन्यवाद, शुक्रिया
 使用下面命令可以将多个单词当成一个参数（句子）来进行翻译。(只需要把句子应用起来作为一个参数就行了)。
 
 $ trans :ta "what is going on your life?"
@@ -144,7 +144,7 @@ Translations of what is going on your life?
 [ English -> தமிழ் ]
 
 what is going on your life?
-    உங்கள் வாழ்க்கையில் என்ன நடக்கிறது?
+	உங்கள் வாழ்க்கையில் என்ன நடக்கிறது?
 下面命令单独地翻译各个单词。
 
 $ trans :ta curios happy
@@ -157,7 +157,7 @@ Translations of curios
 [ Română -> தமிழ் ]
 
 curios
-    ஆர்வம், அறிவாளிகள், ஆர்வமுள்ள, அறிய, ஆர்வமாக
+	ஆர்வம், அறிவாளிகள், ஆர்வமுள்ள, அறிய, ஆர்வமாக
 happy
 /ˈhapē/
 
@@ -167,17 +167,17 @@ happy
 Definitions of happy
 [ English -> தமிழ் ]
 
-    மகிழ்ச்சியான
-        happy, convivial, debonair, gay
-    திருப்தி உடைய
-        happy
+	மகிழ்ச்சியான
+		happy, convivial, debonair, gay
+	திருப்தி உடைய
+		happy
 
 adjective
-    இன்பமான
-        happy
+	இன்பமான
+		happy
 
 happy
-    சந்தோஷமாக, மகிழ்ச்சி, இனிய, சந்தோஷமா
+	சந்தோஷமாக, மகிழ்ச்சி, இனிய, சந்தோஷமா
 简洁模式：默认情况下，Translate Shell 尽可能多的显示翻译信息。如果你希望只显示简要信息，只需要加上 -b选项。
 
 $ trans -b :ta thanks
@@ -189,75 +189,75 @@ thanks
 /THaNGks/
 
 Synonyms
-    noun
-        - gratitude, appreciation, acknowledgment, recognition, credit
+	noun
+		- gratitude, appreciation, acknowledgment, recognition, credit
 
-    exclamation
-        - thank you, many thanks, thanks very much, thanks a lot, thank you kindly, much obliged, much appreciated, bless you, thanks a million
+	exclamation
+		- thank you, many thanks, thanks very much, thanks a lot, thank you kindly, much obliged, much appreciated, bless you, thanks a million
 
 Examples
-    - In short, thanks for everything that makes this city great this Thanksgiving.
+	- In short, thanks for everything that makes this city great this Thanksgiving.
 
-    - many thanks
+	- many thanks
 
-    - There were no thanks in the letter from him, just complaints and accusations.
+	- There were no thanks in the letter from him, just complaints and accusations.
 
-    - It is a joyful celebration in which Bolivians give thanks for their freedom as a nation.
+	- It is a joyful celebration in which Bolivians give thanks for their freedom as a nation.
 
-    - festivals were held to give thanks for the harvest
+	- festivals were held to give thanks for the harvest
 
-    - The collection, as usual, received a great response and thanks is extended to all who subscribed.
+	- The collection, as usual, received a great response and thanks is extended to all who subscribed.
 
-    - It would be easy to dwell on the animals that Tasmania has lost, but I prefer to give thanks for what remains.
+	- It would be easy to dwell on the animals that Tasmania has lost, but I prefer to give thanks for what remains.
 
-    - thanks for being so helpful
+	- thanks for being so helpful
 
-    - It came back on about half an hour earlier than predicted, so I suppose I can give thanks for that.
+	- It came back on about half an hour earlier than predicted, so I suppose I can give thanks for that.
 
-    - Many thanks for the reply but as much as I tried to follow your advice, it's been a bad week.
+	- Many thanks for the reply but as much as I tried to follow your advice, it's been a bad week.
 
-    - To them and to those who have supported the office I extend my grateful thanks .
+	- To them and to those who have supported the office I extend my grateful thanks .
 
-    - We can give thanks and words of appreciation to others for their kind deeds done to us.
+	- We can give thanks and words of appreciation to others for their kind deeds done to us.
 
-    - Adam, thanks for taking time out of your very busy schedule to be with us tonight.
+	- Adam, thanks for taking time out of your very busy schedule to be with us tonight.
 
-    - a letter of thanks
+	- a letter of thanks
 
-    - Thank you very much for wanting to go on reading, and thanks for your understanding.
+	- Thank you very much for wanting to go on reading, and thanks for your understanding.
 
-    - Gerry has received a letter of thanks from the charity for his part in helping to raise this much needed cash.
+	- Gerry has received a letter of thanks from the charity for his part in helping to raise this much needed cash.
 
-    - So thanks for your reply to that guy who seemed to have a chip on his shoulder about it.
+	- So thanks for your reply to that guy who seemed to have a chip on his shoulder about it.
 
-    - Suzanne, thanks for being so supportive with your comments on my blog.
+	- Suzanne, thanks for being so supportive with your comments on my blog.
 
-    - She has never once acknowledged my thanks , or existence for that matter.
+	- She has never once acknowledged my thanks , or existence for that matter.
 
-    - My grateful thanks go to the funders who made it possible for me to travel.
+	- My grateful thanks go to the funders who made it possible for me to travel.
 
-    - festivals were held to give thanks for the harvest
+	- festivals were held to give thanks for the harvest
 
-    - All you secretaries who made it this far into the article… thanks for your patience.
+	- All you secretaries who made it this far into the article… thanks for your patience.
 
-    - So, even though I don't think the photos are that good, thanks for the compliments!
+	- So, even though I don't think the photos are that good, thanks for the compliments!
 
-    - And thanks for warning us that your secret service requires a motorcade of more than 35 cars.
+	- And thanks for warning us that your secret service requires a motorcade of more than 35 cars.
 
-    - Many thanks for your advice, which as you can see, I have passed on to our readers.
+	- Many thanks for your advice, which as you can see, I have passed on to our readers.
 
-    - Tom Ryan was given a bottle of wine as a thanks for his active involvement in the twinning project.
+	- Tom Ryan was given a bottle of wine as a thanks for his active involvement in the twinning project.
 
-    - Mr Hill insists he has received no recent complaints and has even been sent a letter of thanks from the forum.
+	- Mr Hill insists he has received no recent complaints and has even been sent a letter of thanks from the forum.
 
-    - Hundreds turned out to pay tribute to a beloved former headteacher at a memorial service to give thanks for her life.
+	- Hundreds turned out to pay tribute to a beloved former headteacher at a memorial service to give thanks for her life.
 
-    - Again, thanks for a well written and much deserved tribute to our good friend George.
+	- Again, thanks for a well written and much deserved tribute to our good friend George.
 
-    - I appreciate your doing so, and thanks also for the compliments about the photos!
+	- I appreciate your doing so, and thanks also for the compliments about the photos!
 
 See also
-    Thanks!, thank, many thanks, thanks to, thanks to you, special thanks, give thanks, thousand thanks, Many thanks!, render thanks, heartfelt thanks, thanks to this
+	Thanks!, thank, many thanks, thanks to, thanks to you, special thanks, give thanks, thousand thanks, Many thanks!, render thanks, heartfelt thanks, thanks to this
 使用下面格式可以使用 Translate Shell 来翻译文件。
 
 $ trans :ta file:///home/magi/gtrans.txt
@@ -277,11 +277,11 @@ Definitions of thanks
 [ English -> தமிழ் ]
 
 noun
-    நன்றி
-        gratitude, thanks
+	நன்றி
+		gratitude, thanks
 
 thanks
-    நன்றி
+	நன்றி
 想知道语言代码，可以执行下面命令。
 
 $ trans -R

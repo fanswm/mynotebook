@@ -6,3 +6,6 @@ Creation-Date: 2017-11-29T20:34:26+08:00
 Created Wednesday 29 November 2017
 
 http://blog.csdn.net/boshuzhang/article/details/51122457
+
+Bash 最佳实践 https://linux.cn/article-9919-1.html
+Bourne Again SHell (Bash)。

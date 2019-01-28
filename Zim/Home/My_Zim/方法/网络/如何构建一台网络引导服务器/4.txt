@@ -140,8 +140,8 @@ get '/boot' => sub {
    my $template = 'menu';
 
    {
-	  last unless $instance =~ /^fc[[:digit:]]{2}$/;
-	  last unless $username =~ /^[[:alnum:]]+$/;
+	  last unless $instance =~ /^fc:digit:{2}$/;
+	  last unless $username =~ /^:alnum:+$/;
 	  last unless PAM::auth($username, url_unescape($password));
 	  $template = $instance;
    }

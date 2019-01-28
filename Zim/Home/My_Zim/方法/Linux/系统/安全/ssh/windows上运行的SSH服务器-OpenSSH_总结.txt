@@ -11,7 +11,7 @@ https://blog.csdn.net/sinianliushui/article/details/79171499
 
 1、OpenSSH for Windows（适用于2K/XP，98/2003没有测试）
 
-去http://sshwindows.sourceforge.net/download/下载，2004年7月9号的3.8.1p1 版本。
+去 http://sshwindows.sourceforge.net/download/ 下载，2004年7月9号的3.8.1p1 版本。
 
  安装比较简单，不多说，软件带了服务器端和客户端，由于喜欢使用secureCRT，所以没选client。
 
@@ -31,7 +31,7 @@ https://blog.csdn.net/sinianliushui/article/details/79171499
 
 呵呵，用secureCRT连连看，行不行，连接上后和cmd用法一样。
 
-------------------------------------------------------------------------------------------------------
+--------------------
 
 Microsoft Windows 2000 [Version 5.00.2195]
 (C) 版权所有 1985-2000 Microsoft Corp.
@@ -57,11 +57,11 @@ da搜索| 浏览 2900 次|举报
 我有更好的答案
 推荐于2016-07-30 17:44:31最佳答案
 问题描述：
-    在Win7下Cygwin中，使用ssh localhost命令，出现Connection closed by 127.0.0.1的问题。
+	在Win7下Cygwin中，使用ssh localhost命令，出现Connection closed by 127.0.0.1的问题。
 解决方案：
-    1、开始——运行——services.msc
-    2、右键CYGWIN sshd——属性——登录选项卡——选择“此账户”——浏览——高级——立即查找——选择你的账户名（必须为管理员权限）——输入密码（必须要有，空密码不接受）——确定。
-    3、重启CYGWIN sshd服务即可。
-    这样就以你的账户的名义启动了这个服务。而后ssh localhost成功。
-    这样做的一个缺点可能是你要给电脑设个密码。
+	1、开始——运行——services.msc
+	2、右键CYGWIN sshd——属性——登录选项卡——选择“此账户”——浏览——高级——立即查找——选择你的账户名（必须为管理员权限）——输入密码（必须要有，空密码不接受）——确定。
+	3、重启CYGWIN sshd服务即可。
+	这样就以你的账户的名义启动了这个服务。而后ssh localhost成功。
+	这样做的一个缺点可能是你要给电脑设个密码。
 问题3 使用ssh administrator@127.0.0.1 -p 22登录说密码不对 ，使用Administrator正常

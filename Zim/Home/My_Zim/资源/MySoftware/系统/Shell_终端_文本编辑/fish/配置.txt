@@ -27,14 +27,14 @@ http://doabit.com/posts/3-from-oh-my-zsh-to-oh-my-fish
 安装好后，把shell切换到fish shell，编辑 /etc/shells，加入/usr/local/bin/fish，这一步很重要，要不到时会报错，这样，就可以执行chsh -s /usr/local/bin/fish
 设置oh my fish
 修改~/.config/fish/config.fish，添加plugins，如：set fish_plugins rails rbenv bundler node brew rake，这里要注意，如果你在mac下使用Homebrew，那么brew的plugin必须启用，其它的你可以视你自身情况
-环境变量的设置，用习惯了oh my zsh会习惯地找PATH的设置，fish shell的配置有些不同，你可以如此设置，如：set -x PATH /usr/local/sbin $PATH，这和我们平时使用的不太一样，每个变量之间用空格分开，你可以再加个路径，如：set -x PATH /usr/local/sbin /usr/bin $PATH，可以参考fish shell文档http://fishshell.com/docs/2.0/commands.html#set
+环境变量的设置，用习惯了oh my zsh会习惯地找PATH的设置，fish shell的配置有些不同，你可以如此设置，如：set -x PATH /usr/local/sbin $PATH，这和我们平时使用的不太一样，每个变量之间用空格分开，你可以再加个路径，如：set -x PATH /usr/local/sbin /usr/bin $PATH，可以参考fish shell文档 http://fishshell.com/docs/2.0/commands.html#set
 编写plugin
 oh my fish现在的主要问题就是插件很少，不过我个人平时主要就用过git和rails几个，所以感觉不到什么，如果你发现你要的plugin没有的话，可以自己编写个，非常的简单，oh my fish的plugin编写和oh my zsh不同，它是以fuction的方式来编写的，如rrails中我们常用rg rs等，oh my fish默认只带了个migration,所以要自己动手了，如，要编写rg，可以如下
 
 function rg
   rails generate $argv
 end
-这里要注意的是后面的$argv要加上，要不到时不会接受后面输入的参数,保存在rails目录下，rg.fish，然后在~/.config/fish/config.fish中启用rails的plugin就可以了，我自己加了几个rails的命令，都是以这种方式写的https://github.com/doabit/oh-my-fish/tree/dev/plugins/rails
+这里要注意的是后面的$argv要加上，要不到时不会接受后面输入的参数,保存在rails目录下，rg.fish，然后在~/.config/fish/config.fish中启用rails的plugin就可以了，我自己加了几个rails的命令，都是以这种方式写的 https://github.com/doabit/oh-my-fish/tree/dev/plugins/rails
 
 .load文件
 .load后缀的我理解为环境类的设置，如rbenv的plugin，
@@ -46,7 +46,7 @@ end
 if test -d $HOME/.rbenv/shims
   set PATH $HOME/.rbenv/shims $PATH
 end
-更多可以看下https://github.com/bpinto/oh-my-fish/tree/master/custom, 这里有简单说明。
+更多可以看下 https://github.com/bpinto/oh-my-fish/tree/master/custom, 这里有简单说明。
 
 总结
 自从换到oh my fish，感觉各种爽，plugin问题可以自己想要什么自己写吧，也不是太难，主要是速度提升，自动补全也很强，总之，一句话，一旦拥有，别无他求。

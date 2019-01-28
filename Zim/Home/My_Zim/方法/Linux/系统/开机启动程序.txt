@@ -52,5 +52,5 @@ Don’t disable an autostart entry unless you understand what it does. For examp
 
 You should disable entries by unchecking their check boxes instead of clicking the Remove button. If you need to re-enable an entry later, you can re-enable its check box.
 
-from:http://www.howtogeek.com/115797/6-ways-to-speed-up-ubuntu/ sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' [[/etc/xdg/autostart/*.desktop]]
+from: http://www.howtogeek.com/115797/6-ways-to-speed-up-ubuntu/ sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
 

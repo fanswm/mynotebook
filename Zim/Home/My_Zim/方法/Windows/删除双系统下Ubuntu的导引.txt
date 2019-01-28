@@ -7,7 +7,7 @@ Creation-Date: 2019-01-15T11:38:37+08:00
 
 链接：https://www.zhihu.com/question/308605163/answer/570942788
 
-根据答主在评论里面的回复初步判断应该是GPT，但是为了保险起见最好还是检查一下】先确定你电脑使用的是 UEFI+GPT 还是 BIOS+MBR如果你用的是Windows，你可以参考https://zhidao.baidu.com/question/451226706.html如果你用的是Ubuntu，你可以通过sudo parted /dev/sda print
+根据答主在评论里面的回复初步判断应该是GPT，但是为了保险起见最好还是检查一下】先确定你电脑使用的是 UEFI+GPT 还是 BIOS+MBR如果你用的是Windows，你可以参考 https://zhidao.baidu.com/question/451226706.html 如果你用的是Ubuntu，你可以通过sudo parted /dev/sda print
 这个命令来查看，主要看 Partition Table 这一行，以及有没有EFI系统分区比如我的是：Model: ATA SAMSUNG MZNTY128 (scsi)
 Disk /dev/sda: 128GB
 Sector size (logical/physical): 512B/4096B
