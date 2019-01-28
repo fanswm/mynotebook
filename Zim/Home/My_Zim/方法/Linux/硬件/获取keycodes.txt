@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-25T11:03:46+08:00
+
+====== 获取keycodes ======
+创建日期 星期五 25 一月 2019
+
+```
+xmodmap -pk >  map.txt
+xev > map.txt
+```

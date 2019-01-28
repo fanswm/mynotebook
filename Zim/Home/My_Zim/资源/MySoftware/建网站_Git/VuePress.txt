@@ -18,10 +18,9 @@ https://www.jianshu.com/p/7a2cc8a7f40c
 npm install -g vuepress
 
 
-创建工作文件夹  study
-进入文件夹
+mkdir  vue
+cd vue
 快速初始化package.json
-
 npm init -y
 
 2.1 新建文件夹docs

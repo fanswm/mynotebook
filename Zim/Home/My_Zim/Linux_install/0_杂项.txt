@@ -17,7 +17,7 @@ npm
 tldr
 tmux
 virtualbox
-SpaceVim
+SpaceVim, from github.com
 docker
 config github
 jdk
@@ -29,3 +29,4 @@ steam
 typora
 snippetstore: 代码片段管理
 anaconda
+更改键盘映射：pgup->up,pgdn->down,Menu->Home,Contrl_R->End.
