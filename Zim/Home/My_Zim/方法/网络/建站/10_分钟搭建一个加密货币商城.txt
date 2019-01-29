@@ -7,15 +7,15 @@ Created Friday 16 November 2018
 
 10 分钟搭建一个加密货币商城
 2018-11-12 23:02
-原创：Linux中国 https://linux.cn/article-10225-1.html%E4%BD%9C%E8%80%85： Bestony
+原创：Linux中国 https://linux.cn/article-10225-1.html 作者： Bestony
 
 这篇文章将会教你如何在 10 分钟中内借助 WordPress 搭建一个支持 ERC20 通证的在线 B2C 商城。
 
 
 
-在区块链及通证经济备受瞩目的今天，很多开源社区纷纷在探讨如何将开源社区与区块链技术和通证经济相结合，从而为开源社区和开源生态提供自主、自洽、发展的动力和支持。我们 “Linux 中国”就是这诸多探索的开源社区之一。可喜的是，我们已经迈出了第一步：[发布社区通证](https://linux.cn/article-9886-1.html)，也迈出了第二步，[使通证流通起来](https://linux.cn/article-10178-1.html)。这里，我们愿意分享我们的经验给各个社区伙伴，使更多的开源社区也可以投身于新的生态探索，避开一些我们遇到的陷阱，从而共同营造一个更繁荣的开源世界。
+在区块链及通证经济备受瞩目的今天，很多开源社区纷纷在探讨如何将开源社区与区块链技术和通证经济相结合，从而为开源社区和开源生态提供自主、自洽、发展的动力和支持。我们 “Linux 中国”就是这诸多探索的开源社区之一。可喜的是，我们已经迈出了第一步：[发布社区通证](  https://linux.cn/article-9886-1.html )，也迈出了第二步，[使通证流通起来]( https://linux.cn/article-10178-1.html )。这里，我们愿意分享我们的经验给各个社区伙伴，使更多的开源社区也可以投身于新的生态探索，避开一些我们遇到的陷阱，从而共同营造一个更繁荣的开源世界。
 
-我们的[通证商城](https://shop.linux.cn/)是基于 WordPress 的 WooCommerce 商城构建的。
+我们的[通证商城]( https://shop.linux.cn/ )是基于 WordPress 的 WooCommerce 商城构建的。
 
 安装 WordPress
 在开始配置商城前，你需要先安装 WordPress 。你需要购买一个支持 PHP + MySQL 的虚拟主机，或自行配置 VPS、云服务器的环境，以支持 WordPress 的运行。
@@ -61,7 +61,7 @@ Created Friday 16 November 2018
 添加 ERC20 通证作为支付货币
 为了原生支持 ERC20 通证来实现支付，从而免去汇率换算，我们需要添加一款自定义的货币。
 
-打开“插件”-“安装插件”，在关键词中输入 “[Woocommerce Customize ERC20 Currency](https://blog.inkerk.com/2018/11/01/woocommerce-customize-erc20-currency-plugin/)”并回车。这是我们联合硬核区块链公司开发的一款用于给 WooCommerce 增加 ERC20 货币的插件，该插件已经开源于 [GitHub](https://github.com/inKerk/woocommerce-custom-erc20-currencies)。
+打开“插件”-“安装插件”，在关键词中输入 “[Woocommerce Customize ERC20 Currency]( https://blog.inkerk.com/2018/11/01/woocommerce-customize-erc20-currency-plugin/ )”并回车。这是我们联合硬核区块链公司开发的一款用于给 WooCommerce 增加 ERC20 货币的插件，该插件已经开源于 [GitHub] ( https://github.com/inKerk/woocommerce-custom-erc20-currencies )。
 
 找到 “Woocommerce Customize ERC20 Currency” 插件，并安装。
 
@@ -179,14 +179,14 @@ Gas 提醒这里是用来提醒用户支付时选择较高的 Gas ，从而加�
 关于硬核区块链
 
 
-[硬核区块链](https://blog.inkerk.com/)是一个区块链技术服务提供商，我们为顾客提供全面的 ERC20 通证发行、安全审计、解决方案构建、流通流程设计、 空投解决方案等服务，为顾客提供咨询与支付服务。
+[硬核区块链]( https://blog.inkerk.com/ )是一个区块链技术服务提供商，我们为顾客提供全面的 ERC20 通证发行、安全审计、解决方案构建、流通流程设计、 空投解决方案等服务，为顾客提供咨询与支付服务。
 
 相关链接
 Woocommerce ERC20 Payment Gateway 插件
-官方市场https://wordpress.org/plugins/woo-erc20-payment-gateway
-官方仓库https://github.com/inKerk/woocommerce-erc20-payment-gateway
-官方教程https://inkerk.github.io/blog/2018/11/01/woocommerce-erc20-payment-gateway-plugin/
+官方市场 https://wordpress.org/plugins/woo-erc20-payment-gateway
+官方仓库 https://github.com/inKerk/woocommerce-erc20-payment-gateway
+官方教程 https://inkerk.github.io/blog/2018/11/01/woocommerce-erc20-payment-gateway-plugin/
 Woocommerce Customize ERC20 Currency 插件
-官方市场https://wordpress.org/plugins/woo-custom-erc20/
-官方仓库https://github.com/inKerk/woocommerce-custom-erc20-currencies
-官方教程http://blog.inkerk.com/2018/11/01/woocommerce-customize-erc20-currency-plugin/
+官方市场 https://wordpress.org/plugins/woo-custom-erc20/
+官方仓库 https://github.com/inKerk/woocommerce-custom-erc20-currencies
+官方教程 http://blog.inkerk.com/2018/11/01/woocommerce-customize-erc20-currency-plugin/
