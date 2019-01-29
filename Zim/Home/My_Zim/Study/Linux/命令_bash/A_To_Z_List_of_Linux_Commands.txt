@@ -19,7 +19,7 @@ CLIs (command-line interface) have existed since ages. We can find their roots i
 
 In the past, we compiled the list of commands for the CMD command-line interpreter in Microsoft Windows, you can take a look at it below:
 
-    Also Read: The Ultimate A to Z List Of Windows CMD Commands You Need To Know
+	Also Read: The Ultimate A to Z List Of Windows CMD Commands You Need To Know
 
 It’s a known fact that the command line interface (CLI), also known as the shell, is an integral part of the digital lives of various Linux users even when the graphical desktop environments on Linux systems have become quite user-friendly.
 
@@ -459,7 +459,7 @@ nfsstat 	 List NFS statistics.
 nice 	 Run a program with modified scheduling priority.
 nl 	 Show numbered line while displaying the contents of a file.
 nm 	 List symbols from object files.
-nohup 	 Run a command immune to hangups.
+ nohup 	 Run a command immune to hangups.
 notify-send 	 A program to send desktop notifications.
 nslookup 	 Used performs DNS queries. Read this article for more info.
 nsupdate 	 Dynamic DNS update utility.
@@ -764,6 +764,6 @@ znew 	 Recompress .z files to .gz. files.
 
 So, this was the compilation of different Linux commands. I hope this A-Z Linux commands might help you in some way. I’ve spent weeks curating these Linux commands from various sources and testing them. If you find some command missing or some discrepency, please give your valuable feedback and help me make the overall list better. I’ll be looking forward to it.
 
-    Also Read: The Ultimate A to Z List Of Windows CMD Commands You Need To Know (https://fossbytes.com/complete-windows-cmd-commands-list-index/)
+	Also Read: The Ultimate A to Z List Of Windows CMD Commands You Need To Know (https://fossbytes.com/complete-windows-cmd-commands-list-index/)
 
 https://fossbytes.com/a-z-list-linux-command-line-reference/

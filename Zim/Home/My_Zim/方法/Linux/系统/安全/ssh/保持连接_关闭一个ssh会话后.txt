@@ -5,6 +5,7 @@ Creation-Date: 2019-01-28T13:32:15+08:00
 ====== 保持连接 关闭一个ssh会话后 ======
 创建日期 星期一 28 一月 2019
 
+__$ nohup command &__
 https://www.2daygeek.com/how-to-keep-a-process-command-running-after-disconnecting-ssh-session/
 How To Keep A Process/Command Running After Disconnecting SSH Session
 BY MAGESH MARUTHAMUTHU · PUBLISHED : NOVEMBER 21, 2017 || LAST UPDATED: NOVEMBER 21, 2017
@@ -21,11 +22,11 @@ Also you can move the long running processes to background to avoid conflict wit
 
 It can be done by using following commands.
 
-screen
-tmux
-nohup
-disown
-byobu
+__screen__
+__tmux__
+__nohup__
+__disown__
+__byobu__
 Method 1 – Using screen Command
 Screen is a full-screen window manager that multiplexes a physical terminal between several processes, typically interactive shells. Each virtual terminal provides the functions of the DEC VT100 terminal.
 
