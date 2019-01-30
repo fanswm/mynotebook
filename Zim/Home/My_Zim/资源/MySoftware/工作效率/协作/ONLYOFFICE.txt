@@ -1,4 +1,4 @@
-﻿Content-Type: text/x-zim-wiki
+Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-24T12:31:37+08:00
 
@@ -22,4 +22,4 @@ abstracth.onlyoffice.sg
 来源：知乎
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
-如何在 Windows 上 使用 ONLYOFFICE 协同编辑文档——免费的永久开源的0、安装准备如果是局域网，部署的电脑拥有固定ip（下文叫宿主机，切记）。电脑能打开cup的虚拟功能。如果部署到云主机，道理是一样的。环境是win7以上，win10以下。Win10区别就是安装的docker软件不同而已。<img src="https://pic2.zhimg.com/v2-18e0156f9d2868caf3d9a34fc43b3bb1_b.jpg" data-size="normal" data-rawwidth="1280" data-rawheight="893" class="origin_image zh-lightbox-thumb" width="1280" data-original="https://pic2.zhimg.com/v2-18e0156f9d2868caf3d9a34fc43b3bb1_r.jpg">协作word效果第一步：确定电脑打开了cpu虚拟打开。第二步：下载和安装docker toolbox，默认安装即可。下载地址http://get.daocloud.io/，下载支持旧版windows的docker toolbox，win10就直接下载docker了。第三步：启动docker后在里面拉取Onlyoffice Document Server 的Docker镜像1、拉取ONLYOFFICE Document Server 的Docker镜像拉取镜像sudo docker pull onlyoffice/documentserver
+如何在 Windows 上 使用 ONLYOFFICE 协同编辑文档——免费的永久开源的0、安装准备如果是局域网，部署的电脑拥有固定ip（下文叫宿主机，切记）。电脑能打开cup的虚拟功能。如果部署到云主机，道理是一样的。环境是win7以上，win10以下。Win10区别就是安装的docker软件不同而已。<img src="https://pic2.zhimg.com/v2-18e0156f9d2868caf3d9a34fc43b3bb1_b.jpg" data-size="normal" data-rawwidth="1280" data-rawheight="893" class="origin_image zh-lightbox-thumb" width="1280" data-original="https://pic2.zhimg.com/v2-18e0156f9d2868caf3d9a34fc43b3bb1_r.jpg">协作word效果第一步：确定电脑打开了cpu虚拟打开。第二步：下载和安装docker toolbox，默认安装即可。下载地址 http://get.daocloud.io/，下载支持旧版windows的docker toolbox，win10就直接下载docker了。第三步：启动docker后在里面拉取Onlyoffice Document Server 的Docker镜像1、拉取ONLYOFFICE Document Server 的Docker镜像拉取镜像sudo docker pull onlyoffice/documentserver

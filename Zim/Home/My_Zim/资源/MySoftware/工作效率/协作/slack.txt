@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-30T11:35:35+08:00
+
+====== slack ======
+创建日期 星期三 30 一月 2019
+
+https://slack.com/get-started

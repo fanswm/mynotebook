@@ -32,7 +32,7 @@ Android
 下载
 http://www.coolapk.com/apk/com.lazyswipe?mt=8&uo=4&ct=appcards
 
-不少 Android 应用都在「悬浮窗」这个特性做过文章，无论是先前我们推荐过的 [BuMP Music Player](https://sspai.com/31726)，还是我们这里所说的 Pintasking、单手划划以及 Easy App Switcher，利用悬浮窗，它们或许会彻底改变我们在使用 Android 设备时的操作习惯。
+不少 Android 应用都在「悬浮窗」这个特性做过文章，无论是先前我们推荐过的 [BuMP Music Player]( https://sspai.com/31726 )，还是我们这里所说的 Pintasking、单手划划以及 Easy App Switcher，利用悬浮窗，它们或许会彻底改变我们在使用 Android 设备时的操作习惯。
 
 其中，Pintasking 的重心在 tasking 上，注重提升在某几个特定任务之间的转换体验，能在跨越数个 App 的工作过程中帮助我们简化操作步骤并提高专注度；Easy App Switcher 偏向于 switch，但却不仅仅局限于替代 ROM 本身的应用切换功能，利用好常用应用和悬浮球定制这两个功能可以将其变为高效而无多余视觉干扰的快速启动器；单手划划则更像是二者的结合，可以同时替代应用切换、快速启动、快速设置面板甚至是系统的通知中心，应用体积却仅有 2M 不到。
 
@@ -84,12 +84,12 @@ Custom Quick Settings 则可以说是 Android 6.X Marshmallow 用户的必备工
 Texpand
 Android
 相关文章
-下载http://www.coolapk.com/apk/com.isaiasmatewos.texpand?mt=8&uo=4&ct=appcards
+[[下载  http://www.coolapk.com/apk/com.isaiasmatewos.texpand?mt=8&uo=4&ct=appcards]]
 
 Text Aide
 Android
 相关文章
-下载http://coolapk.com/apk/com.arjerine.textxposed?mt=8&uo=4&ct=appcards
+[[下载  http://coolapk.com/apk/com.arjerine.textxposed?mt=8&uo=4&ct=appcards]]
 
 最后要介绍的 Texpand 和 Text Aide 就是文字工作者的福音了。前者能够在输入过程中自动扩展事先设置好的文字内容，提升输入效率（比如输入「hhh」会自动填充为「哈哈哈哈哈哈」）。而后者的功能更为强大，除了扩展事先设置好的内容外，还能在 Android 平台上实现划词搜索、定义甚至是点选翻译等功能（配合 Android 6.X Marshmallow 改进后的文字点选菜单效果更好）。
 
@@ -103,7 +103,7 @@ __录屏截屏__
 AZ Screen Recorder
 Android
 相关文章
-下载http://coolapk.com/apk/com.hecorat.screenrecorder.free?mt=8&uo=4&ct=appcards
+[[下载  http://coolapk.com/apk/com.hecorat.screenrecorder.free?mt=8&uo=4&ct=appcards]]
 
 自 Android 5.0 Lollipop 开启屏幕录制 api 以来，Google Play Store 中已经出现过不少利用该特性的屏幕录制应用，而在这些应用中，AZ Screen Recorder 也许是最为「尽善尽美」的那一款了：支持制过程中随时暂停/恢复、标注；录制结束后亦可随意剪辑或是转为 Gif 动图；开启「Show front-camera」功能后还能作为游戏录制与解说工具来使用。
 
@@ -119,7 +119,7 @@ iOS
 Screener
 Android
 相关文章
-下载http://www.wandoujia.com/apps/de.toastcode.screener?mt=8&uo=4&ct=appcards
+下载 http://www.wandoujia.com/apps/de.toastcode.screener?mt=8&uo=4&ct=appcards
 
 在过去的一年里，带壳截图已经日臻完美。从屏幕眩光到个性后盖，从自动合成到横屏支持，如果说要给「为手机套上外壳」这件事挑一个最佳人选，以此事命名的「带壳截图」无疑是最好的选择。
 
@@ -132,12 +132,12 @@ Android
 PPIICC
 Android
 相关文章
-下载http://coolapk.com/apk/bos.consoar.imagestitch?mt=8&uo=4&ct=appcards
+下载 http://coolapk.com/apk/bos.consoar.imagestitch?mt=8&uo=4&ct=appcards
 
 纯纯打码
 Android
 相关文章
-下载http://coolapk.com/apk/me.drakeet.puremosaic?mt=8&uo=4&ct=appcards
+下载 http://coolapk.com/apk/me.drakeet.puremosaic?mt=8&uo=4&ct=appcards
 
 无论是长图拼接应用 PPIICC 还是图片打码工具纯纯打码，都不偏不倚地戳中了部分 Android 用户的痛点。
 
@@ -172,17 +172,17 @@ Google 家的 Google Keep 则以功能和同步见长：清单、图文、记事
 Monospace Writer
 Android
 相关文章
-下载http://www.wandoujia.com/apps/com.underwood.monospace?mt=8&uo=4&ct=appcards
+下载  http://www.wandoujia.com/apps/com.underwood.monospace?mt=8&uo=4&ct=appcards
 
 JotterPad
 Android
 相关文章
-下载http://www.wandoujia.com/apps/com.jotterpad.x?mt=8&uo=4&ct=appcards
+下载  http://www.wandoujia.com/apps/com.jotterpad.x?mt=8&uo=4&ct=appcards
 
 MarkdownX
 Android
 相关文章
-下载http://www.wandoujia.com/apps/com.ryeeeeee.markdownx?mt=8&uo=4&ct=appcards
+下载  http://www.wandoujia.com/apps/com.ryeeeeee.markdownx?mt=8&uo=4&ct=appcards
 
 除了便签，在移动平台上写作也是一大需求之一，在应运而生的众多文本编辑应用中，我们选择了轻量简洁的 Monospace Writer、功能强大界面精美的 JotterPad 以及专注 Markdown 写作的 MarkdownX 三款应用作为年度推荐。需要注意的是，Monospace Writer 对中文适配并不完整，一定情况下会出现中文字号混乱现象；JotterPad 功能完善支持自定义字体但需要通过内购才能解锁完整功能，相比之下由国人开发的 MarkdownX 应该是我心中的最佳之选。
 
@@ -203,7 +203,7 @@ iPhone
 Solid Explorer 2.0
 Android
 相关文章
-下载http://coolapk.com/apk/pl.solidexplorer2?mt=8&uo=4&ct=appcards
+下载  http://coolapk.com/apk/pl.solidexplorer2?mt=8&uo=4&ct=appcards
 
 Android 平台上的文件管理器不少，真正让我感到省心的却唯有 Solid Explorer 这一款。颜好、功能完善、操作效率高，我们对一款文件管理器的要求真的不能再多了。
 
@@ -214,7 +214,7 @@ Android 平台上的文件管理器不少，真正让我感到省心的却唯有
 Google Photos
 Android
 相关文章
-下载http://www.coolapk.com/apk/com.google.android.apps.photos?mt=8&uo=4&ct=appcards
+下载  http://www.coolapk.com/apk/com.google.android.apps.photos?mt=8&uo=4&ct=appcards
 
 除了文件，手机里最需要管理的也许就是各式各样的照片了。而说起照片管理，Google Photos 今年则是抢近了风头。从 I/O 大会上宣布用户可使用免费的无限量储存空间到后来一次次更新不断祭出「黑科技」，Google 的自家应用又一次竖起了「业界标杆」。
 
@@ -225,7 +225,7 @@ Android
 Focus
 Android
 相关文章
-下载http://www.coolapk.com/apk/com.franco.focus?mt=8&uo=4&ct=appcards
+下载  http://www.coolapk.com/apk/com.franco.focus?mt=8&uo=4&ct=appcards
 
 关于相册，今年还有一个大新闻——猎豹收购快图。被收购之后的快图人气急转直下，搜寻本地图库的替代品成为了一段时间的搜索热门。
 
@@ -236,7 +236,7 @@ Android
 Pushbullet
 Android
 相关文章
-下载http://www.wandoujia.com/apps/com.pushbullet.android?mt=8&uo=4&ct=appcards
+下载  http://www.wandoujia.com/apps/com.pushbullet.android?mt=8&uo=4&ct=appcards
 
 
 Pasteasy
@@ -253,7 +253,7 @@ iPhone
 AirDroid
 Android
 相关文章
-下载http://www.coolapk.com/apk/com.sand.airdroid?mt=8&uo=4&ct=appcards
+下载  http://www.coolapk.com/apk/com.sand.airdroid?mt=8&uo=4&ct=appcards
 
 当然，说起 Android 平台与其他平台间的文件传输，我们一定不会忘了被不少人誉为「神器」的 Airdroid。与各大手机市场和各大手机助手比起来，Airdroid 的强大和专注显得尤为引人注目；与 Pushbullet 等工具相比，Airdroid 在连接稳定性和易用性上也更胜一筹，利用 Airdroid 的 Android 客户端、Windows 客户端、Mac OS 客户端以及网页客户端，我们可以随时随心地在不同设备之间推送文件和信息。点击查看 [Airdroid 相关教程](https://sspai.com/search/?q=airdroid)。
 

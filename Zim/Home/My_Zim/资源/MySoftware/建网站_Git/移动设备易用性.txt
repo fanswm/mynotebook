@@ -28,7 +28,7 @@ https://www.williamlong.info/archives/5509.html
 
 　　测试结果包括以下两个部分：相应网页在移动设备上所呈现的样貌的屏幕截图，以及该工具发现的所有移动设备可用性问题的列表。与在移动设备上的易用性有关的问题是指会对使用移动（小屏幕）设备访问相应网页的用户造成影响的问题，包括字体过小（在小屏幕上很难看清楚）和使用 Flash（大多数移动设备都不支持 Flash）等等。
 
-　　有时候，测试结果展示的屏幕截图并不正常，可能是测试无法加载相应网页所用的所有资源，会显示“网页包含无法加载的资源”的警告消息，这些资源是指网页包含的外部元素，如图片、CSS 或脚https://www.williamlong.info/archives/5509.html
+　　有时候，测试结果展示的屏幕截图并不正常，可能是测试无法加载相应网页所用的所有资源，会显示“网页包含无法加载的资源”的警告消息，这些资源是指网页包含的外部元素，如图片、CSS 或脚  https://www.williamlong.info/archives/5509.html
 本文件。导致出现该问题的最主要原因可能是网站站长设置robots.txt禁止搜索引擎访问相应资源，只需修改robots.txt，取消禁止搜索引擎访问此资源即可。
 
 　　工具优化指南
@@ -54,10 +54,10 @@ https://www.williamlong.info/archives/5509.html
 
 @media screen and (max-width:640px) {
   #divMain {
-    width:100%;
+	width:100%;
   }
   #divSidebar {
-    display:none;
+	display:none;
   }
 }
 
@@ -67,7 +67,7 @@ https://www.williamlong.info/archives/5509.html
 
 @media screen and (max-width:640px) {
   p {
-    line-height:150%;
+	line-height:150%;
   }
 }
 
