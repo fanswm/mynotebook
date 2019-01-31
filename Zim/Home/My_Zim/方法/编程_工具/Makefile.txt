@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-31T15:26:59+08:00
+
+====== Makefile ======
+Created 星期四 31 一月 2019
+
+$<					预置条件
+$@					目标
+touch file-{1..9}.txt: 	创建9个文件：file-1.txt, file-2.txt, .., 注意是两个点儿
+%					匹配变量集中的任意一个目标

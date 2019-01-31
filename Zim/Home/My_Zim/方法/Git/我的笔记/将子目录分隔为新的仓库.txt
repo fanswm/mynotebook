@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-31T15:20:57+08:00
+
+====== 将子目录分隔为新的仓库 ======
+Created 星期四 31 一月 2019
+
+有时，你可能需要将Git仓库中某个特定的目录转换为一个全新的仓库。这可以通过git filter-branch来实现：$ git filter-branch --prune-empty --subdirectory-filtermaster
+# Filter the master branch to your directory and remove empty commits
+Rewrite 48dc599c80e20527ed902928085e7861e6b3cbe6 (89/89)
+Ref 'refs/heads/master' was rewritten
+现在，仓库会包含指定子目录中的所有文件。虽然之前的所有文件都会被删除，但他们依旧存在于Git历史中。现在可以将新的本地仓库推送到远程了。
