@@ -30,3 +30,5 @@ typora
 snippetstore: 代码片段管理
 anaconda
 更改键盘映射：pgup->up,pgdn->down,Menu->Home,Contrl_R->End.
+更改pip镜像为清华；
+sudo apt install trash-cli; alias rm='trash-put'

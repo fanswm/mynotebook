@@ -122,13 +122,24 @@ conda create -n python34 python=3.4 anaconda
 设置国内镜像
 如果需要安装很多packages，你会发现conda下载的速度经常很慢，因为Anaconda.org的服务器在国外。所幸的是，清华TUNA镜像源有Anaconda仓库的镜像，我们将其加入conda的配置即可：
 
-# 添加Anaconda的TUNA镜像
+__# 添加Anaconda的TUNA镜像__
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 # TUNA的help中镜像地址加有引号，需要去掉
+
+__清华官方教程：__
+UNA 还提供了 Anaconda 仓库的镜像，运行以下命令:
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --set show_channel_urls yes
+即可添加 Anaconda Python 免费仓库。
+
+运行 conda install numpy 测试一下吧。
 
 # 设置搜索时显示通道地址
 conda config --set show_channel_urls yes
 执行完上述命令后，会生成~/.condarc(Linux/Mac)或C:\Users\USER_NAME\.condarc文件，记录着我们对conda的配置，直接手动创建、编辑该文件是相同的效果。
+__#启动图形界面：__
+`anaconda-navigator`
 
 跋
 Anaconda具有跨平台、包管理、环境管理的特点，因此很适合快速在新的机器上部署Python环境。总结而言，整套安装、配置流程如下：
