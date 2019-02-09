@@ -11,7 +11,7 @@ https://en.wikipedia.org/wiki/Alpine_(email_client)
 
 为什么我仍然喜欢用 Alpine 在 Linux 终端中发送电子邮件
 2018-08-31 20:13
-编译自：https://opensource.com/article/18/8/love-alpine%E4%BD%9C%E8%80%85： Heiko Ossowski
+编译自：https://opensource.com/article/18/8/love-alpine 作者： Heiko Ossowski
 原创：LCTT https://linux.cn/article-9967-1.html 译者： geekpi
 
 这个免费的邮件客户端使用直观、易于定制，并且可以在许多操作系统上使用。
@@ -39,7 +39,7 @@ Alpine 设置配置屏幕
 Alpine 设置配置屏幕
 请注意如何输入 SNMP 和 IMAP 服务器，因为这与那些有辅助助手和预填字段的邮件客户端不同。如果你像这样输入“服务器/SSL/用户”：
 
-imap.myprovider.com:993/ssl/user=max@example.com
+imap.myprovider.com: 993/ssl/user=max@example.com
 Alpine 会询问你是否使用“收件箱”（选择“是”）并在“服务器”两边加上大括号。完成后，按下 E（“退出设置”）并按下 Y（“是”）提交更改。回到主菜单，然后你可以移动到文件夹列表和收件箱以查看是否有邮件（系统将提示你输入密码）。你现在可以使用 > 和 < 进行移动。
 
 在 Apline 中浏览消息索引

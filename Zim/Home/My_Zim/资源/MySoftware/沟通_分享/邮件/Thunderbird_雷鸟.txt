@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-10-24T14:22:28+08:00
 
-====== Thunderbird ======
+====== Thunderbird 雷鸟 ======
 Created Wednesday 24 October 2018
 
 Thunderbird[https://www.thunderbird.net/] 是最受欢迎的电子邮件客户端之一。它的优点包括免费、开源、可定制、功能丰富，而且最重要的是安装过程也很简便。

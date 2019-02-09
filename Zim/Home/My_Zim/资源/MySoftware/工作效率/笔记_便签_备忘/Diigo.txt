@@ -7,3 +7,5 @@ Creation-Date: 2019-01-12T13:35:16+08:00
 
 https://www.diigo.com/
 我用 Diigo 处理碎片化信息，不仅仅是收集那么简单 http://sspai.com/post/52289
+
+Diigo允许您注释和突出显示网站的部分内容。在学习新话题时，我用它来注释重要信息。
