@@ -32,7 +32,7 @@ anaconda
 更改键盘映射：pgup->up,pgdn->down,Menu->Home,Contrl_R->End.
 更改pip镜像为清华；
 sudo apt install trash-cli; alias rm='trash-put'
-xmind8: download; sudo [[./setup.sh]]; 
+xmind8: download; sudo ./setup.sh; 
 sudo dpkg -i jdk-11.0.2.deb
 sudo apt install openshot-qt
 
