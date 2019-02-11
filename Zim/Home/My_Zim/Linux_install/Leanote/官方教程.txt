@@ -1,0 +1,438 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-10T21:30:55+08:00
+
+官方教程
+Created Sunday 10 February 2019
+
+Leanote 二进制版详细安装教程 Mac and Linux
+life edited this page Jan 10, 2017 · 4 revisions
+本教程适合 Mac 及 linux 用户的二进制版安装。
+
+Mac, Linux 用户的源码版安装，参见这里。
+Windows 用户的二进制版安装，参见这里。
+Windows 用户的源码版安装，参见这里。
+安装步骤:
+
+下载 leanote 二进制版。
+安装 mongodb。
+导入初始数据。
+配置 leanote。
+运行 leanote。
+1. 下载 leanote 二进制版
+
+由此处下载 leanote 最新二进制版。
+
+假设将文件下载到 /home/user1 目录下, 解压文件从而在 /home/user1 目录下生成 leanote目录：
+
+$> cd /home/user1
+$> tar -xzvf leanote-darwin-amd64.v2.0.bin.tar.gz
+2. 安装 mongodb
+
+2.1 安装 mongodb
+
+到 mongodb 官网 下载相应系统的最新版安装包，或者从以下链接下载旧版本：
+
+64位 linux mongodb 3.0.1 下载链接: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.1.tgz
+下载到 /home/user1下, 直接解压即可:
+
+$> cd /home/user1
+$> tar -xzvf mongodb-linux-x86_64-3.0.1.tgz/
+为了快速使用mongodb命令, 可以配置环境变量。编辑 ~/.profile或/etc/profile 文件， 将mongodb/bin路径加入即可:
+
+$> sudo vim /etc/profile
+此处实例使用了vim文本编辑器，你可以使用自己熟悉的编辑器。
+
+在/etc/profile中添加以下行，注意把用户名（user1）和相应的文件目录名（mongodb-linux-x86_64-3.0.1）替换成自己系统中的名称：
+
+export PATH=$PATH:/home/user1/mongodb-linux-x86_64-3.0.1/bin
+保存修改后，在终端运行以下命令使环境变量生效:
+
+$> source /etc/profile
+2.2 测试mongodb安装
+
+先在/home/user1下新建一个目录data存放mongodb数据:
+
+mkdir /home/user1/data
+用以下命令启动mongod:
+
+mongod --dbpath /home/user1/data
+这时mongod已经启动，重新打开一个终端, 键入mongo进入交互程序：
+
+$> mongo
+> show dbs
+...数据库列表
+mongodb安装到此为止, 下面为mongodb导入leanote初始数据。
+
+3. 导入初始数据
+
+leanote初始数据存放在 /home/user1/leanote/mongodb_backup/leanote_install_data中。
+
+打开终端， 输入以下命令导入数据。
+
+$> mongorestore -h localhost -d leanote --dir /home/user1/leanote/mongodb_backup/leanote_install_data/
+现在在mongodb中已经新建了leanote数据库, 可用命令查看下leanote有多少张"表":
+
+$> mongo
+> show dbs #　查看数据库
+leanote	0.203125GB
+local	0.078125GB
+> use leanote # 切换到leanote
+switched to db leanote
+> show collections # 查看表
+files
+has_share_notes
+note_content_histories
+note_contents
+....
+初始数据的users表中已有2个用户:
+
+user1 username: admin, password: abc123 (管理员, 只有该用户才有权管理后台, 请及时修改密码)
+user2 username: demo@leanote.com, password: demo@leanote.com (仅供体验使用)
+4. 配置leanote
+
+leanote的配置存储在文件 conf/app.conf 中。
+
+请务必修改app.secret一项, 在若干个随机位置处，将字符修改成一个其他的值, 否则会有安全隐患!
+
+其它的配置可暂时保持不变, 若需要配置数据库信息, 请参照 leanote问题汇总。
+
+5. 运行leanote
+
+注意: 在此之前请确保mongodb已在运行!
+
+新开一个窗口, 运行:
+
+$> cd /home/user1/leanote/bin
+$> bash run.sh
+最后出现以下信息证明运行成功:
+
+...
+TRACE 2013/06/06 15:01:27 watcher.go:72: Watching: /home/life/leanote/bin/src/github.com/leanote/leanote/conf/routes
+Go to /@tests to run the tests.
+Listening on :9000...
+恭喜你, 打开浏览器输入: http://localhost:9000 体验leanote吧!
+
+注意!!!!!!!!!!!!!!
+
+按照本教程启动Mongodb是没有权限控制的, 如果你的Leanote服务器暴露在外网, 任何人都可以访问你的Mongodb并修改, 所以这是极其危险的!!!!!!!!!!! 请务必为Mongodb添加用户名和密码并以auth启动, 方法请见: 为mongodb数据库添加用户
+
+https://github.com/leanote/leanote/wiki/Leanote-二进制版详细安装教程----Mac-and-Linux
+
+
+本文是关于Leanote安装/配置的一些问题 (English version), 关于Leanote的使用教程请参照 Leanote使用教程集.
+
+在使用或安装Leanote的任何疑问, 请加Leanote官方QQ群 256076853 进行讨论 或 联系 leanote@leanote.com.
+
+欢迎为Leanote作贡献, 一个issue或在文档上一些改进都是对Leanote最好的支持!
+
+目录:
+
+运行出错 "no reachable server"
+安装Leanote后运行出错
+Leanote运行成功, 但不能登录
+修改Leanote运行端口
+如何绑定域名?
+为mongodb数据库添加用户
+为Leanote指定超级管理员帐户(admin用户)
+为Leanote配置https
+Import of github.com/revel/revel/modules/testrunner failed
+开发版如何更新leanote?
+二进制版如何更新leanote?
+为什么需要 site.url
+客户端不能同步图片
+导出PDF配置 wkhtmltopdf
+不能通过IP访问
+no reachable server
+
+请确保数据库是否启动, 如果确定已启动 可以 尝试将 conf/app.conf db.host=localhost 改为 db.host=127.0.0.1
+
+修改后请重新启动Leanote.
+
+安装Leanote后运行出错
+
+如果出现以下问题:
+
+Go to /@tests to run the tests.
+panic: auth fails
+
+goroutine 1 [running]:
+github.com/leanote/leanote/app/db.Init()
+	/home/life/gopackage1/src/github.com/leanote/leanote/app/db/Mgo.go:64 +0x356
+Leanote运行出错90%的原因是数据库的问题, 请检查:
+
+数据库是否启动了?
+如果数据库是以auth方式启动的, 请检查conf/app.conf是否配置了正确的数据库用户名和密码
+注意, 默认的conf/app.conf 数据库配置如下:
+
+# mongdb
+db.host=localhost
+db.port=27017
+db.dbname=leanote # required
+db.username= # if not exists, please leave it blank
+db.password= # if not exists, please leave it blank
+# or you can set the mongdb url for more complex needs the format is:
+# mongodb://myuser:mypass@localhost:40001,otherhost:40001/mydb
+# db.url=mongodb://root:root123@localhost:27017/leanote
+db.urlEnv=${MONGODB_URL} # set url from env
+即数据库名为leanote, 用户名和密码为空, 请检查是否正确.
+
+Leanote运行成功, 但不能登录
+
+原因: 数据库已停止运行, 请重新启动数据库和Leanote.
+
+如果数据库在运行, 请重新启动Leanote.
+
+修改Leanote运行端口
+
+比如想以8080端口启动.
+
+修改conf/app.conf:
+
+http.port=8080
+site.url= http://localhost:8080
+请重启Leanote, 使用 http://localhost:8080访问.
+
+如何绑定域名?
+
+比如想绑定域名a.com到你运行Leanote服务器, 你需要将leanote以80端口运行, 请修改conf/app.conf的如下配置:
+
+http.port=80
+site.url= http://a.com
+然后启动Leanote. 当然你还需要将a.com绑定ip到Leanote服务器.
+
+如果服务器上已有其它程序运行了80端口, 怎么办呢? 请google或百度下 "使用nginx分发请求到不同端口".
+
+为mongodb数据库添加用户
+
+像mysql一样有root用户, mongodb初始是没有用户的, 这样很不安全, 所以要为leanote数据库新建一个用户来连接leanote数据库(注意, 并不是为leanote的表users里新建用户, 而是新建一个连接leanote数据库的用户, 类似mysql的root用户).
+
+mognodb v2与v3创建用户命令有所不同
+
+mongodb v2 创建用户如下:
+
+# 首先切换到leanote数据库下
+> use leanote;
+# 添加一个用户root, 密码是abc123
+> db.addUser("root", "abc123");
+{
+	"_id" : ObjectId("53688d1950cc1813efb9564c"),
+	"user" : "root",
+	"readOnly" : false,
+	"pwd" : "e014bfea4a9c3c27ab34e50bd1ef0955"
+}
+# 测试下是否正确
+> db.auth("root", "abc123");
+1 # 返回1表示正确
+mongodb v3 创建用户如下:
+
+# 首先切换到leanote数据库下
+> use leanote;
+# 添加一个用户root, 密码是abc123
+> db.createUser({
+    user: 'root',
+    pwd: 'abc123',
+    roles: [{role: 'dbOwner', db: 'leanote'}]
+});
+# 测试下是否正确
+> db.auth("root", "abc123");
+1 # 返回1表示正确
+用户添加好后重新运行下mongodb, 并开启权限验证. 在mongod的终端按ctrl+c即可退出mongodb.
+
+启动mongodb:
+
+$> mongod --dbpath /home/user1/data --auth
+还要修改配置文件 : 修改 leanote/conf/app.conf:
+
+db.host=localhost
+db.port=27017
+db.dbname=leanote # required
+db.username=root # if not exists, please leave blank
+db.password=abc123 # if not exists, please leave blank
+为Leanote指定超级管理员帐户(admin用户)
+
+Leanote默认超级管理员为admin, 且一旦不小心修改了username则不能改回. 此时可修改配置文件app.conf, 比如指定用户life为超级管理员, 修改或/添加一行:
+
+adminUsername=life
+为Leanote配置https
+
+1. 生成SSL证书
+
+可以在网上买一个, 或者自己做一个. 这里有一个shell脚本可以自动生成证书: (cert.sh)
+
+#!/bin/sh
+
+# create self-signed server certificate:
+
+read -p "Enter your domain [www.example.com]: " DOMAIN
+
+echo "Create server key..."
+
+openssl genrsa -des3 -out $DOMAIN.key 1024
+
+echo "Create server certificate signing request..."
+
+SUBJECT="/C=US/ST=Mars/L=iTranswarp/O=iTranswarp/OU=iTranswarp/CN=$DOMAIN"
+
+openssl req -new -subj $SUBJECT -key $DOMAIN.key -out $DOMAIN.csr
+
+echo "Remove password..."
+
+mv $DOMAIN.key $DOMAIN.origin.key
+openssl rsa -in $DOMAIN.origin.key -out $DOMAIN.key
+
+echo "Sign SSL certificate..."
+
+openssl x509 -req -days 3650 -in $DOMAIN.csr -signkey $DOMAIN.key -out $DOMAIN.crt
+假设得到了两个文件: a.com.crt, a.com.key
+
+2. 配置Nginx
+
+假设Leanote运行的端口是9000, 域名为a.com, 那么nginx.conf可以配置如下:
+
+# 本配置只有http部分, 不全
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+    
+    upstream  a.com  {
+        server   localhost:9000;
+    }
+
+    # http
+    server
+    {
+        listen  80;
+        server_name  a.com;
+        
+        # 强制https
+        # 如果不需要, 请注释这一行rewrite
+        rewrite ^/(.*) https://jp_linode2.com/$1 permanent;
+        
+        location / {
+            proxy_pass        http://a.com;
+            proxy_set_header   Host             $host;
+            proxy_set_header   X-Real-IP        $remote_addr;
+            proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+        }
+    }
+    
+    # https
+    server
+    {
+        listen  443 ssl;
+        server_name  a.com;
+        ssl_certificate     /root/a.com.crt; # 修改路径, 到a.com.crt, 下同
+        ssl_certificate_key /root/a.com.key;
+        location / {
+            proxy_pass        http://a.com;
+            proxy_set_header   Host             $host;
+            proxy_set_header   X-Real-IP        $remote_addr;
+            proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+        }
+    }
+}
+Import of github.com/revel/revel/modules/testrunner failed
+
+1.0版之前(beta版)会遇到这个问题, 1.0采用revel-0.12, 所以不会遇到这个问题.
+
+Failed to load module.  Import of github.com/revel/revel/modules/testrunner failed: cannot find package "github.com/revel/revel/modules/testrunner" in any of:
+	/Users/life/app/go1.4/src/github.com/revel/revel/modules/testrunner (from $GOROOT)
+	/Users/life/Documents/Go/package_base/src/github.com/revel/revel/modules/testrunner (from $GOPATH)
+revel 0.12 版配置不一样, 请修改app.conf
+
+module.static=github.com/revel/modules/static		 	
+module.testrunner=github.com/revel/modules/testrunner	 
+开发版如何更新leanote?
+
+可以使用git pull得到leanote上最新版本, 如果你已修改了leanote, 可以先fetch(推荐使用fetch的方式)最新到本地, 再与本地的合并. 如:
+
+git fetch origin master:tmp # 得到远程最新版本, 别名为tmp
+git diff tmp # 查看tmp与本地的不同
+git merge tmp # 合并到本地
+如果不能用git方式同步源码, 请下载 https://github.com/leanote/leanote
+
+请先备份leanote之前的目录, 以防万一
+将下载好的替换之前的leanote
+将之前版本下的
+/public/upload/ 目录
+/files/ 目录
+/conf/app.conf 移到新版下相应位置.
+重启Leanote.
+
+如果运行有问题, 如 "cannot find package "github.com/PuerkitoBio/goquery" in any of:..." 类似的信息, 原因是Leanote增加了新的依赖, 此时可以使用go get命令下载新包, 如下载"github.com/PuerkitoBio/goquery"
+
+go get github.com/PuerkitoBio/goquery
+或下载依赖包与源码全集: https://github.com/leanote/leanote-all
+
+二进制版如何更新leanote?
+
+请下载最新的leanote二进制版, 将之前版本下的
+
+/public/upload/ 目录
+/files/ 目录
+/conf/app.conf
+移到新版下相应位置.
+
+在新版下运行leanote.
+
+为什么需要 site.url
+
+site.url是外网可访问的域名, 比如你可以配置为http://a.com, 但在运行leanote可以设端口为9000, 再通过Nginx转发到9000. 如果外网地址是80端口, 请不要填写http://a.com:80, 而只要为http://a.com即可!
+
+site.url用于生成笔记内的图片/附件路径.
+
+若使用nginx转发到https方式部署leanote，site.url需要配置成https://a.com ；否则在博客页面输出的css和js是以http链接形式展现在html中，高版本浏览器比如firefox会直接block掉这部分内容，从而页面显示不正常。更多信息请查看https://github.com/leanote/leanote/issues/228
+
+客户端不能同步图片
+
+请确保conf/app.conf的site.url和在客户端登录时填写的自建服务地址相同!
+
+导出PDF配置 wkhtmltopdf
+
+Leanote的PDF导出使用了wkhtmltopdf, 所以需要先安装wkhtmltopdf, 然后以管理员身份登录Leanote管理后台配置wkhtmltopdf路径.
+
+下文讲解如何安装wkhtmltopdf.
+
+源码编译安装
+
+源码编译安装不会出现依赖的问题，wkhtmltopdf提供的编译脚本已经包含了相关依赖库的下载和安装过程，具体编译请查看wkhtmltopdf的源码包中的install.md文件。
+
+二进制版本wkhtmltopdf安装 [推荐]
+
+下载wkhtmltopdf,选择对应的版本，下载下来后通过rpm -ivh命令进行安装。
+
+然后就会看到缺少一些依赖，所以要安装一些依赖库。
+
+安装wkhtmltopdf的依赖包：
+
+yum install -y fontconfig libX11 libXext libXrender xorg-x11-fonts-Type1 xorg-x11-fonts-75dpi libpng
+安装完后再通过rpm -ivh命令安装wkhtmltopdf。
+
+测试wkhtmltopdf
+
+使用命令wkhtmltopdf http://google.com google.pdf，若没有问题则安装ok。若提示缺少库无法运行，则可以通过ldd wkhtmltopdf，查看缺少什么依赖库，然后再安装缺少的依赖库。
+
+可能部分机器会遇到libpng提示缺少的问题，原因是直接安装的版本过高，某些版本wkhtmltopdf预编译版本依赖的libpng版本要低一点，通过yum provides *libpng12.so.0*，找到对应的版本，然后在进行安装yum install libpng12-1.2.50-6.el7.x86_64。
+
+中文问题
+
+在测试了将google页面导出成pdf，并检查pdf内容正常后，可以试一下使用命令wkhtmltopdf http://baidu.com baidu.pdf看一下中文页面是否能正常导出。若导出后中文内容为空白则是linux系统缺少中文字体。可以从windwows机器的windwows/fonts目录拷贝几个中文字体文件(微软雅黑之类的)到linux系统的/usr/share/fonts目录，然后再去测试下导出百度页面。
+
+不能导出PDF?
+
+如果导出PDF没有出现下载文件的提示, 证明导出出错, 请按照以下步骤检查:
+
+wkhtmltopdf安装是否成功? 请通过 wkhtmltopdf http://baidu.com baidu.pdf 检查
+wkhtmltopdf的路径在Leanote是否正确设置? 请复制你设置的路径到控制台导出试试, 比如 /usr/bin/wkhtmltopdf http://baidu.com baidu.pdf
+导出还有问题? 请检查你的conf/app.conf中设置的site.url是否可以访问, Leanote导出PDF时会访问笔记链接, 这个链接的前缀就是 site.url
+不能通过IP访问
+
+2.6版默认绑定localhost, 不能通过ip访问Leanote,
+
+请修改 app.conf
+
+http.addr=0.0.0.0 # listen on all ip addresses
+重启Leanote
+
+https://github.com/leanote/leanote/wiki/QA#如何绑定域名

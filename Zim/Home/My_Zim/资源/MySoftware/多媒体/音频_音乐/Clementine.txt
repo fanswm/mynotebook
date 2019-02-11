@@ -13,3 +13,22 @@ $ sudo add-apt-repository ppa:me-davidsansome/clementine
 $ sudo apt-get update
 $ sudo apt-get install clementine
 https://www.clementine-player.org/
+
+我想从我用来许多年的默认选项的播放器开始。Clementine[1] 可能是最好的平衡了易用性与灵活性的播放器。Clementine 是新停摆的 Amarok[2] 音乐播放器的复刻，但它不仅限于 Linux； Clementine 在 Mac OS 和 Windows 平台上也可以获得。它的一系列特性十分惊艳，包括：
+
+內建的均衡器
+可定制的界面（将现在的专辑封面显示成背景，见图一）
+播放本地音乐或者从 Spotify、Last.fm 等播放音乐
+便于库导航的侧边栏
+內建的音频转码（转成 MP3、OGG、Flac 等）
+通过 安卓应用[3] 远程控制
+便利的搜索功能
+选项卡式播放列表
+简单创建常规和智能化的播放列表
+支持 CUE 文件
+支持标签
+图一：Clementine 界面可能有一点老派，但是它不可思议得灵活好用。
+图一：Clementine 界面可能有一点老派，但是它不可思议得灵活好用。
+在所有我用过的音乐播放器中，Clementine 是目前为止功能最多也是最容易使用的。它同时也包含了你能在 Linux 音乐播放器中找到的最好的均衡器（有十个频带可以调）。尽管它的界面不够时髦，但它创建、操控播放列表的能力是无与伦比的。如果你的音乐集很大，同时你想完全操控你的音乐集的话，这就是你想要的播放器。
+
+Clementine 可以在标准仓库中找到。它可以从你的发行版的软件中心或通过命令行来安装。

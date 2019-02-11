@@ -15,6 +15,7 @@ Created Friday 24 November 2017
 > https://github.com/myusername/Linux_install/blob/master/install_mongodb.md
 
 > https://github.com/myusername/Linux_install/blob/master/install_golang.md
+`sudo apt install mongodb`
 
 ## 导入初始数据:
 > leanote初始数据存放在 `/home/user1/leanote/mongodb_backup/leanote_install_data`中。
@@ -69,7 +70,7 @@ Listening on :9000...
 
 > 恭喜你, 打开浏览器输入: http://localhost:9000 体验leanote吧!
 
-# at pi:(官方教程)
+__# at pi:(官方教程)__
 
 ## 安装go语言
 leanote是基于golang开发的，解释器必然是不可少的 
@@ -77,65 +78,65 @@ life 的推荐是使用 go语言的二进制包。版本在1.3.1以上。
 然而，golang官方没有给出arm的二进制包。ubuntu最新的官方源中的版本为1.2.1。 
 所以只好自己编译。。
 1 . 2 下载golang源码
-  1. wget https://storage.googleapis.com/golang/go1.4.2.src.tar.gz -P /usr/local/src
+1. wget https://storage.googleapis.com/golang/go1.4.2.src.tar.gz -P /usr/local/src
 1 . 3 安装
 1.3.1 解压
-  1. cd /usr/local/src && tar zxvf go1.4.2.src.tar.gz
+1. cd /usr/local/src && tar zxvf go1.4.2.src.tar.gz
 1.3.2 设置编译参数
-  1. export GOROOT=/usr/local/src/go
-  2. export GOOS=linux
-  3. export GOARCH=arm
-  4. export GOARM=7
+1. export GOROOT=/usr/local/src/go
+2. export GOOS=linux
+3. export GOARCH=arm
+4. export GOARM=7
 GOROOT = golang目录 
 GOOS = 编译的目标系统 PS:比如 linux 、 windows 、 freeBSD 等等 
 GOARCH = 编译的目标平台 PS: 368 、 amd64 、 arm 
 GOARM = 表示使用的浮点运算协处理器版本号，只对arm平台有用，可选值有5，6，7。如果是在目标平台上编译源代码，这个值可以不设置，它会自动判断需要使用哪一个版本。
 1.3.3 编译
-  1. cd go/src && ./make.bash
+1. cd go/src && ./make.bash
 src子目录中，主要有all.bash和make.bash两个脚本.两者的区别在于all.bash在编译完成后还会执行一些测试套件.
 2 . 安装mongodb
 同上 天杀的 官方也没有提供 arm 的二进制包。万幸 apt 的版本能用。
 2.1 apt安装mongodb
-  1. apt-get install git mongodb sysv-rc-conf -y
+1. apt-get install git mongodb sysv-rc-conf -y
 2.2 开机启动
-  1. sysv-rc-conf mongodb on
+1. sysv-rc-conf mongodb on
 3 . 安装 leanote
 3.1 创建GO目录
-  1. mdkir /usr/local/gopackage
-  2. ln -s /usr/local/src/go /usr/local/go
+1. mdkir /usr/local/gopackage
+2. ln -s /usr/local/src/go /usr/local/go
 3.2 下载最新开发版本
-  1. cd /usr/local/src && wget https://github.com/leanote/leanote-all/archive/master.zip
-  2. unzip master.zip
-  3. mv leanote-all-master/* /usr/local/gopackage/
+1. cd /usr/local/src && wget https://github.com/leanote/leanote-all/archive/master.zip
+2. unzip master.zip
+3. mv leanote-all-master/* /usr/local/gopackage/
 3.3 添加 环境变量
-  1. cat << EOF >> /etc/profile
-  2. export GOROOT=/usr/local/go
-  3. export GOPATH=/usr/local/gopackage
-  4. export PATH=\$PATH:\$GOPATH/bin:\$GOROOT/bin
-  5. EOF
+1. cat << EOF >> /etc/profile
+2. export GOROOT=/usr/local/go
+3. export GOPATH=/usr/local/gopackage
+4. export PATH=\$PATH:\$GOPATH/bin:\$GOROOT/bin
+5. EOF
 3.4 安装必要包
-  1. apt-get install -y git-core mercurial openssh-server openssh-client
-  2. go get github.com/revel/cmd/revel
-  3. go get github.com/leanote/leanote/app
+1. apt-get install -y git-core mercurial openssh-server openssh-client
+2. go get github.com/revel/cmd/revel
+3. go get github.com/leanote/leanote/app
 3.5 导入数据库文件
-  1. mongorestore -h localhost -d leanote --directoryperdb /usr/local/gopackage/src/github.com/leanote/leanote/mongodb_backup/leanote_install_data/
+1. mongorestore -h localhost -d leanote --directoryperdb /usr/local/gopackage/src/github.com/leanote/leanote/mongodb_backup/leanote_install_data/
 3.6 配置leanote
-  1. vim /usr/local/gopackage/src/github.com/leanote/leanote/conf/app.conf
+1. vim /usr/local/gopackage/src/github.com/leanote/leanote/conf/app.conf
 主要修改
   ●  http.port=8080
   ●  site.url=http://192.168.1.1:8080
   ●  db.username	mongoadmin
   ●  db.password	mongo+简
 4 开机运行 leanote
-  1. vim /etc/rc.local
-  2. exit前添加
-  3. mongod --dbpath=/var/lib/mongodb &
-  4. export GOROOT=/usr/local/go
-  5. export GOPATH=/usr/local/gopackage
-  6. export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
-  7. revel run github.com/leanote/leanote &
+1. vim /etc/rc.local
+2. exit前添加
+3. mongod --dbpath=/var/lib/mongodb &
+4. export GOROOT=/usr/local/go
+5. export GOPATH=/usr/local/gopackage
+6. export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+7. revel run github.com/leanote/leanote &
 
-# at Win10:
+__# at Win10:__
 $ go version
 go version go1.4.2 windows/386
 
@@ -162,7 +163,7 @@ $ revel run github.com\\leanote\\leanote
 user1 username: admin, password: abc123 (管理员, 只有该用户可以管理后台)
 user2 username: demo@leanote.com, password: demo@leanote.com (仅共体验使用)
 
-# at pi:
+__# at pi:__
 
 ## 添加服务脚本:
 

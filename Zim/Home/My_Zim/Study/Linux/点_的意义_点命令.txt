@@ -2,14 +2,14 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-01-25T16:33:36+08:00
 
-====== 点 的意义 ======
+====== 点 的意义 点命令 ======
 创建日期 星期五 25 一月 2019
 
 点的含义
 2019-01-22 00:02
 
-译自：https://www.linux.com/blog/learn/2019/1/linux-tools-meaning-dot%E4%BD%9C%E8%80%85： Paul Brown
-原创：LCTT https://linux.cn/article-10465-1.html%E8%AF%91%E8%80%85： Asche
+译自：https://www.linux.com/blog/learn/2019/1/linux-tools-meaning-dot作者： Paul Brown
+原创：LCTT https://linux.cn/article-10465-1.html译者： Asche
 
 Paul Brown 解释了 Linux shell 命令中那个不起眼的“点”的各种意思和用法。
 

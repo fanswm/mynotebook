@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-12-03T12:10:11+08:00
 
-====== 我的目录 ======
+====== 我的目录 目录结构 ======
 Created 星期日 03 十二月 2017
 
 github/code/
@@ -24,3 +24,6 @@ jhk:
 	~/
 	pigit/code/
 	pigit/mynotebook/Zim/
+
+pi:
+/home/app/

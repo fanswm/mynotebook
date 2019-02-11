@@ -1,4 +1,4 @@
-﻿Content-Type: text/x-zim-wiki
+Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-11-21T21:37:53+08:00
 
@@ -28,7 +28,7 @@ $ crontab -e
 [root@localhost ~]# vi /etc/rc.local
 在文件的末尾加上一行：/usr/bin/phddns -c /etc/phlinux.conf -d
 以后台模式启动花生壳并检查运行情况：
-/usr/bin/phddns -c /etc/phlinux.conf -d 
+__/usr/bin/phddns__ -c /etc/phlinux.conf -d 
 
 将花生壳加到系统启动时运行：
 nano /etc/rc.local
