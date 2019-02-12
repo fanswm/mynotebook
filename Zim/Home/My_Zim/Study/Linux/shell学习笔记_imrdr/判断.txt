@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-12T11:34:29+08:00
+
+====== 判断 ======
+创建日期 星期二 12 二月 2019
+
+回传值：
++ bash `echo $?`
++ fish: `echo $status`
+
+> 成功： return 0
+else return 非0
+
