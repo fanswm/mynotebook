@@ -1,18 +1,18 @@
-﻿Content-Type: text/x-zim-wiki
+Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-11-21T21:38:38+08:00
 
-====== VNC install ======
+====== VNC server and viewer ======
 创建日期 星期三 21 十一月 2018
 
 安装VNC:
 $ sudo apt-get install tightvncserver
-设置密码:
+__设置密码:__
 vncpasswd
 （先输入操作密码两次，然后会询问是否设置一个查看(view-only)密码，
 按自己喜欢，一般没必要。）
 
-设置开机启动，需要在/etc/init.d/中创建一个文件。例如
+__设置开机启动__，需要在/etc/init.d/中创建一个文件。例如
 tightvncserver：
 sudo nano /etc/init.d/tightvncserver
 20160327:开机启动失败,后来改用:

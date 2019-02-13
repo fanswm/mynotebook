@@ -35,4 +35,6 @@ sudo apt install trash-cli; alias rm='trash-put'
 xmind8: download; sudo ./setup.sh; 
 sudo dpkg -i jdk-11.0.2.deb
 sudo apt install openshot-qt
-
+sudo apt install libav-tools
+pip3 install instantmusic
+[[方法:Linux:系统:清理开机启动项]]
