@@ -5,7 +5,7 @@ Creation-Date: 2017-11-24T11:59:07+08:00
 ====== 清理开机启动项 ======
 Created Friday 24 November 2017
 
-## 查看开机启动项
+__## 查看开机启动项__
 + `systemctl list-unit-files --type=service | grep enabled`
 
 ## 停止项目

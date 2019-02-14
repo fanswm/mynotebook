@@ -14,3 +14,8 @@ server: tightvncserver -name myusername
 client: xxx.xxx.xxx.xxx:5900+number
 
 VNCserver的默认端口是：5900
+
+
+
+SSL/SSH VNC viewer: 
+http://www.karlrunge.com/x11vnc/ssvnc.html
