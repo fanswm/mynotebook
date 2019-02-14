@@ -22,7 +22,7 @@ PanDownload:第三方客户端
 
 修改此项时如果有任务正在下载，需要暂停再开始才会生效！
 
-Aria2配置：参考https://aria2.github.io/manual/en/html/aria2c.html
+Aria2配置：参考 https://aria2.github.io/manual/en/html/aria2c.html
 
 例：修改连接数为64
 

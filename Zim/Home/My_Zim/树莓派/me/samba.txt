@@ -1,8 +1,8 @@
-﻿Content-Type: text/x-zim-wiki
+Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-11-21T21:29:54+08:00
 
-====== samba install ======
+====== samba ======
 创建日期 星期三 21 十一月 2018
 
 $ sudo apt-get install -y samba samba-common-bin
@@ -39,3 +39,11 @@ sudo /etc/init.d/samba restart
 $ crontab -e
 apend:
 */55 * * * * sudo /etc/init.d/samba restart
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# at xubuntu:
+sudo groupadd shares_g     
+sudo useradd -G shares_g shares_u   
+sudo chown -R shares_u:shares_u /home/shares_u/
+sudo vim /etc/samba/smb.conf
