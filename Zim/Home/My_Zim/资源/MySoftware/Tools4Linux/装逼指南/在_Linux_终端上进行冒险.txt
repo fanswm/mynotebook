@@ -1,0 +1,54 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-15T16:33:32+08:00
+
+====== 在 Linux 终端上进行冒险 ======
+创建日期 星期五 15 二月 2019
+
+在 Linux 终端上进行冒险
+2019-02-14 23:36
+
+译自：https://opensource.com/article/18/12/linux-toy-adventure%E4%BD%9C%E8%80%85： Jason Baker
+原创：LCTT https://linux.cn/article-10537-1.html%E8%AF%91%E8%80%85： geekpi
+
+我们的 Linux 命令行玩具日历的最后一天以一场盛大冒险结束。
+
+
+
+今天是我们为期 24 天的 Linux 命令行玩具日历的最后一天。希望你一直有在看，但如果没有，请从头开始[1]，继续努力。你会发现 Linux 终端有很多游戏、消遣和奇怪之处。
+
+虽然你之前可能已经看过我们日历中的一些玩具，但我们希望对每个人而言至少有一件新东西。
+
+今天的玩具是由 Opensource.com 管理员 Joshua Allen Holm[2] 提出的：
+
+“如果你的冒险日历的最后一天不是 ESR（Eric S. Raymond）的开源版的 Adventure 游戏[3] —— 它仍然使用经典的 advent 命令（在 BSD 游戏包中的 adventure） ，我会非常非常非常失望 ;-)“
+
+这是结束我们这个系列的完美方式。
+
+巨洞冒险Colossal Cave Adventure（通常简称 Adventure），是一款来自 20 世纪 70 年代的基于文本的游戏，它引领产生了冒险游戏这个类型的游戏。尽管它很古老，但是当探索幻想世界时，Adventure 仍然是一种轻松消耗时间的方式，就像龙与地下城那样，地下城主可能会引导你穿过一个充满想象的地方。
+
+与其带你了解 Adventure 的历史，我鼓励你去阅读 Joshua 的该游戏的历史[4]这篇文章，以及为什么它几年前会重新复活，并且被重新移植。接着，克隆它的源码[5]并按照安装说明[6]在你的系统上使用 advent 启动游戏。或者，像 Joshua 提到的那样，可以从 bsd-games 包中获取该游戏的另一个版本，该软件包可能存在于你的发行版中的默认仓库。
+
+你有喜欢的命令行玩具认为我们应该介绍么？今天我们的系列结束了，但我们仍然乐于在新的一年中介绍一些很酷的命令行玩具。请在下面的评论中告诉我，我会查看一下。让我知道你对今天玩具的看法。
+
+一定要看看昨天的玩具，能从远程获得乐趣的 Linux 命令[7]，明年再见！
+
+via: https://opensource.com/article/18/12/linux-toy-adventure
+
+作者：Jason Baker[8] 选题：lujun9972[9] 译者：geekpi[10] 校对：wxy[11]
+
+本文由 LCTT[12] 原创编译，Linux中国[13] 荣誉推出
+
+[1]: https://opensource.com/article/18/12/linux-toy-boxes
+[2]: https://opensource.com/users/holmja
+[3]: https://gitlab.com/esr/open-adventure
+[4]: https://opensource.com/article/17/6/revisit-colossal-cave-adventure-open-adventure
+[5]: https://gitlab.com/esr/open-adventure
+[6]: https://gitlab.com/esr/open-adventure/blob/master/INSTALL.adoc
+[7]: https://opensource.com/article/18/12/linux-toy-remote
+[8]: https://opensource.com/users/jason-baker
+[9]: https://github.com/lujun9972
+[10]: https://github.com/geekpi
+[11]: https://github.com/wxy
+[12]: https://github.com/LCTT/TranslateProject
+[13]: https://linux.cn/article-10537-1.html?utm_source=rss&utm_medium=rss
