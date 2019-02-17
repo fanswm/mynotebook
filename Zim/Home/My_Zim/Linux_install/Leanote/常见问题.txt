@@ -78,7 +78,7 @@ Leanote运行成功, 但不能登录
 
 http.port=8080
 site.url=http://localhost:8080
-请重启Leanote, 使用http://localhost:8080访问.
+请重启Leanote, 使用 http://localhost:8080访问.
 
 如何绑定域名?
 
@@ -117,9 +117,9 @@ mongodb v3 创建用户如下:
 > use leanote;
 # 添加一个用户root, 密码是abc123
 > db.createUser({
-    user: 'root',
-    pwd: 'abc123',
-    roles: [{role: 'dbOwner', db: 'leanote'}]
+	user: 'root',
+	pwd: 'abc123',
+	roles: [{role: 'dbOwner', db: 'leanote'}]
 });
 # 测试下是否正确
 > db.auth("root", "abc123");
@@ -179,45 +179,45 @@ openssl x509 -req -days 3650 -in $DOMAIN.csr -signkey $DOMAIN.key -out $DOMAIN.c
 
 # 本配置只有http部分, 不全
 http {
-    include       /etc/nginx/mime.types;
-    default_type  application/octet-stream;
+	include       /etc/nginx/mime.types;
+	default_type  application/octet-stream;
     
-    upstream  a.com  {
-        server   localhost:9000;
-    }
+	upstream  a.com  {
+		server   localhost:9000;
+	}
 
-    # http
-    server
-    {
-        listen  80;
-        server_name  a.com;
+	# http
+	server
+	{
+		listen  80;
+		server_name  a.com;
         
-        # 强制https
-        # 如果不需要, 请注释这一行rewrite
-        rewrite ^/(.*) https://jp_linode2.com/$1 permanent;
+		# 强制https
+		# 如果不需要, 请注释这一行rewrite
+		rewrite ^/(.*) https://jp_linode2.com/$1 permanent;
         
-        location / {
-            proxy_pass        http://a.com;
-            proxy_set_header   Host             $host;
-            proxy_set_header   X-Real-IP        $remote_addr;
-            proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-        }
-    }
+		location / {
+			proxy_pass        http://a.com;
+			proxy_set_header   Host             $host;
+			proxy_set_header   X-Real-IP        $remote_addr;
+			proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+		}
+	}
     
-    # https
-    server
-    {
-        listen  443 ssl;
-        server_name  a.com;
-        ssl_certificate     /root/a.com.crt; # 修改路径, 到a.com.crt, 下同
-        ssl_certificate_key /root/a.com.key;
-        location / {
-            proxy_pass        http://a.com;
-            proxy_set_header   Host             $host;
-            proxy_set_header   X-Real-IP        $remote_addr;
-            proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
-        }
-    }
+	# https
+	server
+	{
+		listen  443 ssl;
+		server_name  a.com;
+		ssl_certificate     /root/a.com.crt; # 修改路径, 到a.com.crt, 下同
+		ssl_certificate_key /root/a.com.key;
+		location / {
+			proxy_pass        http://a.com;
+			proxy_set_header   Host             $host;
+			proxy_set_header   X-Real-IP        $remote_addr;
+			proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+		}
+	}
 }
 Import of github.com/revel/revel/modules/testrunner failed
 
@@ -265,11 +265,11 @@ go get github.com/PuerkitoBio/goquery
 
 为什么需要 site.url
 
-site.url是外网可访问的域名, 比如你可以配置为http://a.com, 但在运行leanote可以设端口为9000, 再通过Nginx转发到9000. 如果外网地址是80端口, 请不要填写http://a.com:80, 而只要为http://a.com即可!
+site.url是外网可访问的域名, 比如你可以配置为http://a.com, 但在运行leanote可以设端口为9000, 再通过Nginx转发到9000. 如果外网地址是80端口, 请不要填写 http://a.com:80, 而只要为 http://a.com即可!
 
 site.url用于生成笔记内的图片/附件路径.
 
-若使用nginx转发到https方式部署leanote，site.url需要配置成https://a.com ；否则在博客页面输出的css和js是以http链接形式展现在html中，高版本浏览器比如firefox会直接block掉这部分内容，从而页面显示不正常。更多信息请查看https://github.com/leanote/leanote/issues/228
+若使用nginx转发到https方式部署leanote，site.url需要配置成 https://a.com ；否则在博客页面输出的css和js是以http链接形式展现在html中，高版本浏览器比如firefox会直接block掉这部分内容，从而页面显示不正常。更多信息请查看 https://github.com/leanote/leanote/issues/228
 
 客户端不能同步图片
 
