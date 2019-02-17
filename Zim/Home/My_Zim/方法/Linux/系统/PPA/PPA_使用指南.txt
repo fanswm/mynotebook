@@ -9,7 +9,7 @@ Ubuntu PPA 使用指南
 2019-01-19 11:02
 
 译自：https://itsfoss.com/ppa-guide/%E4%BD%9C%E8%80%85： Abhishek Prakash
-原创：LCTT https://linux.cn/article-10456-1.html%E8%AF%91%E8%80%85： jlztan
+原创：LCTT https://linux.cn/article-10456-1.html 译者： jlztan
 
 一篇涵盖了在 Ubuntu 和其他 Linux 发行版中使用 PPA 的几乎所有问题的深入的文章。
 
