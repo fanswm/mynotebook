@@ -2,16 +2,12 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-10-22T12:01:25+08:00
 
-====== Browsh ======
+====== Browsh 终端浏览器 ======
 Created Monday 22 October 2018
 
 Browsh
 
 Browsh 是完善的终端网页浏览器。它比 Lynx 更强大，当然更引人注目。 Browsh 以无头模式启动 Firefox Web 浏览器（因此你无法看到它）并在特殊 Web 扩展的帮助下将其与你的终端连接。因此，Browsh 能像 Firefox 一样呈现所有富媒体内容，只是有点像素化的风格。
-
-
-
-
 
 
 安装说明
@@ -20,3 +16,4 @@ Browsh 是完善的终端网页浏览器。它比 Lynx 更强大，当然更引�
 
 sudo dnf install -y https://github.com/browsh-org/browsh/releases/download/v1.4.6/browsh_1.4.6_linux_amd64.rpm
 之后，启动 browsh 命令并给它几秒钟加载。按 Ctrl+L 将焦点切换到地址栏并开始浏览 Web，就像以前一样使用！使用 Ctrl+Q 返回终端。
+https://linux.cn/article-9903-1.html?utm_source=rss&utm_medium=rss

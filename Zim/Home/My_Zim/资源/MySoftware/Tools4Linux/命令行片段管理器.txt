@@ -144,11 +144,11 @@ $ pet list
 $ pet edit
 这将在你的默认文本编辑器中打开所有保存的代码片段，你可以根据需要编辑或更改片段。
 
-[[snippets]]
+snippets
  description = "Remove numbers from output."
  command = "echo 'Hell1o, Welcome1 2to OSTechNix4' | tr -d '1-9'"
  output = ""
-[[snippets]]
+snippets
  description = "Alphabetically sort one line of text"
  command = "\t prev"
  output = ""
