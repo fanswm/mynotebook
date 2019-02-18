@@ -59,11 +59,11 @@ Successfully installed trash-cli-0.17.1.14
 如何使用 Trash-Cli
 Trash-Cli 的使用不难，因为它提供了一个很简单的语法。Trash-Cli 提供了下面这些命令：
 
-trash-put： 删除文件和目录（仅放入回收站中）
-trash-list ：列出被删除了的文件和目录
-trash-restore：从回收站中恢复文件或目录 trash.
-trash-rm：删除回收站中的文件
-trash-empty：清空回收站
+__trash-put： 删除文件和目录（仅放入回收站中）__
+__trash-list ：列出被删除了的文件和目录__
+__trash-restore：从回收站中恢复文件或目录 trash.__
+__trash-rm：删除回收站中的文件__
+__trash-empty：清空回收站__
 下面，让我们通过一些例子来试验一下。
 
 1) 删除文件和目录：在这个例子中，我们通过运行下面这个命令，将 2g.txt 这一文件和 magi 这一文件夹移动到回收站中。

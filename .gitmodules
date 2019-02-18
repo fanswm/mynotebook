@@ -1,0 +1,3 @@
+[submodule "Zim/story"]
+	path = Zim/story
+	url = https://gitlab.com/abstracthex/story
