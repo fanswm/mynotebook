@@ -1,0 +1,335 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-20T16:27:03+08:00
+
+====== 用本地网络控制的树莓派摄影云台 ======
+创建日期 星期三 20 二月 2019
+
+用本地网络控制的树莓派摄影云台
+2018年7月17日 Spoony 未分类 0
+
+MAKER：Mjrovai／译：趣无尽 Cherry（转载请注明出处）
+在前两期的教程中，我们一起学习由多个舵机控制的云台和视频流媒体网站服务器这两个项目。我们学习到如何使用相机（或其他设备）捕捉画面和如何在互联网上流式传输视频。在本教程中，我们将结合之前所学，通过互联网来控制摄像头位置。
+如图所示：
+
+画面显示相机由按钮控制，预编程中固定了云台倾斜角度。 在本教程中，我们还将探索通过互联网控制带摄像头云台的其他替代方案。
+项目框架图：
+
+
+材料清单
+1、树莓派V3 X1
+2、摄像头模块 X1
+3、9G 180°微型舵机X2
+4、迷你平移/倾斜摄像机平台防振照相机支架（2个舵机）
+5、电阻1K欧姆X2（可选）
+6、金属部件
+7、固定带等（用于构建云台平台）
+你可以购买一个平台舵机或自己制作。
+
+该项目中的前三个步骤（安装树莓派照相机、安装FLASK和创建视频流媒体服务器 ）与视频流媒体网站服务器的教程如出一辙。具体细节大家可回顾前期内容，小编不在重复复述。请你点击树莓派+Flask实现视频流媒体WEB服务器。
+请依次进行安装树莓派照相机、安装FLASK和创建视频流媒体服务器，我们接着下一步。
+
+平台移动机制
+
+
+我们的相机可以操作，我们的Flask互联网服务器可以播放视频流，现在让我们安装云台移动机制来远程定位相机。有关详细信息，请访问前期教程：基于树莓派的多舵机控制的定位拍照云台。
+具体回顾其中安装部件和创建 Python 脚本这两个部分。
+
+舵机将连接到外部5V电源，其数据引脚（我的项目中，黄色接线）连接到树莓派GPIO如下：
+GPIO 17 ==>仰角舵机
+GPIO 27 ==>平移舵机
+不要忘记将GND连接在一起 ==> 树莓派 – 舵机 – 外部电源
+
+你可以在树莓派的GPIO和服务器数据输入引脚之间串联一个1K欧姆的电阻。 如果发生舵机故障，这将保护你的树莓派。
+
+我们也可以利用这个机会在虚拟Python环境中测试我们的舵机。
+让我们使用Python脚本在驱动程序中进行测试：
+
+
+from time import sleep
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+ 
+def setServoAngle(servo, angle):
+	pwm = GPIO.PWM(servo, 50)
+	pwm.start(8)
+	dutyCycle = angle / 18. + 3.
+	pwm.ChangeDutyCycle(dutyCycle)
+	sleep(0.3)
+	pwm.stop()
+ 
+if __name__ == '__main__':
+	import sys
+	servo = int(sys.argv[1])
+	GPIO.setup(servo, GPIO.OUT)
+	setServoAngle(servo, int(sys.argv[2]))
+	GPIO.cleanup()
+上述代码的核心是设置舵机和角度的函数。 该函数接收参数、舵机、 GPIO编号和舵机必须定位的角度值。 一旦这个函数的输入是“角度”，我们必须使用之前开发的公式将其转换为百分比的占空比。
+脚本执行时，必须输入参数，舵机GPIO和角度。
+例如：
+
+sudo python angleServoCtrl.py 17 45
+上述命令会将舵机连接到GPIO 17并且以“仰角”45度定位。 一个类似的命令可以用于平移伺服控制（在“方位角”中位置为45度）：
+
+
+sudo python angleServoCtrl.py 27 45
+文件 angleServoCtrl.py可以在我的 GitHub 仓库下载。
+
+通过网络使用按钮来控制摄像头位置
+
+我们开始创建一个新目录：
+
+mkdir PanTiltControl1
+在这个目录树中，我们应该创建环境和文件：
+
+
+├── Documents
+	   └── PanTiltControl1
+			   ├── camera_pi.py
+		 ├── angleServoCtrl.py
+			   ├── appCamPanTilt1.py
+			   ├── templates
+			   |     └── index.html
+			   └── static
+					 └── style.css
+camera_pi.py文件是之前使用过的Miguel脚本和angleServoCtrl.py文件。你可以从我的GitHub仓库中下载。
+现在我们需要appCamPanTilt1.py，index.html和style.css。你可以从我的GitHub仓库下载这些文件，请点击相关链接。注意它们在你的目录上的位置是否正确。
+
+我们来看看index.html：
+
+<html>
+  <head>
+	<title>MJRoBot Lab Live Streaming</title>
+	<link rel="stylesheet" href='../static/style.css'/>
+  </head>
+  <body>
+	<h1>MJRoBot Lab Live Streaming</h1>
+	<h3><img src="{{ url_for('video_feed') }}" width="80%"></h3>
+	<hr>
+	<h4> PAN:  
+		<a href="/pan/30"class="button">30</a>
+		<a href="/pan/45"class="button">45</a>
+		<a href="/pan/60"class="button">60</a>
+		<a href="/pan/75"class="button">75</a>
+		<a href="/pan/90"class="button">90</a>
+		<a href="/pan/105"class="button">105</a>
+		<a href="/pan/120"class="button">120</a>
+		<a href="/pan/135"class="button">135</a>
+		<a href="/pan/150"class="button">150</a>
+		==> Angle: [ {{ panServoAngle }} ]
+	</h4>
+		<h4> TILT: 
+		<a href="/tilt/30"class="button">30</a>
+		<a href="/tilt/45"class="button">45</a>     
+		<a href="/tilt/60"class="button">60</a>
+		<a href="/tilt/75"class="button">75</a>     
+		<a href="/tilt/90"class="button">90</a>
+		<a href="/tilt/105"class="button">105</a>       
+		<a href="/tilt/120"class="button">120</a>
+		<a href="/tilt/135"class="button">135</a>       
+		<a href="/tilt/150"class="button">150</a>
+		==> Angle: [ {{ tiltServoAngle }} ]
+	</h4>
+	<hr>
+	<p> @2018 Developed by MJRoBot.org</p>
+  </body>
+</html>
+index.html是从之前创建过的文件，在流式传输视频时使用过。在这个新建的文件中，每一行代码与页面上显示的按钮有关。
+
+我们来分析其中之一：
+
+1
+<a href="/pan/30"class="button">30</a>
+这是一个简单的HTML超链接，我们将其设计为一个按钮链接。（作为按钮在style.css中描述）。当我们点击这个链接时，我们生成一个“GET/<servo>/<angle>”，其中<servo>是“pan”，<angle>是“30度”。这些参数将传递给网络服务器的应用程序中。（appCamPanTilt1.py）。
+让我们来看看appCamPanTilt1.py上的这部分代码：
+
+
+@app.route("/<servo>/<angle>")
+def move(servo, angle):
+	global panServoAngle
+	global tiltServoAngle
+	if servo == 'pan':
+		panServoAngle = int(angle)
+		os.system("python3 angleServoCtrl.py " + str(panPin) + " " + str(panServoAngle))
+	if servo == 'tilt':
+		tiltServoAngle = int(angle)
+		os.system("python3 angleServoCtrl.py " + str(tiltPin) + " " + str(tiltServoAngle))
+     
+	templateData = {
+	  'panServoAngle'   : panServoAngle,
+	  'tiltServoAngle'  : tiltServoAngle
+	}
+	return render_template('index.html', **templateData)
+在这个例子中，“servo”等于“pan”，下列两行将被执行：
+
+1
+2
+panServoAngle = int(angle)
+os.system("python3 angleServoCtrl.py " + str(panPin) + " " + str(panServoAngle))
+我们在这里所做的与我们在树莓派终端上测试舵机位置时所做是一样的。云台用“27”表示和云台舵机角度用“30”表示。该应用程序将生成命令：
+
+1
+python3 angleServoCtrl 27 30
+请注意，在这种情况下，我们不需要使用“sudo”，因为该应用程序已经开始使用“sudo”。
+这个视频将显示项目如何工作以及如何在树莓派终端上的接受请求：
+
+
+使用增量/减量角度按钮
+
+有时我们只需要几个按钮就可以逐步移动我们的舵机：
+
+平移：向左/向右
+倾斜：向上/向下
+我们也可以使用+/-按钮（增量 /减少角度），你自己去选择。让我们创建一个新目录：
+1
+mkdir PanTiltControl2
+在这个目录中，我们将创建以下环境和文件：
+
+
+├── Documents
+	   └── PanTiltControl2
+			   ├── camera_pi.py
+		 ├── angleServoCtrl.py
+			   ├── appCamPanTilt2.py
+			   ├── templates
+			   |     └── index.html
+			   └── static
+					 └── style.css
+camera_pi.py和angleServoCtrl.py文件与之前使用的文件相同。你可以从我的GitHub仓库下载这两个文件，请点击相关链接或以上相同链接。
+
+现在我们需要appCamPanTilt2.py，index.html和style.css。你可以从我的GitHub仓库下载，请点击相关链接。注意它们在你的目录上的位置是否正确。
+
+我们来看一下新的 index.html：
+
+
+<html>
+  <head>
+	<title>MJRoBot Lab Live Streaming</title>
+	<link rel="stylesheet" href='../static/style.css'/>
+  </head>
+  <body>
+	<h1>MJRoBot Lab Live Streaming</h1>
+	<h3><img src="{{ url_for('video_feed') }}" width="80%"></h3>
+	<hr>
+	<h4> PAN Angle: <a href="/pan/-"class="button">-</a> [ {{ panServoAngle }} ] <a href="/pan/+"class="button">+</a> </h4>
+	<h4> TILT Angle: <a href="/tilt/-"class="button">-</a> [ {{ tiltServoAngle }} ] <a href="/tilt/+"class="button">+</a> </h4> 
+	<hr>
+	<p> @2018 Developed by MJRoBot.org</p>
+  </body>
+</html>
+index.html与上一个非常相似。在这个index.html中代码仅被2行代替，在这里我们只有4个按钮平移 [+]，平移 [ – ]，倾斜 [+]和倾斜 [ – ]。
+我们来分析其中一个按钮：
+
+1
+<a href="/pan/-"class="button">-</a>
+这也是一个简单的HTML超链接，我们将其设计为一个按钮链接（作为按钮在style.css中描述）。当我们点击这个链接时，我们产生一个“GET / <servo> / <Increment or decrement angle>”，其中<servo>是“平移”，< – >是“减小角度”。这些参数将被传送到网络服务器应用程序中（appCamPanTilt2.py）。
+让我们来看看appCamPanTilt2.py上的这部分代码：
+
+
+@app.route("/<servo>/<angle>")
+def move(servo, angle):
+	global panServoAngle
+	global tiltServoAngle
+	if servo == 'pan':
+		if angle == '+':
+			panServoAngle = panServoAngle + 10
+		else:
+			panServoAngle = panServoAngle - 10
+		os.system("python3 angleServoCtrl.py " + str(panPin) + " " + str(panServoAngle))
+	if servo == 'tilt':
+		if angle == '+':
+			tiltServoAngle = tiltServoAngle + 10
+		else:
+			tiltServoAngle = tiltServoAngle - 10
+		os.system("python3 angleServoCtrl.py " + str(tiltPin) + " " + str(tiltServoAngle))
+     
+	templateData = {
+	  'panServoAngle'   : panServoAngle,
+	  'tiltServoAngle'  : tiltServoAngle
+	}
+	return render_template('index.html', **templateData)
+在这个例子中，“servo”等于“平移”，下面将被执行：
+
+
+if angle == '+':
+	panServoAngle = panServoAngle + 10
+else:
+	panServoAngle = panServoAngle - 10
+os.system("python3 angleServoCtrl.py " + str(panPin) + " " + str(panServoAngle)) 
+一旦“角度”等于“ – ”，我们将平台舵机角度减10，并将此参数传递给我们的指令。假设实际的平台舵机的角度是90。新参数将是80。
+
+因此，云台用“27”表示，云台舵机角度用“80”表示。该应用程序将生成命令：
+
+1
+python3 angleServoCtrl 27 80
+请注意，在这种情况下，我们不需要使用“sudo”，因为该应用程序已经开始使用“sudo”。
+网页的工作：
+
+
+使用“POST”方法
+
+有时可能会发送特定的角度命令，如：
+
+平移角度==> 35度
+倾斜角度==> 107度
+这就意味，或者你会在最后一步将你的增量定义为“1”，需要花费很多时间才能达到想要的位置，或者你从网页创建一个POST。让我们探讨这一步的可能性。
+我们再来创建一个新目录：
+
+mkdir PanTiltControl3
+在这个目录中，我们创建以下环境和文件：
+camera_pi.py和angleServoCtrl.py文件与之前使用的文件相同。你可以从我的GitHub仓库下载这两个文件，请点击相关链接或以上相同链接。
+
+现在我们需要appCamPanTilt3.py，index.html和style.css。你可以从我的GitHub仓库下载这些文件，请点击相关链接。注意它们在你的目录上的位置是否正确。
+我们来看看新建的 index.html：
+
+
+<html>
+  <head>
+	<title>MJRoBot Lab Live Streaming</title>
+	<link rel="stylesheet" href='../static/style.css'/>
+  </head>
+  <body>
+	<h1>MJRoBot Lab Live Streaming</h1>
+	<h3><img src="{{ url_for('video_feed') }}" width="80%"></h3>
+	<p> Enter Pan Tilt Servo Angle:
+	<form method="POST">
+		PAN:  <input type="text" name="panServoAngle" value= {{panServoAngle}} size="3">
+		TILT: <input type="text" name="tiltServoAngle" value= {{tiltServoAngle}} size="3">
+		<input type="submit">
+	</form>
+   </p>
+   <hr>
+	<p> @2018 Developed by MJRoBot.org</p>
+  </body>
+</html>
+index.html现在与之前的有点不同。我们将在这里创建一个“表单”，用POST的方法。一个HTML表单输入标签将被用来作为平移/倾斜角度值的参数上传到用户。当按下“提交”按钮时，这些参数将被传递到网络服务器应用程序（appCamPanTilt3.py）。
+我们来看看appCamPanTilt3.py上的这部分代码：
+
+
+@app.route('/', methods=['POST'])
+def my_form_post():
+	global panServoAngle
+	global tiltServoAngle
+ 
+	panNewAngle = int(request.form['panServoAngle'])
+	if (panNewAngle != panServoAngle):
+		panServoAngle = panNewAngle
+		os.system("python3 angleServoCtrl.py " + str(panPin) + " " + str(panServoAngle))
+ 
+	tiltNewAngle = int(request.form['tiltServoAngle'])
+	if (tiltNewAngle != tiltServoAngle):
+		tiltServoAngle = tiltNewAngle
+		os.system("python3 angleServoCtrl.py " + str(tiltPin) + " " + str(tiltServoAngle))
+ 
+	templateData = {
+	  'panServoAngle'   : panServoAngle,
+	  'tiltServoAngle'  : tiltServoAngle
+	}
+	return render_template('index.html', **templateData)
+我们要做的是检查角度发生了变化，是否完成相对应的的指令。
+
+结语
+一如既往，我希望这个项目能够帮助他人进入激动人心的电子世界！
+有关详细信息和最终代码，请访问我的GitHub仓库：WebCam-Pan-Tilt-Control-via-Flask[https://github.com/Mjrovai/WebCam-Pan-Tilt-Control-via-Flask]，或本项目文件库[https://maker.quwj.com/project/60/]。
+http://shumeipai.nxez.com/2018/07/17/raspberry-pi-cam-pan-tilt-control-over-local-inter.html
