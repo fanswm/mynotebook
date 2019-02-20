@@ -38,3 +38,5 @@ sudo apt install openshot-qt
 sudo apt install libav-tools
 pip3 install instantmusic
 [[方法:Linux:系统:清理开机启动项]]
+remarkable: `sudo apt install python3-markdown python3-bs4 gir1.2-webkit-3.0 wkhtmltopdf`
+	sudo dpkg -i ./remarkable_1.87_all.deb  
