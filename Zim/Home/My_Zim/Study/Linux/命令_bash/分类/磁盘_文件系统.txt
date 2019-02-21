@@ -19,10 +19,6 @@ fsck
 
 检查并修复 Linux 文件系统。
 
-dd
-
-转换或复制文件。
-
 dumpe2fs
 
 导出 ext2/ext3/ext4 文件系统信息。

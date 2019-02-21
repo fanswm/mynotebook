@@ -9,7 +9,7 @@ Creation-Date: 2019-02-20T10:01:14+08:00
 2018-08-03 22:56
 
 译自：https://fedoramagazine.org/4-try-copr-july-2018/%E4%BD%9C%E8%80%85： Dominik Turecek
-原创：LCTT https://linux.cn/article-9894-1.html%E8%AF%91%E8%80%85： geekpi
+原创：LCTT https://linux.cn/article-9894-1.html 译者： geekpi
 
 
 

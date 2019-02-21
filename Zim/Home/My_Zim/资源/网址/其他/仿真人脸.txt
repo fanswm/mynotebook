@@ -1,0 +1,25 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-21T13:46:54+08:00
+
+====== 仿真人脸 ======
+创建日期 星期四 21 二月 2019
+
+人工智能生成仿真人脸
+2019-2-18 21:29:30 | 作者: 月光 | 分类: 编程开发 | 评论: 1 | 浏览: 631
+软件
+　　当你访问“This Person Does Not Exist”（此人不存在）网站的时候，你会看到一张朝你微笑的人脸（每次刷新都会跳出不同肤色的人脸）。尽管这些笑脸非常的真实，人眼也很难区分，但是这些笑脸均由神经网络算法生成的，均不是现实生活中的真人。
+
+　　该网站的创作者Phillip Wang于2月12日在Facebook群组中发布了这个网站，声称该网站的神经网络算法能够从512维矢量中划分面部图像。该技术基于NVIDIA设计的最先进人工智能StyleGAN，一种可以分离图像各种元素的神经网络并用于学习和生成新的图像。Nvidia工程师团队于2月6日在arXiv上更新的一份预打印论文中进行了详细介绍。
+
+　　StyleGAN是英伟达2018年底发布的最新研究成果，官方开源了代码，需要Python 3.6和TensorFlow 1.10以上 （支持GPU） 。和官方代码实现一起发布的，还有Flickr高清人脸数据集。数据集里包含7万张1024×1024高清人像。英伟达说，这些照片在年龄、种族、以及图片背景上，都有很强的多样性。
+
+人工智能生成虚假人脸
+
+　　代码实现：https://github.com/NVlabs/stylegan
+
+　　FFHQ数据集：https://github.com/NVlabs/ffhq-dataset
+
+　　论文：https://arxiv.org/abs/1812.04948
+
+　　演示网站：https://thispersondoesnotexist.com
