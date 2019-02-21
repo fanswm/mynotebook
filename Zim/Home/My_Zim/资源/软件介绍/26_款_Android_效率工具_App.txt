@@ -84,12 +84,12 @@ Custom Quick Settings 则可以说是 Android 6.X Marshmallow 用户的必备工
 Texpand
 Android
 相关文章
-[[下载  http://www.coolapk.com/apk/com.isaiasmatewos.texpand?mt=8&uo=4&ct=appcards]]
+下载  http://www.coolapk.com/apk/com.isaiasmatewos.texpand?mt=8&uo=4&ct=appcards
 
 Text Aide
 Android
 相关文章
-[[下载  http://coolapk.com/apk/com.arjerine.textxposed?mt=8&uo=4&ct=appcards]]
+下载  http://coolapk.com/apk/com.arjerine.textxposed?mt=8&uo=4&ct=appcards
 
 最后要介绍的 Texpand 和 Text Aide 就是文字工作者的福音了。前者能够在输入过程中自动扩展事先设置好的文字内容，提升输入效率（比如输入「hhh」会自动填充为「哈哈哈哈哈哈」）。而后者的功能更为强大，除了扩展事先设置好的内容外，还能在 Android 平台上实现划词搜索、定义甚至是点选翻译等功能（配合 Android 6.X Marshmallow 改进后的文字点选菜单效果更好）。
 
@@ -103,7 +103,7 @@ __录屏截屏__
 AZ Screen Recorder
 Android
 相关文章
-[[下载  http://coolapk.com/apk/com.hecorat.screenrecorder.free?mt=8&uo=4&ct=appcards]]
+下载  http://coolapk.com/apk/com.hecorat.screenrecorder.free?mt=8&uo=4&ct=appcards
 
 自 Android 5.0 Lollipop 开启屏幕录制 api 以来，Google Play Store 中已经出现过不少利用该特性的屏幕录制应用，而在这些应用中，AZ Screen Recorder 也许是最为「尽善尽美」的那一款了：支持制过程中随时暂停/恢复、标注；录制结束后亦可随意剪辑或是转为 Gif 动图；开启「Show front-camera」功能后还能作为游戏录制与解说工具来使用。
 

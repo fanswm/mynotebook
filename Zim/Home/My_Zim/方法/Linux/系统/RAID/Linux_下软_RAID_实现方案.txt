@@ -1,0 +1,205 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-21T16:14:09+08:00
+
+====== Linux 下软 RAID 实现方案 ======
+创建日期 星期四 21 二月 2019
+
+https://mp.weixin.qq.com/s?__biz=MzAxODI5ODMwOA==&mid=2666542458&idx=1&sn=d72d890be3c809065c0e2f588524da20&chksm=80dcf1d1b7ab78c7b41ba59fdee5e22ac23e8a4112f201792e8e2ec4f8fbc6f816d33339abb5&mpshare=1&scene=1&srcid=0703TlcrLQ3hcQaNbFNFm8YE#rd
+Linux 下软 RAID 实现方案
+Linux爱好者  2018-06-26
+（点击上方公众号，可快速关注）
+
+
+
+来源：helloclei
+
+blog.chinaunix.net/uid-26252206-id-5785379.html
+
+
+
+一．应用场景
+
+
+
+Raid大家都知道是冗余磁盘的意思（Redundant Arrays of Independent Disks，RAID），可以按业务系统的需要提供高可用性和冗余性，目前市面上比较常见的是通过服务器的raid阵列卡来实现此功能。
+
+
+
+通过硬件阵列卡实现raid具有可靠性高，性能好等特点，但是对于一般的企业而言硬件阵列卡固然好，如果大规模应用的话动辄几千上万的费用也不是他们所能承受的，难道就没有既能保证数据安全，又能减少费用支持的IT方案吗？
+
+
+当然有，软raid就可以实现这一需求。
+
+ 
+
+二．实现步骤
+
+         
+
+软raid比较依赖操作系统，所以他的劣势也显而易见，需要占用系统资源（主要是CPU资源）。目前在Linux和windows下软raid都比较常见了，Linux是通过mdadm实现的，windows下则在win2003之后通过磁盘管理来实现。
+
+ 
+
+实验环境：
+
+
+
+一台centos 7.2 VM，主机名分别为host1，host1上挂载两块50G的数据盘，我们的实验就在这两块数据盘上完成。
+
+
+
+P.S:需要强调的是生产环境下两块组raid的硬盘必须是同品牌同型号同容量的，否则极容易出现软raid失效的情况。
+
+ 
+
+1.确认操作系统是否安装了mdadm软件
+
+
+
+[root@host1 ~]# rpm -qa |grep mdadm
+
+mdadm-3.3.2-7.el7.x86_64
+
+
+
+2.对两块数据盘进行分区，并设置分区类型为raid
+
+
+
+
+
+
+
+fdisk命令只能对容量在2T以下的硬盘进行分区，如果超过2T则需要使用parted工具了。Parted命令以后会介绍使用方法，本节不赘述了。
+
+
+
+在fdisk下raid的分区类型代码是fd，在parted工具下首先需要使用mklabel将磁盘格式由MBR改成GPT，然后才能使用mkpart命令进行分区，分完区之后使用set设置分区flag为raid即可。
+
+
+
+3.使用mdadm命令创建raid1
+
+
+
+
+
+
+
+可以看到创建时有个Note的提示，是说软raid不能当启动设备，这就是软raid比较鸡肋的地方了。
+
+ 
+
+mdadm -C /dev/md0 -ayes -l1 -n2 /dev/xvd[b,c]1
+
+
+
+命令说明：
+
+
+
+-C　　--create　 创建阵列;
+
+-a　　--auto　　 同意创建设备，如不加此参数时必须先使用mknod 命令来创建一个RAID设备，不过推荐使用-a yes参数一次性创建;
+
+-l　　--level　　　阵列模式，支持的阵列模式有 linear, raid0, raid1, raid4, raid5, raid6, raid10, multipath, faulty, container;
+
+-n     --raid-devices 阵列中活动磁盘的数目，该数目加上备用磁盘的数目应该等于阵列中总的磁盘数目;
+
+/dev/md0　　　　阵列的设备名称，如果还有其他阵列组可以以此类推；
+
+ 
+
+创建完成后可以使用cat /proc/mdstat查看阵列状态：
+
+
+
+下图中第一次查看的时候提示resync完成了95.7%，第二次查询的时候两块盘才真正同步完。
+
+
+
+
+
+
+
+也可以使用mdadm -D /dev/md0查看阵列组的状态
+
+
+
+
+
+
+
+4.创建md0的配置文件
+
+
+
+echo DEVICE /dev/sd{a,b}1 >> /etc/mdadm.conf
+mdadm -Evs >> /etc/mdadm.conf
+
+
+
+mdadm运行时会自动检查/etc/mdadm.conf  文件并尝试自动装配，因此第一次配置raid后可以将信息导入到/etc/mdadm.conf  中。
+
+ 
+
+5.使用/dev/md0
+
+
+
+在/dev/md0上创建文件，然后挂载进行使用。
+
+
+
+mkfs.ext4 /dev/md0
+
+
+
+注意：在格式化时，可以指定-E选项下的stride参数指定条带是块大小的多少倍，有在一定程度上提高软RAID性能，如块默认大小为4k，而条带大小默认为64k，则stride为16，这样就避免了RAID每次存取数据时都去计算条带大小，如：
+
+mkfs.ext4  -E stride=16 -b 4096 /dev/md0
+
+ 
+
+6.其他命令
+
+
+
+比如组raid的阵列中有磁盘损坏，可以使用如下命令：
+
+
+
+选项：-a(--add)，-d(--del),-r(--remove),-f(--fail)
+
+
+
+模拟损坏盘：
+
+
+
+mdadm /dev/md1 -f /dev/sdb5
+
+
+
+移除故障盘：
+
+
+
+mdadm /dev/md1 -r /dev/sdb5
+
+
+
+添加新硬盘：
+
+
+
+mdadm /dev/md1 -a /dev/sdb7
+
+
+
+停止阵列
+
+
+
+mdadm -S [[/dev/md1]]
