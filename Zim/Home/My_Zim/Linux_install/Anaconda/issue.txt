@@ -7,9 +7,49 @@ Creation-Date: 2017-11-22T06:54:43+08:00
 
 python发行版
 
-20171025: at WinXP:
+__20171025: at WinXP:__
 
 - 安装anaconda Python 2.5 32-bit时出现如下错误：
   - AttributeError: function 'SHGetKnownFolderPath' not found
   - 无法定位程序输入点_snwprintf_s 于动态链接库msvcrt.dll上
 
+__2019年02月22日:xubuntu__
+```
+⋊> ~ conda activate python2                                             16:29:41
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+	$ conda init <SHELL_NAME>
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+See 'conda init --help' for more information and options.
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+```
+f:https://stackoverflow.com/questions/42871313/cannot-run-source-activate-with-conda-in-fish-shell
+```
+As of fish 2.6.0 conda 4.3.27: the following steps may change as issue is addressed
+
+update config
+Take note of your conda's location
+
+conda info --root
+/Users/mstreeter/anaconda    # this is my <PATH_TO_ROOT>
+Add line to ~/.config/fish/config.fish
+
+ source <PATH_TO_ROOT>/etc/fish/conf.d/conda.fish
+update convention
+Typically you'd run the following from bash
+
+source activate <environment>
+source deactivate <environment>
+Now you must run the following from fish
+
+conda activate <environment>
+__conda deactivate <environment>__
+issues
+so after doing this I'm not able to set fish as my default shell and have it still work properly with conda. Currently, I must first enter my default shell, and enter fish and the shell works as expected. I'll update this after I find out how to get it working completely without the need to explicitly choose fish each time I log into my terminal
+```

@@ -1,0 +1,41 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-22T17:47:50+08:00
+
+====== issue ======
+创建日期 星期五 22 二月 2019
+
+没有python2选项：
+__解决方法__
+查看已有的ipykernel环境
+jupyter kernelspec list
+如下图所示，表明python3的ipython内核已安装
+Available kernels:
+  python3    /home/ozh/.local/share/jupyter/kernels/python3
+
+安装python2环境
+conda create --name pythonn27 python=2.7
+切换python环境
+source activate python27
+安装ipython内核
+conda install ipykernel
+配置内核
+python -m ipykernel install --user
+查看内核文件指向python版本
+位置：~/.local/share/jupyter/kernels/python2/kernel.json
+{
+ "display_name": "Python 2",
+ "language": "python",
+ "argv": [
+  "/home/ozh/anaconda3/envs/python27/bin/python",
+  "-m",
+  "ipykernel_launcher",
+  "-f",
+  "{connection_file}"
+ ]
+}
+--------------------- 
+作者：六月的雨唯你 
+来源：CSDN 
+原文：https://blog.csdn.net/u013187057/article/details/83689020 
+版权声明：本文为博主原创文章，转载请附上博文链接！

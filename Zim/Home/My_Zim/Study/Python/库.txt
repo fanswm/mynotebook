@@ -5,3 +5,4 @@ Creation-Date: 2018-10-15T16:17:59+08:00
 ====== 库 ======
 Created Monday 15 October 2018
 
+https://fossies.org/linux/conda/conda/activate.py

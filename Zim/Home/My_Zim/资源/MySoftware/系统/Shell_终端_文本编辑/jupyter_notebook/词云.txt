@@ -14,7 +14,19 @@ sudo apt install linuxbrew-wrapper
 brew install freetype
 brew install pkg-config
 
+```wordcloud
+filename = "yes-minister.txt"
+with open(filename) as f:
+ mytext = f.read()
 
+from wordcloud import WordCloud
+wordcloud = WordCloud().generate(mytext)
+
+%pylab inline
+import matplotlib.pyplot as plt
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+```
 
 如何用Python做词云？
 
