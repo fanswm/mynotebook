@@ -1,0 +1,23 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-22T11:21:38+08:00
+
+====== Smallpdf ======
+创建日期 星期五 22 二月 2019
+
+https://smallpdf.com/
+各种⽂档格式任意切换。
+如果不是专业的 PDF ⼯作者，偶尔处理两个⼩⽂档，Smallpdf ⾜够了。
+包含以下功能：
+压缩 PDF
+JPG to PDF
+PDF to JPG
+PDF to Word
+PDF to Excel
+PDF to PPT
+Word to PDF
+Excel to PDF
+PPT to PDF
+合并 PDF
+分割 PDF
+解密 P

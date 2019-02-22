@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-22T11:30:35+08:00
+
+====== MapKeyboard (Windows) 键盘键位修改器 ======
+创建日期 星期五 22 二月 2019
+
+使⽤⽅法：
+1.先在软件界⾯的键盘上（如上图）选中你想修改的按钮，然后在左下⽅的 Remap selected key to: 右⽅
+⽩⾊的下拉框中选择修改后对应的键位或作⽤，save layout保存退出。
+2.如果你需要恢复最原始的键位，那么点那个 Reset keyboard layout 即可重置。
+强烈建议玩游戏时，选择 Disabled 禁⽤Win 键 。
+⼀定要去试试！给你爽翻天！！！
+
+https://mapkeyboard.en.uptodown.com/windows

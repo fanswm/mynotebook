@@ -34,7 +34,7 @@ conda create --name <env_name> <package_names>
 <env_name>即创建的环境名。建议以英文命名，且不加空格，名称两边不加尖括号“<>”。
 <package_names>即安装在环境中的包名。名称两边不加尖括号“<>”。
 
-如果要安装指定的版本号，则只需要在包名后面以=和版本号的形式执行。如：conda create --name python2 python=2.7，即创建一个名为“python2”的环境，环境中安装版本为2.7的python。
+__如果要安装指定的版本号，则只需要在包名后面以=和版本号的形式执行。如：conda create --name python2 python=2.7，即创建一个名为“python2”的环境，环境中安装版本为2.7的python。__
 如果要在新创建的环境中创建多个包，则直接在<package_names>后以空格隔开，添加多个包名即可。如：conda create -n python3 python=3.5 numpy pandas，即创建一个名为“python3”的环境，环境中安装版本为3.5的python，同时也安装了numpy和pandas。
 
 
@@ -45,7 +45,19 @@ conda create --name <env_name> <package_names>
 
 __2. 切换环境__
 ① Linux 或 macOS
-source activate <env_name>
+__source activate <env_name>__
+	imrdr: `conda activate <env_name>`
+		error: no such file or dir.// xubuntu/fish/
+	>  $ conda init <SHELL_NAME>
+	Currently supported shells are:
+	  - bash
+	  - fish
+	  - tcsh
+	  - xonsh
+	  - zsh
+	  - powershell
+	>end
+	
 
 ② Windows
 activate <env_name>
@@ -57,7 +69,7 @@ activate <env_name>
 
 __3. 退出环境至root__
 ① Linux 或 macOS
-source deactivate
+__source deactivate__
 
 ② Windows
 deactivate
@@ -69,7 +81,7 @@ conda info --envs
 或
 conda info -e
 或
-conda env list
+__conda env list__
 结果中星号“*”所在行即为当前所在环境。macOS系统中默认创建的环境名为“base”。
 __5. 复制环境__
 conda create --name <new_env_name> --clone <copied_env_name>
@@ -79,7 +91,7 @@ conda create --name <new_env_name> --clone <copied_env_name>
 如：conda create --name py2 --clone python2，即为克隆名为“python2”的环境，克隆后的新环境名为“py2”。此时，环境中将同时存在“python2”和“py2”环境，且两个环境的配置相同。
 
 __6. 删除环境__
-conda remove --name <env_name> --all
+__conda remove --name <env_name> --all__
 
 
 注意：<env_name>为被删除环境的名称。环境名两边不加尖括号“<>”。
