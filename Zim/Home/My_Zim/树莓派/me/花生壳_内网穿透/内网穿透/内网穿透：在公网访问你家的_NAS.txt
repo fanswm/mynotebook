@@ -1,0 +1,176 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-26T18:59:56+08:00
+
+====== 内网穿透：在公网访问你家的 NAS ======
+创建日期 星期二 26 二月 2019
+
+内网穿透：在公网访问你家的 NAS
+韦易笑
+韦易笑
+​
+游戏开发、编程、游戏 等 4 个话题的优秀回答者
+已关注
+343 人赞了该文章
+家里 Nas 中安装了一系列服务，如果外网访问不了，手机上连不上，就十分不方便。所以我们需要内网穿透，方法主要有两个：动态域名和反向代理，下面对比一下：
+
+动态域名
+
+最早期的方法，要求家中拨号网络有一个外网 ip，每次断线拨号虽然 ip 变了，通过定时请求动态域名提供商的一个接口，把域名指向改成你最新的外网地址，这样其他地方就可以通过域名访问你家里的 IP 了。
+
+一般动态域名路由器都支持设置，不支持也没关系，你家里的服务器的定时请求一次 DDNS 服务商接口即可，比如 no-ip 的 http://ddns.net 域名更新：
+
+https://USER:PASSWD@dynupdate.no-ip.com/nic/update?hostname=test.ddns.net
+在家里服务器的 crontab 中设置每 15 分钟 curl 访问一下上面的地址，把用户名密码和hostname替换成你申请的域名，即可更新。
+
+最后家中路由器需配置端口转发，比如把外网 ip 的 443 端口转给内网服务器的 443 端口。
+
+这是最廉价的解决方案，基本没成本，各类 DDNS 服务商也是免费的。唯一问题是当 IP 更新后，最长可能需要 15 分钟才能更新域名指向（更新接口调用快会被 ban），再算上各级 DNS 缓存时间，前后可能会有半小时你无法访问，不过我一周顶多碰到 1-2 次。
+
+如果家里有外网 IP ，这是首选方案，现在越来越多宽带新开户无法得到外网 IP 地址，比如电信。联通还好，曾经不经我允许把我换成内网 IP，然后我打电话去骂，骂来了一个外网ip。但随着 IPv4 资源减少，IPV6 普及以前，外网 IP 肯定越来越少，所以我们需要反向代理。
+
+
+
+反向代理
+
+家中没有外网 IP 时，如果你有一台固定 IP 的外网 VPS，那么可用它做跳板访问家里内网端口。在 VPS 上启动一个反向代理服务，同时在家里内网服务器上启动另外一个映射服务，那么链接外网 VPS 的 443 端口，可以被反向代理转发到内网的 443 端口上。
+
+这类服务程序有很多，比如老牌的 ngrok，python 写的 shootback，前者使用麻烦，如果想跑在自架服务器上，还要重新编译代码，配置证书，而后者性能和并发又不是特别好，所以现在大家都用性能更好，配置更简单的 frp ：
+
+
+Frp 结构很简单，分为 frps/frpc 两个可执行程序，在有公网地址的 VPS 上运行 frps 然后在家中内网运行 frpc 就行。
+
+比如想把家中服务器的 ssh 端口 22 代理代理到外网 vps 202.115.8.1:221 上，那么在 vps 上编辑 frps.ini 配置文件：
+
+# frps.ini
+[common]
+bind_port = 7000
+token = 1234567
+然后 vps 上启动 frps：
+
+frps -c /usr/local/etc/frps.ini
+然后再家中内网服务器上编辑 frpc.ini 配置，token需要保持一致：
+
+# frpc.ini
+[common]
+server_addr = 202.115.8.1
+server_port = 7000
+token = 1234567
+
+[ssh]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 22
+remote_port = 221
+然后内网服务器启动 frpc：
+
+frpc -c /usr/local/etc/frpc.ini
+反向代理就架设成功了，内网的 frpc 启动后会链接到外网的 frps 上的 7000 管理端口，申明自己想把内部的 22 端口暴露成外部的 221 端口。然后外网的 frps 一旦碰到任何 221 端口的链接，都会通过 frpc<->frps 的数据链路转发到内网的 22 端口上来，你在外网任意地方：
+
+ssh -p221 user@202.115.8.1
+相当于登陆家里服务器的 22 端口。你还可以同时配置多个服务，比如增加一个 https 服务：
+
+# frpc.ini
+[common]
+server_addr = 202.115.8.1
+server_port = 7000
+token = 1234567
+
+[ssh]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 22
+remote_port = 221
+
+[https]
+type = tcp
+local_ip = 192.168.1.3
+local_port = 443
+remote_port = 8443
+这样可以把内网服务器的 https://192.168.1.3:443 暴露成：https://202.115.8.1:8443 。
+
+
+
+HTTP/HTTPS 的穿透优化
+
+其实 frps 对于 http/https 还有更友好的配置方式，你有多个域名的话，你可以用多个二级域名的 A 记录同时指向外网 vps 的地址：
+
+nextcloud.skywind.com -> 202.115.8.1
+gitlab.skywind.com -> 202.115.8.1
+配置两个二级域名都指向 VPS 外网地址，对于多个 http/https 转发，在 frps 那里都可以共用同一个端口，我们配置下 frps.ini：
+
+# frps.ini
+[common]
+bind_port = 7000
+token = 1234567
+vhost_http_port = 80
+vhost_https_port = 443
+然后配置内网的 frpc.ini ：
+
+# frpc.ini
+[common] 
+server_addr = 202.115.8.1 
+server_port = 7000 
+token = 1234567
+
+[nextcloud]
+type = https
+local_ip = 192.168.1.3
+local_port = 443
+custom_domains = nextcloud.skywind.com
+
+[gitlab]
+type = https
+local_ip = 192.168.1.4
+local_port = 443
+custom_domains = gitlab.skywind.com
+那么这两个服务都可以公用外网 VPS 的 443 端口，当你用浏览器访问：
+
+https://nextcloud.skywind.com
+
+外网 VPS 上的 frps 就能根据域名知道该请求需要代理到内网 nextcloud 地址，而访问
+
+https://gitlab.skywind.com
+
+时，因为两个域名都是指向外网 VPS 的，frps 根据域名判断就能转发到内网 gitlab 地址。
+
+如果你的 frpc.ini 中 http/https 服务你用的 type=tcp，那每个服务都会占用一个外网 vps 的端口，而把 type 设置成 http/https 的话，只要你有几个二级域名，就能共用 frps 的端口：
+
+
+上图时我在公司通过外网 frps 跳板，访问家中 GitBucket 代码服务的截图。通过 type = https，你可以把家中的：文件服务，照片服务，代码服务，笔记服务 等一些列常用的服务全部代理到外网 VPS 的 443 端口上来，然后用域名进行区分。
+
+这样在外面不管用 PC 还是手机访问家中的服务，外网 URL 会变得很漂亮。
+
+
+
+内网静态域名
+
+那么我们把内网的一个站点用反向代理做穿透时，我们在外面访问的是 VPS 的域名，在家又访问另外一个 192.168.1.x 的裸 IP 的 URL，有没有办法都用一个地址呢？
+
+如果你家里的路由器支持配置静态 DNS 的话，可以把外网 VPS 的 DNS 配置成内网地址，这样你连上家里 wifi 时，git.skywind.com 被解析成 192.168.1.x，在外网时，git.skywind.com 又会被解析成 202.115.8.1 ，总能用同一个域名，以最快的速度访问。
+
+比如手机上设置 nextcloud 客户端时就只需要设置唯一的一个服务器 URL 不用改来改去。
+
+
+
+使用 KCP 加速
+
+如果你手上只有境外 VPS，那么可以通过 UDP 加速传输。Frp 支持使用基于 UDP 的 KCP 协议加速传输，这样对于一些网速慢的 vps 而言，能有比 tcp 更平滑更快速的传输效果。
+
+
+
+其他穿透方案
+
+如果你不想自己架设反向代理服务器的话，可以用花生壳的反向代理付费服务，或者 ngrok 的付费服务，总之消耗带宽的事情，都是要成本的。
+
+其实反向代理唯一的问题就是 VPS 的费用，好歹程序员一般手上都会有几台 VPS，带宽又没跑满，正好拿来做跳板进行内网穿透。以前我喜欢把服务直接架设在外网 VPS 上，比如我的笔记服务，但是经常 VPS 换 IP，换服务商，数据就没法保证，VPS 迁移了又要面临服务架设和数据迁移，十分复杂。
+
+现在我所有服务都是跑在家里服务器上，所有数据都是自己掌握，外网服务器仅仅作为一个转发，几年下来，数据安全性和稳定性比直接把服务架设在 VPS 好多了，不用每换一台 VPS 就重新弄一遍。
+
+--
+
+参考阅读：
+ 
+韦易笑：常用公有云的替换方案 https://zhuanlan.zhihu.com/p/50335990
+
+韦易笑：Nas 系统的虚拟化方案 https://zhuanlan.zhihu.com/p/55025102

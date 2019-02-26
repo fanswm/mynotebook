@@ -30,7 +30,6 @@ chrome
 36氪
 Hello Talk
 lightbot
-搜狐视频
 网易邮箱
 Temple Run
 solo_1.44.apk
