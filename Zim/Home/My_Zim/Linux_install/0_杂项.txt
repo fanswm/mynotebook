@@ -42,3 +42,5 @@ remarkable: `sudo apt install python3-markdown python3-bs4 gir1.2-webkit-3.0 wkh
 [[资源:MySoftware:设计 图片:图片 录屏 截屏:录屏 截屏:将 Linux 终端会话录制成 SVG 动画]]
 sudo npm install -g footballcli
 jupyter notebook
+UNetbootin
+
