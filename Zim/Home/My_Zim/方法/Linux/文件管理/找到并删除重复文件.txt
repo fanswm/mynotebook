@@ -89,7 +89,7 @@ $ rdfind --help
 手册页：
 
 $ man rdfind
-2. Fdupes
+2. __Fdupes__
 Fdupes 是另一个在指定目录以及子目录中识别和移除重复文件的命令行工具。这是一个使用 C 语言编写的自由开源工具。Fdupes 通过对比文件大小、部分 MD5 签名、全部 MD5 签名，最后执行逐个字节对比校验来识别重复文件。
 
 与 Rdfind 工具类似，Fdupes 附带非常少的选项来执行操作，如：
@@ -139,13 +139,13 @@ $ fdupes ~/Downloads ~/Documents/ostechnix
 $ fdupes ~/Downloads -r ~/Documents/ostechnix
 上面的命令将搜索 ~/Downloads 目录，~/Documents/ostechnix 目录和它的子目录中的重复文件。
 
-有时，你可能想要知道一个目录中重复文件的大小。你可以使用 -S 选项，如下：
+__有时，你可能想要知道一个目录中重复文件的大小。你可以使用 -S 选项，如下：__
 
 $ fdupes -S ~/Downloads
 403635 bytes each:
 /home/sk/Downloads/Hyperledger.pdf
 /home/sk/Downloads/Hyperledger(1).pdf
-类似的，为了显示父目录和子目录中重复文件的大小，使用 -Sr 选项。
+__类似的，为了显示父目录和子目录中重复文件的大小，使用 -Sr 选项。__
 
 我们可以在计算时分别使用 -n 和 -A 选项排除空白文件以及排除隐藏文件。
 
@@ -157,7 +157,7 @@ $ fdupes -A ~/Downloads
 
 $ fdupes -m ~/Downloads
 1 duplicate files (in 1 sets), occupying 403.6 kilobytes
-删除所有重复文件，使用 -d 选项。
+__删除所有重复文件，使用 -d 选项。__
 
 $ fdupes -d ~/Downloads
 样例输出：
