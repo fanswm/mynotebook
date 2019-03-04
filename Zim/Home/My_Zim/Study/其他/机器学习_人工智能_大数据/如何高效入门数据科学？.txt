@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-03T14:09:09+08:00
+
+====== 如何高效入门数据科学？ ======
+创建日期 星期日 03 三月 2019
+
+https://zhuanlan.zhihu.com/p/35563090
