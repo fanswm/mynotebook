@@ -12,7 +12,7 @@ Creation-Date: 2017-11-21T20:06:24+08:00
 	apt-get update
 	apt-get upgrade
 
- [http://blog.csdn.net/wuzuodingfeng/article/details/76155829](http://blog.csdn.net/wuzuodingfeng/article/details/76155829) 
+ [http://blog.csdn.net/wuzuodingfeng/article/details/76155829](  http://blog.csdn.net/wuzuodingfeng/article/details/76155829 ) 
 
 ## 国内的源地址
 

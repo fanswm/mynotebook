@@ -1,0 +1,57 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-05T15:11:04+08:00
+
+====== 程序员必用的电脑桌面 ======
+创建日期 星期二 05 三月 2019
+
+声明：本文首发微信公众号【菜鸟要飞】，如有转载，请标明出处！
+
+最近发现了两套开源、神秘、科幻、有逼格的桌面，非常适合在座的各位程序员。
+
+NO1、Himawaripy
+
+Himawaripy是一个开源的使用 Python 3开发的脚本项目。主要功能是根据用户设置的时间间隔不停的抓取，Himawari 8 气象卫星网站:http://himawari8.nict.go.jp/himawari8-image.htm%E4%B8%8A%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E8%80%8C%E7%BD%91%E7%AB%99%E7%9A%84%E6%95%B0%E6%8D%AE%E6%98%AF%E6%97%A5%E6%9C%AC Himawari 8 气象卫星拍摄的接近实时的地球照片，主要是天气形态、云团和光线,并将它设置成你的桌面背景。总之就是可以把你的桌面背景设置成一个时时更新的动态地球图片。效果如下：
+
+
+项目地址：
+
+https://github.com/boramalper/himawaripy
+
+对于不懂Python的读者来说，此项目运行起来还是比较麻烦的。小编也是折腾了一天，才勉强把桌面设置成了地球，但是由于不会写Python，所以一些配置也不是特别明白，并没有实现实时更新的效果，只能手动更新，由于时间原因就不折腾了。不得不吐槽一下，官方文档真是一点都不给力呀！
+
+此项目理论上只要有Python3的开发环境，无论什么系统都可以运行并生效，菜鸟君也只尝试了MAC系统上，简单分享一下经验。
+
+1、首先必须安装Python3的开发环境，并安装setuptools。
+
+2、将Himawaripy项目的源码Git到本地，并cd 到项目的根目录，执行sudo python3 setup.py install 命令，安装Himawaripy。
+
+3、执行安装Himawaripy命令后，会安装失败并报错，报错的内容主要是提示缺少一些项目运行所需要的开发包。根据报错提示，安装开发包就可以了。菜鸟君先后又安装了setuptools-scm、six、dateutil、pillow、appdirs。这些开发包在这个网址https://pypi.org/simple/都可以找到，如https://pypi.org/simple/pillow/。
+
+4、Himawaripy安装成功后，执行himawaripy --auto-offset，这时桌面背景就变成了地球。
+
+至于，如何时时更新，貌似需要设置某个配置项才能实现。有兴趣的自行研究吧，研究成功了，记得告诉我哈。
+
+NO2、edex-ui
+
+edex-ui是使用js开发的一款类似于科幻电脑界面的全屏桌面应用程序，支持运行在 Window、macOS、Linux 系统。再次提醒，它是一款桌面应用程序并不是桌面壁纸，和上面推荐的有本质区别。
+
+edex-ui项目地址：
+
+https://github.com/GitSquared/edex-ui
+
+使用起来超级简单，官方页面为我们提供了已经打包好的应用程序。菜鸟君以MAC上的使用为例简单分享一下。
+
+1、下载安装。
+
+2、打开应用，如下图，是不是够科幻，够逼格。
+
+3、打开应用程序后，左下角的【FILESYSTEM】区域，默认定位在edex-ui程序的安装目录，在这里可以通过点击temes（主题)文件夹，点击文件夹下的配置项来修改程序的主题，如下图。关于fonts的配置的修改，暂时还不清楚。
+
+4、装逼也是需要能力的，使用此应用后，所有的操作几乎都要在MAIN-bash区域，通过shell命令来执行了。例如：打开Android Studio应用程序
+
+open /Applications/Android\ Studio.app。如下图，很遗憾，这款程序貌似有中文乱码的问题，我暂时也没有解决。
+
+好了，装逼也不容易啊，最后祝大家装逼成功吧，觉得不错，记得帮点右下角的【好看】。如果你有类似的桌面程序，欢迎留言交流哦。
+
+https://www.jianshu.com/p/a6549fd7c951

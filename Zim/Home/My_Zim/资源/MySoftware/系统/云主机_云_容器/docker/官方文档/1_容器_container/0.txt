@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-05T15:52:03+08:00
+
+====== 0 ======
+创建日期 星期二 05 三月 2019
+
++ 检查运行中的容器的详细信息
+	首先用docker ps查看所有启动的镜像 
+	[root@bogon ~]# docker ps
+
+	利用命令查看容器的详细信息 
+	[root@bogon ~]# docker inspect ID

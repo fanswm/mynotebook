@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-10T17:37:18+08:00
 
-====== 基本命令 ======
+====== 0 新用户 ======
 Created Wednesday 10 January 2018
 
 

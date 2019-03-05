@@ -7,4 +7,4 @@ Creation-Date: 2018-12-09T10:18:36+08:00
 
 inspect的对象可以是image、运行中的container和停止的container。
 
-{{~/图片/查看容器的内部IP.png}}
+

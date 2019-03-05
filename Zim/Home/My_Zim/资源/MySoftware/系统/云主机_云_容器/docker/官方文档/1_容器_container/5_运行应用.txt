@@ -1,0 +1,38 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-05T12:30:06+08:00
+
+====== 5 运行应用 ======
+创建日期 星期二 05 三月 2019
+
+__运行应用，使用 -p 参数将机器的 4000 端口映射到容器暴露的 80 端口：__
+
+docker run -p 4000:80 friendlyhello
+您将看到 Python 正在为应用提供服务（网址为 http://0.0.0.0:80 ）的通知。但是，该消息来自不知道您已将其 80 端口映射到 4000 端口的容器的内部，因此需要将正确 URL 更改为 http://localhost:4000。
+
+在 Web 浏览器中访问该 URL，以查看网页上提供的显示内容，包括“Hello World”文本、容器 ID以及 Redis 错误消息。
+
+浏览器中的 Hello World
+
+您还可以在 shell 中使用 curl 命令查看相同内容。
+
+$ curl http://localhost:4000
+
+<h3>Hello World!</h3><b>Hostname:</b> 8fc990912a14<br/><b>Visits:</b> <i>cannot connect to Redis, counter disabled</i>
+注：此端口重映射 4000:80 用于说明您在 Dockerfile 中暴露的内容与使用 docker run -p 发布的内容之间的差异。在后续步骤中，我们只需将主机上的 80 端口映射到容器中的 80 端口并使用 http://localhost。
+
+在终端上按 CTRL+C 退出。
+
+现在，我们从后台在分离模式下运行应用。
+
+docker run -d -p 4000:80 friendlyhello
+您将获得应用的长容器 ID，然后将返回到终端。容器现在在后台运行。您还可以使用 docker ps 查看缩写容器 ID（这两种 ID 可以在运行命令时交换工作）：
+
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED
+1fa4ab2cf395        friendlyhello       "python app.py"     28 seconds ago
+您将看到 CONTAINER ID 与 http://localhost:4000 上的内容相匹配。
+
+现在，使用 docker stop 及 CONTAINER ID 结束该进程，如下所示：
+
+docker stop 1fa4ab2cf395
