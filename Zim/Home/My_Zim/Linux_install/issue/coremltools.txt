@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-06T14:00:48+08:00
+
+====== coremltools ======
+创建日期 星期三 06 三月 2019
+
+## No matching distribution found for coremltools==2.0b1 (from turicreate)
+https://pypi.org/project/coremltools/
+pip install coremltools

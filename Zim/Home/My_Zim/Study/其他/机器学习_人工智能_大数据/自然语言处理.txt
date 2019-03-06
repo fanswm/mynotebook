@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-06T13:48:05+08:00
+
+====== 自然语言处理 ======
+创建日期 星期三 06 三月 2019
+
+https://github.com/chdd/weibo/tree/master/stopwords
