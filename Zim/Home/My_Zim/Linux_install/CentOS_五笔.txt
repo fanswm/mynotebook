@@ -6,5 +6,6 @@ Creation-Date: 2017-11-21T20:01:15+08:00
 创建日期 星期二 21 十一月 2017
 
 ```
-yum install ibus ibus-table-wubi*
+sudo yum remove ibus #卸载原有框架
+sudo yum install ibus ibus-table-wubi*
 ```

@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-05T14:25:17+08:00
+
+====== 2 服务 services ======
+创建日期 星期二 05 三月 2019
+
+很容易使用 Docker 平台定义、运行和扩展服务 – 只需编写一个 docker-compose.yml 文件即可。

@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-01T15:46:23+08:00
+
+====== 终端 录制 mp4 ======
+创建日期 星期五 01 三月 2019
+
+https://github.com/rascoro1/recterm

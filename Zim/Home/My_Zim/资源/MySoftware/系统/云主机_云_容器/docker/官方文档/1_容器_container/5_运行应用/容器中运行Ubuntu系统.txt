@@ -1,0 +1,51 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-05T15:26:32+08:00
+
+====== 容器中运行Ubuntu系统 ======
+创建日期 星期二 05 三月 2019
+
+只习惯用Centos系统，但是有些软件编译安装很麻烦不方便，但是呢在Ubuntu中就变得容易方便，所以我打算用docker运行Ubuntu系统弥补Centos短板和不足之处；
+
+项目地址：https://hub.docker.com/_/ubuntu/
+
+1、__安装__Ubuntu系统命令：
+docker pull ubuntu
+这是一个极度精简的系统，连最基本的wget命令都没有；所以先要apt-get update升级系统和安装apt-get install wget命令；
+
+2、__运行进入__Ubuntu系统命令：
+docker run -ti ubuntu bash
+
+3、正确退出系统方式：
+__先按，ctrl+p__
+__再按，ctrl+q__
+绝对不能使用exit或者ctrl+d来退出，这样整个系统就退出了！！！
+
+4、__共享宿主机目录__到Ubuntu系统中：
+docker run -it -v /AAA:/BBB ubuntu bash
+这样宿主机根目录中的AAA文件夹就映射到了容器Ubuntu中去了，两者之间能够共享；
+
+5、__登陆docker中的ubuntu镜像系统__：
+docker run -ti ubuntu /bin/bash
+#6866 是 IMAGE ID 前四位数字-能区分出是哪个image即可
+
+6、退出后 再进入ubuntu
+1、首先用docker ps -a 查找到该CONTAINER ID对应编号（比如：0a3309a3b29e）
+2、进入该系统docker attach 0a3309a3b29e （此时没反应，ctrl+c就进入到ubuntu系统中去了）
+
+PS:我运行的命令
+
+docker run -it -v /download:/download -p 53:53 ubuntu bash
+
+附加常用命令：
+一、查看ubuntu版本：cat /etc/issue
+
+三、安装开启ssh运行用户远程登录
+1、安装sshd命令：apt-get install openssh-server openssh-client
+
+2、编辑/etc/ssh/sshd_config ，注释掉：PermitRootLogin without-password，增加PermitRootLogin yes
+
+3、启动命令
+service ssh start
+service ssh stop
+service ssh restart

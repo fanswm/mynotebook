@@ -1,0 +1,28 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-04T06:39:49+08:00
+
+====== adb Android Debug Bridge ======
+Created 星期一 04 三月 2019
+
+https://developer.android.com/studio/command-line/adb
+
+C:\Users\Administrator\AppData\Local\Android\Sdk
+
+issue:
+1. miss SDK:
+
+
+2. unable to access android sdk add-on list
+
+android studio first run
+unable to access android sdk add-on list
+
+解决方案：
+在 Android Studio 安装目录 bin/idea.properties 文件最后追加一句
+	disable.android.first.run=true
+**参考**：[http://mazhuang.org/2015/05/06/android-studio/](http://mazhuang.org/2015/05/06/android-studio/)
+
+imrdr:
+或http 代理，主机名：127.0.0.1，端口：8085
+

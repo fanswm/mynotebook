@@ -139,13 +139,17 @@ $ fdupes ~/Downloads ~/Documents/ostechnix
 $ fdupes ~/Downloads -r ~/Documents/ostechnix
 上面的命令将搜索 ~/Downloads 目录，~/Documents/ostechnix 目录和它的子目录中的重复文件。
 
+<<<<<<< HEAD
 有时，__你可能想要知道一个目录中重复文件的大小。你可以使用 -S 选项，如下__：
+=======
+__有时，你可能想要知道一个目录中重复文件的大小。你可以使用 -S 选项，如下：__
+>>>>>>> 18251eaf5f0f271b6a612c3047d695df597a7c3e
 
 $ fdupes -S ~/Downloads
 403635 bytes each:
 /home/sk/Downloads/Hyperledger.pdf
 /home/sk/Downloads/Hyperledger(1).pdf
-类似的，为了显示父目录和子目录中重复文件的大小，使用 -Sr 选项。
+__类似的，为了显示父目录和子目录中重复文件的大小，使用 -Sr 选项。__
 
 我们可以在计算时分别使用 -n 和 -A 选项排除空白文件以及排除隐藏文件。
 

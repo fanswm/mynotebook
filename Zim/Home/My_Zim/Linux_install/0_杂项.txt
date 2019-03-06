@@ -43,4 +43,9 @@ remarkable: `sudo apt install python3-markdown python3-bs4 gir1.2-webkit-3.0 wkh
 sudo npm install -g footballcli
 jupyter notebook
 UNetbootin
+labelimg: https://github.com/tzutalin/labelImg
+sudo apt install apt-filere
+linuxBrew:
+	recterm ### termial to mp4 tools.
+
 

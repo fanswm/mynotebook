@@ -1,0 +1,48 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-05T09:47:57+08:00
+
+====== 0 测试 ======
+创建日期 星期二 05 三月 2019
+
+运行docker --version并确保您拥有受支持的Docker版本：
+
+`docker --version`
+
+Docker version 17.12.0-ce, build c97c6d6
+运行docker info或（docker version不--）查看有关docker安装的更多详细信息：
+
+`docker info`
+
+测试Docker安装
+通过运行简单的Docker镜像hello-world来测试您的安装是否有效 ：
+
+`docker run hello-world`
+
+List the hello-world image that was downloaded to your machine:
+
+`docker image ls`
+List the hello-world container (spawned by the image) which exits after displaying its message. If it were still running, you would not need the --all option:
+
+`docker container ls --all`
+
+
+## List Docker CLI commands
+docker
+docker container --help
+
+## Display Docker version and info
+docker --version
+docker version
+docker info
+
+## Execute Docker image
+docker run hello-world
+
+## List Docker images
+docker image ls
+
+## List Docker containers (running, all, all in quiet mode)
+docker container ls
+docker container ls --all
+docker container ls -aq
