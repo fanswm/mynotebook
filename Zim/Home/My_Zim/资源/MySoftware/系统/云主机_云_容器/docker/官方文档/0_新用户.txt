@@ -17,7 +17,6 @@ __镜像仓库 — docker [login|pull|push|search]__
 __本地镜像管理 — docker [images|rmi|tag|build|history|save|import]__
 __其他命令 — docker [info|version]__
 
-{{~/图片/docker 变迁图.png}}
 
 
 Docker 基本命令

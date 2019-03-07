@@ -11,6 +11,4 @@ IT干货分享 - Docker 学习资源整理（分享自知乎网）https://zhuanl
 
 撸代码，学知识 - 只要一小时，零基础入门Docker（分享自知乎网）https://zhuanlan.zhihu.com/p/23599229?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
 
-https://docs.docker.com/
-https://docs.docker-cn.com/
 

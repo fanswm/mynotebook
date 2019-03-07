@@ -8,3 +8,5 @@ Created Friday 24 November 2017
 + `sudo apt-get install sl`
 + `sudo apt-get install cmatrix`
 
+
+Bash-Insulter：一个在输入错误命令时嘲讽用户的脚本 https://linux.cn/article-10593-1.html?utm_source=rss&utm_medium=rss

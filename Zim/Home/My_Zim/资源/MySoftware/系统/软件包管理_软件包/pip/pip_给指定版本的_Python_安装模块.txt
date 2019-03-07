@@ -1,0 +1,35 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-07T11:38:01+08:00
+
+====== pip 给指定版本的 Python 安装模块 ======
+创建日期 星期四 07 三月 2019
+
+有时候树莓派上同时装了 Python2 和 Python3，这时如果使用 pip 安装模块，可能会出现本来需要安装到 Python2 的模块结果却被安装到了 Python3 下的情况。
+比较保险的办法，是手动指定安装版本。
+首先我们了解下如何查看 pip 命令当前对应的 Python 版本和路径。
+
+
+pip -V
+pip 18.0 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5) 
+pip2 -V #或 python2 -m pip -V
+pip 8.1.1 from /usr/lib/python2.7/dist-packages (python 2.7) 
+pip3 -V #或 python3 -m pip -V
+pip 18.0 from /usr/local/lib/python3.5/dist-packages/pip (python 3.5)
+可以通过 pip 指定 Python 的版本进行安装
+
+
+#安装到 Python2.X 版本中
+sudo pip2 install 模块名
+#或
+python2 -m pip install 模块名 
+#安装到 Python3.X 版本中
+sudo pip3 install 模块名
+#或
+python3 -m pip install 模块名
+卸载 pip 所安装的模块使用下面的命令，如果要卸载指定版本，参考安装命令修改即可。
+
+sudo pip uninstall 模块名
+
+文章标题：如何使用 pip 给指定版本的 Python 安装模块 - 树莓派实验室
+固定链接：http://shumeipai.nxez.com/2019/03/05/how-to-use-pip-to-install-modules-for-a-specified-version-of-python.html

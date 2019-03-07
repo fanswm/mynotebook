@@ -1,0 +1,109 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-07T11:28:35+08:00
+
+====== FinalCrypt：一个开源文件加密应用 ======
+创建日期 星期四 07 三月 2019
+
+FinalCrypt：一个开源文件加密应用
+2019-03-05 00:19
+
+译自：https://itsfoss.com/finalcrypt/%E4%BD%9C%E8%80%85： Ankush Das
+原创：LCTT https://linux.cn/article-10588-1.html%E8%AF%91%E8%80%85： geekpi
+
+我通常不会加密文件，但如果我打算整理我的重要文件或凭证，加密程序就会派上用场。
+
+你可能已经在使用像 GnuPG[1] 这样的程序来帮助你加密/解密 Linux 上的文件。还有 EncryptPad[2] 也可以加密你的笔记。
+
+但是，我看到了一个名为 FinalCrypt 的新的免费开源加密工具。你可以在 GitHub 页面[3]上查看其最新的版本和源码。
+
+在本文中，我将分享使用此工具的经验。请注意，我不会将它与其他程序进行比较 —— 因此，如果你想要多个程序之间的详细比较，请在评论中告诉我们。
+
+FinalCrypt
+
+FinalCrypt
+
+使用 FinalCrypt 加密文件
+FinalCrypt 使用一次性密码本[4]密钥生成密码来加密文件。换句话说，它会生成一个 OTP 密钥，你将使用该密钥加密或解密你的文件。
+
+根据你指定的密钥大小，密钥是完全随机的。因此，没有密钥文件就无法解密文件。
+
+虽然 OTP 密钥用于加密/解密简单而有效，但管理或保护密钥文件对某些人来说可能是不方便的。
+
+如果要使用 FinalCrypt，可以从它的网站下载 DEB/RPM 文件。FinalCrypt 也可用于 Windows 和 macOS。
+
+下载 FinalCrypt[5]  https://sites.google.com/site/ronuitholland/home/finalcrypt
+下载后，只需双击该 deb[6] 或 rpm 文件就能安装。如果需要，你还可以从源码编译。
+
+使用 FileCrypt
+该视频演示了如何使用FinalCrypt：
+
+此处应有视频，地址： https://img.linux.net.cn/static/video/How%20does%20FinalCrypt%20work-UeuPel0CVNo.mp4
+
+安装 FinalCrypt 后，你将在已安装的应用列表中找到它。从这里启动它。
+
+启动后，你将看到（分割的）两栏，一个进行加密/解密，另一个选择 OTP 文件。
+
+Using FinalCrypt for encrypting files in Linux
+
+Using FinalCrypt for encrypting files in Linux
+
+首先，你必须生成 OTP 密钥。下面是做法：
+
+finalcrypt otp
+
+finalcrypt otp
+
+请注意你的文件名可以是任何内容 —— 但你需要确保密钥文件的大小大于或等于要加密的文件。我觉得这很荒谬，但事实就是如此。
+
+
+
+生成文件后，选择窗口右侧的密钥，然后选择要在窗口左侧加密的文件。
+
+生成 OTP 后，你会看到高亮显示的校验和、密钥文件大小和有效状态：
+
+
+
+选择之后，你只需要点击 “Encrypt” 来加密这些文件，如果已经加密，那么点击 “Decrypt” 来解密这些文件。
+
+
+
+你还可以在命令行中使用 FinalCrypt 来自动执行加密作业。
+
+如何保护你的 OTP 密钥？
+加密/解密你想要保护的文件很容易。但是，你应该在哪里保存你的 OTP 密钥？
+
+如果你未能将 OTP 密钥保存在安全的地方，那么它几乎没用。
+
+嗯，最好的方法之一是使用专门的 USB 盘保存你的密钥。只需要在解密文件时将它插入即可。
+
+除此之外，如果你认为足够安全，你可以将密钥保存在云服务[7]中。
+
+有关 FinalCrypt 的更多信息，请访问它的网站：FinalCrypt[8]
+
+总结
+它开始时看上去有点复杂，但它实际上是 Linux 中一个简单且用户友好的加密程序。如果你想看看其他的，还有一些其他的加密保护文件夹[9]的程序。
+
+你如何看待 FinalCrypt？你还知道其他类似可能更好的程序么？请在评论区告诉我们，我们将会查看的！
+
+via: https://itsfoss.com/finalcrypt/
+
+作者：Ankush Das[10] 选题：lujun9972[11] 译者：geekpi[12] 校对：wxy[13]
+
+本文由 LCTT[14] 原创编译，Linux中国[15] 荣誉推出
+
+[1]: https://www.gnupg.org/
+[2]: https://itsfoss.com/encryptpad-encrypted-text-editor-linux/
+[3]: https://github.com/ron-from-nl/FinalCrypt
+[4]: https://en.wikipedia.org/wiki/One-time_pad
+[5]: https://sites.google.com/site/ronuitholland/home/finalcrypt
+[6]: https://itsfoss.com/install-deb-files-ubuntu/
+[7]: https://itsfoss.com/cloud-services-linux/
+[8]: https://sites.google.com/site/ronuitholland/home/finalcrypt
+[9]: https://itsfoss.com/password-protect-folder-linux/
+[10]: https://itsfoss.com/author/ankush/
+[11]: https://github.com/lujun9972
+[12]: https://github.com/geekpi
+[13]: https://github.com/wxy
+[14]: https://github.com/LCTT/TranslateProject
+[15]: https://linux.cn/article-10588-1.html?utm_source=rss&utm_medium=rss

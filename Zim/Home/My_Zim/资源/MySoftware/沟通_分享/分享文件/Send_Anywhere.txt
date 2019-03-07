@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-18T21:19:10+08:00
 
-====== SendAnywhere ======
+====== Send Anywhere ======
 创建日期 星期四 18 一月 2018
 
 [SendAnywhere](https://send-anywhere.com/) 虽然也支持无需下载任何客户端即可完成上传、分享和下载的工作，但其依然在跨平台上有着更出色的表现，支持 Windows、macOS、Linux 三大桌面端，iOS、 Android、Windows Phone 三大移动平台（WP 还算吗？），以及 Chrome、Outlook、Gmail、Wordpress、Slack 等工具平台，官方还提供了 API 开发接口。
@@ -19,3 +19,5 @@ Web 网站主界面。主界面给出了清晰的上传区域和支持最大 4GB
 扩展阅读：[免费全平台的文件分享利器：SendAnywhere](https://sspai.com/post/40047)
 
 
+这可能是最好用的跨平台文件传输神器！
+https://zhuanlan.zhihu.com/p/58371554?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

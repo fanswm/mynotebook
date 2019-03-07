@@ -6,3 +6,9 @@ Creation-Date: 2019-03-05T11:59:32+08:00
 创建日期 星期二 05 三月 2019
 
 `docker build -t friendlyhello .`
+
+保存对镜像的修改：
++ 查看id
+`docker ps -l`
++ 保存
+` docker commit <container_id> <image_name>`

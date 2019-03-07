@@ -13,7 +13,7 @@ Creation-Date: 2018-12-09T10:18:57+08:00
 TO-DO
 如何查看镜像与容器的依存关系
 
-删除容器
+__删除容器__
 docker rm <container_id/contaner_name>
 
 __删除所有停止的容器__
