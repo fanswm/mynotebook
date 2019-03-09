@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-11-22T07:04:33+08:00
 
-====== zim ======
+====== zim-desktop ======
 创建日期 星期三 22 十一月 2017
 
 ubuntu
@@ -25,3 +25,6 @@ __at CentOS:__
 + `sudo ./setup install`
 
 
+Manjaro:
+换中科大的源：
+sudo pacman -S zim
