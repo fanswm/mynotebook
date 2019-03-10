@@ -12,23 +12,13 @@ MAINTAINER abstracthex <abstract.hex@gmail.com>
 #RUN wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo 
 
 # Install basic dependencies
-RUN yum update -y && yum install -y
-		cmake \
-		git \
-		wget \
-		vim
-
+RUN yum update -y && yum install -y cmake git wget vim
 
 # Install anaconda for python 3.6
-RUN wget --quiet https://repo.continuum.io/archive/Anaconda3-5.3.1-Linux-x86_64.sh -O ~/anaconda.sh && \
-	/bin/bash ~/anaconda.sh -b -p /opt/conda && \
-	rm ~/anaconda.sh && \
-	echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bashrc
-
+ 12 RUN wget --quiet https://repo.continuum.io/archive/Anaconda3-5.3.1-Linux-x86_64.s    h -O ~/anaconda.sh && /bin/bash ~/anaconda.sh -b -p /opt/conda && rm ~/anaconda.s    h && echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bashrc
 
 # Set timezone
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
 
 # Set locale
 ENV LANG C.UTF-8 LC_ALL=C.UTF-8
@@ -41,4 +31,4 @@ RUN yum clean all && \
 
 # Initialize workspace
 RUN mkdir -p /github/code/python
-WORKDIR /github/code/python
+WORKDIR /github/code

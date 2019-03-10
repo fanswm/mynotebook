@@ -29,3 +29,11 @@ Creation-Date: 2019-03-10T14:55:17+08:00
 ++ 再次启动之前的容器
 `docker start test-redis`
 
+sudo docker run -it centos
+
+#imrdr:
+mkdir -p [[~/docker/python_centos]]
+vim Dockerfile
+#添加Dockerfile内容
+sudo docker build -t python_centos .
+

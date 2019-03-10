@@ -71,4 +71,7 @@ sudo pacman -S wps-office
 sudo pacman -S ttf-wps-fonts
 sudo pacman -S lanter	#蓝灯
 sudo pacman -S go
+sudo pacman -S npm
+	npm i gulp-cli -g # build lantern
+	sudo npm install -g cnpm --registry=http://registry.npm.taobao.org	#切换到中国源淘宝镜像源
 
