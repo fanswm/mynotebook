@@ -14,7 +14,7 @@ Docker version 17.12.0-ce, build c97c6d6
 
 `docker info`
 
-测试Docker安装
+__测试Docker安装__
 通过运行简单的Docker镜像hello-world来测试您的安装是否有效 ：
 
 `docker run hello-world`

@@ -1,0 +1,31 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-10T14:55:17+08:00
+
+====== 方法 ======
+创建日期 星期日 10 三月 2019
+
++ Docker__镜像搜索__
+`docker search 镜像名`
+比如搜索Redis镜像：
+`sudo docker search redis`
++ __镜像下载__
+检索到镜像之后就是下载镜像，还是以Redis为例：
+`docker pull redis`
++ __镜像列表__
+下载完成之后可以__查看本地镜像__
+`docker images`
+
++ 容器列表
+++ 查看运行中的容器列表
+`docker ps`
++ 停止和启动容器
+++ 停止容器
+`docker stop container-name/container-id`
+++ 通过容器名称或者容器id来停止容器，例如停止之前的Redis容器：
+`docker stop test-redis`
+++ 启动容器
+`docker start container-name/container-id`
+++ 再次启动之前的容器
+`docker start test-redis`
+

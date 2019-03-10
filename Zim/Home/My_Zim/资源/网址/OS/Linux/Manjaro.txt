@@ -57,7 +57,18 @@ https://www.jianshu.com/p/1cde4b7ec3c2
 sudo pacman -S trash-cli
 sudo pacman -S tldr
 	tldr --update
-sudo pacman -S docker android-sdk jdk8  
+sudo pacman -S docker
+	# 启动docker服务:
+	sudo systemctl start docker 
+	# 查看docker服务的状态:
+	sudo systemctl status docker
+	#设置docker开机启动服务:
+	systemctl enable docker 
+	
+sudo pacman -S android-sdk jdk8  
 git clone https://github.com/fanswm/code
 sudo pacman -S wps-office
 sudo pacman -S ttf-wps-fonts
+sudo pacman -S lanter	#蓝灯
+sudo pacman -S go
+
