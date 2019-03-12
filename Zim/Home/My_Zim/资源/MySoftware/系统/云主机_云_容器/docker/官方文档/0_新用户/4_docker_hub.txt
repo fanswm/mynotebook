@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-03-05T11:29:42+08:00
-
-====== 4 docker hub ======
-创建日期 星期二 05 三月 2019
-
-## 登录hub.docker.com
-$ sudo docker login

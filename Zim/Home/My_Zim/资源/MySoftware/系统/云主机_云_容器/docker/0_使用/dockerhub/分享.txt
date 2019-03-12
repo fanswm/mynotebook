@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-12T16:03:25+08:00
+
+====== 分享 ======
+创建日期 星期二 12 三月 2019
+
+docker tag <image> username/repository:tag  	# 标记 <image> 以上传到镜像库
+docker push username/repository:tag            	# 将已标记的镜像上传到镜像库

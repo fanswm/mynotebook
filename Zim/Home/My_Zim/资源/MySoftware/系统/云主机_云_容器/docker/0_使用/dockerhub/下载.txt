@@ -1,17 +1,16 @@
 Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
-Creation-Date: 2018-12-09T10:14:38+08:00
+Creation-Date: 2019-03-12T16:11:25+08:00
 
-====== 3 从docker registry server 中下拉image或repository（pull） ======
-创建日期 星期日 09 十二月 2018
+====== 下载 ======
+创建日期 星期二 12 三月 2019
 
-Usage: docker pull [OPTIONS] NAME[:TAG]
-
-__# docker pull centos__
++ __镜像下载__
+检索到镜像之后就是下载镜像，还是以Redis为例：
+`docker pull redis`
 上面的命令需要注意，
 	在docker v1.2版本以前，会下载官方镜像的centos仓库里的所有镜像，
 	而从v.13开始官方文档里的说明变了：will pull the centos:latest image, its intermediate layers and any aliases of the same id，也就是只会下载tag为latest的镜像（以及同一images id的其他tag）。
-	
 __也可以明确指定具体的镜像：__
 __# docker pull centos : centos6__
 

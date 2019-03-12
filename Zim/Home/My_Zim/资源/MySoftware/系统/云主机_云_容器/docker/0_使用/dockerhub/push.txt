@@ -1,9 +1,9 @@
 Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
-Creation-Date: 2018-12-09T10:15:05+08:00
+Creation-Date: 2019-03-12T16:33:25+08:00
 
-====== 4 推送一个image或repository到registry（push） ======
-创建日期 星期日 09 十二月 2018
+====== push ======
+创建日期 星期二 12 三月 2019
 
 与上面的pull对应，可以推送到Docker Hub的Public、Private以及私服，__但不能推送到Top Level Repository。__
 

@@ -5,16 +5,14 @@ Creation-Date: 2019-03-07T16:55:23+08:00
 ====== python-centos ======
 创建日期 星期四 07 三月 2019
 
-FROM debian
-#FROM centos:7
+FROM centos:7
 MAINTAINER abstracthex <abstract.hex@gmail.com>
 
 # Update yum repo
-#RUN wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo 
+RUN wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo 
 
 # Install basic dependencies
-#RUN yum update -y && yum install -y cmake git wget vim
-RUN apt-get update && apt-get upgrade && apt-get install -y cmake git wget vim
+RUN yum update -y && yum install -y cmake git wget vim
 
 # Install anaconda for python 3.6
 #RUN wget --quiet https://repo.continuum.io/archive/Anaconda3-5.3.1-Linux-x86_64.s    h -O ~/anaconda.sh && /bin/bash ~/anaconda.sh -b -p /opt/conda && rm ~/anaconda.s    h && echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bashrc
@@ -27,6 +25,7 @@ ENV LANG C.UTF-8 LC_ALL=C.UTF-8
 
 # Clean OS
 #RUN yum clean all && rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && find /var/log -type f -delete 
+RUN yum clean all && rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && find /var/log -type f -delete 
 
 # Initialize workspace
 RUN mkdir -p /github

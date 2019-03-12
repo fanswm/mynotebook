@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-12T15:56:53+08:00
+
+====== 构建 ======
+创建日期 星期二 12 三月 2019
+
+docker build -t friendlyname . # 使用此目录的 Dockerfile 创建镜像

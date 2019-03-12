@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-12-09T10:18:57+08:00
 
-====== 10  删除一个或多个container、image（rm、rmi） ======
+====== 删除一个或多个container、image（rm、rmi） ======
 创建日期 星期日 09 十二月 2018
 
 你可能在使用过程中会build或commit许多镜像，无用的镜像需要删除。但删除这些镜像是有一些条件的：

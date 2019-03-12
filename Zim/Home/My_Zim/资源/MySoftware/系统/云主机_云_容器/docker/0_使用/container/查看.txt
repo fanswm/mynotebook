@@ -1,0 +1,21 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-05T15:52:03+08:00
+
+====== 查看 ======
+创建日期 星期二 05 三月 2019
+
+docker inspect ID	#	利用命令查看容器的详细信息 。查看image或container的底层信息（inspect）inspect的对象可以是image、运行中的container和停止的container。
+docker ps                     # __查看所有正在运行的容器的列表__
+__docker ps -a           # 查看所有容器的列表，甚至包含未运行的容器__
+
+## List Docker containers (running, all, all in quiet mode)
+docker container ls
+docker container ls --all
+docker container ls -aq
+
+++ 查看当前容器的日志
+`docker logs container-name/container-id`
+
+docker ps -l	#列出最近一次启动的container
+docker ps -q 	#列出最近一次运行的container ID

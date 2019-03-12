@@ -13,3 +13,5 @@ Emacs[14] 是一个高度可配置的文本编辑器，最流行的一个分支 
 $ sudo add-apt-repository ppa:kelleyk/emacs
 $ sudo apt update
 $ sudo apt install emacs25
+
+[[Linux install:Anaconda:在 Emacs 上配置 Anaconda]]
