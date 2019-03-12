@@ -73,7 +73,7 @@ Tails OS通常从外部驱动器启动。 因此，当你使用此操作系统�
 
 tor-10-best-alternatives-8.jpg
 9. JonDO Live
-
+https://anonymous-proxy-servers.net/en/jondo-live-cd.html
 JonDo Live是TOR浏览器的另一个重要替代品。该操作系统配备各种内置功能及程序，你可以利用它们匿名在线，以及保护你的在线隐私。
 
 更重要的是，这个操作系统使用了TOR软件，来保护你在线时免受恶意软件程序的攻击。而TOR系统最具特色的功能之一，莫过于其保护用户免受恶意软件攻击的强大功能。因此，JonDo Live使用TOR软件来保护你免受恶意软件攻击，也就意味着你可已放心的在任何地方，使用该系统的TOR浏览器。
