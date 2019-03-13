@@ -13,3 +13,5 @@ docker image ls		## List Docker images
 	类似于username/repos_name表示Github的个人公共库，
 	类似于regsistory.example.com:5000/repos_name则表示的是私服。
 IMAGE ID列其实是缩写，要显示完整则带上--no-trunc选项
+
+docker images --tree ：显示镜像的所有层(layer)

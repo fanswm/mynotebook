@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-03-07T16:55:23+08:00
 
-====== python-centos ======
+python-centos
 创建日期 星期四 07 三月 2019
 
 FROM centos:7
@@ -13,9 +13,10 @@ MAINTAINER abstracthex <abstract.hex@gmail.com>
 
 # Install basic dependencies
 RUN yum update -y && yum install -y cmake git wget vim
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && yum install -y neovim python{2,34}-neovim
 
 #bashrc
-RUN touch ~/.bashrc && echo -e "alias la='ls -la'\nalias ll='ls -l'\nalias ls='ls --color=auto'\nal    ias c='clear'\nalias cp='cp -i'\nalias df='df -h'\nalias du='du -h --max-dep    th=1 | sort -hr'\nalias ln='ln -i'\nalias mv='mv -i'\nalias ping='ping -c 3'    \nalias path='echo -e ${PATH//:/\\n}'\nalias vi='vim'\nalias wget='wget -c'" >> ~/.bashrc && source ~/.bashrc
+RUN touch ~/.bashrc && echo -e "alias la='ls -la'\nalias ll='ls -l'\nalias ls='ls --color=auto'\nalias c='clear'\nalias cp='cp -i'\nalias df='df -h'\nalias du='du -h --max-depth=1 | sort -hr'\nalias ln='ln -i'\nalias mv='mv -i'\nalias ping='ping -c 3'    \nalias path='echo -e ${PATH//:/\\n}'\nalias vi='vim'\nalias wget='wget -c'" >> ~/.bashrc && source ~/.bashrc
 
 # Install anaconda for python 3.6
 #RUN wget --quiet https://repo.continuum.io/archive/Anaconda3-5.3.1-Linux-x86_64.sh -O ~/anaconda.sh && /bin/bash ~/anaconda.sh -b -p /opt/conda && rm ~/anaconda.s    h && echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bashrc

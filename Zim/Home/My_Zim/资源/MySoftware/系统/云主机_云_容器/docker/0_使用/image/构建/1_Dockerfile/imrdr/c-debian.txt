@@ -1,0 +1,35 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-12T15:51:52+08:00
+
+c-debian
+创建日期 星期二 12 三月 2019
+
+FROM debian
+MAINTAINER abstracthex <abstract.hex@gmail.com>
+
+# Update debian repo
+RUN cp /etc/apt/sources.list /etc/apt/source.list.old 
+RUN echo -e "deb http://mirrors.163.com/debian/ stretch main\ndeb http://mirrors.163.com/debian/ stretch-updates main\ndeb http://mirrors.163.com/debian-security/ stretch/updates main" > /etc/apt/sources.list
+
+# Install basic dependencies
+RUN apt-get update && apt-get install -y apt-transport-https
+RUN apt-get upgrade -y && apt-get  install -y cmake git wget neovim
+
+#bashrc
+RUN touch ~/.bashrc && echo -e "alias la='ls -la'\nalias ll='ls -l'\nalias ls='ls --color=auto'\nalias c='clear'\nalias cp='cp -i'\nalias df='df -h'\nalias du='du -h --max-depth=1 | sort -hr'\nalias ln='ln -i'\nalias mv='mv -i'\nalias ping='ping -c 3'    \nalias path='echo -e ${PATH//:/\\n}'\nalias vim='nvim'\nalias wget='wget -c'" >> ~/.bashrc && source ~/.bashrc
+
+# Install anaconda for python 3.6
+#RUN wget --quiet https://repo.continuum.io/archive/Anaconda3-5.3.1-Linux-x86_64.s    h -O ~/anaconda.sh && /bin/bash ~/anaconda.sh -b -p /opt/conda && rm ~/anaconda.s    h && echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bashrc
+
+# Set timezone
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+# Set locale
+ENV LANG C.UTF-8 LC_ALL=C.UTF-8
+
+# Clean OS
+
+# Initialize workspace
+RUN mkdir -p ~/github
+WORKDIR ~/github

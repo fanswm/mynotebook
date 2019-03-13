@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-12-11T07:56:09+08:00
 
-====== 像 IDE 一样使用 Vim ======
+====== spacevim ======
 Created Monday 11 December 2017
 
 项 目 主 页： spacevim.org

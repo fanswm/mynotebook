@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-03-05T09:47:57+08:00
 
-====== 0 测试 ======
+====== 0 安装测试 ======
 创建日期 星期二 05 三月 2019
 
 `docker --version`		#运行docker --version并确保您拥有受支持的Docker版本：
