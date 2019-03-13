@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-13T21:54:48+08:00
+
+====== issue ======
+创建日期 星期三 13 三月 2019
+
+debconf: delaying package configuration, since apt-utils is not installed
+
