@@ -6,3 +6,5 @@ Creation-Date: 2019-01-09T13:40:17+08:00
 创建日期 星期三 09 一月 2019
 
 https://github.com/wsdjeg/vim-galore-zh_cn
+https://github.com/wsdjeg/vim-galore-zh_cn/blob/master/README.md
+
