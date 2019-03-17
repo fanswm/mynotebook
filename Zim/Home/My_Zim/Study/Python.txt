@@ -8,3 +8,8 @@ Created Tuesday 28 November 2017
 https://docs.python.org/3/library/functions.html#divmod
 
 https://docs.python.org/2/library/
+
+Python 3.7 官方文档《入门教程》翻译完成
+https://zhuanlan.zhihu.com/p/41656209?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+Python 官方文档：入门教程 
+https://learnku.com/docs/tutorial/3.7.0

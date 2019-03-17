@@ -6,3 +6,7 @@ Creation-Date: 2018-11-01T10:56:25+08:00
 Created Thursday 01 November 2018
 
 www.debian.org
+
+https://www.debian.org/doc/manuals/debian-reference/pr01.zh-cn.html
+第 1 章 GNU/Linux 教程
+https://www.debian.org/doc/manuals/debian-reference/ch01.zh-cn.html

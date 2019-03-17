@@ -5,3 +5,5 @@ Creation-Date: 2018-10-09T08:23:08+08:00
 ====== wiki ======
 Created Tuesday 09 October 2018
 
+维基软件列表 - 维基百科
+https://en.wikipedia.org/wiki/List_of_wiki_software

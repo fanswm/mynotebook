@@ -1,0 +1,58 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-17T17:41:40+08:00
+
+====== 装上这几个 VSCode 插件后，上班划水摸鱼不是梦 ======
+创建日期 星期日 17 三月 2019
+
+https://zhuanlan.zhihu.com/p/58302580?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
+最近在微博分享了几个 VSCode 划水插件，让我不禁感叹这班程序员也太会玩了吧。
+
+今天我就花点时间，简单整理下这几个划水插件，让大家可以分享给朋友，一起愉快的划水摸鱼 👀
+
+daily-anime
+如果你喜欢二次元，喜欢动漫，那这个插件就是为你量身定制的。
+
+这款插件让开发者可以在 VSCode 上划水追番，第一时间知道番剧的更新。
+
+
+GitHub 地址：https://github.com/deepred5/daily-anime
+
+read-vscode-e
+上学那会偷偷摸摸看小说被老师逮到的情景现今依旧历历在目，后面我们学精了，在小说本上套上一层课本封面，以此来掩盖上课划水的行为。
+
+read-vscode-e 这个插件感觉跟上课看小说的经历有点像，他让开发者可以在 VSCode 上边写代码边看小说。
+
+下次等产品经理路过你身旁的时候，以为你写了一堆密密麻麻的的代码，都不好意思再给你加需求。
+
+
+GitHub 地址：https://github.com/my-soul/read-vscode-e
+
+vsc-netease-music
+美妙的音乐配合上 VSCode 更显极客范。
+
+装上这款插件之后，你就可以使用 VSCode 愉快的听歌啦~
+
+
+GitHub 地址：https://github.com/nondanee/vsc-netease-music
+
+vscode-maxPlus
+番剧、小说、音乐都齐了，还差什么？当然是游戏啦！
+
+maxPlus 这个插件让你可以在 VSCode 上畅快浏览 Max+ 的游戏资讯，多重体验美滋滋~
+
+
+GitHub 地址：AShujiao/vscode-maxPlus
+
+vscode-leetcode
+如果你怕上面几个插件玩久了变得太过颓废，不思进取，那不妨装下 vscode-leetcode 这个插件。
+
+这个插件让你可以在 VSCode 上刷 LeetCode，提醒你写代码的同时也不要忘了最爱的 LeetCode 哦。
+
+
+GitHub 地址：https://github.com/jdneo/vscode-leetcode
+
+
+
+如果你有什么其他好玩的 VSCode 插件，也欢迎在留言区进行评论，或到微博（GitHubDaily）私信分享给我，这篇文章后续还会保持不断更新的~
