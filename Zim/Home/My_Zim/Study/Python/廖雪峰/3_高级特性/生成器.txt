@@ -26,23 +26,23 @@ next(g)
 
 ```
 def fib(max):
-    n, a, b = 0, 0, 1
-    while n < max:
-        print(b)
-        a, b = b, a + b
-        n = n + 1
-    return 'done'
+	n, a, b = 0, 0, 1
+	while n < max:
+		print(b)
+		a, b = b, a + b
+		n = n + 1
+	return 'done'
 ```
 
 上面的__函数和generator仅一步之遥__。要把fib函数变成generator，__只需要把print(b)改为yield b就可以了：__
 ```
 def fib(max):
-    n, a, b = 0, 0, 1
-    while n < max:
-        yield b
-        a, b = b, a + b
-        n = n + 1
-    return 'done'
+	n, a, b = 0, 0, 1
+	while n < max:
+		yield b
+		a, b = b, a + b
+		n = n + 1
+	return 'done'
 ```
 
 但是用__for循环调用generator时，发现拿不到generator的return语句的返回值__。
