@@ -15,3 +15,13 @@ https://jupyter.org/
 恭喜，您已经安装了Jupyter Notebook！要运行笔记本，请在终端（Mac / Linux）或命令提示符（Windows）上运行以下命令：
 
 `jupyter notebook`
+
+
+知乎：安装：
+https://zhuanlan.zhihu.com/p/47418033?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+pip install jupyter    # or python -m pip install jupyter 
+pip install RISE    # https://github.com/damianavila/RISE
+jupyter-nbextension install rise --py --sys-prefix
+jupyter-nbextension enable rise --py --sys-prefix
+
+jupyter notebook    # 换到切项目根目录下执行
