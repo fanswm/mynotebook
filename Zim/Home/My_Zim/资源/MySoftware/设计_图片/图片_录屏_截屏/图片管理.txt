@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-22T11:18:27+08:00
+
+====== 图片管理 ======
+创建日期 星期五 22 三月 2019
+
+Xnview
+一般来说所谓图像管理三驾马车，acdsee,irfanview,Xnview
+https://www.xnview.com/en/

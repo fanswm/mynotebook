@@ -47,5 +47,7 @@ labelimg: https://github.com/tzutalin/labelImg
 sudo apt install apt-filere
 linuxBrew:
 	recterm ### termial to mp4 tools.
-
+sudo dpkg -i XnConvert
+sudo apt-get install gtk2.0
+sudo apt-get install build-essential libgtk2.0-dev
 
