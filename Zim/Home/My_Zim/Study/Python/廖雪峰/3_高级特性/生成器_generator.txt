@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-29T18:05:16+08:00
 
-====== 生成器 ======
+====== 生成器 generator ======
 Created Monday 29 January 2018
 
 generator

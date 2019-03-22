@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-29T18:04:59+08:00
 
-====== 切片 ======
+====== 切片 slice ======
 Created Monday 29 January 2018
 
 Slice
