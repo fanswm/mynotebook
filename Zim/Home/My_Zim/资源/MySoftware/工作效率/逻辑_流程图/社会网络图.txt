@@ -1,0 +1,144 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-26T14:34:32+08:00
+
+====== 社会网络图 ======
+创建日期 星期二 26 三月 2019
+
+社会网络图？
+王树义
+王树义
+​
+南开大学 情报学博士
+​关注他
+13 人赞同了该文章
+挖掘社会关系网络，助你洞若观火。
+
+
+需求
+最近有个学生问我，如何绘制交互式社会网络图（Interactive Social Network Graph）？
+
+之所以一定要交互式，是因为他的应用场景，是演示给客户。
+
+他解释说，如果客户有选项，可以根据需要来缩放图形、聚焦类别，甚至是可以拖拽图形元素，以不同视角来查看，那展示效果显然会更好。
+
+我对学生这次把握客户需求的能力，还是比较赞赏的。确实，数据可视化的目的就是为了与人沟通。而人是需要控制感的。
+
+在数据科学里，这个需求，属于网络可视化（Network Visualization）范畴。应用上，除了描绘社会网络外，这种可视化的对象还可以包括引文网络、贸易网络、信息（或疾病）传播网络等。甚至，网络可视化操作还能与时序数据结合，例如 Maximilian Noichl 绘制的这张古代哲学家的动态关系网络图。
+
+
+网络可视化的工具，是非常多的。
+
+然而，一旦涉及了交互式，选项就大幅减少了。特别是，他还要求免费、易学、格式开放、演示环境易于部署……
+
+这条件，够苛刻了吧？
+
+还好，我还真就帮他找到了。
+
+虽然易学，可是由于他是文科生，我觉得还是给他写个教程，比较妥帖。
+
+教程写完之后，我觉得你可能也会用得上，所以一并分享给你。
+
+演示数据，我自然不能用他的。否则有泄露商业机密的风险。这里我采用的，是斯坦福大学开放课程《数据库基础》中的一个简单数据样例。我在国际班讲的英文数据库课程，一直用它作为练习数据。
+
+这个演示数据的特点，就是简单。
+
+有多简单？往下看。
+
+数据
+该数据刻画的，是某高中里4个年级部分学生之间的社交关系。
+
+我们一共需要用到3张数据表格，分别是学生信息、朋友关系和“喜欢”关系。
+
+先看学生信息表。我已经把它上传到了这个 github 链接，你可以点击查看。
+
+
+表格包含3列，分别是学号、姓名和年级。
+
+然后是朋友关系表。请点击这个链接查看。
+
+
+除去表头，一共20行。包含两列，代表了关系两端的两个学生的学号。
+
+注意“朋友”关系是一种双向（或者无向）关系。两个人都认可的，才算是朋友。我在人群中，一眼就能认出某影视巨星。可惜，人家不认识我，这显然就不算朋友关系。
+
+再后面，是“喜欢”（likes）关系表。我放在了这个链接。
+
+
+注意这里虽然也描述了关系的起点和终点，但是“喜欢”关系是一种有向关系。张三喜欢李四，李四可能并不喜欢张三。
+
+好了，这就是我们需要用到的全部数据了。下面我们来看看运行环境。
+
+环境
+我们使用的，是 R 的集成开发环境（integrated development environment, IDE） RStudio 。
+
+
+你可以在本机安装 R 以及 RStudio 。我已经把安装和设置步骤写在了《如何用 R 快速了解科研领域？》一文中。
+
+配套的代码和数据，我放在了这个 github 仓库中。你可以下载使用。
+
+然而，此处为了你更快捷地上手，我直接为你准备了云端的运行环境。你只需要点击这个链接（http://t.cn/EJ5U8o6%EF%BC%89%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E9%9D%A2%E5%BC%80%E5%90%AF%E4%B8%80%E4%B8%AA RStudio 。其中，已包含了我为你准备好的数据和代码。
+
+
+双击右下方目录区域里面的 demo.Rmd，你就能看到对应的笔记本了。
+
+
+怎么样？够方便吧？
+
+其实，你自己也可以构建这样的云端环境。具体的方法，我已经在《如何用iPad运行Python代码？》一文中为你详细介绍了。如果你感兴趣，可以在学过本篇教程后，尝试练练手。
+
+下面我们开始介绍代码了。请你根据我的介绍，逐步点击代码模块旁边的运行按钮，查看运行的结果。
+
+
+代码
+首先，我们需要读入本教程中最重要的软件包，也就是 R 环境下的网络交互可视化工具—— visNetwork。
+
+
+visNetwork 基于 Javascript 可视化工具库 vis.js 开发，为 R 用户提供了简单易用的界面，而且功能也很强大。
+
+
+我们使用 library 命令来读入它。
+
+r library('visNetwork') ¨G0G r nodes <- read.csv("data/Highschooler.csv", header=T, as.is=T) friends <- read.csv("data/Friend.csv", header=T, as.is=T) ¨G1G r nodes$title <- paste0("grade", nodes$grade) nodes$label <- nodes$name visNetwork(nodes, friends) ¨G2G r nodes$color.background <- c("orange", "pink", "yellow", "blue")[nodes$grade] visNetwork(nodes, friends) ¨G3G r nodes$grade <- as.factor(nodes$grade) nodes$color.background <- c("orange", "pink", "yellow", "blue")[nodes$grade] visNetwork(nodes, friends) ¨G4G r visNetwork(nodes, friends) %>% visOptions(selectedBy = "grade") ¨G5G r likes <- read.csv("data/Likes.csv", header=T, as.is=T) ¨G6G r visNetwork(nodes, likes) ¨G7G r likes$arrows <- "to" visNetwork(nodes, likes) ¨G8G r friends$relation <- c("friend") likes$relation <- c("likes") ¨G9G r friends ¨G10G r library(tidyverse) ¨G11G r links <- bind_rows(friends, likes) links ¨G12G r visNetwork(nodes, links) ¨G13G r links$color <- c("green", "red")[links$relation] visNetwork(nodes, links) ¨G14G r links$relation <- as.factor(links$relation) links$color <- c("green", "red")[links$relation] visNetwork(nodes, links) ¨G15G r links$relation <- as.factor(links$relation) links$color <- c("green", "red")[links$relation] visNetwork(nodes, links) %>% visOptions(selectedBy = "grade")
+
+
+我们选择一下年级，拖动节点看看：
+
+
+以上，是样例代码中，出现的内容解释。
+
+小结
+通过本文的学习，相信你已经掌握如何把社会网络的表格数据，用交互可视化的方法展现出来。
+
+对于不同的元素，你也已经学会了基本的展现方式。
+
+但请你一定不要止步于此。
+
+首先，你需要继续查看文档。里面还有很多选项参数，此处我们没有涉及。例如说，这里我们只绘制了“关系”（边），但是却没有在其上进行任何文字标记。
+
+
+如果你需要生成非常严肃的数据可视化作品，这些内容很可能用得上。请你点击这个链接，查看完整的文档。从中选择自己感兴趣的部分深入研读。
+
+另外，这个工具，也绝不仅仅可以帮助你绘制社会网络图。只要是适合用网络图展现的内容，它都可以发挥作用。
+
+希望你充分发挥自己举一反三的能力，把这项新技能用好。
+
+祝学习愉快！
+
+延伸阅读
+你可能也会对以下话题感兴趣。点击链接就可以查看。
+
+如何用 R 绘制动态统计图？
+如何用4行 R 语句，快速探索你的数据集？
+如何用R分析CNKI文献关键词词频？
+如何用Python和R对故事情节做情绪分析？
+《文科生数据科学上手指南》分享
+喜欢请点赞和打赏。还可以微信关注和置顶我的公众号“玉树芝兰”(nkwangshuyi)。
+
+如果你对 Python 与数据科学感兴趣，不妨阅读我的系列教程索引贴《如何高效入门数据科学？》，里面还有更多的有趣问题及解法。
+https://zhuanlan.zhihu.com/p/60288769?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
+https://www.jianshu.com/p/8853b19a40cd
+https://github.com/wshuyi/demo-interactive-network-visualization-r/blob/master/data/Highschooler.csv
+https://github.com/wshuyi/demo-interactive-network-visualization-r/blob/master/data/Friend.csv
+https://github.com/wshuyi/demo-interactive-network-visualization-r/blob/master/data/Likes.csv

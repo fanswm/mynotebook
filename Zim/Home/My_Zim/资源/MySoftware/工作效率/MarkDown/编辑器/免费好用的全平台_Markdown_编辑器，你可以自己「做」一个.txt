@@ -1,0 +1,132 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-26T15:35:13+08:00
+
+====== 免费好用的全平台 Markdown 编辑器，你可以自己「做」一个 ======
+创建日期 星期二 26 三月 2019
+
+免费好用的全平台 Markdown 编辑器，你可以自己「做」一个
+03月23日
+SPNCR
+Markdown 这门简洁的标记语言，让我们写文章有了更方便的途径。macOS 上面好用又好看的 Markdown 编辑器百花齐放，但在 Windows 上，好用的 Markdown 编辑器真是少之又少。
+
+在 2015 年，微软开源了 Visual Studio Code 这一轻量级的代码编辑器，从此 VS Code 便突飞猛进，在编程开发领域占下一席之地。事实证明，VS Code 除了方便写代码，还能干更多的事情。今天我就来介绍一下如何利用 VS Code，在全平台上打造一个完全免费的编写 Markdown 的极佳环境。
+
+下载安装
+我们可以直接从 Visual Studio Code 的官网 上下载 VS Code 的安装包，在 Windows 或 macOS 上面直接安装即可。
+
+
+Visual Studio Code
+如果你在 macOS 上使用 Homebrew 包管理器，也可以使用下面的命令直接安装 VS Code：
+
+brew cask install visual-studio-code
+接下来 Windows 和 macOS 的操作方法一致，下面我以 Windows 为例进行介绍。
+
+开箱即用
+利用 VS Code 编写 Markdown 的最大方便之处就是它能做到「开箱即用」。你可以直接打开 VS Code，快捷键 Ctrl + N 创建一个以 .md 为文件扩展名的 Markdown 文件，就可以开始书写 Markdown 了。
+
+利用 VS Code 撰写 Markdown 文档的最佳实践是指定一个文件夹作为你的 Markdown 工作区，之后将你的 Markdown 文件全部放在这个文件夹下，然后用 VS Code 直接打开这个文件夹即可。
+
+VS Code Markdown 编辑模式
+上图是一个典型的 VS Code Markdown 编辑器编辑模式的样子，其中整个编辑器分为三栏：
+
+侧边栏
+编辑区域
+预览区域
+其中侧边栏上半部分显示的是当前工作区文件夹下的文件，包括 Markdown 文件和素材。下半部分可以展开「Outline」视图，即大纲，可以根据当前正在编辑的 Markdown 文件显示其各级标题的大纲目录。
+
+
+编辑模式
+预览 Markdown 文档
+VS Code 强大之处在于其各种内置功能，统一操作这些功能的面板叫做「Command Palette」，即「命令面板」。我们可以直接通过快捷键 Ctrl + Shift + P 调出命令面板，输入关键词，找到相应的命令并回车来执行。预览 Markdown 文件的命令叫做「Markdown: Open Preview to the Side」，即「在旁边打开 Markdown 预览」，我们可以通过这一方式直接调出侧边的 Markdown 预览面板。
+
+
+打开 Markdown 预览
+当然，我们也可以通过每个 Markdown 文件右上角的按钮直接打开侧边预览，或者通过快捷键 Ctrl + K V来调出。
+
+
+按钮调出 Markdown 预览
+值得一提的是，VS Code 的 Markdown 预览默认渲染的是当前你正在编辑的文档，不过如果你希望将某个文档的预览渲染锁定不动，可以通过「Markdown: Toggle Preview Locking」调出一个锁定某个文档的预览界面。
+
+默认情况下，VS Code 的 Markdown 源文件和预览界面是同步的，即你无论是在编辑界面还是预览界面滚动，另一个界面都会同步你当前浏览的位置。
+
+
+Markdown 编辑区和预览区同步滚动
+高效插件
+VS Code 一个强大的地方在于它丰富的插件系统。VS Code 本身在 Visual Studio Marketplace 上面就有成千上万的开源免费的插件，和 Markdown 相关的插件也数不胜数。安装一个 VS Code 的插件非常简单：通常情况下，我们直接点击下图中插件系统的图标，搜索相关插件的名称，点击安装即可。
+
+
+VS Code 插件系统
+这里我仅推荐我日常使用的两个插件，因为这两个插件就足以覆盖我们日常使用的绝大多数功能。
+
+Markdown All in One
+就如其名字所言：Markdown 大一统插件。这个插件直接集成了大部分我们撰写 Markdown 时所需要的功能，是 Markdown 类插件中下载榜榜首。我们可以在 Visual Studio Marketplace | Markdown All in One 处下载安装这个插件，或者直接在侧边栏插件系统中搜索 Markdown All in One 来安装。
+
+
+Markdown All in One
+Markdown All in One 这个插件有着非常强大的 Markdown 文档辅助编写功能，下面我来一一介绍。
+
+快捷键
+快捷键	操作
+Ctrl + B	加粗
+Ctrl + I	斜体
+Alt + S	删除线
+Alt + C	勾选/取消勾选任务清单项目
+Ctrl + M	开启 LaTeX 数学公式编写
+Markdown All in One 内置有上表所示的快捷键，我们可以直接利用快捷键将文字赋予格式、或进行某种操作，非常方便。
+
+自动生成并更新目录
+
+生成目录
+Markdown All in One 插件可以自动根据你正在编辑的文档，生成相应的目录。我们利用快捷键 Ctrl + Shift + P 调出「命令面板」，输入「目录」，即可直接调用命令「Markdown: 创建目录」。之后如果你更新了文章内容，也可以直接通过命令「Markdown：更新目录」更新。
+
+自动格式化表格
+
+格式化表格
+利用命令「Format Document」，Markdown All in One 可以直接帮我们将 Markdown 源文件中的表格进行格式化，使之更加易读。
+
+图片等本地素材自动补全路径
+
+自动补全本地素材路径
+Markdown All in One 可以直接帮助我们补全本地图片的路径，这个功能非常方便，因此我也推荐将 Markdown 文档所需的图片素材保存在一个和源文件同一个路径的文件夹下，比如这一的安排方式就比较合理：
+
+.
+├── 1 文章一
+│   ├── image/
+│   └── Post1.md
+├── 2 文章二
+│   ├── image/
+│   └── Post2.md
+└── 3 文章三
+	├── image/
+	└── Post3.md
+...
+LaTeX 数学公式支持
+
+LaTeX 数学公式
+Markdown All in One 直接提供了基于 LaTeX 的数学公式渲染，支持行内数学公式，以及整段的数学公式。
+
+Markdown Preview Mermaid Support
+前面的插件虽然几乎覆盖了我们日常编写 Markdown 几乎全部需求，但是它并没有支持 Mermaid 渲染引擎。由于我偶尔会使用 Markdown 绘制流程图、时序图或甘特图，因此我也会使用 Mermaid 渲染引擎来辅助我的绘制。这里 Markdown Preview Mermaid Support 这个插件就让 VS Code 的 Markdown 预览能够正确渲染 Mermaid 图，非常方便。
+
+
+Markdown Preview Mermaid Support
+我们可以直接从 Visual Studio Marketplace | Markdown Preview Mermaid Support 这里下载这个插件，也可以从插件系统栏处搜索安装。
+
+进阶操作
+VS Code 最强大的地方在于其无穷无尽的自定义功能。可能你觉得默认的 Markdown 预览风格并不符合你的口味，那么你可以直接在 VS Code 的设置中（快捷键 Ctrl + , 打开）自定义 Markdown 渲染使用的 CSS 样式文件：
+
+{
+	"markdown.styles": [
+		"Style.css"
+	]
+}
+其中的 Style.css 就是更换默认 Markdown 渲染使用样式的 CSS 文件，这里需要填写你所使用文件的绝对路径。
+
+小结
+VS Code 强大的插件系统，以及开源的方便性，让我们可以从几乎任何角度、利用各种手段去自定义我们的 Markdown 编写环境（比如自定义 VS Code 的 CSS 修改样式、自定义编译自动化将 Markdown 编译为 HTML、PDF 等）。更多进阶的操作功能，请直接参考微软官方的开发文档：Markdown and Visual Studio Code
+
+最后说一句，如果你是少数派 Matrix 作者，又恰巧想用 VS Code 作为 Markdown 编辑器为 Matrix 撰写文章，可以来试试我为 VS Code 写的插件：vscode-sspai-markdown-helper，不仅能够帮你管理 Markdown 文档，还能让你的 Markdown 预览样式直接匹配少数派官网格式。👍
+
+利用 VS Code 在几乎任何平台上面编写 Markdown 文档的介绍到这里就结束了。免费开源的 VS Code 让 Windows 上也能有一个简单又漂亮的 Markdown 编写环境。相信经过配置，你的 Markdown 编写环境也一定有所提升。干杯 🍻
+https://sspai.com/post/53327
