@@ -1,0 +1,52 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-27T14:38:39+08:00
+
+====== yay ======
+创建日期 星期三 27 三月 2019
+
+https://www.ostechnix.com/yay-found-yet-another-reliable-aur-helper/
+
+https://github.com/Jguer/yay
+
+To install Yay on any Arch-based systems, run the following commands one by one.
+
+$ sudo pacman -S git
+$ git clone https://aur.archlinux.org/yay.git
+$ cd yay
+$ makepkg -si
+Usage
+Like any other AUR helpers, the typical way to install a package from AUR is:
+
+$ yay -S <package-name-here>
+要在AUR和官方存储库中搜索包，请使用-Ss标记，如下所示。
+
+$ yay -ss mplayer 
+我们还可以在AUR或官方存储库中查看包的信息。
+
+$ yay -Si mplayer 
+要更新AUR和官方存储库中的所有软件包，请使用-Syu标志。
+
+$ yay -Syu
+yay的一个很好的功能是，如果您在没有操作的情况下传递此命令，那么它将显示包安装选择的菜单。
+
+例如，当我运行以下命令时（请注意，没有指定操作），它会显示包选择的菜单。
+
+$ yay mplayer
+
+我必须输入一个数字来安装相应的包。此外，我们可以指定具有空格分隔的多个包。
+
+要安装任何没有确认的软件包（当然没有用户干预），请使用“-noconfirm”选项。
+
+$ yay -S --noconfirm <package-name>
+要打印需要更新的软件包列表，请运行：
+
+$ yay -Pu 
+要删除不需要的依赖项，请使用-Yc标志，如下所示。
+
+
+sk的yay -Yc [sudo]密码：
+
+有关yay的更多详细信息，请参阅手册页。
+
+$ man yay

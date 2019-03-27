@@ -8,8 +8,8 @@ Creation-Date: 2019-03-20T16:24:43+08:00
 高效使用 Org 模式
 2019-03-19 18:10
 
-译自：https://www.badykov.com/emacs/2018/08/26/be-productive-with-org-mode/%E4%BD%9C%E8%80%85： Ayrat Badykov
-原创：LCTT https://linux.cn/article-10634-1.html%E8%AF%91%E8%80%85： DarkSun
+译自：https://www.badykov.com/emacs/2018/08/26/be-productive-with-org-mode/ 作者： Ayrat Badykov
+原创：LCTT https://linux.cn/article-10634-1.html 译者： DarkSun
 
 
 
@@ -36,12 +36,12 @@ Org 模式最基本的应用场景就是以笔记的形式记录下你想记住�
 
    https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html
    http://exercism.io/languages/elisp/about
-   http://batsov.com/articles/2011/11/30/the-ultimate-collection-of-emacs-resources/][The Ultimate Collection of Emacs Resources
+   http://batsov.com/articles/2011/11/30/the-ultimate-collection-of-emacs-resources/ ][The Ultimate Collection of Emacs Resources
 
 ** Rust gamedev
-*** Study https://github.com/SergiusIW/gate][gate 2d game engine with web assembly support
-*** [[ggez][https://github.com/ggez/ggez]]
-*** https://www.amethyst.rs/blog/release-0-8/][Amethyst 0.8 Relesed
+*** Study https://github.com/SergiusIW/gate ][gate 2d game engine with web assembly support
+*** ggez][ https://github.com/ggez/ggez
+*** https://www.amethyst.rs/blog/release-0-8/ ][Amethyst 0.8 Relesed
 
 ** Upgrade Elixir/Erlang Skills
 *** Read Erlang in Anger
@@ -57,13 +57,13 @@ Org 模式最基本的应用场景就是以笔记的形式记录下你想记住�
 项目待办
 我在工作时时常会发现一些能够改进或修复的事情。我并不会在代码文件中留下 TODO 注释 (坏味道)，相反我使用 org-projectile[4] 来在另一个文件中记录一个 TODO 事项，并留下一个快捷方式。下面是一个该文件的例子：
 
-* [[elisp:(org-projectile-open-project%20"mana")][mana]] [3/9]
+* elisp:(org-projectile-open-project%20"mana")][mana [3/9]
   :PROPERTIES:
   :CATEGORY: mana
   :END:
-** DONE [[file:~/Development/mana/apps/blockchain/lib/blockchain/contract/create_contract.ex::insufficient_gas_before_homestead%20=][fix this check using evm.configuration]]
+** DONE file:~/ Development/mana/apps/blockchain/lib/blockchain/contract/create_contract.ex::insufficient_gas_before_homestead%20=][fix this check using evm.configuration
    CLOSED: [2018-08-08 Ср 09:14]
-  https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2.md][eip2:
+  https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2.md ][eip2:
   If contract creation does not have enough gas to pay for the final gas fee for
   adding the contract code to the state, the contract creation fails (i.e. goes out-of-gas)
   rather than leaving an empty contract.
@@ -81,7 +81,7 @@ Org 模式最基本的应用场景就是以笔记的形式记录下你想记住�
 ** TODO [#B] Caching for storage during execution
 ** TODO [#B] Removing old merkle trees
 ** TODO do not calculate cost twice
-* [[elisp:(org-projectile-open-project%20".emacs.d")][.emacs.d]] [1/3]
+* elisp:(org-projectile-open-project%20".emacs.d")][.emacs.d [1/3]
   :PROPERTIES:
   :CATEGORY: .emacs.d
   :END:

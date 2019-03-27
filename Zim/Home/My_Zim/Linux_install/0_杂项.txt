@@ -51,4 +51,5 @@ sudo dpkg -i XnConvert
 sudo apt-get install gtk2.0
 sudo apt-get install build-essential libgtk2.0-dev
 无道词典
+sudo apt install borgbackup
 

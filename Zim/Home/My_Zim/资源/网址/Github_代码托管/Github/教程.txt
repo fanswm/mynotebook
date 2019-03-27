@@ -6,3 +6,10 @@ Creation-Date: 2018-11-14T17:34:01+08:00
 Created Wednesday 14 November 2018
 
 https://www.zhihu.com/question/20070065/answer/517839193?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
+GitHub for Windows 使用教程(一)​youngxhui.top:
+http://youngxhui.top/2016/05/03/GitHub-for-Windows%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B(%E4%B8%80)/
+http://youngxhui.top/2016/05/13/GitHub-for-Windows%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B(%E4%BA%8C)/
+http://youngxhui.top/2016/05/15/GitHub-for-windows%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%EF%BC%88%E4%B8%89%EF%BC%89/
+http://youngxhui.top/2016/08/28/GitHub-for-Windows%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%EF%BC%88%E5%9B%9B%EF%BC%89/
+https://www.zhihu.com/question/20070065/answer/629423977?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
