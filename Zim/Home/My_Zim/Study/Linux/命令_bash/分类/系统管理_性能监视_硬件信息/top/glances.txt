@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-29T20:17:15+08:00
+
+====== glances ======
+创建日期 星期五 29 三月 2019
+
+https://nicolargo.github.io/glances/
+glances：更强大的 htop / top 代替者
+
+htop 代替 top，glances 代替 htop：
+
+信息比 htop 丰富了不少，更全了，对吧？除了命令行查看外，glances 还提供页面服务，让你从页面上随时查看某服务器的状态。

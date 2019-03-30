@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-29T18:36:51+08:00
+
+====== cgasm命令行查询汇编指令 ======
+创建日期 星期五 29 三月 2019
+
+Intel x86/x64 开发者手册，上千页的 PDF 里漫游，效率很低，对不对？cgasm 支持本地模糊搜索，比如查询 aes 相关的指令：
+
+看 Intel 的 PDF 你要这么搞很费力吧？默认 cgasm + 指令，会显示简介。
+
+当然，具体使用你会需要看更详细的说明，那么可以使用 cgasm -v aesenc，将会显示和开发手册 PDF里一致的内容：指令字节码，编码模式，状态影响，伪操作码描述和等价的 Intrinsic 等详细内容，比搜网页和查询 PDF效率高多了。
+
+https://github.com/bnagy/cgasm
