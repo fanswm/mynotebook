@@ -1,0 +1,34 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-02T14:04:12+08:00
+
+====== cheat 命令行笔记 ======
+创建日期 星期二 02 四月 2019
+
+cheat：命令行笔记
+
+就是各种 cheat sheet ，比如经常搞忘 redis 命令的话，你可以新建 ~/.cheat/redis 这个文件，写一些内容，比如：
+
+cat /etc/passwd | redis-cli -x set mypasswd
+redis-cli get mypasswd
+redis-cli -r 100 lpush mylist x
+redis-cli -r 100 -i 1 info | grep used_memory_human:
+redis-cli --eval myscript.lua key1 key2 , arg1 arg2 arg3
+redis-cli --scan --pattern '*:12345*'
+
+然后使用的时候，cheat redis 命令就可以显示出来刚才新建的 cheat sheet 了：
+
+同样 cheat 本身还自带了很多常用 cheat sheet，比如你可以试试：
+
+cheat tar      # 当你忘记 tar 命令时候
+cheat vim      # vim cheat sheet
+cheat rsync    # 文件同步的 cheat sheet
+
+忘记 Vim 怎么退出了？没关系 cheat vim 就可以显示 vim cheat sheet了，对于一些重要的，但是不常用的，经常搞忘的东西，特别有用，比如我最痛恨的 https + svn 搭建过程，第一次查资料弄好，然后忘了，半年后又要再弄时又得全部重新查找资料，然后又忘记了，有了这个就比较好办。
+
+再比如 rsync 的用法，我就老记不住，man rsync 又是废话连篇不着重点，看它自带的 cheat 效率提高不少，注意时常更新，作者会不断添加 cheat sheet。
+
+这显然比你查询网页开 evernote 效率来的快，使用环境变量 DEFAULT_CHEAT_DIR 可以设定 ~/.cheat 以外的个人 cheat 目录，一般很多人都会在 github 上建立一个个人配置文件的项目，里面放满自己的 vim / zsh / bash 等配置，现在可以把个人 cheat 文件也纳入这个项目的管理，这样你就比较方便的能在不同的机器上同步你自己建立的各种 cheat sheet 了。
+
+随着你自定义了越来越多的 cheat sheet，你的工作效率会变得越来越高。
+https://github.com/cheat/cheat

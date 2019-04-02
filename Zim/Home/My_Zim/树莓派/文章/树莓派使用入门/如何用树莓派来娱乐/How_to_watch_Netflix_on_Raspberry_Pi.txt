@@ -1,0 +1,93 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-02T11:48:51+08:00
+
+====== How to watch Netflix on Raspberry Pi ======
+创建日期 星期二 02 四月 2019
+
+https://www.dailydot.com/upstream/netflix-raspberry-pi/
+Step 1: Selecting your Pi
+There are plenty of Raspberry Pi models on the market, but to build the best media center possible, we suggest the Raspberry Pi 3. The device comes with a 1.2GHz 64-bit quad-core CPU, 1GB of RAM, 802.11n Wireless LAN, Bluetooth 4.1, 4 USB ports, HDMI, a Micro SD slot, and a VideoCore IV 3D graphics core. Combined, it’s all the power you need—plus it’s only $34.49.
+
+Raspberry Pis don’t have any onboard storage, so you’re going to need a Micro SD card to store your data. For around $8, you can get a fast Samsung 32GB EVO Select Micro SD. If you decide to write over the media center programming to turn your Pi into a game device or some other project in the future, this Micro SD can handle most small- to medium-size projects.
+
+raspberry pi netflix - pi 3
+Photo via Raspberry Pi
+
+Step 2: Download OSMC
+The Raspberry Pi homebrew scene has developed plenty of great programs, but the best open-source media player is OSMC. Built around the beloved Kodi, OSMC (Open Source Media Center) is the easiest way to turn your Pi into a media center. To install OSMC on your Micro SD card, head over to osmc.tv and download the installer program for your computer’s operating system. With installers for Linux, Mac, and Windows, OSMC is accessible no matter what system you work on. Insert your Micro SD card into your computer, then launch the installer, and follow the prompts.
+
+raspberry pi netflix osmc
+Photo via OSMC
+
+Step 3: Set up OSMC
+Insert the formatted Micro SD card into your Raspberry Pi, connect the device to your TV via an HDMI cable, attach the USB keyboard, and power on the Pi. Follow the prompts during set up. Set up the language, time zone, and name your device, and connect your Pi to your Wi-Fi. Finally, select OSMC as the look for your device. When you’re done, you’ll find yourself at the OSMC homepage. Kodi will launch by default when you turn on OSMC.  
+
+Step 4: Access the terminal and set OSMC to a nightly mode
+Next, we need to configure OSMC to a nightly build using the terminal. To access the terminal, navigate up to the power icon and select Exit/Quit. When the OSMC screen appears on your screen, press ESC on your keyboard. This will bring up the terminal. Log in with the username osmc and the password osmc. Now we’ll need to update some files. Note: We know all these hyphens and dashes can get confusing—made more so by some automatic formatting in WordPress—but you don’t actually need to figure out en dashes on your keyboard: Simply type two hyphens when you see a longer dash, and one where it appears shorter.
+
+First open the source file by entering: sudo nano /etc/apt/sources.list
+
+Now scroll to the bottom of the file and add this line: deb http://download.osmc.tv/dev/gmc-18 gmc-18 main
+
+Press Ctrl + X to save and exit.
+
+Now we’ll add the certificate for a new source. Type: wget -qO – http://download.osmc.tv/dev/gmc-18/pubkey.asc | sudo apt-key add –
+
+Next set OSMC to run this build. Enter the following lines one at a time.
+
+sudo apt-get update
+sudo apt-get dist-upgrade -y
+sudo apt-get install rbp2-mediacenter-osmc=17.8-387 -y –all
+sudo apt-get update
+sudo apt-get dist-upgrade -y
+sudo apt-get install rbp2-mediacenter-osmc=17.8-387 -y –allow-downgrades
+sudo apt-get install python-pip python-crypto build-essential -y
+sudo apt-get install python-all-dev python-setuptools python-wheel -y
+sudo apt-get install python-crypto-dbg python-crypto-doc python-pip-whl -y
+pip install pycryptodomex
+Step 5: Download Netflix
+While you can download Netflix directly from Kodi, it’s easy to download the app while you’re here in the terminal. In the terminal, type in the following link:
+
+wget https://github.com/kodinerds/repo/raw/master/repository.netflix/repository.netflix-1.0.1.zip
+Once the download is complete, reboot the Raspberry Pi.
+
+raspberry pi netflix
+Photo via Netflix
+
+Step 6: Install your app
+Once your Pi reboots OSMC, Kodi will automatically launch. To install our download of Netflix, navigate to the Settings menu. Now select “Add-on browser” then “Install from Zip File” and “Root filesystem.” Select “Home,” “OSMC,” and finally “repository.netflix.1.0.1.zip.  
+
+Now you need to get the Netflix add-on.
+
+Go to “Settings,” “Add-on browser,” “Install from repository,” “Netflix Addon Repository Video add-ons,” and “Netflix.” Start the installation, select the latest version of the app, and press OK.
+
+READ MORE:
+
+What is Kodi, and is it legal?
+How to use Roku: A beginner’s guide
+How to use Kodi on Roku without jailbreaking your device
+The 8 best (legal) ways to watch movies on Kodi
+Step 7: Configure Netflix
+It’s time to log in to your Netflix account. Go to “Settings,” “Add on browser,” “My add-ons,” “Video Addons,” and “Netflix.” Select the “Configure” option, and enter your login information under the “Account” section using the “Switch Accounts” option.
+
+Step 8: Run Netflix and install Widevine
+The first time you play a show or movie on Netflix with your OSMC Kodi device, you’ll be prompted to download a module called Widevine. Using the MakingStuffWork method, Widevine will already be set to install. After the Widevine installer launches, you’ll be taken to an installation page. Say yes to everything in the installer, download the module, and install. Keep saying yes to Widevine’s prompts until the installation is done, then reboot the device. Note: The installation process will take awhile.
+
+raspberry pi netflix - widevine
+Photo via Widevine
+
+Step 9: Launch Netflix
+Once you’ve rebooted the device, fire up Netflix in Kodi. Select a video to watch, play it, and let it run. If the video quality is bad, allow your video to play for a while, then close the video and reboot one more time. The issue should be improved.
+
+Congratulations! Thanks to Raspberry Pi Netflix-streaming capabilities, you now have your own Netflix-enabled Kodi player. You can even find a Kodi/Raspberry Pi compatible Bluetooth remote online so you won’t need to navigate using your USB keyboard. You can connect this device via the OSMC settings menu. To access that, hit the On/Off button on Kodi after the Pi reboots, and find the Settings menu in the OSMC launch page.
+
+Not sure what to watch tonight? Here are our guides for the absolute best movies on Netflix, must-see Netflix original series, documentaries, docuseries, and movies.
+
+Looking for something more specific? Here are our Netflix guides for the best war movies, documentaries, anime, indie flicks, true crime, food shows, rom-coms, LGBT movies, alien movies, gangster movies, Westerns, film noir, and movies based on true stories streaming right now. There are also sad movies guaranteed to make you cry, weird movies to melt your brain, old movies when you need something classic, and standup specials when you really need to laugh. Or check out Flixable, a search engine for Netflix.
+
+Update 9:31am CT, March 26, 2019: We’ve added some clarifying language about the special characters that appear in the Terminal text.
+
+John-Michael Bond
+John-Michael Bond
+John-Michael Bond is a tech reporter and culture writer for Daily Dot. A longtime cord-cutter and early adapter, he's an expert on streaming services (Hulu with Live TV), devices (Roku, Amazon Fire), and anime. A former staff writer for TUAW, he's knowledgeable on all things Apple and Android. You can also also find him regularly performing standup comedy in Los Angeles.

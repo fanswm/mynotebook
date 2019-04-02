@@ -53,3 +53,6 @@ sudo apt-get install build-essential libgtk2.0-dev
 无道词典
 sudo apt install borgbackup
 sudo dpkg -i google-earth-pro-stable_current_amd64.deb
+# 以下bropages: 类似的还有tldr
+sudo apt install ruby ruby-dev
+ sudo gem install bropages    

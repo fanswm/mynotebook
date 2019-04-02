@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-02T14:01:13+08:00
+
+====== mc ：内容浏览 预览 ======
+创建日期 星期二 02 四月 2019
+
+mc ：内容浏览/预览
+
+即便能舒适的呆在终端命令行里工作的人，有时候面对有些事情，也会感到烦躁，比如浏览一个目录的结构和里面文件内容，比如从源文件夹选择拷贝一批特定的文件到目标文件夹，这时候你需要 mc ，对就是前面 mcedit 的父项目 midnight commander ，安装方法同 mcedit：
+
+和原来 Windows 下的 Total Commander 很类似，直接光标上下移动浏览文件，按 TAB键切换左右窗口，支持鼠标，支持内容预览，让你快速了解一堆文件夹里有些什么东西，按 F3 可以唤出 mcedit 预览文件，还可以用二进制查看文件内容，F4可以编辑文件。
+https://midnight-commander.org/

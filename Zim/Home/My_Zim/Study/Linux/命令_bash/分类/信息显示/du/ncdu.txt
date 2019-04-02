@@ -22,7 +22,7 @@ ncdu 是一个非常棒的替代品。它提供了一个交互式的界面并且
 Sample ncdu output
 
 
-还有另外一个叫 [nnn 的替代选择](https://github.com/jarun/nnn)，它提供了一个更漂亮的界面，它也提供文件尺寸和使用情况，实际上它更像一个全功能的文件管理器。
+还有另外一个叫 [nnn 的替代选择](https://github.com/jarun/nnn)%EF%BC%8C%E5%AE%83%E6%8F%90%E4%BE%9B%E4%BA%86%E4%B8%80%E4%B8%AA%E6%9B%B4%E6%BC%82%E4%BA%AE%E7%9A%84%E7%95%8C%E9%9D%A2%EF%BC%8C%E5%AE%83%E4%B9%9F%E6%8F%90%E4%BE%9B%E6%96%87%E4%BB%B6%E5%B0%BA%E5%AF%B8%E5%92%8C%E4%BD%BF%E7%94%A8%E6%83%85%E5%86%B5%EF%BC%8C%E5%AE%9E%E9%99%85%E4%B8%8A%E5%AE%83%E6%9B%B4%E5%83%8F%E4%B8%80%E4%B8%AA%E5%85%A8%E5%8A%9F%E8%83%BD%E7%9A%84%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E5%99%A8。
 
 我的 du 是如下的别名：
 
