@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-29T08:08:29+08:00
 
-====== 命名关键字参数 ======
+====== 3 命名关键字参数 ======
 Created Monday 29 January 2018
 
 ### 命名关键字参数
@@ -11,19 +11,19 @@ Created Monday 29 January 2018
 仍以person()函数为例，我们希望检查是否有city和job参数：
 
 def person(name, age, **kw):
-    __if 'city' in kw:__
-        # 有city参数
-        pass
-    if 'job' in kw:
-        # 有job参数
-        pass
-    print('name:', name, 'age:', age, 'other:', kw)
+	__if 'city' in kw:__
+		# 有city参数
+		pass
+	if 'job' in kw:
+		# 有job参数
+		pass
+	print('name:', name, 'age:', age, 'other:', kw)
 ```
 
 如果要__限制关键字参数的名字__，就可以用__命名关键字参数__，例如，只接收city和job作为关键字参数。这种方式定义的函数如下：
 
 def person(name, age, __*,__ city, job):
-    print(name, age, city, job)
+	print(name, age, city, job)
 和关键字参数**kw不同，__命名关键字参数需要一个特殊分隔符*，*后面的参数被视为命名关键字参数。__
 
 __调用方式如下：__
@@ -33,7 +33,7 @@ Jack 24 Beijing Engineer
 __如果函数定义中已经有了一个可变参数，后面跟着的命名关键字参数就不再需要一个特殊分隔符*了：__
 
 def person(name, age, *args, city, job):
-    print(name, age, args, city, job)
+	print(name, age, args, city, job)
 __命名关键字参数必须传入参数名，这和位置参数不同。如果没有传入参数名，调用将报错：__
 
 >>> person('Jack', 24, 'Beijing', 'Engineer')
@@ -45,7 +45,7 @@ __由于调用时缺少参数名city和job，Python解释器把这4个参数均�
 命名关键字参数__可以有缺省值__，从而简化调用：
 
 def person(name, age, *, city='Beijing', job):
-    print(name, age, city, job)
+	print(name, age, city, job)
 由于命名关键字参数city具有默认值，__调用时，可不传入city参数：__
 
 >>> person('Jack', 24, job='Engineer')

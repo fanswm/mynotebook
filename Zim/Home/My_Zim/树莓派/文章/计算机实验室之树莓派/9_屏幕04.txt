@@ -2,14 +2,14 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-03-12T15:50:35+08:00
 
-====== 课程 9 屏幕04 ======
+====== 9 屏幕04 ======
 创建日期 星期二 12 三月 2019
 
 计算机实验室之树莓派：课程 9 屏幕04
 2019-03-10 20:59
 
-译自：https://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/os/screen04.html%E4%BD%9C%E8%80%85： Alex Chadwick
-原创：LCTT https://linux.cn/article-10605-1.html%E8%AF%91%E8%80%85： qhwdw
+译自：https://www.cl.cam.ac.uk/projects/raspberrypi/tutorials/os/screen04.html作者： Alex Chadwick
+原创：LCTT https://linux.cn/article-10605-1.html译者： qhwdw
 
 
 

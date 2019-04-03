@@ -2,15 +2,15 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-28T21:52:39+08:00
 
-====== 默认参数 ======
+====== 1 默认参数 ======
 Created Sunday 28 January 2018
 
 def power(x, n=2):
-    s = 1
-    while n > 0:
-        n = n - 1
-        s = s * x
-    return s
+	s = 1
+	while n > 0:
+		n = n - 1
+		s = s * x
+	return s
 
 
 设置默认参数时，有几点要注意：
@@ -27,15 +27,15 @@ def power(x, n=2):
 默认参数有个最大的坑，演示如下：
 先定义一个函数，传入一个list，添加一个END再返回：
 def add_end(L=[]):
-    L.append('END')
-    return L
+	L.append('END')
+	return L
 
  __定义默认参数要牢记一点：默认参数必须指向不变对象！__
 
 要修改上面的例子，我们可以用None这个不变对象来实现：
 
 def add_end(L=None):
-    if L is None:
-        L = []
-    L.append('END')
-    return L
+	if L is None:
+		L = []
+	L.append('END')
+	return L

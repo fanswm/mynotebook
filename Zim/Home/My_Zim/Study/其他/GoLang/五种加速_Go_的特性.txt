@@ -7,7 +7,7 @@ Created Thursday 18 October 2018
 
 五种加速 Go 的特性
 2018-10-11 15:06
-编译自：https://dave.cheney.net/2014/06/07/five-things-that-make-go-fast%E4%BD%9C%E8%80%85： Dave Cheney
+编译自：https://dave.cheney.net/2014/06/07/five-things-that-make-go-fast 作者： Dave Cheney
 原创：LCTT https://linux.cn/article-10101-1.html 译者： Baron Hou
 
 Anthony Starks 使用他出色的 Deck 演示工具重构了我原来的基于 Google Slides 的幻灯片。你可以在他的博客上查看他重构后的幻灯片, 

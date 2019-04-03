@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-28T22:02:36+08:00
 
-====== 关键字参数 ======
+====== 4 关键字参数 ======
 Created Sunday 28 January 2018
 
 关键字参数允许你传入__0个或任意个含参数名的参数__，这些关键字参数在函数内部自动组装为一个__dict.__

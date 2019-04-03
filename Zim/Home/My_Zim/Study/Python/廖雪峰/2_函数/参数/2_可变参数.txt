@@ -2,17 +2,17 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-01-28T21:57:30+08:00
 
-====== 可变参数 ======
+====== 2 可变参数 ======
 Created Sunday 28 January 2018
 
 把函数的参数改为可变参数：
 
 ```
 def c__alc(*numbers)__:
-    sum = 0
-    for n in numbers:
-        sum = sum + n * n
-    return sum
+	sum = 0
+	for n in numbers:
+		sum = sum + n * n
+	return sum
 ```
 
 __如果传入的参数是list 或 tuple:__
