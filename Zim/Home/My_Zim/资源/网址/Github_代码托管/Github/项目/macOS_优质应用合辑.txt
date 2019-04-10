@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-10T13:33:12+08:00
+
+====== macOS 优质应用合辑 ======
+创建日期 星期三 10 四月 2019
+
+尽管 macOS 拥有相对完善的 Mac App Store，但许多厂商仍选择独立发售应用。这使得 macOS 上的优质应用无法在 App Store 里得到一站式解决。如果你正在寻找 macOS 上的优质应用，不妨查阅一下 Awesome macOS 这个应用清单。
+
+
+Awesome macOS
+与 Awesome Windows 一样，Awesome macOS 也是一个优质应用的合集。在 macOS 应用大量改用订阅制的现在，我们不妨在这里找一些免费开源的替代品。你可以在 GitHub 上查看 Awesome macOS。如果你偏爱开源应用，也可以在 这里 找到优质的 macOS 开源应用。
+https://github.com/iCHAIT/awesome-macOS
+https://github.com/serhii-londar/open-source-mac-os-apps

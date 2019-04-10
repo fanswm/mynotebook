@@ -14,3 +14,14 @@ $ sudo add-apt-repository ppa:ubuntuhandbook1/audacity
 $ sudo apt-get update
 $ sudo apt-get install audacity
 https://www.audacityteam.org/
+https://github.com/audacity/audacity
+
+音频编辑工具：Audacity
+有时候，我们需要制作一份自己的录音文件。系统录音机的编辑功能太薄弱，如果用 Audition 又有些大材小用。这时不妨试试 Audacity，它是一款轻量级的录音编辑工具。
+
+
+Audacity
+Audacity 可以称得上是「麻雀虽小，五脏俱全」。虽然它是一个轻量级的工具，但声音效果、多轨编辑等功能一应俱全。值得一提的是，Audacity 还支持安装插件来扩展功能。无论是简单的剪辑，还是高要求的制作，Audacity 都能胜任。
+
+Audacity 支持 macOS、Windows 及 Linux，你可以在 官网 或 GitHub 下载它。
+

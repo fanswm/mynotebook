@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-10T13:35:45+08:00
+
+====== 设计工具合集 ======
+创建日期 星期三 10 四月 2019
+
+无论是文章题图，还是学生社团的海报，我们总离不开「设计」这件事。Awesome Design Tools 这个项目为我们整理了海量的设计工具。从图形设计到动画设计，甚至是 AR 的制作，都可以在其中找到相应的工具。
+
+
+Awesome Design Tools
+这个列表囊括了 35 个类别的设计工具，其中既有 After Effects 这样的重量级应用，也不乏许多开源应用。你可以在 GitHub 查看 Awesome Design Tools。
+https://github.com/LisaDziuba/Awesome-Design-Tools

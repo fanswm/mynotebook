@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-10T13:28:10+08:00
+
+====== 高颜值下载工具：Motrix ======
+创建日期 星期三 10 四月 2019
+
+在迅雷、百度网盘越来越难用的今天，下载仿佛又成了一件难事。Motrix 支持主流的 HTTP、FTP、BT及磁链下载，甚至可以解析 thunder:// 开头的迅雷下载链接。配合 Chrome 插件，Motrix 也可以支持百度网盘文件的下载。
+
+
+Motrix
+Motrix 支持 macOS、Windows 及 Linux 系统，你可以在 GitHub 或 官网 下载 Motrix。
+https://github.com/agalwood/Motrix
+https://motrix.app/

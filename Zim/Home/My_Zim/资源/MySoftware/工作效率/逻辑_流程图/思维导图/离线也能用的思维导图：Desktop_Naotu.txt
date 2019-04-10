@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-10T12:00:00+08:00
+
+====== 离线也能用的思维导图：Desktop Naotu ======
+创建日期 星期三 10 四月 2019
+
+思维导图是我们工作、学习中常会用到的东西，一款顺手的思维导图工具显得尤为重要。Desktop Naotu 是基于百度脑图的一款本地应用，不需要网络连接也可以正常使用。
+
+
+Desktop Naotu
+Desktop Naotu 实现了百度脑图的基本功能，同时支持自动保存。Desktop Naotu 支持 macOS、Windows 及 Linux，你可以在 GitHub 下载它。
+https://github.com/NaoTu/DesktopNaotu

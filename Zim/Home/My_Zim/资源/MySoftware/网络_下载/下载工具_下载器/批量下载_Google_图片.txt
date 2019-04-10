@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-10T13:29:03+08:00
+
+====== 批量下载 Google 图片 ======
+创建日期 星期三 10 四月 2019
+
+我们在查找图片时常会利用 Google 的图片搜索功能，可如何批量下载搜索结果一直是困扰我们的难题。Google Images Download 这个项目可以帮我们解决这一困扰。
+
+
+Google Images Download
+Google Images Download 是基于 Python 语言的一个脚本，即使你没有相关的代码知识，也可以很好地用它进行图片搜索和批量下载。少数派也曾详细介绍过这个脚本的使用方法。
+
+Google Images Download 支持 macOS、Windows 及 Linux，你可以在 GitHub 下载它。 https://github.com/hardikvasa/google-images-download
+
+相关阅读：GitHub 上最火的 Google 图片批量下载工具简明教程 https://sspai.com/post/45672

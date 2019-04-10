@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-10T15:51:17+08:00
+
+====== 科学上网 ======
+创建日期 星期三 10 四月 2019
+
+https://github.com/wcmbeta/GFWdata
+https://www.kancloud.cn/chandler/common_software/490153
