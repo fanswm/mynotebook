@@ -1,0 +1,50 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-12T11:36:50+08:00
+
+====== 在树莓派上使用 Mathematica 进行高级数学运算 ======
+创建日期 星期五 12 四月 2019
+
+在树莓派上使用 Mathematica 进行高级数学运算
+2019-04-11 15:09
+
+译自：https://opensource.com/article/19/3/do-math-raspberry-pi%E4%BD%9C%E8%80%85： Anderson Silva
+原创：LCTT https://linux.cn/article-10711-1.html%E8%AF%91%E8%80%85： geekpi
+
+Wolfram 在 Raspbian 中捆绑了一个版本的 Mathematica。在我们的树莓派入门系列的第 12 篇文章中将学习如何使用它。
+
+
+
+在 90 年代中期，我进入了大学数学专业，虽然我是以计算机科学学位毕业的，但是我就差两门课程就拿到了双学位，包括数学专业的学位。当时，我接触到了 Wolfram[1] 的一个名为 Mathematica[2] 的应用，我们可以将黑板上的许多代数和微分方程输入计算机。我每月花几个小时在实验室学习 Wolfram 语言，并在 Mathematica 上解决积分等问题。
+
+对于大学生来说 Mathematica 是闭源而且昂贵的，因此在差不多 20 年后，看到 Wolfram 将一个版本的 Mathematica 与 Raspbian 和 Raspberry Pi 捆绑在一起是一个惊喜。如果你决定使用另一个基于 Debian 的发行版，你可以从这里下载[3]。请注意，此版本仅供非商业用途免费使用。
+
+树莓派基金会的 Mathematica 简介[4]页面介绍了一些基本概念，如变量和循环、解决一些数学问题、创建图形、做线性代数，甚至通过应用与 GPIO 引脚交互。
+
+
+
+要深入了解 Mathematica，请查看 Wolfram 语言文档[5]。如果你只是想解决一些基本的微积分问题，请查看它的函数[6]部分。如果你想绘制一些 2D 和 3D 图形[7]，请阅读链接的教程。
+
+或者，如果你想在做数学运算时坚持使用开源工具，请查看命令行工具 expr、factor 和 bc。（记住使用 man 命令[8] 阅读使用帮助）如果想画图，Gnuplot[9] 是个不错的选择。
+
+via: https://opensource.com/article/19/3/do-math-raspberry-pi
+
+作者：Anderson Silva[10] 选题：lujun9972[11] 译者：geekpi[12] 校对：wxy[13]
+
+本文由 LCTT[14] 原创编译，Linux中国[15] 荣誉推出
+
+[1]: https://wolfram.com/
+[2]: https://en.wikipedia.org/wiki/Wolfram_Mathematica
+[3]: https://www.wolfram.com/raspberry-pi/
+[4]: https://projects.raspberrypi.org/en/projects/getting-started-with-mathematica/
+[5]: https://www.wolfram.com/language/
+[6]: https://reference.wolfram.com/language/guide/Calculus.html
+[7]: https://reference.wolfram.com/language/howto/PlotAGraph.html
+[8]: https://opensource.com/article/19/3/learn-linux-raspberry-pi
+[9]: http://gnuplot.info/
+[10]: https://opensource.com/users/ansilva
+[11]: https://github.com/lujun9972
+[12]: https://github.com/geekpi
+[13]: https://github.com/wxy
+[14]: https://github.com/LCTT/TranslateProject
+[15]: https://linux.cn/article-10711-1.html?utm_source=rss&utm_medium=rss
