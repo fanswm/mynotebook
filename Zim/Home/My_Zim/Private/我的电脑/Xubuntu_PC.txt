@@ -6,7 +6,9 @@ Creation-Date: 2019-04-13T11:24:12+08:00
 创建日期 星期六 13 四月 2019
 
 # 第一步：更改软件源，然后：
-sudo apt-get install zim git vim fcitx-table-wbpy curl npm uget miredo
+sudo apt-get install zim git vim fcitx-table-wbpy curl nodejs npm uget miredo
+# 输入以下命令，切换到淘宝镜像源：
+npm install -g cnpm --registry=http://registry.npm.taobao.org
 
 # 配置zim git
 mkdir -p ~/github/
@@ -71,7 +73,7 @@ sudo docker info
 sudo docker run hello-world
 ## 安装docker时的信息输出,见页面
 ## 配置Docker中国区官方镜像
-##使用vi修改 /etc/docker/daemon.json 文件并添加上”registry-mirrors”: [“https://registry.docker-cn.com%E2%80%9C]%EF%BC%8C%E5%A6%82%E4%B8%8B：
+##使用vi修改 /etc/docker/daemon.json 文件并添加上”registry-mirrors”: [“ https://registry.docker-cn.com “]，如下：
 
 	vi /etc/docker/daemon.json
 	{
@@ -80,3 +82,11 @@ sudo docker run hello-world
 # 重启Docker
 sudo npm install tldr
 tldr --update
+
+#安装坚果云
+#下载： https://www.jianguoyun.com/static/exe/installer/ubuntu/nautilus_nutstore_amd64.deb
+# 双击，用Xubuntu自带的软件安装器安装 nautilus_nutstore_amd64.deb 
+
+# keepassX
+# 软件中心，搜索，安装。
+

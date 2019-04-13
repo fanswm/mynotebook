@@ -26,7 +26,7 @@ In this tutorial, we will see how to install Node.js on popular Linux operating 
 Install NodeJS on Linux
 There are quite a few ways to install Nodejs. The first method is for those who wants to use the stable NodeJS version. The second method and third methods can get you the latest available versions. In particular, the third method is the best way to avoid permission issues while installing packages globally. I will explain all of them.
 
-1. Install Nodejs using your distribution’s package manager (Stable, but outdated versions)
+1. __Install Nodejs using your distribution’s package manager (Stable, but outdated versions)__
 
 Nodejs is available in the default repositories of most Linux distributions. It might not be latest version, but stable. If you want to have a stable Node.js on your Linux, you better install it using your distribution’s package manager as shown below.
 
@@ -51,7 +51,7 @@ Note: Since the packages from the default repositories are outdated, you will ge
 To solve this error, you need to create symlink as shown below.
 
 $ sudo ln -s /usr/bin/nodejs /usr/bin/node
-2. Install Nodejs from NodeSource
+2. __Install Nodejs from NodeSource__
 
 Like I already said, nodejs is available in the default repositories, but it might be bit outdated. To install the most recent version, install the latest version from NodeSource as shown below.
 
