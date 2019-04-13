@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-02-13T15:28:06+08:00
-
-====== 我的 xubuntu ======
-创建日期 星期三 13 二月 2019
-

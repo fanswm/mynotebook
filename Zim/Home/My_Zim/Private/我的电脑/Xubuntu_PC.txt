@@ -1,0 +1,82 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-13T11:24:12+08:00
+
+====== Xubuntu PC ======
+创建日期 星期六 13 四月 2019
+
+# 第一步：更改软件源，然后：
+sudo apt-get install zim git vim fcitx-table-wbpy curl npm uget miredo
+
+# 配置zim git
+mkdir -p ~/github/
+cd ~/github/
+git clone https://github.com/fanswm/mynotebook
+cd mynotebook/Zim/
+git rm story
+git submodule add https://gitlab.com/abstracthex/story
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+# push github.com 免密码：
+cd ~
+touch .git-credentials
+vim .git-credentials
+
+##################添加以下：
+https://{username}:{password}@github.com
+
+# for example:
+# https://xiaoming:passwd@github.com
+
+#在终端下输入：
+git config --global credential.helper store
+#####################################
+
+vim ~/zim_update.sh
+#############################start zim_update.sh
+#!/bin/bash
+#coding:utf-8 
+### zim_update.sh
+cd ~/github/mynotebook/Zim/story
+git pull
+cd ~/github/mynotebook/
+git pull
+
+cd ~/github/mynotebook/Zim/story
+git add .
+git commit -m"commit by xubuntu"
+git push
+
+cd ~/github/mynotebook/
+git add .
+git commit -m"commit by xubuntu"
+git push
+######################################end zim_update.sh
+
+chmod u+x ~/zim_update.sh
+
+#打开zim, 选择~/github/mynotebook/Zim/做为zim的目录
+# 安装chrome浏览器：
+sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install google-chrome-stable
+
+# 安装docker:
+sudo apt-get install docker
+#sudo curl -sSL https://get.daocloud.io/docker | sh
+docker --version
+sudo docker info
+sudo docker run hello-world
+## 安装docker时的信息输出,见页面
+## 配置Docker中国区官方镜像
+##使用vi修改 /etc/docker/daemon.json 文件并添加上”registry-mirrors”: [“https://registry.docker-cn.com%E2%80%9C]%EF%BC%8C%E5%A6%82%E4%B8%8B：
+
+	vi /etc/docker/daemon.json
+	{
+	“registry-mirrors”: [“https://registry.docker-cn.com“]
+	}
+# 重启Docker
+sudo npm install tldr
+tldr --update
