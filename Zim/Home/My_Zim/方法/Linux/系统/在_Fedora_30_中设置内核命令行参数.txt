@@ -1,0 +1,49 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-15T16:16:34+08:00
+
+====== 在 Fedora 30 中设置内核命令行参数 ======
+创建日期 星期一 15 四月 2019
+
+译自：https://fedoramagazine.org/setting-kernel-command-line-arguments-with-fedora-30/%E4%BD%9C%E8%80%85： Laura Abbott
+原创：LCTT https://linux.cn/article-10715-1.html%E8%AF%91%E8%80%85： geekpi
+
+
+
+在调试或试验内核时，向内核命令行添加选项是一项常见任务。即将发布的 Fedora 30 版本改为使用 Bootloader 规范（BLS[1]）。根据你修改内核命令行选项的方式，你的工作流可能会更改。继续阅读获取更多信息。
+
+__要确定你的系统是使用 BLS 还是旧的规范，请查看文件：__
+
+__/etc/default/grub__
+如果你看到：
+
+GRUB_ENABLE_BLSCFG=true
+看到这个，你运行的是 BLS，你可能需要更改设置内核命令行参数的方式。
+
+如果你只想修改单个内核条目（例如，暂时解决显示问题），可以使用 grubby 命令：
+
+$ grubby --update-kernel /boot/vmlinuz-5.0.1-300.fc30.x86_64 --args="amdgpu.dc=0"
+要删除内核参数，可以传递 --remove-args 参数给 grubby：
+
+$ grubby --update-kernel /boot/vmlinuz-5.0.1-300.fc30.x86_64 --remove-args="amdgpu.dc=0"
+如果有应该添加到每个内核命令行的选项（例如，你希望禁用 rdrand 指令生成随机数），则可以运行 grubby 命令：
+
+$ grubby --update-kernel=ALL --args="nordrand"
+这将更新所有内核条目的命令行，并保存作为将来条目的命令行选项。
+
+如果你想要从所有内核中删除该选项，则可以再次使用 --remove-args 和 --update-kernel=ALL：
+
+$ grubby --update-kernel=ALL --remove-args="nordrand"
+via: https://fedoramagazine.org/setting-kernel-command-line-arguments-with-fedora-30/
+
+作者：Laura Abbott[2] 选题：lujun9972[3] 译者：geekpi[4] 校对：wxy[5]
+
+本文由 LCTT[6] 原创编译，Linux中国[7] 荣誉推出
+
+[1]: https://fedoraproject.org/wiki/Changes/BootLoaderSpecByDefault
+[2]: https://fedoramagazine.org/makes-fedora-kernel/
+[3]: https://github.com/lujun9972
+[4]: https://github.com/geekpi
+[5]: https://github.com/wxy
+[6]: https://github.com/LCTT/TranslateProject
+[7]: https://linux.cn/article-10715-1.html?utm_source=rss&utm_medium=rss

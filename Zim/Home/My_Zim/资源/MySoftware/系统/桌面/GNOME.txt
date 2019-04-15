@@ -16,3 +16,6 @@ https://www.gnome.org/
 
 https://wiki.gnome.org/
 https://wiki.gnome.org/Apps/Shotwell
+
+https://www.gnome-look.org/p/1102901/
+https://www.opendesktop.org/p/1136805/
