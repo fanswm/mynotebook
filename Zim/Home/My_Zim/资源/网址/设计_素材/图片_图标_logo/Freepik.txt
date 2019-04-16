@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-16T11:26:35+08:00
+
+====== Freepik ======
+创建日期 星期二 16 四月 2019
+
+https://www.freepik.com/
+Freepik 是一个矢量素材网站，同时也包含照片和图标等资源。里面有许多素材支持 CC0 协议，注册后可免费下载使用。

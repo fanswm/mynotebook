@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-16T11:29:50+08:00
+
+====== 泼辣有图 ======
+创建日期 星期二 16 四月 2019
+
+http://www.polayoutu.com/
+泼辣修图 推出的免费开源摄影分享网站。采取网友自传原创图片的方式，全部图片均为 CC0 版权，每周会由用户投票数最高的 10 张图片。
+
