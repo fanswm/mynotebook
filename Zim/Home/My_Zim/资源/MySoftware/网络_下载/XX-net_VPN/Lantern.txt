@@ -2,11 +2,12 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-03-10T23:03:03+08:00
 
-====== lantern ======
+====== Lantern ======
 创建日期 星期日 10 三月 2019
 
 蓝灯
 https://github.com/getlantern
+好用：
 https://github.com/topics/lantern
 
 https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer.apk

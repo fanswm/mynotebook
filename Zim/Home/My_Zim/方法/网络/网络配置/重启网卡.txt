@@ -21,6 +21,7 @@ dns-nameservers 8.8.8.8
 dns-nameservers 8.8.4.4
 
 + 重启：/etc/init.d/networking restart
+# sudo /etc/init.d/network-manager restart
 
 + `ifdown eth0`
 + `ifup eth0`
