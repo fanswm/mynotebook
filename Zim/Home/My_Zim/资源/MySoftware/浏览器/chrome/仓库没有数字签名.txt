@@ -1,0 +1,32 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-21T01:36:09+08:00
+
+====== 仓库没有数字签名 ======
+创建日期 星期日 21 四月 2019
+
+仓库 “https://repo.fdzh.org/chrome/deb stable Release” 没有数字签名。
+W: GPG 错误：https://repo.fdzh.org/chrome/deb stable Release: 下列签名无效： EXPKEYSIG 1397BC53640DB551 Google Inc. (Linux Packages Signing Authority) <linux-packages-keymaster@google.com>
+E: 仓库 “https://repo.fdzh.org/chrome/deb stable Release” 没有数字签名。
+N: 无法安全地用该源进行更新，所以默认禁用该源。
+N: 参见 apt-secure(8) 手册以了解仓库创建和用户配置方面的细节。
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys  1397BC53640DB551
+
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
+
+原因
+
+在sources.list文件中加入了非ubuntu官方源，所以认为加入源是不可信任的。
+解决方法
+
+导入该源公钥。E084DAB9为上图中公钥后八位
+
+gpg --keyserver keyserver.ubuntu.com --recv-keys 1397BC53640DB551 
+1397BC53640DB551
+gpg --export --armor 1397BC53640DB551 | sudo apt-key add - 
+
+sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install google-chrome-stable
