@@ -1,0 +1,122 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-22T16:36:02+08:00
+
+====== MoodeAudio 音频播放器上手配置 ======
+创建日期 星期一 22 四月 2019
+
+MoodeAudio 音频播放器上手配置
+2019年4月20日 Spoony 未分类 0
+
+
+
+MoodeAudio 是运行于树莓派等开发板的高品质音频播放系统。与 Volumio 类似，又有些许不同。它们声音表现是基本一致的，各种配置选项差别不大，MoodeAudio 所提供的选项稍多，播放功能和按键开关响应较 Volumio 也更灵敏。但没有 Volumio 的中文界面支持，相对而言更适合已经体验过 Volumio 的用户或更专业的用户使用。本文将结合 HiFi DAC 扩展板介绍 MoodeAudio 音频播放器上手配置的方法。
+
+
+
+安装和使用
+如果你是首次使用，推荐在 volumio.org 下载适用于树莓派的最新版系统镜像文件，解压获得 IMG 格式的镜像文件。 使用工具刷入系统后即刻开始享用！ 镜像下载：
+http://www.moodeaudio.org/#download
+
+关于刷入系统的更多细节请参考文章：《Windows下安装树莓派系统到SD卡》、《使用 Etcher 给 SD 卡安装树莓派系统》。
+
+系统初始配置
+我们强烈建议你使用带有无线网卡的树莓派，MoodeAudio 预先将树莓派的无线网卡配置为了 Wi-Fi 热点，系统启动后可用手机或笔记本电脑搜寻无线网络，找到名为 moode 的无线网络，使用密码 moodeaudio 进行连接。如果你使用的树莓派不带无线网卡，请直接参考本节末尾进行操作。
+
+连接之后用浏览器访问 http://moode.local 或 http://172.24.1.1%EF%BC%88%E8%BF%99%E6%98%AF MoodeAudio 默认的主机名和 IP 地址）。
+
+
+
+菜单-Configure,-Audio 设置 DAC 选项，在 I2S audio device 选择 HiFiBerry DAC +，然后点击 SET 如图。
+
+
+
+重启。
+
+菜单-Configure,-Audio 设置 MPD options，EDIT OPTIONS。确认一下 audio device 选择的是“I2S audio device”，Volume control 是“Software”。点击 APPLY 按钮保存配置。
+
+
+
+顺利的话到这里就已经可以通过 HiFi DAC 输出音频了。
+
+在菜单 Network 里面可以配置网络，将 MoodeAudio 接入局域网。注意这里一定要一次设置正确，因为设置之后默认的热点将被撤销，届时只能通过路由器去找 MoodeAudio 的连接地址。
+
+
+
+接入局域网之后还可以把 DLNA 服务端功能开启，共享树莓派上的音乐给其他 DLNA 客户端设备使用。
+
+
+
+如果你使用的树莓派不带无线网卡，则需要通过有线接入到你的局域网，确保和你的终端（手机或电脑在同一个局域网内）。首先你需 要找到树莓派的 IP 地址，可以有多种方法：
+MoodeAudio 系统，在浏览器中输入 http://moode 即可方便地访问到。
+通过登录路由器的客户端列表寻找树莓派对应的IP地址。
+通过外接显示器，查看系统启动信息中 DHCP 分配到的 IP 地址。
+
+使用 Airplay 和蓝牙
+MoodeAudio 的 Airplay 和蓝牙功能需要手动开启一下，配置很容易。另外还有蓝牙也可以一并开启。
+
+
+
+以 iPhone 为例，当手机和树莓派处于同一局域网网段内时，快捷菜单中会自动发现可用的播放设备。选中即可将手机的声音输出到树莓派并通过 HiFi DAC 解码输出。
+
+
+
+同样，手机也可以发现多了一个蓝牙设备。点击连接之后，在 WebUI 进行配对。
+
+
+
+就可以连接上了。
+
+
+
+这样就可以把树莓派当成蓝牙音箱的接收端一样使用了。
+
+硬核配置法
+还有一种一次性配置好全部选项的方法，比较硬核也很方便。就是在 SD 卡的根目录（boot 分区下）创建一个名为 moodecfg.txt 的文件，贴入以下内容，将其中的一些值替换成你需要的样子，保存即可。在下次系统启动的时候，会读入这个配置表自动进行配置。
+
+##########################################
+# Copy this file to /boot/moodecfg.txt
+# worker will process it at startup then
+# delete it and automatically reboot.
+# 
+# All param=value pairs must be present.
+# Set wlanssid= to start AP mode.
+# Example: wlanssid=
+##########################################
+
+[names]
+hostname=moode
+browsertitle=moOde Player
+airplayname=Moode Airplay
+spotifyname=Moode Spotify
+bluetoothname=Moode Bluetooth
+squeezelitename=Moode
+upnpname=Moode UPNP
+dlnaname=Moode DLNA
+mpdzeroconf=Moode MPD
+
+[services]
+airplaysvc=0
+upnpsvc=0
+dlnasvc=0
+
+[network]
+wlanssid=MySSID
+wlansec=wpa
+wlanpwd=MyPassword
+wlancountry=US
+apdssid=Moode
+apdchan=6
+apdpwd=moodeaudio
+
+[other]
+timezone=America/Detroit
+themename=Standard
+accentcolor=Emerald
+配置项的含义基本上可以顾名思义，有兴趣的朋友可以试试。
+
+传送一份官方安装配置文档。
+
+
+文章标题：MoodeAudio 音频播放器上手配置 - 树莓派实验室
+固定链接：http://shumeipai.nxez.com/2019/04/20/hifidac-hat-for-raspberry-pi-moodeaudio-instructions.html
