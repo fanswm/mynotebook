@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-23T15:04:41+08:00
+
+====== PyGObject ======
+创建日期 星期二 23 四月 2019
+
+https://pygobject.readthedocs.io/en/latest/getting_started.html#ubuntu-getting-started

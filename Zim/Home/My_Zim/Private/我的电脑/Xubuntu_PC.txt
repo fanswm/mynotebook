@@ -106,3 +106,16 @@ make lantern
 # During development, you'll likely want to do a clean build like this:
 make clean-desktop lantern && ./lantern
 
+sudo apt-get install kernel-package   #2019年04月23日
+
+#pygtk   没有弄成
+sudo apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0
+pip3 install pycairo
+pip3 install PyGObject
+#ModuleNotFoundError: No module named 'gi'
+# https://stackoverflow.com/questions/53365209/error-python-playsound-no-module-named-gi
+# https://askubuntu.com/questions/1057832/how-to-install-gi-for-anaconda-python3-6?newreg=3a43e4aa13ff4b1f938afeac20da1fd9
+ln -s /usr/lib/python3/dist-packages/gi/ /home/myusername/anaconda3/lib/python3.7/site-packages/
+#sudo find / -name 'gi': 以下结果： [[/usr/lib/python3/dist-packages/gi]]
+##########没有弄成。
+

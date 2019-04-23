@@ -1,0 +1,41 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-23T10:41:14+08:00
+
+====== 声音系统 ======
+创建日期 星期二 23 四月 2019
+
+ubuntu声音系统
+	2017-01-07  原文  https://www.bbsmax.com/A/MyJxgEAznL/   
+ https://www.cnblogs.com/itholidaycn/p/6259798.html
+查看声卡：cat /proc/asound/cards
+
+
+显示所有ALSA的组件：cat /proc/asound/device
+
+
+aplay -l
+
+
+ubuntu使用pulseaudio，是ALSA（先进Linux声音架构）。另外OSS = Open Sound System，声卡，是unix平台上一个统一的音频接口,这是以前使用的，是商业声卡驱动。如果linux没有声音，oss相关组件安装了，即使安装了pulseaudio等组件，也不能正常使用。意思就是，不能同时存在两套不同的驱动。
+。
+sudo update-grub
+
+sudo apt-get remove --purge alsa-base
+
+sudo apt-get remove --purge pulseaudio
+
+sudo apt-get install alsa-base
+
+sudo apt-get install pulseaudio
+
+sudo alsa force-reload
+
+sudo apt-get install linux-sound-base alsa-base alsa-utils
+
+配置一次
+sudo dpkg-reconfigure alsa-source
+
+将会有一个蓝色窗口询问你是否安装，选择yes
+接着会询问你安装的声卡型号，如果你清楚你要安装的型号就选你要装的，但个人推荐全选。
+如果没有出错的话就是成功了。
