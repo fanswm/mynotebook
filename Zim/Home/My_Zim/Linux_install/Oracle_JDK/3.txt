@@ -1,0 +1,87 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-24T06:46:08+08:00
+
+====== 3 ======
+创建日期 星期三 24 四月 2019
+
+oracle JDK既可以通过添加ppa源命令行安装
+
+命令行方式安装oracle Java JDK
+1、安装依赖包：
+
+sudo apt-get install python-software-properties
+
+2、添加仓库源：
+
+sudo add-apt-repository ppa:webupd8team/java
+
+3、更新软件包列表：
+
+sudo apt-get update
+
+4、安装java JDK：
+
+sudo apt-get install oracle-java8-installer
+
+安装过程中需要接受协议：
+
+
+
+5、查看java版本，看看是否安装成功：
+
+java -version
+--------------------- 
+作者：乌托 
+来源：CSDN 
+原文：https://blog.csdn.net/u012707739/article/details/78489833 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+手动下载压缩包安装oracle Java JDK
+1、前往oracle Java官网下载JDK（http://www.oracle.com/technetwork/java/javase/downloads/index.html）
+
+2、解压缩到指定目录（以jdk-8u144-linux-x64.tar.gz为例）
+
+创建目录:
+sudo mkdir /usr/lib/jvm
+
+解压缩到该目录:
+sudo tar -zxvf jdk-7u60-linux-x64.gz -C /usr/lib/jvm
+
+3.修改环境变量:　　
+
+sudo vi ~/.bashrc
+
+在文件末尾追加下面内容：
+
+#set oracle jdk environment
+export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_144  ## 这里要注意目录要换成自己解压的jdk 目录
+export JRE_HOME=${JAVA_HOME}/jre  
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib  
+export PATH=${JAVA_HOME}/bin:$PATH  
+
+使环境变量马上生效：
+
+source ~/.bashrc
+
+4、系统注册此jdk
+
+sudo update-alternatives –install /usr/bin/java java /usr/lib/jvm/jdk1.7.0_60/bin/java 300
+
+5、查看java版本，看看是否安装成功：
+
+java -version
+
+
+
+如果你安装了多个版本的jdk，你可以通过以下命令在这些版本之间切换：
+
+udo update-alternatives –config java
+
+
+
+前面带星号的是当前正在使用的java版本，键入编号选择使用哪个版本。
+--------------------- 
+作者：乌托 
+来源：CSDN 
+原文：https://blog.csdn.net/u012707739/article/details/78489833 
+版权声明：本文为博主原创文章，转载请附上博文链接！

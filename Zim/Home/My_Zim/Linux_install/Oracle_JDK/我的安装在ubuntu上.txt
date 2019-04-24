@@ -1,0 +1,26 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-24T05:58:02+08:00
+
+====== 我的安装在ubuntu上 ======
+创建日期 星期三 24 四月 2019
+
+### 下载
+# https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-5295953.html
+
+sudo su
+mv jdk.tar.gz [[/opt/java/jvm/]]
+cd [[/opt/java/jvm]]
+tar -zxvf [[./jdk.tar.gz]]
+vim [[/etc/profile]]
+# 在末尾添加：
+```
+export JAVA_HOME=/opt/jdk
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib   # issue: java.lang.ClassNotFoundException
+export PATH=${PATH}:${JAVA_HOME}/bin
+```
+# 重启
+# 测试：
+java --version
+

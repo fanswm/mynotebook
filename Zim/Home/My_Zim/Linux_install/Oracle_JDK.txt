@@ -76,7 +76,7 @@ public class HelloWorld{
 ## 运行  
 + `java HelloWorld`  
 
-# 如果之前没有安装Java或OpenJDK：  
+# __如果之前没有安装Java或OpenJDK：__  
 + `tar -zxvf jdk-9_linux-x64_bin.tar.gz`  
 + `sudo su`  
 + `mv jdk-9 /usr/lib/jvm`  

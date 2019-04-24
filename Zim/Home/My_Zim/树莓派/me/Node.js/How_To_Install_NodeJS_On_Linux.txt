@@ -35,7 +35,7 @@ On Arch Linux and its derivatives like Antergos, Manajaro Linux, run the followi
 $ sudo pacman -S nodejs npm
 On Debian, Ubuntu, Linux Mint:
 
-$ sudo apt-get install nodejs npm
+__$ sudo apt-get install nodejs npm__
 On RHEL, CentOS, you need to enable EPEL repository first.
 
 $ sudo yum install epel-release

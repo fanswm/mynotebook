@@ -5,33 +5,3 @@ Creation-Date: 2019-01-08T16:44:22+08:00
 ====== me ======
 创建日期 星期二 08 一月 2019
 
-alias apt-get='apt'
-alias firewall='iptlist'
-alias h='tldr'
-alias ipe='curl ipinfo.io/ip'
-alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
-alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
-alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
-alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
-alias meminfo='free -m -l -t'
-alias myins='sudo apt install'
-alias now='date +"%T"'
-alias rm='rm -I --preserve-root'
-alias speed='speedtest-cli --server 6435 --simple'
-alias untar='tar -zxvf'
-
-#ls
-alias la='ls -la'
-alias ll='ls -l'
-alias ls='ls --color=auto'
-alias c='clear'
-alias cp='cp -i'
-alias df='df -h'
-alias du='du -h --max-depth=1 | sort -hr'
-alias ln='ln -i'
-alias mv='mv -i'
-alias ping='ping -c 3'
-alias path='echo -e ${PATH//:/\\n}'
-alias vi='vim'
-alias wget='wget -c'
-#echo -e "alias la='ls -la'\nalias ll='ls -l'\nalias ls='ls --color=auto'\nal    ias c='clear'\nalias cp='cp -i'\nalias df='df -h'\nalias du='du -h --max-dep    th=1 | sort -hr'\nalias ln='ln -i'\nalias mv='mv -i'\nalias ping='ping -c 3'    \nalias path='echo -e ${PATH//:/\\n}'\nalias vi='vim'\nalias wget='wget -c'"

@@ -1,0 +1,47 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-24T05:19:35+08:00
+
+====== Ubuntu ======
+创建日期 星期三 24 四月 2019
+
+# 一级：
+alias apt='apt-get'
+alias vi='vim'
+alias h='tldr'
+alias c='clear'
+
+alias ipe='curl ipinfo.io/ip'
+alias meminfo='free -m -l -t'
+alias ins='sudo apt install'
+
+alias df='df -h'
+alias du='du -h --max-depth=1 | sort -hr'
+alias ln='ln -i'
+alias mv='mv -i'
+alias cp='cp -i'
+alias rm='rm -I --preserve-root'
+
+alias ping='ping -c 3'
+
+# 二级：
+alias untar='tar -zxvf'
+alias path='echo -e ${PATH//:/\\n}'
+alias wget='wget -c'
+
+# 三级：
+alias firewall='iptlist'
+alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
+alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
+alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
+alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
+alias now='date +"%T"'
+alias speed='speedtest-cli --server 6435 --simple'
+
+# 四级： 一般不用设置：
+#ls
+alias la='ls -la'
+alias ll='ls -l'
+alias ls='ls --color=auto'
+
+#echo -e "alias la='ls -la'\nalias ll='ls -l'\nalias ls='ls --color=auto'\nal    ias c='clear'\nalias cp='cp -i'\nalias df='df -h'\nalias du='du -h --max-dep    th=1 | sort -hr'\nalias ln='ln -i'\nalias mv='mv -i'\nalias ping='ping -c 3'    \nalias path='echo -e ${PATH//:/\\n}'\nalias vi='vim'\nalias wget='wget -c'"
