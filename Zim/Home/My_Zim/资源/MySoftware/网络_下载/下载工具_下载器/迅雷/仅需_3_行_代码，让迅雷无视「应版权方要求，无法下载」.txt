@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-25T16:14:58+08:00
+
+====== 仅需 3 行 代码，让迅雷无视「应版权方要求，无法下载」 ======
+创建日期 星期四 25 四月 2019
+

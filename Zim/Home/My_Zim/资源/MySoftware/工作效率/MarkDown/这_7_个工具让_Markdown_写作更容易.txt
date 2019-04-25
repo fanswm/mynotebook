@@ -1,0 +1,90 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-25T11:53:12+08:00
+
+====== 这 7 个工具让 Markdown 写作更容易 ======
+创建日期 星期四 25 四月 2019
+
+这 7 个工具让 Markdown 写作更容易
+https://sspai.com/post/54103
+2天前
+SpencerWoo
+Markdown 从诞生之初，就因为其轻量、简便，而被内容创造者所青睐。然而并不是所有的地方都支持直接书写并渲染 Markdown 格式的文档，也并不是所有利用 Markdown 生成内容都是那么方便。接下来，我来介绍下面这几个在线的小工具，来帮助你更方便地排版 Markdown 文章。
+
+Markdown Tables Generator
+⚒ 链接：https://www.tablesgenerator.com/markdown_tables
+
+在 Markdown 中新建一个表格确实不是件轻松的事情。这个 Markdown Tables Generator 可以方便的为我们创建 Markdown 格式的表格文本，我们只需要指定表格的内容即可。
+
+
+Markdown Tables Generator
+要知道，Markdown Tables Generator 是一个「所见即所得」的交互方式，因此我们创建表格的方式就非常直观清晰。同时，Markdown Tables Generator 还能够直接帮我们设置某列的左对齐、居中和右对齐等样式。我们生成成功一个表格之后，直接将下方的 Markdown 纯文本拷贝，就能粘贴到我们所使用的 Markdown 编辑器中了。
+
+
+LaTeX、HTML、纯文本等表格的绘制
+不得不再说一下，实际上这个 Tables Generator 这个网站除了支持生成 Markdown 格式的表格，还能帮我们方便的绘制 LaTeX、HTML、纯文本和 MediaWiki 格式的表格。特别是 LaTeX 格式的复杂表格，利用 Tables Generator 这个网站生成的操作过程太人性化了，非常推荐。👍
+
+Paste to Markdown
+🎙 链接：https://euangoddard.github.io/clipboard2markdown
+
+Paste to Markdown 是一个能帮我们将复制的富文本转换为 Markdown 格式的纯文本的网站。比方说，如果我们在一个网页上面看到了一篇文章，并希望能够直接保存为 Markdown 格式至本地，我们可以首先通过浏览器的阅读模式将原网页格式化，从而去除没有用的元素并正确排版，之后再通过 Paste to Markdown 将原网页或浏览器阅读模式的富文本内容转换为 Markdown 格式的内容。
+
+
+Paste to Markdown
+通过 Paste to Markdown，我们不仅仅能成功将我们常用的加粗、斜体、删除线、标题和列表等富文本元素全部转换为 Markdown 格式的内容，还可以直接地将我们复制的图片的链接（即「图片外链」）转换为标准 Markdown 图片引用的格式（比如：![](path/to/image)），这样的格式化处理让我们保存网页文章至本地的操作成本大大降低。
+Markdown Here
+💎 链接：https://markdown-here.com/
+
+Markdown Here 是一个相对知名的浏览器 Markdown 扩展插件。其最方便的地方就在于：能够将我们在任意位置书写的 Markdown 格式的纯文本转换为相应的富文本内容。这尤其方便了我们在撰写邮件的时候进行排版，简单的 Markdown 让我们高效完成邮件的主体内容，之后通过 Markdown Here 插件一键转换，就能看到已经排版好的邮件内容。
+
+
+Markdown Here 撰写邮件
+Markdown Here 这个浏览器插件支持 Chrome、Safari、Firefox 等绝大多数浏览器，我们可以直接在 这个页面 下载你所使用的浏览器的插件。同时，Markdown Here 也开源在 GitHub 上面：adam-p/markdown-here
+WeChat Format
+😉 链接：https://lab.lyric.im/wxformat
+
+WeChat Format 是一个开源的、专为微信公众号排版准备的在线 Markdown 编辑器。相信大家如果有微信公众号排版使用的经验，就一定体验过糟糕的微信公众号后台「所见即所得」编辑器。在秀米、135 等专门为微信公众号排版而生的样式编辑器霸道横行的时代，如果我们能利用 Markdown 直接排版微信公众号，那岂不是又方便又舒服。
+
+
+WeChat Format
+传统的 Markdown 编辑器的输出预览其实也是可以直接复制粘贴到微信公众号后台排版工具中的，只是微信公众号并不允许我们添加除了公众号文章以外的链接。WeChat Format 很好的解决了这一问题：文章中的全部链接都以文章尾注的形式加在了文章末尾，这样既方便了我们直接利用 Markdown 排版文章，还能让读者轻松查看相应的链接。
+
+目前 WeChat Format 已经将源代码开源于 lyricat/wechat-format，更加详细的介绍和说明文档位于「花三小时写这个工具，只为一分钟拯救公众号排版」，我们如果希望自定义排版的样式，由于 WeChat Format 已经开源了全部源码，因此我们当然可以直接自己部署整个项目，并通过修改 CSS 来自定义排版样式。
+
+Mermaid JS
+♻️ 链接：https://mermaidjs.github.io/mermaid-live-editor/#/
+
+Mermaid JS 是一个专为流程图、时序图和甘特图等图表的绘制准备的渲染引擎。虽然 Mermaid 渲染引擎的语法相对比较复杂，但是经过简单的学习我们就可以利用 Mermaid 直接在 Markdown 里面绘制流程图、时序图和甘特图等相对专业的图表。
+
+
+Mermaid 渲染器
+推荐阅读 Power+ 文章：如何在 Markdown 里绘制各种图表 | 实用技巧
+
+这里我推荐这个 Mermaid JS 在线编辑器，我们可以直接使用 Mermaid 语法绘制相应的流程图、时序图和甘特图等图标，并将渲染出来的图表以 SVG 的格式下载到本地。
+
+在线 Markdown 编辑器
+说完了上面这几个 Markdown 相关的网页小工具，接下来我再来推荐两个好用的在线 Markdown 编辑器。
+
+StackEdit
+📑 链接： https://stackedit.io/app
+
+StackEdit 是一个非常优质的在线 Markdown 编辑器，其最大的方便之处是能够和 Dropbox、GitHub、GitLab 和 Google Drive 等直接同步，以及 Blogger、WordPress、ZenDesk 等内容发布平台的直接发布功能。要说在线编辑器最大的优势，那肯定就是「随时随地，想写就写」。只要有网络和浏览器，我们就能创造内容。StackEdit 还能够让我们在任何地方、任何设备上面同步修改撰写我们创作的文章，写完文章就可以直接发布。这样的「一条龙服务」是本地的 Markdown 编辑器所几乎无法达到的。
+
+
+StackEdit
+不仅如此，StackEdit 还原生直接支持了 Mermaid 渲染引擎，也就是说我们在 StackEdit 里面能够直接利用 Mermaid 渲染 UML 图表等复杂的内容。很多本地的 Markdown 编辑器都没有做到的功能，StackEdit 全都能胜任。得益于 PWA 技术，StackEdit 网页编辑器实际上离线同样也可以使用，因此我们完全可以直接将 StackEdit 添加到本地，这样没有网络我们照样能够进行创作。
+HackMD
+📬 链接： https://hackmd.io/
+
+HackMD 和上面 StackEdit 最大的功能升级就是：HackMD 支持多人协作撰写 Markdown 文档。我们可以直接理解 HackMD 就是 Markdown 世界里的 Google Docs（或腾讯文档、石墨文档这种团队协作文档编辑器）。我们可以利用 HackMD 和团队成员共同实时地写作撰写编辑一篇 Markdown 文档，方便高效。
+
+
+HackMD
+HackMD 原生嵌入了 MathJax 及 UML 模式，我们可以直接快速书写书写公式或流程图，当然也可以利用 Mermaid 渲染引擎制作 UML 图表。
+
+值得注意的是，上面这两款在线的 Markdown 编辑器都是无需登录即可使用的，只有 HackMD 在多人协作时才需要登录。
+
+小结
+随着 Web 技术的急速发展，基于 Web 前端的小工具越来越丰富也越来越强大。很多时候一些小功能，桌面客户端往往都没有做很好的处理，这时候 Web 前端的小工具反而能够胜任。不仅如此，我们还可以通过 PWA 技术让这些网页 App 直接变成桌面软件，离线使用，无所不能。
+
+善用在线小工具，我们很多时候会发现原本简洁的工作流程还能更加高效。希望这篇文章中提到的这些工具在你的创作过程中满足你的所有需求。感谢阅读。
