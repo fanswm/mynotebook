@@ -1,0 +1,97 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-26T13:47:45+08:00
+
+====== me ======
+创建日期 星期五 26 四月 2019
+
+#安装位置：/dev/sda9
+	sudo passwd #root password.
+	sudo pacman -S vim
+
+	#**添加中科大源 https://www.jianshu.com/p/1cde4b7ec3c2
+	sudo vim /etc/pacman.conf
+
+	#在文件末尾添加
+	[archlinuxcn]
+	SigLevel = Optional TrustedOnly
+	Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+
+	#导入GPG Key
+	sudo pacman -Syy && sudo pacman -S archlinuxcn-keyring
+
+#添加了中科大源后，也可以直接在添加/删除软件里搜索直接安装
+	#现在可以安装软件了，比如 chrome 和搜狗拼音输入法
+	#**安装搜狗拼音输入法**
+	sudo pacman -S fcitx-im #默认全部安装
+	sudo pacman -S fcitx-configtool fcitx-sogoupinyin
+
+	sudo pacman -S google-chrome    #谷歌浏览器
+	sudo pacman -S netease-cloud-music   #网易云音乐
+
+sudo pacman -S zim
+		mkdir -p ~/github
+		cd ~/github
+		git clone https://github.com/fanswm/mynotebook
+		cd ~/github/mynotebook/Zim/
+		git rm story
+		git submodule add https://gitlab.com/abstracthex/story
+	vim ~/zim-update.sh
+
+	#!/bin/bash
+	#coding:utf-8 
+	### zim_update.sh
+	cd ~/github/mynotebook/Zim/story
+	git pull
+	cd ~/github/mynotebook/
+	git pull
+    
+	cd ~/github/mynotebook/Zim/story
+	git add .
+	git commit -m"commit by xubuntu"
+	git push
+    
+	cd ~/github/mynotebook/
+	git add .
+	git commit -m"commit by xubuntu"
+	git push
+
+	git config --global user.email "abstracthex@163.com"
+	git config --global user.name "abstracthex"
+
+	# push github.com 免密码：
+	cd ~
+	touch .git-credentials
+	vim .git-credentials
+    
+	##################添加以下：
+	https://{username}:{password}@github.com
+    
+	# for example:
+	# https://xiaoming:passwd@github.com
+	##################
+    
+	#在终端下输入：
+	git config --global credential.helper store
+	chmod u+x [[./zim_update.sh]]
+
+sudo pacman -S keepassx
+sudo pacman -S remarkable    # markdown
+sudo pacman -S nutstore    #坚果云
+#sudo pacman -S yaourt
+sudo pacman -S make
+sudo pacman -S gcc
+
+#miredo
+#下载/arch/miredo-1.2.6.tar.xz  https://www.remlab.net/files/miredo/?C=N;O=D
+
+	xz -d miredo-1.2.6.tar.xz
+	tar -xvf miredo-1.2.6.tar
+	cd
+	# ./configure
+	# make
+	# su
+	# make install
+
+#常用
+sudo pacman -S docker google-chrome npm nodejs tldr remarkable 
