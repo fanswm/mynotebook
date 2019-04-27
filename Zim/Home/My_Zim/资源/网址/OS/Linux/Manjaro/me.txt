@@ -22,7 +22,7 @@ Creation-Date: 2019-04-26T13:47:45+08:00
 
 #添加了中科大源后，也可以直接在添加/删除软件里搜索直接安装
 	#现在可以安装软件了，比如 chrome 和搜狗拼音输入法
-	#**安装搜狗拼音输入法**
+	#安装搜狗拼音输入法
 	sudo pacman -S fcitx-im #默认全部安装
 	sudo pacman -S fcitx-configtool fcitx-sogoupinyin
 
@@ -95,3 +95,21 @@ sudo pacman -S gcc
 
 #常用
 sudo pacman -S docker google-chrome npm nodejs tldr remarkable 
+
+#oh-my-zsh
+echo $SHELL
+cat /etc/shells
+sudo chsh -s /usr/bin/zsh
+#安装oh-my-zsh
+# 手动将zip包下载下来。
+# 将zip包解压，拷贝至~/.oh-my-zsh目录。此处省略拷贝的操作步骤。
+# 执行cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc 
+unzip ./oh-my-zsh-master
+mv ./oh-my-zsh-master .oh-my-zsh-master
+mv ./.oh-my-zsh-master ~/
+# 通过如下命令可以查看可用的Theme：
+ls ~/.oh-my-zsh/themes
+# 如何修改zsh主题呢？
+# 编辑~/.zshrc文件，将ZSH_THEME="candy",即将主题修改为candy。我采用的steeef。
+sudo pacman -S autojump
+sudo pacman -S bat
