@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-04-26T17:44:46+08:00
 
-====== zsh+on-my-zsh配置教程指南 ======
+====== on-my-zsh配置教程指南 ======
 创建日期 星期五 26 四月 2019
 
 
@@ -198,3 +198,19 @@ Mac
 	zsh+on-my-zsh配置教程指南 本文地址
 
 https://segmentfault.com/a/1190000013612471?utm_source=tag-newest
+
+
+__zsh-autosuggestions自动补全插件__
+下载该插件到.oh-my-zsh的插件目录
+git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
+编辑.zshrc文件
+找到plugins=(git)这一行，如果没有添加。更改为如下
+plugins=(git zsh-autosuggestions)
+
+重启命令
+
+作者：tianyu_f
+链接：https://www.jianshu.com/p/aea390c1c8ef
+来源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
