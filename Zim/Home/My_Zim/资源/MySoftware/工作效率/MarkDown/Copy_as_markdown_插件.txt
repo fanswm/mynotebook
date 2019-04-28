@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-12-05T07:52:35+08:00
 
-====== Copy as markdown ======
+====== Copy as markdown 插件 ======
 Created Tuesday 05 December 2017
 
 如果你经常需要写一些资源列表性质的文章，发给同事或客户。最简单的办法是，打开这些网页，放在一个独立的Chrome浏览器窗口里面，然后安装好插件：【Copy as markdown】，选择【All Tabs as List】，唰！漂亮的资源列表就生成了！

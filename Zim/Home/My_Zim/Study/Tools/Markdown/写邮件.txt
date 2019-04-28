@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-05T07:53:13+08:00
-
-====== 写邮件 ======
-Created Tuesday 05 December 2017
-
-如果你习惯用Markdown了，那么，装上Chrome插件Markdown here，在gmail撰写邮件界面，写好后，轻轻一点，你的邮件就变成漂亮的文档了。
