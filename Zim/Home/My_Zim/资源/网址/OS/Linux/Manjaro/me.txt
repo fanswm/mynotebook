@@ -95,3 +95,5 @@ sudo pip3 install pycparser
 cd ~/app/XX-net/
 sudo bash [[./start]]
 #未成功
+
+# vnote
