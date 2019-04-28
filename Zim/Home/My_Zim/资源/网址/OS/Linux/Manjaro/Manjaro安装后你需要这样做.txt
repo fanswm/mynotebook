@@ -1,0 +1,200 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-29T02:41:51+08:00
+
+====== Manjaro安装后你需要这样做 ======
+创建日期 星期一 29 四月 2019
+
+Manjaro linux 简单配置
+1. Mirror Source
+1.1 配置官方源
+sudo pacman-mirrors -i -c China -m rank //排列并选择源
+
+1.2 配置AUR源
+修改 /etc/pacman.conf -> 末尾添加
+[archlinuxcn]
+# SigLevel = Optional TrustedOnly
+SigLevel = Never
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+
+[arch4edu]
+SigLevel = Never
+Server = https://mirrors.tuna.tsinghua.edu.cn/arch4edu/$arch
+sudo pacman-mirrors -g //更新并选择最快的源列表
+sudo pacman -Syy //更新数据源
+pacman -S archlinux-keying //更新archlinux签名
+1.3 配置AUR源、使用yaourt
+
+sudo pacman -S yaourt //yaourt aur前端工具/用于软件安装
+修改/etc/yaourtrc //去除 #AURURL 注释
+AURURL=“https://aur.tuna.tsinghua.edu.cn”  
+sudo pacman -Syyu //更新系统
+1.3 Yay
+sudo pacman -S yay //yay aur前端工具
+yay -S vim 安装VIM文本编辑器、vi用不习惯
+使用yay 更改pacman配置/etc/pacman.conf 打开Color
+搜索：yay -Ss
+安装： yay -S
+2. SoftWare
+软件安装方式： yay -S software
+
+软件搜索方式： yay -Ss software
+
+常用软件		
+wps-office	typora	visual-studio-code-bin
+netease-cloud-music	chromium	deadbeef
+thunderbird	vlc	
+fcitx-im	fcitx-configtool	fcitx-libpinyin
+fcitx-cloudpinyin		
+图形		
+krita	pinta	gimp
+cheese	peek录屏	SimpleScreenRecorder录屏
+hotshots截图		
+解码器			
+flashplugin	pepper-flash	FFmpeg	gstreamer
+字体		
+wqy-microhei	wqy-zenhei	ttf-wps-fonts
+adobe-source-code-pro-fonts	adobe-source-sans-pro-fonts	adobe-source-serif-pro-fonts
+adobe-source-han-sans-cn-fonts	adobe-source-han-serif-cn-fonts	
+图标与主题		
+numix-circle-icon-theme	papirus-icon-theme	la-capitaine-icon-theme
+arc-kde	arc-gtk-theme	
+sddm-theme-kde-plasma-chili		
+工具		
+calibre	i-nex	teamviewer
+redshift护眼软件	redshift-qt	pandoc
+mycli	bash-completion
+rar rar -x file	rdesktop	nutstore 坚果云
+htop进程管理	bleachbit 磁盘清理	gpick取色工具
+neofetch 查配置	uget	
+KDE软件		
+ktouch	kgeography	umbrello
+kblocks	kollision	imagewriter
+KDE部件		
+Redshift-Control	控制屏幕色温	
+颜色拾取器	取色	
+Netspeed Widget	显示网速	
+Resource Monitor	显示CPU和内存使用情况	
+备选软件		
+foxitreader	electronic-wechat	dingtalk
+p7zip	wiznote	leanote
+deepin-wine-tim	deepin-qq-im	deepin-screenshot
+deepin-screenshot	deepin-screen-recorder	deepin-voice-recorder
+deepin-image-viewer	deepin-music	deepin-calendar
+deepin-calculator	fcitx-sougoupinyin	deepin-wechat
+deepin-wine-thunderspeed		
+新软件	test
+scribus	出版物设计软件（设计杂志、海报、演示稿件等等）
+mockingbot	墨刀 原型设计工具
+pencil	设计稿制作（web页面、桌面程序界面、移动应用界面……）
+dia	示意图制作（丰富的类型：流程图、UML、气象、地理、工程……）
+vym/xmind	思维图
+pycharm-community-edition
+3. Proglem
+3.1 WPS 无法输入中文
+1. sudo vim /usr/bin/wps
+	# 添加在第二行
+	export XMODIFIERS="@im=fcitx"
+	export QT_IM_MODULE="fcitx"
+
+2. sudo vim /usr/bin/et
+	# 添加在第二行
+	export XMODIFIERS="@im=fcitx"
+	export QT_IM_MODULE="fcitx"
+3.2 Fcitx无法输出中文
+1. sudo vim /etc/environment
+2. GTK_IM_MODULE=fcitx
+   QT_IM_MODULE=fcitx
+   XMODIFIERS=fcitx
+3.3 Rdesktop
+连接windwos远程桌面
+
+基本参数
+
+-f 全屏模式 _Ctrl+Alt+Enter_退出全屏
+
+-g 显示的分辨率 -g workarea 自适应 sound:on/off
+
+使用方法
+
+rdesktop -f 192.168.1.1
+
+rdesktop -f -u administrator -p xxxx 192.168.1.1 -g 1400*900
+
+3.4 VirtualBox
+sudo pacman -S virtualbox
+uname -r eg: 4.14.25-1-MANJARO 内核版本为414
+扩展包 sudo pacman -S virtualbox-ext-oracle
+添加用户到vboxusers组 sudo usermod -a -G vboxusers $YourUsername
+重启或执行sudo modrobe vboxdrv？？？？
+3.5 Oh-my-zsh
+查看本地有哪几种shell cat /etc/shells
+切换到zsh chsh -s /bin/zsh
+安装 oh-my-zsh的配置文件
+via wget
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+**或者**
+via curl
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+更改konsole配置 关闭打开终端
+3.6 You-get
+yay -S you-get
+sudo pip3 install you-get --user
+
+pip3 install --upgrade you-get
+
+you-get -i 'https://www.xxx' 查看视频相关信息
+
+you-get -o ~/video -O name 'https://www.xxx' 指定下载地址和名称
+
+you-get -p vlc&chromium 'https://www.xxx' 通过播放器/浏览器播放
+
+you-get 'https://www.xxx' 下载视频
+
+3.7 中文汉化
+sudo pacman -S --noconfirm firefox-i18n-zh-cn thunderbird-i18n-zh-cn gimp-help-zh_cn libreoffice-still-zh-CN man-pages-zh_cn
+Firefox汉化
+
+输入 about:config
+搜索 intl.locale.requested
+值 zh_CN
+4. KDE
+4.1 个性化
+应用程序 ➡ 位置 ➡ 更换个人文件位置 ➡ 改英文名 //方便使用
+desktop / document / download / movie / music / picture
+
+4.2 外观
+字体 ➡ 思源黑体
+常规 ➡13 小字 ➡11 工具栏和菜单 ➡13 窗口标题 ➡14
+
+等宽字 Source Code Pro Medium ➡13
+
+图标主题 ➡ epapirus numix circle
+
+标题栏样式： Breezemite BreezemiteForman
+
+应用程序风格 ➡ Gnome风格 ➡ 更换图标与字体 思源黑体 13
+
+4.3 HotKey
+系统设置 ➡ 快捷键 ➡ 自定义快捷键 ➡ 编辑
+新建 ➡ 全局快捷键 ➡ 命令/url ➡ 编辑名字 ➡ 右边窗口 ➡ 触发器 ➡ 设置快捷键 ➡ 动作 软件名称
+自定义快捷键 Eg: dolphin Meta+e ...
+添加KWin快捷键
+Meta Shift PgUp 窗口铺至左上方
+Meta Shift PgDown 窗口铺至右上方
+Meta Shift Left 窗口铺至左下方
+Meta Shift Rigth 窗口铺至右下方
+Meta F1 更改窗口大小
+Meta F2 移动窗口
+4.4 KDE 全局菜单1
+右键桌面 - 添加部件 - 全局菜单
+
+安装一堆包
+
+yay -S appmenu-gtk-module gmenu-dbusmenu-proxy-git libdbusmenu-glib libdbusmenu-gtk2 libdbusmenu-gtk
+适配 Firefox 和 LibreOffice
+
+.xprofile 中加入下面这一行：
+
+export SAL_USE_VCLPLUGIN=gtk
+https://www.cnblogs.com/haohao77/p/9034499.html
