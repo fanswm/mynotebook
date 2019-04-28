@@ -1,0 +1,127 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-28T13:35:36+08:00
+
+====== Qt5 ======
+创建日期 星期日 28 四月 2019
+
+https://mirrors4.tuna.tsinghua.edu.cn/qt/official_releases/qt/5.9/
+
+Linux
+在Ubuntu中，你可以像这样从PPA获得 Qt 5.9：
+
+sudo add-apt-repository ppa:beineri/opt-qt591-trusty -y
+sudo apt-get update -qq
+sudo apt-get -y install qt59base qt59webengine
+sudo apt-get -y install qt59webchannel qt59svg qt59location qt59tools qt59translations
+source /opt/qt*/bin/qt*-env.sh
+#以上，不成功。
+
+#下载qt-opensource-linux-x64-5.9.8.run
+
+### https://www.cnblogs.com/findumars/p/9362011.html   ::
+Introduction
+This is a tutorial for installation of Qt 5.7.0 to Ubuntu 12.10. It may be used also for newer versions of Qt and Ubuntu. A difference for OpenGL has been found and added as a note below.
+
+Installation Guide
+Download
+Visit Qt downloads page an download a 32-bit or 64-bit Linux installation depending your version of Ubuntu. The installation file can be also downloaded through the command line using wget.
+
+Example:
+
+wget http://download.qt.io/official_releases/qt/5.7/5.7.0/qt-opensource-linux-x64-5.7.0.run
+Install
+
+调整权限，运行安装程序并按照说明完成安装。
+chmod +x qt-opensource-linux-x64-5.7.0.run
+[[./qt-opensource-linux-x64-5.7.0.run]]
+
+Install g++
+打开终端并执行以下命令安装g ++：
+sudo apt-get install build-essential	#ubuntu 默认安装
+
+Install generic font configuration library - runtime
+安装通用字体配置库 - 运行时：
+Open a terminal and execute the following command to install the full runtime files for the generic font configuration library:
+打开终端并执行以下命令以安装通用字体配置库的完整运行时文件：
+sudo apt-get install libfontconfig1   #ubuntu 默认安装
+
+Configure a compiler
+Launch Qt Creator. Go to __Tools > Options__. Click Build & Run and select tab Kit. Configure a compiler if it is not automatically detected.
+__配置编译器__
+__启动Qt Creator。转到工具>选项。单击Build＆Run并选择选项卡Kit。如果未自动检测到编译器，请对其进行配置。  #ubuntu 默认安装__
+
+Install OpenGL libraries
+Execute the following command to install OpenGL libraries:
+__安装OpenGL库__
+__执行以下命令安装OpenGL库：__
+sudo apt-get install mesa-common-dev
+
+Note: Just installing the above-mentioned mesa-common-dev kit is not sufficient for more recent Ubuntu versions. Based on a comment in the Qt forum[1] an additional package needs installation. Execute following command:
+__注意：仅安装上述mesa-common-dev工具包对于更新的Ubuntu版本来说是不够的。基于Qt论坛[1]中  的评论，需要安装额外的软件包。执行以下命令：__
+sudo apt-get install libglu1-mesa-dev -y
+
+Tested with Qt5.3.1 and Ubuntu 14.04 and it solved the problem with missing -lGL.
+__使用Qt5.3.1和Ubuntu 14.04进行测试，它解决了缺少-lGL的问题。__
+
+Set file association with pro files
+When installing from the on-line source the file association is not done automatically. It also not show up when you try to associate it with file explorer. Create a file named “Qt-Creator.desktop” and fill the file with the following.
+设置与pro文件的文件关联
+从在线源安装时，文件关联不会自动完成。当您尝试将其与文件资源管理器关联时，它也不会显示。创建一个名为“Qt-Creator.desktop”的文件，并使用以下内容填充该文件。
+
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=QtCreator
+Comment=QtCreator
+NoDsiplay=true
+Exec=(Install folder of QT)/Tools/QtCreator/bin/qtcreator %f
+Icon=(Install folder of QT)/5.4/Src/qtdoc/doc/images/landing/icon_QtCreator_78x78px.png
+Name[en_US]=Qt-Creator
+
+Place this file in home .local/share/applications .
+Edit a file named “defaults.list” in the same directory . Add the following line.
+将此文件放在 home .local/share/applications 中。
+在同一目录中编辑名为“defaults.list”的文件。添加以下行。imrdr已执行。
+text/qtcreator=Qt-Creator.desktop;
+
+open file mimeapps.list and check if the following line is present.
+__打开文件mimeapps.list并检查是否存在以下行__：imrdr已执行。
+application/vnd.nokia.qt.qmakeprofile=qtcreator.desktop
+
+if not add it under [added Associations].
+如果不在[added Associations]下添加它。
+
+Run the following command.
+运行以下命令。
+sudo update-mime-database /usr/share/mime
+
+now Qt has been added to the list of file associations.
+现在Qt已被添加到文件关联列表中。
+
+Troubleshooting  故障排除
+Qt Creator needs a compiler set up to build
+Follow the instruction from the previous section to configure compiler for Qt Creator.
+Qt Creator需要一个编译器设置来构建
+按照上一节中的说明为Qt Creator配置编译器。
+
+error: g++: Command not found
+Solution:解：
+sudo apt-get install build-essential
+
+error: GL/gl.h: No such file or directory
+Solution:解决：
+sudo apt-get install mesa-common-dev
+
+References  参考
+Jump up↑ Qt 5.5.0 problem running examples [SOLVED]. 2015-09-22. Archived from the original on 2016-08-01. Retrieved 2016-08-01.
+Execute the following command to install OpenGL libraries: sudo apt-get install mesa-common-dev Note: Just installing the above-mentioned mesa-common-dev kit is not sufficient for more recent Ubuntu versions. Based on this comment in the forum an additional package needs installation. Execute following command: sudo apt-get install libglu1-mesa-dev -y Tested with Qt5.3.1 and Ubuntu 14.04 and it solved the problem with missing -lGL.
+ 
+
+# 原文地址: http://wiki.qt.io/Install_Qt_5_on_Ubuntu
+
+ 
+
+# https://blog.csdn.net/zbc415766331/article/details/80832943
+

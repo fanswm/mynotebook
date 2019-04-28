@@ -122,3 +122,10 @@ ln -s /usr/lib/python3/dist-packages/gi/ /home/myusername/anaconda3/lib/python3.
 #sudo find / -name 'gi': 以下结果： [[/usr/lib/python3/dist-packages/gi]]
 ##########__没有弄成__。
 
+# 安装VNote
+# 下载appimage,直接运行。
+
+# 安装Qt5
+#下载qt...run
+chmod u+x qt.run
+#执行：./qt.run
