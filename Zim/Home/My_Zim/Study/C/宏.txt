@@ -1,0 +1,224 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-30T15:51:04+08:00
+
+====== 宏 ======
+创建日期 星期二 30 四月 2019
+
+https://www.zhihu.com/question/22465774/answer/660997629?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+要求：定义一个宏，求两个数中的最大数。
+
+#define  MAX(x,y)  x > y ? x : y
+
+这验证一下我们定义的宏是否正确：
+
+#define MAX(x,y) x > y ? x : y
+int main(void)
+{
+	printf("max=%d",MAX(1!=1,1!=2));
+	return 0;
+}
+
+2. 这样的宏才能算一个合格的宏：
+#define MAX(x,y) (x) > (y) ? (x) : (y)
+
+3. 中等
+上面的宏，只能算合格，但还是存在漏洞。比如，我们使用下面的代码测试：
+
+#define MAX(x,y) (x) > (y) ? (x) : (y)
+int main(void)
+{
+	printf("max=%d",3 + MAX(1,2));
+	return 0;
+}
+
+在程序中，我们打印表达式 3 + MAX(1, 2) 的值，预期结果应该是5，但实际运行结果却是1。我们展开后，发现同样有问题：
+
+3 + (1) > (2) ? (1) : (2);
+
+因为运算符 + 的优先级大于比较运算符 >，所以这个表达式就变为4>2?1:2，最后结果为1也就见怪不怪了。此时我们应该继续修改这个宏：
+
+#define MAX(x,y) ((x) > (y) ? (x) : (y))
+
+4. 良好
+上面的宏，虽然解决了运算符优先级带来的问题，但是仍存在一定的漏洞。比如，我们使用下面的测试程序来测试我们定义的宏：
+#define MAX(x,y) ((x) > (y) ? (x) : (y))
+int main(void)
+{
+	int i = 2;
+	int j = 6;
+	printf("max=%d",MAX(i++,j++));
+	return 0;
+}
+在程序中，我们定义两个变量 i 和 j，然后比较两个变量的大小，并作自增运算。实际运行结果发现max = 7，而不是预期结果max = 6。这是因为变量 i 和 j 在宏展开后，做了两次自增运算，导致打印出 i 的值为7
+遇到这种情况，那该怎么办呢？ 这时候，语句表达式就该上场了。我们可以使用语句表达式来定义这个宏，在语句表达式中定义两个临时变量，分别来暂储 i 和 j 的值，然后进行比较，这样就避免了两次自增、自减问题。
+
+#define MAX(x,y)({     \
+	int _x = x;        \
+	int _y = y;        \
+	_x > _y ? _x : _y; \
+})
+int main(void)
+{
+	int i = 2;
+	int j = 6;
+	printf("max=%d",MAX(i++,j++));
+	return 0;
+}
+
+在语句表达式中，我们定义了2个局部变量_x、_y来存储宏参数 x 和 y 的值，然后使用 _x 和 _y 来比较大小，这样就避免了 i 和 j 带来的2次自增运算问题。
+你能坚持到了这一关，并写出这样自带BGM的宏，面试官心里可能已经有了给你offer的意愿了。但此时此刻，千万不要骄傲！为了彻底打消面试官的心理顾虑，我们需要对这个宏继续优化。
+
+5. 优秀
+在上面这个宏中，我们定义的两个临时变量数据类型是int型，只能比较两个整型的数据。那对于其它类型的数据，就需要重新再定义一个宏了，这样太麻烦了！我们可以基于上面的宏继续修改，让它可以支持任意类型的数据比较大小：
+#define MAX(type,x,y)({     \
+	type _x = x;        \
+	type _y = y;        \
+	_x > _y ? _x : _y; \
+})
+int main(void)
+{
+	int i = 2;
+	int j = 6;
+	printf("max=%d\n",MAX(int,i++,j++));
+	printf("max=%f\n",MAX(float,3.14,3.15));
+	return 0;
+}
+
+在这个宏中，我们添加一个参数：type，用来指定临时变量 _x 和 _y 的类型。这样，我们在比较两个数的大小时，只要将2个数据的类型作为参数传给宏，就可以比较任意类型的数据了。如果你能在面试中，写出这样的宏，面试官肯定会非常高兴，他一般会跟你说：小伙子，稍等，待会HR会跟你谈待遇问题。
+
+还能不能更牛逼？
+
+6. 上面的宏定义中，我们增加了一个type类型参数，来兼容不同的数据类型，此时此刻，为了薪水，我们应该把这个也省去。如何做到？使用typeof就可以了，typeof是GNU C新增的一个关键字，用来获取数据类型，我们不用传参进去，让typeof直接获取！
+
+#define max(x, y) ({    \
+	typeof(x) _x = (x); \
+	typeof(y) _y = (y); \
+	(void) (&_x == &_y);\
+	_x > _y ? _x : _y; })
+
+在这个宏定义中，使用了typeof关键字用来获取宏的两个参数类型。干货在(void) (&x == &y);这句话，简直是天才般的设计！一是用来给用户提示一个警告，对于不同类型的指针比较，编译器会给一个警告，提示两种数据类型不同；二是，当两个值比较，比较的结果没有用到，有些编译器可能会给出一个warning，加个(void)后，就可以消除这个警告！
+
+此刻，面试官看到你的这个宏，估计会倒吸一口气：乖乖，果然是后生可畏，这家伙比我还牛逼！你等着，HR待会过来跟你谈薪水！恭喜你，拿到offer了！
+
+打造一个趋近完美的宏
+
+以上的宏解决了自增自减运算符 ++/-- 带来的一系列问题。但也不是十全十美，通过与
+
+@左江
+
+的激情讨论，发现还是有漏洞：在宏内部的语句表达中，我们定义了2个临时变量 _x 和 _y解决了 ++/-- 带来的问题，但是也引入了一个新漏洞，比如当我们使用下面的代码时：
+
+max(x, _x)
+
+当宏展开后，第二个参数就与宏内部定义的临时变量同名了，这就影响宏最后的结果。因此，为了防止用户传入的参数跟宏内部的临时变量产生同名冲突，我们可以将宏内部的临时变量尽量定义得复杂一些，降低同名的概率，比如Linux 内核中max宏的定义：
+
+#define max(x, y) ({				\
+	typeof(x) _max1 = (x);			\
+	typeof(y) _max2 = (y);			\
+	(void) (&_max1 == &_max2);		\
+	_max1 > _max2 ? _max1 : _max2; })
+
+在上面的宏定义中，虽然临时变量 _max1 和 max2 比我们上面的 _x 和 _y 好点，也只是更进一步降低跟用户的传参同名冲突的概率，但是还是不能完全杜绝。极端一点，我们可以把这两个变量定义得无比长、无比奇葩，只要不超过C标准规定以的标识符最大长度j就可以：
+
+_____________tmp______________________for_______________________max______
+
+再奇葩的程序员，再猪一样的队友，哪怕是团队毒瘤、代码杀手，估计也不会定义这样的变量吧！这样同名冲突的概率就大大降低了，但是还是不能完全杜绝，算是Linux内核的一个小漏洞吧。
+
+还好，谢谢
+
+@王云峰
+
+提供的链接，下载新版本的Linux内核，发现已经堵住了这个漏洞：
+
+#define __max(t1, t2, max1, max2, x, y) ({              \
+	t1 max1 = (x);                                  \
+	t2 max2 = (y);                                  \
+	(void) (&max1 == &max2);                        \
+	max1 < max2 ? max1 : max2; })
+
+#define ___PASTE(a,b) a##b
+#define __PASTE(a,b) ___PASTE(a,b)
+
+#define __UNIQUE_ID(prefix) __PASTE(__PASTE(__UNIQUE_ID_, prefix), __COUNTER__)
+
+#define max(x, y)                                       \
+	__max(typeof(x), typeof(y),                     \
+		  __UNIQUE_ID(max1_), __UNIQUE_ID(max2_),   \
+		  x, y)
+
+在新版的宏中，内部的临时变量不再由程序员自己定义，而是让编译器生成一个独一无二的变量，这样就避免了同名冲突的风险。宏__UNIQUE_ID的作用就是生成了一个独一无二的变量，确保了临时变量的唯一性。关于它的使用，可以参考下面的文章，写的很好：
+
+Linux kernel中的min和max宏​gaomf.cn
+
+是不是已经完美了？
+
+新版本Linux内核堵住了临时变量可能带来的同名冲突的漏洞，但是是不是就完美了呢？还是不一定！针对Linux内核中宏的新版本，最近又引发各种争论，比如针对常量、变长数组问题等，看看他们提交的各种更新的版本吧：
+
+Variable-length arrays and the max() mess​lwn.net
+
+The joy of max()​lwn.net
+
+   #define __single_eval_max(t1, t2, max1, max2, x, y) ({	\
+ 	t1 max1 = (x);					\
+ 	t2 max2 = (y);					\
+ 	(void) (&max1 == &max2);			\
+ 	max1 > max2 ? max1 : max2; })
+
+	#define __max(t1, t2, x, y)						\
+	__builtin_choose_expr(__builtin_constant_p(x) &&		\
+				  __builtin_constant_p(y),			\
+				  (t1)(x) > (t2)(y) ? (t1)(x) : (t2)(y),	\
+				  __single_eval_max(t1, t2,			\
+						__UNIQUE_ID(max1_),	\
+						__UNIQUE_ID(max2_),	\
+						x, y))
+
+	#define max(x, y)	__max(typeof(x), typeof(y), x, y)The joy of max()   #define __single_eval_max(t1, t2, max1, max2, x, y) ({	\
+ 	t1 max1 = (x);					\
+ 	t2 max2 = (y);					\
+ 	(void) (&max1 == &max2);			\
+ 	max1 > max2 ? max1 : max2; })
+
+	#define __max(t1, t2, x, y)						\
+	__builtin_choose_expr(__builtin_constant_p(x) &&		\
+				  __builtin_constant_p(y),			\
+				  (t1)(x) > (t2)(y) ? (t1)(x) : (t2)(y),	\
+				  __single_eval_max(t1, t2,			\
+						__UNIQUE_ID(max1_),	\
+						__UNIQUE_ID(max2_),	\
+						x, y))
+
+	#define max(x, y)	__max(typeof(x), typeof(y), x, y)
+
+还有这种更加复杂的max宏的实现：
+
+  #define __typecheck(x, y) \
+		(!!(sizeof((typeof(x)*)1 == (typeof(y)*)1)))
+
+	#define __is_constant(x) \
+	(sizeof(int) == sizeof(*(1 ? ((void*)((long)(x) * 0l)) : (int*)1)))
+
+	#define __no_side_effects(x, y) \
+		(__is_constant(x) && __is_constant(y))
+
+	#define __safe_cmp(x, y) \
+		(__typecheck(x, y) && __no_side_effects(x, y))
+
+	#define __cmp(x, y, op)	((x) op (y) ? (x) : (y))
+
+	#define __cmp_once(x, y, op) ({	\
+		typeof(x) __x = (x);	\
+		typeof(y) __y = (y);	\
+		__cmp(__x, __y, op); })
+
+	#define __careful_cmp(x, y, op)			\
+		__builtin_choose_expr(__safe_cmp(x, y),	\
+					  __cmp(x, y, op), __cmp_once(x, y, op))
+ 
+	#define max(x, y)	__careful_cmp(x, y, >)
+
+小结：
+
+上面以一个宏为例子，意在说明，对一门语言的掌握是永无止境的，就算你把当前所有的C语言知识点、编程技能都掌握了，C语言也是不断更新的、C标准也是不断更新变化的。编程技巧、编程技能也是不断进步的。
+
