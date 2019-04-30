@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-04-10T11:53:27+08:00
 
-====== 手机和电脑之间如何高效传文件？10 款跨平台传输应用和服务横评 ======
+====== airdroid 手机和电脑之间如何高效传文件 10 款跨平台传输应用和服务横评 ======
 创建日期 星期三 10 四月 2019
 
 https://sspai.com/post/53889
