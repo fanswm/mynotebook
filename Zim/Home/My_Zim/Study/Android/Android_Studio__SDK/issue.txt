@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-05-01T22:22:55+08:00
 
-====== 111 ======
+====== issue ======
 创建日期 星期三 01 五月 2019
 
 我参考： https://www.jianshu.com/p/9977ca2c26b4
@@ -51,3 +51,12 @@ Use the following command to install KVM:
 
 sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils ia32-libs-multiarch
 ########################end
+Failed to load module "canberra-gtk-module"
+解决：
+sudo apt-get install libcanberra-gtk-module
+
+Check the components you want to update/install. Click Next to continue.
+Target folder is neither empty nor does it point to an existing SDK installation.
+
+The selected directory is not a valid home for JDK.
+
