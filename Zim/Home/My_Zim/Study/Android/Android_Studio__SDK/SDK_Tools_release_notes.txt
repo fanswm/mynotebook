@@ -1,0 +1,21 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-01T21:56:42+08:00
+
+====== SDK Tools release notes ======
+创建日期 星期三 01 五月 2019
+
+https://developer.android.com/studio/releases/sdk-tools
+Android SDK Tools is a component for the Android SDK. It includes the complete set of development and debugging tools for Android. It is included with Android Studio.
+Revisions
+
+The sections below provide notes about successive releases of the SDK Tools, as denoted by revision number. To ensure you have the latest version, check SDK Manager for updates.
+
+SDK Tools, Revision 26.1.1 (September 2017)
+
+Changes:
+
+		A command-line version of the Apk Analyzer has been added in tools/bin/apkanalyzer. It offers the same features as the Apk Analyzer in Android Studio and can be integrated into build/CI servers and scripts for tracking size regressions, generating reports, and so on.
+		ProGuard rules files under tools/proguard are no longer used by the Android Plugin for Gradle. Added a comment to explain that.
+
+

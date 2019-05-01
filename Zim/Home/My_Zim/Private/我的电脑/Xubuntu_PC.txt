@@ -145,8 +145,27 @@ mv ./.oh-my-zsh-master ~/
 # 通过如下命令可以查看可用的Theme：
 ls ~/.oh-my-zsh/themes
 # 官方插件一览：https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview
-# 安装atuojump插件：
+# __安装atuojump插件：__
 #参考： https://www.jianshu.com/p/9189eac3e52d
+# https://github.com/wting/autojump
+# 安装 autojump
+sudo apt-get install autojump
+cd ~/app
+git clone git://github.com/wting/autojump.git
+cd autojump
+./install.py 
+# or ./uninstall.py
+vim .zhsrc
+# 添加以下：
+```
+ [[ -s /home/fdd/.autojump/etc/profile.d/autojump.sh  ]]  && source /home/fdd/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
+```
+
+# 自动补全：命令历史自动补全
+git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
+# 然后：
 vim .zshrc
 # 搜索plugins
 ```
