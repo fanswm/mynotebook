@@ -5,9 +5,7 @@ Creation-Date: 2017-12-03T09:18:52+08:00
 ====== 网络-深入 ======
 Created Sunday 03 December 2017
 
-nmap
 
-网络扫描命令。
 
 lsof
 

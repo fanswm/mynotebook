@@ -119,7 +119,7 @@ pip3 install PyGObject
 # https://stackoverflow.com/questions/53365209/error-python-playsound-no-module-named-gi
 # https://askubuntu.com/questions/1057832/how-to-install-gi-for-anaconda-python3-6?newreg=3a43e4aa13ff4b1f938afeac20da1fd9
 ln -s /usr/lib/python3/dist-packages/gi/ /home/myusername/anaconda3/lib/python3.7/site-packages/
-#sudo find / -name 'gi': 以下结果： [[/usr/lib/python3/dist-packages/gi]]
+#sudo find / -name 'gi': 以下结果： /usr/lib/python3/dist-packages/gi
 ##########__没有弄成__。
 
 # 安装VNote
@@ -129,3 +129,34 @@ ln -s /usr/lib/python3/dist-packages/gi/ /home/myusername/anaconda3/lib/python3.
 #下载qt...run
 chmod u+x qt.run
 #执行：./qt.run
+
+# __外观__（主题）：设置->外观；
+# __桌面不显示其他磁盘的图标__：菜单-> 搜索“desktop”-> 图标-> 默认图标-> 可移动设备，去除勾选
+
+# __oh-my-zsh__
+# https://github.com/robbyrussell/oh-my-zsh
+sudo apt-get install zsh zsh-doc
+# 手动将zip包下载下来。
+# 将zip包解压，拷贝至~/.oh-my-zsh目录。此处省略拷贝的操作步骤。
+# 执行cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc 
+unzip ./oh-my-zsh-master
+mv ./oh-my-zsh-master .oh-my-zsh-master
+mv ./.oh-my-zsh-master ~/
+# 通过如下命令可以查看可用的Theme：
+ls ~/.oh-my-zsh/themes
+# 官方插件一览：https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview
+# 安装atuojump插件：
+#参考： https://www.jianshu.com/p/9189eac3e52d
+vim .zshrc
+# 搜索plugins
+```
+plugins=(
+		git
+		autojump
+		extract
+		z
+		sublime
+		)
+```
+source .zshrc
+
