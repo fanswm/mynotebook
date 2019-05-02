@@ -7,8 +7,7 @@ Creation-Date: 2019-05-02T06:58:16+08:00
 
 # 参考文章： https://www.yfeer.com/142.html
 sudo apt-get update && sudo apt-get upgrade -y
-apt-get install x-window-system-core 
-apt-get install gnome-core
+apt-get install x-window-system-core gnome-core
 # 弹出对话框中选择窗口管理器，我选ligdm；
 
 
