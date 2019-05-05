@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-12-30T22:18:26+08:00
 
-====== 编译器原理 ======
+====== 编译器 ======
 创建日期 星期日 30 十二月 2018
 
 

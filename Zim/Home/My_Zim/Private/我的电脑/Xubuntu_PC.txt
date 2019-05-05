@@ -179,3 +179,5 @@ plugins=(
 ```
 source .zshrc
 
+#Gnome:
+[[资源:MySoftware:系统:桌面:GNOME:Xbuuntu 安装 Gnome 桌面]]

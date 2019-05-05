@@ -11,7 +11,7 @@ Creation-Date: 2019-03-05T15:11:04+08:00
 
 NO1、Himawaripy
 
-Himawaripy是一个开源的使用 Python 3开发的脚本项目。主要功能是根据用户设置的时间间隔不停的抓取，Himawari 8 气象卫星网站:http://himawari8.nict.go.jp/himawari8-image.htm%E4%B8%8A%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E8%80%8C%E7%BD%91%E7%AB%99%E7%9A%84%E6%95%B0%E6%8D%AE%E6%98%AF%E6%97%A5%E6%9C%AC Himawari 8 气象卫星拍摄的接近实时的地球照片，主要是天气形态、云团和光线,并将它设置成你的桌面背景。总之就是可以把你的桌面背景设置成一个时时更新的动态地球图片。效果如下：
+Himawaripy是一个开源的使用 Python 3开发的脚本项目。主要功能是根据用户设置的时间间隔不停的抓取，Himawari 8 气象卫星网站: http://himawari8.nict.go.jp/himawari8-image.htm 上的数据，而网站的数据是日本 Himawari 8 气象卫星拍摄的接近实时的地球照片，主要是天气形态、云团和光线,并将它设置成你的桌面背景。总之就是可以把你的桌面背景设置成一个时时更新的动态地球图片。效果如下：
 
 
 项目地址：
@@ -26,7 +26,7 @@ https://github.com/boramalper/himawaripy
 
 2、将Himawaripy项目的源码Git到本地，并cd 到项目的根目录，执行sudo python3 setup.py install 命令，安装Himawaripy。
 
-3、执行安装Himawaripy命令后，会安装失败并报错，报错的内容主要是提示缺少一些项目运行所需要的开发包。根据报错提示，安装开发包就可以了。菜鸟君先后又安装了setuptools-scm、six、dateutil、pillow、appdirs。这些开发包在这个网址https://pypi.org/simple/都可以找到，如https://pypi.org/simple/pillow/。
+3、执行安装Himawaripy命令后，会安装失败并报错，报错的内容主要是提示缺少一些项目运行所需要的开发包。根据报错提示，安装开发包就可以了。菜鸟君先后又安装了setuptools-scm、six、dateutil、pillow、appdirs。这些开发包在这个网址 https://pypi.org/simple/ 都可以找到，如 https://pypi.org/simple/pillow/。
 
 4、Himawaripy安装成功后，执行himawaripy --auto-offset，这时桌面背景就变成了地球。
 

@@ -98,3 +98,5 @@ sudo bash [[./start]]
 #未成功
 
 # vnote
+#Android Studio
+sudo pacman -S andtoid-studio
