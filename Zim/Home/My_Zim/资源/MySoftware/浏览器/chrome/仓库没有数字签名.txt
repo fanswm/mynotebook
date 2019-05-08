@@ -13,7 +13,9 @@ N: 参见 apt-secure(8) 手册以了解仓库创建和用户配置方面的细�
 
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys  1397BC53640DB551
 
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
+# wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
+bi:
+# wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
 原因
 
@@ -28,5 +30,19 @@ gpg --export --armor 1397BC53640DB551 | sudo apt-key add -
 
 sudo wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install google-chrome-stable
+sudo apt-get update && sudo apt-get install google-chrome-stable
+
+
+20190507:
+#Ubuntu 16.04.2执行 sudo apt-get update 。警告如下：W: GPG error: http://dl.google.com/linux/chrome/deb stable Release: The following signatures couldn’t be verified because the public key is not available: NO_PUBKEY 6494C6D6997C215E
+
+报错原因是：google chrome 改变了linux的key仓库。
+
+解决办法：执行下面语句即可。
+--------------------- 
+作者：朝着希望前进 
+来源：CSDN 
+原文：https://blog.csdn.net/zl544434558/article/details/76810555 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -

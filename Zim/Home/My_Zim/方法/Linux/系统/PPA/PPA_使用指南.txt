@@ -8,7 +8,7 @@ Creation-Date: 2019-01-23T11:13:29+08:00
 Ubuntu PPA 使用指南
 2019-01-19 11:02
 
-译自：https://itsfoss.com/ppa-guide/%E4%BD%9C%E8%80%85： Abhishek Prakash
+译自：https://itsfoss.com/ppa-guide/ 作者： Abhishek Prakash
 原创：LCTT https://linux.cn/article-10456-1.html 译者： jlztan
 
 一篇涵盖了在 Ubuntu 和其他 Linux 发行版中使用 PPA 的几乎所有问题的深入的文章。
@@ -31,7 +31,7 @@ Everything you need to know about PPA in Ubuntu Linux
 
 Everything you need to know about PPA in Ubuntu Linux
 
-PPA 表示个人软件包存档Personal Package Archive。
+__PPA 表示个人软件包存档Personal Package Archive。__
 
 这样说容易理解吗？可能不是很容易。
 
@@ -40,10 +40,10 @@ PPA 表示个人软件包存档Personal Package Archive。
 软件仓库和包管理的概念
 软件仓库是一组文件，其中包含各种软件及其版本的信息，以及校验和等其他一些详细信息。每个版本的 Ubuntu 都有自己的四个官方软件仓库：
 
-Main - Canonical 支持的自由开源软件。
-Universe - 社区维护的自由开源软件。
-Restricted - 设备的专有驱动程序。
-Multiverse - 受版权或法律问题限制的软件。
+__Main - Canonical 支持的自由开源软件。__
+__Universe - 社区维护的自由开源软件。__
+__Restricted - 设备的专有驱动程序。__
+__Multiverse - 受版权或法律问题限制的软件。__
 你可以在 这里[2] 看到所有版本的 Ubuntu 的软件仓库。你可以浏览并转到各个仓库。例如，可以在 这里[3] 找到 Ubuntu 16.04 的主存储库（Main）。
 
 所以，PPA 基本上是一个包含软件信息的网址。那你的系统又是如何知道这些仓库的位置的呢？
@@ -92,7 +92,7 @@ sudo apt-get install <package_in_PPA> <- 此命令安装软件包。
 sudo add-apt-repository ppa:dr-akulavich/lighttable
 你会注意到此命令没有软件仓库的 URL。这是因为该工具被设计成将 URL 信息抽象之后再展示给你。
 
-小小注意一下：如果你添加的是 ppa:dr-akulavich/lighttable，你会得到 Light Table。但是如果你添加 ppa:dr-akulavich，你将得到 “上层软件仓库” 中的所有仓库或软件包。它是按层级划分的。
+小小注意一下：如果你添加的是 ppa:dr-akulavich/lighttable，你会得到 Light Table。__但是如果你添加 ppa:dr-akulavich，你将得到 “上层软件仓库” 中的所有仓库或软件包。它是按层级划分的。__
 
 基本上，当您使用 add-apt-repository 添加 PPA 时，它将执行与手动运行这些命令相同的操作：
 
@@ -100,9 +100,9 @@ deb http://ppa.launchpad.net/dr-akulavich/lighttable/ubuntu YOUR_UBUNTU_VERSION_
 deb-src http://ppa.launchpad.net/dr-akulavich/lighttable/ubuntu YOUR_UBUNTU_VERSION_HERE main
 以上两行是将任何软件仓库添加到你系统的 sources.list 文件的传统方法。但 PPA 会自动为你完成这些工作，无需考虑确切的软件仓库 URL 和操作系统版本。
 
-此处不那么重要的一点是，当你使用 PPA 时，它不会更改原始的 sources.list 文件。相反，它在 /etc/apt/sources.d 目录中创建了两个文件，一个 .list 文件和一个带有 .save 后缀的备份文件。
+此处不那么重要的一点是，当你使用 PPA 时，它不会更改原始的 sources.list 文件。相反，__它在 /etc/apt/sources.d 目录中创建了两个文件，一个 .list 文件和一个带有 .save 后缀的备份文件。__
 
-PPA 创建了单独的 sources.list 文件
+__PPA 创建了单独的 sources.list 文件__
 
 PPA 创建了单独的 sources.list 文件
 
@@ -112,7 +112,7 @@ PPA 创建了单独的 sources.list 文件
 
 一个 PPA 的 source.list 文件的内容
 
-这是一种安全措施，可以确保添加的 PPA 不会和原始的 sources.list 文件弄混，它还有助于移除 PPA。
+__这是一种安全措施，可以确保添加的 PPA 不会和原始的 sources.list 文件弄混，它还有助于移除 PPA。__
 
 为什么使用 PPA？为何不用 DEB 包
 你可能会问为什么要使用 PPA，PPA 需要通过命令行使用，而不是每个人都喜欢用命令行。为什么不直接分发可以图形方式安装的 DEB 包呢？
@@ -196,7 +196,7 @@ Download DEB file from PPA
 
 我认为你已经阅读了足够多的关于添加 PPA 的内容，那么如何删除 PPA 及其安装的软件呢？
 
-如何删除 PPA？
+__如何删除 PPA？__
 我过去曾写过 删除 PPA[13] 的教程，这里写的也是同样的方法。
 
 我建议在删除 PPA 之前删除从 PPA 安装的软件。如果只是删除 PPA，则已安装的软件仍保留在系统中，但不会获得任何更新。这不是你想要的，不是吗？
@@ -204,7 +204,7 @@ Download DEB file from PPA
 那么，问题来了，如何知道是哪个 PPA 安装了哪个应用程序？
 
 查找 PPA 安装的软件包并将其移除
-Ubuntu 软件中心无法移除 PPA 安装的软件包，你必须使用具有更多高级功能的 Synaptic 包管理器。
+Ubuntu 软件中心无法移除 PPA 安装的软件包，你必须使用具有更多高级功能的 __Synaptic 包管理器。__
 
 可以从软件中心安装 Synaptic 或使用以下命令进行安装：
 
