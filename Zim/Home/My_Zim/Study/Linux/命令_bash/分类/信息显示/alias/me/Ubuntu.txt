@@ -5,6 +5,7 @@ Creation-Date: 2019-04-24T05:19:35+08:00
 ====== Ubuntu ======
 创建日期 星期三 24 四月 2019
 
+# vim ~/.bashrc
 # 一级：
 alias apt='apt-get'
 alias vi='vim'

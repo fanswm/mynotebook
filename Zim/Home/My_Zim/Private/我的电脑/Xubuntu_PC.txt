@@ -67,7 +67,8 @@ sudo apt-get install google-chrome-stable
 #  [[资源:MySoftware:浏览器:chrome:仓库没有数字签名]]
 
 # 安__装docker:__
-sudo apt-get install docker
+#sudo apt-get install docker  #这个已经不能用了，用下面这个方法
+sudo apt-get install docker.io
 #sudo curl -sSL https://get.daocloud.io/docker | sh
 docker --version
 sudo docker info
@@ -126,7 +127,7 @@ ln -s /usr/lib/python3/dist-packages/gi/ /home/myusername/anaconda3/lib/python3.
 # 安装VNote
 # 下载appimage,直接运行。
 
-# 安装Qt5
+# __安装Qt5__
 #下载qt...run
 chmod u+x qt.run
 #执行：./qt.run
@@ -140,9 +141,12 @@ sudo apt-get install zsh zsh-doc
 # 手动将zip包下载下来。
 # 将zip包解压，拷贝至~/.oh-my-zsh目录。此处省略拷贝的操作步骤。
 # 执行cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc 
-unzip ./oh-my-zsh-master
-mv ./oh-my-zsh-master .oh-my-zsh-master
-mv ./.oh-my-zsh-master ~/
+
+#更改shell，注意：不要使用sudo。
+#chsh -s /bin/zsh
+# https://www.cnblogs.com/EasonJim/p/7863099.html  还参考了这个教程
+#以下：安装
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 # 通过如下命令可以查看可用的Theme：
 ls ~/.oh-my-zsh/themes
 # 官方插件一览：https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins-Overview
@@ -151,6 +155,14 @@ ls ~/.oh-my-zsh/themes
 # https://github.com/wting/autojump
 # 安装 autojump
 sudo apt-get install autojump
+#配置：
+vim .zshrc
+#在最后一行加入，注意点后面是一个空格
+#########################
+. /usr/share/autojump/autojump.sh
+#########################
+
+#下面这个可能是在home_xubuntu上安的autojump:
 cd ~/app
 git clone git://github.com/wting/autojump.git
 cd autojump
