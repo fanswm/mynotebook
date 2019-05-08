@@ -9,3 +9,9 @@ Creation-Date: 2019-01-25T11:03:46+08:00
 xmodmap -pk >  map.txt
 xev > map.txt
 ```
+# 查看KeyPress event， KeyRelease event
+
+Prior是pageUp
+Next是：pageDown
+Control_R:
+Menu:

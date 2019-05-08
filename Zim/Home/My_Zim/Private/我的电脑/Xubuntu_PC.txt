@@ -188,6 +188,7 @@ plugins=(
 		extract
 		z
 		sublime
+		zsh-autosuggestions
 		)
 ```
 source .zshrc
