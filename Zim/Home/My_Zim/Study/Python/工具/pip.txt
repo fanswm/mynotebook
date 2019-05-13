@@ -5,3 +5,41 @@ Creation-Date: 2018-10-25T11:32:35+08:00
 ====== pip ======
 Created Thursday 25 October 2018
 
+
+问题：
+from pip import main
+ImportError: cannot import name main
+:::方法一：
+
+sudo gedit /usr/bin/pip
+将原来的
+
+from pip import main
+改为
+
+from pip._internal import main
+方法二：
+
+sudo gedit /usr/bin/pip
+将原来的：
+
+from pip import main
+if __name__ == '__main__':
+	sys.exit(main())
+改为：
+
+from pip import __main__
+if __name__ == '__main__':
+	sys.exit(__main__._main())
+就可以了，注意__main__左右的下划线是两个下划线，很多同学不成功的原因是因为只写了一个下划线
+imrdr: 这里的黄色不是zim的，请查看原文链接，或使用第一个方法。
+--------------------- 
+作者：ZONG_XP 
+来源：CSDN 
+原文：https://blog.csdn.net/zong596568821xp/article/details/80410416 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+
+问题：
+ERROR: Could not install packages due to an EnvironmentError: [Errno 13] 权限不够: '/usr/local/lib/python2.7/dist-packages/labelImg-1.8.1.dist-info'
+Consider using the `--user` option or check the permissions.
+

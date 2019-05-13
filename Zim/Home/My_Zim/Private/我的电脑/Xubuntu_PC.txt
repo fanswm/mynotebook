@@ -113,6 +113,10 @@ make clean-desktop lantern && ./lantern
 # __kernel-package__
 sudo apt-get install kernel-package   #2019年04月23日
 
+# pip pip3
+sudo apt-get install python-pip python3-pip
+#  [[Study:Python:工具:pip:pip3]]
+
 # __pygtk__   没有弄成
 sudo apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0
 pip3 install pycairo
@@ -195,3 +199,9 @@ source .zshrc
 
 #Gnome:
 [[资源:MySoftware:系统:桌面:GNOME:Xbuuntu 安装 Gnome 桌面]]
+
+# labelimg
+[[资源:MySoftware:设计 图片:图片文字 图片标注:labelimg]]
+
+
+

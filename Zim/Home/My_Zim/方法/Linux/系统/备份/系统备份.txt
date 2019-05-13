@@ -5,6 +5,10 @@ Creation-Date: 2017-11-24T08:18:15+08:00
 ====== 系统备份 ======
 Created Friday 24 November 2017
 
+相关链接：
+[[资源:MySoftware:系统:软件包管理 软件包:apt-clone]]
+
+
 ### 备份系统
 
 + 首先成为root用户：

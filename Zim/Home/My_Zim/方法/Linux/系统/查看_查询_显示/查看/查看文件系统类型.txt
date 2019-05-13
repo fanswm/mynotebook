@@ -136,7 +136,7 @@ lsblk 命令可以展示设备的信息。
 
 要展示已挂载文件系统的信息，只需运行：
 
-$ lsblk -f
+__$ lsblk -f__
 NAME   FSTYPE   LABEL  UUID                                 MOUNTPOINT
 loop0  squashfs                                             /var/lib/snapd/snap/core/4327
 sda

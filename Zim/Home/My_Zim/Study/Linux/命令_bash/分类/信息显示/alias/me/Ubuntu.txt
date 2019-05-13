@@ -11,10 +11,10 @@ alias apt='apt-get'
 alias vi='vim'
 alias h='tldr'
 alias c='clear'
+alias ins='sudo apt-get install'
 
 alias ipe='curl ipinfo.io/ip'
 alias meminfo='free -m -l -t'
-alias ins='sudo apt install'
 
 alias df='df -h'
 alias du='du -h --max-depth=1 | sort -hr'

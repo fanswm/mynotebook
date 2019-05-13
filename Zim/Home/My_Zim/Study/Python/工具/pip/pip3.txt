@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-13T11:43:08+08:00
+
+====== pip3 ======
+创建日期 星期一 13 五月 2019
+
+sudo apt-get install python3-pip

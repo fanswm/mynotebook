@@ -5,10 +5,6 @@ Creation-Date: 2019-02-28T10:40:29+08:00
 ====== 图片文字 ======
 创建日期 星期四 28 二月 2019
 
-Labelimg: https://tzutalin.github.io/labelImg/
-	https://github.com/tzutalin/labelImg
-	
-
 免费在线的添加图片文字水印工具
 https://www.fotor.com/cn/features/text.html
 

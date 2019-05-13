@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-13T11:30:07+08:00
+
+====== flameshot ======
+创建日期 星期一 13 五月 2019
+
+http://www.sohu.com/a/257582297_100034897
+https://github.com/lupoDharkael/flameshot
+
+
+sudo apt-get install flameshot

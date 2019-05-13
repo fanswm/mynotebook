@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-13T13:33:04+08:00
+
+====== labelimg ======
+创建日期 星期一 13 五月 2019
+
+Labelimg: https://tzutalin.github.io/labelImg/
+	https://github.com/tzutalin/labelImg
+
+sudo apt-get install python-pip
+sudo pip install labelimg
+sudo apt-get install pyqt4-dev-tools
+
+
+sudo apt-get install pyqt5-dev-tools
+sudo pip3 install -r requirements/requirements-linux-python3.txt
+make qt5py3
+python3 labelImg.py
+python3 labelImg.py [IMAGE_PATH] [PRE-DEFINED CLASS FILE]
