@@ -1,0 +1,46 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-14T12:53:05+08:00
+
+====== archlinux上安装samba以及配置 ======
+创建日期 星期二 14 五月 2019
+
+安装samba
+
+sudo yaourt -S samba
+
+ 
+
+启动smbd和nmbd
+
+systemctl start smbd.service nmbd.service
+systemctl enable smbd.service nmbd.service
+
+
+添加samba用户
+先添加系统用户
+
+sudo useradd samba_user
+
+ 
+
+再添加samba的用户
+
+sudo smbpasswd -a samba_user
+
+ 
+
+可以在配置文件里修改samba用户的密码
+文件位置一般是在：/etc/samba/smb.conf
+
+可以通过命令，查看帮助信息：
+
+man smbpasswd
+
+ 
+
+可以通过命令，查看samba的配置文件位置。
+
+whereis samba
+
+http://www.cnblogs.com/codeaaa/p/6872474.html
