@@ -1,0 +1,60 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-14T21:26:02+08:00
+
+====== qemu ======
+创建日期 星期二 14 五月 2019
+
+https://blog.csdn.net/sanxinge/article/details/52347998
+
+安装qemu
+
+Qemu是一个广泛使用的开源计算机仿真器和虚拟机，当作为仿真器时，可以在一种架构(如PC机)下运行另一种架构(如ARM)下的操作系统和程序。通过动态转化，可以获得很高的运行效率。当 QEME 作为虚拟机时，可以使用 xen 或 kvm 访问 CPU 的扩展功能(HVM)，在主机 CPU 上直接执行虚拟客户端的代码，获得接近于真机的性能表现。
+1
+$ sudo pacman -S qemu
+
+其他可选包： 
+qemu-arch-extra - 其它架构支持 
+qemu-block-gluster - glusterfs block 支持 
+qemu-block-iscsi - iSCSI block 支持 
+qemu-block-rbd - RBD block 支持 
+samba - SMB/CIFS 服务器支持
+
+安装libvirt
+
+libvirt是Linux上实现虚拟化功能的库，是长期稳定的C语言API，支持KVM/QEMU、Xen、LXC等主流虚拟化方案。
+1
+$ sudo pacman -S libvirt virt-manager #virt-manager为图形前端，可选 
+为了网络连接，安装这些包：
+
+ebtables 和 dnsmasq 用于默认的 NAT/DHCP网络
+bridge-utils 用于桥接网络
+openbsd-netcat 通过 SSH 远程管理
+四、配置
+启动/开机自起守护进程
+
+systemctl start libvirtd    #启动libvirtd进程
+systemctl enable libvirtd   #开机自起
+1
+2
+添加用户到kvm用户组 
+usermod -a -G kvm user_name 
+-a 代表 append， 将自己添加到新用户组且不离开原来用户组
+五、安装UEFI功能（可选）
+首先我们安装用于虚拟机上的UEFI固件： 
+$ sudo pacman -S ovmf
+配置 libvirtd以启用UEFI,libvirt需要知道UEFI—>NVRAM中的配置文件映射 
+#vim /etc/libvirt/qemu.conf 
+找到nvram = []去掉注释，默认的配置文件中NVRAM配置的是ovmf_code.fd和ovmf_vars.fd两文件的路径，而且网上教程大多也这样说的；但在我的arch linux中的OVMF 18419-1版本中没有这两文件，整了半天在发现人家变成ovmf_x64.bin和ovmf_ia32.bin两文件，不知其他版本的有没有这回事？？?
+
+我的NVRAM配置如下：
+nvram = [ 
+"/usr/share/ovmf/ovmf_x64.bin:/usr/share/ovmf/ovmf_ia32.bin" 
+]
+
+现在可以通过virt-manager或命令安装虚拟系统了，具体操作我会在后期写相关的文章。
+--------------------- 
+作者：散心阁 
+来源：CSDN 
+原文：https://blog.csdn.net/sanxinge/article/details/52347998 
+版权声明：本文为博主原创文章，转载请附上博文链接！

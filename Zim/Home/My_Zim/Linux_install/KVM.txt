@@ -7,7 +7,11 @@ Creation-Date: 2019-05-01T21:31:42+08:00
 
 查看CPU是否支持KVM
 
- egrep "(svm|vmx)" /proc/cpuinfo
+ egrep "(svm|vmx)" [[/proc/cpuinfo]]
+
+##################
+你将在输出中看到 vmx（Intel-VT 技术）或 svm （AMD-V 支持）。
+####################
 
 # https://www.cnblogs.com/ccskun/p/5527014.html
 
