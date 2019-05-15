@@ -98,6 +98,5 @@ sudo pacman -S npm
 sudo npm install -g cnpm --registry=http://registry.npm.taobao.org
 
 # __tldr__
-sudo npm install -g tldr
-tldr --update
+sudo npm install -g tldr && tldr --update
 
