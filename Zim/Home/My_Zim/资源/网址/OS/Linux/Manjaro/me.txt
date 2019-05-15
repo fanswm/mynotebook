@@ -86,9 +86,18 @@ sudo bash ./start
 #Android Studio
 sudo pacman -S andtoid-studio
 
-# samba
+# __samba__
 sudo pacman -S samba
 # 在软件包管理器中安装manjaro-settings-samba
 # 编辑smb.conf
 # 增加用户
 sudo systemctl restart smb
+
+# __npm__
+sudo pacman -S npm
+sudo npm install -g cnpm --registry=http://registry.npm.taobao.org
+
+# __tldr__
+sudo npm install -g tldr
+tldr --update
+
