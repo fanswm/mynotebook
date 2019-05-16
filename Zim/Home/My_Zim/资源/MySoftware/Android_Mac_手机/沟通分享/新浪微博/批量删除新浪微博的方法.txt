@@ -1,0 +1,35 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-16T15:50:44+08:00
+
+====== 批量删除新浪微博的方法 ======
+创建日期 星期四 16 五月 2019
+
+批量删除新浪微博的方法 https://www.williamlong.info/archives/5699.html
+
+新浪微博本身不提供批量删除微博的方法，而有些时候，我们需要删除自己微博上所有带图片的内容，下面就是一个批量删除微博的方法，包括带图片微博的方法。
+
+　　先使用谷歌浏览器访问自己的微博首页，在自己微博里，使用搜索功能过滤出指定日期所有带图片的微博，不过滤的话将删除所有微博。
+
+　　接着，按F12，调出后台工具，点击console，将以下代码复制进去，直接回车即可。
+
+　　如果遇到提示错误可以不用管，还是会在删除。
+
+var s = document.createElement('script');
+s.setAttribute(
+  'src',
+  'https://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js'
+);
+s.onload = function() {
+	 setInterval(function() {
+		  if (!$('a[action-type="feed_list_delete"]')) {
+			  $('a.next').click();
+		  } else {
+			  $('a[action-type="feed_list_delete"]')[0].click();
+			  $('a[action-type="ok"]')[0].click();
+		 }
+ 
+		  $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+	 }, 500);
+};
+document.head.appendChild(s);

@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-16T16:13:00+08:00
+
+====== FreeFileSync ======
+创建日期 星期四 16 五月 2019
+
+FreeFileSync 是一款本地同步 备份 软件：如将本地硬盘上的文件同步到移动硬盘上。可以做到增量备份、自动识别差异项等。同步方式有：双向、镜像、更新 。下载地址：Download FreeFileSync ，解压后直接点击 FreeFileSync 文件就能使用。
+
+因为没有图标，这里给出写入图标的方式（有工具就绝对不手写）：
+# –-no-install-recommends 参数避免安装非必须的文件，从而减小体积
+sudo apt install --no-install-recommends gnome-panel
+创建应用程序启动方式
+sudo gnome-desktop-item-edit /usr/share/applications/ --create-new
+命令：点浏览展开到解压目录，选择 FreeFileSync 的可执行文件。
+
+图标：解压包中有一个名为 Resources.zip 的压缩包，含有一些图片，从中选取软件图标。
+
+https://freefilesync.org/

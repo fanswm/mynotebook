@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-12-28T16:21:32+08:00
 
-====== 微博 ======
+====== 新浪微博 ======
 Created Friday 28 December 2018
 
 Share微博客户端
