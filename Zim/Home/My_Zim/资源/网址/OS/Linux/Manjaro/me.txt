@@ -100,3 +100,15 @@ sudo npm install -g cnpm --registry=http://registry.npm.taobao.org
 # __tldr__
 sudo npm install -g tldr && tldr --update
 
+# __pip__
+sudo pacman -S python-pip # pip3
+#sudo pacman -S python2-pip # pip2
+# 检查各自的 pip 版本
+pip --version
+
+# popup-dict
+# 安装pip3
+
+# pyGObject
+sudo pacman -S python-gobject gtk3
+
