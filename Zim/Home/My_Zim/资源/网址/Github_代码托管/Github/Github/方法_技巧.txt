@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-01-25T15:58:51+08:00
 
-====== 技巧 ======
+====== 方法 技巧 ======
 创建日期 星期五 25 一月 2019
 
 丧心病狂的Github技巧
