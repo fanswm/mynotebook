@@ -5,3 +5,6 @@ Creation-Date: 2018-12-07T15:24:17+08:00
 ====== 网友 ======
 Created Friday 07 December 2018
 
+使用 Python 和 Pygame 模块构建一个游戏框架 https://linux.cn/article-10850-1.html?utm_source=rss&utm_medium=rss
+使用 Python 进行社交媒体情感分析入门 https://linux.cn/article-10852-1.html?utm_source=rss&utm_medium=rss
+如何在你的 Python 游戏中添加一个玩家 https://linux.cn/article-10858-1.html?utm_source=rss&utm_medium=rss

@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-17T16:39:43+08:00
+
+====== 查看文件系统状态findmnt ======
+创建日期 星期五 17 五月 2019
+
+findmnt
+Findmnt 是一个 Linux 内置的命令行工具，它主要用于查找挂载的文件系统状态。Findmnt 可以查看到当前系统中已挂载的设备，在必要时还可进行 mount 或 unmount 操作。
+
+执行 findmnt 命令后会看到如下输入：
+
+当然，还有如下参数可用：
+
+findmnt -l ：以列表方式进行输出
+findmnt -s ：输出 fstab 中挂载的设备
+findmnt -t ext4 ：按文件系统类型进行输出

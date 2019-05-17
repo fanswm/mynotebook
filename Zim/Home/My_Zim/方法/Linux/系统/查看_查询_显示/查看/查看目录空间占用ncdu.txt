@@ -1,0 +1,21 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-17T16:37:01+08:00
+
+====== 查看目录空间占用ncdu ======
+创建日期 星期五 17 五月 2019
+
+ ncdu
+ncdu 命令可以用来查看和分析 Linux 中各目录对磁盘空间占用情况的工具，请使用如下命令进行安装：
+
+apt-get install ncdu
+安装好后执行如下命令即可从根目录开始分析：
+
+ncdu /
+注意：执行上述命令会占用大量磁盘 I/O
+
+分析完成后，会生成类似如下截图的输出：
+
+我们可以在结果界面按 n 按名称进行排序或按 s 按大小进行排序。
+
+[[Study:Linux:命令 bash:分类:信息显示:du:ncdu]]

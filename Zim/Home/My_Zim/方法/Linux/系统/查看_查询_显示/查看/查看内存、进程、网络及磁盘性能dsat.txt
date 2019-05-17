@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-17T16:40:45+08:00
+
+====== 查看内存、进程、网络及磁盘性能dsat ======
+创建日期 星期五 17 五月 2019
+
+dstat
+dstat 是一个可以非常灵活使用和进行组合使用的工具，它可用于监控内存、进行、网络及磁盘性能，可用于替代 ifstat、iostat、dmstat等工具。使用之前需先执行如下命令进行安装：
+
+apt-get install dstat
+执行如下命令可以看到所有监控数据：
+
+dstat
+其可选参数非常多，常用的有：
+
+dstat -c ： 监控CPU
+dstat -cdl -D sda1 ：监控CPU详细信息
+dstat -d ：监控磁盘

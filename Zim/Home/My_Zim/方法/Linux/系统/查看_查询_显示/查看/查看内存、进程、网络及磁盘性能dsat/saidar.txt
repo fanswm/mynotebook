@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-17T16:43:13+08:00
+
+====== saidar ======
+创建日期 星期五 17 五月 2019
+
+saidar 是另一个 CLI 系统数据监控和统计工具，可提供有关磁盘、网络、存储和 SWAP 的监控信息。使用之前需先使用如下命令进行安装：
+
+sudo apt-get install saidar
+安装完成后可直接执行 saidar 进行输出，但我们通常使用带参数的命令生成带颜色输出：
+
+saidar -c

@@ -238,9 +238,9 @@ Payload: http://www.test.com/test.php?file=zip://D:/Server/htdocs/test/upload/sh
 
 
 
-第四种：phar://相对路径运行PHP文件
+第四种：phar:// 相对路径运行PHP文件
 
-当我们想要运行自己的PHP文件，该咋做呐？通过文件包含（include,require这类函数），首先构造一个这样的文件，将 webshell.php 添加到压缩文件 .zip，然后将压缩包后缀名改为.jpg反正合法的文件后缀即可（一般的操作是这样的，当只能上传图片的时候），最后使用phar://按照相对路径读取并执行文件。
+当我们想要运行自己的PHP文件，该咋做呐？通过文件包含（include,require这类函数），首先构造一个这样的文件，将 webshell.php 添加到压缩文件 .zip，然后将压缩包后缀名改为.jpg反正合法的文件后缀即可（一般的操作是这样的，当只能上传图片的时候），最后使用 phar:// 按照相对路径读取并执行文件。
 
 
 

@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-17T16:45:18+08:00
+
+====== 查看系统活动 ======
+创建日期 星期五 17 五月 2019
+
+ranwhen.py
+我们最后介绍的 ranwhen.py 是一个 python 工具，它可以以图形方式显示系统活动。
+
+要使用该工具需要先安装 python 语言支持：
+
+sudo apt-add-repository ppa:fkrull/deadsnakessudo apt-get updatesudo apt-get install python3.2
+然后下载ranwhen.py
+
+wget https://github.com/p-e-w/ranwhen/archive/master.zipunzip master.zip && cd ranwhen-master
+使用如下命令即可执行ranwhen.py
+
+python3.2 ranwhen.py

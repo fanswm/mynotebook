@@ -189,74 +189,74 @@ with语句适用于对资源进行访问的场合，确保不管使用过程中�
 what will be the output of the code below? explain your answer
 
 def extend_list(val, list=[]):
-    list.append(val)    return list
+	list.append(val)    return list
 
 list1 = extend_list(10)
 list2 = extend_list(123, [])
 list3 = extend_list('a')
 
 print(list1) # list1 = [10, 'a']print(list2) # list2 = [123, []]print(list3) # list3 = [10, 'a']class Parent(object):
-    x = 1class Child1(Parent):
-    passclass Child2(Parent):
-    passprint(Parent.x, Child1.x, Child2.x)  # [1,1,1]Child1.x = 2print(Parent.x, Child1.x, Child2.x)  # [1,2,1]Partent.x = 3print(Parent.x, Child1.x, Child2.x)  # [3,2,3]
+	x = 1class Child1(Parent):
+	passclass Child2(Parent):
+	passprint(Parent.x, Child1.x, Child2.x)  # [1,1,1]Child1.x = 2print(Parent.x, Child1.x, Child2.x)  # [1,2,1]Partent.x = 3print(Parent.x, Child1.x, Child2.x)  # [3,2,3]
 在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
 
-arr = [[1,4,7,10,15], [2,5,8,12,19], [3,6,9,16,22], [10,13,14,17,24], [18,21,23,26,30]]def getNum(num, data=None):
-    while data:        if num > data[0][-1]:            del data[0]
-            print(data)
-            getNum(num, data=None)        elif num < data[0][-1]:
-            data = list(zip(*data))            del data[-1]
-            data = list(zip(*data))
-            print(data)
-            getNum(num, data=None)        else:            return True
-            data.clear()    return Falseif __name__ == '__main__':
-    print(getNum(18, arr))
+arr = [1,4,7,10,15], [2,5,8,12,19], [3,6,9,16,22], [10,13,14,17,24], [18,21,23,26,30def getNum(num, data=None):
+	while data:        if num > data[0][-1]:            del data[0]
+			print(data)
+			getNum(num, data=None)        elif num < data[0][-1]:
+			data = list(zip(*data))            del data[-1]
+			data = list(zip(*data))
+			print(data)
+			getNum(num, data=None)        else:            return True
+			data.clear()    return Falseif __name__ == '__main__':
+	print(getNum(18, arr))
 获取最大公约数、最小公倍数
 
 	a = 36
 	b = 21
 	def maxCommon(a, b):
-	    while b: 
+		while b: 
 			a,b = b, a%b    
 		return a
 		
 	def minCommon(a, b):
-	    c = a*b    
+		c = a*b    
 		while b: 
 			a,b = b, a%b    
 		return c//a
 	
 	if __name__ == '__main__':
-    print(maxCommon(a,b))
-    print(minCommon(a,b))
+	print(maxCommon(a,b))
+	print(minCommon(a,b))
 
 获取中位数
 
 def median(data):
-    data.sort()
-    half = len(data) // 2
-    return (data[half] + data[~half])/2l = [1,3,4,53,2,46,8,42,82]
+	data.sort()
+	half = len(data) // 2
+	return (data[half] + data[~half])/2l = [1,3,4,53,2,46,8,42,82]
 if __name__ == '__main__':
-    print(median(l))
+	print(median(l))
 
 输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。
 
 def getOneCount(num):
-    if num > 0:
-        count = b_num.count('1')
-        print(b_num)        
+	if num > 0:
+		count = b_num.count('1')
+		print(b_num)        
 		return count    
 	elif num < 0:
-        b_num = bin(~num)
-        count = 8 - b_num.count('1')        
+		b_num = bin(~num)
+		count = 8 - b_num.count('1')        
 		return count    
 	else:        
 		return 8
 		
 if __name__ == '__main__':
-    print(getOneCount(5))
-    print(getOneCount(-5))
-    print(getOneCount(0))
+	print(getOneCount(5))
+	print(getOneCount(-5))
+	print(getOneCount(0))
 
 有几家给了13K，有一家给了 15K，最后选了在浦东的一家公司。目前工作大半年了，第一次分享，但我还是会坚持 kotlin 的学习。 
 最近下决心 花了一万买了MC，  购置了一台电脑桌，方便我以后学习！

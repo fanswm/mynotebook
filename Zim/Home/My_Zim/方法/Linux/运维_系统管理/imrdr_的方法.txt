@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-17T16:31:42+08:00
+
+====== imrdr 的方法 ======
+创建日期 星期五 17 五月 2019
+
+查看到当前登录系统的用户是谁，以及执行了哪些命令： w
+监控当前系统性能: nmon
