@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-05-17T16:38:21+08:00
 
-====== 查看网卡带宽监控 ======
+====== 查看网卡带宽监控 slurm ======
 创建日期 星期五 17 五月 2019
 
 slurm

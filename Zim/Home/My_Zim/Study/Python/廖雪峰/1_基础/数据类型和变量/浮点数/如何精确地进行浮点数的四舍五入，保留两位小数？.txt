@@ -1,0 +1,138 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-20T14:46:29+08:00
+
+====== 如何精确地进行浮点数的四舍五入，保留两位小数？ ======
+创建日期 星期一 20 五月 2019
+
+为什么这里又五入了？
+
+因为在Python 3里面，round对小数的精确度采用了四舍六入五成双的方式。
+
+如果你写过大学物理的实验报告，那么你应该会记得老师讲过，直接使用四舍五入，最后的结果可能会偏高。所以需要使用奇进偶舍的处理方法。
+
+例如对于一个小数a.bcd，需要精确到小数点后两位，那么就要看小数点后第三位：
+
+如果d小于5，直接舍去
+如果d大于5，直接进位
+如果d等于5：
+d后面没有数据，且c为偶数，那么不进位，保留c
+d后面没有数据，且c为奇数，那么进位，c变成(c + 1)
+如果d后面还有非0数字，例如实际上小数为a.bcdef，此时一定要进位，c变成(c + 1)
+关于奇进偶舍，有兴趣的同学可以在维基百科搜索这两个词条：数值修约和奇进偶舍。
+
+所以，round给出的结果如果与你设想的不一样，那么你需要考虑两个原因：
+
+你的这个小数在计算机中能不能被精确储存？如果不能，那么它可能并没有达到四舍五入的标准，例如1.115，它的小数点后第三位实际上是4，当然会被舍去。
+如果你的这个小数在计算机中能被精确表示，那么，round采用的进位机制是奇进偶舍，所以这取决于你要保留的那一位，它是奇数还是偶数，以及它的下一位后面还有没有数据。
+如何正确进行四舍五入
+如果要实现我们数学上的四舍五入，那么就需要使用decimal模块。
+
+如何正确使用decimal模块呢？
+
+看官方文档，不要看中文垃圾博客！！！
+
+看官方文档，不要看中文垃圾博客！！！
+
+看官方文档，不要看中文垃圾博客！！！
+
+不要担心看不懂英文，Python已经推出了官方中文文档（有些函数的使用方法还没有翻译完成）。
+
+我们来看一下：https://docs.python.org/zh-cn/3/library/decimal.html#decimal.Decimal.quantize
+
+官方文档给出了具体的写法：
+
+>>>Decimal('1.41421356').quantize(Decimal('1.000'))
+Decimal('1.414')
+那么我们来测试一下，0.125和0.375分别保留两位小数是多少：
+
+>>> from decimal import Decimal
+>>> Decimal('0.125').quantize(Decimal('0.00'))
+Decimal('0.12')
+>>> Decimal('0.375').quantize(Decimal('0.00'))
+Decimal('0.38')
+怎么结果和round一样？我们来看看文档中quantize的函数原型和文档说明：
+
+
+
+
+
+
+这里提到了可以通过指定rounding参数来确定进位方式。如果没有指定rounding参数，那么默认使用上下文提供的进位方式。
+
+现在我们来查看一下默认上下文中的进位方式是什么：
+
+>>> from decimal import getcontext
+>>> getcontext().rounding
+'ROUND_HALF_EVEN'
+如下图所示：
+
+
+
+
+
+
+ROUND_HALF_EVEN实际上就是奇进偶舍！如果要指定真正的四舍五入，那么我们需要在quantize中指定进位方式为ROUND_HALF_UP：
+
+>>> from decimal import Decimal, ROUND_HALF_UP
+>>> Decimal('0.375').quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)
+Decimal('0.38')
+>>> Decimal('0.125').quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)
+Decimal('0.13')
+现在看起来一切都正常了。
+
+那么会不会有人进一步追问一下，如果Decimal接收的参数不是字符串，而是浮点数会怎么样呢？
+
+来实验一下：
+
+>>> Decimal(0.375).quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)
+Decimal('0.38')
+>>> Decimal(0.125).quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)
+Decimal('0.13')
+那是不是说明，在Decimal的第一个参数，可以直接传浮点数呢？
+
+我们换一个数来测试一下：
+
+>>> Decimal(11.245).quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)
+Decimal('11.24')
+>>> Decimal('11.245').quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)
+Decimal('11.25')
+为什么浮点数11.245和字符串'11.245'，传进去以后，结果不一样？
+
+我们继续在文档在寻找答案。
+
+
+
+
+
+
+官方文档已经很清楚地说明了，如果你传入的参数为浮点数，并且这个浮点值在计算机里面不能被精确存储，那么它会先被转换为一个不精确的二进制值，然后再把这个不精确的二进制值转换为等效的十进制值。
+
+对于不能精确表示的小数，当你传入的时候，Python在拿到这个数前，这个数就已经被转成了一个不精确的数了。所以你虽然参数传入的是11.245，但是Python拿到的实际上是11.244999999999...。
+
+但是如果你传入的是字符串'11.245'，那么Python拿到它的时候，就能知道这是11.245，不会提前被转换为一个不精确的值，所以，建议给Decimal的第一个参数传入字符串型的浮点数，而不是直接写浮点数。
+
+__总结，如果想实现精确的四舍五入，代码应该这样写：__
+
+__from decimal import Decimal, ROUND_HALF_UP__
+
+__origin_num = Decimal('11.245')__
+__answer_num = origin_num.quantize(Decimal('0.00'), rounding=ROUND_HALF_UP)__
+__print(answer_num)__
+运行效果如下图所示：
+
+
+
+
+
+
+特别注意，一旦要做精确计算，那么就不应该再单独使用浮点数，而是应该总是使用Decimal('浮点数')。否则，当你赋值的时候，精度已经被丢失了，建议全程使用Decimal举例：
+
+a = Decimal('0.1')
+b = Decimal('0.2')
+c = a + b
+print(c)
+最后，如果有同学想知道为什么0.125和0.375能被精确的储存，而1.115、11.245不能被精确储存，请在这篇文章下面留言，如果想知道的同学多，我就写一篇文章来说明。
+
+如果这篇文章能帮到你，请考虑关注我的微信公众号 未闻Code（ID: itskingname）
+https://zhuanlan.zhihu.com/p/60952919?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

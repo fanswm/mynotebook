@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-05-17T16:40:45+08:00
 
-====== 查看内存、进程、网络及磁盘性能dsat ======
+====== 查看内存、进程、网络及磁盘性能 dstat ======
 创建日期 星期五 17 五月 2019
 
 dstat

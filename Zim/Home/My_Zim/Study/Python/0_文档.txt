@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-20T14:50:07+08:00
+
+====== 0 文档 ======
+创建日期 星期一 20 五月 2019
+
+https://docs.python.org/zh-cn/3/library/index.html
+https://docs.python.org/zh-cn/3/library/decimal.html#decimal.Decimal.quantize
+
+
+https://docs.python.org/3/library/functions.html#divmod
+
+https://docs.python.org/2/library/
+
+Python 3.7 官方文档《入门教程》翻译完成
+https://zhuanlan.zhihu.com/p/41656209?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+Python 官方文档：入门教程 
+https://learnku.com/docs/tutorial/3.7.0
+
+
+http://www.pythondoc.com/pythontutorial27/index.html
+http://www.pythondoc.com/pythontutorial3/index.html
+http://www.pythondoc.com/
