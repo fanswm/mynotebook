@@ -7,3 +7,5 @@ Created Wednesday 06 December 2017
 
 https://jerryding.site/
 
+Linux:
+https://www.2daygeek.com/category/shell-script/

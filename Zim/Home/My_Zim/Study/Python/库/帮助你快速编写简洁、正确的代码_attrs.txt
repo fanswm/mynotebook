@@ -1,0 +1,87 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-21T14:08:27+08:00
+
+帮助你快速编写简洁、正确的代码 attrs
+创建日期 星期二 21 五月 2019
+
+使用 attrs 来告别 Python 中的样板
+2019-05-18 21:14
+
+译自：https://opensource.com/article/19/5/python-attrs作者： Moshe Zadka
+原创：LCTT https://linux.cn/article-10871-1.html译者： geekpi
+
+在我们覆盖 7 个 PyPI 库的系列文章中了解更多解决 Python 问题的信息。
+
+
+
+Python是当今使用最多流行的编程语言[1]之一，因为：它是开源的，它具有广泛的用途（例如 Web 编程、业务应用、游戏、科学编程等等），它有一个充满活力和专注的社区支持它。这个社区是我们在 Python Package Index[2]（PyPI）中提供如此庞大、多样化的软件包的原因，用以扩展和改进 Python。并解决不可避免的问题。
+
+在本系列中，我们将介绍七个可以帮助你解决常见 Python 问题的 PyPI 库。今天，我们将研究 attrs[3]，这是一个帮助你快速编写简洁、正确的代码的 Python 包。
+
+attrs
+如果你已经写过一段时间的 Python，那么你可能习惯这样写代码：
+
+class Book(object):
+
+	def init(self, isbn, name, author):
+		self.isbn = isbn
+		self.name = name
+		self.author = author
+接着写一个 repr 函数。否则，很难记录 Book 的实例：
+
+def repr(self):
+	return f"Book({self.isbn}, {self.name}, {self.author})"
+接下来你会写一个好看的 docstring 来记录期望的类型。但是你注意到你忘了添加 edition 和 published_year 属性，所以你必须在五个地方修改它们。
+
+如果你不必这么做如何？
+
+@attr.s(auto_attribs=True)
+class Book(object):
+	isbn: str
+	name: str
+	author: str
+	published_year: int
+	edition: int
+使用新的类型注释语法注释类型属性，attrs 会检测注释并创建一个类。
+
+ISBN 有特定格式。如果我们想强行使用该格式怎么办？
+
+@attr.s(auto_attribs=True)
+class Book(object):
+	isbn: str = attr.ib()
+	@isbn.validator
+	def pattern_match(self, attribute, value):
+		m = re.match(r"^(\d{3}-)\d{1,3}-\d{2,3}-\d{1,7}-\d$", value)
+		if not m:
+			raise ValueError("incorrect format for isbn", value)
+	name: str 
+	author: str
+	published_year: int
+	edition: int
+attrs 库也对不可变式编程[4]支持良好。将第一行改成 @attr.s(auto_attribs=True, frozen=True) 意味着 Book 现在是不可变的：尝试修改一个属性将会引发一个异常。相反，比如，如果希望将发布日期向后一年，我们可以修改成 attr.evolve(old_book, published_year=old_book.published_year+1) 来得到一个新的实例。
+
+本系列的下一篇文章我们将来看下 singledispatch，一个能让你向 Python 库添加方法的库。
+
+查看本系列先前的文章：
+
+Cython[5]
+Black[6]
+via: https://opensource.com/article/19/5/python-attrs
+
+作者：Moshe Zadka[7] 选题：lujun9972[8] 译者：geekpi[9] 校对：wxy[10]
+
+本文由 LCTT[11] 原创编译，Linux中国[12] 荣誉推出
+
+[1]: https://opensource.com/article/18/5/numbers-python-community-trends
+[2]: https://pypi.org/
+[3]: https://pypi.org/project/attrs/
+[4]: https://opensource.com/article/18/10/functional-programming-python-immutable-data-structures
+[5]: https://linux.cn/article-10859-1.html
+[6]: https://linux.cn/article-10864-1.html
+[7]: https://opensource.com/users/moshez/users/moshez
+[8]: https://github.com/lujun9972
+[9]: https://github.com/geekpi
+[10]: https://github.com/wxy
+[11]: https://github.com/LCTT/TranslateProject
+[12]: https://linux.cn/article-10871-1.html?utm_source=rss&utm_medium=rss

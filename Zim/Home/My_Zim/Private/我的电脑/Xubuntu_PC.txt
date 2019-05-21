@@ -141,13 +141,14 @@ chmod u+x qt.run
 
 # [[资源:MySoftware:系统:Shell 终端 文本编辑:终端:zsh:oh-my-fish]]
 
-#Gnome:
+#__Gnome__:
 # [[资源:MySoftware:系统:桌面:GNOME:Xbuuntu 安装 Gnome 桌面]]
 
-# labelimg
+# __labelimg__
 # [[资源:MySoftware:设计 图片:图片文字 图片标注:labelimg]]
 
-# 安装timeshift
+# 安装__timeshift__
 # [[资源:MySoftware:系统:备份:Timeshift]]
 
-
+# jupyterlab
+# [[资源:MySoftware:系统:Shell 终端 文本编辑:jupyter notebook:JupyterLab：程序员的笔记本神器:0]]

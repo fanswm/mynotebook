@@ -8,3 +8,6 @@ Creation-Date: 2019-05-19T11:21:22+08:00
 https://github.com/jupyterlab/jupyterlab
 使用以下命令安装JupyterLab conda软件包：
 conda install -c conda-forge jupyterlab
+或： python3 -m pip install jupyterlab
+
+启动：jupyter lab
