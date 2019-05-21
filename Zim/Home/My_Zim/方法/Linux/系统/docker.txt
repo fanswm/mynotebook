@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-07T14:27:29+08:00
-
-====== docker ======
-Created Friday 07 December 2018
-
