@@ -147,3 +147,4 @@ http://shumeipai.nxez.com/2019/01/17/fstab-and-mobile-hard-disk-mounting-method.
 https://wiki.archlinux.org/index.php/Fstab
 https://help.ubuntu.com/community/Fstab
 
+辑 /etc/fstab 文件时，请务必以换行符结束，否则系统将无法启动
