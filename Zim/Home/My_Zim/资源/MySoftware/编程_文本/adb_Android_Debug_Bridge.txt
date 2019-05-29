@@ -26,3 +26,5 @@ unable to access android sdk add-on list
 imrdr:
 或http 代理，主机名：127.0.0.1，端口：8085
 
+adb官方文档：
+https://developer.android.com/studio/command-line/adb?hl=zh-cn#howadbworks

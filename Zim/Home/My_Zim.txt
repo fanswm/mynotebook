@@ -6,17 +6,8 @@ Creation-Date: 2017-11-21T14:20:22+08:00
 Created Tuesday 21 November 2017
 abstracthex-notes
 
-Linux install: 	Linux 各种软件安装方法
-Other：		相当于笔记，种杂项：IT资讯，个人修养，健康生活，娱乐，工作团队，教育，电子知识
-Private:	私人的东西
-Study：	
-Windows install:
-方法：		各种方法，包括自己试验成功的方法
-系统管理：	电脑系统管理
-资源：		软件，网址，软件安装介绍
-
-
-
 记录原则：
 	尽量扁平化
 	不重复记录
+	以关键词记录，不再分到底是软件还是网址，或者是方法。有的地方大致分。
+	

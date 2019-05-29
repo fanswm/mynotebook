@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-05-29T16:34:33+08:00
 
-====== 作为「在家工作」的自由职业者，我是这样打造自己的生活空间的 ======
+作为「在家工作」的自由职业者，我是这样打造自己的生活空间的
 创建日期 星期三 29 五月 2019
 
 https://sspai.com/post/54802
