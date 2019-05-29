@@ -42,7 +42,7 @@ pip3 install instantmusic
 [[方法:Linux:系统:开机启动程序:清理开机启动项]]
 remarkable: `sudo apt install python3-markdown python3-bs4 gir1.2-webkit-3.0 wkhtmltopdf`
 	sudo dpkg -i ./remarkable_1.87_all.deb  
-[[资源:MySoftware:设计 图片:图片 录屏 截屏:录屏 截屏:将 Linux 终端会话录制成 SVG 动画]]
+[[资源:MySoftware:设计 图片:图片 录屏 截屏 图片处理 照片处理:录屏 截屏:将 Linux 终端会话录制成 SVG 动画]]
 sudo npm install -g footballcli
 jupyter notebook
 UNetbootin

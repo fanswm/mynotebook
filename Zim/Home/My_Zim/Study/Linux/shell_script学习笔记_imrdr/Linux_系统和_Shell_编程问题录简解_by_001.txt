@@ -191,7 +191,7 @@ cat /proc/version
 参考资料：
 
 https://en.wikipedia.org/wiki/Linux_kernel
-https://zh.wikipedia.org/zh-hans/Linux%E5%86%85%E6%A0%B8
+https://zh.wikipedia.org/zh-hans/Linux内核
 https://itsfoss.com/find-which-kernel-version-is-running-in-ubuntu/
 https://www.howtogeek.com/howto/31632/what-is-the-linux-kernel-and-what-does-it-do/
 https://www.kernel.org/
@@ -338,7 +338,7 @@ ans1:
 https://medium.com/actualize-network/how-to-learn-vim-a-four-week-plan-cd8b376a9b85/
 https://www.openvim.com/
 https://www.labnol.org/internet/learning-vim-for-beginners/28820/
-https://vim-adventures.com/%EF%BC%9A%E7%8E%A9%E6%B8%B8%E6%88%8F%E5%AD%A6vim
+https://vim-adventures.com/：玩游戏学vim
 https://github.com/damassi/learn-vim
 https://github.com/dofy/learn-vim
 https://www.quora.com/What-is-the-best-way-to-learn-Vim-What-sites-and-resources-would-you-recommend-to-learn-efficiently
@@ -391,7 +391,7 @@ https://stackoverflow.com/questions/16497317/piping-both-stdout-and-stderr-in-ba
 http://note.qidong.name/2017/07/bash_stdout_stderr/
 https://blog.csdn.net/wangyeqiang/article/details/38726433
 http://www.01happy.com/linux-stdin-stdout-stderr/
-https://zh.wikipedia.org/zh/%E6%A8%99%E6%BA%96%E4%B8%B2%E6%B5%81
+https://zh.wikipedia.org/zh/標準串流
 19. 如何查看隐藏文件
 l.
 ls -d .*
@@ -468,7 +468,7 @@ vim /etc/fstab                 # 开机mount，模板是UUID=********** /u01  ex
 
 https://blog.csdn.net/qq_41116956/article/details/82767764
 https://qiita.com/chinaperfirect/items/a525e4db0fae036b94f5
-https://wiki.archlinux.org/index.php/Fstab_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+https://wiki.archlinux.org/index.php/Fstab_(简体中文)
 https://en.wikipedia.org/wiki/Fstab
 https://blog.51cto.com/zkxfoo/1758529
 https://help.ubuntu.com/community/Fstab
@@ -595,10 +595,10 @@ X server 是 Linux 系统里面图形接口服务器的简称。X server 管理�
 参考资料：
 
 https://en.wikipedia.org/wiki/X_server
-https://zh.wikipedia.org/wiki/X_Window%E7%B3%BB%E7%B5%B1
+https://zh.wikipedia.org/wiki/X_Window系統
 https://blog.csdn.net/vic_qxz/article/details/79073558
 34. Manjaro Deepin Linux 是一个什么样的存在？
-Manjaro 是一款基于 Arch 的带 Deepin 外壳的操作系统，它是近年来最火热的桌面 Linux 操作系统之一（https://distrowatch.com/dwres.php?resource=popularity%EF%BC%89%E3%80%82%E5%AE%83%E9%BB%98%E8%AE%A4%E6%94%AF%E6%8C%81%E5%A4%9A%E7%A7%8D%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83%E5%92%8C%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%EF%BC%8C%E5%B9%B6%E5%88%86%E5%88%AB%E6%8F%90%E4%BE%9B ISO安装镜像（XFCE、KDE、Cinnamon、GNOME、MATE，以及 Deepin）。并且原生使用 Arch 的 Pacman 进行软件滚动安装，可以让你方便、稳定的用上最新的软件包。
+Manjaro 是一款基于 Arch 的带 Deepin 外壳的操作系统，它是近年来最火热的桌面 Linux 操作系统之一（https://distrowatch.com/dwres.php?resource=popularity）。它默认支持多种桌面环境和窗口管理界面，并分别提供 ISO安装镜像（XFCE、KDE、Cinnamon、GNOME、MATE，以及 Deepin）。并且原生使用 Arch 的 Pacman 进行软件滚动安装，可以让你方便、稳定的用上最新的软件包。
 
 参考资料：
 
@@ -777,23 +777,20 @@ grep 'gene_biotype "protein_coding"' Homo_sapiens.GRCh38.89.chr.gtf | \
 awk -F, 'NR==1{for(i=1；i<=NF；i++)if(!($i in v)){ v[$i]；t[i]}}{s=""； for(i=1；i<=NF；i++)if(i in t)s=s sprintf("%s,",$i)；if(s){sub(/,$/,"",s)；print s}} ' sample.csv
 4. 使用 bash 编程实现时间戳功能，如下为 ngsjs 的 rtime_stamp 命令行程序（R语言）输出
 $ rtime_stamp
-[[1]]
 [1] “2019_04_03_18_53_44_” “2019_04_03_18_53_” “2019_04_03_18_”
 [4] “2019_04_03_” “2019_04_” “2019_”
-[[2]]
 [1] “2019-04-03-18-53-44-” “2019-04-03-18-53-” “2019-04-03-18-”
 [4] “2019-04-03-” “2019-04-” “2019-”
-[[3]]
 [1] “2019/04/03/18/53/44/” “2019/04/03/18/53/” “2019/04/03/18/”
 [4] “2019/04/03/” “2019/04/” “2019/”
-$ rtime_stamp -r ‘x[[1]]’
+$ rtime_stamp -r ‘x1’
 2019_04_03_18_56_55_
 2019_04_03_18_56_
 2019_04_03_18_
 2019_04_03_
 2019_04_
 2019_
-$ rtime_stamp -r ‘x[[1]][1]’
+$ rtime_stamp -r ‘x1[1]’
 2019_04_03_18_57_18_
 [yangyang@izuf6btm1dq2w64mt5q889z practice]$ date +%F-%H-%M-%S
 2019-04-06-17-36-46

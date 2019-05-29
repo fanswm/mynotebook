@@ -2,6 +2,6 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-02-12T11:34:17+08:00
 
-====== shell学习笔记 imrdr ======
+====== shell script学习笔记 imrdr ======
 创建日期 星期二 12 二月 2019
 
