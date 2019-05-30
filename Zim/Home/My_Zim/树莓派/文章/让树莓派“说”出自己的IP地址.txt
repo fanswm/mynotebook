@@ -1,0 +1,259 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-30T13:31:23+08:00
+
+====== 让树莓派“说”出自己的IP地址 ======
+创建日期 星期四 30 五月 2019
+
+让树莓派“说”出自己的IP地址
+2019年5月29日 Spoony 未分类 0
+
+
+
+树莓派实验室之前已经介绍了多种方法，来获得树莓派的IP地址。有的利用局域网工具或登录路由器查询、有的通过OLED小屏幕自动显示、还有的利用DDNS做域名解析。下面我们再来多介绍一种，让树莓派在启动之后“说”出自己的IP地址。
+
+这里用到了下面这些东西：
+树莓派主板
+USB 声卡
+音箱或耳机一副
+mplayer 播放器
+数字语音包，含一组录制好了的 MP3 音频
+Python 主程序
+
+注意，USB声卡不是必须的，但因无法忍受树莓派板载3.5MM的电流声，这里加装了一个USB声卡。软件部分是在 GitHub @ma6174 的开源项目基础上修改而来。
+
+https://github.com/spoonysonny/speak_raspi_ip
+
+一、下载主程序和软件
+运行下面的命令。
+
+1
+2
+3
+4
+cd ~
+sudo git clone https://github.com/spoonysonny/speak_raspi_ip.git
+sudo apt-get install mplayer
+sudo apt-get install -y mpg123
+二、设置输出声卡
+如果你使用树莓派板载的声卡，那么可以跳过这一步。下面的介绍用于在使用其他声卡的情况下参考（以USB声卡为例）。
+笔者所用的这个USB声卡免驱，即插即用。所以直接进行切换声卡的设定就行。
+运行 alsamixer 命令进入 alsamixer 画面。
+
+按 F2 查看系统信息，选择 /proc/asound/cards 查看可用的声卡设备。
+
+可以看到设备名和对应的编号，记下USB声卡的编号（为1）下面会用到。
+
+alsamixer 的其他功能如果有兴趣可以顺便试试，这里暂不深入。如果只需要列出声卡信息，还可以使用 aplay -l 命令。
+
+编辑文件 /etc/asound.conf。
+
+1
+sudo nano /etc/asound.conf
+填入如下内容，请先确保这个文件之前是空白的再填入：
+
+1
+2
+3
+4
+5
+6
+pcm.!default  {
+ type hw card 1
+}
+ctl.!default {
+ type hw card 1
+}
+上面的数字 1 代表声卡的设备编号。
+
+按下 Ctrl+O 保存，按下 Ctrl+X 退出。并重启系统。
+
+1
+sudo reboot
+三、测试运行
+首先需要确认一下声卡和 mplayer 是否正常工作。
+
+1
+2
+cd ~/speak_raspi_ip
+sudo mplayer voice/1.mp3
+如果顺利的话，接上音箱会听到报数“一”。
+
+下面就可以测试主程序了。
+
+1
+sudo python speak_ip.py
+现在树莓派应该会“说”出IP地址。
+
+四、设置开机运行
+编辑 rc.local 文件。
+
+1
+sudo nano /etc/rc.local
+在 exit 0 之前添加一行：
+
+1
+sudo /usr/bin/python /home/pi/speak_raspi_ip/speak_ip.py &
+
+
+按下 Ctrl+O 保存，按下 Ctrl+X 退出。
+完成之后，下次重启的时候就可以听到树莓派的IP地址了。
+
+最后，附上主程序代码
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+#!/usr/bin/env python
+# coding=utf-8
+ 
+import os
+import sys
+import time
+import socket
+import subprocess
+ 
+voice_path = os.path.join(sys.path[0], 'voice')
+player = ["mplayer"]
+ 
+ 
+def getLocalIP():
+	ip = None
+	try:
+		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		s.connect(('114.114.114.114', 0))
+		ip = s.getsockname()[0]
+	except:
+		name = socket.gethostname()
+		ip = socket.gethostbyname(name)
+	if ip.startswith("127."):
+		cmd = '''/sbin/ifconfig | grep "inet " | cut -d: -f2 | awk '{print $1}' | grep -v "^127."'''
+		a = subprocess.Popen(
+			cmd,
+			shell=True,
+			stdout=subprocess.PIPE,
+			stderr=subprocess.PIPE)
+		a.wait()
+		out = a.communicate()
+		ip = out[0].strip().split("\n")  # 所有的列表
+		if len(ip) == 1 and ip[0] == "" or len(ip) == 0:
+			return False
+		ip = "over".join(ip)
+	return ip
+ 
+ 
+def getFilePath(filename):
+	return os.path.join(voice_path, "%s.mp3" % filename)
+ 
+ 
+def play(voice):
+	for i in player:
+		cmd = "%s %s" % (i, getFilePath(voice))
+		a = subprocess.Popen(
+			cmd,
+			shell=True,
+			stdout=subprocess.PIPE,
+			stderr=subprocess.PIPE)
+		a.wait()
+		if a.returncode == 0:
+			break
+ 
+ 
+def speak(ip):
+	for i in ip:
+		if i == ".":
+			play("dot")
+		else:
+			play(i)
+	play("over")
+ 
+if __name__ == '__main__':
+	count = 0
+	while True:
+		ip = getLocalIP()
+		print ip
+		if ip == False:
+			play("fetching")
+		else:
+			count += 1
+			speak(ip)
+		if count == 10:
+			break
+		time.sleep(1)
+
+ 
+
+文章标题：让树莓派“说”出自己的IP地址 - 树莓派实验室
+固定链接：http://shumeipai.nxez.com/2019/05/29/make-the-raspberry-pi-speak-its-own-ip-address.html

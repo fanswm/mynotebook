@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-30T15:29:37+08:00
+
+====== pngimg ======
+创建日期 星期四 30 五月 2019
+
+http://pngimg.com/
+Ithas 60000 free PNG images。而且new png images还在陆续设计和上传，像其他网站一样，还free。这个png网站按照类别排列去背图，有animals、有nature、有food、还有vegetables……和阿里巴巴图标库不同的是，这个网站提供的去背图大部分是实物，来感受一下：
+
+作者：树的葡萄
+链接：https://www.zhihu.com/question/20238525/answer/612890457
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

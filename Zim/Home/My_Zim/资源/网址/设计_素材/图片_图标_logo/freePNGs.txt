@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-30T15:30:20+08:00
+
+====== freePNGs ======
+创建日期 星期四 30 五月 2019
+
+freePNG网站最粗暴的一点是：你可以一键下载网站170000个png images，70个G，但是需要支付50美金。
+
+如果仅仅是这样，广大网民的内心肯定是拒绝的。
+
+freePNG的大部分图片都是免费的，而且，图片处理相当精致。
