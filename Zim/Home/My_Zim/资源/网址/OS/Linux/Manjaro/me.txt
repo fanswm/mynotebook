@@ -112,3 +112,6 @@ pip --version
 # pyGObject
 sudo pacman -S python-gobject gtk3
 
+# python-openssl
+# [[Study:Python:工具:pip:pip3:pyopenssl python-openssl]]
+
