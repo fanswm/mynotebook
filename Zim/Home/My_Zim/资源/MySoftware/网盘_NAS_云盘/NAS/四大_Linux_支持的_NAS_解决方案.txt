@@ -1,0 +1,70 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-06-05T20:31:56+08:00
+
+====== 四大 Linux 支持的 NAS 解决方案 ======
+创建日期 星期三 05 六月 2019
+
+https://zhuanlan.zhihu.com/p/55193199?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+阿里产品总监：四大 Linux 支持的 NAS 解决方案
+范特卡卡西
+范特卡卡西
+10余年老产品，从心出发，开始创业。微信公众号：范特卡卡西
+123 人赞同了该文章
+无论你使用哪种操作系统，数据存储都很重要。数据备份最常见的工具是 NAS。网络附加存储 (NAS) 设备是指以偏重数据存储的服务器，是家庭文件服务器的理想选择。
+
+人们构建（或购买）NAS 设备的主要是为了备份数据。一旦某网络中配备了 NAS，其所有计算机都可以通过 Samba 或 NFS，加上一个可访问的文件夹，轻松访问中央备份解决方案。
+
+但是，备份数据并不是使用 NAS 的唯一原因。专门用于数据存储的服务器，可以成为 Plex、Emby 或 Subsonic 安装的重要基础。除此之外，使用此类网络存储设备的原因还有很多。以下是用作数据存储的四个最佳Linux 环境 NAS：
+
+1. Amahi
+
+
+
+Amahi 是家庭 NAS 用户的一个优质的开源设备，Amahi 上集成的设置可替换路由器上的 DHCP / DNS 设置，这样可以控制网络上所有连接了 NAS 的驱动器，并进行命名。该设备更像是一个家庭服务器，不是严格意义上的操作系统，不过它依然非常强大，其界面简洁，提供了应用程序、插件商店，你可使用 Plex 甚至是 Minecraft 服务器来丰富功能。
+
+它提供了大量备份选项，包括完整的磁盘网络备份，及 Windows 和 Mac PC 的定时备份。 Amahi 可以轻松创建用户在网内共享文件，并管控访问权限。
+
+用户关注的是 Amahi 的安全问题。虽然尚未出现数据泄露问题，但是 Amahi 似乎坚持一旦出现问题，将不承担任何责任，并且并没有详细说明已采取了哪些措施来保护数据安全。不过，它预装了自己的 OpenVPN 版本，是一个很使用的功能。
+
+如果 Amahi 不适合你，Amahi 还非常诚实地提供了其他 NAS 供应商的链接，加分！
+
+
+2. Open Media Vault
+
+
+
+在构建由基于 Linux 的 NAS 时，Open Media Vault 可能是每个人的首选。为什么？对于初学者来说，它在 Debian stable 上运行：一个坚如磐石的版本，很少添加新功能。这样保证你的服务器能够始终正常工作，并且不会因重大更改而受阻。
+
+Open Media Vault 无需过多设置。使用时，你甚至不需要知道关于 Linux 或 Debian 的复杂知识。该设备安装在系统上后，你可以通过系统自行设置的复杂 Web 界面进行全面管理。
+
+OMV 支持 Samba / CIFS、FTP、NFS、Rsync 和 TFTP。此外，Open Media Vault 还支持插件。转到 Web 界面中的插件板块，便可以轻松安装这些插件，如 OwnCloud、LDAP、shairport 等。
+
+如果你对寻找基于 Linux 的 NAS 毫无经验，或只是在寻找一个良好的解决方案，那么你最好不要将 Open Media Vault 作为首选。
+
+3. Rockstor
+
+
+
+Rockstor 是一款基于 CentOS、BTRFS 支持的 NAS 设备，声称是用户的个人云。与列表中的其他设备一样，配置了用于系统管理和监视的 Web 界面，支持多种文件共享协议（如Samba / CIFS，NFS 等）。
+
+注意：Rockstor 是免费的，但你必须支付订阅费才能进行持续更新。
+
+Rockstor 最引人注目的方面是插件系统。用户可以从各种插件中进行选择，这些插件被称为“Rock-ons”。“Rock-ons” 包括 OwnCloud、Bittorrent Sync、Discourse 等等。显然，这不是唯一可使用运动插件的的 NAS 设备。但是，它在此设备上的运行方式非常独特。插件在 Docker 容器内分发和部署。这意味着，你可以毫不费力地将一些非常复杂的插件安装到 NAS 上。
+
+总体而言，Rockstor 是一个有效的 NAS 解决方案，还有一些有趣的方面。如果你正在寻找一个基于 Linux 的 NAS 设备，并希望通过 Open Media Vault 的 Debian 支持 CentOS 和Redhat，那么这是一个不错的选择。
+
+4. Openfiler
+
+
+
+Openfiler 是另一个非常稳定的 NAS 解决方案，具有相当不错的 Web 管理界面（配有各种工具来检查数据的运行结果、添加共享等）。性能不花哨繁复，且保证了稳定的表现。与 Open Media Vault不同，此设备更侧重于企业或职业性解决方案。
+
+NAS 的功能还支持 CIFS、NFS 和 HTTP。 Openfiler 也支持 iSCSI、NIS、LDAP、Active Directory、快照等功能。毋庸置疑，该设备可以为那些希望严格控制数据的人，提供专业的解决方案。
+
+结论
+专用于存储的 Linux 家庭服务器并不是一个新概念。然而，随着数据急剧扩张，基于 Linux 的操作系统开始更多地迎合普通用户，这并不难理解。
+
+即使是 Linux 的硬核粉丝，都不愿意在本地网络上次次手动配置文件共享。这就是为什么越来越多的人，转向使用无需配置的 NAS 设备，来实现所有文件存储需求。我希望在本文的帮助下，你可以了解到支持 Linux 的 NAS 有多棒。
+
+你拥有 NAS 吗？在什么操作系统上运行？请在评论中告诉我们。
