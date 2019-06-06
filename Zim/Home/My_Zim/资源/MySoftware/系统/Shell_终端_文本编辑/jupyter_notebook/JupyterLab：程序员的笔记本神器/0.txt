@@ -10,4 +10,4 @@ https://github.com/jupyterlab/jupyterlab
 conda install -c conda-forge jupyterlab
 或： python3 -m pip install jupyterlab
 
-启动：jupyter lab
+__启动：jupyter lab__

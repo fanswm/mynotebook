@@ -8,7 +8,7 @@ Created Sunday 28 January 2018
 关键字参数允许你传入__0个或任意个含参数名的参数__，这些关键字参数在函数内部自动组装为一个__dict.__
 请看示例：
 
-def person(name, age, **kw):
+def person(name, age, __**kw__):
 	print('name:', name, 'age:', age, 'other:', kw)
 
 它可以扩展函数的功能
