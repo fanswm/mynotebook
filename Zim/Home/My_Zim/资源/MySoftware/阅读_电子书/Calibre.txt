@@ -136,3 +136,7 @@ Calibre 提供了不止一种共享图书的办法，有内容服务器、无线
 你可以在 Calibre 官网 下载到 macOS、Windows 32 位、64 位、Linux 版本，以及 绿色版。
 https://sspai.com/post/43843
 https://calibre-ebook.com/download_windows64
+
+
+https://calibre-ebook.com/demo
+https://manual.calibre-ebook.com/
