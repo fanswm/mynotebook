@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-07-12T15:27:47+08:00
+
+====== 如何写出让同事无法维护的代码 ======
+创建日期 星期五 12 七月 2019
+
+http://mp.weixin.qq.com/s?__biz=MzIyMjYyMzg3MA==&mid=2247490267&idx=1&sn=b6a9ba48c3ab7edf91e080b3a6d85b16&chksm=e82bfbcadf5c72dc1bc1452768ea3121c41647979e5d7cfbdf72d1aac3ba14755ad5778b8d76&mpshare=1&scene=1&srcid=#rd

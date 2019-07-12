@@ -1,0 +1,31 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-07-12T15:01:37+08:00
+
+====== 学习 B站 ======
+创建日期 星期五 12 七月 2019
+
+https://www.bilibili.com/
+https://www.zhihu.com/question/315958918/answer/735492950?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512&hb_wx_block=0
+宇宙纪录片:
+	宇宙的奇迹
+	太阳系的奇迹  Wonders Of The Solar System
+	《生命的奇迹》Wonders of Life
+	《神秘的混沌理论》The Secret Life of Chaos
+	《万物与虚无》Everything and Nothing
+	《旅行者号：冲出太阳系》Voyager:To the Final Fronti
+	《寰宇轨迹》Orbit Earths Extraordinary Journey
+	
+关于数学的顶级纪录片:
+	数学的故事(The Story Of Maths) 历史上最聪明的人为何对数学如此痴迷？
+	统计学的乐趣 (The Joy of Stats) 掌握分析数据的能力，就能跳出直觉理性看问题！
+	终极密码(The Code) 揭开事物背后的数字规律，我们生活在一个充满数字的抽象世界！
+	伟大的疯狂(A Brilliant Madness) 在无常命运中保持美丽心灵的数学家约翰·纳什。
+	数学大谜思(The Great Math Mystery) 数学散步在大自然的各个角落，大自然比人类更懂它！
+	逻辑的乐趣(The Joy of Logic) 逻辑是哲学、语言、数学的引擎！
+	一根绳子有多长？ 测量地越精细，绳子就越长！
+	寻找隐藏的维度  电影特效也得依靠数学理论！  观看链接：http://www.bilibili.com/video/av4235890/
+	维度：数学漫步  Dimensions:A Walk Through Mathematics  帮小科幻迷搞懂“四维空间”！
+	神秘的混沌理论  The Secret Life of Chaos  看过本片后，孩子眼中的世界会变得与众不同！
+	
+	
