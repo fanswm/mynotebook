@@ -1,0 +1,78 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-07-15T16:39:48+08:00
+
+====== 在 Linux 中如何从命令行查找 VirtualBox 版本 ======
+创建日期 星期一 15 七月 2019
+
+在 Linux 中如何从命令行查找 VirtualBox 版本
+2019-07-14 15:08
+
+译自：https://www.ostechnix.com/how-to-find-virtualbox-version-from-commandline-in-linux/%E4%BD%9C%E8%80%85： Sk
+原创：LCTT https://linux.cn/article-11099-1.html%E8%AF%91%E8%80%85： geekpi
+
+FInd Virtualbox version from commandline In Linux
+
+FInd Virtualbox version from commandline In Linux
+
+我使用 Oracle VirtualBox 和 KVM[1] 虚拟化程序测试不同的 Linux 操作系统[2]。虽然我偶尔使用 KVM，但 Virtualbox 始终是我的首选。不是因为我不喜欢 KVM，而是因为我只是习惯了 VirtualBox。当在我的 Ubuntu 无头服务器上使用 Virtualbox[3] 时，我需要知道 VirtualBox 的版本。如果它有 GUI，我可以进入 Virtualbox -> About -> Help 轻松找到它。但我的是没有 GUI 的 Ubuntu 服务器。如果你想知道如何在 Linux 中从命令行查找 VirtualBox 版本，可以采用以下几种方法。
+
+在 Linux 中从命令行查找 VirtualBox 版本
+要查找已安装的 VirtualBox 的版本，请打开终端并运行以下命令：
+
+$ vboxmanage --version
+示例输出：
+
+5.2.18_Ubuntur123745
+在 Linux 中从命令行查找 Virtualbox 版本
+
+在 Linux 中从命令行查找 Virtualbox 版本
+
+正如你在上面的输出中看到的，安装的 VirtualBox 的版本是 5.2。
+
+查找 VirtualBox 版本的另一种方法是：
+
+$ vbox-img --version
+示例输出：
+
+5.2.18_Ubuntur123745
+或者，你可以使用 head 和 awk 命令来查找 VirtualBox 版本。
+
+$ virtualbox --help | head -n 1 | awk '{print $NF}'
+示例输出：
+
+5.2.18_Ubuntu
+或者，使用 echo 命令结合 head 和 awk 命令：
+
+$ echo $(virtualbox --help | head -n 1 | awk '{print $NF}')
+示例输出：
+
+5.2.18_Ubuntu
+以上命令适用于任何 Linux 发行版。如果你使用的是 Ubuntu，你可以使用 dpkg 命令查看 VirtualBox 版本。
+
+$ dpkg -l | grep virtualbox | awk '{print $3}'
+示例输出：
+
+5.2.30-130521~Ubuntu~bionic
+5.2.18-dfsg-2~ubuntu18.04.5
+就是这些了。这些是从 Linux 中的终端查找 Oracle Virtualbox 版本的几种方法。希望这篇文章很有用。
+
+参考来自：
+
+AskUbuntu[4]
+via: https://www.ostechnix.com/how-to-find-virtualbox-version-from-commandline-in-linux/
+
+作者：sk[5] 选题：lujun9972[6] 译者：geekpi[7] 校对：wxy[8]
+
+本文由 LCTT[9] 原创编译，Linux中国[10] 荣誉推出
+
+[1]: https://www.ostechnix.com/setup-headless-virtualization-server-using-kvm-ubuntu/
+[2]: https://www.ostechnix.com/test-100-linux-and-unix-operating-systems-online-for-free/
+[3]: https://www.ostechnix.com/install-oracle-virtualbox-ubuntu-16-04-headless-server/
+[4]: https://askubuntu.com/questions/420363/how-do-i-check-virtualbox-version-from-cli
+[5]: https://www.ostechnix.com/author/sk/
+[6]: https://github.com/lujun9972
+[7]: https://github.com/geekpi
+[8]: https://github.com/wxy
+[9]: https://github.com/LCTT/TranslateProject
+[10]: https://linux.cn/article-11099-1.html?utm_source=rss&utm_medium=rss

@@ -1,0 +1,110 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-07-15T16:38:49+08:00
+
+====== SEO优化技巧 ======
+创建日期 星期一 15 七月 2019
+
+Google Blogger十大SEO优化技巧
+2019-7-15 9:14:55 | 作者: 月光 | 分类: 网站建设 | 评论: 0 | 浏览: 364
+谷歌博客
+　　Google Blogger是Google提供的免费博客服务，提供中文界面，是一个很成熟的中文博客发布平台。虽然目前Google Blogger无法从国内访问，但依然有很多国外用户在使用这个服务。
+
+　　Blogger一个突出的特点就是简洁但功能强大，没有多余而花哨的功能，必要的功能一个都不差。Bloger自由性最大的地方在于其模板可以自定义，也就是说你可以修改模板里的任何内容，这给那些懂Html和CSS的Blogger提供了很大的自由度。不过，Google Blogger的默认设置并没有进行SEO优化，这里就介绍一下使用Google Blogger后需要注意的SEO优化技巧。
+
+Google Blogger
+
+　　使用自定义域名绑定
+
+　　使用Google Blogger建立网站，一个最重要的SEO技巧就是使用自定义域名绑定，这样的话，即使Google Blogger哪天停止服务了，我们做的网站SEO优化也不会白费，我们还可以把网站内容迁移到自己的服务器上。
+
+　　使用自定义域名绑定Google Blogger的方法是，Blogger后台-设置-基本-发布-博客地址，将博客地址修改为自己的域名即可。
+
+　　使用HTTPS
+
+　　使用HTTPS会让网站更加安全可靠，是未来网站的大趋势，设置HTTPS的方法是，Blogger后台-设置-基本-HTTPS，将“HTTPS 可用性”和“HTTPS 重定向”都选为“是”。
+
+　　绑定“Google 搜索控制台”提交Sitemaps
+
+　　访问“Google 搜索控制台”，绑定自己的域名，之后在“索引”-“站点地图”里提交自己的Sitemaps，Google Blogger会在网站自动生成Sitemaps，提交的地址是：站点/sitemap.xml
+
+　　修改robots.txt
+
+　　进入Blogger后台-设置-搜索偏好设置-自定义 robots.txt，点击修改，输入以下内容：Sitemap: https://%E7%AB%99%E7%82%B9%E5%9C%B0%E5%9D%80/sitemap.xml
+
+　　修改Blogger文章标题的位置
+
+　　Google Blogger的默认设置对SEO不是很友好，文章在搜寻引擎上显示的方式和一般进行过SEO的网站不太一样。通常在搜寻引擎上网页的呈现方式是标题在前，网站名在后；而Google Blogger却是网站名在前，文章标题在后，这种显示形式对SEO很不友好。
+
+　　根据通常认为的SEO尝试，一个网页应该是核心关键字越靠前越好，也就是说标题在前，网站名在后的呈现方式更符合SEO习惯，修改Blogger文章标题的位置的方法是：
+
+　　1. 进入Blogger的后台，点选左边功能中的“主题背景”，再点页面里的“修改HTML”。
+
+　　2. 在Blogger模版的HTML代码，搜索下面这行文字。
+
+<title><data:blog.pageTitle/></title>
+
+　　3. 然后搜索到的HTML代码，使用下面的这段HTML码替换，然后保存主题。
+
+<title>
+<b:if cond='data:blog.url == data:blog.homepageUrl'>
+<data:blog.pageTitle/>
+<b:else/>
+<data:blog.pageName/>-<data:blog.title/>
+</b:if>
+</title>
+
+　　修改文章的固定链接
+
+　　在发布文章的时候，输入标题后，Google Blogger会自动生成一个文章的url链接网址，通常这样的链接网址不适合SEO优化，因此，我们可以在发布文章的时候手动修改文章的固定链接，修改方法是：发布新文章-博文设置-固定链接-自定义固定链接。
+
+　　需要注意的是，自定义固定链接的文章一旦发布，就无法修改，只能删除文章重新发布。
+
+　　实现自适应设计
+
+　　目前的网站大多数都支持手机访问，使用较多的技术是自适应设计，Google Blogger做为一个年代很久的建站平台，对自适应的支持并不是太好，因此为了移动端的SEO优化和排名，很有必要修改模版使得Google Blogger能够支持自适应设计。修改方法是：
+
+　　进入Blogger的后台，点选左边功能中的“主题背景”，再点页面里的“修改HTML”。
+
+　　在HTML头部增加如下一行代码。
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+　　搜索HTML，寻找width关键字，将使用绝对宽度的样式名找到。
+
+　　搜索HTML，寻找padding-right，padding-left关键字，将使用这个的样式名找到。
+
+　　Blogger后台点左侧“布局”，在底部添加“HTML/JavaScript”小工具。在博客中添加自适应样式代码。不同的Blogger模版，样式名略有一些不同。
+
+　　下面是一段自适应样式的示例代码。
+
+<style type="text/css">
+@media screen and (max-width:768px) {
+body {min-width: 100%;width: 100%;}
+.content-outer, .content-fauxcolumn-outer, .region-inner {min-width: 100%;max-width: 100%;width: 100%;}
+.main-inner .columns {padding-left: 0;padding-right: 0;}
+.main-cap-top .cap-left {display:none;}
+.column-right-outer {width: 100%;}
+#layout .content-outer {width: 100%;}
+.column-right-outer {display:none;}
+.column-right-inner {display:none;}
+.footer-outer {display:none;}
+}
+</style>
+
+　　最后，进入之前设置的“Google 搜索控制台”，在-“增强功能”-“移动设备易用性”里，查看是否出现错误页面，如有错误页面，可使用Google移动设备适合性测试工具进行调试。
+
+　　优化底部翻页导航
+
+　　Google Blogger底部的翻页导航体验其实不怎么样，可以通过一个第三方插件Infinite Ajax Scroll对其进行优化，实现的效果是：浏览到页面底部的时候，自动加载下一页内容，也就是下拉加载效果，这种效果可以让用户不用点击“下一页”按钮，也可以实现翻页，无论在PC还是手机上，体验效果都很不错。
+
+　　修改meta元标记
+
+　　进入Blogger后台-设置-搜索偏好设置-元标记，点击修改，输入150个字左右的网站简介和关键字信息。
+
+　　自定义robots标头标记
+
+　　进入Blogger后台-设置-搜索偏好设置-自定义robots标头标记，点击修改，可以将“存档并搜索页面”设置为noindex，其他设置为all即可。这样可以让存档和搜索页面里大量重复内容不被索引。
+
+　　好了，上面就是针对Google Blogger的十大SEO优化技巧，通过这些技巧，我们可以让Google Blogger建成的网站能在搜索引擎里有更好的排名和收录。
+https://www.williamlong.info/archives/5766.html
