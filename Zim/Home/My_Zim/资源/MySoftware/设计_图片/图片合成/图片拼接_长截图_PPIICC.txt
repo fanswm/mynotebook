@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-11-22T17:29:33+08:00
 
-====== 长截图 PPIICC ======
+====== 图片拼接 长截图 PPIICC ======
 Created Thursday 22 November 2018
 
 以自己的使用场景角度出发，常常需要截取长对话信息或者完整的文章，在体验多款相关应用之后，我最终选择了 PPIICC。

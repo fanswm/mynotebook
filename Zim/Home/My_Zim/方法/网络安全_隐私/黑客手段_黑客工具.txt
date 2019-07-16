@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-12-05T13:35:34+08:00
 
-====== 黑客的手段 黑客工具 ======
+====== 黑客手段 黑客工具 ======
 Created Wednesday 05 December 2018
 
 为了避免骇客公鸡可能遭受的损失，防患于未然最关键，这里给大家总结了骇客的几种公鸡手段，知己知彼方能有备无患。

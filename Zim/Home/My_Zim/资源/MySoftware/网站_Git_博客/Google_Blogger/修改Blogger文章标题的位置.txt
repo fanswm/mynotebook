@@ -1,0 +1,32 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-07-16T13:46:32+08:00
+
+====== 修改Blogger文章标题的位置 ======
+创建日期 星期二 16 七月 2019
+
+修改Blogger文章标题的位置
+2019-7-13 14:27:46 | 作者: 月光 | 分类: 网站建设 | 评论: 2 | 浏览: 511
+谷歌博客
+　　使用Google Blogger的用户会发现，Google Blogger的默认设置对SEO不是很友好，文章在搜寻引擎上显示的方式和一般进行过SEO的网站不太一样。通常在搜寻引擎上网页的呈现方式是标题在前，网站名在后；而Google Blogger却是网站名在前，文章标题在后，这种显示形式对SEO很不友好。
+
+　　根据通常认为的SEO尝试，一个网页应该是核心关键字越靠前越好，也就是说标题在前，网站名在后的呈现方式更符合SEO习惯，下面我就讲一下怎么修改Google Blogger来实现符合SEO标准的页面展现形式。
+
+　　1. 进入Blogger的后台，点选左边功能中的“主题背景”，再点页面里的“修改HTML”。
+
+　　2. 在Blogger模版的HTML代码，搜索下面这行文字。
+
+<title><data:blog.pageTitle/></title>
+
+　　3. 然后搜索到的HTML代码，使用下面的这段HTML码替换，然后保存主题。
+
+<title>
+<b:if cond='data:blog.url == data:blog.homepageUrl'>
+<data:blog.pageTitle/>
+<b:else/>
+<data:blog.pageName/>-<data:blog.title/>
+</b:if>
+</title>
+
+　　经过上面的修改，Google Blogger的文章展现形式就比默认的更加符合SEO标准。
+https://www.williamlong.info/archives/5764.html
