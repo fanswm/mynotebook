@@ -1,0 +1,76 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-07-22T11:41:55+08:00
+
+====== WordPress切换到Nginx服务器 ======
+创建日期 星期一 22 七月 2019
+
+https://www.williamlong.info/archives/5769.html
+
+WordPress切换到Nginx服务器
+2019-7-18 22:28:54 | 作者: 月光 | 分类: 网站建设 | 评论: 3 | 浏览: 1050
+WordPress
+　　这几天将几个WordPress的Web服务器从Apache切换到了Nginx，中间遇到了不少问题，因此记录一下，以便日后维护使用。
+
+　　对于WordPress站点来说，固定链接主要是通过根目录下的.htaccess文件来控制，切换服务器后，Nginx的rewrite格式和Apache的不同，需要修改。
+
+　　先卸载Apache系统，之后安装Nginx系统。
+
+WordPress
+
+　　在BT面板后台，点“网站”-“设置”-“伪静态”，对于单站点的WordPress来说，原先的.htaccess文件内容如下：
+
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+
+　　切换到Nginx系统后，其配置内容如下：
+
+location / {
+try_files $uri $uri/ /index.php?$args;
+}
+rewrite /wp-admin$ $scheme://$host$uri/ permanent;
+
+　　对于子域名方式的多站点的WordPress来说，原先的.htaccess文件内容如下：
+
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteRule ^wp-admin$ wp-admin/ [R=301,L]
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^(wp-(content|admin|includes).*) $1 [L]
+RewriteRule ^(.*\.php)$ $1 [L]
+RewriteRule . index.php [L]
+
+　　切换到Nginx系统后，其配置内容如下：
+
+if (!-e $request_filename) {
+rewrite ^.+?(/wp-.*) $1 last;
+rewrite ^.+?(/.*\.php)$ $1 last;
+rewrite ^ /index.php last;
+}
+
+　　此外，服务器上还安装了v2ray，原先在Apache里配置的内容如下：
+
+RewriteEngine On
+RewriteCond %{HTTP:Upgrade} =websocket [NC]
+RewriteRule /test/(.*)           ws://127.0.0.1:11111/$1 [P,L]
+RewriteCond %{HTTP:Upgrade} !=websocket [NC]
+RewriteRule /test/(.*)           http://127.0.0.1:11111/$1 [P,L]
+
+　　切换到Nginx后，在Nginx服务器配置文件里修改的内容如下：
+
+location /test/ {
+proxy_pass http://127.0.0.1:11111/;
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection "upgrade";
+proxy_set_header Host $http_host;
+}
+
+
