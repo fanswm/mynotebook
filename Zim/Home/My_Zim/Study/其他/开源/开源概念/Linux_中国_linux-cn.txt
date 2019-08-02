@@ -5,6 +5,11 @@ Creation-Date: 2018-12-03T10:26:10+08:00
 ====== Linux 中国 linux-cn ======
 Created Monday 03 December 2018
 
+后缀：
+?utm_source=rss&utm_medium=rss
+?pr
+
+
 Linux 中国翻译组成立项目管理委员会，向正规化管理迈出一步
 2018-11-26 13:32
 原创：Linux中国 https://linux.cn/article-10279-1.html%E4%BD%9C%E8%80%85： Wxy
