@@ -8,8 +8,8 @@ Creation-Date: 2019-08-05T17:20:38+08:00
 Linux 上最好的五款音乐播放器
 2019-02-09 23:20
 
-译自：https://www.linux.com/learn/intro-to-linux/2017/12/top-5-linux-music-players%E4%BD%9C%E8%80%85： Jack Wallen
-原创：LCTT https://linux.cn/article-10523-1.html%E8%AF%91%E8%80%85： Liwen Jiang
+译自：https://www.linux.com/learn/intro-to-linux/2017/12/top-5-linux-music-players 作者： Jack Wallen
+原创：LCTT https://linux.cn/article-10523-1.html 译者： Liwen Jiang
 
 Jack Wallen 盘点他最爱的五款 Linux 音乐播放器。
 
