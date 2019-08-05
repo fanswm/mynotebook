@@ -10,3 +10,5 @@ www.debian.org
 https://www.debian.org/doc/manuals/debian-reference/pr01.zh-cn.html
 第 1 章 GNU/Linux 教程
 https://www.debian.org/doc/manuals/debian-reference/ch01.zh-cn.html
+
+[[Linux ISO:Debian]]

@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-12-07T16:17:14+08:00
 
-====== 找到并删除重复文件 ======
+====== 找到并删除重复文件 冗余文件 ======
 Created Friday 07 December 2018
 
 如何在 Linux 中找到并删除重复文件
@@ -80,9 +80,9 @@ $ rdfind -ignoreempty true ~/Downloads
 删除重复文件，就运行：
 
 $ rdfind -deleteduplicates true ~/Downloads
-如果你不想忽略空文件，并且和所哟重复文件一起删除。运行：
+__如果你不想忽略空文件，并且和所哟重复文件一起删除。运行：__
 
-$ rdfind -deleteduplicates true -ignoreempty false ~/Downloads
+__$ rdfind -deleteduplicates true -ignoreempty false ~/Downloads__
 更多细节，参照帮助部分：
 
 $ rdfind --help
