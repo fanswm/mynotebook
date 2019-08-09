@@ -9,7 +9,7 @@ Creation-Date: 2019-03-27T11:24:14+08:00
 2019-03-26 09:27
 
 译自：https://opensource.com/article/19/3/backup-solutions%E4%BD%9C%E8%80%85： Don Watkins
-原创：LCTT https://linux.cn/article-10655-1.html%E8%AF%91%E8%80%85： qhwdw
+原创：LCTT https://linux.cn/article-10655-1.html 译者： qhwdw
 
 读者们推荐了超过一打的他们喜欢的数据保护解决方案。
 
