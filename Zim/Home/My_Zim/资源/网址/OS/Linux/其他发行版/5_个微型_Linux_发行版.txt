@@ -8,8 +8,8 @@ Creation-Date: 2019-08-02T16:23:14+08:00
 不容错过的 5 个微型 Linux 发行版
 2019-07-01 12:37
 
-译自：https://opensource.com/article/19/6/linux-distros-to-try%E4%BD%9C%E8%80%85： Seth Kenlon
-原创：LCTT https://linux.cn/article-11040-1.html%E8%AF%91%E8%80%85： chen ni
+译自：https://opensource.com/article/19/6/linux-distros-to-try 作者： Seth Kenlon
+原创：LCTT https://linux.cn/article-11040-1.html 译者： chen ni
 
 这些微型 Linux 发行版可以让你的老爷机复活，可以启动一个损坏的系统，或者是确保在公共电脑上进行安全的操作。
 
