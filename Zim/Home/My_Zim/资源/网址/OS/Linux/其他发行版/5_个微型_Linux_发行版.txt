@@ -119,7 +119,7 @@ Porteus 的基础镜像文件相对来说比较小，因此被称为是“微型
 Porteus installer
 
 Porteus installer
-
+https://mirrors.dotsrc.org/porteus/i486/current/
 你可以根据 官方的安装指南[14] 将 Porteus 安装到一个 U盘 或者是内部硬盘里。这两种方式非常相似，都会使用一个不可变的压缩根文件系统。这是一种稳定的、受限制的文件系统，会根据你的使用被修改。你所做的变更和安装的应用程序在重启的时候都会被加载到内存里，从而还原你关机前的使用环境。
 
 应用程序
