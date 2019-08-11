@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-02-19T16:34:13+08:00
 
-====== 觉得安卓分享功能很难用--Sharedr--Android分享 ======
+====== sharedr 觉得安卓分享功能很难用-Android分享 ======
 创建日期 星期二 19 二月 2019
 
 觉得 Android 的分享功能很难用？这款 App 帮你解决这个问题：Sharedr
