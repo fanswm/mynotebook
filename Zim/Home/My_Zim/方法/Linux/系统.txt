@@ -5,3 +5,4 @@ Creation-Date: 2018-10-18T16:44:08+08:00
 ====== 系统 ======
 Created Thursday 18 October 2018
 
+资源:MySoftware:系统:NTP 时间服务器

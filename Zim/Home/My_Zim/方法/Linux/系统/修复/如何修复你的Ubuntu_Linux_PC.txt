@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-08-16T11:46:43+08:00
+
+====== 如何修复你的Ubuntu Linux PC ======
+Created 星期五 16 八月 2019
+
+https://www.makeuseof.com/tag/fix-ubuntu-linux-pc-wont-boot/
