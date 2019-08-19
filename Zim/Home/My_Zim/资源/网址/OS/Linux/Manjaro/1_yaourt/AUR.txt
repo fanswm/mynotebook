@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-05-19T11:49:01+08:00
-
-====== AUR ======
-创建日期 星期日 19 五月 2019
-
-https://wiki.manjaro.org/index.php/Arch_User_Repository

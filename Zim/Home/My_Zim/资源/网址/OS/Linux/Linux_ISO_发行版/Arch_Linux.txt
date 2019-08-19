@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-22T10:04:43+08:00
+
+====== Arch Linux ======
+Created Monday 22 October 2018
+
+
+http://mirrors.sohu.com/archlinux/iso/
+
+http://mirrors.163.com/archlinux/
