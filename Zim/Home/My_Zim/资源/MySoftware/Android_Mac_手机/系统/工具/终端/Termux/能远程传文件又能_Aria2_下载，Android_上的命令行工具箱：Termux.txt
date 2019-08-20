@@ -1,0 +1,149 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-08-20T07:42:55+08:00
+
+====== 能远程传文件又能 Aria2 下载，Android 上的命令行工具箱：Termux ======
+Created 星期二 20 八月 2019
+
+https://sspai.com/post/56220
+Android 作为一个开源的系统，从诞生之初就携带着开放自由的属性。近些年，随着移动智能设备的普及和性能的不断提升，如今的手机和平板在硬件标准上已经达到了初级桌面计算机的硬件标准，甚至有过之而无不及。既然硬件已经足够强悍，那么软件也会跟着升级，Termux 便是因此诞生的。
+
+Termux 是一款 Android 手机的 Linux 模拟器，它模拟封装了一整套 Linux 环境，让我们可以用它安装管理软件、定制 shell 环境、下载互联网资源、编写代码、编译和运行程序，甚至可以将手机作为反向代理或是 Web 服务器。这一系列的功能都可以通过这个小小的应用完成，有了它，我们就可以可以挖掘出移动设备的所有潜能，将我们手上的移动设备强化成一把无所不能的「瑞士军刀」。下面就从基本配置开始，一步步展示 Termux 究竟有何过人之处。
+
+初始环境配置
+正所谓「磨刀不误砍柴工」，当我们开始使用 Termux 之前，得先花点时间来配置好它的环境，主要需要做下面几件事。
+
+修改 Termux 的软件源
+Termux 默认使用官方的软件源，作为国内的用户访问起来会有一些问题，而且速度也比较慢，因此我们需要将软件源改为国内软件源：
+
+清华大学软件源 ：http://mirrors.tuna.tsinghua.edu.cn/termux
+中科大软件源：https://mirrors.ustc.edu.cn/termux
+考虑到很多人对 vi / vim / nano 并不熟悉，这里推荐使用 sed 的方式来修改软件源，复制这条命令进入 Termux 执行后就会自动替换默认源并自动更新软件列表：
+
+sed -i 's@^\(deb.*stable main\)$@#\1\ndeb http://mirrors.tuna.tsinghua.edu.cn/termux stable main@' $PREFIX/etc/apt/sources.list pkg up
+对 vi / vim / nano 熟悉的同学也可以通过下面的方式自己修改：
+
+
+模拟 Root 的环境
+对于部分没有给手机 Root 权限的人，我们需要安装 proot 来模拟一些 root 环境，方便我们进行一些配置。
+
+pkg install proot
+
+环境安装完成后，可以通过以下命令进入模拟的 root 环境：
+
+termux-chroot
+安装 OpenSSH 与其他设备联动
+为了方便地通过 Termux 连接电脑和被其他设备连接，我们需要安装 OpenSSH 服务并生成密钥对，方法很简单：
+
+pkg install openssh
+ssh-keygen
+然后我们启动 OpenSSH 服务：
+
+sshd
+再将其他设备的公钥拷贝到 Termux 上，这样就能在其他设备上远程登录我们的 Android 手机了：
+
+ssh user@address "cat ~/.ssh/id_rsa.pub" >> ~/.ssh/authorized_keys
+或者将 Termux 生成密钥对，上传到其他设备，通过 Termux 控制其他远程机器。下面就是我的 Mac 成功连接上我的手机的状态，需要注意的是 Termux 的 sshd 服务默认使用的是 8022 端口。
+
+
+这一切完工后，我们就可以来深入做一些其他有趣的事情了。
+
+私人专属移动下载器
+环境搭建完之后，我们可以着手利用 Termux 打造一个移动下载器，这里就需要安装两个经典的下载工具——Aria2 和 YOU-GET。
+
+Aria2 作为一个轻量级的命令行下载程序，功能非常加强大，在少数派里也已经被提到过无数次，我们可以利用它将我们的手机变成一个下载器。
+
+在 Termux 上使下面的命令用来安装 Aria2 ：
+
+pkg install aria2
+
+如果觉得在手机上按键麻烦，在 Termux 启动了 ssh服务后，我们也能通过在 PC 或 MAC 连接 Termux 终端进行一系列操作，利用传统键盘敲提高我们的操作效率。 我们使用下面的命令启动 Aria2 的 RPC 模式，熟悉 Aria2 的小伙伴也可以使用其他指令直接下载网络资源。
+
+aria2c --enable-rpc --rpc-listen-all
+
+启动了 RPC 服务后，推荐大家使用 Transdrone 来管理我们的 Aria2。你可以在 这里 下载 Transdrone。
+
+打开 Transdrone，我们点击右上角的设定，添加一个服务器，选择 「Add normal，custom server」，服务类型选择 Aria2 ，IP 或域名使用 127.0.0.1，其他的设定可以根据自己的需求修改，这里我们就不赘述了。
+
+
+完成之后，我们就把本地的 Aria2 服务给添加进去了，后面就可以通过 Transdrone 来管理下载任务了。
+
+
+除了 Arial2，另一款工具 YOU-GET 相比大家也不陌生，他是一个基于 Python 的开源下载工具。使用它可以很轻松的下载网络上的视频、图片及音乐。而且它支持的视频和音乐网站非常多，包括 YouTube、Twitter、Tumblr、Instagram、niconico 以及国内的爱奇艺、优酷、腾讯、哔哩哔哩、网易云音乐、斗鱼等等。使用 Termux，我们也可以把 YOU-GET 装进手机里。
+
+首先我们需要安装一些环境依赖，然后再安装 YOU-GET，依次输入以下命名即可：
+
+# 安装 Python 环境
+pkg install python
+# 安装 ffmpeg
+pkg install ffmpeg
+# 升级 pip 并安装 you-get
+pip install --upgrade pip && pip install you-get
+完成后就可以愉快的使用 YOU-GET 下载视频啦，具体的操作方法可以参考 官方教程：
+
+
+当然你也可以选择使用 youtube-dl 或者其他下载软件，只要是基于 Linux 开发的，都可以在 Termux 上尝试安装。
+
+联通终端共享文件
+在初始环境配置时，我们就将公钥上传到了 Termux 中，这样我们的 PC 或者 Mac 就可以通过以下形式连接 Termux，这样一来我们就连接了我们的两台设备，就可以实现把两台设备的文件，剪贴板共享起来，将我们的手机作为一个娱乐终端来使用：
+
+ssh IP -p 8022 
+首先我们需要将手机目录共享给 Termux，让它能读取我们的手机文件，我们使用下面这个命令：
+
+termux-setup-storage 
+然后在手机上允许 Termux 访问本地文件，开启之后，会在 home 目录多出一个 storage 的文件夹。
+
+
+这样我们就可以访问到手机里的存储文件了，接下来就可以使用 SCP 命令来获取手机中的文件，或传输我们电脑中的文件，而不需要借助其他客户端软件。
+
+
+如果你觉得使用命令行操作太过繁琐，我们可以利用 Python 启动一个简单的 HTTP 服务，让局域网内所有设备都可以访问我们的手机的文件。
+
+python -m http.server
+在浏览器输入你的手机的 IP 加端口号 8000，就可以访问你的文件了。
+
+
+接管手机的一切
+除了上述的内容之外，Termux 最强大的就是可以通过 Termux:API 来调用手机的各种接口，从而实现远程操控手机，想要做到这个我们还需要额外下载 Termux:API。
+
+下载了衍生应用之后，我们还是通过其他设备远程连接 Termux ，然后执行命令：
+
+pkg install termux-api
+安装好相关的依赖之后，就可以在我们的电脑终端上远程控制手机了，例如我们可以通过这个命令共享我们手机的剪切板：
+
+termux-clipboard-get
+
+或者使用它来发送我们的内容到手机的剪贴板中：
+
+termux-clipboard-set [text]
+用这种方式实现就能实现最简单的剪切板共享。我们还可以读取手机的联系人，并给自定义的号码拨打电话：
+
+# 获取联系人
+termux-contact-list
+# 拨打电话
+termux-telephony-call 10086
+在早些时候，你甚至可以用调用短信的收发接口来实现自动的发短信，接短信，做到自动不查看手机也能知晓一切短信内容，现在这个功能因为涉及到隐私和其他安全问题，Google 已经不再允许他这么使用了：
+
+# 获取短信内容列表
+termux-sms-list
+# 发送短信
+termux-sms-send -n 10086 hello
+还有我们也可以调用拍照的接口完成远程的拍照：
+
+# 自动拍照
+termux-camera-photo [-c camera-id] output-file
+除了这些还有诸如，开启手电筒，扫描周围的 WIFI 等等其他有趣的接口可以使用，我们可以根据自己的需求发挥想象力来加以利用创造出有趣的内容，具体的 API 信息可以参照 官方的文档。
+
+成为开发环境和服务器
+对一个开发人员来说，我们也可以通过 Termux 把手机变成一台服务器，在上面进行相关程序的开发，然后运行我们的软件或者脚本，比如在 Termux 上安装配置 Python 环境，在 Termux 上写一些小的脚本，随身携带。
+
+
+除了 Python 之外，也可以配置诸如 C++、PHP、node.js、Ruby 等等其他编程语言。
+
+
+不仅如此，我们还可以将它编程一个 Web 服务器，在上面安装 Nginx，部署 WordPress 或者 Hexo 环境，将它编程一个 Blog，然后通过使用 ngrok 或者 frp 的内网穿透技术，将 Termux 上面搭建的网站映射到外网上去，让你的手机成为一个独立的网站服务器，未来如果有机会可以单独针对这些功能展开讲讲，可以说有了 Termux ，不怕做不到，就怕想不到，它有无限的潜力等我们去挖掘。
+
+总结
+Termux 作为一个 Android 生态下开源的高级终端模拟器，支持 Python、PHP、Ruby、Nodejs、MySQL 等各种编程语言和软件，自带的 apt 和 pkg 管理软件包，能够非常便携的安装和管理软件包，由此衍生出了各种各样强大的功能和使用场景，除了前面介绍的各种工具和功能，Termux 还拓展出了非常多的小插件： Termux:Styling、Termux:Float、Termux:Widget、Termux:Task 等等，可以说 Termux 完整地支撑起了一个生态，极大地强化了 Android 的可用性。
+
+整片文章挂一漏万，只能带大家管中窥豹，从大家都能接受的角度去感受这款应用的魅力，如果因为它，激发出了你内心的好奇心和创造力，那么不要再犹豫，赶紧亲身体会下 Termux 的魅力吧。

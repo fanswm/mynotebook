@@ -42,9 +42,9 @@ vim ~/zim-update.sh
 git config --global user.email "abstracthex@163.com"
 git config --global user.name "abstracthex"
     
-# git push 免密码： [[MySoftware:网站 Git 博客:Git 版本控制:免输入账号和密码方法]]
+# git push 免密码： [[MySoftware:编程 文本编辑器 编译器:Git 代码管理 提交代码 版本控制:Git 版本控制:免输入账号和密码方法]]
 chmod u+x zim_update.sh
-# git的输出信息中文被转码: [[MySoftware:网站 Git 博客:Git 版本控制:git的输出信息中文被转码]]
+# git的输出信息中文被转码: [[MySoftware:编程 文本编辑器 编译器:Git 代码管理 提交代码 版本控制:Git 版本控制:git的输出信息中文被转码]]
 sudo pacman -S keepassx
 sudo pacman -S remarkable    # markdown
 sudo pacman -S nutstore    #坚果云
