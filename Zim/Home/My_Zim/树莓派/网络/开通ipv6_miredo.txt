@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-12-17T15:19:28+08:00
 
-====== 开通ipv6 ======
+====== 开通ipv6 miredo ======
 Created Monday 17 December 2018
 
 vim [[/etc/modprobe.d/ipv6.conf]]
@@ -13,3 +13,6 @@ reboot
 xubuntu:
 sudo apt-get install miredo
 sudo miredo
+
+
+systemctl status miredo.service

@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-08-20T16:49:37+08:00
+
+====== 时间管理 ======
+创建日期 星期二 20 八月 2019
+
+坚持用「时间块」记录生活后，我发现了这些管理时间的技巧 https://sspai.com/post/56012

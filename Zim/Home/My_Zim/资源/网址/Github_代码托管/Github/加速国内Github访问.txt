@@ -13,7 +13,7 @@ https://www.jianshu.com/p/b230d05438df
 
 1 获取GitHub官方CDN地址
 
-打开https://www.ipaddress.com/
+打开 https://www.ipaddress.com/
 
 查询以下三个链接的DNS解析地址
 github.com

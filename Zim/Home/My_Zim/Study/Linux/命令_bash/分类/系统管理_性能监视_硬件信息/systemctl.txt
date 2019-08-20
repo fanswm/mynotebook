@@ -1,0 +1,28 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-08-20T11:30:09+08:00
+
+====== systemctl ======
+创建日期 星期二 20 八月 2019
+
+systemctl
+
+  Control the systemd system and service manager.
+
+  - List failed units:
+	systemctl --failed
+
+  - Start/Stop/Restart/Reload a service:
+	systemctl start/stop/restart/reload unit
+
+  - Show the status of a unit:
+	systemctl status unit
+
+  - Enable/Disable a unit to be started on bootup:
+	systemctl enable/disable unit
+
+  - Mask/Unmask a unit, prevent it to be started on bootup:
+	systemctl mask/unmask unit
+
+  - Reload systemd, scanning for new or changed units:
+	systemctl daemon-reload

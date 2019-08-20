@@ -140,7 +140,7 @@ jekyll new . --force
 完成后，Jekyll 会在你指定的目录下生成好所有文件，你可以使用 bundle exec jekyll serve 命令，然后就可以通过访问 127.0.0.1:4000 查看初始界面的样子了。
 
 
-默认的界面看起来非常的简陋也很丑，但是没关系，[[%E4%BD%A0%E5%8F%AF%E4%BB%A5%E5%9C%A8%E8%BF%99%E4%BA%9B%E7%BD%91%E7%AB%99%E9%87%8C%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E5%96%9C%E5%A5%BD%E6%89%BE%E5%88%B0%E4%B8%80%E4%BA%9B%E7%BE%8E%E8%A7%82%E7%9A%84%E4%B8%BB%E9%A2%98http://jekyllthemes.org/%E3%80%81https://jekyllthemes.io/%E3%80%81http://themes.jekyllrc.org/]]。
+默认的界面看起来非常的简陋也很丑，但是没关系，%E4%BD%A0%E5%8F%AF%E4%BB%A5%E5%9C%A8%E8%BF%99%E4%BA%9B%E7%BD%91%E7%AB%99%E9%87%8C%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E5%96%9C%E5%A5%BD%E6%89%BE%E5%88%B0%E4%B8%80%E4%BA%9B%E7%BE%8E%E8%A7%82%E7%9A%84%E4%B8%BB%E9%A2%98http://jekyllthemes.org/%E3%80%81https://jekyllthemes.io/%E3%80%81http://themes.jekyllrc.org/ 。
 
 安装方法很简单，一般情况下只需要下载主题包解压后完整的，复制到你的 GitHub Pages 的项目目录里，并覆盖你之前的文件即可，有些特殊的主题要参考作者给的安装步骤，这里我随意的更换了一个主题。
 

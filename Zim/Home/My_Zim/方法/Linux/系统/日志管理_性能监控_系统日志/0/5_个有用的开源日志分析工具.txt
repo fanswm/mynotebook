@@ -9,7 +9,7 @@ Creation-Date: 2019-04-22T15:50:20+08:00
 2019-04-21 10:51
 
 译自：https://opensource.com/article/19/4/log-analysis-tools%E4%BD%9C%E8%80%85： Sam Bocetta
-原创：LCTT https://linux.cn/article-10757-1.html%E8%AF%91%E8%80%85： MjSeven
+原创：LCTT https://linux.cn/article-10757-1.html 译者： MjSeven
 
 监控网络活动既重要又繁琐，以下这些工具可以使它更容易。
 
