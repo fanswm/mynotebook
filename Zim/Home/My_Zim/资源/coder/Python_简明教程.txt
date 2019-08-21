@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-07T17:36:57+08:00
-
-====== Python 简明教程 ======
-Created Thursday 07 December 2017
-
-[[./python简明教程.chm]] 

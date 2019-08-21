@@ -2,6 +2,6 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-08-15T20:22:27+08:00
 
-====== 我的设备 ======
+====== 我的手机 ======
 Created 星期四 15 八月 2019
 
