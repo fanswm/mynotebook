@@ -106,7 +106,7 @@ __Fdupes 存在于大多数 Linux 发行版的默认仓库中。__
 
 在 Arch Linux 和它的变种如 Antergos、Manjaro Linux 上，如下使用 Pacman 安装它。
 
-$ sudo pacman -S fdupes
+__$ sudo pacman -S fdupes__
 在 Debian、Ubuntu、Linux Mint 上:
 
 $ sudo apt-get install fdupes

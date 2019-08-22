@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-08-22T22:33:17+08:00
+
+====== rdfind ======
+创建日期 星期四 22 八月 2019
+
+https://github.com/pauldreik/rdfind
+

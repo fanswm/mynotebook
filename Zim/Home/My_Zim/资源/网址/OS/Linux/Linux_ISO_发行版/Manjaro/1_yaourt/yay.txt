@@ -9,6 +9,9 @@ https://www.ostechnix.com/yay-found-yet-another-reliable-aur-helper/
 
 https://github.com/Jguer/yay
 
+安装：
+pacman -S yay
+
 To install Yay on any Arch-based systems, run the following commands one by one.
 
 $ sudo pacman -S git

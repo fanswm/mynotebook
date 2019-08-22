@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-08-22T22:29:19+08:00
+
+====== yay ======
+创建日期 星期四 22 八月 2019
+
+[[网址:OS:Linux:Linux ISO 发行版:Manjaro]]
