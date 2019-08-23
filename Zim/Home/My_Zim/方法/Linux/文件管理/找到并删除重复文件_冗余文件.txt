@@ -121,67 +121,7 @@ $ sudo yum install fdupes
 
 Fdupes 用法非常简单。仅运行下面的命令就可以在目录中找到重复文件，如：~/Downloads。
 
-__$ fdupes ~/Downloads__
-我系统中的样例输出：
 
-/home/sk/Downloads/Hyperledger.pdf
-/home/sk/Downloads/Hyperledger(1).pdf
-你可以看到，在 /home/sk/Downloads/ 目录下有一个重复文件。它仅显示了父级目录中的重复文件。如何显示子目录中的重复文件？像下面一样，使用 -r 选项。
-
-$ fdupes -r ~/Downloads
-现在你将看到 /home/sk/Downloads/ 目录以及子目录中的重复文件。
-
-Fdupes 也可用来从多个目录中迅速查找重复文件。
-
-$ fdupes ~/Downloads ~/Documents/ostechnix
-你甚至可以搜索多个目录，递归搜索其中一个目录，如下：
-
-$ fdupes ~/Downloads -r ~/Documents/ostechnix
-上面的命令将搜索 ~/Downloads 目录，~/Documents/ostechnix 目录和它的子目录中的重复文件。
-
-<<<<<<< HEAD
-有时，__你可能想要知道一个目录中重复文件的大小。你可以使用 -S 选项，如下__：
-=======
-__有时，你可能想要知道一个目录中重复文件的大小。你可以使用 -S 选项，如下：__
->>>>>>> 18251eaf5f0f271b6a612c3047d695df597a7c3e
-
-$ fdupes -S ~/Downloads
-403635 bytes each:
-/home/sk/Downloads/Hyperledger.pdf
-/home/sk/Downloads/Hyperledger(1).pdf
-__类似的，为了显示父目录和子目录中重复文件的大小，使用 -Sr 选项。__
-
-我们可以在计算时分别使用 -n 和 -A 选项排除空白文件以及排除隐藏文件。
-
-$ fdupes -n ~/Downloads
-$ fdupes -A ~/Downloads
-在搜索指定目录的重复文件时，第一个命令将排除零长度文件，后面的命令将排除隐藏文件。
-
-__汇总重复文件信息，使用 -m 选项。__
-
-$ fdupes -m ~/Downloads
-1 duplicate files (in 1 sets), occupying 403.6 kilobytes
-__删除所有重复文件，使用 -d 选项。__
-
-$ fdupes -d ~/Downloads
-样例输出：
-
-[1] /home/sk/Downloads/Hyperledger Fabric Installation.pdf
-[2] /home/sk/Downloads/Hyperledger Fabric Installation(1).pdf
-
-Set 1 of 1, preserve files [1 - 2, all]:
-这个命令将提示你保留还是删除所有其他重复文件。输入任一号码保留相应的文件，并删除剩下的文件。当使用这个选项的时候需要更加注意。如果不小心，你可能会删除原文件。
-
-如果你想要每次保留每个重复文件集合的第一个文件，且无提示的删除其他文件，使用 -dN 选项（不推荐）。
-
-$ fdupes -dN ~/Downloads
-当遇到重复文件时删除它们，使用 -I 标志。
-
-$ fdupes -I ~/Downloads
-关于 Fdupes 的更多细节，查看帮助部分和 man 页面。
-
-$ fdupes --help
-$ man fdupes
 3. __FSlint__
 FSlint 是另外一个查找重复文件的工具，有时我用它去掉 Linux 系统中不需要的重复文件并释放磁盘空间。不像另外两个工具，FSlint 有 GUI 和 CLI 两种模式。因此对于新手来说它更友好。FSlint 不仅仅找出重复文件，也找出坏符号链接、坏名字文件、临时文件、坏的用户 ID、空目录和非精简的二进制文件等等。
 
