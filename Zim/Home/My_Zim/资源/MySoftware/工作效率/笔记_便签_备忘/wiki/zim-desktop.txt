@@ -28,3 +28,36 @@ __at CentOS:__
 Manjaro:
 换中科大的源：
 sudo pacman -S zim
+
+
+__notion.so:__
+# 第一步：更改软件源，sudo passwd，然后：
+sudo passwd
+sudo apt-get install zim git vim fcitx-table-wbpy curl nodejs npm uget miredo 
+# 输入以下命令，切换到淘宝镜像源：
+sudo npm install -g cnpm --registry=http://registry.npm.taobao.org
+
+# 配置zim git
+mkdir -p ~/github/
+cd ~/github/
+git clone https://github.com/fanswm/mynotebook
+cd mynotebook/Zim/
+git rm story
+git submodule add https://gitlab.com/abstracthex/story
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+# push github.com 免密码：
+cd ~
+touch .git-credentials
+vim .git-credentials
+
+##################添加以下：
+https://{username}:{password}@github.com
+
+# for example:
+# https://xiaoming:passwd@github.com
+
+# 在终端下输入：
+git config --global credential.helper store
+#####################################
