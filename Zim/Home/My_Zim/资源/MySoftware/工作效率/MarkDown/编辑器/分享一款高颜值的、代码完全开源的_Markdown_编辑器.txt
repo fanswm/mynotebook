@@ -11,30 +11,10 @@ https://zhuanlan.zhihu.com/p/57873149?utm_source=com.youdao.note&utm_medium=soci
 今天我在这里给大家另外推荐一款高颜值、界面清新、功能强悍的 Markdown 编辑器 — Notable。
 
 Notable 是 GitHub 上一款基于 AGPL 协议开源的 Markdown 编辑器，由于其界面清新、代码开源而受到不少程序员喜爱。
-
-
-
-
 它有着与 Bear 类似的无限嵌套标签功能：
-
-
-
-
 并支持同时编辑（收藏、置顶、删除）多篇文章：
-
-
-
-
 也可快速检索并打开文件：
-
-
-
-
 与其它编辑器的功能对照：
-
-
-
-
 从功能对照图中我们可以看到，Notable 有着如下基础功能：
 
 无限标签嵌套

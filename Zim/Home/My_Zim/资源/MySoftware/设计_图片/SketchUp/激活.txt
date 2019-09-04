@@ -6,27 +6,17 @@ Creation-Date: 2018-08-02T23:05:50+08:00
 Created 星期四 02 八月 2018
 
 找到如图所示的文件： su2015-32-patch。
-
 点击patch。
-
 点击是。
-
-找到sketchup。
-
-找到style builder。
-
+找到sketchup（应用程序）。
+找到style builder（应用程序）。
 提示OK。
-
-打开sketchup2016。
-
+打开sketchup2016主程序。
 选择我同意，然后继续。
 https://jingyan.baidu.com/article/2f9b480de594b641cb6cc29f.html
 
-草图大师Sketchup Pro 2016中文版安装激活教程
-点击开始使用。
-
-草图大师Sketchup Pro 2016中文版安装激活教程
-选择模板。
-
-草图大师Sketchup Pro 2016中文版安装激活教程
-sketchup2016界面。
+20190904：
+打开注册机后点击"Patch"弹出窗口确定
+弹出窗口选择SketchUp.exe，LayOut.exe，Style Builder.exe（软件安装目录内可找到）相应程序打开即可
+都打开后你会看到以破解成功，再次打开软件即可免费试用了
+https://www.cr173.com/soft/209544.html
