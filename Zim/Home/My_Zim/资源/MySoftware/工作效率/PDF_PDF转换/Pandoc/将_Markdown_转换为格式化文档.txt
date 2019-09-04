@@ -9,7 +9,7 @@ Creation-Date: 2019-08-02T10:23:13+08:00
 2019-07-29 11:34
 
 译自：https://opensource.com/article/19/5/convert-markdown-to-word-pandoc%E4%BD%9C%E8%80%85： Scott Nesbitt
-原创：LCTT https://linux.cn/article-11160-1.html%E8%AF%91%E8%80%85： Xingyu.Wang
+原创：LCTT https://linux.cn/article-11160-1.html 译者： Xingyu.Wang
 
 生活在普通文本世界么？以下是无需使用文字处理器而创建别人要的格式化文档的方法。
 

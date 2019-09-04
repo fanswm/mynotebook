@@ -63,6 +63,7 @@ $\Box\diamond p\equiv\diamond p$
 $\int_{0}^{1} x dx = \left[ \frac{1}{2}x^2 \right]_{0}^{1} = \frac{1}{2}$
 
 $e^x = \sum_{n=0}^\infty \frac{x^n}{n!} = \lim_{n\rightarrow\infty} (1+x/n)^n$
+
 通过输入以下命令将 LaTeX 文档转换为名为 mathMathML.html 的网站：
 
 pandoc math.tex -s --mathml  -o mathMathML.html
@@ -146,11 +147,11 @@ slideNumber=true 显示幻灯片编号
 all: generate
 
 generate:
-    pandoc -t revealjs -s --self-contained SLIDES \
-    -V theme=white -V slideNumber=true -o index.html
+	pandoc -t revealjs -s --self-contained SLIDES \
+	-V theme=white -V slideNumber=true -o index.html
 
 clean: index.html
-    rm index.html
+	rm index.html
 
 .PHONY: all clean generate
 可以在 这个仓库[11] 中找到所有代码。
@@ -215,12 +216,12 @@ Name & \hspace{3cm} & Name \\
 DOCS=contract-agreement.md
 
 all: $(DOCS)
-    pandoc -s $(DOCS) -o $(DOCS:md=pdf)
-    pandoc -s $(DOCS) -o $(DOCS:md=docx)
-    pandoc -s $(DOCS) -o $(DOCS:md=odt)
+	pandoc -s $(DOCS) -o $(DOCS:md=pdf)
+	pandoc -s $(DOCS) -o $(DOCS:md=docx)
+	pandoc -s $(DOCS) -o $(DOCS:md=odt)
 
 clean:
-    rm *.pdf *.docx *.odt
+	rm *.pdf *.docx *.odt
 
 .PHONY: all clean
 4 到 7 行是生成三种不同输出格式的具体命令：
