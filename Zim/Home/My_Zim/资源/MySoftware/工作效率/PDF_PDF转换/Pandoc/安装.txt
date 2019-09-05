@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-09-05T15:05:45+08:00
+
+====== 安装 ======
+创建日期 星期四 05 九月 2019
+
+manjaro:
+install pandoc;
+install 
+sudo npm install -g pdflatex
