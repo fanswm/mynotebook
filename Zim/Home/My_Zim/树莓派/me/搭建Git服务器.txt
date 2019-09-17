@@ -45,6 +45,8 @@ __第六步，克隆远程仓库__：
 __$ git clone git@server:/srv/sample.git__
 git clone ssh://git@urlurl:nnn/src/git.git
 
+git clone ssh://git@URL:端品号/home/USERNAME/git.git
+
 Cloning into 'sample'...
 warning: You appear to have cloned an empty repository.
 剩下的推送就简单了。
