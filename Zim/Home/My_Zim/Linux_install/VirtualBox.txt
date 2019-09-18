@@ -5,6 +5,20 @@ Creation-Date: 2017-11-24T13:40:01+08:00
 ====== VirtualBox ======
 Created Friday 24 November 2017
 
+
+
+VirtualBox[85] 是一个用于操作系统虚拟化的开源应用程序，在服务器、台式机和嵌入式系统上都可以运行。
+
+使用以下命令在 Ubuntu 和 Debian 安装 VirtualBox。
+
+$ wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+$ wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+$ sudo apt-get update
+$ sudo apt-get install virtualbox-5.2
+$ virtualbox
+
+https://www.virtualbox.org/wiki/VirtualBox
+
 ## at CentOS7:
 20171101
 
@@ -17,5 +31,3 @@ enabled=1
 gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://www.virtualbox.org/download/oracle_vbox.asc
-
-
