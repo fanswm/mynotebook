@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2017-11-21T16:58:58+08:00
 
-====== gimp ======
+====== Gimp ======
 Created Tuesday 21 November 2017
 
 GIMP[52] 是 Photoshop 的开源替代品中最受欢迎的。这是因为它有多种可自定义的选项、第三方插件以及活跃的用户社区。
