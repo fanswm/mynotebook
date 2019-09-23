@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-15T15:43:33+08:00
-
-====== 基础 ======
-Created Monday 15 January 2018
-
-微信公众号是B/S，渲染核心是微信内置的X5内核，也是QQ浏览器的内核。

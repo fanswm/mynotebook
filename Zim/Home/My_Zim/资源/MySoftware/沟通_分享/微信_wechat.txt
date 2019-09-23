@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-02-18T07:50:03+08:00
 
-====== 微信 ======
+====== 微信 wechat ======
 创建日期 星期日 18 二月 2018
 
 + 群聚会：
@@ -13,3 +13,7 @@ Creation-Date: 2018-02-18T07:50:03+08:00
 
 ++ 群相册服务
 ++ 微信__办公传文件__不方便？试试这款支持小程序分享的网盘：__数蚁__ https://sspai.com/post/47142
+
+
+PC版保存位置默认： C:\Users\MyUserName\Documents\WeChat Files\
+

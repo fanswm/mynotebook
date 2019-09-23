@@ -2,6 +2,8 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-01-03T16:57:06+08:00
 
+[[Nevolution]] 
+
 ====== 微信 ======
 Created Thursday 03 January 2019
 
@@ -17,3 +19,4 @@ __Nevolution__
 
 Nevolution 目前仍在开放公测阶段，你可以加入开发者创建的 Telegram 群组，按照群内置顶公告的提示进行下载、安装和使用。
 https://www.coolapk.com/apk/com.oasisfeng.nevo?mt=8&uo=4&ct=appcards
+
