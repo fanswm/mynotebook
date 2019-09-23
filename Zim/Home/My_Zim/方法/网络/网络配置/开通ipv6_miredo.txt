@@ -16,3 +16,5 @@ sudo miredo
 
 
 systemctl status miredo.service
+
+测试：  http://test-ipv6.com/
