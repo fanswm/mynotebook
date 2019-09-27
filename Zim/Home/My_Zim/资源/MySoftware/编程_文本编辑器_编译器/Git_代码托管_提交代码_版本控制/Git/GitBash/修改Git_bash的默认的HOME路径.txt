@@ -15,3 +15,7 @@ HOME="$(cd "$HOME" ; pwd)"
 cd
 ···
 export PATH="$HOME/bin:$PATH"
+
+HOME="/d/github/"
+HOME="$(cd "$HOME" ; pwd)"
+cd
