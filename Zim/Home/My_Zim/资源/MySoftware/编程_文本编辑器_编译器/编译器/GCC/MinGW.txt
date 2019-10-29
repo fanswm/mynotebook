@@ -31,11 +31,11 @@ MinGW-Installation-Manager运行界面如下：
 
 桌面－》鼠标右键单击我的电脑－》属性－》高级－》环境变量
 
-　　–将C:\MinGW\bin加入PATH　　
+　　–将C:\__MinGW\bin__加入PATH　　
 
-　　–将C:\MinGW\include加入INCLUDE
+　　–将C:\__MinGW\include__加入INCLUDE
 
-　　–将C:\MinGW\lib加入LIB 
+　　–将C:\__MinGW\li__b加入LIB 
 
 打开CMD在命令提示符下输入gcc –v,看到gcc版本信息，gcc安装OK
 
