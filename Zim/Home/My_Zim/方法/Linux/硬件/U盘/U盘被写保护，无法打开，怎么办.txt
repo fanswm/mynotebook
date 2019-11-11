@@ -7,6 +7,9 @@ Creation-Date: 2019-04-04T15:23:57+08:00
 
 Linux下，dosfsck
 
+Windows: 进入命令行，·format 盘符:/fs:fat32
+https://baijiahao.baidu.com/s?id=1615914396306806035&wfr=spider&for=pc
+http://www.upantool.com/jiaocheng/xiufu/2012/1943.html
 
 
 以下，试过，不行。
