@@ -25,6 +25,10 @@ sudo pacman -S vim
 #__安装搜狗拼音输入法__
 sudo pacman -S fcitx-im #默认全部安装
 sudo pacman -S fcitx-configtool fcitx-sogoupinyin
+### 20191112
+Couldn't determine full name for SGPYEUDC_1.TTE
+Couldn't get family name for SGPYEUDC_1.TTE
+###########
 
 sudo pacman -S google-chrome    #谷歌浏览器
 sudo pacman -S netease-cloud-music   #网易云音乐
