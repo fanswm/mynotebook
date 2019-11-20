@@ -10,3 +10,5 @@ Creation-Date: 2019-05-17T15:47:37+08:00
 使用 LVM 升级 Fedora https://linux.cn/article-11250-1.html?utm_source=rss&utm_medium=rss
 
 https://lists.fedoraproject.org/pipermail/devel-announce/2010-July/000647.html
+
+https://docs.fedoraproject.org/en-US/quick-docs/creating-and-using-a-live-installation-image/index.html
