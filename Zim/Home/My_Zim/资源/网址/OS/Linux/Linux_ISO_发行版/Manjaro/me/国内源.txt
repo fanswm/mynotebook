@@ -1,0 +1,48 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-21T18:34:25+08:00
+
+====== 国内源 ======
+创建日期 星期四 21 十一月 2019
+
+https://www.jianshu.com/p/1cde4b7ec3c2
+Manjaro 系统虽然比 Ubuntu 用着稳定，但有些小地方没有 Ubuntu 人性化，比如默认安装完的系统貌似没有中国的，Ubuntu 估计是用的人多，所以安装完后会根据所在地给你配置更新的源。
+
+下面是网上抄来的添加中科大源的方法：
+
+#先排列源
+
+sudo pacman-mirrors -g
+
+#同步并优化（类似磁盘整理，固态硬盘无需操作）
+
+sudo pacman-optimize && sync
+
+#升级系统
+sudo pacman -Syyu
+
+添加中科大源
+
+#打开配置文件
+
+sudo nano /etc/pacman.conf
+
+在文件末尾添加
+
+[archlinuxcn]
+
+SigLevel = Optional TrustedOnly
+
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+
+#导入GPG Key
+
+sudo pacman -Syy && sudo pacman -S archlinuxcn-keyring
+
+现在可以安装软件了，比如 chrome 和搜狗拼音输入法
+
+#安装chrome
+
+sudo pacman -S google-chrome
+
+添加了中科大源后，也可以直接在添加/删除软件里搜索直接安装
