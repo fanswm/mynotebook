@@ -5,6 +5,10 @@ Creation-Date: 2019-03-09T16:28:15+08:00
 ====== Manjaro ======
 创建日期 星期六 09 三月 2019
 
+
+帮助：
+https://mirrors.ustc.edu.cn/help/archlinuxcn.html
+
 **添加中科大源**
 
 https://www.jianshu.com/p/1cde4b7ec3c2

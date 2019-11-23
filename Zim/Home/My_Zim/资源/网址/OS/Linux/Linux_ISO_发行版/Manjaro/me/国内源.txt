@@ -11,11 +11,9 @@ Manjaro 系统虽然比 Ubuntu 用着稳定，但有些小地方没有 Ubuntu �
 下面是网上抄来的添加中科大源的方法：
 
 #先排列源
-
 sudo pacman-mirrors -g
 
 #同步并优化（类似磁盘整理，固态硬盘无需操作）
-
 sudo pacman-optimize && sync
 
 #升级系统
@@ -24,25 +22,18 @@ sudo pacman -Syyu
 添加中科大源
 
 #打开配置文件
-
 sudo nano /etc/pacman.conf
 
 在文件末尾添加
-
 [archlinuxcn]
-
 SigLevel = Optional TrustedOnly
-
 Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 
 #导入GPG Key
-
 sudo pacman -Syy && sudo pacman -S archlinuxcn-keyring
 
 现在可以安装软件了，比如 chrome 和搜狗拼音输入法
-
 #安装chrome
-
 sudo pacman -S google-chrome
 
 添加了中科大源后，也可以直接在添加/删除软件里搜索直接安装

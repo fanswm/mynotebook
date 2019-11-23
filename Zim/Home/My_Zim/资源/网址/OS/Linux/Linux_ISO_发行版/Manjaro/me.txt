@@ -120,4 +120,11 @@ sudo pacman -S python-gobject gtk3
 # [[Study:Python:工具:pip:pip3:pyopenssl python-openssl]]
 
 #安装WPS-office
+wps-office 的可选依赖：
 sudo pacman -S wps-office
+	ttf-wps-fonts: Symbol fonts required by wps-office
+		ttf-ms-fonts: Microsft Fonts recommended for wps-office
+		wps-office-fonts: FZ TTF fonts provided by wps community
+		wps-office-mime: Use mime files provided by Kingsoft
+	
+
