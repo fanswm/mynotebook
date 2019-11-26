@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-26T13:21:23+08:00
+
+====== yaourt AUR ======
+创建日期 星期二 26 十一月 2019
+
+sudo pacman -S yaourt
+
+https://wiki.manjaro.org/index.php/Arch_User_Repository
