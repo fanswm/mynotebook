@@ -126,5 +126,10 @@ sudo pacman -S wps-office
 		ttf-ms-fonts: Microsft Fonts recommended for wps-office
 		wps-office-fonts: FZ TTF fonts provided by wps community
 		wps-office-mime: Use mime files provided by Kingsoft
-	
+# 安装docker-compose
+# [[MySoftware:系统:云主机 云 容器:docker:Compose:imrdr 操作]]
+# 我实际采用的方法：
+sudo pacman -S docker-compose
+
+
 

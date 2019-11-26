@@ -37,6 +37,7 @@ nano /etc/rc.local
 /usr/bin/phddns -c /etc/phlinux.conf -d  
 以上未验证。
 
+升级：oraynewph upgrade
 
 
 

@@ -1,14 +1,9 @@
 Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
-Creation-Date: 2019-05-21T21:21:12+08:00
+Creation-Date: 2019-11-24T17:45:49+08:00
 
 ====== 树莓派上 Docker 的安装和使用 ======
-创建日期 星期二 21 五月 2019
-
-树莓派上 Docker 的安装和使用
-2019年5月20日 Spoony 未分类 0
-
-
+创建日期 星期日 24 十一月 2019
 
 Docker 是一个开源的应用容器引擎，可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口，容器性能开销极低。这对树莓派非常有用，本教程将介绍 Docker 这个工具以及如何在 Raspbian 上安装 Docker。
 
@@ -23,14 +18,16 @@ Docker 让开发者可以打包他们的应用以及依赖包到一个可移植�
 
 这里介绍两种安装 Docker 的方法，最简单的是直接从 get.docker.com 下载安装脚本并开始安装。仅需执行下面一行命令即可。经测试，树莓派3B、3A+、3B+ 均可支持 Docker，树莓派 Zero 虽然可以安装成功，但无法启动 Docker 服务。
 
-安装方法（脚本安装）
+安装方法一（脚本安装）
 脚本安装是最推荐的方式，只需要输入下面的命令，等待自动安装好即可。
 
 1
 sudo curl -sSL https://get.docker.com | sh
+如果采用这一步安装成功，可直接跳到下文的图形界面安装那里继续阅读。
 
 
-安装方法（apt 安装）
+
+安装方法二（apt 安装）
 由于 Raspbian 基于 Debian，我们还可以使用 apt 来安装 Docker，首先需要更新一下软件包的索引。
 
 1
@@ -155,9 +152,6 @@ Docker 官网：http://www.docker.com
 Github Docker 源码：https://github.com/docker/docker
 Docker 商店：https://store.docker.com
 Docker 文档：https://docs.docker.com
-
-
- 
 
 文章标题：树莓派上 Docker 的安装和使用 - 树莓派实验室
 固定链接：http://shumeipai.nxez.com/2019/05/20/how-to-install-docker-on-your-raspberry-pi.html

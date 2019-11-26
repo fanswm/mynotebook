@@ -8,8 +8,8 @@ Creation-Date: 2019-08-01T16:27:38+08:00
 获取有关 Linux shell 内置命令的帮助
 2019-07-28 20:49
 
-译自：https://www.networkworld.com/article/3410350/getting-help-for-linux-shell-built-ins.html%E4%BD%9C%E8%80%85： Sandra Henry-stocker
-原创：LCTT https://linux.cn/article-11158-1.html%E8%AF%91%E8%80%85： MjSeven
+译自：https://www.networkworld.com/article/3410350/getting-help-for-linux-shell-built-ins.html 作者： Sandra Henry-stocker
+原创：LCTT https://linux.cn/article-11158-1.html 译者： MjSeven
 
 Linux 内置命令属于用户 shell 的一部分，本文将告诉你如何识别它们并获取使用它们的帮助。
 
@@ -73,7 +73,7 @@ A star (*) next to a name means that the command is disabled.
  . filename [arguments]                   jobs [-lnprs] [jobspec ...] or jobs ->
  :                                        kill [-s sigspec | -n signum | -sigsp>
  [ arg... ]                               let arg [arg ...]
- [[ expression ]]                         local [option] name[=value] ...
+  expression                          local [option] name[=value] ...
  alias [-p] [name[=value] ... ]           logout [n]
  bg [job_spec ...]                        mapfile [-d delim] [-n count] [-O ori>
  bind [-lpsvPSVX] [-m keymap] [-f filen>  popd [-n] [+N | -N]

@@ -71,7 +71,42 @@ vnc1
 $ /etc/init.d/tightvncsever srart
 
 $ tightvncserver -name myusername
-查看桌面号:1,2,3?
+__查看桌面号__:1,2,3?  (如果是1：端口号就是5901；2：5902；3：5903)
 然后,在win中,192.168.31.142:桌面号
 连接
 *：vnc1
+
+#######################
+在manjaro上连接：
+用Tightvnc Viewer:
+__填写服务器地址__：
+192.168.xx.xx:5901
+#####################################################
+frpi:~ $ sudo tightvncserver restart
+
+You will require a password to access your desktops.
+
+Password: 
+Warning: password truncated to the length of 8.
+Verify:   
+Would you like to enter a view-only password (y/n)? n
+TightVNC Server version 1.3.9
+
+Usage: tightvncserver [<OPTIONS>] [:<DISPLAY#>]
+	   tightvncserver -kill :<DISPLAY#>
+
+<OPTIONS> are Xtightvnc options, or:
+
+		-name <DESKTOP-NAME>
+		-depth <DEPTH>
+		-geometry <WIDTH>x<HEIGHT>
+		-httpport number
+		-basehttpport number
+		-alwaysshared
+		-nevershared
+		-pixelformat rgb<NNN>
+		-pixelformat bgr<NNN>
+
+See vncserver and Xtightvnc manual pages for more information.
+
+#############################################################

@@ -1,0 +1,45 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-25T16:37:56+08:00
+
+====== imrdr操作 ======
+创建日期 星期一 25 十一月 2019
+
+# 安装 golang
+#测试安装
+go version
+
+
+#安装zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# 安装atuojump插件：
+git clone git://github.com/wting/autojump.git $ZSH_CUSTOM/plugins/autojump
+cd $ZSH_CUSTOM/plugins/autojump/
+./install.py 
+# or ./uninstall.py
+vim .zhsrc   #我看着是.bashrc
+# 添加以下：
+```
+ [[ -s /home/myusername/.autojump/etc/profile.d/autojump.sh ]] && source /home/myusername/.autojump/etc/profile.d/autojump.sh
+
+	autoload -U compinit && compinit -u
+
+```
+
+# 自动补全：命令历史自动补全
+git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
+# 然后：
+vim .zshrc
+# 搜索plugins
+```
+plugins=(
+		git
+		autojump
+		extract
+		z
+		zsh-autosuggestions
+		)
+```
+source .zshrc

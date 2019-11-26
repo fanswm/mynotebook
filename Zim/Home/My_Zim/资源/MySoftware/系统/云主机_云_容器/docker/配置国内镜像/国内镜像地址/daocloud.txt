@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-24T19:47:59+08:00
+
+====== daocloud ======
+创建日期 星期日 24 十一月 2019
+
+echo "DOCKER_OPTS=\"\$DOCKER_OPTS --registry-mirror=http://f2d6cb40.m.daocloud.io\"" | sudo tee -a [[/etc/default/docker]]
+sudo service docker restart

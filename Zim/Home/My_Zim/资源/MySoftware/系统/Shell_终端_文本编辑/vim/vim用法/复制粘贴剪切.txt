@@ -16,3 +16,14 @@ Created Sunday 03 December 2017
 # yy 复制当前行
  
 # dd 剪切当前行
+
+__正题（不能右键粘贴设置方法）__
+用vim时，鼠标右键不能粘贴而是进入了visual模式，解决方法：
+方法一：
+:set mouse-=a
+方法二：
+# 编辑 ~/.vimrc 文件，加入如下代码： 
+if has('mouse') 
+	set mouse-=a endif 
+set mouse=a【这个是用来开启鼠标功能的，a表示所有模式】
+原文链接：https://blog.csdn.net/foryouslgme/article/details/52688285
