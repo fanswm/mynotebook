@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-27T13:56:58+08:00
+
+====== 卷标 ======
+创建日期 星期三 27 十一月 2019
+
+sudo e2label /dev/sdxx youlabel

@@ -1,0 +1,27 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-28T02:16:10+08:00
+
+====== 官网说明 ======
+创建日期 星期四 28 十一月 2019
+
+Accessing Nextcloud files using WebDAV
+https://docs.nextcloud.com/server/14/user_manual/files/access_webdav.html
+
+Using the contacts app
+https://docs.nextcloud.com/server/14/user_manual/pim/contacts.html
+
+Using the calendar app
+https://docs.nextcloud.com/server/14/user_manual/pim/calendar.html
+
+应用中心:
+http://192.168.xx.xxx/index.php/settings/apps
+
+用户中心:
+https://docs.nextcloud.com/server/14/user_manual/
+
+管理员手册:
+https://docs.nextcloud.com/server/14/admin_manual/
+
+开发手册:
+https://docs.nextcloud.com/server/14/developer_manual/

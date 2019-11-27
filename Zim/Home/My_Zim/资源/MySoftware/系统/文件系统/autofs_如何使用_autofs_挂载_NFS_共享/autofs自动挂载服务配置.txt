@@ -1,0 +1,260 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-27T14:31:13+08:00
+
+====== autofs自动挂载服务配置 ======
+创建日期 星期三 27 十一月 2019
+
+autofs简介
+
+mount是用来挂载文件系统的，可以在系统启动的时候挂载，也可以在系统启动后挂载。
+
+对于本地固定设备，如硬盘可以使用mount挂载，而光盘、软盘、NFS、SMB等文件系统具有动态性，即需要的时候才有必要挂载。
+
+光驱和软盘我们一般知道什么时候需要挂载，但NFS和SMB共享等就不一定知道了，即我们一般不能及时知道NFS共享和SMB什么时候可以挂载。
+
+而autofs服务就提供这种功能，好像windows中的光驱自动打开功能，能够及时挂载动态加载的文件系统，免去我们手动挂载的麻烦。
+
+要实现光驱，软盘等的动态自动挂载，需要进行相关的配置。
+
+下面我们就给出配置的方法。
+
+
+autofs配置
+
+autofs的主要配置文件有两个，分别是/etc下的auto.master和auto.misc。
+
+其中，auto.master是起控制作用的，它定义了挂在点和automount动作的文件。auto.misc就是automount动作的文件
+
+/etc/auto.master的内容如下：
+
+#
+# $Id: auto.master,v 1.4 2005/01/04 14:36:54 raven Exp $
+#
+# Sample auto.master file
+# This is an automounter map and it has the following format
+# key [ -mount-options-separated-by-comma ] location
+# For details of the format look at autofs(5).
+#
+/misc   /etc/auto.misc      --/misc是定义的自动mount的挂载点，/etc/auto.misc里定义了mount的动作（/etc/auto.misc一般为默认的mount文件，还可以自定义）
+#
+# NOTE: mounts done from a hosts map will be mounted with the
+#       "nosuid" and "nodev" options unless the "suid" and "dev"
+#       options are explicitly given.
+#
+/net    -hosts
+#
+# Include central master map if it can be found using
+# nsswitch sources.
+#
+# Note that if there are entries for /net or /misc (as
+# above) in the included master map any keys that are the
+# same will not be seen as the first read key seen takes
+# precedence.
+#
++auto.master
+ 
+
+
+/etc/auto.misc的内容如下：
+
+#
+# $Id: auto.misc,v 1.2 2003/09/29 08:22:35 raven Exp $
+#
+# This is an automounter map and it has the following format
+# key [ -mount-options-separated-by-comma ] location
+# Details may be found in the autofs(5) manpage
+cd -fstype=iso9660,ro,nosuid,nodev :/dev/cdrom   --将/dev/cdrom自动挂载到/misc/cd/下
+# the following entries are samples to pique your imagination
+#linux -ro,soft,intr ftp.example.org:/pub/linux      --将ftp.example.org的共享目录/pub/linux/自动挂载到/misc/linux/下
+#boot -fstype=ext2 :/dev/hda1                            --将本地磁盘分区/dev/hda1自动挂载到/misc/boot下
+#floppy -fstype=auto :/dev/fd0                            --将软盘设备/dev/fd0自动挂载到/misc/floppy下
+#floppy -fstype=ext2 :/dev/fd0
+#e2floppy -fstype=ext2 :/dev/fd0
+#jaz -fstype=ext2 :/dev/sdc1
+#removable -fstype=ext2 :/dev/hdd
+
+要访问上面的automount资源，可以用如下命令：
+
+shell> ls /misc/cd/
+shell> ls /misc/linux/
+shell> ls /misc/boot/
+shell> ls /misc/floppy/
+
+ 
+
+这些资源只有在你试图访问的时候才会去自动挂载，而在一段时间之后，如果你不再使用这些资源，autofs会自动卸载这些资源
+
+默认时间为5分钟(300秒)，此选项由/etc/sysconfig/autofs定义，根据需要可以修改。
+
+/etc/sysconfig/autofs的内容如下：
+
+#
+# Define default options for autofs.
+#
+# MASTER_MAP_NAME - default map name for the master map.
+#
+#MASTER_MAP_NAME="auto.master"
+#
+# TIMEOUT - set the default mount timeout (default 600).
+#
+TIMEOUT=300
+#
+# NEGATIVE_TIMEOUT - set the default negative timeout for
+#                    failed mount attempts (default 60).
+#
+#NEGATIVE_TIMEOUT=60
+#
+# UMOUNT_WAIT - time to wait for a response from umount(8).
+#
+#UMOUNT_WAIT=12
+#
+# BROWSE_MODE - maps are browsable by default.
+#
+BROWSE_MODE="no"
+#
+# APPEND_OPTIONS - append to global options instead of replace.
+#
+#APPEND_OPTIONS="yes"
+#
+# LOGGING - set default log level "none", "verbose" or "debug"
+#
+#LOGGING="none"
+#
+# Define base dn for map dn lookup.
+#
+# Define server URIs
+#
+# LDAP_URI - space seperated list of server uris of the form
+#            <proto>://<server>[/] where <proto> can be ldap
+#            or ldaps. The option can be given multiple times.
+#            Map entries that include a server name override
+#            this option.
+#
+#            This configuration option can also be used to
+#            request autofs lookup SRV RRs for a domain of
+#            the form <proto>:///[<domain dn>]. Note that a
+#            trailing "/" is not allowed when using this form.
+#            If the domain dn is not specified the dns domain
+#            name (if any) is used to construct the domain dn
+#            for the SRV RR lookup. The server list returned
+#            from an SRV RR lookup is refreshed according to
+#            the minimum ttl found in the SRV RR records or
+#            after one hour, whichever is less.
+#
+#LDAP_URI=""
+#
+# LDAP__TIMEOUT - timeout value for the synchronous API  calls
+#                 (default is LDAP library default).
+#
+#LDAP_TIMEOUT=-1
+#
+# LDAP_NETWORK_TIMEOUT - set the network response timeout (default 8).
+#
+#LDAP_NETWORK_TIMEOUT=8
+#
+# SEARCH_BASE - base dn to use for searching for map search dn.
+#               Multiple entries can be given and they are checked
+#               in the order they occur here.
+#
+#SEARCH_BASE=""
+#
+# Define the LDAP schema to used for lookups
+#
+# If no schema is set autofs will check each of the schemas
+# below in the order given to try and locate an appropriate
+# basdn for lookups. If you want to minimize the number of
+# queries to the server set the values here.
+#
+#MAP_OBJECT_CLASS="nisMap"
+#ENTRY_OBJECT_CLASS="nisObject"
+#MAP_ATTRIBUTE="nisMapName"
+#ENTRY_ATTRIBUTE="cn"
+#VALUE_ATTRIBUTE="nisMapEntry"
+#
+# Other common LDAP nameing
+#
+#MAP_OBJECT_CLASS="automountMap"
+#ENTRY_OBJECT_CLASS="automount"
+#MAP_ATTRIBUTE="ou"
+#ENTRY_ATTRIBUTE="cn"
+#VALUE_ATTRIBUTE="automountInformation"
+#
+#MAP_OBJECT_CLASS="automountMap"
+#ENTRY_OBJECT_CLASS="automount"
+#MAP_ATTRIBUTE="automountMapName"
+#ENTRY_ATTRIBUTE="automountKey"
+#VALUE_ATTRIBUTE="automountInformation"
+#
+# AUTH_CONF_FILE - set the default location for the SASL
+#                          authentication configuration file.
+#
+#AUTH_CONF_FILE="/etc/autofs_ldap_auth.conf"
+#
+# MAP_HASH_TABLE_SIZE - set the map cache hash table size.
+#                       Should be a power of 2 with a ratio roughly
+#                       between 1:10 and 1:20 for each map.
+#
+#MAP_HASH_TABLE_SIZE=1024
+#
+# General global options
+#
+# If the kernel supports using the autofs miscellanous device
+# and you wish to use it you must set this configuration option
+# to "yes" otherwise it will not be used.
+USE_MISC_DEVICE="yes"
+#
+#OPTIONS=""
+#
+
+
+应用举例
+
+服务器：192.168.78.142
+
+客户端：192.168.78.143
+
+将服务器上的/home目录自动挂载到客户端/app/home下，要求对挂载过来的/home目录有读写功能
+服务器上的/home目录通过nfs共享，需要将服务器上/home目录export出来，客户端还需要能够自动挂载此目录。
+
+1、服务器端共享/home目录
+
+vi  /etc/exports
+
+/home 192.168.78.*(rw)
+
+ 
+
+2、客户端配置automount
+
+vi  /etc/auto.master
+
+添加一行：
+
+/app  /etc/auto.home     --/app是定义的自动mount的挂载点，/etc/auto.home定义了mount的动作，此文件系统默认不存在，需要我们手工创建
+
+ 
+
+在/etc下创建auto.home，并写入一行：
+
+home   -rw     192.168.78.142:/home/     --home即为在/app下的home目录，因为在/etc/auto.master文件中已经指定了挂载点了，此处挂载的是远程目录，若挂载本地目录，
+
+                                                                   不用指定ip地址，直接写 :[要挂载的目录] 即可
+
+3、重启autofs服务
+
+service autofs restart
+
+ 
+
+4、查看是否挂载成功
+
+cd /app/home/langkeziju                   --langkeziju是服务器/home目录下的目录
+
+ls -l                                                    --查看下面的文件
+
+total 1
+drwx------ 3 langkeziju root 4096 Oct 12 16:33     1.txt     
+————————————————
+版权声明：本文为CSDN博主「persist-win」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/langkeziju/article/details/15503287

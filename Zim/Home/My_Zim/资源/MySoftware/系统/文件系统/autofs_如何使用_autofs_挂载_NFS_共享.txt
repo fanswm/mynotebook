@@ -2,14 +2,14 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-05-30T18:18:24+08:00
 
-====== 如何使用 autofs 挂载 NFS 共享 ======
+====== autofs 如何使用 autofs 挂载 NFS 共享 ======
 创建日期 星期四 30 五月 2019
 
 如何使用 autofs 挂载 NFS 共享
 2019-05-08 11:54
 
-译自：https://opensource.com/article/18/6/using-autofs-mount-nfs-shares%E4%BD%9C%E8%80%85： Alan Formy-duval
-原创：LCTT https://linux.cn/article-10830-1.html%E8%AF%91%E8%80%85： geekpi
+译自：https://opensource.com/article/18/6/using-autofs-mount-nfs-shares 作者： Alan Formy-duval
+原创：LCTT https://linux.cn/article-10830-1.html 译者： geekpi
 
 给你的网络文件系统（NFS）配置一个基本的自动挂载功能。
 
