@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-28T20:13:08+08:00
+
+====== 1-1 连接 ======
+创建日期 星期四 28 十一月 2019
+
+注意：localhost为主机名，这个选项是必须的：
+
+mongodb://localhost
+
