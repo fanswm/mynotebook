@@ -8,7 +8,11 @@ Creation-Date: 2019-11-28T22:59:59+08:00
 https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/
 
 https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/
+
+从USB启动（从树莓派3开始）：
 https://docs.nextcloudpi.com/en/how-to-install-nextcloudpi/
+从SD卡启动：
+
 
 下载:
 https://ownyourbits.com/downloads/NextCloudPi_RPi_07-20-19/
