@@ -2,8 +2,11 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-11-28T00:13:29+08:00
 
-====== 参考 ======
+====== 参考 下载 ======
 创建日期 星期四 28 十一月 2019
 
 Nextcloud上的一些常见报错及解决方案
 https://www.orgleaf.com/3154.html
+
+下载:
+https://download.nextcloud.com/server/releases
