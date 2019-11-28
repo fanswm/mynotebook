@@ -1,0 +1,130 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-28T22:35:48+08:00
+
+====== 树莓派Raspberry Pi安装NextCloud教程 ======
+创建日期 星期四 28 十一月 2019
+
+树莓派Raspberry Pi安装NextCloud教程-自建家庭私有云局域网共享
+首发：2017年10月11日 更新： 2017年12月13日 07:52 by Qi 55 17,726
+NextCloud是一个非常优秀的开源私有云存储系统，之前我已经在VPS主机安装和使用NextCloud，同时又利用Aria2离线下载将服务器变成了一个影视下载中心，再利用支持WebDAV协议的视频播放器，这样就可以随时随地观看视频了。
+
+这几天正好手里有一个Raspberry Pi 2一直放着那里没有用，而家里用路由器开启的SMB共享在看高清视频时又卡得要命，合计着拿Raspberry Pi来做一个共享系统，正好还有500GB的移动硬盘闲置，可以将移动硬盘挂载到Raspberry Pi当硬盘来用。
+
+由于树莓派Raspberry Pi安装的操作系统是经过修改过的Linux Debian，所以在测试时发现了不少的问题。本来在Linux上安装NextCloud是一个非常简单的事情，但是树莓派Raspberry Pi文件权限问题、挂载移动硬盘、Linux与Windows硬盘格式问题等都是踩过的坑。
+
+树莓派Raspberry Pi安装NextCloud教程-自建家庭私有云实现局域网文件共享
+
+如果你对搭建个人云存储感兴趣，你还可以试试这些：
+
+VPS挂载国内外网盘实现免费扩容工具:Rclone,COS-Fuse和OSSFS
+自建Nextcloud影音中心:Aria2离线下载+PotPlayer和Kodi本地观看
+Linux VPS挂载Google Drive和Dropbox-实现VPS主机数据同步备份
+PS：2017年12月13日更新，Raspberry Pi打造NAS可能遇到一些问题，这里收集整理问题与解决办法：树莓派Raspberry Pi 打造低成本NAS存储家庭服务器的十个问题整理。
+
+PS：2017年11月14日更新，如果想搞一个简单的在线文件管理系统，可以试试：三款优秀的在线文件管理器(目录列表)对比-Directory Lister、h5ai和FileRun。
+
+一、树莓派安装NextCloud
+1.1  简易方法：直接刷NextCloudPi镜像
+树莓派Raspberry Pi安装镜像
+
+NextCloudPi是一个专门用于Raspberry Pi的NextCloud镜像，镜像已经有了Raspbian 9 、Nextcloud 12.0.2 、Apache 2.4.25、HTTP2 等，具体如下：
+
+Raspbian 9 stretch
+
+Nextcloud 12.0.2
+
+Apache 2.4.25, with HTTP2 enabled
+
+PHP 7.0 (double the speed of PHP5!)
+
+MariaDB 10
+
+4.9 Linux Kernel
+
+nextcloudpi-config for easy setup ( RAM logs, USB drive and more )
+
+Automatic redirection to HTTPS
+
+ACPU PHP cache
+
+PHP Zend OPcache enabled with file cache
+
+HSTS
+
+Cron jobs for Nextcloud
+
+Sane configuration defaults
+
+Full emoji support
+
+NextCloudPi安装说明见官网：https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/%EF%BC%8C%E5%A4%87%E7%94%A8%E4%B8%8B%E8%BD%BD%EF%BC%9Ahttps://www.ucblog.net/wzfou/NextCloudPi_08-20-17.tar.bz2%E3%80%82%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E4%BD%A0%E5%B0%B1%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87https://<rpi_ip_or_url>:4443访问了。
+
+树莓派Raspberry Pi安装
+
+1.2  手动方法：在LNMP\LAMP上安装NextCloud
+这个方法就相当于我们在Linux VPS主机上搭建LNMP和LAMP环境了，先手动安装LNMP和LAMP，然后再下载安装NextCloud，详细的可以参考：手动安装NextCloud教程-免费开源的私有云存储网盘可播放图片音乐。
+
+树莓派Raspberry Pi手动配置
+
+二、树莓派挂载移动硬盘/u盘
+如果你是安装的树莓派官网的Raspbian “Jessie”，那么将移动硬盘插入到树莓派就可以自动挂载了。但是此处有一个问题：移动硬盘是NTFS和FAT32格式，Linux虽然能够挂载，但是不能修改文件权限。
+
+不能修改权限，将导致后面的NextCloud挂载外部存储使用，所以格式化移动硬盘。首先，如果移动硬盘已经挂载，先取消挂载：sudo umount /xxxmnt/xxxusb_flash。接着执行sudo fdisk -l查看你的u盘的序号，通常是/dev/sdb之类的，U盘分区通常是/dev/sdb1。
+
+最后，执行格式化操作：
+
+sudo mkfs.ext4 /dev/sda1 # 格式化为ext4分区 
+sudo mkfs.ext3 /dev/sda1 # 格式化为ext3分区 
+sudo mkfs.ext2 /dev/sda1 #格式化为ext2分区
+特别注意：格式化后你的移动硬盘时面的东西就都清除了，在格式化以前最好做好备份。格式化完毕后，记得对你的移动硬盘修改读写权限为：777或者755。
+
+树莓派Raspberry Pi修改权限
+
+移动硬盘挂载成功后，就可以查看和管理移动硬盘中的文件了。
+
+树莓派Raspberry Pi查看文件
+
+三、NextCloud挂载第三方存储
+格式化并挂载了移动硬盘，这时我们就可以在NextCloud中添加第三方存储了。
+
+树莓派Raspberry Pi添加第三方存储
+
+添加第三方存储后，你就可以在NextCloud中管理文件了。
+
+树莓派Raspberry Pi本地管理文件
+
+四、安装并启用Aria2离线下载
+安装并启用Aria2离线下载的详细方法可以参考之前的：Nextcloud离线下载搭建方法-整合Aria2和AriaNg、Aria2 WebUI实现离线下载，你需要修改aria2.conf的下载保存路径为你刚刚挂载的移动硬盘。
+
+树莓派Raspberry Pi修改配置文件
+
+最后打开AriaNg，添加树莓派Raspberry Pi的Aria2服务器地址、密钥，就可以看到已经连接成功了。
+
+树莓派Raspberry Pi连接成功
+
+五、家庭私有云局域网文件共享
+有了NextCloud，我们实现家庭私有云局域网文件共享就简单地多了，由于支持WebDAV，无论是手机、PC、平板等客户端，都可以安装NextCloud，实现多个终端共享树莓派Raspberry Pi服务器中的文件。
+
+树莓派Raspberry Pi手机查看文件
+
+如果是电视TV，我们可以安装一些支持WebDAV协议的播放器实现影音共享。以Kodi为例，添加网络位置
+
+树莓派Raspberry Pi共享文件
+
+然后填写树莓派Raspberry Pi服务器的WebDAV信息。详细教程请参考：自建Nextcloud影音中心:Aria2离线下载+PotPlayer和Kodi本地观看。
+
+树莓派Raspberry Pi添加信息
+
+最后直接在Kodi中播放树莓派Raspberry Pi中的文件。（点击放大）
+
+树莓派Raspberry Pi在线播放
+
+六、总结
+从我的使用体验来看，树莓派Raspberry Pi安装NextCloud最好是直接刷NextCloudPi镜像，因为手动安装LNMP并配置NextCloudPi容易消耗大的资源，运行起来有点卡。
+
+树莓派Raspberry Pi单独运行Aria2不怎么占用资源，如果用Aria2下载磁力链接如果没有速度，可以试试在配置文件中添加bt-tracker服务器，同时耐心地等上一会儿就好了。
+
+今天在使用的过程中还遇到树莓派断电重启后挂载移动硬盘出现错误提示：“ error mounting exited with non-zero exit status 32,Can’t Read Superblock”，解决办法：先用命令：sudo fdisk -l 找到/dev/sdxxx，然后修复：sudo fsck /dev/sdxxx。如果你发现重启Aria2后下载任务为空，很有可能是/root/.aria2时面的session文件没有改成读写权限，请把里面的文件全部改成755权限。
+
+文章出自：挖站否 https://wzfou.com/raspberry-nextcloud/，

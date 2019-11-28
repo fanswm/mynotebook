@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-28T22:51:49+08:00
+
+====== How to install NextCloud on your Raspberry Pi ======
+创建日期 星期四 28 十一月 2019
+
+https://raspberrytips.com/install-nextcloud-raspberry-pi/
+
+认情况下，附加功能未激活。用sudo nextcloudpi-config配置它们
+
+地址为NextCloudPi的IP地址：https://x.x.x:4443%E3%80%82%EF%BC%88%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E7%9A%84%E7%AB%AF%E5%8F%A3%E6%98%AF4443）
+页面登录用户名是：ncp，密码：ownyourbits。

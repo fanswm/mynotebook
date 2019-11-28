@@ -19,6 +19,7 @@ http://192.168.xx.xxx/index.php/settings/apps
 
 用户中心:
 https://docs.nextcloud.com/server/14/user_manual/
+https://docs.nextcloud.com/server/17/user_manual/
 
 管理员手册:
 https://docs.nextcloud.com/server/14/admin_manual/

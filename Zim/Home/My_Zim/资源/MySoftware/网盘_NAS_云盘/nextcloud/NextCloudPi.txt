@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-28T22:59:59+08:00
+
+====== NextCloudPi ======
+创建日期 星期四 28 十一月 2019
+
+https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/
+
+https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/
+https://docs.nextcloudpi.com/en/how-to-install-nextcloudpi/
+
+下载:
+https://ownyourbits.com/downloads/NextCloudPi_RPi_07-20-19/
+
