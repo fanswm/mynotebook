@@ -13,3 +13,7 @@ https://download.nextcloud.com/server/releases
 
 
 https://blog.csdn.net/changer_sun/article/details/78430767
+
+
+官方文档:
+https://docs.nextcloudpi.com/en/

@@ -36,7 +36,7 @@ sudo vim /etc/auto.master
 如果不存在以下内容，则创建 /etc/auto.usb，然后重新启动 autofs 服务：
 
 > data -fstype=ext4,rw :/dev/disk/by-label/data
-backup -fstype=ext4,rw :/dev/disk/by-label/backup
+#backup -fstype=ext4,rw :/dev/disk/by-label/backup  #未启用
 
 ```
 sudo service autofs restart
