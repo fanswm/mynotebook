@@ -5,6 +5,10 @@ Creation-Date: 2019-11-25T14:36:53+08:00
 ====== imrdr操作 ======
 创建日期 星期一 25 十一月 2019
 
+
+参考：
+https://github.com/leanote/leanote/wiki/Leanote-%E6%BA%90%E7%A0%81%E7%89%88%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B----Mac-and-Linux
+
 ### 安装 golang
 ### 测试安装
 `go version`
@@ -104,7 +108,6 @@ revel run github.com/leanote/lean
 ```
 
 用户添加好后重新运行下mongodb, 并开启权限验证. 在mongod的终端按ctrl+c即可退出mongodb.
-
 启动mongodb:
 
 ```
@@ -122,3 +125,10 @@ db.password=abc123 # if not exists, please leave blank
 ```
 自定义服务器：
 http://192.168.31.142:9000
+
+
+新开一个窗口, 运行:
+
+$> cd /home/user1/leanote/bin
+$> bash run.sh
+

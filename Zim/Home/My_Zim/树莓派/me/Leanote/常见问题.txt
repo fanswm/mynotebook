@@ -78,7 +78,7 @@ Leanote运行成功, 但不能登录
 
 http.port=8080
 site.url=http://localhost:8080
-请重启Leanote, 使用 http://localhost:8080访问.
+请重启Leanote, 使用 http://localhost:8080%E8%AE%BF%E9%97%AE.
 
 如何绑定域名?
 
@@ -265,7 +265,7 @@ go get github.com/PuerkitoBio/goquery
 
 为什么需要 site.url
 
-site.url是外网可访问的域名, 比如你可以配置为http://a.com, 但在运行leanote可以设端口为9000, 再通过Nginx转发到9000. 如果外网地址是80端口, 请不要填写 http://a.com:80, 而只要为 http://a.com即可!
+site.url是外网可访问的域名, 比如你可以配置为 http://a.com, 但在运行leanote可以设端口为9000, 再通过Nginx转发到9000. 如果外网地址是80端口, 请不要填写 http://a.com:80, 而只要为 http://a.com 即可!
 
 site.url用于生成笔记内的图片/附件路径.
 
