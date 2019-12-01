@@ -70,7 +70,7 @@ AllowOverride None
 
 a2ensite 001-nextcloud
 sudo systemctl reload apache2
-现在，你应该可以通过浏览器中输入域名访问到 web 服务器了。这里我推荐使用 HTTPS 协议而不是 HTTP 协议来访问 Nextcloud。一个简单而且免费的方法就是利用 Certbot[8] 下载 Let’s Encrypt[9] 证书，然后设置定时任务自动刷新。这样就避免了自签证书等的麻烦。参考 如何在树莓派中安装[10] Certbot 。在配置 Certbot 的时候，你甚至可以配置将 HTTP 自动转到 HTTPS ，例如访问 http://nextcloud.pi-nas.com 自动跳转到 https://nextcloud.pi-nas.com%E3%80%82%E6%B3%A8%E6%84%8F%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%BD%A0%E7%9A%84%E6%A0%91%E8%8E%93%E6%B4%BE NAS 运行在家庭路由器的下面，别忘了设置路由器的 443 端口和 80 端口转发。
+现在，你应该可以通过浏览器中输入域名访问到 web 服务器了。这里我推荐使用 HTTPS 协议而不是 HTTP 协议来访问 Nextcloud。一个简单而且免费的方法就是利用 Certbot[8] 下载 Let’s Encrypt[9] 证书，然后设置定时任务自动刷新。这样就避免了自签证书等的麻烦。参考 如何在树莓派中安装[10] Certbot 。在配置 Certbot 的时候，你甚至可以配置将 HTTP 自动转到 HTTPS ，例如访问 http://nextcloud.pi-nas.com 自动跳转到 https://nextcloud.pi-nas.com 。注意，如果你的树莓派 NAS 运行在家庭路由器的下面，别忘了设置路由器的 443 端口和 80 端口转发。
 
 配置 Nextcloud
 最后一步，通过浏览器访问 Nextcloud 来配置它。在浏览器中输入域名地址，插入上文中的数据库设置信息。这里，你可以创建 Nextcloud 管理员用户。默认情况下，数据保存目录在在 Nextcloud 目录下，所以你也无需修改我们在 第二篇[11] 一文中设置的备份策略。

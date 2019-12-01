@@ -68,7 +68,7 @@ sudo vim /etc/exports
 如果要在 Linux 计算机挂载存储，运行以下命令：
 ```
 sudo mkdir /nas/data
-sudo mount -t nfs <raspberry-pi-hostname-or-ip>:/nas/data /nas/data
+__sudo mount -t nfs <raspberry-pi-hostname-or-ip>:/nas/data /nas/data__
 ```
 
 同样，我建议使用 autofs 来挂载该网络设备。如果需要其他帮助，请参看 如何使用 Autofs 来挂载 NFS 共享[6]。
@@ -82,7 +82,7 @@ $ sudo /etc/init.d/nfs-kernel-server restart
 在其他服务器进行挂载验证
 erick@docker43:/$ sudo apt-get install -y nfs-common
 erick@docker43:/$ showmount -e 172.16.36.25
-erick@docker43:/$ sudo mount -t nfs 172.16.36.25:/home/erick/nfs /mnt
+__erick@docker43:/$ sudo mount -t nfs 172.16.36.25:/home/erick/nfs /mnt__
 erick@docker43:/$ sudo umount /mnt
 
 安装 Nextcloud
