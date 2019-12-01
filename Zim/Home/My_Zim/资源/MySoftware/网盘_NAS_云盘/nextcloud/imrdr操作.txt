@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-11-27T13:58:05+08:00
@@ -113,3 +114,120 @@ AllowOverride None
 
 sudo a2ensite www.myusername.com 
 sudo systemctl reload apache2  
+=======
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-27T13:58:05+08:00
+
+====== imrdr操作 ======
+创建日期 星期三 27 十一月 2019
+
+准备硬盘
+```
+sudo fdisk -l
+sudo fdisk /dev/sdb1
+sudo e2label /dev/sdb1 data
+```
+在树莓派上安装
+```
+sudo apt-get install autofs
+```
+
+> Creating config file /etc/auto.master with new version
+Creating config file /etc/auto.net with new version
+Creating config file /etc/auto.misc with new version
+Creating config file /etc/auto.smb with new version
+Creating config file /etc/autofs.conf with new version
+Creating config file /etc/default/autofs with new version
+Created symlink /etc/systemd/system/multi-user.target.wants/autofs.service → /lib/systemd/system/autofs.service.
+update-rc.d: warning: start and stop actions are no longer supported; falling back to defaults
+正在处理用于 systemd (232-25+deb9u12) 的触发器 ...
+正在处理用于 man-db (2.7.6.1-2) 的触发器 ...
+
+```
+sudo mkdir /nas
+sudo vim /etc/auto.master
+```
+> /nas    /etc/auto.usb
+
+如果不存在以下内容，则创建 /etc/auto.usb，然后重新启动 autofs 服务：
+
+> data -fstype=ext4,rw :/dev/disk/by-label/data
+backup -fstype=ext4,rw :/dev/disk/by-label/backup
+
+```
+sudo service autofs restart
+```
+
+现在你应该可以分别访问 /nas/data 以及 /nas/backup 磁盘了。显然，到此还不会令人太兴奋，因为你只是擦除了磁盘中的数据。不过，你可以执行以下命令来确认设备是否已经挂载成功：
+
+```
+cd /nas/data
+cd /nas/backup
+mount
+```
+
+挂载网络存储
+现在你已经设置了基本的网络存储，我们希望将它安装到远程 Linux 机器上。这里使用 NFS 文件系统，首先在树莓派上安装 NFS 服务器：
+
+```
+sudo apt install nfs-kernel-server
+```
+
+然后，需要告诉 NFS 服务器公开 /nas/data 目录，这是从树莓派外部可以访问的唯一设备（另一个用于备份）。编辑 /etc/exports 添加如下内容以允许所有可以访问 NAS 云盘的设备挂载存储：
+sudo vim /etc/exports
+```
+/nas/data *(rw,sync,no_subtree_check)
+```
+
+更多有关限制挂载到单个设备的详细信息，请参阅 man exports。经过上面的配置，任何人都可以访问数据，只要他们可以访问 NFS 所需的端口：111 和 2049。我通过上面的配置，只允许通过路由器防火墙访问到我的家庭网络的 22 和 443 端口。这样，只有在家庭网络中的设备才能访问 NFS 服务器。
+
+如果要在 Linux 计算机挂载存储，运行以下命令：
+```
+sudo mkdir /nas/data
+__sudo mount -t nfs <raspberry-pi-hostname-or-ip>:/nas/data /nas/data__
+```
+
+同样，我建议使用 autofs 来挂载该网络设备。如果需要其他帮助，请参看 如何使用 Autofs 来挂载 NFS 共享[6]。
+
+现在你可以在远程设备上通过 NFS 系统访问位于你树莓派 NAS 云盘上的数据了。在后面一篇文章中，我将介绍如何使用 rsync 自动将数据备份到第二个 USB 磁盘驱动器。你将会学到如何使用 rsync 创建增量备份，在进行日常备份的同时还能节省设备空间。
+
+重启服务
+$ sudo /etc/init.d/rpcbind restart
+$ sudo /etc/init.d/nfs-kernel-server restart
+
+在其他服务器进行挂载验证
+erick@docker43:/$ sudo apt-get install -y nfs-common
+erick@docker43:/$ showmount -e 172.16.36.25
+__erick@docker43:/$ sudo mount -t nfs 172.16.36.25:/home/erick/nfs /mnt__
+erick@docker43:/$ sudo umount /mnt
+
+安装 Nextcloud
+
+sudo mkdir -p /nas/data/nextcloud
+sudo chown pi /nas/data/nextcloud
+sudo chown pi /nas/data
+cd /nas/data/
+wget https://download.nextcloud.com/server/releases/nextcloud-17.0.1.zip -O /nas/data/nextcloud.zip
+unzip nextcloud.zip
+sudo ln -s /nas/data/nextcloud /var/www/nextcloud
+sudo chown -R www-data:www-data /nas/data/nextcloud
+
+
+
+sudo vim /etc/apache2/sites-available/www.myusername.com.conf
+```
+<VirtualHost 192.168.31.142:80>
+ServerName www.myusername.com
+ServerAdmin admin@www.myusername.com
+DocumentRoot /var/www/nextcloud
+
+<Directory /var/www/nextcloud/>
+AllowOverride None
+</Directory>
+</VirtualHost>
+```
+
+sudo a2ensite www.myusername.com 
+sudo systemctl reload apache2  
+>>>>>>> e06834d7b813e28de506d2598c1e7411a788fab4

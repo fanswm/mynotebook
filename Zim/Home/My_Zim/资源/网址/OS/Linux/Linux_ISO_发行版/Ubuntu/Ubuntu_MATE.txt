@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-01T16:28:12+08:00
+
+====== Ubuntu MATE ======
+创建日期 星期日 01 十二月 2019
+
+https://ubuntu-mate.org/download/
+树莓派安装wiki:
+https://wiki.ubuntu.com/ARM/RaspberryPi#Recovering_a_system_using_the_generic_kernel
