@@ -2,6 +2,9 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-07-06T11:45:55+08:00
 
-====== CAD ======
+====== CAD AutoCAD ======
 Created Friday 06 July 2018
 
+[[Study:Tools:AutoCAD]]
+下载： 
+https://www.nocang.com/autocad2004-autocad2013/
