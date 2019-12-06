@@ -22,7 +22,7 @@ https://github.com/XX-net/XX-Net/wiki/IPv6-Win7-%E5%B0%8F%E7%99%BD%E6%8C%87%E5%B
 IPv4 DNS
 180.76.76.76
 114.114.114.114
-
+	
 	参考 http://ip.cn/dns.html
 
 IPv4 DNS 设置
