@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
-Creation-Date: 2019-11-27T13:58:05+08:00
 
 ====== imrdr操作 ======
 创建日期 星期三 27 十一月 2019
@@ -86,7 +84,7 @@ erick@docker43:/$ showmount -e 172.16.36.25
 erick@docker43:/$ sudo mount -t nfs 172.16.36.25:/home/erick/nfs /mnt
 erick@docker43:/$ sudo umount /mnt
 
-安装 Nextcloud
+__安装 Nextcloud__
 
 sudo mkdir -p /nas/data/nextcloud
 sudo chown pi /nas/data/nextcloud
@@ -122,13 +120,13 @@ Creation-Date: 2019-11-27T13:58:05+08:00
 ====== imrdr操作 ======
 创建日期 星期三 27 十一月 2019
 
-准备硬盘
+__准备硬盘__
 ```
 sudo fdisk -l
 sudo fdisk /dev/sdb1
 sudo e2label /dev/sdb1 data
 ```
-在树莓派上安装
+__在树莓派上安装__
 ```
 sudo apt-get install autofs
 ```
@@ -210,7 +208,7 @@ sudo chown pi /nas/data
 cd /nas/data/
 wget https://download.nextcloud.com/server/releases/nextcloud-17.0.1.zip -O /nas/data/nextcloud.zip
 unzip nextcloud.zip
-sudo ln -s /nas/data/nextcloud /var/www/nextcloud
+__sudo ln -s /nas/data/nextcloud /var/www/nextcloud__
 sudo chown -R www-data:www-data /nas/data/nextcloud
 
 
