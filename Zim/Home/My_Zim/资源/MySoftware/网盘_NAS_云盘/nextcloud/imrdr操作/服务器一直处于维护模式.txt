@@ -1,0 +1,32 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-12T19:20:25+08:00
+
+====== 服务器一直处于维护模式 ======
+Created 星期四 12 十二月 2019
+
+> 
+该实例 Nextcloud 当前处于维护模式，这将花费一些时间。 当实例再次可用时，页面会自动刷新。
+
+
+更新后NextCloud一直处于维护状态，无法自动解除。
+
+解决方法：
+
+Ubuntu 在next cloud的目录下，对着occ脚本运行
+
+sudo -u www-data php occ maintenance:mode --off
+不过有提示错误，无权修改config文件夹
+
+
+
+其实运行这条命令主要修改的也是config/config.php，如果命令不行，直接修改该文件
+
+
+
+把'maintenance' => true 改为 false, 或者直接删掉这句。（图片已改）
+
+之后就可以加载进入了。
+————————————————
+版权声明：本文为CSDN博主「Chgl16」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/chenbetter1996/article/details/82831413
