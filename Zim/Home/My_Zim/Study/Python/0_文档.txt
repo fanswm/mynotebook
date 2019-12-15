@@ -22,3 +22,11 @@ https://learnku.com/docs/tutorial/3.7.0
 http://www.pythondoc.com/pythontutorial27/index.html
 http://www.pythondoc.com/pythontutorial3/index.html
 http://www.pythondoc.com/
+
+
+
+version:
+__3.8:__
+The Python Tutorial: https://docs.python.org/3.8/tutorial/index.html
+Python 3.8.1rc1 documentation: https://docs.python.org/3.8/index.html
+What’s New In Python 3.8: https://docs.python.org/3.8/whatsnew/3.8.html

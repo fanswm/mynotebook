@@ -17,7 +17,7 @@ https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/AccessingInstancesLinu
 ssh -i /path/my-key-pair.pem ec2-user@ec2-198-51-100-1.compute-1.amazonaws.com
 您会看到如下响应：
 
-	
+imrdr:	
 ec2-18-188-147-221.us-east-2.compute.amazonaws.com
 
 The authenticity of host 'ec2-198-51-100-1.compute-1.amazonaws.com (10.254.142.33)'
