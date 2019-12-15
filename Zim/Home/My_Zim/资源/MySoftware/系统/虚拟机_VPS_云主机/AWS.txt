@@ -32,4 +32,4 @@ ssh -i /path/my-key-pair.pem ec2-user@2001:db8:1234:1a00:9691:9503:25ad:1761
 输入 yes。您会看到如下响应：
 
 Warning: Permanently added 'ec2-198-51-100-1.compute-1.amazonaws.com' (RSA) 
-to the list of known hosts.
+to the list of known hosts.         
