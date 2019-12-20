@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-20T05:30:26+08:00
+
+====== SQL ======
+创建日期 星期五 20 十二月 2019
+
+https://www.w3school.com.cn/sql/index.asp
