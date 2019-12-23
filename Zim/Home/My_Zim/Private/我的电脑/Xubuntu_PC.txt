@@ -139,7 +139,7 @@ chmod u+x qt.run
 # __外观__（主题）：设置->外观；
 # __桌面不显示其他磁盘的图标__：菜单-> 搜索“desktop”-> 图标-> 默认图标-> 可移动设备，去除勾选
 
-# [[资源:MySoftware:系统:Shell 终端 文本编辑:终端:zsh:oh-my-fish]]
+# [[资源:MySoftware:系统:Shell 终端 文本编辑:终端:zsh:oh-my-fish 和 添加环境变量]]
 
 #__Gnome__:
 # [[资源:MySoftware:系统:GUI 桌面 desktop:GNOME:Xbuuntu 安装 Gnome 桌面]]
@@ -148,7 +148,7 @@ chmod u+x qt.run
 # [[资源:MySoftware:设计 图片:图片文字 图片标注:labelimg]]
 
 # 安装__timeshift__
-# [[方法:Linux:系统:备份:Timeshift]]
+# [[方法:Linux:系统:修复 备份:备份:Timeshift]]
 
 # jupyterlab
 # [[资源:MySoftware:系统:Shell 终端 文本编辑:jupyter notebook:JupyterLab：程序员的笔记本神器:0]]

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2019-11-27T13:56:58+08:00
@@ -6,3 +7,25 @@ Creation-Date: 2019-11-27T13:56:58+08:00
 创建日期 星期三 27 十一月 2019
 
 sudo e2label /dev/sdxx youlabel
+
+获取:
+
+
+UUID:
+sudo blkid
+
+/dev/sda1: UUID="83c6ff3d-7b91-4b28-b202-c5be2277465f" TYPE="ext4"
+=======
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-27T13:56:58+08:00
+
+====== 卷标 ======
+创建日期 星期三 27 十一月 2019
+
+sudo e2label /dev/sdxx youlabel
+
+
+获取：
+sudo blkid
+>>>>>>> e06834d7b813e28de506d2598c1e7411a788fab4

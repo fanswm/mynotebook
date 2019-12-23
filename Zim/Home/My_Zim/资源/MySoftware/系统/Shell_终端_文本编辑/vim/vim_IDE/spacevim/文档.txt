@@ -7,3 +7,5 @@ Creation-Date: 2019-03-14T17:27:30+08:00
 
 https://spacevim.org/cn/quick-start-guide/
 https://everettjf.gitbooks.io/spacevimtutorial/content/
+
+https://spacevim.org/quick-start-guide/#linux-and-macos

@@ -13,3 +13,5 @@ https://github.com/topics/lantern
 https://raw.githubusercontent.com/getlantern/lantern-binaries/master/lantern-installer.apk
 
 http://www.kexueren.com.cn/12372.html
+
+https://github.com/getlantern/lantern

@@ -8,8 +8,8 @@ Creation-Date: 2019-08-02T15:12:54+08:00
 WPS Office：Linux 上的 Microsoft Office 的免费替代品
 2019-07-31 09:53
 
-译自：https://itsfoss.com/wps-office-linux/%E4%BD%9C%E8%80%85： Sergiu
-原创：LCTT https://linux.cn/article-11170-1.html%E8%AF%91%E8%80%85： geekpi
+译自：https://itsfoss.com/wps-office-linux/ 作者： Sergiu
+原创：LCTT https://linux.cn/article-11170-1.html 译者： geekpi
 
 如果你在寻找 Linux 上 Microsoft Office 免费替代品，那么 WPS Office 是最佳选择之一。它可以免费使用，并兼容 MS Office 文档格式。
 

@@ -32,7 +32,8 @@ shares1
 $ sudo smbpasswd -a myusername_get_shares
 $ sudo smbpasswd -a myusername_shares
 shares1
-$ cp /etc/rc.local ~/myusername_backup/etc_rc.local.201603122215
+$ cp /etc/rc.local [[~/myusername_backup/etc_rc.local.201603122215]]
+
 $ sudo vi /etc/rc.local
 # append before "exit 0"
 sudo /etc/init.d/samba restart

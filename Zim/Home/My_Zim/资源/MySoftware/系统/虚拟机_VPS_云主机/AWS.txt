@@ -1,0 +1,35 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-09T20:11:38+08:00
+
+====== AWS ======
+Created 星期一 09 十二月 2019
+
+https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html
+
+使用 SSH 客户端连接到 Linux 实例
+通过以下过程使用 SSH 客户端连接到您的 Linux 实例。如果您在尝试连接到实例时收到错误，请参阅 排查实例的连接问题。
+
+使用 SSH 连接到您的实例
+
+在终端窗口中，使用 ssh 命令连接到该实例。您可以指定私有密钥 (.pem) 文件、AMI 的用户名以及实例的公有 DNS 名称。例如，如果您使用了 Amazon Linux 2 或 Amazon Linux AMI，则用户名为 ec2-user。有关查找 AMI 的用户名和实例的 DNS 名称的更多信息，请参阅获取有关您的实例的信息。
+
+ssh -i /path/my-key-pair.pem ec2-user@ec2-198-51-100-1.compute-1.amazonaws.com
+您会看到如下响应：
+
+imrdr:	
+ec2-18-188-147-221.us-east-2.compute.amazonaws.com
+
+The authenticity of host 'ec2-198-51-100-1.compute-1.amazonaws.com (10.254.142.33)'
+can't be established.
+RSA key fingerprint is 1f:51:ae:28:bf:89:e9:d8:1f:25:5d:37:2d:7d:b8:ca:9f:f5:f1:6f.
+Are you sure you want to continue connecting (yes/no)?
+(仅限 IPv6) 或者，您可以使用 IPv6 地址连接到实例。请在 ssh 命令中指定私有密钥 (.pem) 文件路径、适当的用户名和 IPv6 地址。例如，如果您使用了 Amazon Linux 2 或 Amazon Linux AMI，则用户名为 ec2-user。
+
+ssh -i /path/my-key-pair.pem ec2-user@2001:db8:1234:1a00:9691:9503:25ad:1761
+(可选) 验证安全警报中的指纹是否与您之前在 （可选）获取实例指纹 中获得的指纹相匹配。如果这些指纹不匹配，则表示有人可能在试图实施“中间人”攻击。如果匹配，请继续到下一步。
+
+输入 yes。您会看到如下响应：
+
+Warning: Permanently added 'ec2-198-51-100-1.compute-1.amazonaws.com' (RSA) 
+to the list of known hosts.         

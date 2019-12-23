@@ -31,3 +31,8 @@ args[0] 是你传入的第一个参数，args[1]是传入的第二个参数，�
 javac HelloWorld.java
 java ./HelloWorld
 （java命令后面不要加class）
+
+从jdk13开始：
+运行：
+java HelloWorld
+不要加./

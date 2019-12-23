@@ -5,7 +5,11 @@ Creation-Date: 2019-11-25T14:36:53+08:00
 ====== imrdr操作 ======
 创建日期 星期一 25 十一月 2019
 
-### 安装 golang
+
+参考：
+https://github.com/leanote/leanote/wiki/Leanote-%E6%BA%90%E7%A0%81%E7%89%88%E8%AF%A6%E7%BB%86%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B----Mac-and-Linux
+
+### __安装 golang__
 ### 测试安装
 `go version`
 ####在～/.profile最后添加以下：
@@ -16,13 +20,13 @@ export GOPATH=/home/myusername/gopackage
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ```
 
-### 获取Revel和Leanote
+### __获取Revel和Leanote__
 ```
 go get github.com/revel/cmd/revel
 go get github.com/leanote/leanote/app
 ```
 
-### 安装Mongodb
+### __安装Mongodb__
 sudo apt-get install mongodb
 
 ### 先在/home/user1下新建一个目录data存放Mongodb数据:
@@ -67,7 +71,7 @@ note_contents
 user1 username: admin, password: abc123 (管理员, 只有该用户才有权管理后台, 请及时修改密码)
 user2 username: demo@leanote.com, password: demo@leanote.com (仅供体验使用)
 
-###  配置Leanote
+###  __配置Leanote__
  Leanote的配置存储在文件 conf/app.conf 中。
 
  请务必修改app.secret一项, 在若干个随机位置处，将字符修改成一个其他的值, 否则会有安全隐患!
@@ -86,11 +90,11 @@ revel run github.com/leanote/lean
 注意!!!!!!!!!!!!!!
 按照本教程启动Mongodb是没有权限控制的, 如果你的Leanote服务器暴露在外网, 任何人都可以访问你的Mongodb并修改, 所以这是极其危险的!!!!!!!!!!! 请务必为Mongodb添加用户名和密码并以# auth启动, 方法请见: 为mongodb数据库添加用户
 
-### 为mongodb数据库添加用户
+### __为mongodb数据库添加用户__
 ```
 # 首先切换到leanote数据库下
 > use leanote;
-# 添加一个用户root, 密码是abc123
+# __添加一个用户root, 密码是abc123__
 > db.addUser("root", "abc123");
 {
 	"_id" : ObjectId("53688d1950cc1813efb9564c"),
@@ -100,12 +104,11 @@ revel run github.com/leanote/lean
 }
 # 测试下是否正确
 > db.auth("root", "abc123");
-1 # 返回1表示正确
+1 # __返回1表示正确__
 ```
 
-用户添加好后重新运行下mongodb, 并开启权限验证. 在mongod的终端按ctrl+c即可退出mongodb.
-
-启动mongodb:
+__用户添加好后重新运行下mongodb, 并开启权限验证. 在mongod的终端按ctrl+c即可退出mongodb.__
+__启动mongodb:__
 
 ```
 mongod --dbpath /home/user1/data --auth
@@ -122,3 +125,10 @@ db.password=abc123 # if not exists, please leave blank
 ```
 自定义服务器：
 http://192.168.31.142:9000
+
+
+新开一个窗口, 运行:
+
+$> cd /home/user1/leanote/bin
+$> bash run.sh
+

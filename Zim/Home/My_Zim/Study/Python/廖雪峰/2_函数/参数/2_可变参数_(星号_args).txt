@@ -14,6 +14,7 @@ def c__alc(*numbers)__:
 		sum = sum + n * n
 	return sum
 ```
+>> 参数数量不定，用逗号隔开
 
 __如果传入的参数是list 或 tuple:__
 __ calc(*nums)__

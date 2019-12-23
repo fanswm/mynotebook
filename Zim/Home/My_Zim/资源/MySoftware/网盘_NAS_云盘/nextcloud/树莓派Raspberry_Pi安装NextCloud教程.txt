@@ -58,7 +58,7 @@ Sane configuration defaults
 
 Full emoji support
 
-NextCloudPi安装说明见官网：https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/%EF%BC%8C%E5%A4%87%E7%94%A8%E4%B8%8B%E8%BD%BD%EF%BC%9Ahttps://www.ucblog.net/wzfou/NextCloudPi_08-20-17.tar.bz2%E3%80%82%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E4%BD%A0%E5%B0%B1%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87https://<rpi_ip_or_url>:4443访问了。
+NextCloudPi安装说明见官网：https://ownyourbits.com/2017/02/13/nextcloud-ready-raspberry-pi-image/ ，备用下载：https://www.ucblog.net/wzfou/NextCloudPi_08-20-17.tar.bz2 。安装完成后，你就可以通过 https://<rpi_ip_or_url>:4443 访问了。
 
 树莓派Raspberry Pi安装
 
