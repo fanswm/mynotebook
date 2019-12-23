@@ -12,4 +12,7 @@ passwd manjaro
 打开timeshift
 恢复快照
 修复grub:
+sudo vim [[/etc/default/grub]]
+修改其中的resume=UUIDxxxxxxxx.......
+然后:
 sudo grub-mkconfig -o /boot/grub/grub.cfg
