@@ -71,7 +71,7 @@ sudo pacman -S gcc
 sudo pacman -S docker google-chrome npm nodejs tldr remarkable 
 
 #__oh-my-zsh__
-# [[MySoftware:系统:Shell 终端 文本编辑:终端:zsh:oh-my-fish]]
+# [[MySoftware:系统:Shell 终端 文本编辑:终端:zsh:oh-my-fish 和 添加环境变量]]
 
 # __Lantern 蓝灯__
 sudo pacman -S lantern
