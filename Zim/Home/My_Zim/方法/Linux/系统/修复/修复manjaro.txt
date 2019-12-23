@@ -13,6 +13,11 @@ passwd manjaro
 恢复快照
 修复grub:
 sudo vim [[/etc/default/grub]]
-修改其中的resume=UUIDxxxxxxxx.......
+修改其中的
+```
+GRUB_CMDLINE_LINUX_DEFAULT="quiet apparmor=1 security=apparmor resume=UUID=d732a1bb-78cd-4344-a66c-dc872e2280ca udev.log_priority=3"
+```
+把其中的UUID=XXXXXX,改成实际辨识出的uuid
+
 然后:
 sudo grub-mkconfig -o /boot/grub/grub.cfg
