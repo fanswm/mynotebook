@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-23T20:07:12+08:00
+
+====== 修复manjaro ======
+创建日期 星期一 23 十二月 2019
+
+U盘Live CD进入系统;
+sudo passwd
+su root
+passwd manjaro
+打开timeshift
+恢复快照
+修复grub:
+sudo grub-mkconfig -o /boot/grub/grub.cfg

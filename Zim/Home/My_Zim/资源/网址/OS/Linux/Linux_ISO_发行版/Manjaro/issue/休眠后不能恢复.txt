@@ -1,0 +1,160 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-23T20:13:01+08:00
+
+====== 休眠后不能恢复 ======
+创建日期 星期一 23 十二月 2019
+
+https://askubuntu.com/questions/1034185/ubuntu-18-04-cant-resume-after-hibernate
+
+There are changes done to default settings when compared to previous LTS (16.04). In my case hibernation didn't work until I've did several steps, among them increased the size of swap file, turned it on, made sure policies allowed it, etc.
+
+This may easily be my lengthiest answer on entire StackExchange so I tried to make headers descriptive.
+
+Boots as there was no hibernation
+Would be prudent to take a look at your logs (dmesg might help) and see if anything's there. There are reasons when despite you telling the system to hibernate, it actually won't, or it will suspend-to-RAM instead (sleep).
+
+Taking a look at kern.log and syslog looking for any hibernate-related messages wouldn't hurt as well. Sections starting with "problem" may help you with specific issues.
+
+Swap file or swap partition
+One of crucial changes is that now you DO NOT HAVE a swap partition, but you have a swap FILE.
+
+Swap file may not work for your blend of hardware/drivers/OS and hibernation.
+
+Hibernation turned off
+Policies may also turn off or disallow hibernation.
+
+Jargon
+Suspend to RAM - RAM keeps the data, computer goes to sleep faster, uses more energy when suspended, wakes up faster. Some call this sleep.
+
+Suspend to disk - aka hibernation. RAM is saved to swap (partition or file), computer goes to sleep slower, uses less energy while hibernating, wakes up slower.
+
+Suspend-to-RAM in Linux by Rafael J. Wysocki and A. Leonard Brown
+
+Prerequisites - do you have enough space?
+To hibernate, you need to (simplification here) save your entire RAM to your hard drive. So, you need to set aside enough space to do so. If you don't, this will fail and you won't hibernate.
+
+free -m will tell you how much memory you have, use and how much is in your swap.
+df -h will tell you how much disk space you have on each mount point and how much is used, free, etc. This is important since you may want to later specify where your swap file will be located, or which partition to "trim" to have enough space for your swap.
+cat fstab should give you information if you have a swap partition or file. According to Ubuntu Hibernation FAQ swapfile may not always work with some combinations of hardware/drivers.
+If you don't have enough space, follow Ubuntu swap FAQ. It tells you how to increase swap file, add another, check if it's used etc. With commands and explanations. Really nice resource.
+
+I don't have enough space to fit my RAM!
+Kernel docs say:
+
+/sys/power/image_size controls the size of the image created by the suspend-to-disk mechanism. It can be written a string representing a non-negative integer that will be used as an upper limit of the image size, in bytes. The suspend-to-disk mechanism will do its best to ensure the image size will not exceed that number. However, if this turns out to be impossible, it will try to suspend anyway using the smallest image possible. In particular, if "0" is written to this file, the suspend image will be as small as possible. Reading from this file will display the current image size limit, which is set to 2/5 of available RAM by default.
+
+So, try tweaking your image size. How - ask another question please.
+
+Prerequisites - does your kernel support suspend-to-disk?
+Kernel supports whatever is listed in /sys/power/state, so:
+
+cat /sys/power/state
+
+Allowed (to my knowledge) entries there include: mem, standby, freeze, disk. Explanation:
+
+mem - has several meanings, which one exactly on your system you'll find out via cat /sys/power/mem_sleep. I have: s2idle [deep]
+standby - Power-On Suspend (if supported)
+freeze - Suspend To Idle (STI)
+disk - Suspend To Disk (STD), hibernation. This - you want.
+Then we need to check cat /sys/power/disk. If you have there disabled then dive in your BIOS looking for Secure Boot - that's the only idea I can offer and only thing I know may interfere and turn off hibernation. While I know only of SecureBoot, there may be other interferences, so taking a look at your BIOS is a good idea even if you don't have there any "secure boot".
+
+Reading here:
+
+Kernel docs
+Debian Wiki on hibernation
+TBH, even if your kernel does NOT support hibernation, you can try it in another way, scroll down to section Interfaces.
+
+Read this - warnings and problems - no BTRFS
+In no particular order:
+
+Not all chipsets will work (don't have sources that I can cite here so let's say this is hearsay)
+VAIO has problems, supposedly there's a flag to counter them
+SecureBoot is often cited as interfering or turning off hibernation
+Wake-on-LAN consumes power even with hibernation
+Number of modules (graphics especially) may be initialized BEFORE your system properly resumes from hibernation - this is usually the cause for black screen when resuming. Look at ArchLinux Wiki for tips on how to debug issues. I'd also suggest Ubuntu FAQ on hibernate issues. Browsing through Launchpad bugs may also yield results. IIRC, there's a kernel parameter specifying in seconds a delay before resume.
+Allowing hibernation procedure differs for different Polkit versions
+Don't use BTRFS and hibernate: corrupted data will be the result.
+
+I want to hibernate - swap partition
+There are cases, when people forego swap file and go back to swap partition. After all, it worked on previous LTS. I did not try, so won't offer pointers.
+
+I want to hibernate - with swap file
+Make sure you have enough space there. Ubuntu swap FAQ tells you how much you need, commands from above do so as well. If you need more info here, ask another question please, as this is a lengthy topic.
+Increase the swap file or create a new one with good enough size (preferred, I agree with @muru) and change in the /etc/fstab to new one. Reboot to see change is taken well (store backup of the fstab so you can easily revert just in case.
+Point your kernel at this with appropriate params, so it know where to resume from.
+Update/reconfigure your boot loader and reboot.
+Kernel parameters? Scary!
+Carefully read and decide if you wish to do that, but it's just a way to configure your kernel. It may be easier to hibernate via systemd and uswsusp (see Interfaces, below). It may be, that you - like me - will ultimately decide suspend-to-RAM is enough and you don't want to have 32GB on a swap file (not so great for folks with one SSD in their laptops, for instance). But!
+
+hibernate to swap file requires resume= to know which partition your swap file is on and resume_offset= to know where in swap file to start resuming from.
+hibernate to partition requires resume= to point to swap partition.
+resolving black screen issues may well require resumedelay=.
+Kernel docs on delaying resuming from Hibernation:
+
+resumedelay= [HIBERNATION] Delay (in seconds) to pause before attempting to read the resume files
+
+Required parameters for swap-file and hibernation:
+
+resume= [SWSUSP]
+
+	  Specify the partition device for software suspend
+
+	  Format:
+
+	  {/dev/<dev> | PARTUUID=<uuid> | <int>:<int> | <hex>}
+resume_offset= [SWSUSP]
+
+	  Specify the offset from the beginning of the partition
+	  given by "resume=" at which the swap header is located,
+	  in <PAGE_SIZE> units (needed only for swap files).
+
+	  See Documentation/power/swsusp-and-swap-files.txt
+For the resume= choose the same style as root element has in fstab. So, either /dev/sdaX or UUID or LVM. For hibernating to file - provide partition where your file can be found.
+
+Reading:
+
+https://www.kernel.org/doc/Documentation/admin-guide/kernel-parameters.txt
+https://wiki.archlinux.org/index.php/Kernel_parameters
+Problem - swap header not found
+Swap file needs to be formatted properly. If your logs tell you this, you either are trying to hibernate to a file, or your resume parameter is not right.
+
+Switch to partition or fix the file or change interface used for hibernation.
+
+See: https://unix.stackexchange.com/questions/43508/debian-hibernate-problem-pm-swap-header-not-found
+
+mkswap is used to format file, read more on it here
+
+Problem! Hibernation not allowed!
+Test: pm-hibernate (if pm-utils package is installed) or systemctl hibernate tell you you are not allowed. Default setting in Ubuntu since IIRC 12.04.
+
+Solution(s): depends on your Polkit version, your Ubuntu version and flavour... See this question. Also, ArchWiki on Polkit may help.
+
+For Mint, see: https://forums.linuxmint.com/viewtopic.php?t=259912
+
+Problem! Hibernation disabled by something in BIOS!
+Test: cat /sys/power/disk has disabled. Logs show "Failed to hibernate system via logind: Sleep verb not supported".
+
+Solution: search your BIOS and find the problematic thing. Turn it off.
+
+Solution 2: try another hibernate interface.
+
+See: How to activate hibernation in 16.04.1 ? (systemd).
+
+Interfaces
+swsusp - low level kernel interface. See Prerequisites - kernel for which files. Writing to files directly may cause suspend (to RAM, to disk and hybrid). According to SwapFAQ problematic with hibernating to file.
+uswsusp - ArchWiki and Debian Wiki and nice AskUbuntu question with a write-up how to use it.
+systemd - ArchWiki on it
+pm-utils - AFAIK that's a collection of scripts originally from Debian - I'll gladly welcome more info myself.
+Closing remarks
+For me it was a matter of almost two days of work to compile that. Hopefully this will help you (and others) solve your issue faster. There are still points I missed but it's 2 AM and I don't feel like writing more now. I'm of course open to anybody's pointers to make this better, so comment away. I'll reply once I sleep, work etc. :-)
+
+I'm not certain hibernating to disk is that great. I went with sleeping in the end. But for me issue was with having a 32GB file just to be able to do hibernation, since I'm usually avoiding swapping at all. My initial swap-file was at 2GB and it was mostly empty. YMMV. Nevertheless, good luck! And start with the logs!
+
+
+
+https://superuser.com/questions/383140/linux-grub2-how-to-resume-from-hibernation
+Open up /etc/default/grub with root privledges and add GRUB_CMDLINE_LINUX="resume=/dev/sdXY" Where XY is the swap partition location, which can be found by sudo fdisk -l. It looks like you are using UUID instead and that's fine. /etc/default/grub only affects the current operating system so don't worry about every linux OS using grub to start using that swap. After finishing your edits, run sudo grub-mkconfig -o /boot/grub/grub.cfg (substitute grub.cfg with whatever file grub reads at boot, e.g. it may be named /boot/grub/grub.efi) to update your grub startup information with what you changed in /etc/default/grub
+
+(I don't think this needs to be done on Ubuntu)
+Note that one may need to add a resume hook to make sure the kernel knows that it should resume if Archlinux or perhaps another OS is being used. To do this, if one is using mkinitcpio, go to /etc/mkinitcpio.conf and insert resume in the HOOKS array before filesystems but after ide, scsi, and sata. Then, you you need to rebuild the initial ramdisk(early OS state for loading modules, including resume) image by mkinitcpio -p linux
