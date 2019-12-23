@@ -10,3 +10,6 @@ Visual Studio Code[31] 是由微软开发的代码编辑器，它包含了文本
 参考阅读：在Ubuntu 下载 Visual Studio Code[https://code.visualstudio.com/download]
 
 Getting Started： https://code.visualstudio.com/docs?start=true
+
+官方文档：
+https://code.visualstudio.com/docs/supporting/faq#_how-to-disable-telemetry-reporting
