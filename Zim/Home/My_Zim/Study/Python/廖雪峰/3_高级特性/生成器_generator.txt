@@ -22,7 +22,7 @@ __第一种方法很简单，只要把一个列表生成式的[]改成()__，就
 next(g)
 ```
 
-没有更多的元素时，抛出StopIteration的错误。
+__没有更多的元素时，抛出StopIteration的错误。__
 
 ```
 def fib(max):
@@ -33,7 +33,9 @@ def fib(max):
 		n = n + 1
 	return 'done'
 ```
-
+# 打印b
+# a = b
+# b = a + b
 上面的__函数和generator仅一步之遥__。要把fib函数变成generator，__只需要把print(b)改为yield b就可以了：__
 ```
 def fib(max):
@@ -47,7 +49,7 @@ def fib(max):
 
 但是用__for循环调用generator时，发现拿不到generator的return语句的返回值__。
 
-如果想要拿到返回值，必须捕获StopIteration错误，返回值包含在S__topIteration的value中__：
+如果想要拿到返回值，必须捕获StopIteration错误，__返回值包含在__S__topIteration的value中__：
 
 g = fib(6)
 >>> while True:
