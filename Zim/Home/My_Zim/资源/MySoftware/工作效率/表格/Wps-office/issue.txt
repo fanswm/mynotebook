@@ -17,3 +17,6 @@ Creation-Date: 2019-08-07T11:26:59+08:00
 [root@localhost Fonts]# cp mtextra_01.ttf mtextra.ttf /usr/share/fonts/wps-office
 [root@localhost Fonts]# cp symbol.ttf /usr/share/fonts/wps-office
 [root@localhost Fonts]# cp Symbol\ Tiger* /usr/share/fonts/wps-office
+
+
++++ 

@@ -1,7 +1,5 @@
 Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
-<<<<<<< HEAD
-Creation-Date: 2019-12-17T13:27:35+08:00
 
 ====== 1 ======
 创建日期 星期二 17 十二月 2019
