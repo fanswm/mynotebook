@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-25T18:30:27+08:00
+
+====== 将ipynb文件转换为markdown ======
+创建日期 星期三 25 十二月 2019
+
+jupyter nbconvert --to markdown "xxxx.ipynb"

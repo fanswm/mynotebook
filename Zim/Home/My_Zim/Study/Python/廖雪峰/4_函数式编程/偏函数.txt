@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-29T18:06:25+08:00
-
-====== 偏函数 ======
-Created Monday 29 January 2018
-

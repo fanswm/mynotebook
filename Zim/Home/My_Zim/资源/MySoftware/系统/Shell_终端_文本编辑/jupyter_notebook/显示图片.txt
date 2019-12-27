@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-25T13:13:14+08:00
+
+====== 显示图片 ======
+创建日期 星期三 25 十二月 2019
+
+方法一：
+from PIL import Image
+display(Image.open('path'))
+
+方法二：
+from PIL import Image
+from IPython.display import Image as IMG
+path='./jp_log.png'
+display(Image.open(path))
+
