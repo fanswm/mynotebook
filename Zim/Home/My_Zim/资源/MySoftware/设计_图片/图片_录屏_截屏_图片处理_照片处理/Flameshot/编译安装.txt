@@ -1,0 +1,32 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-24T19:50:41+08:00
+
+====== 编译安装 ======
+创建日期 星期二 24 十二月 2019
+
+https://github.com/lupoDharkael/flameshot#installation
+
+Debian
+
+# Compile-time
+sudo apt-get install g++ build-essential qt5-default qt5-qmake qttools5-dev-tools
+
+# Run-time
+sudo apt-get install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5-dev
+
+# Optional 可选的
+sudo apt-get install git openssl ca-certificates
+
+
+Build
+After installing all the dependencies, finally run the following commands __in the sources root directory:__
+```
+mkdir build
+cd build
+qmake ../
+make
+
+Install
+Simply use make install with privileges.
+```

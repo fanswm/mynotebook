@@ -7,7 +7,7 @@ Created Friday 09 November 2018
 
 Flameshot：一个简洁但功能丰富的截图工具
 2018-11-01 13:19
-编译自：https://www.ostechnix.com/flameshot-a-simple-yet-powerful-feature-rich-screenshot-tool/%E4%BD%9C%E8%80%85： Sk
+编译自：https://www.ostechnix.com/flameshot-a-simple-yet-powerful-feature-rich-screenshot-tool/ 作者： Sk
 原创：LCTT https://linux.cn/article-10180-1.html 译者： Chang Liu
 
 

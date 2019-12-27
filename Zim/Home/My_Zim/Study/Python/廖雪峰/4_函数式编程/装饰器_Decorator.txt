@@ -22,9 +22,10 @@ def log(func):
 		print('call %s():' % func.__name__)
 		return func(*args, **kw)
 	return wrapper
+	
 观察上面的log，因为它是一个decorator，所以接受一个函数作为参数，并返回一个函数。__我们要借助Python的@语法，把decorator置于函数的定义处：__
 
-@log
+@log        #相当于now = log(now)
 def now():
 	print('2015-3-25')
 调用now()函数，不仅会运行now()函数本身，还会在运行now()函数前打印一行日志：
@@ -37,7 +38,7 @@ call now():
 now = log(now)
 由于log()是一个decorator，返回一个函数，所以，原来的now()函数仍然存在，只是现在同名的now变量指向了新的函数，于是调用now()将执行新函数，即在log()函数中返回的wrapper()函数。
 
-wrapper()函数的参数定义是(*args, **kw)，因此，wrapper()函数可以接受任意参数的调用。在wrapper()函数内，首先打印日志，再紧接着调用原始函数。
+wrapper()函数的参数定义是(*args, **kw)，__因此，wrapper()函数可以接受任意参数的调用__。在wrapper()函数内，首先打印日志，再紧接着调用原始函数。
 
 如果decorator本身需要传入参数，那就需要编写一个返回decorator的高阶函数，写出来会更复杂。比如，要自定义log的文本：
 
@@ -50,7 +51,7 @@ def log(text):
 	return decorator
 这个3层嵌套的decorator用法如下：
 
-@log('execute')
+@log('execute')       	#相当于： now = log('execute')(now)
 def now():
 	print('2015-3-25')
 执行结果如下：
