@@ -1,0 +1,67 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-26T15:03:46+08:00
+
+====== 4 获取对象信息 判断 ======
+创建日期 星期四 26 十二月 2019
+
+__判断数据类型__：
+	__isinstance(var, typeOfData)__：
+		判断一个变量是否是某个类型可以用isinstance()判断
+		子类也是父类的类型，但是反过来不成立。
+	__type()：__
+		__基本类型__都可以用type()判断。
+				能用type()判断的基本类型也可以用__isinstance()__判断。
+			如果一个变量指向函数或者类，也可以用type()判断。
+			但是type()函数返回的是什么类型呢？它返回对应的Class类型。如果我们要在if语句中判断，就需要比较两个变量的type类型是否相同：
+				>>> type(123)==type(456)
+					True
+				>>> type(123)==int
+					True
+	__是否是函数__：
+		要判断一个对象是否是函数怎么办？可以使用types模块中定义的常量：
+			>>> __import types__
+			>>> type(fn)==types.FunctionType
+				True
+			>>> type(abs)==types.BuiltinFunctionType
+				True
+			>>> type(lambda x: x)==types.LambdaType
+				True
+			>>> type((x for x in range(10)))==types.GeneratorType
+				True
+获得一个对象的__所有属性和方法：__
+	__使用dir()函数：__
+		它返回一个包含字符串的list
+		类似__xxx__的属性和方法在Python中都是有特殊用途的，比如__len__方法返回长度
+	仅仅把属性和方法列出来是不够的，配合getattr()、setattr()以及hasattr()，我们可以直接操作一个对象的状态。
+		>>> class MyObject(object):
+		...     def __init__(self):
+		...         self.x = 9
+		...     def power(self):
+		...         return self.x * self.x
+		...
+		>>> obj = MyObject()
+		
+		>>> hasattr(obj, 'x') # 有属性'x'吗？
+		True
+		>>> obj.x
+		9
+		>>> hasattr(obj, 'y') # 有属性'y'吗？
+		False
+		>>> setattr(obj, 'y', 19) # 设置一个属性'y'
+		>>> hasattr(obj, 'y') # 有属性'y'吗？
+		True
+		>>> getattr(obj, 'y') # 获取属性'y'
+		19
+		>>> obj.y # 获取属性'y'
+		如果试图获取不存在的属性，会抛__出AttributeError的错误__：
+		__可以传入一个default参数，如果属性不存在，就返回默认值__：
+		>>> getattr(obj, 'z', 404) # 获取属性'z'，如果不存在，返回默认值404
+		
+		一个正确的用法的例子如下：
+		def readImage(fp):
+			if hasattr(fp, 'read'):
+				return readData(fp)
+			return None
+		
+

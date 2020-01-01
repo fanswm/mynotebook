@@ -1,7 +1,7 @@
 Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
-Creation-Date: 2019-12-27T10:53:04+08:00
+Creation-Date: 2019-12-27T22:39:13+08:00
 
-====== 6 ======
+====== 5 使用枚举类 ======
 创建日期 星期五 27 十二月 2019
 

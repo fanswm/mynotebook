@@ -5,7 +5,13 @@ Creation-Date: 2019-12-26T14:51:21+08:00
 ====== 特殊变量 ======
 创建日期 星期四 26 十二月 2019
 
-__doc__:  任何模块代码的第一个字符串都被视为模块的文档注释；是:doc 
- __name__ 
- __main__
-__ 
+_ _ name _ _:
+_ _ main _ _:
+_ _ doc _  _:	任何模块代码的第一个字符串都被视为模块的文档注释。
+_ _ var:			类内部的私有变量。实际被类自动变成了：_ className_ _ var
+_ _ len _ _: len('abc')  和 'abc'. _ _ len _ _ () 等价；自己也可以定义这个方法。
+_ _ slots _ _ : 为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的__slots__变量，来限制该class实例能添加的属性：
+	class Student(object):
+		__slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
+	违反得到__AttributeError的错误。__
+
