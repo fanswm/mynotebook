@@ -30,3 +30,5 @@ __3.8:__
 The Python Tutorial: https://docs.python.org/3.8/tutorial/index.html
 Python 3.8.1rc1 documentation: https://docs.python.org/3.8/index.html
 What’s New In Python 3.8: https://docs.python.org/3.8/whatsnew/3.8.html
+
+https://docs.python.org/zh-cn/3/tutorial/errors.html

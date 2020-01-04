@@ -26,7 +26,7 @@ Creation-Date: 2019-02-19T14:31:14+08:00
 
 　　IBM笔记本----Shift+Numlock键
 
-　　__联想笔记本----Fn+ NmLK Scroll键(右上方，两个功能在一起__)、Fn+ NmLK键、Fn+ NmLK键
+　　__联想笔记本----Fn+ NmLK Scroll键(右上方，两个功能在一起__)、Fn+ NmLK键、Fn+ NmLK键{__得用笔记本上的键盘，不能用红外键盘。by imrdr}__
 
 　　宏基笔记本----Fn+F11键
 

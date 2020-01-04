@@ -9,9 +9,81 @@ _ _ name _ _:
 _ _ main _ _:
 _ _ doc _  _:	任何模块代码的第一个字符串都被视为模块的文档注释。
 _ _ var:			类内部的私有变量。实际被类自动变成了：_ className_ _ var
-_ _ len _ _: len('abc')  和 'abc'. _ _ len _ _ () 等价；自己也可以定义这个方法。
-_ _ slots _ _ : 为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的__slots__变量，来限制该class实例能添加的属性：
+
+_ _ slots _ _ : 为了达到限制的目的，Python允许在定义class的时候，定义一个特殊的_ _ slots_ _变量，来限制该class实例能添加的属性：
+		class Student(object):
+		_ _ slots_ _ = ('name', 'age') # 用tuple定义允许绑定的属性名称
+		违反得到AttributeError的错误。
+_ _ class _ _:
+	类名；
+_ _ class _ _._ _ name _ _: 类的名称
+
+
+__特殊函数__：
+___ _ len _ _()：__	
+	 len('abc')  和 'abc'. _ _ len _ _ () 等价；自己也可以定义这个方法。
+__ _  _ str _  _ ()：__
+	定制类的打印字符：print(ClassName('name')), 但是直接用变量调出来的，不同，用的是：_  _ repr _  _。这是因为直接显示变量调用的不是 _  _ str _  _ ()，而是 _  _ repr _  _ ()，
+	两者的区别是 _  _ str _  _ ()返回用户看到的字符串，而
+__ _  _ repr _  _ ()__
+	返回程序开发者看到的字符串，也就是说， ___  _ repr _  _ ()是为调试服务的。__
+	解决办法：
 	class Student(object):
-		__slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
-	违反得到__AttributeError的错误。__
+		def _ _ init _ _ (self, name):
+			self.name = name
+		def _ _ str _ _ (self):
+			return 'Student object (name=%s)' % self.name
+		_ _ repr _ _ = _ _ str _ _
+	# 因为通常：通常 _ _ str _ _ ()和 _ _ repr _ _ ()代码都是一样的
+	
+___ _ iter _ _():__
+	__类用于for...in__
+	class Fib(object):
+		def _ _ init _ _ (self):
+			self.a, self.b = 0, 1 # 初始化两个计数器a，b
+	
+		def  _ _ iter _ _ (self):
+			return self # 实例本身就是迭代对象，故返回自己
+	
+		def _ _ next _ _ (self):
+			self.a, self.b = self.b, self.a + self.b # 计算下一个值
+			if self.a > 100000: # 退出循环的条件
+				raise StopIteration()
+			return self.a # 返回下一个值
+___ _ getitem _ _()：__
+	按照下标取出元素：
+	要表现得像list那样按照下标取出元素，需要实现 _ _ getitem _ _ ()方法：
+	
+	class Fib(object):
+		def _ _ getitem _ _ (self, n):
+			a, b = 1, 1
+			for x in range(n):
+				a, b = b, a + b
+			return a
+__实现切片：__
+	class Fib(object):
+		def _ _ getitem _ _ (self, n):
+			if isinstance(n, int): # n是索引
+				a, b = 1, 1
+				for x in range(n):
+					a, b = b, a + b
+				return a
+			if isinstance(n, slice): # n是切片
+				start = n.start
+				stop = n.stop
+				if start is None:
+					start = 0
+				a, b = 1, 1
+				L = []
+				for x in range(stop):
+					if x >= start:
+						L.append(a)
+					a, b = b, a + b
+				return L
+___ _ setitem _ _ ()__：把类看做dict
+___ _ delitem _ _ ()方__法，用于删除某个元素。
+	
+___ _ getattr _ _（）__：写一个这样的方法，动态返回一个属性。返回函数也是完全可以的
+	注意，只有在没有找到属性的情况下，才调用__getattr__，已有的属性，比如name，不会在__getattr__中查找。
+	这实际上可以把一个类的所有属性和方法调用全部动态化处理了，不需要任何特殊手段。
 

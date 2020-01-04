@@ -31,4 +31,4 @@ __def f(x):__
 同样，__也可以把匿名函数作为返回值返回__，比如：
 
 def build(x, y):
-	return lambda: x * x + y * y
+	__return lambda: x * x + y * y__

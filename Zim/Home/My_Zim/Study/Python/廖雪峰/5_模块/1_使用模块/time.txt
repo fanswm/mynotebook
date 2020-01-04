@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-03T14:26:04+08:00
+
+====== time ======
+创建日期 星期五 03 一月 2020
+
+from time import strftime, localtime
+strftime("%b %d %H:%M", localtime())
+
+时间值由 gmtime()，localtime() 和 strptime() 返回，
+	并被 asctime()， mktime() 和 strftime() 接受，是一个 9 个整数的序列。 
+	gmtime()， localtime() 和 strptime() 的返回值还提供各个字段的属性名称。
+
+{{./pasted_image.png}}
+
+

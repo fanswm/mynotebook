@@ -32,10 +32,10 @@ __判断数据类型__：
 获得一个对象的__所有属性和方法：__
 	__使用dir()函数：__
 		它返回一个包含字符串的list
-		类似__xxx__的属性和方法在Python中都是有特殊用途的，比如__len__方法返回长度
-	仅仅把属性和方法列出来是不够的，配合getattr()、setattr()以及hasattr()，我们可以直接操作一个对象的状态。
+		类似_ _ xxx_ _ 的属性和方法在Python中都是有特殊用途的，比如_ _ len_ _ 方法返回长度
+	仅仅把属性和方法列出来是不够的，配合__getattr()、setattr()以及hasattr()__，我们可以直接操作一个对象的状态。
 		>>> class MyObject(object):
-		...     def __init__(self):
+		...     def _ _ init_ _(self):
 		...         self.x = 9
 		...     def power(self):
 		...         return self.x * self.x
@@ -63,5 +63,6 @@ __判断数据类型__：
 			if hasattr(fp, 'read'):
 				return readData(fp)
 			return None
-		
+__是否能被调用：__
+	callable(对象)
 

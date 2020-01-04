@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-12-27T21:55:06+08:00
-
-====== 错误 ======
-创建日期 星期五 27 十二月 2019
-
-AttributeError的错误：如果试图获取不存在的属性，会抛出AttributeError的错误
