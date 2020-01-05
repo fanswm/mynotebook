@@ -14,4 +14,11 @@ strftime("%b %d %H:%M", localtime())
 
 {{./pasted_image.png}}
 
+程序运行时间：
+	start = time.time()
+	time.sleep(random.random() * 3)
+	end = time.time()
+	print('Task %s runs %0.2f seconds.' % (name, (end - start)))
+
+
 
