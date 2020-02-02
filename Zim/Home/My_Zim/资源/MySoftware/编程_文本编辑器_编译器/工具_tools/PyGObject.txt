@@ -6,3 +6,18 @@ Creation-Date: 2019-04-23T15:04:41+08:00
 创建日期 星期二 23 四月 2019
 
 https://pygobject.readthedocs.io/en/latest/getting_started.html#ubuntu-getting-started
+
+
+安装：
+anaconda:
+https://anaconda.org/conda-forge/pygobject
+To install this package with conda run one of the following:
+__conda install -c conda-forge pygobject  # imrdr 使用__
+conda install -c conda-forge/label/gcc7 pygobject
+conda install -c conda-forge/label/cf201901 pygobject 
+
+问题：
+ValueError: Namespace Gtk not available
+
+解决：
+conda install -c pkgw/label/superseded gtk3

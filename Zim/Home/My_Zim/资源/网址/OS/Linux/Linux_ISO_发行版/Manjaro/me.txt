@@ -6,20 +6,29 @@ Creation-Date: 2019-04-26T13:47:45+08:00
 创建日期 星期五 26 四月 2019
 
 #__安装位置__：/dev/sda9
-sudo passwd #root password.
-sudo pacman -S vim
+sudo passwd #root password
+
+sudo gedit /etc/pacman.d/mirrors
+#######################
+## China
+Server = http://mirrors.neusoft.edu.cn/archlinux/$repo/os/$arch
+## China
+Server = http://mirrors.163.com/archlinux/$repo/os/$arch
+## China
+Server = http://mirrors.cqu.edu.cn/archlinux/$repo/os/$arch
+########################
 
 #__添加中科大源__ https://www.jianshu.com/p/1cde4b7ec3c2
 	sudo vim /etc/pacman.conf
 
 #在文件末尾添加
-	[archlinuxcn]
-	SigLevel = Optional TrustedOnly
-	Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+[archlinuxcn]
+SigLevel = Optional TrustedOnly
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 
 #__导入GPG Key__
 	sudo pacman -Syy && sudo pacman -S archlinuxcn-keyring
-
+sudo pacman -S vim
 #添加了中科大源后，也可以直接在添加/删除软件里搜索直接安装
 #现在可以安装软件了，比如 chrome 和搜狗拼音输入法
 #__安装搜狗拼音输入法__

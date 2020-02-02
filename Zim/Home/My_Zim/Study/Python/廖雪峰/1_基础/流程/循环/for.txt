@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-09T10:37:50+08:00
+
+====== for ======
+创建日期 星期四 09 一月 2020
+
+>>> import random
+>>> ''.join([chr(random.randint(48, 122)) for i in range(20)])
+'fW2]St6[D=y?kHu=rsJ\\'
+

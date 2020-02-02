@@ -17,3 +17,19 @@ Created Monday 04 December 2017
 >>> '%.2f' % 3.1415926
 '3.14'
 如果你不太确定应该用什么，%s永远起作用，它会把任何数据类型转换为字符串.
+
+
+打印不换行：
+Python2的写法是：
+
+print 'hello',
+
+Python3的写法是：
+
+print('hello', end='')
+
+对于python2和python3都兼容的写法是：
+
+from __future__ import print_function
+
+print('hello', end='')

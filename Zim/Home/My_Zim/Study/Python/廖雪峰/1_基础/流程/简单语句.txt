@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-18T19:16:41+08:00
+
+====== 简单语句 ======
+创建日期 星期六 18 一月 2020
+
+https://docs.python.org/zh-cn/3/reference/simple_stmts.html#yield
+

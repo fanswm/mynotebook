@@ -1,0 +1,64 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-13T11:30:07+08:00
+
+====== 文章 ======
+创建日期 星期一 13 五月 2019
+
+http://www.sohu.com/a/257582297_100034897
+https://github.com/lupoDharkael/flameshot
+
+
+sudo apt-get install flameshot
+
+
+键盘快捷键  https://github.com/lupoDharkael/flameshot
+本地
+这些快捷方式在GUI模式下可用：
+
+按键	描述
+←，↓，↑，→	移动选择1px
+Shift+ ←，↓，↑，→	调整大小选择1px
+Esc	退出捕获
+Ctrl + C	复制到剪贴板
+Ctrl + S	将选择保存为文件
+Ctrl + Z	撤消上次修改
+Spacebar	使用所选工具的选项，绘图颜色和历史记录菜单的颜色选择器切换侧栏的可见性
+右键点击	显示色轮
+鼠标滚轮	更改工具的厚度
+Shift +拖动选择区域的处理程序：对面处理程序中的镜像重建。
+
+全球
+如果您想将Flameshot用作默认屏幕截图实用程序，则可能需要使用Prt Sc密钥启动它。Flameshot尚未提供完全自动化的选项，但您可以配置系统来执行此操作。
+
+在KDE等离子桌面上
+为了简化配置，存储库中有一个文件可以或多或少地自动执行此过程。默认情况下，此文件将以下操作分配给以下操作：
+
+按键	描述
+Prt Sc	启动Flameshot截图工具并截取屏幕截图
+Ctrl + Prt Sc	等待3秒钟，然后启动Flameshot截图工具并截取屏幕截图
+Shift + Prt Sc	拍摄全屏（所有显示器）截图并保存
+Ctrl+ Shift+Prt Sc	拍摄全屏（所有显示器）屏幕截图并将其复制到剪贴板
+如果您不喜欢默认值，可以稍后手动更改。
+
+使用配置的步骤：
+
+配置文件配置快捷方式，以便Flameshot自动保存（无需打开保存对话框）屏幕截图到~/Pictures/Screenshots文件夹。通过运行以下命令确保您拥有该文件夹：
+
+mkdir -p ~ /图片/截图
+（如果您不喜欢默认位置，则可以跳过此步骤并稍后配置首选目录。）
+
+下载配置文件：
+
+cd  ~ / Desktop 
+wget https://raw.githubusercontent.com/lupoDharkael/flameshot/master/docs/shortcuts-config/flameshot-shortcuts-kde
+进入系统设置 → 快捷方式 → 自定义快捷方式。
+
+如果有的话，您需要先禁用Spectacle的条目，这是默认的KDE屏幕截图实用程序，因为它的快捷方式可能会与Flameshot的快捷方式发生冲突; 所以，只需取消选中Spectacle条目即可。
+
+单击编辑 → 导入...，导航到桌面文件夹（或保存配置文件的任何位置）并打开配置文件。
+
+现在Flameshot条目应该出现在列表中。单击“ 应用”以应用更改。
+
+如果要更改默认值，可以展开条目，选择适当的操作并根据需要进行修改; 这个过程非常明显。
+

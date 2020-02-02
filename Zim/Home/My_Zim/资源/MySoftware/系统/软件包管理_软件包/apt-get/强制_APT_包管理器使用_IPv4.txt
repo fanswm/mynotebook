@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-09-29T16:45:54+08:00
+
+====== 强制 APT 包管理器使用 IPv4 ======
+Created Saturday 29 September 2018
+
+如何在 Ubuntu 16.04 强制 APT 包管理器使用 IPv4 https://linux.cn/article-10058-1.html?utm_source=rss&utm_medium=rss

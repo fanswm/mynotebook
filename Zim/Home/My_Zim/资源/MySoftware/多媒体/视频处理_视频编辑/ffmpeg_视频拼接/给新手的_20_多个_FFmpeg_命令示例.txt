@@ -9,7 +9,7 @@ Creation-Date: 2019-06-05T21:01:27+08:00
 2019-06-03 01:20
 
 译自：https://www.ostechnix.com/20-ffmpeg-commands-beginners/%E4%BD%9C%E8%80%85： Sk
-原创：LCTT https://linux.cn/article-10932-1.html%E8%AF%91%E8%80%85： 郑
+原创：LCTT https://linux.cn/article-10932-1.html 译者： 郑
 
 
 
@@ -233,7 +233,7 @@ $ ffmpeg -i input.mp4 -t 00:00:30 -c copy part1.mp4 -ss 00:00:30 -codec copy par
 
 -t 00:00:30 表示从视频的开始到视频的第 30 秒创建一部分视频。
 -ss 00:00:30 为视频的下一部分显示开始时间戳。它意味着第 2 部分将从第 30 秒开始，并将持续到原始视频文件的结尾。
-16、接合或合并多个视频部分到一个
+16、__接合或合并多个视频部分到一个__
 FFmpeg 也可以接合多个视频部分，并创建一个单个视频文件。
 
 创建包含你想接合文件的准确的路径的 join.txt。所有的文件都应该是相同的格式（相同的编码格式）。所有文件的路径应该逐个列出，像下面。
@@ -245,11 +245,11 @@ file /home/sk/myvideos/part4.mp4
 现在，接合所有文件，使用命令：
 
 $ ffmpeg -f concat -i join.txt -c copy output.mp4
-如果你得到一些像下面的错误；
+__如果你得到一些像下面的错误；__
 
-[concat @ 0x555fed174cc0] Unsafe file name '/path/to/mp4'
-join.txt: Operation not permitted
-添加 -safe 0 :
+__[concat @ 0x555fed174cc0] Unsafe file name '/path/to/mp4'__
+__join.txt: Operation not permitted__
+__添加 -safe 0 :__
 
 $ ffmpeg -f concat -safe 0 -i join.txt -c copy output.mp4
 上面的命令将接合 part1.mp4、part2.mp4、part3.mp4 和 part4.mp4 文件到一个称为 output.mp4 的单个文件中。

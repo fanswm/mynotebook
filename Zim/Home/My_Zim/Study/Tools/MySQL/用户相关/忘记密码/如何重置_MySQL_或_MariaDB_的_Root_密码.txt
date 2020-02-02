@@ -42,7 +42,7 @@ exit
 最后，关闭之前使用 --skip-grant-tables 选项运行的数据库。为此，运行：
 
 $ sudo mysqladmin -u root -p shutdown
-系统将要求你输入在上一步中设置的 MySQL/MariaDB 用户密码。
+系统将__要求你输入在上一步中设置的 MySQL/MariaDB 用户密码__。
 
 现在，使用以下命令正常启动 MySQL/MariaDB 服务：
 

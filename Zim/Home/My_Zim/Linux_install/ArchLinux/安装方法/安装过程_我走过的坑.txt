@@ -1,0 +1,173 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-01T18:43:47+08:00
+
+====== 安装过程 我走过的坑 ======
+Created Saturday 01 February 2020
+
+# 系统安装位置： /  sda10, /home sda11
+
+pacman -S screenfetch xed thunar tldr
+
+yay -S timeshift
+
+# arch 的软件包位置：/var/cache/pacman/pkg/
+
+# 清理干净软件包，卸载干净：
+
+# pacman -Rs pkg-name
+
+ins flameshot drawing ntfs-3g 
+
+在文件末尾添加
+
+[archlinuxcn]
+SigLevel = Optional TrustedOnly
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
+
+#导入GPG Key
+sudo pacman -Syy && sudo pacman -S archlinuxcn-keyring
+
+添加了中科大源后，也可以直接在添加/删除软件里搜索直接安装
+
+现在可以安装软件了，比如 chrome 和搜狗拼音输入法
+
+ins nutstore
+
+ 
+
+# Sublime-Text
+
+pacman
+# Install the GPG key:
+
+
+# Select the channel to use:
+
+# Stable
+
+
+# Dev
+
+
+ # acpid
+
+# 电源管理设置位置：仅当您希望配置不受电源管理器禁止的特定事件的行为时，才需要更改/etc/systemd/logind.conf或/etc/systemd/logind.conf.d/*.conf进行更改。
+
+sudo pacman -S acpid
+
+sudo systemctl enable acpid
+
+sudo systemctl start acpid
+
+ins yaourt
+
+yaourt -S laptop-mode-tools
+
+systemctl enable laptop-mode.service
+
+#  下面的命令可以用来列出模块的启用配置（启用、禁用或自动）：
+
+
+ins hdparm  # 安装硬盘管理软件包 https://wiki.archlinux.org/index.php/Hdparm
+sudo hdparm -I /dev/sdb #获取有关硬盘的信息
+
+sudo hdparm -B /dev/sda #查询当前值，请传递不带值的参数
+
+# 可能的值在1到255之间，较低的值表示更积极的电源管理，较高的值表示更好的性能。从1到127的值允许降速旋转，而从128到254的值不允许降速旋转。值255将完全禁用该功能。
+
+hdparm -B 127 /dev/sda​ #应用其他值，例如将APM设置为127
+
+ins smartmontools #查询磁盘状态而无需唤醒磁盘 安装。提供smartctl
+
+sudo smartctl -i -n standby /dev/sda
+
+ins xss-lock
+
+# AUR home: https://aur.archlinux.org/
+
+#  EXAMPLES #############################
+* Run xlock after ten minutes of inactivity:
+
+xset 600
+xss-lock xlock +resetsaver
+
+Without +resetsaver, xlock forces a screen saver reset during startup, thereby telling xss-lock to immediately kill xlock again.
+
+* Dim the screen after three minutes of inactivity, lock the screen two minutes later using i3lock:
+
+xset 180 120
+xss-lock -n dim-screen.sh -- i3lock -n
+
+NOTE:
+A script is provided to use i3lock's forking mode with the --tranfer-sleep-lock option (see above).
+
+#############################
+
+# 休眠: resume钩子在中是必需的 /etc/mkinitcpio.conf
+
+# 内核文档：用于系统休眠的电源管理接口​：
+
+#   https://www.kernel.org/doc/Documentation/power/interface.txt
+
+# 实现休眠：
+
+# 1，创建一个交换分区或文件。
+
+# 2，使用resume=内核参数将内核指向您的交换，该参数是通过引导加载程序配置的。
+
+# 3，您还需要配置initramfs。
+
+ 
+
+# 壁纸时钟：
+
+ins komorebi
+
+ # 声音： https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+
+ins alsa-utils
+alsamixer    # MM是静音，00是有声音。
+
+lspci | grep Audio
+lsmod | grep udio
+
+speaker-test -c 2
+aplay -L | grep :CARD    # 查找 -D 后面的对数是多少？
+
+
+speaker-test -D default:MID -c 2
+sudo reboot
+
+ 
+
+ 
+
+# Arch Linux 整体的系统管理：General recommendations (简体中文)：
+
+#  https://wiki.archlinux.org/index.php/General_recommendations_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E4%B8%AD%E5%9B%BD%E5%A4%A7%E9%99%86%E7%94%A8%E6%88%B7%E7%9A%84%E6%8E%A8%E8%8D%90%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88
+
+# 笔记本电脑模式工具： https://wiki.archlinux.org/index.php/Laptop_Mode_Tools
+
+# 自动启动： https://wiki.archlinux.org/index.php/Autostarting
+
+# 笔记本电源管理：
+
+# https://wiki.archlinux.org/index.php/Power_management
+
+# Laptop (简体中文)
+
+# https://wiki.archlinux.org/index.php/Laptop_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+
+# 笔记本电脑（简体中文）：
+
+#  https://wiki.archlinux.org/index.php/Laptop_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87) 
+
+# systemd中文 手册：
+
+http://www.jinbuguo.com/systemd/systemd.syntax.html#
+
+https://blog.csdn.net/a624575745856085/article/details/101618439
+
+# 开机时自动调整亮度： https://www.cnblogs.com/vanwoos/p/5475912.html
+

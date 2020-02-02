@@ -32,3 +32,11 @@ __def f(x):__
 
 def build(x, y):
 	__return lambda: x * x + y * y__
+	
+	
+imrdr:
+a = 9
+b = (a//4+1)*4 if a%4 > 0 else a
+print(b)
+12
+

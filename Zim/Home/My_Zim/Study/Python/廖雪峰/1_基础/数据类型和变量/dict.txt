@@ -29,3 +29,6 @@ get()方法:
 查找和插入的时间随着元素的增加而增加；
 占用空间小，浪费内存很少。
 
+for k,v in d.items():
+	print(k,v)
+https://docs.python.org/zh-cn/3/library/stdtypes.html#mapping-types-dict

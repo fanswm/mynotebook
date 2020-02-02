@@ -1,0 +1,18 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-13T18:55:22+08:00
+
+====== google chrome origin ======
+创建日期 星期二 13 十一月 2018
+
+E: 仓库'http://dl.google.com/linux/chrome/deb stable Release'将其'Origin'值从'Google, Inc.'修改到了'Google LLC'
+N: 为了让这个仓库能够应用，这必须在更新之前显式接受。更多细节请参阅 apt-secure(8) 手册。
+
+解决：
+https://stackoverflow.com/questions/50942353/e-repository-http-dl-google-com-linux-chrome-remote-desktop-deb-stable-relea
+
+sudo apt update
+(NOT apt-get)
+sudo apt list --upgrade
+sudo apt-get update 
+sudo apt-get upgrade

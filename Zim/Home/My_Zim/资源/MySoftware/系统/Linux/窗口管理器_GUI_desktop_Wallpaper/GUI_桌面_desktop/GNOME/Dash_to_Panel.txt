@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-30T09:01:26+08:00
+
+====== Dash to Panel ======
+创建日期 星期六 30 十一月 2019
+
+https://www.linuxidc.com/Linux/2018-05/152498.htm
+dash to dock

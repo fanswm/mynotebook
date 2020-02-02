@@ -45,6 +45,43 @@ http://www.aiuxian.com/relative/p-1437041.html
 
 imrdr:
 ls | sort -n > l.txt   
+vim ./l.txt
+##
+##__del l.txt line__
+##
 cat ./l.txt | awk '{print "file \'",$1,"\'"}' > ./list.txt
+
+# cat ./l.txt | awk '{print "file ./",$1,".mp4"}' > ./list.txt
+
 vim 删除列
 ffmpeg -f  concat -i list.txt -c copy output.mp4
+
+########## list.txt 形如：
+	file /home/sk/myvideos/part1.mp4
+	file /home/sk/myvideos/part2.mp4
+	file /home/sk/myvideos/part3.mp4
+	file /home/sk/myvideos/part4.mp4
+
+
+
+```python
+import os
+
+with open('./l.txt','r') as f:
+	line = f.readlines()
+    
+with open('list.txt','a') as f2:
+	for i in line:
+		f2.write('file ./' + i)
+```
+
+
+```python3
+# 制作输入文件：
+import os
+name = 'Y2hlbmppbmdjb25n'  #文件名的前缀
+max = 448   #文件名的序号最大数，最小为0，注意！！！！
+with open('list.txt','a') as f:
+	for i in range(max):
+		f.write('file ./'+name + str(i)+'\n')
+```

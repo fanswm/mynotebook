@@ -1,0 +1,34 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-11T07:56:09+08:00
+
+====== spacevim neovim nvim ======
+Created Monday 11 December 2017
+
+项 目 主 页： spacevim.org
+[Github 地址](https://github.com/SpaceVim/SpaceVim)
+[Vim 中文基本教材](https://link.juejin.im/?target=https%3A%2F%2Fgithub.com%2Fwsdjeg%2Fvim-galore-zh_cn)
+SpaceVim 是一个社区驱动的模块化 vim/neovim 配置集合，其中包含了多种功能模块，并且针对 neovim 做了功能优化。spacevim 有多种功能模块可供用户选择，针对不同语言选择特定的模块，就可以配置出一个适合特定语言开发的环境。
+使用过程中遇到问题或者有什么功能需求可以在 github 提交 issue，这将更容易被关注和修复。我们也欢迎喜欢 vim/neovim 的用户加入我们的 QQ 群，一起讨论 vim 相关的技巧，点击加入Vim/SpaceVim用户群。
+Features
+* Great documentation: access documentation in Vim with SPC h SPC.  
+* Beautiful UI: you'll love the awesome UI and its useful features.  
+* Mnemonic key bindings: all key bindings have mnemonic prefixes.  
+* Describe key bindings: use SPC h d k to describe key bindings, and find definition of key bindings.  
+* Lazy load plugins: Lazy-load 90% of plugins with dein.vim  
+* Awesome statusline: a heavily customized modular statusline.  
+* Neovim centric: Dark powered mode of SpaceVim
+
+
+作者：王世东
+链接：https://juejin.im/post/5a2d2c525188253e71465bbf
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+ubuntu:正在使用：
+curl -sLf https://spacevim.org/install.sh | bash
+
+For more info about the install script, please check:
+
+curl -sLf https://spacevim.org/install.sh | bash -s -- -h
+

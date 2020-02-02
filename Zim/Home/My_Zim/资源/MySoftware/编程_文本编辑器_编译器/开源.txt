@@ -5,3 +5,8 @@ Creation-Date: 2018-10-15T14:50:24+08:00
 ====== 开源 ======
 Created Monday 15 October 2018
 
+celluloid
+https://github.com/celluloid-player/celluloid
+
+xed
+https://github.com/linuxmint/xed

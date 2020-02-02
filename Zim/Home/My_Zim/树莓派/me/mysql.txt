@@ -5,14 +5,16 @@ Creation-Date: 2019-11-24T21:08:43+08:00
 ====== mysql ======
 创建日期 星期日 24 十一月 2019
 
-sudo apt-get install mysql-server
-我以为中间会让我提示输入 数据库root的密码，没想到一帆风顺，直接完成，我要疯了，密码到底是什么了。通过搜索发现，可以使用如下命令，空密码登录
+sudo apt-get install mysql-server mysql-client  libmysqlclient-dev
+通过搜索发现，可以使用如下命令，空密码登录
 
 $ sudo mysql -u root
 设置root密码
 use mysql;
-update user set plugin='mysql_native_password' where user='root';
-UPDATE user SET password=PASSWORD('你自己的密码') WHERE user='root';
+~~update user set plugin='mysql_native_password' where user='root';~~
+~~UPDATE user SET password=PASSWORD('你自己的密码') WHERE user='root';~~
+update user set password=PASSWORD('mypasswd') where user='root';
+update user set authentication_string=password('my_password') where user='root'; 
 flush privileges;
 exit;
 操作Mysql
@@ -30,3 +32,38 @@ use mysql;
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root账号密码' WITH GRANT OPTION;
 flush privileges;
 然后就可以使用其他客户端直接连接了
+
+
+把数据库默认的编码全部改为UTF-8。MySQL的配置文件__默认存放在/etc/my.cnf或者/etc/mysql/my.cnf：__
+
+__[client]__
+__default-character-set = utf8__
+
+__[mysqld]__
+__default-storage-engine = INNODB__
+__character-set-server = utf8__
+__collation-server = utf8_general_ci__
+
+重启MySQL后，可以通过MySQL的客户端命令行__检查编码：__
+
+$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor...
+...
+
+mysql> __show variables like '%char%';__
++--------------------------+--------------------------------------------------------+
+| Variable_name            | Value                                                  |
++--------------------------+--------------------------------------------------------+
+| character_set_client     | utf8                                                   |
+|--------------------------|--------------------------------------------------------|
+| character_set_connection | utf8                                                   |
+| character_set_database   | utf8                                                   |
+| character_set_filesystem | binary                                                 |
+| character_set_results    | utf8                                                   |
+| character_set_server     | utf8                                                   |
+| character_set_system     | utf8                                                   |
+| character_sets_dir       | /usr/local/mysql-5.1.65-osx10.6-x86_64/share/charsets/ |
++--------------------------+--------------------------------------------------------+
+8 rows in set (0.00 sec)
+注：__如果MySQL的版本≥5.5.3，可以把编码设置为utf8mb4，utf8mb4和utf8完全兼容，但它支持最新的Unicode标准，可以显示emoji字符。__

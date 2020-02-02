@@ -13,7 +13,7 @@ Debian
 sudo apt-get install g++ build-essential qt5-default qt5-qmake qttools5-dev-tools
 
 # Run-time
-sudo apt-get install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5-dev
+sudo apt-get install libqt5dbus5 libqt5network5 libqt5core5a libqt5widgets5 libqt5gui5 libqt5svg5-dev 
 
 # Optional 可选的
 sudo apt-get install git openssl ca-certificates
@@ -22,11 +22,12 @@ sudo apt-get install git openssl ca-certificates
 Build
 After installing all the dependencies, finally run the following commands __in the sources root directory:__
 ```
+git clone https://github.com/lupoDharkael/flameshot
+cd flameshot
 mkdir build
 cd build
 qmake ../
 make
-
-Install
-Simply use make install with privileges.
+make install
+# Simply use make install with privileges.
 ```

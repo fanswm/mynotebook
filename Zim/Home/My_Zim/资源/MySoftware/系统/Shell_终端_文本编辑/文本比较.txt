@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-08T17:04:45+08:00
+
+====== 文本比较 ======
+创建日期 星期三 08 一月 2020
+
+Diffuse
+
+替代软件编辑
+在 Linux 下，已经有一些文件比较工具，比如我们曾经提到的命令行的 ColorDiff、图形化的 Meld、BeeDiff、适合 KDE 环境的 KDiff3、Kompare 等等。你可以根据自己的需要来进行选择。 [1]

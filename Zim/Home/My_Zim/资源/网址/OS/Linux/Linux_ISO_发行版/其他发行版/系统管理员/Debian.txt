@@ -11,4 +11,5 @@ https://www.debian.org/doc/manuals/debian-reference/pr01.zh-cn.html
 第 1 章 GNU/Linux 教程
 https://www.debian.org/doc/manuals/debian-reference/ch01.zh-cn.html
 
-[[Linux ISO:Debian]]
+官网中文文档：
+https://www.debian.org/releases/stable/amd64/ch05s03.zh-cn.html

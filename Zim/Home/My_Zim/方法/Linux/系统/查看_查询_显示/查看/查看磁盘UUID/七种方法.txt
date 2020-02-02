@@ -8,8 +8,8 @@ Creation-Date: 2019-04-15T15:07:45+08:00
 Linux 中获取硬盘分区或文件系统的 UUID 的七种方法
 2019-04-15 11:34
 
-译自：https://www.2daygeek.com/check-partitions-uuid-filesystem-uuid-universally-unique-identifier-linux/作者： Magesh Maruthamuthu
-原创：LCTT https://linux.cn/article-10727-1.html译者： liujing97
+译自：https://www.2daygeek.com/check-partitions-uuid-filesystem-uuid-universally-unique-identifier-linux/%E4%BD%9C%E8%80%85： Magesh Maruthamuthu
+原创：LCTT https://linux.cn/article-10727-1.html%E8%AF%91%E8%80%85： liujing97
 
 
 
@@ -18,7 +18,7 @@ Linux 中获取硬盘分区或文件系统的 UUID 的七种方法
 有许多可用的实用程序可以查看 UUID。本文我们将会向你展示多种查看 UUID 的方法，并且你可以选择一种适合于你的方法。
 
 何为 UUID？
-UUID 意即通用唯一识别码Universally Unique Identifier，它可以帮助 Linux 系统识别一个磁盘分区而不是块设备文件。
+__UUID 意即通用唯一识别码Universally Unique Identifier，它可以帮助 Linux 系统识别一个磁盘分区而不是块设备文件。__
 
 自内核 2.15.1 起，libuuid 就是 util-linux-ng 包中的一部分，它被默认安装在 Linux 系统中。UUID 由该库生成，可以合理地认为在一个系统中 UUID 是唯一的，并且在所有系统中也是唯一的。
 
@@ -43,13 +43,13 @@ UUID=69d9dd18-36be-4631-9ebb-78f05fe3217f / ext4 defaults,noatime 0 1
 UUID=a2092b92-af29-4760-8e68-7a201922573b swap swap defaults,noatime 0 2
 我们可以使用下面的 7 个命令来查看。
 
-blkid 命令：定位或打印块设备的属性。
-lsblk 命令：列出所有可用的或指定的块设备的信息。
-hwinfo 命令：硬件信息工具，是另外一个很好的实用工具，用于查询系统中已存在硬件。
-udevadm 命令：udev 管理工具
-tune2fs 命令：调整 ext2/ext3/ext4 文件系统上的可调文件系统参数。
-dumpe2fs 命令：查询 ext2/ext3/ext4 文件系统的信息。　
-使用 by-uuid 路径：该目录下包含有 UUID 和实际的块设备文件，UUID 与实际的块设备文件链接在一起。
+__blkid 命令：定位或打印块设备的属性。__
+__lsblk 命令：列出所有可用的或指定的块设备的信息。__
+__hwinfo 命令：硬件信息工具，是另外一个很好的实用工具，用于查询系统中已存在硬件。__
+__udevadm 命令：udev 管理工具__
+__tune2fs 命令：调整 ext2/ext3/ext4 文件系统上的可调文件系统参数。__
+__dumpe2fs 命令：查询 ext2/ext3/ext4 文件系统的信息。　__
+__使用 by-uuid 路径：该目录下包含有 UUID 和实际的块设备文件，UUID 与实际的块设备文件链接在一起。__
 Linux 中如何使用 blkid 命令查看磁盘分区或文件系统的 UUID？
 blkid 是定位或打印块设备属性的命令行实用工具。它利用 libblkid 库在 Linux 系统中获得到磁盘分区的 UUID。
 

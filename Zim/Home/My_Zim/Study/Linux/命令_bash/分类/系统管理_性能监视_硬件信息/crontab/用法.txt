@@ -20,12 +20,12 @@ Cron 各项的描述
 
 以下是 crontab 文件的格式：
 
-{minute} {hour} {day-of-month} {month} {day-of-week} {full-path-to-shell-script} 
-o minute: 区间为 0 – 59 
-o hour: 区间为0 – 23 
-o day-of-month: 区间为0 – 31 
-o month: 区间为1 – 12. 1 是1月. 12是12月. 
-o Day-of-week: 区间为0 – 7. 周日可以是0或7.
+{__minute} {hour} {day-of-month} {month} {day-of-week} {full-path-to-shell-script} __
+__o minute: 区间为 0 – 59 __
+__o hour: 区间为0 – 23 __
+__o day-of-month: 区间为0 – 31 __
+__o month: 区间为1 – 12. 1 是1月. 12是12月. __
+__o Day-of-week: 区间为0 – 7. 周日可以是0或7.__
 
 Crontab 示例
 

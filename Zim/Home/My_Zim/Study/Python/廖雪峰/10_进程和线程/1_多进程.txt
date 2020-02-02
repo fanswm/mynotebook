@@ -118,7 +118,8 @@ __p = Pool(5)__
 __就可以同时跑5个进程。__
 
 __由于Pool的默认大小是CPU的核数，如果你不幸拥有8核CPU，你要提交至少9个子进程才能看到上面的等待效果。__
-子进程
+
+**__子进程__
 
 很多时候，子进程并不是自身，而是一个外部进程。我们创建了子进程后，还需要控制子进程的输入和输出。
 
@@ -129,7 +130,7 @@ __subprocess模块__可以让我们非常方便地启动一个子进程，然后
 import subprocess
 
 print('$ nslookup www.python.org')
-r = subprocess.call(['nslookup', 'www.python.org'])
+r = __subprocess.call(['nslookup', 'www.python.org'])__
 print('Exit code:', r)
 
 运行结果：
@@ -145,15 +146,15 @@ Address: 199.27.79.223
 
 Exit code: 0
 
-如果子进程还需要输入，则可以通过communicate()方法输入：
+__如果子进程还需要输入，则可以通过communicate()方法输入：__
 
 import subprocess
 
 print('$ nslookup')
-p = subprocess.Popen(['nslookup'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-output, err = p.communicate(b'set q=mx\npython.org\nexit\n')
+__p = subprocess.Popen(['nslookup'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)__
+__output, err = p.communicate(b'set q=mx\npython.org\nexit\n')__
 print(output.decode('utf-8'))
-print('Exit code:', p.returncode)
+__print('Exit code:', p.returncode)__
 
 上面的代码相当于在命令行执行命令nslookup，然后手动输入：
 
@@ -177,9 +178,9 @@ mail.python.org	has AAAA address 2001:888:2000:d::a6
 
 Exit code: 0
 
-进程间通信
+__进程间通信__
 
-Process之间肯定是需要通信的，操作系统提供了很多机制来实现进程间的通信。Python的multiprocessing模块包装了底层的机制，提供了Queue、Pipes等多种方式来交换数据。
+Process之间肯定是需要通信的，操作系统提供了很多机制来实现进程间的通信。Python的multiprocessing模块包装了底层的机制，__提供了Queue、Pipes等多种方式来交换数据。__
 
 我们以Queue为例，在父进程中创建两个子进程，一个往Queue里写数据，一个从Queue里读数据：
 

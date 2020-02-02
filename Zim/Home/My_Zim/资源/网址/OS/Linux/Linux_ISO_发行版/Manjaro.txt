@@ -51,13 +51,13 @@ https://www.jianshu.com/p/1cde4b7ec3c2
 	sudo pacman -S make
 	sudo pacman -S gcc
 
-[[+1 yaourt]]
++1 yaourt
 
 	yaourt -S xx-net
 
-[[+2 xx-net未成功]]
++2 xx-net未成功
 
-[[+3 miredo]]
++3 miredo
 sudo pacman -S trash-cli
 sudo pacman -S tldr
 	tldr --update
