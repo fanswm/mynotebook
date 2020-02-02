@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-22T10:07:32+08:00
+
+====== How To Install Arch Linux Latest Version ======
+Created Monday 22 October 2018
+
+https://www.ostechnix.com/install-arch-linux-latest-version/

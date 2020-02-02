@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-08-16T11:50:46+08:00
+
+====== 网上的方法 ======
+Created 星期五 16 八月 2019
+
+LINUX的
+如何在您的计算机上安装Arch Linux [第1部分] https://www.makeuseof.com/tag/install-arch-linux-computer-part-1/
+
+https://www.makeuseof.com/tags/arch-linux/
+
