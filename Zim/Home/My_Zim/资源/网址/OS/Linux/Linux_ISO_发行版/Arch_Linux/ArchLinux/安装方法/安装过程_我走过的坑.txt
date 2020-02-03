@@ -5,19 +5,85 @@ Creation-Date: 2020-02-01T18:43:47+08:00
 ====== 安装过程 我走过的坑 ======
 Created Saturday 01 February 2020
 
-__# 系统安装位置： / : /dev/sda10, /home: /dev/sda11__
+# 系统安装位置： / : /dev/sda10, /home: /dev/sda11
 
-pacman -S screenfetch xed thunar tldr
+pacman -S screenfetch xed thunar tldr samba 
 
-__# 安装 yay:__
+#  thunar-shares-plugin    # arch 官网： https://wiki.archlinux.org/index.php/Thunar_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+
+yay -S thunar-shares-plugin   # 选择git版本
+
+##  libtool: Version mismatch error.
+
+libtool: Version mismatch error. This is libtool 2.4.6, but the definition of this LT_INIT comes from libtool 2.4.6.42-b88ce. You should recreate aclocal.m4 with macros from libtool 2.4.6 and run autoconf again.
+
+ 
+
+# 安装 GTK3  https://wiki.archlinux.org/index.php/GTK#Installation
+
+ins gtk3
+
+#解决方法：
+#在工程的根目录下执行下面命令：
+autoreconf --force --install 
+./configure 
+make && make install
+
+#没有成功
+
+# 解决方法很简单：运行 
+autoreconf -ivf # 即可。
+./configure
+make
+
+ 
+
+# 出现新的问题：  #  syntax error near unexpected token `GTK,'
+
+# 最终没有成功。 
+
+# 最终我只是装了一个：
+
+ins gvfs-smb﻿​     # 参照manjaro： https://wiki.manjaro.org/index.php?title=Using_Samba_in_your_File_Manager#KDE
+
+ 
+
+# 同步 zim between gitee and github   https://www.cnblogs.com/MikeZhang/p/rsyncExample_20160818.html
+
+rsync -av src_dir to_dir 
+
+# 错误：
+
+```shell
+
+hint: You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it.
+hint: If you meant to add a submodule, use:
+hint: 
+hint: git submodule add <url> mynotebook
+hint: 
+hint: If you added this path by mistake, you can remove it from the
+hint: index with:
+hint: 
+hint: git rm --cached mynotebook
+hint: 
+hint: See "git help submodule" for more information.
+
+``` 
+
+
+
+# 安装 yay:
 
 git clone https://aur.archlinux.org/yay.git
 ls
 cd yay
 makepkg -si
+
  
 
-__# arch 的软件包位置：/var/cache/pacman/pkg/__
+# arch 的软件包位置：/var/cache/pacman/pkg/
 
 # 清理干净软件包，卸载干净：
 
@@ -25,7 +91,7 @@ __# arch 的软件包位置：/var/cache/pacman/pkg/__
 
 ins flameshot drawing ntfs-3g 
 
-# 在文件末尾添加
+在文件末尾添加
 
 [archlinuxcn]
 SigLevel = Optional TrustedOnly
@@ -34,11 +100,11 @@ Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch
 #导入GPG Key
 sudo pacman -Syy && sudo pacman -S archlinuxcn-keyring
 
-# __添加了中科大源后，__也可以直接在添加/删除软件里搜索直接安装，现在可以安装软件了，比如 chrome 和搜狗拼音输入法
+# 添加了中科大源后，也可以直接在添加/删除软件里搜索直接安装，现在可以安装软件了，比如 chrome 和搜狗拼音输入法
 
 ins nutstore
 
-__# 安装 timeshift__
+# 安装 timeshift
 
 yay -S timeshift
 
@@ -52,21 +118,19 @@ sudo timeshift --list    # 查看
 
  
 
-__# Sublime-Text__
+# Sublime-Text
 
 ##  pacman  （imrdr 未成功）
 
 # Install the GPG key:
 
 curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
-# Select the channel to use:
 
-# Stable
-echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
+ 
 
-# Dev
-echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/dev/x86_64" | sudo tee -a /etc/pacman.conf﻿​
-# acpid
+ 
+
+# 没有成功。# acpid
 
 # 电源管理设置位置：仅当您希望配置不受电源管理器禁止的特定事件的行为时，才需要更改/etc/systemd/logind.conf或/etc/systemd/logind.conf.d/*.conf进行更改。
 
@@ -83,6 +147,11 @@ ls -l /usr/lib/modules/5.4.15-arch1-1/kernel/drivers/acpi
 # 检查硬件是否支持该模块：#  这些模块的配置文件在： /etc/modules-load.d  # 一般不需要手动增加这些配置文件。
 
 dmesg | grep acpi﻿​
+
+ 
+
+ 
+
 # 获取电池信息：
 
 ins acpi acpi_call
@@ -120,15 +189,20 @@ ERROR: /run/thinkfan.pid already exists. Either thinkfan is already running, or 
 # thinkpad_acpi需要配置才能让用户空间程序正确控制风扇转速。
 
 # /etc/modprobe.d/thinkpad_acpi.conf
+
 options thinkpad_acpi fan_control=1
+
+ 
+
 #  thinkfan配置文件需要知道如何控制风扇转速。用以下配置替换默认的传感器配置：
 
 # /etc/thinkfan.conf
+
 sensor /sys/devices/virtual/thermal/thermal_zone0/temp
- # systemd，请使用：
+
+# systemd，请使用：
 
 # systemctl enable thinkfan.service﻿​
- 
 
  yaourt -S laptop-mode-tools
 
@@ -136,15 +210,18 @@ systemctl enable laptop-mode.service
 
 #  下面的命令可以用来列出模块的启用配置（启用、禁用或自动）：
 
-$ grep -r '^\(CONTROL\|ENABLE\)_' /etc/laptop-mode/conf.d﻿​
+grep -r '^\(CONTROL\|ENABLE\)_' /etc/laptop-mode/conf.d​
+
 ins hdparm  # 安装硬盘管理软件包 https://wiki.archlinux.org/index.php/Hdparm
 sudo hdparm -I /dev/sdb #获取有关硬盘的信息
 
-sudo hdparm -B /dev/sda #查询当前值，请传递不带值的参数
+sudo hdparm -B /dev/sda #查询当前值，请传递不带值的参数。
+
+# 参数介绍：
 
 -S :
 
-设置驱动器的待机（停工）超时。 超时指定关闭电动机以节省功率之前在空闲（无磁盘活动）中等待多长时间。 值0禁用降速，值1到240指定5秒的倍数，值241到251指定30分钟的倍数。(imrdr 选用241)
+# 设置驱动器的待机（停工）超时。 超时指定关闭电动机以节省功率之前在空闲（无磁盘活动）中等待多长时间。 值0禁用降速，值1到240指定5秒的倍数，值241到251指定30分钟的倍数。(imrdr 选用241)
 
 # 可能的值在1到255之间，较低的值表示更积极的电源管理，较高的值表示更好的性能。从1到127的值允许降速旋转，而从128到254的值不允许降速旋转。值255将完全禁用该功能。
 
@@ -157,25 +234,31 @@ sudo smartctl -i -n standby /dev/sda
 # 使用udev规则进行永久配置 
 
 /etc/udev/rules.d/69-hdparm.rules 
+
 ACTION=="add", SUBSYSTEM=="block", KERNEL=="sda", RUN+="/usr/bin/hdparm -B 254 -S 0 /dev/sda"﻿​ 
+
  
 
 # 系统挂起/休眠后丢失了配置, 则可以使用systemd-sleep重新应用它。将脚本放入/usr/lib/systemd/system-sleep并使其可执行：
 
-/usr/lib/systemd/system-sleep/hdparm # imrdr 创建了一个名叫hdparm的文件 
-#!/bin/sh
+# /usr/lib/systemd/system-sleep/hdparm # imrdr 创建了一个名叫hdparm的文件 
 
-case $1 in post)
-		/usr/bin/hdparm -B 254 -S 0 /dev/sda
-		;;
-esac​  
+#!/bin/sh case $1 in post)         /usr/bin/hdparm -B 254 -S 0 /dev/sda         ;; esac​  
+
  
 
-引导后直接将驱动器置于睡眠状态:
+ 
 
-创建一个systemd服务并启用它：
+ 
+
+# 引导后直接将驱动器置于睡眠状态:
+
+# 创建一个systemd服务并启用它：
 
 /etc/systemd/system/hdparm.service 
+
+```shell
+
 [Unit]
 Description=hdparm sleep
 
@@ -185,7 +268,12 @@ ExecStart=/usr/bin/hdparm -q -S 120 -y /dev/sda
 
 [Install]
 WantedBy=multi-user.target​
- sudo systemctl enabled hdparm.service 
+
+ 
+
+```
+
+sudo systemctl enabled hdparm.service 
 
  
 
@@ -254,10 +342,16 @@ A script is provided to use i3lock's forking mode with the --tranfer-sleep-lock 
 
 ins komorebi
 
- # 声音： https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+# 声音 ALSA
+
+#  https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 
 ins alsa-utils
 alsamixer    # MM是静音，00是有声音。
+
+# 也可以用以下命令消除静音：
+
+amixer sset Master unmute
 
 lspci | grep Audio
 lsmod | grep udio
@@ -266,8 +360,22 @@ speaker-test -c 2
 aplay -L | grep :CARD    # 查找 -D 后面的对数是多少？
 
 
-speaker-test -D default:MID -c 2
+speaker-test -D default:MID -c 2    # 测试
 sudo reboot
+
+# issue:
+
+### 没有声音
+
+ins pulseaudio  pulseaudio-alsa
+
+ins kmix   # KMix — KDE音量控制应用程序，支持多个平台，包括PulseAudio，可配置的系统任务栏小程序。
+
+#  kmix: error while loading shared libraries: libKF5Solid.so.5: cannot open shared object file: No such file or directory
+
+ 
+
+ 
 
  
 
@@ -303,13 +411,18 @@ sudo make install
 
 # 出现以下显示信息：
 
-﻿Install the project...
+```shell
+
+Install the project...
 -- Install configuration: ""
 -- Installing: /usr/local/share/man/man1/qrencode.1
 -- Installing: /usr/local/lib/pkgconfig/libqrencode.pc
 -- Installing: /usr/local/include/qrencode.h
 -- Installing: /usr/local/lib/libqrencode.a
 -- Installing: /usr/local/bin/qrencode
+
+``` 
+
 sudo make clean   # 没有显示信息,是不是makefile中没有 clean 这一项？
 
 重新安装 systemd-light
@@ -318,13 +431,18 @@ yay -S systemd-light
 
 # 遇到以下错误：
 
+```
+
 Error: Could not find all required packages
 meson.build:1046:8: ERROR: Dependency "libqrencode" not found, tried pkgconfig and cmake
 
 # imrdr: libqrencode
+
+```
+
 # 未果。
 
-
+ 
 
 # 尝试以下这样，遇到错误：
 
@@ -336,7 +454,7 @@ makepkg -si
 
 # 未成功。
 
-
+ 
 
 ###### 改成AUR库安装  https://aur.archlinux.org/cgit/aur.git/?h=systemd-light ：
 
@@ -350,7 +468,7 @@ makepkg -si
 
 # 结果未成功。
 
-
+ 
 
 # cpupower 使用
 
@@ -372,9 +490,11 @@ $ cpupower frequency-info
 
 watch grep \"cpu MHz\" /proc/cpuinfo
 
+ 
 
+ 
 
-
+ 
 
 #  PKGBUILD (简体中文):  https://wiki.archlinux.org/index.php/PKGBUILD_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 
@@ -415,4 +535,3 @@ https://blog.csdn.net/a624575745856085/article/details/101618439
 # 开机时自动调整亮度： https://www.cnblogs.com/vanwoos/p/5475912.html
 
 # AUR helpers (简体中文):  https://wiki.archlinux.org/index.php/AUR_helpers_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
-
