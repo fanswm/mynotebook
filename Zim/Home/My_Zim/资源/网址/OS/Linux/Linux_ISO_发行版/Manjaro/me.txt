@@ -39,7 +39,7 @@ Couldn't determine full name for SGPYEUDC_1.TTE
 Couldn't get family name for SGPYEUDC_1.TTE
 ###########
 
-sudo pacman -S google-chrome    #谷歌浏览器
+sudo pacman -S google-chrome    #__谷歌浏览器__
 sudo pacman -S netease-cloud-music   #网易云音乐
 
 sudo pacman -S zim
