@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-04T17:37:41+08:00
+
+====== bypy ======
+Created Monday 04 December 2017
+
+Python client for Baidu Yun (Personal Cloud Storage) 百度云/百度网盘Python客户端 
+
+https://github.com/houtianze/bypy

@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T20:05:38+08:00
+
+====== ubuntu unity-tweak-tool ======
+创建日期 星期二 21 十一月 2017
+
+```
+sudo apt-get install unity-tweak-tool
+sudo apt-get install unity-chromium-extension
+
+```

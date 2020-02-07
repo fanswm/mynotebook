@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-26T08:46:13+08:00
+
+====== 任务管理 项目管理 待办 ======
+Created Sunday 26 November 2017
+doit.im: http://doitim.com/cn/
+things: https://culturedcode.com/things/
+clear:
+目前国内最火的GTD应用：奇妙清单wunderlist
+最大牌的时间管理神器：OmniFocus 2

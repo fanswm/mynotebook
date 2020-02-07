@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-06T22:35:58+08:00
+
+====== 三角剖分 ======
+Created Sunday 06 January 2019
+

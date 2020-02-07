@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T07:39:21+08:00
+
+====== 通配符 ======
+创建日期 星期三 22 十一月 2017
+
+在查找替换对话框中，如果要查找*和?本身，则需要在通配符前面加上波浪号~(输入方法为同时按Shift+数字1旁边那个按键)
+
+如果要查找波浪号~本身，则需要输入两个波浪号~~
+
+在公式中遇到了通配符，可能也需要先将通配符替换成~*或~?
+
+很多函数都支持通配符，比如Vlookup、Hlookup、Match、Sum、Sumif、Sumifs、Countif、Countifs、Maxifs、Minifs、Search、SearchB等，还有各种数据库函数，比如DSum、DCount、DCounta、DAverage、DMax、DMin等。

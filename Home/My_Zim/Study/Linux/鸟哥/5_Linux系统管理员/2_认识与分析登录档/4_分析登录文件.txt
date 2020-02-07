@@ -1,0 +1,175 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T13:36:13+08:00
+
+====== 4 分析登录文件 ======
+Created Wednesday 22 November 2017
+
+ 分析登录文件
+　　4.1 CentOS 默认提供的 logwatch
+　　4.2 鸟哥自己写的登录文件分析工具：
+ 大标题的图示分析登录文件
+登录文件的分析是很重要的！你可以自行以 vi 进入登录文件去查阅相关的资讯。而系统也提供一些软件可以让你从登录文件中取得数据， 例如之前谈过的 last, lastlog, dmesg 等等命令。不过，这些数据毕竟都非常的分散，如果你想要一口气读取所有的登录资讯， 其实有点困扰的。不过，好在 CentOS 有提供 logwatch 这个登录文件分析程序，你可以藉由该程序来了解登录文件资讯。 此外，鸟哥也依据 Red Hat 系统的 syslog 写了一支小程序给大家使用喔！
+
+
+小标题的图示CentOS 默认提供的 logwatch
+虽然有一些有用的系统命令，不过，要了解系统的状态，还是得要分析整个登录文件才行～ 事实上，目前已经有相当多的登录文件分析工具，例如 CentOS 5.x 上面默认的 logwatch 这个套件所提供的分析工具， 他会每天分析一次登录文件，并且将数据以 email 的格式寄送给 root 呢！ 你也可以直接到 logwatch 的官方网站上面看看：
+
+http://www.logwatch.org/
+logwatch 分析的结果如下所示：
+
+[root@www ~]# mail
+Mail version 8.1 6/6/93.  Type ? for help.
+"/var/spool/mail/root": 433 messages 433 new
+>N  1 logwatch@www.vbird.t  Fri Sep  5 11:42  43/1542  "Logwatch for www.vbird.tsai (Linux)"
+ N  2 logwatch@www.vbird.t  Sat Sep  6 15:34  92/2709  "Logwatch for www.vbird.tsai (Linux)"
+ N  3 logwatch@www.vbird.t  Mon Sep  8 15:26  43/1542  "Logwatch for www.vbird.tsai (Linux)"
+....(中间省略)....
+ N431 logwatch@www.vbird.t  Wed Apr  8 04:02  53/1772  "Logwatch for www.vbird.tsai (Linux)"
+& 431
+Message 431:
+From root@www.vbird.tsai  Wed Apr  8 04:02:05 2009
+Date: Wed, 8 Apr 2009 04:02:05 +0800
+To: root@www.vbird.tsai
+From: logwatch@www.vbird.tsai
+Subject: Logwatch for www.vbird.tsai (Linux)
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+
+# 先会说明分析的日期与相关的分析期间！
+ ################### Logwatch 7.3 (03/24/06) ####################
+        Processing Initiated: Wed Apr  8 04:02:05 2009
+        Date Range Processed: yesterday
+                              ( 2009-Apr-07 )
+                              Period is day.
+      Detail Level of Output: 0
+              Type of Output: unformatted
+           Logfiles for Host: www.vbird.tsai
+  ##################################################################
+
+# 底下则是依据各种服务来进行各项分析！先是登陆者的 ssh 服务分析
+ --------------------- SSHD Begin ------------------------
+
+ Users logging in through sshd:
+    root:
+       192.168.100.101: 1 time
+       192.168.100.254: 1 time
+
+ ---------------------- SSHD End -------------------------
+
+# 磁碟容量分析！可以避免你的系统使用过量磁碟，导致的系统不稳问题！
+ --------------------- Disk Space Begin ------------------------
+
+ Filesystem            Size  Used Avail Use% Mounted on
+ /dev/hda2             9.5G  3.8G  5.3G  42% /
+ /dev/hda3             4.8G  1.1G  3.5G  23% /home
+ /dev/hda1              99M   21M   73M  23% /boot
+
+ ---------------------- Disk Space End -------------------------
+ ###################### Logwatch End #########################
+由於鸟哥的测试用主机尚未启动许多服务，所以分析的项目很少。若你的系统已经启动许多服务的话， 那么分析的项目理应会多很多才对。
+
+小标题的图示鸟哥自己写的登录文件分析工具：
+虽然已经有了类似 logwatch 的工具，但是鸟哥自己想要分析的数据毕竟与对方不同～ 所以罗，鸟哥就自己写了一支小程序 (shell script 的语法) 用来分析自己的登录文件， 这支程序分析的登录文件数据其实是固定的，包括有：
+
+/var/log/secure
+/var/log/messages
+/var/log/maillog
+当然啦，还不只这些啦，包括各个主要常见的服务，如 pop3, mail, ftp, su 等会使用到 pam 的服务， 都可以透过鸟哥写的这个小程序来分析与处理呢～整个数据还会输出一些系统资讯。如果你想要使用这个程序的话， 欢迎下载：
+
+http://cn.linux.vbird.org/download/index.php?action=detail&fileid=69
+安装的方法也很简单，只要将上述文件下载并解压缩后，就会得到一个名为 logfile 的目录， 将此目录移动到 /usr/local/virus/ 目录下并修改一下： /usr/local/virus/logfile.sh 文件， 里面的 email 与相关的资讯只要修改一下，你就可以使用啦～啊！还要记得，将这支程序的运行写入 /etc/crontab 当中喔！ 可以在每天的 12:10am 运行这支小程序啦！ ^_^
+
+[root@www ~]# mkdir /usr/local/virus
+[root@www ~]# tar -zxvf logfile-0.1-4-2.tgz -C /usr/local/virus
+[root@www ~]# cd /usr/local/virus/logfile
+[root@www ~]# vi logfile.sh
+email="root@localhost" <==大约在 93 行左右，请填入你的 email ，否则保留默认值
+basedir="/usr/local/virus/logfile" <==保留默认值，除非你的运行目录不同与此！
+
+[root@www ~]# sh logfile.sh
+# 开始尝试分析系统的登录文件，依据你的登录文件大小，分析的时间不固定！
+
+[root@www ~]# vi /etc/crontab
+10 0 * * * root /usr/local/virus/logfile/logfile.sh
+# 添加这一行！让系统在每天的凌晨自己进行登录文件分析！
+
+[root@www ~]# mail
+# 自己找到刚刚输出的结果，该结果的输出有点像底下这样：
+
+# 先进行程序的宣告！你也可以在底下的连结找到一些错误回报！
+##########################################################
+欢迎使用本程序来查验您的登录文件
+本程序目前版本为： Version 0.1-4-2
+程序最后升级日期为： 2006-09-22
+若在您的系统中发现本程序有问题, 欢迎与我联络！
+鸟哥的首页 http://linux.vbird.org
+问题回报： http://phorum.vbird.org/viewtopic.php?t=3425
+##########################################################
+
+# 先看看你的硬件与操作系统的相关情况，尤其是 partition 的使用量更需要随时注意！
+=============== 系统汇整 =================================
+核心版本  : Linux version 2.6.18-92.el5 (mockbuild@builder16.centos.org)
+CPU 资讯  : Intel(R) Celeron(TM) CPU
+          : 1200.062 MHz
+主机名称  : www.vbird.tsai
+统计日期  : 2009/April/08 17:00:59 ( Wednesday )
+分析的日期: Apr  8
+已启动期间: 7 days, 22:46,
+目前主机挂载的 partitions
+       Filesystem            Size  Used Avail Use% Mounted on
+       /dev/hda2             9.5G  3.8G  5.3G  42% /
+       /dev/hda3             4.8G  1.1G  3.5G  23% /home
+       /dev/hda1              99M   21M   73M  23% /boot
+       tmpfs                 363M     0  363M   0% /dev/shm
+
+# 这个程序会将针对 internet 与内部监听的端口分开来显示！
+================= Ports 的相关分析资讯 =======================
+主机激活的 port 与相关的 process owner：
+仅对本机介面开放的 ports (PID|owner|command)
+       tcp 25|(root)|sendmail: accepting connections
+       tcp 631|(root)|cupsd
+       tcp 2207|(root)|python ./hpssd.py
+       tcp 2208|(root)|./hpiod
+对外部介面开放的 ports (PID|owner|command)
+       tcp 22|(root)|/usr/sbin/sshd
+       tcp 111|(rpc)|portmap
+       tcp 737|(root)|rpc.statd
+       udp 111|(rpc)|portmap
+       udp 514|(root)|syslogd -m 0 -r
+       udp 631|(root)|cupsd
+       udp 731|(root)|rpc.statd
+       udp 734|(root)|rpc.statd
+       udp 5353|(avahi)|avahi-daemon: running [www.local]
+       udp 32768|(avahi)|avahi-daemon: running [www.local]
+       udp 32769|(avahi)|avahi-daemon: running [www.local]
+
+# 以下针对有启动的服务个别进行分析！
+================= SSH 的登录文件资讯汇整 =======================
+今日没有使用 SSH 的纪录
+
+
+================= Sednamil 的登录文件资讯汇整 ==================
+您的主机有进行 SASL 身份认证的功能
+
+今日没有 sendmail 的相关资讯
+
+
+================= 全部的登录文件资讯汇整 =======================
+1. 重要的登录记录档 ( Secure file )
+   说明：已经取消了 pop3 的资讯！
+Apr  8 15:46:22 www su: session opened for user vbird by root(uid=0)
+Apr  8 15:47:02 www su: session closed for user vbird
+
+2. 使用 last 这个命令输出的结果
+
+wtmp begins Wed Apr  8 15:19:47 2009
+
+3. 将特重要的 /var/log/messages 列出来瞧瞧！
+   已经取消 crond 与 snmpd 的信息
+Apr  8 15:19:47 www syslogd 1.4.1: restart (remote reception).
+Apr  8 15:34:25 www syslogd 1.4.1: restart (remote reception).
+目前鸟哥都是透过这支程序去分析自己管理的主机，然后再据以了解系统状况，如果有特殊状况则即时进行系统处理！ 而且鸟哥都是将上述的 email 调整成自己可以在 Internet 上面读到的邮件，这样我每天都可以收到正确的登录文件分析资讯哩！
+
+

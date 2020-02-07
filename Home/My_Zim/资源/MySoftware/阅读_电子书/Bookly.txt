@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-25T15:25:18+08:00
+
+====== Bookly ======
+创建日期 星期四 25 四月 2019
+
+这款设计精美的读书记录工具，让你像追剧一样追书：Bookly
+https://sspai.com/post/47513

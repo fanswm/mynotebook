@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-31T15:20:32+08:00
+
+====== 每隔X秒运行一次git pull ======
+Created 星期四 31 一月 2019
+
+每隔X秒运行一次git pull通常，合并冲突出现的原因在于你正在工作的本地仓库不再反映远程仓库的当前状态。这正是我们为什么每天早晨要首先执行一次git pull的缘故。此外，你还可以在后台通过脚本（或是使用GNU Screen）每隔X秒调用一次git pull：$ screen
+$ for((i=1;i<=10000;i+=1)); do sleep X && git pull; done

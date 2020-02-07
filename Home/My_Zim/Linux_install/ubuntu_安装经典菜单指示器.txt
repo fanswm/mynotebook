@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T20:04:47+08:00
+
+====== ubuntu 安装经典菜单指示器 ======
+创建日期 星期二 21 十一月 2017
+
+安装经典菜单指示器
+
+	sudo add-apt-repository ppa:diesch/testing 
+	sudo apt-get update 
+	sudo apt-get install classicmenu-indicator

@@ -1,0 +1,72 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T13:38:06+08:00
+
+====== 搭建RSS订阅服务 ======
+Created Friday 24 November 2017
+
+## 安装docker
++ `sudo curl -sSL https://get.daocloud.io/docker | sh`
+> 此为在树莓派上安装
+
+## 安装postgres
++ `sudo docker run -d --name ttrssdb nornagon/postgres`
+
+```
+Unable to find image 'nornagon/postgres:latest' locally
+latest: Pulling from nornagon/postgres
+a3ed95caeb02: Pull complete 
+f80cb4f9962b: Pull complete 
+97b1b713ad17: Pull complete 
+6e7a6b46cdc8: Pull complete 
+642dc7cda3ae: Pull complete 
+f4291e96c68e: Pull complete 
+ec4eb16fefb8: Pull complete 
+daad7ebdc517: Pull complete 
+878257fd6b1c: Pull complete 
+76db01743f63: Pull complete 
+03ce5e2b74d8: Pull complete 
+30188e474f4e: Pull complete 
+eac441241b3f: Pull complete 
+ed2775208465: Pull complete 
+7406e530697c: Pull complete 
+Digest: sha256:ad9930580803f0939830f0627294a8540a8377fe21f7065abbe46f132a7d20ad
+Status: Downloaded newer image for nornagon/postgres:latest
+4e441dc5d0c7b0750862c321d006432a651cd8a959da494509ba50e6d409677b
+```
+
+## 安装RSS订阅
++ `sudo docker run -d --link ttrssdb:db -p 80:80 -e SELF_URL_PATH=http://172.17.0.1 fischerman/docker-ttrss`
+> -p 80:80：该参数表明，将该容器内应用的 80 端口（冒号后）映射到主机的 80 端口（冒号前）上；“172.17.0.1”是docker的ip。
+
+```
+sudo docker run -d --link ttrssdb:db -p 80:80 -e SELF_URL_PATH=http://172.17.0.1 fischerman/docker-ttrss
+
+Unable to find image 'fischerman/docker-ttrss:latest' locally
+latest: Pulling from fischerman/docker-ttrss
+7ee37f181318: Pull complete 
+df5ffabe5e97: Pull complete 
+ae2040ed51a1: Pull complete 
+3ce7010d244b: Pull complete 
+2538b201d2a6: Pull complete 
+5fd03a7e036f: Pull complete 
+771d161e46c1: Pull complete 
+8f0d22091545: Pull complete 
+70d1258aff08: Pull complete 
+2f161cd4b2ec: Pull complete 
+7494455b2b8b: Pull complete 
+754d17c062c3: Pull complete 
+7dcc193a6bac: Pull complete 
+903e0507333a: Pull complete 
+248c823a3ee0: Pull complete 
+f6031d9b0350: Pull complete 
+fd08aba56c2f: Pull complete 
+Digest: sha256:49e97faa6b02e855e6ac4bca61822096f33a6749d2d818595a1e810e11268437
+Status: Downloaded newer image for fischerman/docker-ttrss:latest
+1de3283f0e41dd68eea104d69d511a398a4a298b5221f34e7659a101b0aa5de9
+docker: Error response from daemon: driver failed programming external connectivity on endpoint dazzling_jackson (8ac913a5a24de3da8c99ae5d9383c53429252331091bcf9b3bd710ce4c2c0ee3): Error starting userland proxy: listen tcp 0.0.0.0:80: bind: address already in use.
+
+```
+
+tags: 树莓派，RSS订阅源，docker
+

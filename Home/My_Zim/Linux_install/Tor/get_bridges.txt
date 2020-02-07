@@ -1,0 +1,27 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-02T10:53:13+08:00
+
+====== get bridges ======
+Created Friday 02 November 2018
+
+mail to bridges: 
+    bridges@torproject.org     
+    for:  get transport obfs3
+
+
+COMMANDs: (combine COMMANDs to specify multiple options simultaneously)
+ get bridges            Request vanilla bridges.
+ get transport [TYPE]   Request a Pluggable Transport by TYPE.
+ get help               Displays this message.
+ get key                Get a copy of BridgeDB's public GnuPG key.
+ get ipv6               Request IPv6 bridges.
+
+Currently supported transport TYPEs:
+ fte
+ obfs3
+ obfs4
+
+
+
+https://bridges.torproject.org/options

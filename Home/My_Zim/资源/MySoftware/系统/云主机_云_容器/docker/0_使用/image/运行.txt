@@ -1,0 +1,48 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-12T16:03:54+08:00
+
+====== 运行 ======
+创建日期 星期二 12 三月 2019
+
+docker run username/repository:tag                   # 运行镜像库中的镜像
+docker run -p 4000:80 friendlyname  		# 运行端口 4000 到 90 的“友好名称”映射
+docker run -d -p 4000:80 friendlyname         # 内容相同，但在分离模式下
+
+最简单的运行镜像为容器
+`docker run —-name container-name -d image-name`
+> –name参数是为容器取的名字，-d表示detached，在后台运行容器，image-name是要使用哪个镜像来运行容器。
+
+使用image创建container并进入交互模式, login shell是/bin/bash
+__# docker run -i -t --name mytest centos:centos6 /bin/bash__
+上面的--name参数可以指定启动后的容器名字，如果不指定则docker会帮我们取一个名字。镜像centos:centos6也可以用IMAGE ID (68edf809afe7) 代替），并且会启动一个伪终端，但通过ps或top命令我们却只能看到一两个进程，因为容器的核心是所执行的应用程序，所需要的资源都是应用程序运行所必需的，除此之外，并没有其它的资源，可见Docker对资源的利用率极高。__此时使用exit或Ctrl+D退出后，这个容器也就消失了（消失后的容器并没有完全删除？）__
+（那么多个TAG不同而IMAGE ID相同的的镜像究竟会运行以哪一个TAG启动呢
+
+__5.2 运行出一个container放到后台运行__
+# docker run -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 2; done"
+ae60c4b642058fefcc61ada85a610914bed9f5df0e2aa147100eab85cea785dc
+它将直接把启动的container挂起放在后台运行（这才叫saas），并且会输出一个CONTAINER ID，
+通过docker ps可以看到这个容器的信息，
+可在container外面查看它的输出docker logs ae60c4b64205，
+也可以通过docker attach ae60c4b64205连接到这个正在运行的终端，
+此时在Ctrl+C退出container就消失了，按ctrl-p ctrl-q可以退出到宿主机，而保持container仍然在运行
+另外，如果-d启动但后面的命令执行完就结束了，如/bin/bash、echo test，则container做完该做的时候依然会终止。而且-d不能与--rm同时使用
+可以通过这种方式来运行memcached、apache等。
+
+启动一个已存在的容器（__run是从image新建容器后再启动）__，以下也可以使用docker start nginx_test代替  
+
+
+
+
+
+imrdr:
+sudo docker run -it centos
+
+当利用 docker run 来创建容器时，Docker 在后台运行的标准操作包括：
+__检查本地是否存在指定的镜像，不存在就从公有仓库下载__
+__利用镜像创建并启动一个容器__
+__分配一个文件系统，并在只读的镜像层外面挂载一层可读写层__
+__从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去__
+__从地址池配置一个 ip 地址给容器__
+__执行用户指定的应用程序__
+__执行完毕后容器被终止__

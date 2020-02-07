@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-14T17:27:30+08:00
+
+====== 文档 ======
+创建日期 星期四 14 三月 2019
+
+https://spacevim.org/cn/quick-start-guide/
+https://everettjf.gitbooks.io/spacevimtutorial/content/
+
+https://spacevim.org/quick-start-guide/#linux-and-macos

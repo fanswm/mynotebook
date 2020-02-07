@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-08-21T17:39:58+08:00
+
+====== 职业资格证书 ======
+创建日期 星期三 21 八月 2019
+
+2018年国家承认的职业资格证书一览表
+http://www.sohu.com/a/245736327_100244522
+{{./职业资格证书1.jpeg}}
+{{./职业资格证书.jpeg}}

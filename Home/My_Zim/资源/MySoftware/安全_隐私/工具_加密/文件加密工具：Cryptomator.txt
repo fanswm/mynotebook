@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-10T13:30:35+08:00
+
+====== 文件加密工具：Cryptomator ======
+创建日期 星期三 10 四月 2019
+
+「涉密不联网，联网不涉密」是许多涉密文件管理的原则。日常生活中，我们有时需要拍摄如身份证、护照等隐私信息的照片，将图片放在云端怕不安全，放在本地又太麻烦。如果你也有这样的困扰，不妨试试这款加密工具 Cryptomator。
+
+
+Cryptomator
+
+Cryptomator 支持 DropBox、Google Drive 等云盘，你也可以将其链接至你自己的云盘上。当然，我们也可以用 Cryptomator 来加密存储本地文件。我们需要为每一个资料库设置一个单独的密码。
+
+Cryptomator 支持 macOS、Windows 及 Linux，它同时也提供了移动客户端，你可以在 GitHub 或 官网 下载它。
+https://github.com/cryptomator/cryptomator
+https://cryptomator.org/

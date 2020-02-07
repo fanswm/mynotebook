@@ -1,0 +1,68 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-22T12:00:47+08:00
+
+====== 9 个有趣的 HTML 5 交互网站 ======
+Created Monday 22 January 2018
+
+一旦打开就忍不住想狂点鼠标，9 个有趣的 HTML 5 交互网站
+https://sspai.com/post/42919
+
+沨沄极客 沨沄极客 21小时前  57  9
+HTML 5 的诞生已经有些时日，它向我们呈现了令人惊叹的视觉效果。基于网页的交互究竟能有多优秀？这些网站可以告诉你答案。
+
+在网页上的精美制作：MakeMePulse
+MakeMePulse 连续两年制作了基于鼠标的交互网页——MakeMePulse 2017 在这个页面中，你可以看到制作精美的灯泡、拍立得、机器人、纸飞机、登月飞船这五个页面。
+
+MakeMePulse 2017
+[MakeMePulse 2017](http://2017.makemepulse.com/)
+同样是 MakeMePulse 制作的 2016 MakeMePulse 年度关键字 网站也是类似的效果。长按页面开始随机选择关键词，每个关键词都可以用鼠标操作，实现很不错的效果。即便是两年前制作的动画效果，放在今天依然毫不逊色，比国内的一众测试网站要炫酷得多。
+
+MakeMePulse 2016
+MakeMePulse 2016
+在线拧魔方：Iamthecu
+Iamthecu 给我们提供了一个在线的三阶魔方，支持自动打乱、自动还原、撤销。网站交互很棒，提供了各种透视视图，来帮助你更清楚的看到还原魔方的技巧和方法。再也不用担心拧乱魔方没法还原了。
+
+Iamthecu 魔方
+[Iamthecu 魔方](http://iamthecu.be/)
+如果你不满足于三阶魔方，另一个网站 [Grubiks](https://www.grubiks.com/) 提供了四阶、五阶、异形、金字塔魔方供你在线游玩。不过这里并不提供还原步骤演示。
+
+Grubiks 异形魔方
+Grubiks 异形魔方
+
+随手就能弹出节奏：Mikutap
+在 [初音未来](https://aidn.jp/mikutap/) Mikutap 中随意点击屏幕就可以让初音未来唱出歌曲，再加上魔性的背景音乐和丰富的动画效果，可以组成各种各样的节奏。
+
+这个网页画风清新，非常动感，「随便按按就能出节奏」的畅快感有如第一次在 GarageBand 中打开示例项目，让「我也有音乐天赋」的错觉油然而生。（笑）
+
+Mikutap
+Mikutap
+网页上的点与线：鼠标躲避球
+这是玩法不同，但表现形式类似的三个小游戏网站——Sinuous、Core、Coil，需要用到鼠标操作。
+http://www.sinuousgame.com/
+https://lab.hakim.se/core/01/
+https://lab.hakim.se/coil/
+
+
+[Sinuous](http://www.sinuousgame.com/) 的玩法是控制鼠标躲避来自远方的红点，碰到红点或碰壁都会 Game Over。游戏过程中还有一些道具，可以干掉这些烦人的红点或者驱散他们，游戏难度分为 1-9 。我玩到难度 6 就玩不下去了，你能否打破这个记录呢？
+
+Sinuous
+Sinuous
+Core 则需要玩家控制防护罩，阻挡红点的入侵。后期红点太多时还可以按住空格，消耗生命达到短时间无敌的效果。是个不错的小游戏。
+
+Core
+Core
+Coil 的玩法是三个游戏中最有创意的，玩家要用鼠标划过屏幕出现的蓝线，不断把蓝点圈住。由于蓝线的长度是由时间决定的，所以不仅需要准确度，速度也不能太慢。最高分玩到了 26000 分左右，欢迎挑战。🌝
+
+Coil
+Coil
+这三个玩法简单的小游戏非常适合消磨时间，如果你跟我一样无聊就来玩玩看吧。
+
+有趣的 HTML 5 交互：FFF.cmiscm
+如果你看了上面这些网站还意犹未尽，还可以去 [FFF.cmiscm](http://fff.cmiscm.com/) 看看。
+
+它包含了多达 15 种由 HTML 5 制作的交互动画。包括「海浪模拟器」「时钟」「雨刮器效果」「数山羊模拟器」「湖面倒映模拟器」等没什么用但很有趣的效果。
+
+FFF.cmiscm
+FFF.cmiscm
+你是否也遇到过这类有意思的以交互为主的网站？欢迎在评论区和大家分享一下。

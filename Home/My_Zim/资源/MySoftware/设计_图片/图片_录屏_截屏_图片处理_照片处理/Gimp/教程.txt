@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-09-22T14:07:43+08:00
+
+====== 教程 ======
+Created 星期日 22 九月 2019
+
+GIMP操作基础教程  http://teliute.org/linux/gimp/lesson20/lesson20.html
+https://www.cnblogs.com/cheermyang/p/4802462.html

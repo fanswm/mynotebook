@@ -1,0 +1,119 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-03T17:32:45+08:00
+
+====== 优雅的CMS系统 — OctoberCMS ======
+Created Wednesday 03 January 2018
+
+https://www.jianshu.com/p/7f2041a008cc
+
+今天我们要介绍的主角是OctoberCMS，它是一款基于Laravel这个PHP开发框架的CMS系统。我猜你可能完全没有听说过它，如果你是个PHPer，可能会听说过WordPress、Drupal、Joomla等等国外知名CMS，当然还有国内老牌的帝国、Dede，新兴的禅知CMS等。如果你是个Rubist，想必听说过RefineryCMS等。如果你是Noder，也有一些CMS系统，如KeystoneJS，Ghost可以勉强算一个。当然，即使在Erlang界也有它的高性能CMS系统Zotonic。
+
+
+各种语言各种框架的CMS系统如此繁多，有的适合几个页面的小站点，有的适合上万页面的大型新闻站，有的适合公司企业展示，有的插件丰富，有的易于扩展，有的代码似浆糊，有的性能处处瓶颈。在这么多的CMS系统中，其实最为常用的无非就那么几个，WordPress、Drupal。抛开一些国内新闻站点使用的久经考验的国产CMS不说，WordPress最大的优点在于插件丰富，几乎你想要的任何功能都有人以插件的形式提供，主流的云服务WordPress都有它们的插件。但最大的缺点也恰恰是这个，由于历史包袱太重，核心代码无法轻易的修改，随便一弄就是数以千计的插件无法使用。打个比方，就像Windows操作系统，WinXP升级到Win7，多少软件就不能用了，崩溃了，现在Win7升级到Win10，各种游戏玩家都在纷纷骂娘。
+
+Drupal VS Wordpress
+Drupal像是WordPress的一面镜子，几乎处处相反。首先Drupal在安全性、可定制性、性能等方面都要远超WordPress，但是后果就是Drupal的易用性远不及WordPress。想要使用Drupal，首先需要了解一大堆Drupal的概念，更别提开发了，都得请专业人员，难怪别人都说Drupal更像是一个开发框架而非CMS系统，相比WordPress的各种钩子插件，Drupal的开发门槛显然要高出许多。
+
+
+其实，从Themeforest这个模板出售站点也可以看出各个CMS系统的流行程度，WordPress单独占一个分类，里面有各种类型CMS的模板，而其他的CMS如Drupal和Joomla等，则归为CMS一类。Drupal为了解决开发难的问题，在Drupal8中使用了Symfony这款PHP框架，原因是开发者可以更好的遵循MVC的开发模式，并且能使用许多Symfony现成的类库。
+
+The PHP Framework For Web Artisans
+关于Laravel和Symfony的比较可以看以下这些文章：
+[1] 最好的 PHP 框架是什么？为什么？
+[2] Symfony2到底比Laravel差在哪里？
+
+简单的说，Symfony功能强大，企业级，但是学习成本高，Laravel借鉴了Symfony，功能强大并且更加易用。所以Drupal之于OctoberCMS就像Symfony之于Laravel。Drupal8功能强大，能够实现你任何想要干的事，但是对于中小站点来说就是大炮打蚊子，而OctoberCMS关注了CMS的核心功能，使用和扩展也不复杂。
+
+下面，我们来正式介绍OctoberCMS了！
+
+问：Github上stars数前三的PHP CMS系统有哪些？
+答1：WordPress！ 对！它有7500个stars，但是它在Github上只是SVN同步源。
+答2：Drupal！ 对！它排第三，有2250个stars。
+答3：纳尼？那是谁？
+答4：OctoberCMS！对！它有4600个stars，实际上的第二，名义上的第一。
+那么一个CMS系统至少需要哪些功能或特性呢？
+
+文章发布 - Wordpress的Blog Drupal的node
+页面发布 - Wordpress的Page Drupal的node
+用户系统 - 用户注册/登录
+权限系统 - 订阅者/编辑/管理员
+那么一个比较完备的CMS系统还需要哪些功能或特性呢？
+
+插件系统 - 丰富的插件
+模板系统 - 可定制的模板或主题
+缓存系统 - 轻松地配置缓存
+那么一个易于使用的CMS系统需要哪些功能或特性呢？
+
+安装部署方便 - Docker image
+支持内建编辑 - 内部修改代码
+容易定制 - 容易写插件
+好了，我们来「快速上手」吧！
+
+1. 安装Docker，OctoberCMS Docker Image
+
+如何安装Docker，DaoCloud可以参见这篇文章：使用DaoCloud安装Docker和镜像
+
+然后使用dragontek/octobercms这个镜像。
+
+$ dao pull dragontek/octobercms
+OctoberCMS支持多种数据库，这里以PostgreSQL为例，我们也下载好这个镜像
+
+$ dao pull postgres
+有了这两个镜像，我们就可以快速部署了
+
+$ docker run --name some-postgres -e POSTGRES_PASSWORD=example -d postgres
+$ docker run --name some-october --link some-postgres:postgres -d dragontek/octobercms
+2. 后台一览
+
+我们可以通过localhost/backend登录后台，初始用户名密码均为admin，当然，如果你运行Docker镜像时进行了修改的话，使用你-e环境变量设置的值。不过，运行后登录后台再进行修改也是完全可以滴。
+
+Admin Backend
+我们可以点击右上角的Admin Person，在「后台设置」中设置语言为「简体中文」。然后我们可以看到左侧菜单栏：
+
+Backend Sidebar
+在「更新」中，我们可以查看现在安装的插件和主题，并且可以搜索新的插件和主题。
+
+Paste_Image.png
+3. 博客和页面
+
+页面设置，可以看到我们能够直接在页面中编辑代码哦。这里的代码编辑器可不容小觑，可不是WordPress那样的白板，这里的编辑器基本是一个小型的Sublime Text，支持多选，列编辑，自动缩进，Emmet般的HTML/CSS自动补全，功能强大到爆炸！
+
+
+当然，对于固定模板的页面，October也提供了类似WordPress那样输入内容的页面，这里的Pages静态页面插件也提供了静态菜单Menus的制作。
+
+
+关于博客系统，我们只需要在后台插件安装页面搜索blog，然后点击安装即可。博客的使用非常简单，之后会详细讲述，你可以自己先试试哟。
+
+4. 用户登录和注册
+
+在用户中心中，我们可以使用「组件」中的「帐号」来添加用户登录和注册页面。
+
+Paste_Image.png
+添加后我们还可以修改成想要的样式，比如由tab分隔成两个子页面。
+
+用户中心页面
+登录注册页面
+用户系统后台
+在layout模板中，我们都可以添加组件中的session模块，来获取登录后的用户信息。
+
+5. 媒体
+
+点击顶部导航栏的媒体，可以看到October支持丰富的媒体属性，如最常见的图片、视频、音频、文档等。
+
+
+
+总体来说，我们可以看到OctoberCMS的后台功能相当强大，并且可以在后台进行代码的修改。事实上，如果是常见的功能，我们完全不用编写任何代码，只需要使用正确的插件和正确的配置即可。
+
+What's NEXT ?
+
+这篇文章只是对October进行了非常简单的讲解，之后会针对OctoberCMS一些最常用，功能最为强大的插件进行详细讲解，千万别错过了哟！
+
+你也可以在 https://octobercms.com/resources 中的 Screencasts 先行一瞥October的强大之处。
+
+
+
+How to Install OctoberCMS on Ubuntu 16.04 LTS
+
+ https://www.howtoforge.com/tutorial/how-to-install-and-configure-octobercms-on-ubuntu-1604/
+

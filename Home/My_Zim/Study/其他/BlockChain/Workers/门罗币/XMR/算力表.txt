@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-20T14:12:48+08:00
+
+====== 算力表 ======
+Created 星期六 20 一月 2018
+
+http://monerobenchmarks.info

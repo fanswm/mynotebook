@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-22T16:01:53+08:00
+
+====== 修改网卡的硬件地址 ======
+创建日期 星期一 22 四月 2019
+
+方法一：
+$ifconfig eth0 hw ether XX:XX:XX:XX:XX:XX
+$/etc/init.d/networking restart(重启网卡)
+方法二：
+以上只是暂时的修改硬件地址要永久修改，直接编辑 /etc/network/interfaces 文件，在 iface eth0 inet static 后面添加一行： pre-up ifconfig eth0 hw ether xx:xx:xx:xx:xx:xx（要改成的MAC）
+$ sudo /etc/init.d/networking restart（重启网卡）

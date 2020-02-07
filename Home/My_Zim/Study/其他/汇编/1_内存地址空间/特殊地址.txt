@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-02T16:05:29+08:00
+
+====== 特殊地址 ======
+Created Wednesday 02 January 2019
+
++ pc机主板上的ROM中写有一个日期,在内存: FFF00-FFFFF的某几个单元中.
+
++ 8086CPU加电启动或复位后(即CPU刚开始工作时),CS和IP被设置为:
+CS=FFFFH;
+IP=0000H.
+__FFFF0H单元中的指令是8086PC机开机后执行的第一条指令;__

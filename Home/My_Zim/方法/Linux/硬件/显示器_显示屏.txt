@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-09-04T11:10:18+08:00
+
+====== 显示器 显示屏 ======
+Created 星期三 04 九月 2019
+
+[[资源:MySoftware:系统:显示器管理]]
+
+我的显示器：win7: 最佳分辨率：1360*768；
+
+redshift:  自动高速亮度。

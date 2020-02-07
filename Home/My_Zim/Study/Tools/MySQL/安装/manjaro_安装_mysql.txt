@@ -1,0 +1,71 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-20T05:45:17+08:00
+
+====== manjaro 安装 mysql ======
+创建日期 星期五 20 十二月 2019
+
+第一步： 安装 MySQL
+安装命令如下：
+
+sudo pacman -S mysql
+
+__第二步： 初始化__
+__sudo mysqld --initialize --user=mysql --basedir=/usr --datadir=/var/lib/mysql__
+
+如果成功则返回以下信息
+
+2018-12-18T13:52:12.107493Z 0 [Warning] [MY-010915] [Server] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2018-12-18T13:52:12.107563Z 0 [System] [MY-013169] [Server] /usr/bin/mysqld (mysqld 8.0.13) initializing of server in progress as process 1376
+2018-12-18T13:52:12.108739Z 0 [Warning] [MY-013242] [Server] --character-set-server: 'utf8' is currently an alias for the character set UTF8MB3, but will be an alias for UTF8MB4 in a future release. Please consider using UTF8MB4 in order to be unambiguous.
+2018-12-18T13:52:12.108748Z 0 [Warning] [MY-013244] [Server] --collation-server: 'utf8_general_ci' is a collation of the deprecated character set UTF8MB3. Please consider using UTF8MB4 with an appropriate collation instead.
+2018-12-18T13:52:32.034755Z 5 [Note] [MY-010454] [Server] A temporary password is generated for __root@localhost: uJq1y<0:Y(cx__
+2018-12-18T13:52:47.269030Z 0 [System] [MY-013170] [Server] /usr/bin/mysqld (mysqld 8.0.13) initializing of server has completed
+
+红色标注的就是用户名和密码。
+
+如果你的返回信息中提示有Error而且没有用户名和密码则说明失败了，这时候则需要你卸载你的mysql然后重新安装
+
+卸载mysql：  sudo pacman -Rs mysql
+
+然后删除/var/lib/mysql目录：sudo rm -rf  /var/lib/mysql然后重新执行第一步。
+
+第三步： 开机自启
+sudo systemctl enable mysqld.service
+
+第四步： 启动 MySQL 服务
+sudo systemctl start mysqld.service
+
+第五步：连接数据库
+mysql -uroot -p
+
+这里我的密码是：uJq1y<0:Y(cx       这个密码在第二部的返回初始化信息中
+
+连接成功
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 20
+Server version: 8.0.13 Source distribution
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+ 
+
+第六步：修改密码
+系统初始化的密码不是我们个人习惯的很难记，所以我们要修改密码，刚才已经成功登录了Mysql
+
+输入如下命令
+
+ ALTER user 'root'@'localhost' IDENTIFIED BY 'new_password';
+
+————————————————
+
+版权声明：本文为CSDN博主「Bruce_Chou」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+
+原文链接：https://blog.csdn.net/Bruce_Chou/article/details/85081721

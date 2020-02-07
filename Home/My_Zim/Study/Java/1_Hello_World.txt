@@ -1,0 +1,38 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-02-24T13:07:00+08:00
+
+====== 1 Hello World ======
+创建日期 星期六 24 二月 2018
+
+====== 环境搭建 ======
+
+__变量：__
+JAVA_HOME：D:\Java\jdk1.8.0_91
+CLASSPATH：.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;（前面有英文点号）
+Path：%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;
+
+__Helloworld：__
+```
+public class HelloWorld {
+	public static void main(String[] args) {
+		System.out.println("Hello World");
+	}
+}
+```
+> 推荐使用 `String[] args`
+String[] args 还有一种等价的写法： String... args
+main 是一个程序的入口，一个 java 程序运行必须而且有且仅有一个 main 方法。
+args[0] 是你传入的第一个参数，args[1]是传入的第二个参数，以此类推。
+
+====== 编译 ======
+创建日期 星期六 24 二月 2018
+
+javac HelloWorld.java
+java ./HelloWorld
+（java命令后面不要加class）
+
+从jdk13开始：
+运行：
+java HelloWorld
+不要加./

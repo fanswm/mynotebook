@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-12T16:33:25+08:00
+
+====== push ======
+创建日期 星期二 12 三月 2019
+
+与上面的pull对应，可以推送到Docker Hub的Public、Private以及私服，__但不能推送到Top Level Repository。__
+
+# docker push seanlook/mongo
+# docker push registry.tp-link.net:5000/mongo:2014-10-27
+registry.tp-link.net也可以写成IP，172.29.88.222。
+__在repository不存在的情况下，命令行下push上去的会为我们创建为私有库，然而通过浏览器创建的默认为公共库。__

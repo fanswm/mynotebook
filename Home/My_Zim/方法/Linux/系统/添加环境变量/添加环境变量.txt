@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T11:59:37+08:00
+
+====== 添加环境变量 ======
+Created Friday 24 November 2017
+
++ `vim ~/.bashrc`
+> append:
+> `PATH=$PATH:/home/myusername/anaconda2/bin`
+
++ `source ~/.bashrc`

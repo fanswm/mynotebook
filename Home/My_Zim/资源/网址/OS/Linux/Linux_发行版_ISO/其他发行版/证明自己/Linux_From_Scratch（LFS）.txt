@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-01T10:59:38+08:00
+
+====== Linux From Scratch（LFS） ======
+Created Thursday 01 November 2018
+
+http://www.linuxfromscratch.org/
+
+
+Linux From Scratch Book[http://www.linuxfromscratch.org/lfs/download.html]
+
+中文版： https://lctt.github.io/LFS-BOOK/
+
+你和 Linux 极客只差一个 LFS：LFS 8.3 中文翻译版本发布！： https://linux.cn/article-8438-1.html?utm_source=weibo&utm_medium=weibo

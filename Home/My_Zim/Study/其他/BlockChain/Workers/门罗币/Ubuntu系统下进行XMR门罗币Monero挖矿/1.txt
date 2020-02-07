@@ -1,0 +1,29 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-19T21:09:49+08:00
+
+====== 1 ======
+创建日期 星期五 19 一月 2018
+
+**************** Copy&Paste BEGIN ****************
+
+"cpu_threads_conf" :
+[
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : false },
+],
+
+**************** Copy&Paste END ****************
+
+
+⋊> ~ openssl rand -hex 32                                               05:59:14
+caca60a19f5c2cd6ede884aaac096ec4f5985b6aea42f798711fcea7c2aaaae2
+
+
+我的electrum:收钱地址：
+1CdTRppgvFWUZvNxhfgqNdVF4nHGDBxs3j
+
+我的公钥：
+xpub661MyMwAqRbcFbqgyNSL13jS9PKUXQNzy1nexc9LR94CK2cSC1ufP557ZdEP6mU1eBWRpcVWvcDfg4UTtBs2QDxkkCGAof4WL3oZyhu2PaZ
+
+
+

@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-28T13:59:50+08:00
+
+====== 你不知道的 Chrome 调试工具技巧 ======
+创建日期 星期一 28 一月 2019
+
+1 console中的 '$' https://juejin.im/post/5c09a80151882521c81168a2
+2 
+断点 https://juejin.im/post/5c1b16556fb9a049ff4e14dd

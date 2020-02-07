@@ -1,0 +1,130 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-15T14:25:29+08:00
+
+====== An Easy And Fast Way To Share Files Over Internet From Command Line ======
+Created Monday 15 October 2018
+
+https://www.ostechnix.com/easy-fast-way-share-files-internet-command-line/
+
+An Easy And Fast Way To Share Files Over Internet From Command Line
+BY SK · PUBLISHED APRIL 8, 2017 · UPDATED APRIL 9, 2018
+
+Share Files Over Internet From Command Line
+There are plenty of file sharing utilities on the web. Some of them are CLI-based, and some of them are GUI-based. Some of them are free, and some of them are paid. When it comes to share or transfer large files from command line over Internet, there are only a few. One of them is Transfer.sh. No, it isn’t a script, it is a website. It allows you to share files over Internet easily and quickly. You don’t need to install anything except cURL or wget. Most of the Linux distributions comes preinstalled with those utilities, so you don’t need to install anything, really.
+
+Transfer.sh allows you to upload files up to 10 GB in one go. All shared files automatically expire after 14 days, so you don’t need to worry about removing them manually. We can upload a single or group files in one go. All files can be encrypted before uploading them. We can scan the uploaded files for malware or viruses with ClamAV or VirusTotal. And, of course, it is completely FREE. For more details look at the project’s homepage link attached at the end of this guide.
+
+Download – Free eBook: “Linux® Quick Fix Notebook – Free 696 Page eBook”
+Share Files Over Internet From Command Line Using transfer.sh
+Sharing or transferring files using transfer.sh is not a big deal. First let us upload the files.
+
+Upload files
+
+All you have to do is run the following command to share the files:
+
+$ curl --upload-file Amazon_s3_tutorial.pdf https://transfer.sh/Amazon_s3_tutorial.pdf
+Here, Amazon_s3_tutorial.pdf is the file in my Home folder.
+
+Sample output:
+
+https://transfer.sh/S9ewb/Amazon_s3_tutorial.pdf
+When the upload is completed, the service returns the unique download link of the file. You can pass this URL to anyone who wants to download and use this file.
+
+It is also possible to upload files using ‘wget’.
+
+$ wget --method PUT --body-file=/home/sk/file.pdf https://transfer.sh/file.pdf -O - -nv
+Transfer.sh allows us to upload multiple files in one go.
+
+To upload multiple files at once, run:
+
+$ curl -i -F filedata=@/home/sk/Downloads/bash_tips.pdf -F filedata=@/home/sk/Downloads/Docker.pdf https://transfer.sh/
+Sample output:
+
+HTTP/1.1 100 Continue
+
+HTTP/1.1 200 OK
+Date: Sat, 08 Apr 2017 10:10:01 GMT
+Content-Type: text/plain
+Content-Length: 75
+Connection: keep-alive
+Server: Transfer.sh HTTP Server 1.0
+X-Made-With: <3 by DutchCoders
+X-Served-By: Proudly served by DutchCoders
+
+https://transfer.sh/E7MLa/bash_tips.pdfhttps://transfer.sh/E7MLa/Docker.pdf
+Once the upload is complete, Transfer.sh will give you a unique download links for each files.
+
+Download files
+
+To download the file, just run:
+
+$ curl https://transfer.sh/S9ewb/Amazon_s3_tutorial.pdf -o Amazon_s3_tutorial.pdf
+Sample output:
+
+% Total % Received % Xferd Average Speed Time Time Time Current
+ Dload Upload Total Spent Left Speed
+100 693k 100 693k 0 0 171k 0 0:00:04 0:00:04 --:--:-- 171k
+Alternatively, you can preview and download it from your Web browser. Just place the download link on the address bar of your web browser and click the download button to download the shared file.
+
+
+
+Encrypt and upload files
+
+Transfer.sh allows you to encrypt and upload the files.
+
+To encrypt and upload file, run:
+
+$ cat /home/sk/file.txt|gpg -ac -o-|curl -X PUT --upload-file "-" https://transfer.sh/file.txt
+You’ll be asked to enter a passphrase twice. Then, transfer.sh will give you the download link of the encrypted file.
+
+https://transfer.sh/140GMQ/file.txt
+Decrypt and download files
+
+To decrypt and download the above encrypted file, run:
+
+$ curl https://transfer.sh/140GMQ/file.txt|gpg -o- > /home/sk/ostechnix.txt
+Sample output:
+
+% Total % Received % Xferd Average Speed Time Time Time Current
+ Dload Upload Total Spent Left Speed
+ 0 0 0 0 0 0 0 0 --:--:-- --:--:-- --:--:-- 0gpg: WARNING: no command supplied. Trying to guess what you mean ...
+100 220 100 220 0 0 113 0 0:00:01 0:00:01 --:--:-- 113
+gpg: AES encrypted data
+gpg: encrypted with 1 passphrase
+Add alias
+
+If you plan to frequently use this service, you can add alias to .bashrc or .zshrc files to make this command even more easier.
+
+If you use BASH shell, edit ~/.bashrc file:
+
+$ sudo vi ~/.bashrc
+Add the following lines at the end.
+
+transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi 
+tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }
+Save and close the file. Then, run the following command to take effect the saved changes.
+
+$ source ~/.bashrc
+Now, you can upload and download files as shown below.
+
+$ transfer file.txt
+Sample output:
+
+################################################################## 100.0%
+https://transfer.sh/yjRW9/file.txt
+Also check a similar file sharing utility – PSiTransfer.
+
+PSiTransfer – A Simple Open Source Self-hosted File Sharing Solution
+Conclusion
+I must admit that I really liked transfer.sh. I haven’t seen or used this kind of file sharing tools before. As far as I tested this tool, it is really easy and very fast. And yes, some of the popular web services such as Google Drive, One Drive also allows you to share and transfer files over Internet. But they have some limitations. You need to have a registered account to use those services. But, transfer.sh doesn’t need any registered account. And, it’s really easy and fast to share large files. More importantly, you don’t need to leave your Terminal and don’t need to install any extra applications to share the files.
+
+If you know any similar command line file sharing tools, please let me know in the comment section below. I am all ears!
+
+Hope this helps. I will be soon here with another useful guide. If you find this guide useful, please share it on your social and professional networks.
+
+Cheers!
+
+Resource:
+
+Transfer.sh website

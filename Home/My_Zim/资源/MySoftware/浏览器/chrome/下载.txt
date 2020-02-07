@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-04T14:01:23+08:00
+
+====== 下载 ======
+Created Thursday 04 January 2018
+
+http://www.cnplugins.com/
+
+
+浏览迷网站：http://liulanmi.com/
+新浪软件中心：http://tech.sina.com.cn/down/
+卡饭chrome区：http://bbs.kafan.cn/forum-214-1.html
+chrome离线包：https://api.shuax.com/tools/getchrome

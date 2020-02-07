@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T15:04:25+08:00
+
+====== Firefox Quantum ======
+Created Wednesday 24 October 2018
+
+Firefox Quantum[89] 是一款漂亮、快速、完善并且可自定义的浏览器。它也是自由开源的，包含有开发人员所需要的工具，对于初学者也没有任何使用门槛。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Firefox Quantum。
+
+$ sudo add-apt-repository ppa:mozillateam/firefox-next
+$ sudo apt update && sudo apt upgrade
+$ sudo apt install firefox
+https://www.mozilla.org/en-US/firefox/

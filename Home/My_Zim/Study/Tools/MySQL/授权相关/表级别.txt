@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-06T11:57:42+08:00
+
+====== 表级别 ======
+Created Wednesday 06 December 2017
+
+授权：
+
+mysql> grant select,insert,update on 数据库名.表名 to 用户名

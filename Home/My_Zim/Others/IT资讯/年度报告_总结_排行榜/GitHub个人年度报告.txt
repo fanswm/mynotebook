@@ -1,0 +1,30 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-23T15:35:02+08:00
+
+====== GitHub个人年度报告 ======
+创建日期 星期三 23 一月 2019
+
+https://mp.weixin.qq.com/s?__biz=MzIzMDQyMjcxOA==&mid=2247486803&idx=2&sn=ae9efeb54c910f4728a9fcb29023bc4c&chksm=e8b2ec82dfc56594cc457f941f760bf3547b433eea1bd12c971d714436dd1e4154e5d47627a7&mpshare=1&scene=1&srcid=0123lMS7Rej7sSDSrddRCH01#rd
+首先，咱们看这张海报上面，这个程序员的GitHub的名字叫做mgravell，上面第一部分的那个绿点图就是每个人在2018年每天提交代码的情况。这个其实就是用爬虫从网页中截的一张图片。
+
+
+
+第二部分就是文字部分，大家看到连续多少钱敲代码，以及提交了多少代码，这些数据都是真实的数据，都是从你的GitHub主页采集的。最后我会把这个海报封装到一个网页里面。
+
+
+
+当然，这里面涉及到的技术比较多，因为GitHub速度比较慢，如何做优化。在网页上自动截图也比较慢怎么做优化。其中有很多坑。这个如果大家有兴趣，留在以后说吧。
+
+
+
+。。。
+
+
+
+说到这里估计有很多小伙伴跃跃欲试了，想看看自己的2018是什么样子的。那怎么查看自己的2018年度GitHub报告呢？
+
+
+
+http://62.234.130.12:5000/github/%E4%BD%A0%E7%9A%84GitHub_ID
+

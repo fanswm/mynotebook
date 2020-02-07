@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-16T11:28:08+08:00
+
+====== Mazwai ======
+创建日期 星期二 16 四月 2019
+
+http://mazwai.com/
+Mazwai 是基于 Creative Commons 协议的高清视频片段和视频的网站，做产品素材和网站动态背景都是不错的选择。

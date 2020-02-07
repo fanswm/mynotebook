@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-07-22T11:39:43+08:00
+
+====== GCC ======
+创建日期 星期一 22 七月 2019
+

@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-27T23:33:26+08:00
+
+====== 服务重启 ======
+创建日期 星期三 27 十一月 2019
+
+sudo service apache2 restart
+sudo systemctl reload apache2
+sudo /etc/init.d/apache2 start
+

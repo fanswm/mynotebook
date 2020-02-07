@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-18T23:13:08+08:00
+
+====== 下载 ======
+创建日期 星期日 18 十一月 2018
+
+http://shumeipai.nxez.com/download#os
+
+https://sourceforge.net/projects/berryboot/files/os_images/

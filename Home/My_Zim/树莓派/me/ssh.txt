@@ -1,0 +1,22 @@
+﻿Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-21T21:38:16+08:00
+
+====== ssh ======
+创建日期 星期三 21 十一月 2018
+
+ssh创建key：
+$ ssh-keygen
+/home/pi/.ssh/id_rsa
+mssh1
+the key fingerprint is:
+c8:b3:32:c3:0b:f7:ca:bd:1c:8b:75:87:77:ab:a5:16 pi@fspi
+it is mine;
+myusername don't know:fe:df:b1:95:8e:55:01:09:97:6c:b6:be:68:b9:8...
+
+https://blog.csdn.net/hu5566798/article/details/80659621
+sudo apt-get install openssh-server
+sudo rm -rf /etc/ssh/ssh_host_*
+sudo dpkg-reconfigure openssh-server
+
+

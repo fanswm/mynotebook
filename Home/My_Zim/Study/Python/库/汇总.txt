@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-25T11:44:21+08:00
+
+====== 汇总 ======
+Created Thursday 25 October 2018
+
+pymysql 一个可以连接MySQL实例并且实现增删改查功能的库
+
+datetime Python标准库中自带的关于时间的库
+
+·openpyxl 一个可以读写07版以后的Excel文档（.xlsx格式也支持）的库
+
+·smtplib SMTP即简单邮件传输协议，Python简单封装成了一个库
+
+·email 一个用来处理邮件消息的库

@@ -1,0 +1,22 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:47:03+08:00
+
+====== Rhythmbox ======
+Created Wednesday 24 October 2018
+
+Rhythmbox[58] 支持海量种类的音乐，目前被认为是最可靠的音乐播放器，并由 Ubuntu 自带。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Rhythmbox。
+
+$ sudo add-apt-repository ppa:fossfreedom/rhythmbox
+$ sudo apt-get update
+$ sudo apt-get install rhythmbox
+https://wiki.gnome.org/Apps/Rhythmbox
+
+
+Rhythmbox[4] 是 GNOME 桌面的默认播放器，但是它在其它桌面工作得也很好。Rhythmbox 的界面比 Clementine 的界面稍微时尚一点，它的设计遵循极简的理念。这并不意味着它缺乏特性，相反 Rhythmbox 提供无间隔回放、支持 Soundcloud、专辑封面显示、从 Last.fm 和 Libre.fm 导入音频、支持 Jamendo、播客订阅（从 Apple iTunes[5]）、从网页远程控制等特性。
+
+在 Rhythmbox 中发现的一个很好的特性是支持插件，这使得你可以使用像 DAAP 音乐分享、FM 电台、封面查找、通知、ReplayGain、歌词等特性。
+
+Rhythmbox 播放列表特性不像 Clementine 的那么强大，但是将你的音乐整理进任何形式的快速播放列表还是很简单的。尽管 Rhythmbox 的界面（图二）比 Clementine 要时髦一点，但是它不像 Clementine 那样灵活。

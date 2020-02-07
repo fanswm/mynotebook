@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-09T08:24:36+08:00
+
+====== DEVONthink ======
+Created Tuesday 09 October 2018
+
+从 Evernote 到 DEVONthink
+https://sspai.com/post/44648
+
+5 个实用脚本，把 DEVONthink 打造成个人知识库
+https://sspai.com/post/44109

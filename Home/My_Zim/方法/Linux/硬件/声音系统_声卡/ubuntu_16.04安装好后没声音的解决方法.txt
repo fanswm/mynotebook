@@ -1,0 +1,43 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-23T11:06:11+08:00
+
+====== ubuntu 16.04安装好后没声音的解决方法 ======
+创建日期 星期二 23 四月 2019
+
+http://www.linuxdiyf.com/linux/33178.html
+刚安装好Ubuntu16.04 刚安装好后没声音，找了好多方法都不行，看到网上说通过安装pavucontrol和alsamixer调节解决，最后无意发现一个方法，总算是可以用了，在此记录一下。可能有的可以解决，可是我的设置没什么问题，调节pavucontrol和alsamixer并不能解决。而且奇怪的是时好时坏，有事开机，声卡可以识别，有时又不行。
+ 
+一、先说说用alsamixer 调节的方法吧：
+alsamixer是Linux 音频架构ALSA工具的其中一个，用于配置音频的各个参数。
+alsamixer是基于文本下的图形界面的，可以通过键盘的上下键，左右键等，很方便地设置需要的音量，开关某个switch（开关）等等操作，
+一般桌面版Linux系统会自动安装声卡驱动，如果没有的，手动安装
+sudo apt-get install alsa-base
+__然后终端执行__
+__alsamixer__
+会出现调节界面
+ubuntu 16.04安装好后没声音的解决方法
+从图中可以看到Master, Headphone,Speaker,PCM,__当用扬声器播放时，Master和Speaker不能为MM，因为MM代表静音__，如图我时用外音播放，没插耳机，所以耳机模式为MM，当插入耳机时，MM变得可调，Speaker变为MM，__如果你的不是，可以通过左右移动键选择要设置的项，然后按下M键改变MM和00,00状态为工作状态__，__可以通过上下移动键调节音量大小__。__PCM也不能为MM模式__。我的这里没什么问题，即使没问题，也还是没声音。
+ 
+二、如果你像我一样调节alsamixer不能解决问题，很有可能时电脑内部声卡数据传输有问题，正好我有一个大屏显示器，然后我用HDMI线讲电脑连接到显示器，小音响连接到显示器的音频输出孔----耳机插孔，通过点击桌面右上角声音图标的最后一项 -声音设置-我连接显示屏后，输出设置里后多了一个声卡，如图所示：
+ubuntu 16.04安装好后没声音的解决方法
+然后我选择用HDMI/DisplayPort 2声卡来播放，就可以了。下面一个声卡 ”扬声器“ 开机后有时能用有时却不能用，一直纳闷，不过通过外接显示器来输出声音总算解决了我的问题。
+ 
+三、补充解决方法三
+最近用电脑时出现根目录磁盘空间不足的报错，于是磁盘分析发现/var/log占用空间太大，近30G，打开发现内核日志和系统日志都非常大。点开发现都是重复的pcie问题，
+报错信息如下：
+zzf-ubuntu kernel: [  339.364989] pcieport 0000:00:1c.5:    [ 0] Receiver Error(First)
+zzf-ubuntu kernel: [  339.364999] pcieport 0000:00:1c.5: AER: Multiple Corrected error received: id=00e5
+zzf-ubuntu kernel: [  339.365644] pcieport 0000:00:1c.5: can't find device of ID00e5
+zzf-ubuntu kernel: [  339.365647] pcieport 0000:00:1c.5: AER: Corrected error received: id=00e5
+zzf-ubuntu kernel: [  339.365657] pcieport 0000:00:1c.5: PCIe Bus Error: severity=Corrected, type=Physical Layer, id=00e5(Receiver ID)
+zzf-ubuntu kernel: [  339.365664] pcieport 0000:00:1c.5:   device [8086:9d15] error status/mask=00000001/00002000
+于是，又想到每次关机时都会有一些pcie的报错信息，一开始没在意，可现在联系起来，感觉应该时pcie问题导致声音问题，声卡大都采用PCI或者PCIE接口，自然而然声音信息就要听过pcie总线传输，现在pcie bus有问题，声音问题也就可以解释了。然后找到的方法是，引导时加入
+pci=nomsi
+具体方法可以查看文章：解决Linux下pcieport 0000:00:1c.5问题导致的系统根目录/磁盘空间不足（http://www.linuxdiyf.com/linux/33177.html）
+ 
+解决ubuntu16.04升级内核后耳机没声音的问题：http://www.linuxdiyf.com/linux/32834.html
+ubuntu声音系统linux没声音即使安装pulseaudio组件也不能使用：http://www.linuxdiyf.com/linux/27629.html
+ubuntu没声音？：http://www.linuxdiyf.com/linux/25529.html
+安装win7和Ubuntu双系统后，win7耳机没声音，外放有声音：http://www.linuxdiyf.com/linux/14318.html
+Ubuntu蓝牙音频设备可以配对但没声音的临时解决方案：http://www.linuxdiyf.com/linux/13804.html

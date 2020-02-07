@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-31T19:50:52+08:00
+
+====== 4 运算 ======
+Created Monday 31 December 2018
+
+在进行数据传送或运算时,注意指令的两个操作数必须位数一样.
+
+mov al,c5h
+add al,93h
+'c5+93=158h
+这时158h中的1,并不能在ah中保存,因为进行的是8位运算;

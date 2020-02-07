@@ -1,0 +1,53 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-07T20:38:38+08:00
+
+====== wiki ======
+创建日期 星期五 07 二月 2020
+
+pacman -Ss pkg    查询没有安装的软件包;
+
+pacman -Rs pkg    删除指定软件包，及其所有没有被其他已安装软件包使用的依赖关系
+
+想要查看哪些包属于 gnome 组，运行：
+
+
+1
+# pacman -Sg gnome  
+
+
+ pacman 将下载的软件包保存在 /var/cache/pacman/pkg/
+
+ 
+
+查看哪些包属于 gnome 组:  # pacman -Sg gnome
+
+也可以访问 https://www.archlinux.org/groups/ 查看可用的包组。
+
+ 位置： /etc/pacman.conf​
+
+回滚：  https://wiki.archlinux.org/index.php/Arch_Linux_Archive_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+
+如何恢复所有包到指定日期： https://wiki.archlinux.org/index.php/Arch_Linux_Archive_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%E6%89%80%E6%9C%89%E5%8C%85%E5%88%B0%E6%8C%87%E5%AE%9A%E6%97%A5%E6%9C%9F
+
+ 
+
+https://archive.archlinux.org/repos/2019/11/30/
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 

@@ -1,0 +1,141 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-18T13:56:03+08:00
+
+====== 修改树莓派的开机启动画面 ======
+Created Tuesday 18 December 2018
+
+修改树莓派的开机启动画面
+2018年12月16日 Spoony 未分类 0
+
+
+树莓派修改开机界面主要分为三步：1. 屏蔽彩虹屏；2. 屏蔽开机滚动代码；3. 设置开机界面。
+
+1. 屏蔽彩虹屏
+
+彩虹屏即树莓派开机自检GPU，会在屏幕中央出现彩虹色的方块。
+
+1
+sudo nano /boot/config.txt
+在config.txt中添加一行disable_splash=1，字面上的意思就是取消启动界面。
+
+
+2. 屏蔽开机滚动代码
+
+我们需要修改文件/boot/cmdline.txt
+
+1
+sudo nano /boot/cmdline.txt
+将console=tty1修改成console=tty3（是将开机的滚动代码指向tty3，从而开机时的tty1没有代码。2016年9月以后的raspbian镜像tty1无需更改成tty3），并添加一句loglevel=3，修改后的文件如下：
+
+1
+dwc_otg.lpm_enable=0 console=tty3 console=ttyAMA0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait fbcon=map:10 fbcon=font:ProFont6x11 logo.nologo loglevel=3
+3. 设置开机界面
+
+首先安装 fbi
+
+1
+sudo apt-get install fbi
+界面图片准备
+就开机界面的图片的分辨率不要超过屏幕分辨率，格式为.png，重命名为splash.png，然后复制到/etc/目录下。
+
+开机脚本
+在/etc/init.d/目录下新建文件asplashscreen
+
+1
+sudo nano /etc/init.d/asplashscreen
+在文件中输入：
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          asplashscreen
+# Required-Start:
+# Required-Stop:
+# Should-Start:      
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Show custom splashscreen
+# Description:       Show custom splashscreen
+### END INIT INFO
+ 
+ 
+do_start () {
+ 
+    /usr/bin/fbi -T 1 -noverbose -a /etc/splash.png    
+    exit 0
+}
+ 
+case "$1" in
+  start|"")
+    do_start
+    ;;
+  restart|reload|force-reload)
+    echo "Error: argument '$1' not supported" >&2
+    exit 3
+    ;;
+  stop)
+    # No-op
+    ;;
+  status)
+    exit 0
+    ;;
+  *)
+    echo "Usage: asplashscreen [start|stop]" >&2
+    exit 3
+    ;;
+esac
+ 
+:
+然后使这个文件可执行，开机自动运行：
+
+1
+2
+3
+sudo chmod a+x /etc/init.d/asplashscreen
+sudo insserv /etc/init.d/asplashscreen
+reboot
+最后在终端中输入reboot重启即可看见开机你设置的图片。
+
+作者：BrillZhang
+来源：blog.csdn.net/zyf2539/article/details/54178284
+http://shumeipai.nxez.com/2018/12/16/customize-the-boot-startup-screen-of-the-raspberry-pi.html

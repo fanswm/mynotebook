@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-21T21:29:01+08:00
+
+====== SSH默认启动 ======
+创建日期 星期三 21 十一月 2018
+
+设置SSH默认启动：
+$ sudo /etc/init.d/ssh start
+$ sudo update-rc.d ssh defaults

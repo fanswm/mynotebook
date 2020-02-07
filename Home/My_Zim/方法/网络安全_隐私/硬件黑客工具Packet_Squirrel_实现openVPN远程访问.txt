@@ -1,0 +1,88 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-30T14:49:39+08:00
+
+====== 硬件黑客工具Packet Squirrel 实现openVPN远程访问 ======
+Created Tuesday 30 January 2018
+
+http://www.freebuf.com/articles/network/161073.html
+
+上篇文章介绍了Packet Squirrel的两种payload使用方式，今天再讲一下利用openVPN实现远程访问Packet Squirrel。
+
+  openVPN是一个开源的基于OpenSSL库的应用层VPN软件，可通过配置使用共享密钥、证书、用户名密码等方式进行身份验证，大量使用了OpenSSL加密库中SSLv3/TLSv1协议，可在Linux、MacOS、Windows、FreeBSD等系统上运行，同时包含了许多安全性的功能。
+
+  另外上文我们提到过Packet Squirrel设备支持外置U盘格式为NTFS和EXT4，前段时间Hak5官方更新了固件版本，执行updatefw升级固件后，增加支持FAT32格式的U盘。
+在Packet Squirrel中支持两种模式：Remote Access和Client Tunneling。
+
+Remote Access（远程访问模式）：
+
+image.png
+
+在远程访问模式下，连接Packet Squirrel设备两端的网络流量仍然正常传输，与此同时，Packet Squirrel作为openVPN客户端再建立一条链接到我们的openVPN服务器（我们预先配置的VPS），这样我们就可以直接通过VPS远程访问Packet Squirrel了。
+
+Client Tunneling（客户端隧道模式）：
+
+image.png
+
+	 在客户端隧道模式下，连接Packet Squirrel设备Lan口的流量会全部传输至我们的openVPN服务器上，再由openVPN服务端进行流量转发，实现目标网络的PC通过openVPN进行网络访问的目的。
+
+     
+
+	 首先，Packet Squirrel设备出厂时已经在Payloads / switch3中包含了一个openVPN客户端脚本，通过在VPS上搭建一个openVPN服务端接受来自Packet Squirrel的连接，完成配置整个过程。
+
+第一步：配置openVPN服务端。
+
+	 在我们预先准备的VPS上安装并配置openVPN安装脚本，该安装脚本可在  https://git.io/vpn  获取，下载到安装脚本后保存为openvpn.sh并执行。
+
+image.png
+
+openVPN服务端安装脚本采取一系列交互式完成安装，其中IP address为我们VPS公网IP，推荐使用openVPN协议类型为UDP，端口1194，其他保持默认即可。
+
+
+image.png
+
+经过大约几分钟的安装过程，会在服务器/root目录下生成client.ovpn文件，其中包含了openVPN的服务端配置信息以及密钥等。
+
+	 安装过程有个需要注意的地方是安装脚本中会下载一个EasyRSA.tgz的文件，这个文件在安装脚本中默认下载地址是位于AWS上服务器，有时会遇到莫名其妙问题无法下载成功，导致卡在这里，我当时的解决办法是从其他途径下载到该文件然后通过修改安装脚本中有关此项的内容来绕过这个地方。
+
+
+image.png
+
+服务端脚本安装完成后会在本地生成一个虚拟网卡tun0，默认地址为10.8.0.1，如果客户端连接后，分配的客户端地址会依次分发为10.8.0.2/3等。
+
+
+image.png
+
+以上内容已经完成了openVPN服务端侧的配置过程。
+
+	  下面配置openVPN客户端的内容，首先将在服务端生成的client.ovpn文件修改名称为config.ovpn并复制到Packet Squirrel设备的payloads/switch3文件夹中。
+
+
+image.png
+
+	  关于Packet Squirrel在openVPN客户端处的配置很简单，仅需要将client.ovpn文件复制到switch3后，并将switch文件内容置为3，重启Packet Squirrel后会自动进行openVPN的连接，连接成功后设备保持LED灯黄色闪烁。
+
+下图所示在Packet Squirrel重启后进行openVPN自动连接成功，VPS上的openVPN服务端日志记录。
+
+image.png
+
+可以看到图中显示来自客户端（即Packet Squirrel）的连接情况，分配的客户端地址为10.8.0.2。
+
+image.png
+
+如上图所示，此时我们就可以在VPS上直接SSH root@10.8.0.2 对Packet Squirrel进行远程访问。
+
+	 上面就是Packet Squirrel的openVPN实现的主要过程，payload默认采用了Remote Access模式访问，对于切换为Client Tunneling模式也很简单，只需要将对应payload.sh脚本中FOR_CLIENTS字段值设为“1”（0:Remote Access  1:Client Tunneling）。
+
+正常模式下Packet Squrriel设备Lan口PC访问网络的地址：
+
+image.png
+
+
+在其他设置保持不变，payload脚本修改完成后重启Packet Squirrel，待自动连接后默认情况下Lan口的PC访问网络IP为正常地址。
+
+在启用客户端隧道模式后，Packet Squirrel设备Lan口的PC访问网络的IP地址变为openVPN服务端的地址，意味着所有流量都经过了openVPN的代理。
+
+image.png
+
+以上就是关于Packet Squirrel实现openVPN远程访问的全部内容。

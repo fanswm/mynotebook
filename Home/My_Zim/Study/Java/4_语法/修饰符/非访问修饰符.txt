@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-07T10:39:19+08:00
+
+====== 非访问修饰符 ======
+Created Wednesday 07 March 2018
+
+修饰符：abstract、static、final
+
+    abstract: 表示是抽象类。 使用对象：类、接口、方法
+    static: 可以当做普通类使用，而不用先实例化一个外部类。（用他修饰后，就成了静态内部类了）。 使用对象：类、变量、方法、初始化函数（注意：修饰类时只能修饰 内部类 ）
+    final: 表示类不可以被继承。 使用对象：类、变量、方法
+

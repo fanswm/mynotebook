@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-08-31T20:16:02+08:00
+
+====== Gentoo ======
+创建日期 星期六 31 八月 2019
+
+[[其他发行版:证明自己:Gentoo]]

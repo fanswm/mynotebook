@@ -1,0 +1,23 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-08T14:50:19+08:00
+
+====== Character 类 ======
+Created Thursday 08 March 2018
+
+__用于对单个字符进行操作。__
+
+Character 类在对象中包装一个基本类型 char 的值
+实例
+char ch = 'a';
+ 
+// Unicode 字符表示形式
+char uniChar = '\u039A'; 
+ 
+// 字符数组
+char[] charArray ={ 'a', 'b', 'c', 'd', 'e' };
+
+ Character类提供了一系列方法来操纵字符。__你可以使用Character的构造方法创建一个Character类对象__，例如：
+Character ch = new Character('a');
+
+将一个char类型的参数传递给需要一个Character类型参数的方法时，那么编译器会自动地将char类型参数转换为Character对象。 这种特征称为__装箱__，反过来称为__拆箱__。 

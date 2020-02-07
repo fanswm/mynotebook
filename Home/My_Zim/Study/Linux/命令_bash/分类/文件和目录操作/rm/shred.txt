@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-15T14:42:46+08:00
+
+====== shred ======
+Created Thursday 15 November 2018
+
+切碎（shred）
+当你不仅要删除文件还想要确保没有人能够恢复它时，shred 命令很方便。使用 rm 命令删除文件是不够的。你还需要覆盖该文件以前占用的空间。这就是 shred 的用武之地。

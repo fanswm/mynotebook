@@ -1,0 +1,190 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-11T16:39:54+08:00
+
+====== 4 配置启动挂载 ======
+Created Monday 11 December 2017
+
+4. 配置启动挂载：
+　　4.1 启动挂载 /etc/fstab 及 /etc/mtab
+　　4.2 特殊装置 loop 挂载(映象档不刻录就挂载使用)
+配置启动挂载：
+手动处理 mount 不是很人性化，我们总是需要让系统『自动』在启动时进行挂载的！本小节就是在谈这玩意儿！ 另外，从 FTP 服务器捉下来的映像档能否不用刻录就可以读取内容？我们也需要谈谈先！
+
+
+启动挂载 /etc/fstab 及 /etc/mtab
+刚刚上面说了许多，那么可不可以在启动的时候就将我要的文件系统都挂好呢？这样我就不需要每次进入 Linux 系统都还要在挂载一次呀！当然可以啰！那就直接到 /etc/fstab 里面去修修就行啰！不过，在开始说明前，这里要先跟大家说一说系统挂载的一些限制：
+
+__根目录 / 是必须挂载的﹐而且一定要先于其它 mount point 被挂载进来。__
+__其它 mount point 必须为已创建的目录﹐可任意指定﹐但一定要遵守必须的系统目录架构原则__
+__所有 mount point 在同一时间之内﹐只能挂载一次。__
+__所有 partition 在同一时间之内﹐只能挂载一次。__
+__如若进行卸除﹐您必须先将工作目录移到 mount point(及其子目录) 之外。__
+让我们直接查阅一下 /etc/fstab 这个文件的内容吧！
+
+[root@www ~]# cat /etc/fstab
+# Device        Mount point   filesystem parameters    dump fsck
+LABEL=/1          /           ext3       defaults        1 1
+LABEL=/home       /home       ext3       defaults        1 2
+LABEL=/boot       /boot       ext3       defaults        1 2
+tmpfs             /dev/shm    tmpfs      defaults        0 0
+devpts            /dev/pts    devpts     gid=5,mode=620  0 0
+sysfs             /sys        sysfs      defaults        0 0
+proc              /proc       proc       defaults        0 0
+LABEL=SWAP-hdc5   swap        swap       defaults        0 0
+# 上述特殊字体的部分与实际磁盘有关！其他则是虚拟文件系统或
+# 与内存置换空间 (swap) 有关。
+其实 /etc/fstab (filesystem table) 就是将我们利用 mount 命令进行挂载时， 将所有的选项与参数写入到这个文件中就是了。除此之外， __/etc/fstab 还加入了 dump 这个备份用命令的支持__！ 与启动时是否进行文件系统检验 fsck 等命令有关。
+
+这个文件的内容共有六个字段，这六个字段非常的重要！你『一定要背起来』才好！ 各个字段的详细数据如下：
+
+
+__第一栏：磁盘装置文件名或该装置的 Label：__
+这个字段请填入文件系统的装置文件名。但是由上面表格的默认值我们知道系统默认使用的是 Label 名称！ 在鸟哥的这个测试系统中 /dev/hdc2 标头名称为 /1，所以上述表格中的『LABEL=/1』也可以被取代成为『/dev/hdc2』的意思。 至于Label可以使用 dumpe2fs 命令来查阅的。
+
+
+所以啦，这里再次的强调，利用装置名称 (ex> /dev/hda1) 来挂载 partition 时， 虽然是被固定死的，所以您的硬盘不可以随意插在任意的插槽，不过他还是有好处的。 而使用 Label name 来挂载，虽然就没有插槽方面的问题，不过，您就得要随时注意您的 Label name 喔！尤其是新增硬盘的时候！ ^_^	鸟哥的图示
+
+__第二栏：挂载点 (mount point)：：__
+就是挂载点啊！挂载点是什么？一定是目录啊～要知道啊！
+
+
+__第三栏：磁盘分区槽的文件系统：__
+在手动挂载时可以让系统自动测试挂载，但在这个文件当中我们必须要手动写入文件系统才行！ 包括 ext3, reiserfs, nfs, vfat 等等。
+
+
+__第四栏：文件系统参数：__
+记不记得我们在 mount 这个命令中谈到很多特殊的文件系统参数？ 还有我们使用过的『-o iocharset=cp950』？这些特殊的参数就是写入在这个字段啦！ 虽然之前在 mount 已经提过一次，这里我们利用表格的方式再汇整一下：
+
+参数			内容意义
+async/sync
+异步/同步		配置磁盘是否以异步方式运行！默认为 async(效能较佳)
+
+auto/noauto
+自动/非自动		当下达 mount -a 时，此文件系统是否会被主动测试挂载。默认为 auto。
+
+rw/ro
+可擦写/只读		让该分割槽以可擦写或者是只读的型态挂载上来，如果你想要分享的数据是不给用户随意变更的， 这里也能够配置为只读。则不论			在此文件系统的文件是否配置 w 权限，都无法写入喔！
+
+exec/noexec
+可运行/不可运行		限制在此文件系统内是否可以进行『运行』的工作？如果是纯粹用来储存数据的， 那么可以配置为 noexec 会比较安全，相对的，会比较麻烦！
+
+user/nouser
+允许/不允许使用者挂载	是否允许用户使用 mount 命令来挂载呢？一般而言，我们当然不希望一般身份的 user 能使用 mount 啰，因为太不安全了，因此这里应该要配置为 nouser 啰！
+
+suid/nosuid
+具有/不具有 suid 权限	该文件系统是否允许 SUID 的存在？如果不是运行文件放置目录，也可以配置为 nosuid 来取消这个功能！
+
+usrquota		注意名称是『 usrquota 』不要拼错了！这个是在启动 filesystem 支持磁盘配额模式，更多数据我们在第四篇再谈。
+
+grpquota		注意名称是『grpquota』，启动 filesystem 对群组磁盘配额模式的支持。
+
+defaults		同时具有 rw, suid, dev, exec, auto, nouser, async 等参数。 基本上，默认情况使用 defaults 配置即可！
+
+__第五栏：能否被 dump 备份命令作用：__
+dump 是一个用来做为备份的命令(我们会在第二十五章备份策略中谈到这个命令)， 我们可以透过 fstab 指定哪个文件系统必须要进行 dump 备份！ 0 代表不要做 dump 备份， 1 代表要每天进行 dump 的动作。 2 也代表其他不定日期的 dump 备份动作， 通常这个数值不是 0 就是 1 啦！
+
+
+__第六栏：是否以 fsck 检验扇区：__
+启动的过程中，系统默认会以 fsck 检验我们的 filesystem 是否完整 (clean)。 不过，某些 filesystem 是不需要检验的，例如内存置换空间 (swap) ，或者是特殊文件系统例如 /proc 与 /sys 等等。所以，在这个字段中，我们可以配置是否要以 fsck 检验该 filesystem 喔。 0 是不要检验， 1 表示最早检验(一般只有根目录会配置为 1)， 2 也是要检验，不过 1 会比较早被检验啦！ 一般来说，根目录配置为 1 ，其他的要检验的 filesystem 都配置为 2 就好了。
+
+
+例题：
+假设我们要将 /dev/hdc6 每次启动都自动挂载到 /mnt/hdc6 ，该如何进行？
+答：
+首先，请用 nano 将底下这一行写入 /etc/fstab 当中；
+[root@www ~]# nano /etc/fstab
+/dev/hdc6  /mnt/hdc6    ext3    defaults   1 2
+再来看看 /dev/hdc6 是否已经挂载，如果挂载了，请务必卸除再说！
+[root@www ~]# df
+Filesystem           1K-blocks      Used Available Use% Mounted on
+/dev/hdc6              1976312     42072   1833836   3% /mnt/hdc6
+# 竟然不知道何时被挂载了？赶紧给他卸除先！
+
+[root@www ~]# umount /dev/hdc6
+最后测试一下刚刚我们写入 /etc/fstab 的语法有没有错误！这点很重要！因为这个文件如果写错了， 则你的 Linux 很可能将无法顺利启动完成！所以请务必要测试测试喔！
+[root@www ~]# mount -a
+[root@www ~]# df
+最终有看到 /dev/hdc6 被挂载起来的信息才是成功的挂载了！而且以后每次启动都会顺利的将此文件系统挂载起来的！ 由于这个范例仅是测试而已，请务必回到 /etc/fstab 当中，将上述这行给他批注或者是删除掉！
+[root@www ~]# nano /etc/fstab
+# /dev/hdc6  /mnt/hdc6    ext3    defaults   1 2
+
+/etc/fstab 是启动时的配置文件，不过，实际 filesystem 的挂载是记录到 /etc/mtab 与 /proc/mounts 这两个文件当中的。每次我们在更动 filesystem 的挂载时，也会同时更动这两个文件喔！但是，万一发生您在 /etc/fstab 输入的数据错误，导致无法顺利启动成功，而进入单人维护模式当中，那时候的 / 可是 read only 的状态，当然您就无法修改 /etc/fstab ，也无法升级 /etc/mtab 啰～那怎么办？ 没关系，可以利用底下这一招：
+
+[root@www ~]# mount -n -o remount,rw /
+特殊装置 loop 挂载 (映象档不刻录就挂载使用)
+挂载光盘/DVD映象文件
+想象一下如果今天我们从国家高速网络中心(http://ftp.twaren.net)%E6%88%96%E8%80%85%E6%98%AF%E4%B9%89%E5%AE%88%E5%A4%A7%E5%AD%A6(http://ftp.isu.edu.tw)%E4%B8%8B%E8%BD%BD%E4%BA%86 Linux 或者是其他所需光盘/DVD的映象文件后， 难道一定需要刻录成为光盘才能够使用该文件里面的数据吗？当然不是啦！我们可以透过 loop 装置来挂载的！
+
+那要如何挂载呢？鸟哥将整个 CentOS 5.2 的 DVD 映象档捉到测试机上面，然后利用这个文件来挂载给大家参考看看啰！
+
+[root@www ~]# ll -h /root/centos5.2_x86_64.iso
+-rw-r--r-- 1 root root 4.3G Oct 27 17:34 /root/centos5.2_x86_64.iso
+# 看到上面的结果吧！这个文件就是映象档，文件非常的大吧！
+
+[root@www ~]# mkdir /mnt/centos_dvd
+[root@www ~]# mount -o loop /root/centos5.2_x86_64.iso /mnt/centos_dvd
+[root@www ~]# df
+Filesystem           1K-blocks      Used Available Use% Mounted on
+/root/centos5.2_x86_64.iso
+					   4493152   4493152         0 100% /mnt/centos_dvd
+# 就是这个项目！ .iso 映象文件内的所有数据可以在 /mnt/centos_dvd 看到！
+
+[root@www ~]# ll /mnt/centos_dvd
+total 584
+drwxr-xr-x 2 root root 522240 Jun 24 00:57 CentOS <==瞧！就是DVD的内容啊！
+-rw-r--r-- 8 root root    212 Nov 21  2007 EULA
+-rw-r--r-- 8 root root  18009 Nov 21  2007 GPL
+drwxr-xr-x 4 root root   2048 Jun 24 00:57 images
+.....底下省略.....
+
+[root@www ~]# umount /mnt/centos_dvd/
+# 测试完成！记得将数据给他卸除！
+非常方便吧！如此一来我们不需要将这个文件刻录成为光盘或者是 DVD 就能够读取内部的数据了！ 换句话说，你也可以在这个文件内『动手脚』去修改文件的！这也是为什么很多映象档提供后，还得要提供验证码 (MD5) 给使用者确认该映象档没有问题！
+
+
+创建大文件以制作 loop 装置文件！
+想一想，既然能够挂载 DVD 的映象档，那么我能不能制作出一个大文件，然后将这个文件格式化后挂载呢？ 好问题！这是个有趣的动作！而且还能够帮助我们解决很多系统的分割不良的情况呢！举例来说，如果当初在分割时， 你只有分割出一个根目录，假设你已经没有多余的容量可以进行额外的分割的！偏偏根目录的容量还很大！ 此时你就能够制作出一个大文件，然后将这个文件挂载！如此一来感觉上你就多了一个分割槽啰！ 用途非常的广泛啦！
+
+底下我们在 /home 下创建一个 512MB 左右的大文件，然后将这个大文件格式化并且实际挂载来玩一玩！ 这样你会比较清楚鸟哥在讲啥！
+
+创建大型文件
+
+首先，我们得先有一个大的文件吧！怎么创建这个大文件呢？在 Linux 底下我们有一支很好用的程序 dd ！他可以用来创建空的文件喔！详细的说明请先翻到下一章 压缩命令的运用 来查阅，这里鸟哥仅作一个简单的范例而已。 假设我要创建一个空的文件在 /home/loopdev ，那可以这样做：
+__[root@www ~]# dd if=/dev/zero of=/home/loopdev bs=1M count=512__
+512+0 records in   <==读入 512 笔数据
+512+0 records out  <==输出 512 笔数据
+536870912 bytes (537 MB) copied, 12.3484 seconds, 43.5 MB/s
+# 这个命令的简单意义如下：
+# if 是 input file ，输入文件。那个 /dev/zero 是会一直输出 0 的装置！
+# of 是 output file ，将一堆零写入到后面接的文件中。
+# bs 是每个 block 大小，就像文件系统那样的 block 意义；
+# count 则是总共几个 bs 的意思。
+
+[root@www ~]# ll -h /home/loopdev
+-rw-r--r-- 1 root root 512M Oct 28 02:29 /home/loopdev
+dd 就好像在迭砖块一样，将 512 块，每块 1MB 的砖块堆栈成为一个大文件 (/home/loopdev) ！ 最终就会出现一个 512MB 的文件！粉简单吧！
+
+格式化
+
+很简单就创建起一个 512MB 的文件了吶！接下来当然是格式化啰！
+[root@www ~]# mkfs -t ext3 /home/loopdev
+mke2fs 1.39 (29-May-2006)
+/home/loopdev is not a block special device.
+Proceed anyway? (y,n) y  <==由于不是正常的装置，所以这里会提示你！
+Filesystem label=
+OS type: Linux
+Block size=1024 (log=0)
+Fragment size=1024 (log=0)
+131072 inodes, 524288 blocks
+26214 blocks (5.00%) reserved for the super user
+.....以下省略.....
+
+挂载
+
+那要如何挂载啊？利用 mount 的特殊参数，那个 -o loop 的参数来处理！
+[root@www ~]# mount -o loop /home/loopdev /media/cdrom/
+[root@www ~]# df
+Filesystem           1K-blocks      Used Available Use% Mounted on
+/home/loopdev           507748     18768    462766   4% /media/cdrom
+透过这个简单的方法，感觉上你就可以在原本的分割槽在不更动原有的环境下制作出你想要的分割槽就是了！ 这东西很好用的！尤其是想要玩 Linux 上面的『虚拟机』的话， 也就是以一部 Linux 主机再切割成为数个独立的主机系统时，类似 VMware 这类的软件， 在 Linux 上使用 xen 这个软件，他就可以配合这种 loop device 的文件类型来进行根目录的挂载， 真的非常有用的喔！ ^_^

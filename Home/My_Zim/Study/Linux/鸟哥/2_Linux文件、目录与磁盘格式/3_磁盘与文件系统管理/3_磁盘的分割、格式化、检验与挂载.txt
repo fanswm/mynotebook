@@ -1,0 +1,820 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-11T16:39:41+08:00
+
+====== 3 磁盘的分割、格式化、检验与挂载 ======
+Created Monday 11 December 2017
+
+3. 磁盘的分割、格式化、检验与挂载
+　　3.1 磁盘分区： fdisk, partprobe
+　　3.2 磁盘格式化： mkfs, mke2fs
+　　3.3 磁盘检验： fsck, badblocks
+　　3.4 磁盘挂载与卸除： mount, umount
+　　3.5 磁盘参数修订： mknod, e2label, tune2fs, hdparm
+磁盘的分割、格式化、检验与挂载：
+
+如果我们想要在系统里面新增一颗硬盘时，应该有哪些动作需要做的呢：
+
+对磁盘进行分割，以创建可用的 partition ；
+对该 partition 进行格式化( format )，以创建系统可用的 filesystem；
+若想要仔细一点，则可对刚刚创建好的 filesystem 进行检验；
+在 Linux 系统上，需要创建挂载点 ( 亦即是目录 )，并将他挂载上来；
+当然啰，在上述的过程当中，还有很多需要考虑的，例如磁盘分区槽 (partition) 需要定多大？ 是否需要加入 journal 的功能？inode 与 block 的数量应该如何规划等等的问题。但是这些问题的决定， 都需要与你的主机用途来加以考虑的～所以，在这个小节里面，鸟哥仅会介绍几个动作而已， 更详细的配置值，则需要以你未来的经验来参考啰！
+
+
+__磁盘分区： fdisk__
+__[root@www ~]# fdisk [-l] 装置名称__
+__选项与参数：__
+__-l  ：输出后面接的装置所有的 partition 内容。若仅有 fdisk -l 时，__
+	__  则系统将会把整个系统内能够搜寻到的装置的 partition 均列出来。__
+
+范例：找出你系统中的根目录所在磁盘，并查阅该硬盘内的相关信息
+[root@www ~]# df /            <==注意：重点在找出磁盘文件名而已
+Filesystem           1K-blocks      Used Available Use% Mounted on
+/dev/hdc2              9920624   3823168   5585388  41% /
+
+[root@www ~]# fdisk /dev/hdc  <==仔细看，不要加上数字喔！
+The number of cylinders for this disk is set to 5005.
+There is nothing wrong with that, but this is larger than 1024,
+and could in certain setups cause problems with:
+1) software that runs at boot time (e.g., old versions of LILO)
+2) booting and partitioning software from other OSs
+   (e.g., DOS FDISK, OS/2 FDISK)
+
+Command (m for help):     <==等待你的输入！
+由于每个人的环境都不一样，因此每部主机的磁盘数量也不相同。所以你可以先使用 df 这个命令找出可用磁盘文件名， 然后再用 fdisk 来查阅。在你进入 fdisk 这支程序的工作画面后，如果您的硬盘太大的话(通常指磁柱数量多于 1024 以上)，就会出现如上信息。这个信息仅是在告知你，因为某些旧版的软件与操作系统并无法支持大于 1024 磁柱 (cylinter) 后的扇区使用，不过我们新版的 Linux 是没问题啦！底下继续来看看 fdisk 内如何操作相关动作吧！
+
+Command (m for help): m   <== 输入 m 后，就会看到底下这些命令介绍
+Command action
+   a   toggle a bootable flag
+   b   edit bsd disklabel
+   c   toggle the dos compatibility flag
+   __d   delete a partition            <==删除一个partition__
+   l   list known partition types
+   m   print this menu
+   __n   add a new partition           <==新增一个partition__
+   o   create a new empty DOS partition table
+   __p   print the partition table     <==在屏幕上显示分割表__
+   __q   quit without saving changes   <==不储存离开fdisk程序__
+   s   create a new empty Sun disklabel
+   t   change a partition's system id
+   u   change display/entry units
+   v   verify the partition table
+   __w   write table to disk and exit  <==将刚刚的动作写入分割表__
+   x   extra functionality (experts only)
+老实说，使用 fdisk 这支程序是完全不需要背命令的！如同上面的表格中，你只要按下 m 就能够看到所有的动作！ 比较重要的动作在上面已经用底线画出来了，你可以参考看看。其中比较不一样的是『q 与 w』这两个玩意儿！ 不管你进行了什么动作，只要离开 fdisk 时按下『q』，那么所有的动作『都不会生效！』相反的， 按下『w』就是动作生效的意思。所以，你可以随便玩 fdisk ，只要离开时按下的是『q』即可。 ^_^！ 好了，先来看看分割表信息吧！
+
+Command (m for help): p  <== 这里可以输出目前磁盘的状态
+
+Disk /dev/hdc: 41.1 GB, 41174138880 bytes        <==这个磁盘的文件名与容量
+255 heads, 63 sectors/track, 5005 cylinders      <==磁头、扇区与磁柱大小
+Units = cylinders of 16065 * 512 = 8225280 bytes <==每个磁柱的大小
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/hdc1   *           1          13      104391   83  Linux
+/dev/hdc2              14        1288    10241437+  83  Linux
+/dev/hdc3            1289        1925     5116702+  83  Linux
+/dev/hdc4            1926        5005    24740100    5  Extended
+/dev/hdc5            1926        2052     1020096   82  Linux swap / Solaris
+# 装置文件名 启动区否 开始磁柱    结束磁柱  1K大小容量 磁盘分区槽内的系统
+
+Command (m for help): q
+# 想要不储存离开吗？按下 q 就对了！不要随便按 w 啊！
+使用『 p 』可以列出目前这颗磁盘的分割表信息，这个信息的上半部在显示整体磁盘的状态。 以鸟哥这颗磁盘为例，这个磁盘共有 41.1GB 左右的容量，共有 5005 个磁柱，每个磁柱透过 255 个磁头在管理读写， 每个磁头管理 63 个扇区，而每个扇区的大小均为 512bytes ，因此每个磁柱为『 255*63*512 = 16065*512 = 8225280bytes 』。
+
+下半部的分割表信息主要在列出每个分割槽的个别信息项目。每个项目的意义为：
+
+__Device：装置文件名，依据不同的磁盘接口/分割槽位置而变。__
+__Boot：是否为启动引导块？通常 Windows 系统的 C 需要这块！__
+__Start, End：这个分割槽在哪个磁柱号码之间，可以决定此分割槽的大小；__
+__Blocks：就是以 1K 为单位的容量。如上所示，/dev/hdc1 大小为104391K = 102MB__
+__ID, System：代表这个分割槽内的文件系统应该是啥！不过这个项目只是一个提示而已， 不见得真的代表此分割槽内的文件系统喔！__
+从上表我们可以发现几件事情：
+
+整部磁盘还可以进行额外的分割，因为最大磁柱为 5005 ，但只使用到 2052 号而已；
+/dev/hdc5 是由 /dev/hdc4 分割出来的，因为 /dev/hdc4 为 Extended，且 /dev/hdc5 磁柱号码在 /dev/hdc4 之内；
+fdisk 还可以直接秀出系统内的所有 partition 喔！举例来说，鸟哥刚刚插入一个 U盘 磁盘到这部 Linux 系统中， 那该如何观察 (1)这个磁盘的代号与 (2)这个磁盘的分割槽呢？
+
+范例：查阅目前系统内的所有 partition 有哪些？
+[root@www ~]# fdisk -l
+Disk /dev/hdc: 41.1 GB, 41174138880 bytes
+255 heads, 63 sectors/track, 5005 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/hdc1   *           1          13      104391   83  Linux
+/dev/hdc2              14        1288    10241437+  83  Linux
+/dev/hdc3            1289        1925     5116702+  83  Linux
+/dev/hdc4            1926        5005    24740100    5  Extended
+/dev/hdc5            1926        2052     1020096   82  Linux swap / Solaris
+
+Disk /dev/sda: 8313 MB, 8313110528 bytes
+59 heads, 58 sectors/track, 4744 cylinders
+Units = cylinders of 3422 * 512 = 1752064 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1               1        4745     8118260    b  W95 FAT32
+由上表的信息我们可以看到我有两颗磁盘，磁盘文件名为『/dev/hdc 与 /dev/sda』，/dev/hdc 已经在上面谈过了， 至于 /dev/sda 则有 8GB 左右的容量，且全部的磁柱都已经分割给 /dev/sda1 ，该文件系统应该为 Windows 的 FAT 文件系统。这样很容易查阅到分割方面的信息吧！
+
+这个 fdisk 只有 root 才能运行，此外，请注意， 使用的『装置文件名』请不要加上数字，因为 partition 是针对『整个硬盘装置』而不是某个 partition 呢！所以运行『 fdisk /dev/hdc1 』 就会发生错误啦！要使用 fdisk /dev/hdc 才对！那么我们知道可以利用 fdisk 来查阅硬盘的 partition 信息外，底下再来说一说进入 fdisk 之后的几个常做的工作！
+
+Tips:
+再次强调，你可以使用 fdisk 在您的硬盘上面胡搞瞎搞的进行实际操作，都不打紧， 但是请『千万记住，不要按下 w 即可！』离开的时候按下 q 就万事无妨啰！	鸟哥的图示
+删除磁盘分区槽
+如果你是按照鸟哥建议的方式去安装你的 CentOS ，那么你的磁盘应该会预留一块容量来做练习的。 实际练习新增硬盘之前，我们先来玩一玩恐怖的删除好了～如果想要测试一下如何将你的 /dev/hdc 全部的分割槽删除，应该怎么做？
+
+fdisk /dev/hdc ：先进入 fdisk 画面；
+p ：先看一下分割槽的信息，假设要杀掉 /dev/hdc1；
+d ：这个时候会要你选择一个 partition ，就选 1 啰！
+w (or) q ：按 w 可储存到磁盘数据表中，并离开 fdisk ；当然啰， 如果你反悔了，呵呵，直接按下 q 就可以取消刚刚的删除动作了！
+# 练习一： 先进入 fdisk 的画面当中去！
+[root@www ~]# fdisk /dev/hdc
+
+# 练习二： 先看看整个分割表的情况是如何
+Command (m for help): p
+
+Disk /dev/hdc: 41.1 GB, 41174138880 bytes
+255 heads, 63 sectors/track, 5005 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/hdc1   *           1          13      104391   83  Linux
+/dev/hdc2              14        1288    10241437+  83  Linux
+/dev/hdc3            1289        1925     5116702+  83  Linux
+/dev/hdc4            1926        5005    24740100    5  Extended
+/dev/hdc5            1926        2052     1020096   82  Linux swap / Solaris
+
+# 练习三： 按下 d 给他删除吧！
+Command (m for help): d
+Partition number (1-5): 4
+
+Command (m for help): d
+Partition number (1-4): 3
+
+Command (m for help): p
+
+Disk /dev/hdc: 41.1 GB, 41174138880 bytes
+255 heads, 63 sectors/track, 5005 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/hdc1   *           1          13      104391   83  Linux
+/dev/hdc2              14        1288    10241437+  83  Linux
+# 因为 /dev/hdc5 是由 /dev/hdc4 所衍生出来的逻辑分割槽，因此 /dev/hdc4 被删除，
+# /dev/hdc5 就自动不见了！最终就会剩下两个分割槽而已喔！
+
+Command (m for help): q
+# 鸟哥这里仅是做一个练习而已，所以，按下 q 就能够离开啰～
+
+练习新增磁盘分区槽
+新增磁盘分区槽有好多种情况，因为新增 Primary / Extended / Logical 的显示结果都不太相同。 底下我们先将 /dev/hdc 全部删除成为干净未分割的磁盘，然后依序新增给大家瞧瞧！
+
+# 练习一： 进入 fdisk 的分割软件画面中，并删除所有分割槽：
+[root@www ~]# fdisk /dev/hdc
+Command (m for help): d
+Partition number (1-5): 4
+
+Command (m for help): d
+Partition number (1-4): 3
+
+Command (m for help): d
+Partition number (1-4): 2
+
+Command (m for help): d
+Selected partition 1
+# 由于最后仅剩下一个 partition ，因此系统主动选取这个 partition 删除去！
+
+# 练习二： 开始新增，我们先新增一个 Primary  的分割槽，且指定为 4 号看看！
+Command (m for help): n
+Command action            <==因为是全新磁盘，因此只会问extended/primary而已
+   e   extended
+   p   primary partition (1-4)
+p                         <==选择 Primary 分割槽
+Partition number (1-4): 4 <==配置为 4 号！
+First cylinder (1-5005, default 1): <==直接按下[enter]按键决定！
+Using default value 1               <==启始磁柱就选用默认值！
+Last cylinder or +size or +sizeM or +sizeK (1-5005, default 5005): +512M
+# 这个地方有趣了！我们知道 partition 是由 n1 到 n2 的磁柱号码 (cylinder)，
+# 但磁柱的大小每颗磁盘都不相同，这个时候可以填入 +512M 来让系统自动帮我们找出
+# 『最接近 512M 的那个 cylinder 号码』！因为不可能刚好等于 512MBytes 啦！
+# 如上所示：这个地方输入的方式有两种：
+# 1) 直接输入磁柱的号码，你得要自己计算磁柱/分割槽的大小才行；
+# 2) 用 +XXM 来输入分割槽的大小，让系统自己捉磁柱的号码。
+#    +与M是必须要有的，XX为数字
+
+Command (m for help): p
+
+Disk /dev/hdc: 41.1 GB, 41174138880 bytes
+255 heads, 63 sectors/track, 5005 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/hdc4               1          63      506016   83  Linux
+# 注意！只有 4 号！ 1 ~ 3 保留下来了！
+# 练习三： 继续新增一个，这次我们新增 Extended 的分割槽好了！
+Command (m for help): n
+Command action
+   e   extended
+   p   primary partition (1-4)
+e    <==选择的是 Extended 喔！
+Partition number (1-4): 1
+First cylinder (64-5005, default 64): <=[enter]
+Using default value 64
+Last cylinder or +size or +sizeM or +sizeK (64-5005, default 5005): <=[enter]
+Using default value 5005
+# 还记得我们在第三章的磁盘分区表曾经谈到过的，扩展分配最好能够包含所有
+# 未分割的区间；所以在这个练习中，我们将所有未配置的磁柱都给了这个分割槽喔！
+# 所以在开始/结束磁柱的位置上，按下两个[enter]用默认值即可！
+
+Command (m for help): p
+
+Disk /dev/hdc: 41.1 GB, 41174138880 bytes
+255 heads, 63 sectors/track, 5005 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/hdc1              64        5005    39696615    5  Extended
+/dev/hdc4               1          63      506016   83  Linux
+# 如上所示，所有的磁柱都在 /dev/hdc1 里面啰！
+# 练习四： 这次我们随便新增一个 2GB 的分割槽看看！
+Command (m for help): n
+Command action
+   l   logical (5 or over)     <==因为已有 extended ，所以出现 logical 分割槽
+   p   primary partition (1-4)
+p   <==偷偷玩一下，能否新增主要分割槽
+Partition number (1-4): 2
+No free sectors available   <==肯定不行！因为没有多余的磁柱可供配置
+
+Command (m for help): n
+Command action
+   l   logical (5 or over)
+   p   primary partition (1-4)
+l   <==乖乖使用逻辑分割槽吧！
+First cylinder (64-5005, default 64): <=[enter]
+Using default value 64
+Last cylinder or +size or +sizeM or +sizeK (64-5005, default 5005): +2048M
+
+Command (m for help): p
+
+Disk /dev/hdc: 41.1 GB, 41174138880 bytes
+255 heads, 63 sectors/track, 5005 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/hdc1              64        5005    39696615    5  Extended
+/dev/hdc4               1          63      506016   83  Linux
+/dev/hdc5              64         313     2008093+  83  Linux
+# 这样就新增了 2GB 的分割槽，且由于是 logical ，所以由 5 号开始！
+Command (m for help): q
+# 鸟哥这里仅是做一个练习而已，所以，按下 q 就能够离开啰～
+上面的练习非常重要！您得要自行练习一下比较好！注意，不要按下 w 喔！会让你的系统损毁的！ 由上面的一连串练习中，最重要的地方其实就在于创建分割槽的形式( primary/extended/logical )以及分割槽的大小了！一般来说创建分割槽的形式会有底下的数种状况：
+
+1-4 号尚有剩余，且系统未有 extended：
+此时会出现让你挑选 Primary / Extended 的项目，且你可以指定 1~4 号间的号码；
+
+1-4 号尚有剩余，且系统有 extended：
+此时会出现让你挑选 Primary / Logical 的项目；若选择 p 则你还需要指定 1~4 号间的号码； 若选择 l(L的小写) 则不需要配置号码，因为系统会自动指定逻辑分割槽的文件名号码；
+
+1-4 没有剩余，且系统有 extended：
+此时不会让你挑选分割槽类型，直接会进入 logical 的分割槽形式。
+
+例题：
+请依照你的系统情况，创建一个大约 1GB 左右的分割槽，并显示该分割槽的相关信息：
+答：
+鸟哥的磁盘为 /dev/hdc ，尚有剩余磁柱号码，因此可以这样做：
+[root@www ~]# fdisk /dev/hdc
+Command (m for help): n
+First cylinder (2053-5005, default 2053): <==[enter]
+Using default value 2053
+Last cylinder or +size or +sizeM or +sizeK (2053-5005, default 5005): +2048M
+
+Command (m for help): p
+
+Disk /dev/hdc: 41.1 GB, 41174138880 bytes
+255 heads, 63 sectors/track, 5005 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/hdc1   *           1          13      104391   83  Linux
+/dev/hdc2              14        1288    10241437+  83  Linux
+/dev/hdc3            1289        1925     5116702+  83  Linux
+/dev/hdc4            1926        5005    24740100    5  Extended
+/dev/hdc5            1926        2052     1020096   82  Linux swap / Solaris
+/dev/hdc6            2053        2302     2008093+  83  Linux
+
+Command (m for help): w
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+
+WARNING: Re-reading the partition table failed with error 16: Device or 
+resource busy.
+The kernel still uses the old table.
+The new table will be used at the next reboot.
+Syncing disks. <==见鬼了！竟然需要 reboot 才能够生效！我可不要重新启动！
+
+__[root@www ~]# partprobe  <==强制让核心重新捉一次 partition table__
+在这个实作题中，请务必要按下『 w 』这个动作！因为我们实际上确实要创建这个分割槽嘛！ 但请仔细看一下最后的警告信息，因为我们的磁盘无法卸除(因为含有根目录)，所以核心无法重新取得分割表信息， 因此此时系统会要求我们重新启动(reboot)以升级核心的分割表信息才行。
+如上的练习中，最终写入分割表后竟然会让核心无法捉到分割表信息！此时你可以直接使用 reboot 来处理， 也可以使用 GNU 推出的工具程序来处置，那就是 partprobe 这个命令。这个命令的运行很简单， 他仅是告知核心必须要读取新的分割表而已，因此并不会在屏幕上出现任何信息才是！ 这样一来，我们就不需要 reboot 啰！
+
+
+操作环境的说明
+以 root 的身份进行硬盘的 partition 时，最好是在单人维护模式底下比较安全一些， 此外，在进行 fdisk 的时候，如果该硬盘某个 partition 还在使用当中， 那么很有可能系统核心会无法重载硬盘的 partition table ，解决的方法就是将该使用中的 partition 给他卸除，然后再重新进入 fdisk 一遍，重新写入 partition table ，那么就可以成功啰！
+
+
+注意事项：
+另外在实作过程中请特别注意，因为 SATA 硬盘最多能够支持到 15 号的分割槽， IDE 则可以支持到 63 号。 但目前大家常见的系统都是 SATA 磁盘，因此在练习的时候千万不要让你的分割槽超过 15 号！ 否则即使你还有剩余的磁柱容量，但还是会无法继续进行分割的喔！
+
+另外需要特别留意的是，__fdisk 没有办法处理大于 2TB 以上的磁盘分区槽__！ 这个问题比较严重！因为虽然 Ext3 文件系统已经支持达到 16TB 以上的磁盘，但是分割命令却无法支持。 时至今日(2009)所有的硬件价格大跌，硬盘也已经出到单颗 1TB 之谱，若加上磁盘阵列 (RAID) ， 高于 2TB 的磁盘系统应该会很常见！此时你就得使用 __parted 这个命令__了！我们会在本章最后谈一谈这个命令的用法。
+
+磁盘格式化
+分割完毕后自然就是要进行文件系统的格式化啰！格式化的命令非常的简单，那就是『make filesystem, mkfs』 这个命令啦！这个命令其实是个综合的命令，他会去呼叫正确的文件系统格式化工具软件！ 不啰唆，让我们来瞧瞧吧！
+
+
+__mkfs__
+__[root@www ~]# mkfs [-t 文件系统格式] 装置文件名__
+__选项与参数：__
+__-t  ：可以接文件系统格式，例如 ext3, ext2, vfat 等(系统有支持才会生效)__
+
+范例一：请将上个小节当中所制作出来的 /dev/hdc6 格式化为 ext3 文件系统
+[root@www ~]# mkfs -t ext3 /dev/hdc6
+mke2fs 1.39 (29-May-2006)
+Filesystem label=                <==这里指的是分割槽的名称(label)
+OS type: Linux
+Block size=4096 (log=2)          <==block 的大小配置为 4K 
+Fragment size=4096 (log=2)
+251392 inodes, 502023 blocks     <==由此配置决定的inode/block数量
+25101 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=515899392
+16 block groups
+32768 blocks per group, 32768 fragments per group
+15712 inodes per group
+Superblock backups stored on blocks:
+		32768, 98304, 163840, 229376, 294912
+
+Writing inode tables: done
+Creating journal (8192 blocks): done <==有日志记录
+Writing superblocks and filesystem accounting information: done
+
+This filesystem will be automatically checked every 34 mounts or
+180 days, whichever comes first.  Use tune2fs -c or -i to override.
+# 这样就创建起来我们所需要的 Ext3 文件系统了！简单明了！
+
+__[root@www ~]# mkfs[tab][tab]__
+__mkfs         mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.msdos   mkfs.vfat__
+# 按下两个[tab]，会发现 mkfs 支持的文件格式如上所示！可以格式化 vfat 喔！
+mkfs 其实是个综合命令而已，事实上如同上表所示，当我们使用『 mkfs -t ext3 ...』时， 系统会去呼叫 mkfs.ext3 这个命令来进行格式化的动作啦！若如同上表所展现的结果， 那么鸟哥这个系统支持的文件系统格式化工具有『cramfs, ext2, ext3, msdoc, vfat』等， 而最常用的应该是 ext3, vfat 两种啦！ vfat 可以用在 Windows/Linux 共享的 U盘 闪盘啰。
+
+例题：
+将刚刚的 /dev/hdc6 格式化为 Windows 可读的 vfat 格式吧！
+答：
+mkfs -t vfat /dev/hdc6
+在格式化为 Ext3 的范例中，我们可以发现结果里面含有非常多的信息，由于我们没有详细指定文件系统的细部项目， 因此系统会使用默认值来进行格式化。其中比较重要的部分为：文件系统的标头(Label)、Block的大小以及 inode 的数量。 如果你要指定这些东西，就得要了解一下 Ext2/Ext3 的公用程序，亦即 mke2fs 这个命令啰！
+
+
+__mke2fs__
+__[root@www ~]# mke2fs [-b block大小] [-i block大小] [-L 标头] [-cj] 装置__
+__选项与参数：__
+__-b  ：可以配置每个 block 的大小，目前支持 1024, 2048, 4096 bytes 三种；__
+__-i  ：多少容量给予一个 inode 呢？__
+__-c  ：检查磁盘错误，仅下达一次 -c 时，会进行快速读取测试；__
+	__  如果下达两次 -c -c 的话，会测试读写(read-write)，会很慢～__
+__-L  ：后面可以接标头名称 (Label)，这个 label 是有用的喔！e2label命令介绍会谈到～__
+__-j  ：本来 mke2fs 是 EXT2 ，加上 -j 后，会主动加入 journal 而成为 EXT3。__
+__mke2fs 是一个很详细但是很麻烦的命令！因为里面的细部配置太多了！现在我们进行如下的假设：__
+
+这个文件系统的标头配置为：vbird_logical
+我的 block 指定为 2048 大小；
+每 8192 bytes 分配一个 inode ；
+建置为 journal 的 Ext3 文件系统。
+开始格式化 /dev/hdc6 结果会变成如下所示：
+
+[root@www ~]# mke2fs -j -L "vbird_logical" -b 2048 -i 8192 /dev/hdc6
+mke2fs 1.39 (29-May-2006)
+Filesystem label=vbird_logical
+OS type: Linux
+Block size=2048 (log=1)
+Fragment size=2048 (log=1)
+251968 inodes, 1004046 blocks
+50202 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=537919488
+62 block groups
+16384 blocks per group, 16384 fragments per group
+4064 inodes per group
+Superblock backups stored on blocks:
+		16384, 49152, 81920, 114688, 147456, 409600, 442368, 802816
+
+Writing inode tables: done
+Creating journal (16384 blocks): done
+Writing superblocks and filesystem accounting information: done
+# 比较看看，跟上面的范例用默认值的结果，有什么不一样的啊？
+其实 mke2fs 所使用的各项选项/参数也可以用在『 mkfs -t ext3 ... 』后面，因为最终使用的公用程序是相同的啦！ 特别要注意的是 -b, -i 及 -j 这几个选项，尤其是 -j 这个选项，当没有指定 -j 的时候， mke2fs 使用 ext2 为格式化文件格式，若加入 -j 时，则格式化为 ext3 这个 Journaling 的 filesystem 呦！
+
+老实说，如果没有特殊需求的话，使用『 mkfs -t ext3....』不但容易记忆，而且就非常好用啰！
+
+__磁盘检验： fsck, badblocks__
+由于系统在运行时谁也说不准啥时硬件或者是电源会有问题，所以『死机』可能是难免的情况(不管是硬件还是软件)。 现在我们知道文件系统运行时会有硬盘与内存数据异步的状况发生，因此莫名其妙的死机非常可能导致文件系统的错乱。 问题来啦，如果文件系统真的发生错乱的话，那该如何是好？就...挽救啊！此时那个好用的 filesystem check, fsck 就得拿来仔细瞧瞧啰。
+
+
+__fsck__
+__[root@www ~]# fsck [-t 文件系统] [-ACay] 装置名称__
+__选项与参数：__
+__-t  ：如同 mkfs 一样，fsck 也是个综合软件而已！因此我们同样需要指定文件系统。__
+	__  不过由于现今的 Linux 太聪明了，他会自动的透过 superblock 去分辨文件系统，__
+	__  因此通常可以不需要这个选项的啰！请看后续的范例说明。__
+__-A  ：依据 /etc/fstab 的内容，将需要的装置扫瞄一次。/etc/fstab 于下一小节说明，__
+	__  通常启动过程中就会运行此一命令了。__
+__-a  ：自动修复检查到的有问题的扇区，所以你不用一直按 y 啰！__
+__-y  ：与 -a 类似，但是某些 filesystem 仅支持 -y 这个参数！__
+__-C  ：可以在检验的过程当中，使用一个直方图来显示目前的进度！__
+
+__EXT2/EXT3 的额外选项功能：(e2fsck 这支命令所提供)__
+__-f  ：强制检查！一般来说，如果 fsck 没有发现任何 unclean 的旗标，不会主动进入__
+	__  细部检查的，如果您想要强制 fsck 进入细部检查，就得加上 -f 旗标啰！__
+__-D  ：针对文件系统下的目录进行优化配置。__
+
+范例一：强制的将前面我们创建的 /dev/hdc6 这个装置给他检验一下！
+[root@www ~]# fsck -C -f -t ext3 /dev/hdc6 
+fsck 1.39 (29-May-2006)
+e2fsck 1.39 (29-May-2006)
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+vbird_logical: 11/251968 files (9.1% non-contiguous), 36926/1004046 blocks
+# 如果没有加上 -f 的选项，则由于这个文件系统不曾出现问题，
+# 检查的经过非常快速！若加上 -f 强制检查，才会一项一项的显示过程。
+
+__范例二：系统有多少文件系统支持的 fsck 软件？__
+__[root@www ~]# fsck[tab][tab]__
+__fsck         fsck.cramfs  fsck.ext2    fsck.ext3    fsck.msdos   fsck.vfat__
+这是用来检查与修正文件系统错误的命令。注意：通常只有身为 root 且你的文件系统有问题的时候才使用这个命令，否则在正常状况下使用此一命令， 可能会造成对系统的危害！通常使用这个命令的场合都是在系统出现极大的问题，导致你在 Linux 启动的时候得进入单人单机模式下进行维护的行为时，才必须使用此一命令！
+
+另外，如果你怀疑刚刚格式化成功的硬盘有问题的时后，也可以使用 fsck 来检查一硬盘呦！其实就有点像是 Windows 的 scandisk 啦！此外，由于 fsck 在扫瞄硬盘的时候，可能会造成部分 filesystem 的损坏，__所以『运行 fsck 时， 被检查的 partition 务必不可挂载到系统上！亦即是需要在卸除的状态喔！』__
+
+不知道你还记不记得第六章的目录配置中我们提过， ext2/ext3 文件系统的最顶层(就是挂载点那个目录底下)会存在一个『lost+found』的目录吧！ 该目录就是在当你使用 fsck 检查文件系统后，若出现问题时，有问题的数据会被放置到这个目录中喔！ 所以理论上这个目录不应该会有任何数据，若系统自动产生数据在里面，那...你就得特别注意你的文件系统啰！
+
+另外，我们的系统实际运行的 fsck 命令，其实是呼叫 e2fsck 这个软件啦！可以 man e2fsck 找到更多的选项辅助喔！ 
+
+
+__badblocks__
+__[root@www ~]# badblocks -[svw] 装置名称__
+__选项与参数：__
+__-s  ：在屏幕上列出进度__
+__-v  ：可以在屏幕上看到进度__
+__-w  ：使用写入的方式来测试，建议不要使用此一参数，尤其是待检查的装置已有文件时！__
+
+[root@www ~]# badblocks -sv /dev/hdc6
+Checking blocks 0 to 2008093
+Checking for bad blocks (read-only test): done
+Pass completed, 0 bad blocks found.
+刚刚谈到的 fsck 是用来检验文件系统是否出错，至于 badblocks 则是用来检查硬盘或软盘扇区有没有坏轨的命令！ 由于这个命令其实可以透过『 mke2fs -c 装置文件名 』在进行格式化的时候处理磁盘表面的读取测试， 因此目前大多不使用这个命令啰！
+
+磁盘挂载与卸除
+我们在本章一开始时的挂载点的意义当中提过挂载点是目录， 而这个目录是进入磁盘分区槽(其实是文件系统啦！)的入口就是了。不过要进行挂载前，你最好先确定几件事：
+
+单一文件系统不应该被重复挂载在不同的挂载点(目录)中；
+单一目录不应该重复挂载多个文件系统；
+要作为挂载点的目录，理论上应该都是空目录才是。
+尤其是上述的后两点！如果你要用来挂载的目录里面并不是空的，那么挂载了文件系统之后，原目录下的东西就会暂时的消失。 举个例子来说，假设你的 /home 原本与根目录 (/) 在同一个文件系统中，底下原本就有 /home/test 与 /home/vbird 两个目录。然后你想要加入新的硬盘，并且直接挂载 /home 底下，那么当你挂载上新的分割槽时，则 /home 目录显示的是新分割槽内的数据，至于原先的 test 与 vbird 这两个目录就会暂时的被隐藏掉了！注意喔！并不是被覆盖掉， 而是暂时的隐藏了起来，等到新分割槽被卸除之后，则 /home 原本的内容就会再次的跑出来啦！
+
+而要将文件系统挂载到我们的 Linux 系统上，就要使用 mount 这个命令啦！ 不过，这个命令真的是博大精深～粉难啦！我们学简单一点啊～ ^_^
+
+[root@www ~]# mount -a
+[root@www ~]# mount [-l]
+__[root@www ~]# mount [-t 文件系统] [-L Label名] [-o 额外选项] \__
+__ [-n]  装置文件名  挂载点__
+__选项与参数：__
+__-a  ：依照配置文件 /etc/fstab 的数据将所有未挂载的磁盘都挂载上来__
+__-l  ：单纯的输入 mount 会显示目前挂载的信息。加上 -l 可增列 Label 名称！__
+__-t  ：与 mkfs 的选项非常类似的，可以加上文件系统种类来指定欲挂载的类型。__
+	__  常见的 Linux 支持类型有：ext2, ext3, vfat, reiserfs, iso9660(光盘格式),__
+	__  nfs, cifs, smbfs(此三种为网络文件系统类型)__
+__-n  ：在默认的情况下，系统会将实际挂载的情况实时写入 /etc/mtab 中，以利其他程序__
+	__  的运行。但在某些情况下(例如单人维护模式)为了避免问题，会刻意不写入。__
+	__  此时就得要使用这个 -n 的选项了。__
+__-L  ：系统除了利用装置文件名 (例如 /dev/hdc6) 之外，还可以利用文件系统的标头名称__
+	__  (Label)来进行挂载。最好为你的文件系统取一个独一无二的名称吧！__
+__-o  ：后面可以接一些挂载时额外加上的参数！比方说账号、密码、读写权限等：__
+	__  ro, rw:       挂载文件系统成为只读(ro) 或可擦写(rw)__
+	__  async, sync:  此文件系统是否使用同步写入 (sync) 或异步 (async) 的__
+					__内存机制，请参考文件系统运行方式。默认为 async。__
+	__  auto, noauto: 允许此 partition 被以 mount -a 自动挂载(auto)__
+	__  dev, nodev:   是否允许此 partition 上，可创建装置文件？ dev 为可允许__
+	__  suid, nosuid: 是否允许此 partition 含有 suid/sgid 的文件格式？__
+	__  exec, noexec: 是否允许此 partition 上拥有可运行 binary 文件？__
+	__  user, nouser: 是否允许此 partition 让任何使用者运行 mount ？一般来说，__
+					__mount 仅有 root 可以进行，但下达 user 参数，则可让__
+					__一般 user 也能够对此 partition 进行 mount 。__
+	__  defaults:     默认值为：rw, suid, dev, exec, auto, nouser, and async__
+	__  remount:      重新挂载，这在系统出错，或重新升级参数时，很有用！__
+会不会觉得光是看这个命令的细部选项就快要昏倒了？如果有兴趣的话看一下 man mount ，那才会真的昏倒的。 事实上 mount 是个很万用的命令，他可以挂载 ext3/vfat/nfs 等文件系统，由于每种文件系统的数据并不相同， 想当然尔，详细的参数与选项自然也就不相同啦！不过实际应用时却简单的会让你想笑呢！ 看看底下的几个简单范例先！
+
+
+挂载Ext2/Ext3文件系统
+范例一：用默认的方式，将刚刚创建的 /dev/hdc6 挂载到 /mnt/hdc6 上面！
+[root@www ~]# mkdir /mnt/hdc6
+[root@www ~]# mount /dev/hdc6 /mnt/hdc6
+[root@www ~]# df
+Filesystem           1K-blocks      Used Available Use% Mounted on
+.....中间省略.....
+/dev/hdc6              1976312     42072   1833836   3% /mnt/hdc6
+# 看起来，真的有挂载！且文件大小约为 2GB 左右啦！
+瞎密？竟然这么简单！利用『mount 装置文件名 挂载点』就能够顺利的挂载了！真是方便啊！ 为什么可以这么方便呢(甚至不需要使用 -t 这个选项)？由于文件系统几乎都有 superblock ， 我们的 Linux 可以透过分析 superblock 搭配 Linux 自己的驱动程序去测试挂载， 如果成功的套和了，就立刻自动的使用该类型的文件系统挂载起来啊！ 那么系统有没有指定哪些类型的 filesystem 才需要进行上述的挂载测试呢？ 主要是参考底下这两个文件：
+
+__/etc/filesystems：系统指定的测试挂载文件系统类型；__
+__/proc/filesystems：Linux系统已经加载的文件系统类型。__
+那我怎么知道我的 Linux 有没有相关文件系统类型的驱动程序呢？我们 Linux 支持的文件系统之驱动程序都写在如下的目录中：
+
+/lib/modules/$(uname -r)/kernel/fs/
+例如 vfat 的驱动程序就写在『/lib/modules/$(uname -r)/kernel/fs/vfat/』这个目录下啦！ 简单的测试挂载后，接下来让我们检查看看目前已挂载的文件系统状况吧！
+
+范例二：观察目前『已挂载』的文件系统，包含各文件系统的Label名称
+[root@www ~]# mount -l
+/dev/hdc2 on / type ext3 (rw) [/1]
+proc on /proc type proc (rw)
+sysfs on /sys type sysfs (rw)
+devpts on /dev/pts type devpts (rw,gid=5,mode=620)
+/dev/hdc3 on /home type ext3 (rw) [/home]
+/dev/hdc1 on /boot type ext3 (rw) [/boot]
+tmpfs on /dev/shm type tmpfs (rw)
+none on /proc/sys/fs/binfmt_misc type binfmt_misc (rw)
+sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw)
+/dev/hdc6 on /mnt/hdc6 type ext3 (rw) [vbird_logical]
+# 除了实际的文件系统外，很多特殊的文件系统(proc/sysfs...)也会被显示出来！
+# 值得注意的是，加上 -l 选项可以列出如上特殊字体的标头(label)喔
+这个命令输出的结果可以让我们看到非常多信息，以 /dev/hdc2 这个装置来说好了(上面表格的第一行)， 他的意义是：『/dev/hdc2 是挂载到 / 目录，文件系统类型为 ext3 ，且挂载为可擦写 (rw) ，另外，这个 filesystem 有标头，名字(label)为 /1 』 这样，你会解释上述表格中的最后一行输出结果了吗？自己解释一下先。^_^。 接下来请拿出你的 CentOS DVD 放入光驱中，并拿 FAT 格式的 U盘 闪盘(不要用 NTFS 的)插入 U盘 插槽中，我们来测试挂载一下！
+
+
+挂载 CD 或 DVD 光盘
+范例三：将你用来安装 Linux 的 CentOS 原版光盘拿出来挂载！
+[root@www ~]# mkdir /media/cdrom
+[root@www ~]# mount -t iso9660 /dev/cdrom /media/cdrom
+[root@www ~]# mount /dev/cdrom /media/cdrom 
+# 你可以指定 -t iso9660 这个光盘片的格式来挂载，也可以让系统自己去测试挂载！
+# 所以上述的命令只要做一个就够了！但是目录的创建初次挂载时必须要进行喔！
+ 
+[root@www ~]# df
+Filesystem           1K-blocks      Used Available Use% Mounted on
+.....中间省略.....
+/dev/hdd               4493152   4493152         0 100% /media/cdrom
+# 因为我的光驱使用的是 /dev/hdd 的 IDE 接口之故！
+光驱一挂载之后就无法退出光盘片了！除非你将他卸除才能够退出！ 从上面的数据你也可以发现，因为是光盘嘛！所以磁盘使用率达到 100% ，因为你无法直接写入任何数据到光盘当中ㄇㄟ！ 另外，其实 /dev/cdrom 是个链接文件，正确的磁盘文件名得要看你的光驱是什么连接接口的环境。 以鸟哥为例，我的光驱接在 /dev/hdd，所以正确的挂载应该是『mount /dev/hdd /media/cdrom』比较正确喔！
+
+Tips:
+话说当时年纪小 (其实是刚接触 Linux 的那一年)，摸 Linux 到处碰壁！连将 CDROM 挂载后， 光驱竟然都不让我退片！那个时候难过的要死！解决的方法竟然是『重新启动！』囧的可以啊！	鸟哥的图示
+格式化与挂载软盘
+软盘的格式化可以直接使用 mkfs 即可。但是软盘也是可以格式化成为 ext3 或 vfat 格式的。 挂载的时候我们同样的使用系统自动测试挂载即可！真是粉简单！如果你有软盘片的话(很少人有了吧？)， 请先放置到软盘驱动器当中啰！底下来测试看看(软盘片请勿放置任何数据，且将写保护打开！)。
+
+范例四：格式化后挂载软盘到 /media/floppy/ 目录中。
+[root@www ~]# mkfs -t vfat /dev/fd0
+# 我们格式化软盘成为 Windows/Linux 可共同使用的 FAT 格式吧！
+[root@www ~]# mkdir /media/floppy
+[root@www ~]# mount -t vfat /dev/fd0 /media/floppy
+[root@www ~]# df
+Filesystem           1K-blocks      Used Available Use% Mounted on
+.....中间省略.....
+/dev/fd0                  1424       164      1260  12% /media/floppy
+与光驱不同的是，你挂载了软盘后竟然还是可以退出软盘喔！不过，如此一来你的文件系统将会有莫名奇妙的问题发生！ 整个 Linux 最重要的就是文件系统，而文件系统是直接挂载到目录树上头， 几乎任何命令都会或多或少使用到目录树的数据，因此你当然不可以随意的将光盘/软盘拿出来！ 所以，软盘也请卸除之后再退出！很重要的一点！
+
+
+挂载闪盘
+请拿出你的闪盘并插入 Linux 主机的 U盘 槽中！注意，你的这个闪盘不能够是 NTFS 的文件系统喔！ 接下来让我们测试测试吧！
+
+范例五：找出你的闪盘装置文件名，并挂载到 /mnt/flash 目录中
+[root@www ~]# fdisk -l
+.....中间省略.....
+Disk /dev/sda: 8313 MB, 8313110528 bytes
+59 heads, 58 sectors/track, 4744 cylinders
+Units = cylinders of 3422 * 512 = 1752064 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1               1        4745     8118260    b  W95 FAT32
+# 从上的特殊字体，可得知磁盘的大小以及装置文件名，知道是 /dev/sda1 
+
+[root@www ~]# mkdir /mnt/flash
+[root@www ~]# mount -t vfat -o iocharset=cp950 /dev/sda1 /mnt/flash
+[root@www ~]# df
+Filesystem           1K-blocks      Used Available Use% Mounted on
+.....中间省略.....
+/dev/sda1              8102416   4986228   3116188  62% /mnt/flash
+如果带有中文文件名的数据，那么可以在挂载时指定一下挂载文件系统所使用的语系数据。 在 man mount 找到 vfat 文件格式当中可以使用 iocharset 来指定语系，而中文语系是 cp950 ， 所以也就有了上述的挂载命令项目啰。
+
+万一你使用的是随身硬盘，也就是利用笔记型计算机所做出来的U盘磁盘时，通常这样的硬盘都使用 NTFS 格式的～ 怎办？没关系，可以参考底下这个网站：(注8)
+
+NTFS 文件系统官网：Linux-NTFS Project: http://www.linux-ntfs.org/
+CentOS 5.x 版的相关驱动程序下载页面：http://www.linux-ntfs.org/doku.php?id=redhat:rhel5
+将她们提供的驱动程序捉下来并且安装之后，就能够使用 NTFS 的文件系统了！ 只是由于文件系统与 Linux 核心有很大的关系，因此以后如果你的 Linux 系统有升级 (update) 时， 你就得要重新下载一次相对应的驱动程序版本喔！
+
+
+重新挂载根目录与挂载不特定目录
+整个目录树最重要的地方就是根目录了，所以根目录根本就不能够被卸除的！问题是，如果你的挂载参数要改变， 或者是根目录出现『只读』状态时，如何重新挂载呢？最可能的处理方式就是重新启动 (reboot)！ 不过你也可以这样做：
+
+__范例六：将 / 重新挂载，并加入参数为 rw 与 auto__
+__[root@www ~]# mount -o remount,rw,auto /__
+重点是那个『 -o remount,xx 』的选项与参数！请注意，要重新挂载 (remount) 时， 这是个非常重要的机制！尤其是当你进入单人维护模式时，你的根目录常会被系统挂载为只读，这个时候这个命令就太重要了！
+
+另外，我们也可以利用 mount 来将某个目录挂载到另外一个目录去喔！这并不是挂载文件系统，而是额外挂载某个目录的方法！ 虽然底下的方法也可以使用 symbolic link 来连结，不过在某些不支持符号链接的程序运行中，还是得要透过这样的方法才行。
+
+范例七：将 /home 这个目录暂时挂载到 /mnt/home 底下：
+[root@www ~]# mkdir /mnt/home
+[root@www ~]# mount --bind /home /mnt/home
+[root@www ~]# ls -lid /home/ /mnt/home
+2 drwxr-xr-x 6 root root 4096 Sep 29 02:21 /home/
+2 drwxr-xr-x 6 root root 4096 Sep 29 02:21 /mnt/home
+
+[root@www ~]# mount -l
+/home on /mnt/home type none (rw,bind)
+看起来，其实两者连结到同一个 inode 嘛！ ^_^ 没错啦！透过这个 mount --bind 的功能， 您可以将某个目录挂载到其他目录去喔！而并不是整块 filesystem 的啦！所以从此进入 /mnt/home 就是进入 /home 的意思喔！
+
+
+__umount (将装置文件卸除)__
+__[root@www ~]# umount [-fn] 装置文件名或挂载点__
+__选项与参数：__
+__-f ：强制卸除！可用在类似网络文件系统 (NFS) 无法读取到的情况下；__
+__-n ：不升级 /etc/mtab 情况下卸除。__
+就是直接将已挂载的文件系统给他卸除即是！卸除之后，可以使用 df 或 mount -l 看看是否还存在目录树中？ 卸除的方式，可以下达装置文件名或挂载点，均可接受啦！底下的范例做看看吧！
+
+范例八：将本章之前自行挂载的文件系统全部卸除：
+[root@www ~]# mount
+.....前面省略.....
+/dev/hdc6 on /mnt/hdc6 type ext3 (rw)
+/dev/hdd on /media/cdrom type iso9660 (rw)
+/dev/sda1 on /mnt/flash type vfat (rw,iocharset=cp950)
+/home on /mnt/home type none (rw,bind)
+# 先找一下已经挂载的文件系统，如上所示，特殊字体即为刚刚挂载的装置啰！
+
+[root@www ~]# umount /dev/hdc6      <==用装置文件名来卸除
+[root@www ~]# umount /media/cdrom   <==用挂载点来卸除
+[root@www ~]# umount /mnt/flash     <==因为挂载点比较好记忆！
+[root@www ~]# umount /dev/fd0       <==用装置文件名较好记！
+[root@www ~]# umount /mnt/home      <==一定要用挂载点！因为挂载的是目录
+由于通通卸除了，此时你才可以退出光盘片、软盘片、U盘闪盘等设备喔！如果你遇到这样的情况：
+
+[root@www ~]# mount /dev/cdrom /media/cdrom
+[root@www ~]# cd /media/cdrom
+[root@www cdrom]# umount /media/cdrom
+umount: /media/cdrom: device is busy
+umount: /media/cdrom: device is busy
+由于你目前正在 /media/cdrom/ 的目录内，也就是说其实『你正在使用该文件系统』的意思！ 所以自然无法卸除这个装置！那该如何是好？就『离开该文件系统的挂载点』即可。以上述的案例来说， 你可以使用『 cd / 』回到根目录，就能够卸除 /media/cdrom 啰！简单吧！
+
+
+使用 Label name 进行挂载的方法
+除了磁盘的装置文件名之外，其实我们可以使用文件系统的标头(label)名称来挂载喔！ 举例来说，我们刚刚卸除的 /dev/hdc6 标头名称是『vbird_logical』，你也可以使用 dumpe2fs 这个命令来查询一下啦！然后就这样做即可：
+
+范例九：找出 /dev/hdc6 的 label name，并用 label 挂载到 /mnt/hdc6 
+[root@www ~]# dumpe2fs -h /dev/hdc6
+Filesystem volume name:   vbird_logical
+.....底下省略.....
+# 找到啦！标头名称为 vbird_logical 啰！
+
+[root@www ~]# mount -L "vbird_logical" /mnt/hdc6
+这种挂载的方法有一个很大的好处：『系统不必知道该文件系统所在的接口与磁盘文件名！』 更详细的说明我们会在下一小节当中的 e2label 介绍的！
+
+磁盘参数修订
+某些时刻，你可能会希望修改一下目前文件系统的一些相关信息，举例来说，你可能要修改 Label name ， 或者是 journal 的参数，或者是其他硬盘运行时的相关参数 (例如 DMA 启动与否～)。 这个时候，就得需要底下这些相关的命令功能啰～
+
+
+mknod
+还记得我们说过，在 Linux 底下所有的装置都以文件来代表吧！但是那个文件如何代表该装置呢？ 很简单！就是透过文件的 major 与 minor 数值来替代的～所以，那个 major 与 minor 数值是有特殊意义的，不是随意配置的喔！举例来说，在鸟哥的这个测试机当中， 那个用到的磁盘 /dev/hdc 的相关装置代码如下：
+
+[root@www ~]# ll /dev/hdc*
+brw-r----- 1 root disk 22, 0 Oct 24 15:55 /dev/hdc
+brw-r----- 1 root disk 22, 1 Oct 20 08:47 /dev/hdc1
+brw-r----- 1 root disk 22, 2 Oct 20 08:47 /dev/hdc2
+brw-r----- 1 root disk 22, 3 Oct 20 08:47 /dev/hdc3
+brw-r----- 1 root disk 22, 4 Oct 24 16:02 /dev/hdc4
+brw-r----- 1 root disk 22, 5 Oct 20 16:46 /dev/hdc5
+brw-r----- 1 root disk 22, 6 Oct 25 01:33 /dev/hdc6
+上表当中 22 为主要装置代码 (Major) 而 0~6 则为次要装置代码 (Minor)。 我们的 Linux 核心认识的装置数据就是透过这两个数值来决定的！举例来说，常见的硬盘文件名 /dev/hda 与 /dev/sda 装置代码如下所示：
+
+磁盘文件名	Major	Minor
+/dev/hda	3	0~63
+/dev/hdb	3	64~127
+/dev/sda	8	0-15
+/dev/sdb	8	16-31
+
+__如果你想要知道更多核心支持的硬件装置代码 (major, minor) 请参考官网的连结(注9)：__
+
+http://www.kernel.org/pub/linux/docs/device-list/devices.txt
+基本上，Linux 核心 2.6 版以后，硬件文件名已经都可以被系统自动的实时产生了，我们根本不需要手动创建装置文件。 不过某些情况底下我们可能还是得要手动处理装置文件的，例如在某些服务被关到特定目录下时(chroot)， 就需要这样做了。此时这个 mknod 就得要知道如何操作才行！
+
+__[root@www ~]# mknod 装置文件名 [bcp] [Major] [Minor]__
+__选项与参数：__
+__装置种类：__
+__   b  ：配置装置名称成为一个周边储存设备文件，例如硬盘等；__
+__   c  ：配置装置名称成为一个周边输入设备文件，例如鼠标/键盘等；__
+__   p  ：配置装置名称成为一个 FIFO 文件；__
+__Major ：主要装置代码；__
+__Minor ：次要装置代码；__
+
+范例一：由上述的介绍我们知道 /dev/hdc10 装置代码 22, 10，请创建并查阅此装置
+[root@www ~]# mknod /dev/hdc10 b 22 10
+[root@www ~]# ll /dev/hdc10
+brw-r--r-- 1 root root 22, 10 Oct 26 23:57 /dev/hdc10
+# 上面那个 22 与 10 是有意义的，不要随意配置啊！
+
+范例二：创建一个 FIFO 文件，档名为 /tmp/testpipe
+[root@www ~]# mknod /tmp/testpipe p
+[root@www ~]# ll /tmp/testpipe
+prw-r--r-- 1 root root 0 Oct 27 00:00 /tmp/testpipe
+# 注意啊！这个文件可不是一般文件，不可以随便就放在这里！
+# 测试完毕之后请删除这个文件吧！看一下这个文件的类型！是 p 喔！^_^
+
+__e2label__
+我们在 mkfs 命令介绍时有谈到配置文件系统标头 (Label) 的方法。 那如果格式化完毕后想要修改标头呢？就用这个 e2label 来修改了。那什么是 Label 呢？ 我们拿你曾用过的 Windows 系统来说明。当你打开『文件总管』时，C/D等槽不是都会有个名称吗？ 那就是 label (如果没有配置名称，就会显示『本机磁盘驱动器』的字样)
+
+这个东西除了有趣且可以让你知道磁盘的内容是啥玩意儿之外，也会被使用到一些配置文件案当中！ 举例来说，刚刚我们聊到的磁盘的挂载时，不就有用到 Label name 来进行挂载吗？ 目前 CentOS 的配置文件，也就是那个 /etc/fstab 文件的配置都默认使用 Label name 呢！ 那这样做有什么好处与缺点呢？
+
+__优点：不论磁盘文件名怎么变，不论你将硬盘插在哪个 IDE / SATA 接口，由于系统是透过 Label ，所以，磁盘插在哪个接口将不会有影响；__
+
+__缺点：如果插了两颗硬盘，刚好两颗硬盘的 Label 有重复的，那就惨了～ 因为系统可能会无法判断哪个磁盘分区槽才是正确的！__
+鸟哥一直是个比较『硬派』作风，所以我还是比较喜欢直接利用磁盘文件名来挂载啦！ 不过，如果没有特殊需求的话，那么利用 Label 来挂载也成！ 但是你就不可以随意修改 Label 的名称了！
+
+__[root@www ~]# e2label 装置名称  新的Label名称__
+
+范例一：将 /dev/hdc6 的标头改成 my_test 并观察是否修改成功？
+[root@www ~]# dumpe2fs -h /dev/hdc6
+Filesystem volume name:   vbird_logical  <==原本的标头名称
+.....底下省略.....
+
+[root@www ~]# e2label /dev/hdc6 "my_test"
+[root@www ~]# dumpe2fs -h /dev/hdc6
+Filesystem volume name:   my_test        <==改过来啦！
+.....底下省略.....
+
+__tune2fs__
+__[root@www ~]# tune2fs [-jlL] 装置代号__
+__选项与参数：__
+__-l  ：类似 dumpe2fs -h 的功能～将 superblock 内的数据读出来～__
+__-j  ：将 ext2 的 filesystem 转换为 ext3 的文件系统；__
+__-L  ：类似 e2label 的功能，可以修改 filesystem 的 Label 喔！__
+
+范例一：列出 /dev/hdc6 的 superblock 内容
+[root@www ~]# tune2fs -l /dev/hdc6
+这个命令的功能其实很广泛啦～上面鸟哥仅列出很简单的一些参数而已， 更多的用法请自行参考 man tune2fs 。比较有趣的是，如果你的某个 partition 原本是 ext2 的文件系统，如果想要将他升级成为 ext3 文件系统的话，利用 tune2fs 就可以很简单的转换过来啰～
+
+
+hdparm
+如果你的硬盘是 IDE 接口的，那么这个命令可以帮助你配置一些进阶参数！如果你是使用 SATA 接口的， 那么这个命令就没有多大用途了！另外，目前的 Linux 系统都已经稍微优化过，所以这个命令最多是用来测试效能啦！ 而且建议你不要随便调整硬盘参数，文件系统容易出问题喔！除非你真的知道你调整的数据是啥！
+
+__[root@www ~]# hdparm [-icdmXTt] 装置名称__
+__选项与参数：__
+__-i  ：将核心侦测到的硬盘参数显示出来！__
+__-c  ：配置 32-bit (32位)存取模式。这个 32 位存取模式指的是在硬盘在与 __
+	__  PCI 接口之间传输的模式，而硬盘本身是依旧以 16 位模式在跑的！__
+	__  默认的情况下，这个配置值都会被打开，建议直接使用 c1 即可！__
+__-d  ：配置是否激活 dma 模式， -d1 为启动， -d0 为取消；__
+__-m  ：配置同步读取多个 sector 的模式。一般来说，配置此模式，可降低系统因为__
+	__  读取磁盘而损耗的效能～不过， WD 的硬盘则不怎么建议配置此值～__
+	__  一般来说，配置为 16/32 是优化，不过，WD 硬盘建议值则是 4/8 。__
+	__  这个值的最大值，可以利用 hdparm -i /dev/hda 输出的 MaxMultSect__
+	__  来配置喔！一般如果不晓得，配置 16 是合理的！__
+__-X  ：配置 UtraDMA 的模式，一般来说， UDMA 的模式值加 64 即为配置值。__
+	__  并且，硬盘与主板芯片必须要同步，所以，取最小的那个。一般来说：__
+	__  33 MHz DMA mode 0~2 (X64~X66)__
+	__  66 MHz DMA mode 3~4 (X67~X68)__
+	__  100MHz DMA mode 5   (X69)__
+	__  如果您的硬盘上面显示的是 UATA 100 以上的，那么配置 X69 也不错！__
+__-T  ：测试缓存区 cache 的存取效能__
+__-t  ：测试硬盘的实际存取效能 （较正确！）__
+
+范例一：取得我硬盘的最大同步存取 sector 值与目前的 UDMA 模式
+[root@www ~]# hdparm -i /dev/hdc
+ Model=IC35L040AVER07-0, FwRev=ER4OA41A, SerialNo=SX0SXL98406 <==硬盘的厂牌型号
+ Config={ HardSect NotMFM HdSw>15uSec Fixed DTR>10Mbs }
+ RawCHS=16383/16/63, TrkSize=0, SectSize=0, ECCbytes=40
+ BuffType=DualPortCache, BuffSize=1916kB, MaxMultSect=16, MultSect=16
+ CurCHS=16383/16/63, CurSects=16514064, LBA=yes, LBAsects=80418240
+ IORDY=on/off, tPIO={min:240,w/IORDY:120}, tDMA={min:120,rec:120}
+ PIO modes:  pio0 pio1 pio2 pio3 pio4
+ DMA modes:  mdma0 mdma1 mdma2
+ UDMA modes: udma0 udma1 udma2 udma3 udma4 *udma5 <==有 * 为目前的值
+ AdvancedPM=yes: disabled (255) WriteCache=enabled
+ Drive conforms to: ATA/ATAPI-5 T13 1321D revision 1:  
+	ATA/ATAPI-2 ATA/ATAPI-3 ATA/ATAPI-4 ATA/ATAPI-5
+# 这颗硬盘缓冲存储器只有 2MB(BuffSize)，但使用的是 udma5 ！还可以。
+
+范例二：由上个范例知道最大 16 位/UDMA 为 mode 5，所以可以配置为：
+[root@www ~]# hdparm -d1 -c1 -X69 /dev/hdc
+
+范例三：测试这颗硬盘的读取效能
+[root@www ~]# hdparm -Tt /dev/hdc
+/dev/hdc:
+ Timing cached reads:   428 MB in  2.00 seconds = 213.50 MB/sec
+ Timing buffered disk reads:  114 MB in  3.00 seconds =  38.00 MB/sec
+# 鸟哥的这部测试机没有很好啦～这样的速度.....差强人意～
+如果你是使用 SATA 硬盘的话，这个命令唯一可以做的，就是最后面那个测试的功能而已啰！ 虽然这样的测试不是很准确，至少是一个可以比较的基准。鸟哥在我的 cluster 机器上面测试的 SATA (/dev/sda) 与 RAID (/dev/sdb) 结果如下，可以提供给你参考看看。
+
+[root@www ~]# hdparm -Tt /dev/sda /dev/sdb
+/dev/sda:
+ Timing cached reads:   4152 MB in  2.00 seconds = 2075.28 MB/sec
+ Timing buffered disk reads:  304 MB in  3.01 seconds = 100.91 MB/sec
+
+/dev/sdb:
+ Timing cached reads:   4072 MB in  2.00 seconds = 2036.31 MB/sec
+ Timing buffered disk reads:  278 MB in  3.00 seconds =  92.59 MB/sec
+

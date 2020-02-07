@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-21T21:29:38+08:00
+
+====== exfat install ======
+创建日期 星期三 21 十一月 2018
+
+sudo apt-get install exfat-fuse

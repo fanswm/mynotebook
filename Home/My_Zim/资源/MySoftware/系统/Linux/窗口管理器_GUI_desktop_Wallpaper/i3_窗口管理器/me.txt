@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-03T22:04:51+08:00
+
+====== me ======
+Created 星期日 03 二月 2019
+
+
+5 reasons the i3 window manager makes Linux better | Opensource.com https://opensource.com/article/18/8/i3-tiling-window-manager
+i3 窗口管理器入门 https://linux.cn/article-10021-1.html?utm_source=rss&utm_medium=rss

@@ -1,0 +1,59 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-26T12:48:37+08:00
+
+====== 命令行提示符(PS1 prompt) ======
+创建日期 星期二 26 十一月 2019
+
+linux 下
+
+ vi ~/.zshrc 
+在最后一行添加如下格式的语句并退出：
+
+ export PS1="my zsh ps1> "
+重新打开zsh查看效果：
+
+
+当然如果需要显示一些实用的信息就需要用到zsh 的转义变量（prompt variables 和 conditional substrings）：
+下面是一些比较常用的转义变量
+
+转义变量	描述
+%T	系统时间（时：分）
+%*	系统时间（时：分：秒）
+%D	系统日期（年-月-日）
+%n	你的用户名
+%B - %b	开始到结束使用粗体打印
+%U - %u	开始到结束使用下划线打印
+%d	你目前的工作目录
+%~	你目前的工作目录相对于～的相对路径（可能在某些zsh版本可能造成乱码）
+%M	计算机的主机名
+%m	计算机的主机名（在第一个句号之前截断）
+%l	你当前的tty
+更多详细的转义指令可以到zsh Prompt-Expansion查询
+
+举个栗子～
+在~/.zshrc 修改之前的PS1
+
+ export PS1="[%T] %~ %# "
+
+相应效果如下：
+
+[2:00] ~ % sudo su
+[sudo] password for diaoshe: 
+[2:00] /home/diaoshe # 
+
+加点颜色
+配置更加个性化的命令提示符<——–说明文档！  https://wiki.archlinux.org/index.php/Zsh_%28%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%29#.E5.BD.A9.E8.89.B2
+栗子again~
+在~/.zshrc 中删除之前添加的 PS1 并添加如下语句
+
+#开启颜色
+autoload -U colors && colors       
+#配置提示符模式。。 其实配置之前的PS1也是可以的 但是为了尊重说明文档。。。
+PROMPT="%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[green]%}%1|%~ %{$reset_color%}%#>"        
+#在行末显示上一命令的返回状态
+RPROMPT="[%{$fg_bold[yellow]%}%?%{$reset_color%}]"
+保存退出,重启zsh后就阔以使用拉～：
+————————————————
+版权声明：本文为CSDN博主「diaoshe」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/u014218108/article/details/51195582

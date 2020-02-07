@@ -1,0 +1,39 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-23T11:18:16+08:00
+
+====== 安装 ======
+创建日期 星期一 23 十二月 2019
+
+1. 通过官方PPA安装Ubuntu make
+
+	sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
+	sudo apt-get update
+	sudo apt-get install ubuntu-make
+
+2. 使用命令安装visual studio code
+
+	umake ide visual-studio-code  (这条命令网上很多错写成web)
+
+	中间会确认安装visual studio code，输入a即可
+
+3. 安装完成后，可以发现VSCode图标已经出现在Unity启动器上，点击即可运行。
+
+4. 若安装完成，图标却没有出现，说明安装错误。
+
+报错为：(process:6655): dconf-WARNING **: failed to commit changes to dconf: Cannot。。。
+
+需要重置unity桌面
+
+	打开终端（使用快捷键 Ctrl + Alt + F1）进入终端
+	dconf reset -f /org/compiz/ （重置Compiz）
+	setsid unity （重启Unity）
+	unity --reset-icons  （如果想重新使用unity默认的启动器图标，可以运行该命令）
+	sudo shutdown -r now 来重新启动Ubuntu
+
+5. 卸载已经安装的VSCode
+
+	umake ide visual-studio-code  --remove
+————————————————
+版权声明：本文为CSDN博主「被虐哭也要努力」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/Among12345/article/details/81874117

@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T20:10:27+08:00
+
+====== unity-tweak-tool ======
+创建日期 星期二 21 十一月 2017
+
+```
+# numix
+sudo apt-add-repository ppa:numix/ppa 
+sudo apt-get update 
+sudo apt-get install numix-icon-theme-circle //安装图标
+sudo apt-get install numix-gtk-theme          //安装主题
+```

@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-18T21:24:41+08:00
+
+====== Gett ======
+创建日期 星期四 18 一月 2018
+
+Gett 一大特色在于上传完文件后，支持快速分享到 Twitter、Facebook、Google Plus 社交平台，即时统计功能还可以帮助分享者究竟有多少人下载了分享的文件资源。未注册使用 Gett 服务，分享的文件链接会保存 30 天时间，注册免费账号后可保存三个月，官方还有 1.99 美元和 3.99 美元的两种付费方案。
+
+http://ge.tt/

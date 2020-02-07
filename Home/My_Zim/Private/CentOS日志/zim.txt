@@ -1,0 +1,550 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T18:13:15+08:00
+
+====== zim ======
+创建日期 星期二 21 十一月 2017
+
++ 下载源码
++ 解压
++ mv zim-0.67 [[~/app/]]
++ cd [[~/app/zim-0.67/]]
++ `sudo ./setup install`
+
+> [myname@MiWiFi-R1CL-srv zim-0.67]$ sudo ./setup.py install
+[sudo] myname 的密码：
+No handlers could be found for logger "zim.fs"
+running install
+running build
+running build_py
+running build_scripts
+copying and adjusting zim.py -> build/scripts-2.7
+changing mode of build/scripts-2.7/zim.py from 644 to 755
+renaming build/scripts-2.7/zim.py to build/scripts-2.7/zim
+running build_trans
+Setting plugin list in build/lib/zim/plugins/__init__.py
+running install_lib
+creating /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/__init__.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/history.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/signals.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/search.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/tokenparser.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/www.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/actions.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/parsing.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/applications.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/datetimetz.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/objectmanager.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/parser.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/fs.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/environ.py -> /usr/lib/python2.7/site-packages/zim
+copying build/lib/zim/errors.py -> /usr/lib/python2.7/site-packages/zim
+creating /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/__init__.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/ditaaeditor.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/screenshot.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/tableofcontents.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/quicknote.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/gnu_r_ploteditor.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/sequencediagrameditor.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/trayicon.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/scoreeditor.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/gnuplot_ploteditor.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/calendar.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/inlinecalculator.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/tableeditor.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/distractionfree.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/zeitgeist-logger.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/equationeditor.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/linesorter.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/osx_menubar.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/insertsymbol.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/spell.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/arithmetic.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/diagrameditor.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/bookmarksbar.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/linkmap.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/sourceview.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/printtobrowser.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/backlinkpane.py -> /usr/lib/python2.7/site-packages/zim/plugins
+copying build/lib/zim/plugins/tags.py -> /usr/lib/python2.7/site-packages/zim/plugins
+creating /usr/lib/python2.7/site-packages/zim/plugins/attachmentbrowser
+copying build/lib/zim/plugins/attachmentbrowser/__init__.py -> /usr/lib/python2.7/site-packages/zim/plugins/attachmentbrowser
+copying build/lib/zim/plugins/attachmentbrowser/filebrowser.py -> /usr/lib/python2.7/site-packages/zim/plugins/attachmentbrowser
+copying build/lib/zim/plugins/attachmentbrowser/thumbnailer.py -> /usr/lib/python2.7/site-packages/zim/plugins/attachmentbrowser
+creating /usr/lib/python2.7/site-packages/zim/plugins/base
+copying build/lib/zim/plugins/base/__init__.py -> /usr/lib/python2.7/site-packages/zim/plugins/base
+copying build/lib/zim/plugins/base/imagegenerator.py -> /usr/lib/python2.7/site-packages/zim/plugins/base
+creating /usr/lib/python2.7/site-packages/zim/plugins/versioncontrol
+copying build/lib/zim/plugins/versioncontrol/__init__.py -> /usr/lib/python2.7/site-packages/zim/plugins/versioncontrol
+copying build/lib/zim/plugins/versioncontrol/bzr.py -> /usr/lib/python2.7/site-packages/zim/plugins/versioncontrol
+copying build/lib/zim/plugins/versioncontrol/git.py -> /usr/lib/python2.7/site-packages/zim/plugins/versioncontrol
+copying build/lib/zim/plugins/versioncontrol/hg.py -> /usr/lib/python2.7/site-packages/zim/plugins/versioncontrol
+copying build/lib/zim/plugins/versioncontrol/fossil.py -> /usr/lib/python2.7/site-packages/zim/plugins/versioncontrol
+creating /usr/lib/python2.7/site-packages/zim/plugins/tasklist
+copying build/lib/zim/plugins/tasklist/__init__.py -> /usr/lib/python2.7/site-packages/zim/plugins/tasklist
+copying build/lib/zim/plugins/tasklist/gui.py -> /usr/lib/python2.7/site-packages/zim/plugins/tasklist
+copying build/lib/zim/plugins/tasklist/indexer.py -> /usr/lib/python2.7/site-packages/zim/plugins/tasklist
+copying build/lib/zim/plugins/tasklist/dates.py -> /usr/lib/python2.7/site-packages/zim/plugins/tasklist
+creating /usr/lib/python2.7/site-packages/zim/main
+copying build/lib/zim/main/__init__.py -> /usr/lib/python2.7/site-packages/zim/main
+copying build/lib/zim/main/command.py -> /usr/lib/python2.7/site-packages/zim/main
+copying build/lib/zim/main/ipc.py -> /usr/lib/python2.7/site-packages/zim/main
+creating /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/__init__.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/pathbar.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/propertiesdialog.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/pageindex.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/server.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/pageview.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/recentchangesdialog.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/searchdialog.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/applications.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/widgets.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/templateeditordialog.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/objectmanager.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/customtools.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/notebookdialog.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/exportdialog.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/clipboard.py -> /usr/lib/python2.7/site-packages/zim/gui
+copying build/lib/zim/gui/preferencesdialog.py -> /usr/lib/python2.7/site-packages/zim/gui
+creating /usr/lib/python2.7/site-packages/zim/utils
+copying build/lib/zim/utils/__init__.py -> /usr/lib/python2.7/site-packages/zim/utils
+copying build/lib/zim/utils/threading.py -> /usr/lib/python2.7/site-packages/zim/utils
+creating /usr/lib/python2.7/site-packages/zim/config
+copying build/lib/zim/config/__init__.py -> /usr/lib/python2.7/site-packages/zim/config
+copying build/lib/zim/config/dicts.py -> /usr/lib/python2.7/site-packages/zim/config
+copying build/lib/zim/config/manager.py -> /usr/lib/python2.7/site-packages/zim/config
+copying build/lib/zim/config/basedirs.py -> /usr/lib/python2.7/site-packages/zim/config
+creating /usr/lib/python2.7/site-packages/zim/newfs
+copying build/lib/zim/newfs/__init__.py -> /usr/lib/python2.7/site-packages/zim/newfs
+copying build/lib/zim/newfs/base.py -> /usr/lib/python2.7/site-packages/zim/newfs
+copying build/lib/zim/newfs/mock.py -> /usr/lib/python2.7/site-packages/zim/newfs
+copying build/lib/zim/newfs/local.py -> /usr/lib/python2.7/site-packages/zim/newfs
+copying build/lib/zim/newfs/helpers.py -> /usr/lib/python2.7/site-packages/zim/newfs
+creating /usr/lib/python2.7/site-packages/zim/templates
+copying build/lib/zim/templates/__init__.py -> /usr/lib/python2.7/site-packages/zim/templates
+copying build/lib/zim/templates/expression.py -> /usr/lib/python2.7/site-packages/zim/templates
+copying build/lib/zim/templates/functions.py -> /usr/lib/python2.7/site-packages/zim/templates
+copying build/lib/zim/templates/processor.py -> /usr/lib/python2.7/site-packages/zim/templates
+copying build/lib/zim/templates/parser.py -> /usr/lib/python2.7/site-packages/zim/templates
+copying build/lib/zim/templates/expressionparser.py -> /usr/lib/python2.7/site-packages/zim/templates
+creating /usr/lib/python2.7/site-packages/zim/inc
+copying build/lib/zim/inc/__init__.py -> /usr/lib/python2.7/site-packages/zim/inc
+copying build/lib/zim/inc/xdot.py -> /usr/lib/python2.7/site-packages/zim/inc
+copying build/lib/zim/inc/arithmetic.py -> /usr/lib/python2.7/site-packages/zim/inc
+creating /usr/lib/python2.7/site-packages/zim/notebook
+copying build/lib/zim/notebook/__init__.py -> /usr/lib/python2.7/site-packages/zim/notebook
+copying build/lib/zim/notebook/layout.py -> /usr/lib/python2.7/site-packages/zim/notebook
+copying build/lib/zim/notebook/info.py -> /usr/lib/python2.7/site-packages/zim/notebook
+copying build/lib/zim/notebook/operations.py -> /usr/lib/python2.7/site-packages/zim/notebook
+copying build/lib/zim/notebook/page.py -> /usr/lib/python2.7/site-packages/zim/notebook
+copying build/lib/zim/notebook/notebook.py -> /usr/lib/python2.7/site-packages/zim/notebook
+creating /usr/lib/python2.7/site-packages/zim/notebook/index
+copying build/lib/zim/notebook/index/__init__.py -> /usr/lib/python2.7/site-packages/zim/notebook/index
+copying build/lib/zim/notebook/index/pages.py -> /usr/lib/python2.7/site-packages/zim/notebook/index
+copying build/lib/zim/notebook/index/base.py -> /usr/lib/python2.7/site-packages/zim/notebook/index
+copying build/lib/zim/notebook/index/files.py -> /usr/lib/python2.7/site-packages/zim/notebook/index
+copying build/lib/zim/notebook/index/links.py -> /usr/lib/python2.7/site-packages/zim/notebook/index
+copying build/lib/zim/notebook/index/tags.py -> /usr/lib/python2.7/site-packages/zim/notebook/index
+creating /usr/lib/python2.7/site-packages/zim/export
+copying build/lib/zim/export/__init__.py -> /usr/lib/python2.7/site-packages/zim/export
+copying build/lib/zim/export/layouts.py -> /usr/lib/python2.7/site-packages/zim/export
+copying build/lib/zim/export/linker.py -> /usr/lib/python2.7/site-packages/zim/export
+copying build/lib/zim/export/selections.py -> /usr/lib/python2.7/site-packages/zim/export
+copying build/lib/zim/export/__main__.py -> /usr/lib/python2.7/site-packages/zim/export
+copying build/lib/zim/export/template.py -> /usr/lib/python2.7/site-packages/zim/export
+creating /usr/lib/python2.7/site-packages/zim/export/exporters
+copying build/lib/zim/export/exporters/__init__.py -> /usr/lib/python2.7/site-packages/zim/export/exporters
+copying build/lib/zim/export/exporters/mhtml.py -> /usr/lib/python2.7/site-packages/zim/export/exporters
+copying build/lib/zim/export/exporters/files.py -> /usr/lib/python2.7/site-packages/zim/export/exporters
+creating /usr/lib/python2.7/site-packages/zim/formats
+copying build/lib/zim/formats/__init__.py -> /usr/lib/python2.7/site-packages/zim/formats
+copying build/lib/zim/formats/plain.py -> /usr/lib/python2.7/site-packages/zim/formats
+copying build/lib/zim/formats/rst.py -> /usr/lib/python2.7/site-packages/zim/formats
+copying build/lib/zim/formats/html.py -> /usr/lib/python2.7/site-packages/zim/formats
+copying build/lib/zim/formats/markdown.py -> /usr/lib/python2.7/site-packages/zim/formats
+copying build/lib/zim/formats/__main__.py -> /usr/lib/python2.7/site-packages/zim/formats
+copying build/lib/zim/formats/latex.py -> /usr/lib/python2.7/site-packages/zim/formats
+copying build/lib/zim/formats/wiki.py -> /usr/lib/python2.7/site-packages/zim/formats
+byte-compiling /usr/lib/python2.7/site-packages/zim/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/history.py to history.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/signals.py to signals.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/search.py to search.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/tokenparser.py to tokenparser.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/www.py to www.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/actions.py to actions.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/parsing.py to parsing.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/applications.py to applications.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/datetimetz.py to datetimetz.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/objectmanager.py to objectmanager.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/parser.py to parser.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/fs.py to fs.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/environ.py to environ.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/errors.py to errors.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/ditaaeditor.py to ditaaeditor.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/screenshot.py to screenshot.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/tableofcontents.py to tableofcontents.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/quicknote.py to quicknote.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/gnu_r_ploteditor.py to gnu_r_ploteditor.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/sequencediagrameditor.py to sequencediagrameditor.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/trayicon.py to trayicon.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/scoreeditor.py to scoreeditor.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/gnuplot_ploteditor.py to gnuplot_ploteditor.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/calendar.py to calendar.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/inlinecalculator.py to inlinecalculator.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/tableeditor.py to tableeditor.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/distractionfree.py to distractionfree.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/zeitgeist-logger.py to zeitgeist-logger.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/equationeditor.py to equationeditor.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/linesorter.py to linesorter.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/osx_menubar.py to osx_menubar.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/insertsymbol.py to insertsymbol.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/spell.py to spell.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/arithmetic.py to arithmetic.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/diagrameditor.py to diagrameditor.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/bookmarksbar.py to bookmarksbar.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/linkmap.py to linkmap.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/sourceview.py to sourceview.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/printtobrowser.py to printtobrowser.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/backlinkpane.py to backlinkpane.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/tags.py to tags.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/attachmentbrowser/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/attachmentbrowser/filebrowser.py to filebrowser.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/attachmentbrowser/thumbnailer.py to thumbnailer.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/base/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/base/imagegenerator.py to imagegenerator.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/versioncontrol/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/versioncontrol/bzr.py to bzr.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/versioncontrol/git.py to git.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/versioncontrol/hg.py to hg.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/versioncontrol/fossil.py to fossil.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/tasklist/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/tasklist/gui.py to gui.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/tasklist/indexer.py to indexer.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/plugins/tasklist/dates.py to dates.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/main/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/main/command.py to command.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/main/ipc.py to ipc.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/pathbar.py to pathbar.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/propertiesdialog.py to propertiesdialog.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/pageindex.py to pageindex.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/server.py to server.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/pageview.py to pageview.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/recentchangesdialog.py to recentchangesdialog.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/searchdialog.py to searchdialog.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/applications.py to applications.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/widgets.py to widgets.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/templateeditordialog.py to templateeditordialog.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/objectmanager.py to objectmanager.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/customtools.py to customtools.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/notebookdialog.py to notebookdialog.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/exportdialog.py to exportdialog.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/clipboard.py to clipboard.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/gui/preferencesdialog.py to preferencesdialog.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/utils/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/utils/threading.py to threading.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/config/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/config/dicts.py to dicts.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/config/manager.py to manager.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/config/basedirs.py to basedirs.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/newfs/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/newfs/base.py to base.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/newfs/mock.py to mock.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/newfs/local.py to local.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/newfs/helpers.py to helpers.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/templates/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/templates/expression.py to expression.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/templates/functions.py to functions.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/templates/processor.py to processor.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/templates/parser.py to parser.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/templates/expressionparser.py to expressionparser.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/inc/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/inc/xdot.py to xdot.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/inc/arithmetic.py to arithmetic.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/notebook/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/notebook/layout.py to layout.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/notebook/info.py to info.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/notebook/operations.py to operations.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/notebook/page.py to page.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/notebook/notebook.py to notebook.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/notebook/index/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/notebook/index/pages.py to pages.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/notebook/index/base.py to base.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/notebook/index/files.py to files.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/notebook/index/links.py to links.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/notebook/index/tags.py to tags.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/export/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/export/layouts.py to layouts.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/export/linker.py to linker.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/export/selections.py to selections.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/export/__main__.py to __main__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/export/template.py to template.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/export/exporters/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/export/exporters/mhtml.py to mhtml.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/export/exporters/files.py to files.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/formats/__init__.py to __init__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/formats/plain.py to plain.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/formats/rst.py to rst.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/formats/html.py to html.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/formats/markdown.py to markdown.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/formats/__main__.py to __main__.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/formats/latex.py to latex.pyc
+byte-compiling /usr/lib/python2.7/site-packages/zim/formats/wiki.py to wiki.pyc
+running install_scripts
+copying build/scripts-2.7/zim -> /usr/bin
+changing mode of /usr/bin/zim to 755
+running install_data
+copying man/zim.1 -> /usr/share/man/man1
+copying xdg/zim.desktop -> /usr/share/applications
+copying xdg/zim.xml -> /usr/share/mime/packages
+copying xdg/hicolor/48x48/apps/zim.png -> /usr/share/pixmaps
+copying xdg/zim.appdata.xml -> /usr/share/appdata
+copying xdg/hicolor/scalable/apps/zim.svg -> /usr/share/icons/hicolor/scalable/apps
+copying xdg/hicolor/scalable/mimetypes/gnome-mime-application-x-zim-notebook.svg -> /usr/share/icons/hicolor/scalable/mimetypes
+copying xdg/hicolor/scalable/mimetypes/application-x-zim-notebook.svg -> /usr/share/icons/hicolor/scalable/mimetypes
+copying xdg/hicolor/16x16/apps/zim.png -> /usr/share/icons/hicolor/16x16/apps
+copying xdg/hicolor/16x16/mimetypes/gnome-mime-application-x-zim-notebook.png -> /usr/share/icons/hicolor/16x16/mimetypes
+copying xdg/hicolor/16x16/mimetypes/application-x-zim-notebook.png -> /usr/share/icons/hicolor/16x16/mimetypes
+copying xdg/hicolor/22x22/apps/zim.png -> /usr/share/icons/hicolor/22x22/apps
+copying xdg/hicolor/22x22/mimetypes/gnome-mime-application-x-zim-notebook.png -> /usr/share/icons/hicolor/22x22/mimetypes
+copying xdg/hicolor/22x22/mimetypes/application-x-zim-notebook.png -> /usr/share/icons/hicolor/22x22/mimetypes
+copying xdg/hicolor/24x24/apps/zim.png -> /usr/share/icons/hicolor/24x24/apps
+copying xdg/hicolor/24x24/mimetypes/gnome-mime-application-x-zim-notebook.png -> /usr/share/icons/hicolor/24x24/mimetypes
+copying xdg/hicolor/24x24/mimetypes/application-x-zim-notebook.png -> /usr/share/icons/hicolor/24x24/mimetypes
+copying xdg/hicolor/32x32/apps/zim.png -> /usr/share/icons/hicolor/32x32/apps
+copying xdg/hicolor/32x32/mimetypes/gnome-mime-application-x-zim-notebook.png -> /usr/share/icons/hicolor/32x32/mimetypes
+copying xdg/hicolor/32x32/mimetypes/application-x-zim-notebook.png -> /usr/share/icons/hicolor/32x32/mimetypes
+copying xdg/hicolor/48x48/apps/zim.png -> /usr/share/icons/hicolor/48x48/apps
+copying xdg/hicolor/48x48/mimetypes/gnome-mime-application-x-zim-notebook.png -> /usr/share/icons/hicolor/48x48/mimetypes
+copying xdg/hicolor/48x48/mimetypes/application-x-zim-notebook.png -> /usr/share/icons/hicolor/48x48/mimetypes
+creating /usr/share/icons/ubuntu-mono-light
+creating /usr/share/icons/ubuntu-mono-light/apps
+creating /usr/share/icons/ubuntu-mono-light/apps/22
+copying icons/ubuntu-mono-light/zim-panel.svg -> /usr/share/icons/ubuntu-mono-light/apps/22
+creating /usr/share/icons/ubuntu-mono-dark
+creating /usr/share/icons/ubuntu-mono-dark/apps
+creating /usr/share/icons/ubuntu-mono-dark/apps/22
+copying icons/ubuntu-mono-dark/zim-panel.svg -> /usr/share/icons/ubuntu-mono-dark/apps/22
+creating /usr/share/zim
+copying data/globe_banner_small.png -> /usr/share/zim/
+copying data/style.conf -> /usr/share/zim/
+copying data/globe.svg -> /usr/share/zim/
+copying data/globe_banner.svg -> /usr/share/zim/
+copying data/symbols.list -> /usr/share/zim/
+copying data/urls.list -> /usr/share/zim/
+copying data/dates.list -> /usr/share/zim/
+copying data/menubar.xml -> /usr/share/zim/
+copying data/zim.png -> /usr/share/zim/
+creating /usr/share/zim/pixmaps
+copying data/pixmaps/migrated-box.png -> /usr/share/zim/pixmaps
+copying data/pixmaps/attachment.png -> /usr/share/zim/pixmaps
+copying data/pixmaps/linkmap.svg -> /usr/share/zim/pixmaps
+copying data/pixmaps/xchecked-box.png -> /usr/share/zim/pixmaps
+copying data/pixmaps/add-bookmark.png -> /usr/share/zim/pixmaps
+copying data/pixmaps/calendar.png -> /usr/share/zim/pixmaps
+copying data/pixmaps/unchecked-box.png -> /usr/share/zim/pixmaps
+copying data/pixmaps/favicon.ico -> /usr/share/zim/pixmaps
+copying data/pixmaps/link.png -> /usr/share/zim/pixmaps
+copying data/pixmaps/task-list.png -> /usr/share/zim/pixmaps
+copying data/pixmaps/checked-box.png -> /usr/share/zim/pixmaps
+copying data/pixmaps/linkmap.png -> /usr/share/zim/pixmaps
+copying data/pixmaps/insert-table.png -> /usr/share/zim/pixmaps
+creating /usr/share/zim/templates
+creating /usr/share/zim/templates/plugins
+copying data/templates/plugins/scoreeditor.ly -> /usr/share/zim/templates/plugins
+copying data/templates/plugins/gnuploteditor.gnu -> /usr/share/zim/templates/plugins
+copying data/templates/plugins/equationeditor.tex -> /usr/share/zim/templates/plugins
+copying data/templates/plugins/gnu_r_editor.r -> /usr/share/zim/templates/plugins
+copying data/templates/plugins/quicknote.txt -> /usr/share/zim/templates/plugins
+creating /usr/share/zim/templates/latex
+copying data/templates/latex/Article.tex -> /usr/share/zim/templates/latex
+copying data/templates/latex/Report.tex -> /usr/share/zim/templates/latex
+copying data/templates/latex/Part.tex -> /usr/share/zim/templates/latex
+creating /usr/share/zim/templates/rst
+copying data/templates/rst/Default.rst -> /usr/share/zim/templates/rst
+creating /usr/share/zim/templates/markdown
+copying data/templates/markdown/Default.markdown -> /usr/share/zim/templates/markdown
+creating /usr/share/zim/templates/html
+copying data/templates/html/SlideShow_(S5).html -> /usr/share/zim/templates/html
+copying data/templates/html/ZeroFiveEight.html -> /usr/share/zim/templates/html
+copying data/templates/html/Default.html -> /usr/share/zim/templates/html
+copying data/templates/html/Print.html -> /usr/share/zim/templates/html
+copying data/templates/html/Presentation.html -> /usr/share/zim/templates/html
+copying data/templates/html/Default_with_index.html -> /usr/share/zim/templates/html
+creating /usr/share/zim/templates/html/SlideShow_(S5)
+creating /usr/share/zim/templates/html/SlideShow_(S5)/ui
+creating /usr/share/zim/templates/html/SlideShow_(S5)/ui/default
+copying data/templates/html/SlideShow_(S5)/ui/default/print.css -> /usr/share/zim/templates/html/SlideShow_(S5)/ui/default
+copying data/templates/html/SlideShow_(S5)/ui/default/framing.css -> /usr/share/zim/templates/html/SlideShow_(S5)/ui/default
+copying data/templates/html/SlideShow_(S5)/ui/default/opera.css -> /usr/share/zim/templates/html/SlideShow_(S5)/ui/default
+copying data/templates/html/SlideShow_(S5)/ui/default/pretty.css -> /usr/share/zim/templates/html/SlideShow_(S5)/ui/default
+copying data/templates/html/SlideShow_(S5)/ui/default/bodybg.gif -> /usr/share/zim/templates/html/SlideShow_(S5)/ui/default
+copying data/templates/html/SlideShow_(S5)/ui/default/slides.js -> /usr/share/zim/templates/html/SlideShow_(S5)/ui/default
+copying data/templates/html/SlideShow_(S5)/ui/default/slides.css -> /usr/share/zim/templates/html/SlideShow_(S5)/ui/default
+copying data/templates/html/SlideShow_(S5)/ui/default/outline.css -> /usr/share/zim/templates/html/SlideShow_(S5)/ui/default
+copying data/templates/html/SlideShow_(S5)/ui/default/blank.gif -> /usr/share/zim/templates/html/SlideShow_(S5)/ui/default
+copying data/templates/html/SlideShow_(S5)/ui/default/s5-core.css -> /usr/share/zim/templates/html/SlideShow_(S5)/ui/default
+copying data/templates/html/SlideShow_(S5)/ui/default/iepngfix.htc -> /usr/share/zim/templates/html/SlideShow_(S5)/ui/default
+creating /usr/share/zim/templates/wiki
+copying data/templates/wiki/Default.txt -> /usr/share/zim/templates/wiki
+copying data/templates/wiki/Journal.txt -> /usr/share/zim/templates/wiki
+creating /usr/share/zim/manual
+copying data/manual/About.txt -> /usr/share/zim/manual
+copying data/manual/Start.txt -> /usr/share/zim/manual
+copying data/manual/Bugs.txt -> /usr/share/zim/manual
+copying data/manual/Help.txt -> /usr/share/zim/manual
+copying data/manual/notebook.zim -> /usr/share/zim/manual
+copying data/manual/Usage.txt -> /usr/share/zim/manual
+copying data/manual/Plugins.txt -> /usr/share/zim/manual
+copying data/manual/FAQ.txt -> /usr/share/zim/manual
+creating /usr/share/zim/manual/Help
+copying data/manual/Help/Key_Bindings.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Automount.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Templates.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Commandline_Options.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Check_Boxes.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Default_Applications.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Searching.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Custom_Tools.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Menu_Items.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Tags.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Wiki_Syntax.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Notebooks.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Attachments.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Importing_external_files.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Export.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Pages.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Auto_Formatting.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Links.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Preferences.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Properties.txt -> /usr/share/zim/manual/Help
+copying data/manual/Help/Config_Files.txt -> /usr/share/zim/manual/Help
+creating /usr/share/zim/manual/Help/Export
+copying data/manual/Help/Export/LaTeX.txt -> /usr/share/zim/manual/Help/Export
+copying data/manual/Help/Export/HTML.txt -> /usr/share/zim/manual/Help/Export
+creating /usr/share/zim/manual/Usage
+copying data/manual/Usage/Collaboration.txt -> /usr/share/zim/manual/Usage
+copying data/manual/Usage/Getting_Started.txt -> /usr/share/zim/manual/Usage
+copying data/manual/Usage/Daily_Journal.txt -> /usr/share/zim/manual/Usage
+copying data/manual/Usage/GTD_flowchart.svg -> /usr/share/zim/manual/Usage
+copying data/manual/Usage/GTD_flowchart.png -> /usr/share/zim/manual/Usage
+copying data/manual/Usage/Creative_Writing.txt -> /usr/share/zim/manual/Usage
+copying data/manual/Usage/Publishing.txt -> /usr/share/zim/manual/Usage
+copying data/manual/Usage/Getting_Things_Done.txt -> /usr/share/zim/manual/Usage
+creating /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Link_Map.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/BookmarksBar.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Insert_Screenshot.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Score_Editor.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Sequence_Diagram_Editor.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Spell_Checker.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Ditaa_Editor.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Equation_Editor.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Source_View.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Journal.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Tags.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Tray_Icon.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Diagram_Editor.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Task_List.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Inline_Calculator.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Arithmetic.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/BackLinks_Pane.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Version_Control.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Table_Editor.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/GNU_R_Plot_Editor.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Insert_Symbol.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Quick_Note.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Gnuplot_Editor.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Distraction_Free_Editing.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Line_Sorter.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Log_events_with_Zeitgeist.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Attachment_Browser.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Print_to_Browser.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/macOS_Menubar.txt -> /usr/share/zim/manual/Plugins
+copying data/manual/Plugins/Table_Of_Contents.txt -> /usr/share/zim/manual/Plugins
+creating /usr/share/zim/manual/Plugins/Score_Editor
+copying data/manual/Plugins/Score_Editor/score003.png -> /usr/share/zim/manual/Plugins/Score_Editor
+copying data/manual/Plugins/Score_Editor/score003.ly -> /usr/share/zim/manual/Plugins/Score_Editor
+copying data/manual/Plugins/Score_Editor/score001.ly -> /usr/share/zim/manual/Plugins/Score_Editor
+copying data/manual/Plugins/Score_Editor/score.ly -> /usr/share/zim/manual/Plugins/Score_Editor
+copying data/manual/Plugins/Score_Editor/score002.ly -> /usr/share/zim/manual/Plugins/Score_Editor
+copying data/manual/Plugins/Score_Editor/score002.png -> /usr/share/zim/manual/Plugins/Score_Editor
+copying data/manual/Plugins/Score_Editor/score001.png -> /usr/share/zim/manual/Plugins/Score_Editor
+copying data/manual/Plugins/Score_Editor/score.png -> /usr/share/zim/manual/Plugins/Score_Editor
+creating /usr/share/zim/manual/Plugins/Ditaa_Editor
+copying data/manual/Plugins/Ditaa_Editor/ditaa.dia -> /usr/share/zim/manual/Plugins/Ditaa_Editor
+copying data/manual/Plugins/Ditaa_Editor/ditaa.png -> /usr/share/zim/manual/Plugins/Ditaa_Editor
+creating /usr/share/zim/manual/Plugins/GNU_R_Plot_Editor
+copying data/manual/Plugins/GNU_R_Plot_Editor/gnu_r_plot001.png -> /usr/share/zim/manual/Plugins/GNU_R_Plot_Editor
+copying data/manual/Plugins/GNU_R_Plot_Editor/gnu_r_plot.png -> /usr/share/zim/manual/Plugins/GNU_R_Plot_Editor
+copying data/manual/Plugins/GNU_R_Plot_Editor/gnu_r_plot001.r -> /usr/share/zim/manual/Plugins/GNU_R_Plot_Editor
+copying data/manual/Plugins/GNU_R_Plot_Editor/gnu_r_plot.r -> /usr/share/zim/manual/Plugins/GNU_R_Plot_Editor
+creating /usr/share/zim/manual/Plugins/Equation_Editor
+copying data/manual/Plugins/Equation_Editor/equation_01.png -> /usr/share/zim/manual/Plugins/Equation_Editor
+creating /usr/share/zim/manual/Plugins/Gnuplot_Editor
+copying data/manual/Plugins/Gnuplot_Editor/gnuplot.png -> /usr/share/zim/manual/Plugins/Gnuplot_Editor
+copying data/manual/Plugins/Gnuplot_Editor/gnuplot.gnu -> /usr/share/zim/manual/Plugins/Gnuplot_Editor
+creating /usr/share/zim/manual/Plugins/Sequence_Diagram_Editor
+copying data/manual/Plugins/Sequence_Diagram_Editor/diagram.png -> /usr/share/zim/manual/Plugins/Sequence_Diagram_Editor
+creating /usr/share/zim/manual/Plugins/Diagram_Editor
+copying data/manual/Plugins/Diagram_Editor/diagram.png -> /usr/share/zim/manual/Plugins/Diagram_Editor
+creating /usr/share/zim/manual/Plugins/Table_Editor
+copying data/manual/Plugins/Table_Editor/without_borders.png -> /usr/share/zim/manual/Plugins/Table_Editor
+copying data/manual/Plugins/Table_Editor/Superior_Table_Operations.txt -> /usr/share/zim/manual/Plugins/Table_Editor
+copying data/manual/Plugins/Table_Editor/table_toolbar.png -> /usr/share/zim/manual/Plugins/Table_Editor
+copying data/manual/Plugins/Table_Editor/table_demo.png -> /usr/share/zim/manual/Plugins/Table_Editor
+copying data/manual/Plugins/Table_Editor/Basic_Table_Operations.txt -> /usr/share/zim/manual/Plugins/Table_Editor
+copying data/manual/Plugins/Table_Editor/table_footer.png -> /usr/share/zim/manual/Plugins/Table_Editor
+copying data/manual/Plugins/Table_Editor/with_borders.png -> /usr/share/zim/manual/Plugins/Table_Editor
+creating /usr/share/zim/manual/Plugins/Table_Editor/Basic_Table_Operations
+copying data/manual/Plugins/Table_Editor/Basic_Table_Operations/table_popup.png -> /usr/share/zim/manual/Plugins/Table_Editor/Basic_Table_Operations
+copying data/manual/Plugins/Table_Editor/Basic_Table_Operations/table_settings_dialog.png -> /usr/share/zim/manual/Plugins/Table_Editor/Basic_Table_Operations
+copying data/manual/Plugins/Table_Editor/Basic_Table_Operations/insert-table.png -> /usr/share/zim/manual/Plugins/Table_Editor/Basic_Table_Operations
+creating /usr/share/zim/manual/Plugins/Table_Editor/Superior_Table_Operations
+copying data/manual/Plugins/Table_Editor/Superior_Table_Operations/cell_editing_with_text_formatting.png -> /usr/share/zim/manual/Plugins/Table_Editor/Superior_Table_Operations
+copying data/manual/Plugins/Table_Editor/Superior_Table_Operations/cell_after_text_formatting.png -> /usr/share/zim/manual/Plugins/Table_Editor/Superior_Table_Operations
+creating /usr/share/zim/helpers
+creating /usr/share/zim/helpers/compare_files
+copying data/helpers/compare_files/meld.desktop -> /usr/share/zim/helpers/compare_files
+copying locale/am/LC_MESSAGES/zim.mo -> /usr/share/locale/am/LC_MESSAGES
+copying locale/pt_BR/LC_MESSAGES/zim.mo -> /usr/share/locale/pt_BR/LC_MESSAGES
+copying locale/it/LC_MESSAGES/zim.mo -> /usr/share/locale/it/LC_MESSAGES
+copying locale/ar/LC_MESSAGES/zim.mo -> /usr/share/locale/ar/LC_MESSAGES
+copying locale/hu/LC_MESSAGES/zim.mo -> /usr/share/locale/hu/LC_MESSAGES
+copying locale/cs/LC_MESSAGES/zim.mo -> /usr/share/locale/cs/LC_MESSAGES
+copying locale/sl/LC_MESSAGES/zim.mo -> /usr/share/locale/sl/LC_MESSAGES
+copying locale/zh_CN/LC_MESSAGES/zim.mo -> /usr/share/locale/zh_CN/LC_MESSAGES
+copying locale/es/LC_MESSAGES/zim.mo -> /usr/share/locale/es/LC_MESSAGES
+copying locale/eu/LC_MESSAGES/zim.mo -> /usr/share/locale/eu/LC_MESSAGES
+copying locale/fr/LC_MESSAGES/zim.mo -> /usr/share/locale/fr/LC_MESSAGES
+copying locale/ru/LC_MESSAGES/zim.mo -> /usr/share/locale/ru/LC_MESSAGES
+copying locale/ko/LC_MESSAGES/zim.mo -> /usr/share/locale/ko/LC_MESSAGES
+copying locale/de/LC_MESSAGES/zim.mo -> /usr/share/locale/de/LC_MESSAGES
+copying locale/sv/LC_MESSAGES/zim.mo -> /usr/share/locale/sv/LC_MESSAGES
+copying locale/zh_TW/LC_MESSAGES/zim.mo -> /usr/share/locale/zh_TW/LC_MESSAGES
+copying locale/en_GB/LC_MESSAGES/zim.mo -> /usr/share/locale/en_GB/LC_MESSAGES
+copying locale/sr/LC_MESSAGES/zim.mo -> /usr/share/locale/sr/LC_MESSAGES
+copying locale/nb/LC_MESSAGES/zim.mo -> /usr/share/locale/nb/LC_MESSAGES
+copying locale/ca/LC_MESSAGES/zim.mo -> /usr/share/locale/ca/LC_MESSAGES
+copying locale/pt/LC_MESSAGES/zim.mo -> /usr/share/locale/pt/LC_MESSAGES
+copying locale/fi/LC_MESSAGES/zim.mo -> /usr/share/locale/fi/LC_MESSAGES
+copying locale/sk/LC_MESSAGES/zim.mo -> /usr/share/locale/sk/LC_MESSAGES
+copying locale/da/LC_MESSAGES/zim.mo -> /usr/share/locale/da/LC_MESSAGES
+copying locale/pl/LC_MESSAGES/zim.mo -> /usr/share/locale/pl/LC_MESSAGES
+copying locale/uk/LC_MESSAGES/zim.mo -> /usr/share/locale/uk/LC_MESSAGES
+copying locale/et/LC_MESSAGES/zim.mo -> /usr/share/locale/et/LC_MESSAGES
+copying locale/nl/LC_MESSAGES/zim.mo -> /usr/share/locale/nl/LC_MESSAGES
+copying locale/tr/LC_MESSAGES/zim.mo -> /usr/share/locale/tr/LC_MESSAGES
+copying locale/ro/LC_MESSAGES/zim.mo -> /usr/share/locale/ro/LC_MESSAGES
+copying locale/gl/LC_MESSAGES/zim.mo -> /usr/share/locale/gl/LC_MESSAGES
+copying locale/he/LC_MESSAGES/zim.mo -> /usr/share/locale/he/LC_MESSAGES
+copying locale/ja/LC_MESSAGES/zim.mo -> /usr/share/locale/ja/LC_MESSAGES
+copying locale/el/LC_MESSAGES/zim.mo -> /usr/share/locale/el/LC_MESSAGES
+running install_egg_info
+Writing /usr/lib/python2.7/site-packages/zim-0.67-py2.7.egg-info
+Trying: update-desktop-database
+Trying: update-mime-database /usr/share/mime

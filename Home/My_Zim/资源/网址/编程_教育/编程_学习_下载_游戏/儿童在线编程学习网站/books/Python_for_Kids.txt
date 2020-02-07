@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-08-10T16:24:15+08:00
+
+====== Python for Kids ======
+Created Friday 10 August 2018
+
+http://jasonrbriggs.com/python-for-kids/?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

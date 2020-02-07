@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-27T20:48:53+08:00
+
+====== 验证工具 ======
+创建日期 星期三 27 十一月 2019
+
+Enter a string or character to find its ASCII codes:
+http://www.asciivalue.com/index.php

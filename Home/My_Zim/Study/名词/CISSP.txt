@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-26T16:49:44+08:00
+
+====== CISSP ======
+Created Friday 26 January 2018
+
+CISSP 英文全称：“ Certified Information Systems Security Professional”，中文全称：“(ISC)²__注册信息系统安全专家__”，由(ISC)²组织和管理，是目前全球范围内最权威，最专业，最系统的信息安全认证。
+
+CISSP的含金量和认可度还是很高的，考试费用也不菲，599刀，涉及的内容非常广泛，号称安全界的“百科全书”，不过虽然涉及的范围广，但很多都是点到为止， “一英里宽，一英寸深”，这是CISSP最大的特点。
+
+  为什么考CISSP？用我们领导的话说，可以迅速建立起个人对安全体系的知识框架，认证+读行业标准是最有效的方法。

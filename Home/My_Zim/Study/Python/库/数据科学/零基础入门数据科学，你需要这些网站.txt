@@ -1,0 +1,158 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-22T15:41:30+08:00
+
+====== 零基础入门数据科学，你需要这些网站 ======
+创建日期 星期一 22 四月 2019
+
+https://sspai.com/post/53908
+为什么要学习数据科学
+为什么用 MOOC
+入门数据科学网站推荐
+更多的学习网站
+结语
+先做一个简单的自我介绍：某 985 大学自动化在读，即将本科毕业去美国就读金融科技硕士。一年以前我还是一个连机器学习是什么都不知道的小白，只上过 C 语言和数据结构两门编程基础课，通过下面的网站一步步自学 Python、SQL 以及机器学习的各种方法，成功入门数据科学。下面是我在学习过程中使用的和了解的有关数据科学的网站，每个网站都配有自己的经历或者相应的介绍，每个网站也给出了相应的价格，希望可以帮你快速入门数据科学，从容应对这波数据浪潮。
+
+为什么要学习数据科学
+在今天，只要你身处互联网，就一定能频繁听到大数据、机器学习、人工智能等字眼。数据科学已经深入产业界，银行、保险、零售行业等都在使用机器学习方法为自己的商业运作赋能，机器学习等数据科学方法代替人的新闻也层出不穷，即使我们应该保持冷静、克制焦虑，但科技的大趋势我们也不能视而不见。
+
+从职业发展来说，学习数据科学或许可以让你在今后的发展中占得先机，在这波科技浪潮中取得优势；从个人角度来说，未来数据分析是必不可少的，将来明白如何利用数据可能就和今天明白如何使用电脑一样稀松平常，掌握数据分析的一些技能或许可以让你生活地更有效率。
+
+What is Data Science?
+What is Data Science?
+为什么用 MOOC
+尽管数据科学炒的火热，想要入门一门学科绝非一件容易事。纵使有些网站有着系统的培训班，动辄 1000 大洋以上的报班费真的伤不起；而对着网上的免费资料自学，从各种公众号免费获取到 10 个 G 的资料，但大多资料凌乱且没有体系，永远都是放在硬盘里「吃灰」；对着各种工具书学，虽然系统但难免概念的堆砌，有时候看完所有基础操作也做不完一个完整的项目。
+
+我个人觉得学习数据科学这类需要实际操作的学科，最好的方式是learning by doing，即在学完了一个方法后要立马实际操作并感受，哪怕不报错地完成一个最简单的项目也会有极大地自信心。所以我认为，网站和 MOOC 类学习是学习数据科学最好的方式。在看完或者阅读完教程后，这些课程也会留有相对的作业，通过一个一个章节的学习，会不断巩固基础，也完成一个一个的项目。
+
+入门数据科学网站推荐
+下面这些 MOOC 类网站都是英文网站，按推荐顺序排序。我经过对比之后，发现相比于国内的学习网站，这些英文网站课程质量会更好，有些完全免费，有些需要付费但价格着实不贵，性价比都比较高。
+
+别担心，这些课程的英文难度都不会太高，很多都配有字幕，有些网站甚至有中文翻译。利用英文网站学习，一方面可以学到质量更高的课程，另一方面还能潜移默化地锻炼英语，何乐而不为呢。（但有些可能科学上网速度会更快。）
+
+DataCamp.com
+DataCamp 是一个互动性的 MOOC 网站，视频类的讲解偏少，更多的是文字直接指导你进入实战项目。同时 DataCamp 也是我最推荐的数据科学入门网站，从 Python 与 R 的基础讲解到数据处理流程，从机器学习到深度学习，它都有涉及。如果没有时间尝试不同的 MOOC，认真刷完它的一个 Career Track 就够用了。
+
+DataCamp
+DataCamp
+DataCamp 有以下三个特点：
+
+直接开始上手做：不像通常的 MOOC 是视频讲解后课下留作业，DataCamp 确实做到了让你在做的过程中学习，如下图：左边是指导性文字，右边是你需要填写的 code。这样做可以说把 learning by doing 做到了极致。
+
+DataCamp 学习界面
+DataCamp 学习界面
+不用在自己电脑上安装 Python或 R的环境：网站上有云端的运行环境，写完代码后直接提交就可以看到结果了，可以说非常省心省力。作为经历了小白阶段的我，可以说非常理解装环境的痛苦。代码还没写一行，装环境就费了半天劲。有例如 Anaconda 的集成包顺利安装完还好说，要是出了什么问题网上一搜全是用命令行，很多写的又不详细，完全不知道每个命令是干嘛的，还没入门就已经放弃。但在这个网站学习完全不用担心这些事，先学习代码如何写，完整地写一个项目入门，那些装环境的琐碎事情等到深入了解了再做也不迟。
+
+帮你预先安排好了课程列表：网站将一个个课程打包为 Skill Tracks 和 Career Tracks ，如下图。不论你是想学 Python 还是 R，想成为数据分析员还是数据科学家，只用找到相应的 Track 点进去跟着学就好了，不用再纠结下一步学什么技能。当然，这些列表是灵活的，你完全可以跳过某个 Track 的一些课程。
+
+DataCamp 的 Career Track 界面
+DataCamp 的 Career Track 界面
+同时，DataCamp 还提供了一些语言（如 Python）、工具（如 Jupyter Notebook）以及各种包（如 NumPy、Pandas、Matplotlib）的 cheatsheet（小抄） ，简洁而美观。
+
+价格：一些课程免费，解锁全部课程 $25 / 月。
+
+Coursera | Machine Learning Specialization - University of Washington
+Machine Learning Specialization - University of Washington 是入门机器学习的优质课程，由华盛顿大学两位教授主讲。此课程是一个系列，原本总共有 6 个 course，分别讲解机器学习基础（Machine Learning Foundations）、回归（Regression）、分类（Classification）、聚类（Clustering）、矩阵分解（Matrix Factorization）、深度学习（Deep Learning）。每个 Course 大约 6 个章节，每个章节学习时间大约 3 小时。
+
+Machine Learning Specialization
+Machine Learning Specialization
+此课程最有特色的地方，是用第一个 Course：Machine Learning Foundations 统领接下来 5 个 Course，每个章节对应着接下来 5 个 Course，用最简单的案例和现成的工具，利用上述的 5 种机器学习方法分别完成 5 个项目。也就是说，在第一课里你就完整地利用机器学习解决了一个个现实的问题，然后再在接下来的 5 个课中深入学习每一个机器学习的方法。我对这种自顶向下的学习方式的方式完全赞同，因为一开始我就宏观了解了该用什么方法解决什么问题，而不是学了一堆命令却不知道解决问题的流程；而且经过第一个 Course 的学习，会有极大地成就感，因为每次都成功完成了一个项目，接下来会更想了解这个现成工具是怎么制作的，也就更想深入剖析机器学习的各种方法。
+
+Course 的每周内容
+Course 的每周内容
+但是为什么说是原本有 6 个 Course 呢，因为现在这个系列只有 4 个 Course 了…… 教授老爷子课程开发到一半跳票了，据说是因为他开发的 Trui 软件包被苹果收购以后忙得没时间开发完课程了。不过别担心，即使只有前四个课程，回归、分类和聚类依旧是机器学习的重头，学完四个课程会掌握绝大部分的机器学习技术。如果时间有限想快速入门，建议学习第一个课程，同样会比较全面地了解机器学习的各种方法，同时也能利用软件包解决一定的问题。
+
+对比大名鼎鼎的吴恩达的机器学习课程，这个机器学习可能更适合小白，同时课程内使用 Python 这一对新手更加友好的语言，而吴恩达的课程用的是 MATLAB，所以华盛顿大学的课程更适合入门机器学习。依托于 Coursera 这一大平台，课程每个视频都配有英文文稿，部分视频有中文字幕，相信学习起来更易上手。
+
+价格：免费旁听（选择课程时点 Audit），上完课后拿证书要付费。
+
+Udemy | Complete Python Bootcamp
+Complete Python Bootcamp: Go from zero to hero in Python 3 是入门 Python 比较推荐的课程，导师讲解很细致，边编程边讲，从 Python 最基础的数据结构、到函数和方法，再到模块和类，内容安排很合理，且每章都有作业可以检测自己的学习。
+https://www.udemy.com/complete-python-bootcamp
+
+Complete Python Bootcamp  主页
+Complete Python Bootcamp 主页
+不过此课程是关于 Python 语言的课程，将 Python 作为开发语言完全讲解，实际上应用到数据科学的 Python，只用上到此课程的 Module & Package 就足够了，剩下的有兴趣也可以继续学习，但在数据科学中可能应用不大。
+
+价格：RMB 100 元左右。
+
+课程内的视频
+课程内的视频
+Khan Academy （可汗学院）
+Khan Academy 主页
+Khan Academy 主页
+我在 Khan Academy 上学的 SQL 基础用法。同 DataCamp 一样，代码可以直接在这个网站上运行，无需本地安装环境。上课过程中互动性也很强，同时运用积分制让你每完成一个项目都会有成就感。
+
+可汗学院对于数据科学的课程较少。但其本身有着非常全面的课程，从计算机科学到人文社科都有。在计算机科学的门类中也有不少基础课，课程也比较通俗易懂，适合复习基础或拓展知识面。
+
+价格：完全免费。
+
+课程内学习过程：左边是代码，右边是结果
+课程内学习过程：左边是代码，右边是结果
+更多的学习网站
+上述四个网站是我亲身体验过并用来入门数据科学的网站。在学习过程中也同样搜集了别人推荐的网站，但还没来得及体验，以下列出来供感兴趣的朋友们点击。
+https://www.khanacademy.org/
+
+
+Dataquest  https://www.dataquest.io/
+Dataquest 是以文字教程为主的网站，也是边看边学，与 DataCamp 很相似，有兴趣的朋友可以探索一下。
+
+价格：$29 / 每月。
+
+Dataquest 主页
+Dataquest 主页
+Udacity （优达学城）
+Udacity 内所有的课程都是和 IT 有关的，更 Geek 一点，不像 edX 或者 Coursera 还有人文社科类的课程。Udacity 优点是课程有体系化，有针对某个职位的专项课程，对职业发展比较友好；但价格真的不便宜，一般一个纳米学位都要上千大洋。网站内也有免费的课程，同时大多数课程都有中文版。
+
+价格：课程费用不等，都在几千左右。
+
+Udacity 主页
+Udacity 主页  https://cn.udacity.com/
+edX
+edX 由麻省理工学院和哈佛大学共同创建，与 Coursera、Udacity 并称为 MOOC 三巨头。其实光看 edX 开课的大学列表就挺震撼的了，可以说足不出户也可以享受顶级大学的课程。关于数据科学，根据网上的评价推荐下面的课程系列：
+
+Complete Python Bootcamp  主页
+Complete Python Bootcamp 主页
+Data Science - Harvard University
+哈佛大学推出的数据科学系列课程 Data Science - Harvard University，共包含 9 个课程，主要使用的是 R 语言。顺便提一下，哈佛大学才新增了 Data Science 的硕士学位，2018 年秋季是第一批学生入学，从侧面也可见数据科学的发展。  https://www.edx.org/professional-certificate/harvardx-data-science
+
+Harvard's Data Science Certificate
+Harvard's Data Science Certificate
+Microsoft Professional Program in Data Science
+微软推出的数据科学课程 Microsoft Professional Program in Data Science，课程内容比较全面，有 Python 和 R 语言两条支线，可以任选一条完成课程，当然也可以都掌握。同时也将 Excel 以及自家云平台 Azure 融合进课程，用微软系的朋友可以更多关注一下。  https://www.edx.org/microsoft-professional-program-data-science
+
+Microsoft Data Science Program
+Microsoft Data Science Program
+价格：edX 所有课程都是免费的，不过上完课程要获取证书需要付费。
+
+Coursera
+Applied Data Science with Python Specialization
+密歇根大学的系列课程 Applied Data Science with Python Specialization，据说对新手比较友好，共 5 个 Course，从基础到机器学习以及深度学习都有介绍，比较全面。
+https://www.coursera.org/specializations/data-science-python
+密歇根大学的数据科学课程
+密歇根大学的数据科学课程
+Machine Learning - Stanford University  https://www.coursera.org/learn/machine-learning
+这门课程 由大名鼎鼎的斯坦福教授吴恩达主讲，很多人就是冲着这个名号去学习这门课程的。此课程很全面的讲解了机器学习的各个部分，也会有很多案例应用。但是课程全程用的是 Matlab，并不是用现在数据科学最主流的 Python 和 R，从这方面来讲对新手来说可能不是很友好，建议有了一定机器学习基础后再用这门课补课。
+
+大名鼎鼎的斯坦福机器学习课程
+大名鼎鼎的斯坦福机器学习课程
+Deep Learning Specialization  https://www.coursera.org/specializations/deep-learning
+同样是吴恩达领衔的深度学习课程 Deep Learning Specialization，共有 5 个 Course，包括神经网络和卷积神经网络。
+
+在 Coursera 上的深度学习课程
+在 Coursera 上的深度学习课程
+价格：所有课程均可免费旁听（点 Audit），获取证书需付费。
+
+Brilliant.org  https://brilliant.org/
+Brilliant.org 是我偶然间从 Instagram 推荐的广告上发现的网站，网站制作精良，多是数学与科学的主体。网站试图以最简单的方法出传达科学知识，绝对是不可多得的好网站。同时也有人工智能与机器学习的主体，但应该更偏重理论，有兴趣的朋友可以了解一下。同时这个网站还有同名 app：Brilliant。
+
+Birlliant 主打课程，多与数学及物理相关
+Birlliant 主打课程，多与数学及物理相关
+价格：基础课程免费，其他需要付费
+
+结语
+以上就是我用来入门数据科学的网站以及在学习过程中搜集到的感兴趣的网站，分享出来供想要入门的朋友参考。数据分析是一个趋势，且不说忽视它会不会被淘汰，但掌握它绝不是一件坏事，毕竟技多不压身。在入门数据科学时，看书或许有点沉闷，上线下的培训课或许又太花时间，而这些 MOOC 课程既让你可以自由安排时间学习，也更好地发挥了多媒体的优势，让你 Learning by doing。你只需要静下心来沉浸于英语的环境，并加上一点耐心，挑出自己喜欢的课程系列并持续学下去，相信你会在未来拥有更高的起点。
+https://www.datacamp.com/   
+https://www.datacamp.com/community/data-science-cheatsheets
+https://www.coursera.org/specializations/machine-learning
+

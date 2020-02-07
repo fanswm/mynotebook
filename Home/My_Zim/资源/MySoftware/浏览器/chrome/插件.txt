@@ -1,0 +1,67 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T20:25:37+08:00
+
+====== 插件 ======
+创建日期 星期二 21 十一月 2017
+
+- Listen 1		https://github.com/listen1/listen1_chrome_extension
+							https://github.com/listen1/listen1_desktop
+- Anything to QRcode
+- FairyDict 词典
+- SiumilarWeb 网站流量来源和排名
+- Stylish-为任意网站自定义主题
+- Tampermonkey油猴
+- 广告终结者 3.2.2
+- listen1 听歌
+- https://www.crx4chrome.com/
+
+https://www.crx4chrome.com/
+
+
+Loom	https://sspai.com/post/42626
+		如果你有录屏的需求又纠结于动辄几百上千的软件价格，试试 Loom 吧。虽然只是个浏览器插件，但 Loom 除了可以录制浏览器网页之外，还能录制摄像头、程序窗口甚至整个桌面；录制的视频可以保存到 Loom 提供的免费空间，可以下载为本地视频，也可以生成链接分享给别人，功能非常完整。而且，Loom 完全免费，开发商非常霸气地说「目前并没有很在意价格与盈利」。
+		https://chrome.google.com/webstore/detail/loom-video-recorder-scree/liecbddmkiiihnedobmlmillhodjkdmb?hl=zh-CN
+		
+ImTranslator	https://chrome.google.com/webstore/detail/imtranslator-translator-d/noaijdpnepcgjemiklgfkcfbkokogabh?hl=zh-CN
+		这是一个非常方便的网页翻译插件，支持 90 多种语言互译。译文可以嵌入原网页中，也可以在新窗口中弹出，方便编辑、调整。插件还有其它浏览器的版本，有需要的话可以到 官网 下载。寒假论文还没写完的话就用起来吧~
+		http://imtranslator.net/Translator-for-Chrome-Imtranslator.asp
+
+Taskade
+	https://chrome.google.com/webstore/detail/taskade/hcobdfnjjaceclfdjpmmpiknimccjpmf?hl=zh-CN
+	Taskade 可以将 Chrome 的新标签页变成任务清单，相比起其它很多「浅尝辄止」的同类产品，它的功能更丰富，比如支持多层级任务，可创建多个空间/项目，还能分享给别人实时协作编辑。Taskade 目前除了 Chrome 插件还有 Windows 和 Mac 客户端，移动端 App 也即将推出。
+
+Newsreel
+	https://chrome.google.com/webstore/detail/newsreel-new-tab-notifica/fiiicpgiidmingolgkpnoofepmjobnaa?hl=zh-CN
+	Newsreel 是一款新闻、社交平台聚合插件，它可以将很多（国外）主流社交平台以及网站变成新标签页中的瀑布流，一眼就可以看到各种更新。除了普通网站，GitHub、Trello、Todoist 等工具型网站它也支持。其实同类的插件也有不少，不过这款的页面风格我个人觉得最实用，简简单单有条有理，没有纯粹为了好看而放一堆很占位置的高清大图。
+	
+crxMouse Chrome Gestures
+	https://chrome.google.com/webstore/detail/crxmouse-chrome-gestures/jlgkpaicikihijadgifklkbpdajbkhjo?hl=zh-CN
+	crxMouse 称得上是最为强大的浏览器鼠标手势插件，它可以让用户为几乎所有浏览器操作添加上鼠标手势，比如左滑是返回上一页，画圆圈是刷新画个叉叉就是关闭当前标签页等等。反正功能很强大、齐全，有了 crxMouse，就连很少用到的鼠标中键也能利用起来了。
+	
+	更新：经读者提醒，官方版 crxMouse 会 强制收集用户信息，所以我们加入了网友重制的 [纯净版]()https://chrome.google.com/webstore/detail/clean-crxmouse-gestures/mjidkpedjlfnanainpdfnedkdlacidla?hl=zh-CN%EF%BC%8C%E5%A4%A7%E5%AE%B6%E5%8F%AF%E4%BB%A5%E8%87%AA%E8%A1%8C%E9%80%89%E6%8B%A9。
+	
+RSS Feed Reader
+	https://chrome.google.com/webstore/detail/rss-feed-reader/pnjaodmkngahhkoihejjehlcdlnohgmp?hl=zh-CN
+	RSS 阅读插件在 Chrome 商店里其实不少，但相比起大部分插件把重点放在了新标签页的信息流上，我更喜欢这款 feeder 开发的小插件。它允许用户即使不注册 feeder 的服务也可以随意添加 RSS feed，所有的订阅都收在插件按钮中，想看再打开。插件也会根据本地 cookies 区分已看和未看，并告诉用户未读消息的数量，非常贴心。
+	
+Typio Form Recovery
+	https://chrome.google.com/webstore/detail/typio-form-recovery/djkbihbnjhkjahbhjaadbepppbpoedaa?hl=zh-CN
+	你有没有试过经常在网页上写文章、发表评论，洋洋洒洒写了一大段之后浏览器崩溃；或是点了发送才发现网站无法连接，连忙返回上一页却什么也没有了。如果这也是你的困扰，试试 Typio 吧，它可以自动保存你在 Chrome 中输入的文字。上述问题发生后，放心打开 Typio，你的文字一秒钟恢复。用户可以自定义允许保存文字的网站以及文字的保留时间以节省系统资源。开发者承诺所有文字均仅储存在电脑本地，绝不会上传，且已将 Typio [开源](https://bitbucket.org/nicklassandell/chrome-form-recovery/)。
+	
+Additor - The Simplest Bookmark & Highlighter
+	https://chrome.google.com/webstore/detail/additor-the-simplest-book/hfllajanfnlimffhkjbondolipoimcgn?hl=zh-CN
+	看电子书的时候我们经常会选中某些句子或段落，然后设置为高亮摘抄起来以便后续查阅。其实浏览网页找资料时也有类似需求，但同类工具似乎不多。Additor 是其中一款，它可以让用户直接在网页中高亮段落，登录 Additor 网站便既有整个页面，又可以看到右侧的摘录内容，很适合经常搜集资料的用户。
+	
+LastPass
+	8 款你不可不知的「最常用」Chrome 插件，让你的电脑更好用
+	https://zhuanlan.zhihu.com/p/25407784
+	
+	
+简悦
+	简悦 是一款可以让你在 Chrome 上也能体验到沉浸式阅读环境的扩展程序，它手动适配了数百个常用网站，让你能以更优雅地方式浏览自己喜欢的文章。对于尚未适配的网站，你也可以手动选择内容进入阅读模式，聚焦文章重点。
+	
+	在简悦的设置中，你可以从数种预设主题中挑选自己喜欢的那一款，也可以通过自定义 CSS 样式进一步增强阅读体验。此外，简悦还允许你将提炼后的内容一键发送至 Pocket、Instapaper、Evernote 等应用，或分享至数个社交网络。
+	https://chrome.google.com/webstore/detail/%E7%AE%80%E6%82%A6-simpread/ijllcpnolfcooahcekpamkbidhejabll
+	
+

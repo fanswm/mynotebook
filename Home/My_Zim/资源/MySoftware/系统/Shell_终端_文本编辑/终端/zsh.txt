@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T16:39:07+08:00
+
+====== zsh ======
+Created Thursday 07 December 2017
+
+好用的shell, for Linux
+
+https://segmentfault.com/a/1190000013612471?utm_source=tag-newest

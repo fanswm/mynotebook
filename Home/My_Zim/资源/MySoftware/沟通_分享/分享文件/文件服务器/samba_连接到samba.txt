@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T11:57:44+08:00
+
+====== samba 连接到samba ======
+Created Friday 24 November 2017
+
++ "文件系统"->“其他位置”->“连接到服务器”->“输入服务器地址”
++ `smb://xxx.xxx.xxx.xxx/your_share_dir`
++ 输入用户名，密码。

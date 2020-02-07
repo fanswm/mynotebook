@@ -1,0 +1,31 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-10T15:52:51+08:00
+
+====== IIS和Apache实现HTTP重定向到HTTPS ======
+Created Monday 10 December 2018
+
+https://www.williamlong.info/archives/5463.html
+本文介绍IIS7和Apache上实现访问HTTP跳转到HTTPS访问的方法，网站设计出于安全的考虑需要使用https协议，但不少用户因为输入网址的习惯不喜欢带上https协议，导致访问异常，因此需要一种重定向功能，实现HTTP网站重定向到HTTPS网站的方法，具体操作如下。
+
+　　IIS7
+
+　　从微软的官方网站下载HTTP重写模块，安装完毕之后重启IIS服务，之后打开IIS控制台，发现多了一个组件，双击“URL重写”，在右边窗体中选择“添加规则”，并添加一个空白规则，给规则自定义一个名字(名称自便)，比如我这里叫“redirect to HTTPS”，模式为：(.*)，添加一个条件，条件输入为 {HTTPS}，与模式匹配，模式为 ^OFF$，然后配置操作，操作类型为：重定向，重定向到URL为：https://{HTTP_HOST}/{R:1}%EF%BC%8C%E9%87%8D%E5%AE%9A%E5%90%91%E7%B1%BB%E5%9E%8B%EF%BC%9A%E6%B0%B8%E4%B9%85301。
+
+　　设置完毕后点击右侧的“应用”，这个 URL 重写就配置完毕了。
+
+　　Apache
+
+　　修改.htaccess文件，在文件里增加如下几行：
+
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+　　另一种写法是：
+
+RewriteEngine on
+RewriteBase /
+RewriteCond %{SERVER_PORT} !^443$
+RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]

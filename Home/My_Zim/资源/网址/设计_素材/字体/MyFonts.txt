@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-30T11:29:08+08:00
+
+====== MyFonts ======
+Created Saturday 30 December 2017
+
+https://www.myfonts.com/WhatTheFont/
+
+MyFonts 提供的搜索相对前者来说可能更「人性化」一些，在搜索栏中它已经为你提供了四种分类：All Fonts、Free Fonts、Webfonts、Subscription。在网站中，你也可以通过图片关键字等方式来定位字体。在字体的详情页面中，用户可以看到该字体的所有样式的样例，并且还能在网站上随意调整大小背景等元素方便查看效果。
+
+如果你在这里看中了一款付费字体，其实不用急着购买，可以现在详情页面中点击 30 天的免费试用来体验一下整体效果，再下决定。
+

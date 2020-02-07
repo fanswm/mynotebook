@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T12:00:01+08:00
+
+====== Yu Writer ======
+Created Thursday 07 December 2017
+
+https://sspai.com/post/42153
+
+https://ivarptr.github.io/yu-writer.site/
+
+相比 macOS 的百花齐放，在 Windows 上用 Markdown 进行写作一直没有太多选择，直到 Yu Writer 横空出世。你可以利用它自由写作，并在统一的文档库中进行管理，Yu Writer 会自动保存你的写作进度及操作记录，随时回滚至以前版本。
+写作完成之后，你可以将文章导出为 PDF、Docx、HTML 和微信公众号等多种格式，并选择主题配色。Yu Writer 的界面同样支持更换主题，功能区也可以自由定制。
+
+https://github.com/ivarptr/yu-writer.site/releases

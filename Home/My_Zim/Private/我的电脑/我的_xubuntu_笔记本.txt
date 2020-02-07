@@ -1,0 +1,61 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-13T15:28:06+08:00
+
+====== 我的 xubuntu 笔记本 ======
+创建日期 星期三 13 二月 2019
+
+====== 0 杂项 ======
+Created Friday 05 January 2018
+
+我的xubuntu安装记录(笔记本）：
+vim
+chrome
+	插件：
+zim-desktop
+gtk
+alias
+nodejs  npm
+tldr
+tmux
+virtualbox
+SpaceVim, from github.com
+docker
+config github
+jdk
+xmind zen: sudo dpkg -i xmindzen;  uninstalled
+pycharm: sudo snap install pycharm-community --classic
+xx-net
+veracrypt
+steam
+typora
+snippetstore: 代码片段管理
+anaconda
+更改键盘映射：pgup->up,pgdn->down,Menu->Home,Contrl_R->End.
+更改pip镜像为清华；
+sudo apt install trash-cli; alias rm='trash-put'
+xmind8: download; sudo ./setup.sh; 
+sudo dpkg -i jdk-11.0.2.deb
+sudo apt install openshot-qt
+sudo apt install libav-tools
+pip3 install instantmusic
+[[方法:Linux:系统:开机启动程序:清理开机启动项]]
+remarkable: `sudo apt install python3-markdown python3-bs4 gir1.2-webkit-3.0 wkhtmltopdf`
+	sudo dpkg -i ./remarkable_1.87_all.deb  
+[[资源:MySoftware:设计 图片:图片 录屏 截屏 图片处理 照片处理:录屏 截屏:将 Linux 终端会话录制成 SVG 动画]]
+sudo npm install -g footballcli
+jupyter notebook
+UNetbootin
+labelimg: https://github.com/tzutalin/labelImg
+sudo apt install apt-filere
+linuxBrew:
+	recterm ### termial to mp4 tools.
+sudo dpkg -i XnConvert
+sudo apt-get install gtk2.0
+sudo apt-get install build-essential libgtk2.0-dev
+无道词典
+sudo apt install borgbackup
+sudo dpkg -i google-earth-pro-stable_current_amd64.deb
+# 以下bropages: 类似的还有tldr
+sudo apt install ruby ruby-dev
+ sudo gem install bropages    

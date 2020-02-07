@@ -1,0 +1,191 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-30T13:43:58+08:00
+
+====== How to Install Mautic Marketing Automation Tool ======
+Created Tuesday 30 January 2018
+
+How to Install Mautic Marketing Automation Tool on Ubuntu 16.04
+
+On this page
+
+Prerequisites
+What we will do
+Step 1 - Install Nginx
+Step 2 - Install and Configure MariaDB
+Step 3 - Install and Configure PHP-FPM
+Step 4 - Download Mautic
+Step 5 - Configure Nginx Virtual Host for Mautic
+Step 6 - Mautic Web-Based Installation
+Reference
+Mautic is an open source self-hosted marketing automation tool for everyone. You can use it to grow up your business or community, monitor your website, create landing pages, create a campaign for your business, manage contacts, and even send marketing emails.
+In this tutorial, I will show you step-by-step how to install Mautic Marketing Automation Platform using Ubuntu 16.04. It's a web-based application, and we will be using the LEMP stack for our installation guide.
+Prerequisites
+Ubuntu 16.04
+Root privileges
+What we will do
+Install Nginx
+Install and configure MariaDB
+install and configure PHP-FPM
+Download Mautic
+Configure Nginx virtual host for Mautic
+Mautic Web-based installation
+Testing
+Step 1 - Install Nginx
+Mautic is a web-based marketing automation tool, and we will be using the Nginx web server for our Mautic installation.
+Login to your server machine, and then update and upgrade all packages.
+sudo apt update
+sudo apt upgrade
+
+Now install Nginx using the apt command below.
+sudo apt install nginx
+
+After the installation is complete, start the nginx service and enable it to launch every time at system boot.
+systemctl start nginx
+systemctl enable nginx
+
+The Nginx web server has been installed on to the Ubuntu 16.04 system - check it using the netstat command.
+netstat -plntu
+
+You should get the default HTTP port 80 on the list with 'LISTEN' state status.
+Start nginx
+Step 2 - Install and Configure MariaDB
+Mautic offers support only for the MySQL database with min version 5.5.3. For this guide, we will be using the mariadb-server 10.0 based on MySQL 5.5.
+Install the mariadb database using the following apt command.
+sudo apt install mariadb-server mariadb-client -y
+
+After the installation is complete, start the mariadb service and enable it to launch every time at system boot.
+systemctl start mysql
+systemctl enable mysql
+
+Now, we need to create a new database and user for mautic. We will create new database named 'mautic', user 'mauticuser' with password 'aqwe123'.
+Login to the MySQL shell using the following mysql command.
+mysql -u root -p
+
+Create a new database and user using the following queries.
+create database mautic;
+grant all on mautic.* to 'mauticuser'@'localhost' IDENTIFIED BY 'aqwe123';
+flush privileges;
+exit;
+
+Create MySQL database for Mautic
+MariaDB database has been installed, and the database for Mautic installation has been created.
+Step 3 - Install and Configure PHP-FPM
+Mautic requires at-least PHP 5.6.19 for the installation. So for this guide, we will be using PHP-FPM 7.0 for our mautic installation.
+Install PHP and PHP-FPM (with all required extensions) using the apt command below.
+sudo apt install -y php7.0-fpm php7.0-mbstring php7.0-xml php7.0-mysql php7.0-common php7.0-gd php7.0-json php7.0-cli php7.0-curl php7.0-zip php7.0-xml php7.0-mcrypt php7.0-imap php7.0-intl
+
+After the installation is complete, we need to configure the php.ini files for FPM and CLI configurations.
+Go to the '/etc/php/7.0' directory and edit the 'php.ini' file under 'fpm' directory.
+cd /etc/php/7.0/
+vim fpm/php.ini
+
+Uncomment the 'date.timezone' line and give the with 'UTC' for timezone configuration.
+date.timezone = "UTC"
+Now uncomment the 'cgi.fix_pathinfo' line and change the value to '0'.
+cgi.fix_pathinfo = 0
+Save and exit.
+Next, edit the 'php.ini' file under the 'cli' directory.
+vim cli/php.ini
+
+Uncomment the 'date.timezone' line and give the value with 'UTC' for PHP timezone configuration.
+date.time = "UTC"
+Next, uncomment the 'cgi.fix_pathinfo' line, and change the value to '0'.
+cgi.fix_pathinfo = 0
+Save and exit.
+Now start the PHP-FPM service and enable it to launch every time at system boot.
+systemctl restart php7.0-fpm
+systemctl enable php7.0-fpm
+
+The PHP and PHP-FPM installation and configuration for our Mautic installation has been completed. Check it using the netstat command as shown below.
+netstat -pl | grep php
+
+And you should get the result as shown below.
+
+Step 4 - Download Mautic
+Goto the '/var/www/' directory and download the mautic source code using the following wget command.
+cd /var/www
+wget https://www.mautic.org/download/latest
+
+Extract the 'latest' file with the unzip command to the 'mautic' directory.
+unzip latest -d mautic/
+
+Note: If you don't have the unzip command on your system, install it using the command below.
+sudo apt install unzip -y
+
+Now change the owner and group for the 'mautic' directory to 'www-data'.
+chown -R www-data:www-data mautic/
+
+Mautic is downloaded to the '/var/www/mautic' directory.
+Step 5 - Configure Nginx Virtual Host for Mautic
+For this guide, we're using Nginx instead of the Apache web server. In this step, we will configure the Nginx virtual host for the mautic installation.
+Go to the '/etc/nginx' directory and create a new file named 'mautic' under the 'sites-available' directory.
+cd /etc/nginx/
+vim sites-available/mautic
+
+Paste the following mautic nginx configuration there.
+server {
+     listen 80;
+     listen [::]:80;     
+     server_name mautic.hakase-labs.co;
+      
+     root /var/www/mautic;
+     index index.php index.html index.htm index.nginx-debian.html;
+      
+     location / {
+       try_files $uri $uri/ =404;
+     }
+ 
+     location ~ .php$ {
+       include snippets/fastcgi-php.conf;
+       fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+     }
+ 
+     location ~* ^/index.php {
+       fastcgi_split_path_info ^(.+.php)(/.+)$;
+       fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+       fastcgi_index index.php;
+       fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+       include fastcgi_params;
+       fastcgi_buffer_size 128k;
+       fastcgi_buffers 256 16k;
+       fastcgi_busy_buffers_size 256k;
+       fastcgi_temp_file_write_size 256k;
+     }
+ }
+Save and exit.
+Now activate the 'mautic' virtual host and check it using the 'nginx -t' command as shown below.
+ln -s /etc/nginx/sites-available/mautic /etc/nginx/sites-enabled/
+nginx -t
+
+Make sure there is no error, and restart the webserver.
+systemctl restart nginx
+
+Configure Nginx for Mautic
+Nginx virtual host configuration for mautic has been completed.
+Step 6 - Mautic Web-Based Installation
+Open your web browser and visit the mautic domain name, mine is http://mautic.hakase-labs.co.
+You will be redirected to the mautic installation page. Make sure all the extensions and configuration is error-free as shown below.
+Mautic Web Installer
+Click 'Next Step' button to continue.
+Now you will see the page about the database configuration. Type your database name, database user, and password as shown below.
+Database configuration
+And click the 'Next Step' button.
+Now we need to create the new admin account for Mautic. Type your admin user, email, and password.
+Set admin user and password
+Click the 'Next Step' button.
+For the email configuration, you can choose one option, or you can configure it later.
+Email configuration
+Click the 'Next Step' button again.
+Now you will get to see the admin login page. Type your admin user and password and click the 'Login' button.
+Mautic login
+And now you'll be able to see the Mautic admin dashboard.
+Mautic Dashboard
+The installation of the Mautic marketing automation tool on Ubuntu 16.04 with Nginx webserver has been completed successfully.
+Reference
+https://github.com/mautic/mautic
+https://www.mautic.org/
+ view as pdf |  print
+
+
+https://www.howtoforge.com/tutorial/how-to-install-mautic-marketing-automation-tool-on-ubuntu-1604/

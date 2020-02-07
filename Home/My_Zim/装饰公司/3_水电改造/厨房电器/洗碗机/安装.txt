@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-24T17:18:07+08:00
+
+====== 安装 ======
+Created Tuesday 24 July 2018
+
+有的洗碗机属于半嵌入式，自身不带门板，要利用橱柜的门板

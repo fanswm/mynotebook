@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-28T16:59:59+08:00
+
+====== Git bash 默认样式 ======
+Created Thursday 28 December 2017
+
+my git bash, gitbash
+我的设置：
+前景色：160/0/0, RGB:0/0/0
+背景色：160/0/240, RGB:255/255/255
+ 
+默认设置:
+前景色：160/0/160, RGB:170/170/170
+背景色：160/0/0，RGB:0/0/0

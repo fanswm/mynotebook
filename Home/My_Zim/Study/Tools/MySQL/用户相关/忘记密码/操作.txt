@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-06T14:43:27+08:00
+
+====== 操作 ======
+创建日期 星期一 06 一月 2020
+
+
+# 在manjaro:
+#初始化
+sudo mysqld --initialize --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+
+2020-01-06T06:33:10.528339Z 0 [Warning] [MY-010915] [Server] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2020-01-06T06:33:10.528465Z 0 [System] [MY-013169] [Server] /usr/bin/mysqld (mysqld 8.0.18) initializing of server in progress as process 4592
+2020-01-06T06:33:29.378325Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: D1a_#&t3A:25
+
+# sudo systemctl start mysql.service
+mysql -uroot -p
+ALTER user 'root'@'localhost' IDENTIFIED BY 'new_password';
+FLUSH PRIVILEGES;
+exit
+
+退出；
+重新登录；

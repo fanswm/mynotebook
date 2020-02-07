@@ -1,0 +1,50 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-04-06T08:12:40+08:00
+
+====== 格式化字符串 ======
+Created Friday 06 April 2018
+
+如果你__需要重复提供日期__，那么利用这种方式来格式化它的每一部分就有点复杂了。因此，可以__利用一个格式化字符串__指出要被格式化的参数的索引。
+__索引必须紧跟在%后面，而且必须以$结束__。例如：
+实例
+```
+import java.util.Date;
+  
+public class DateDemo {
+ 
+   public static void main(String args[]) {
+       // 初始化 Date 对象
+       Date date = new Date();
+        
+       // 使用toString()显示日期和时间
+       __System.out.printf("%1$s %2$tB %2$td, %2$tY", __
+__                         "Due date:", date);__
+   }
+}
+```
+
+运行实例 »
+以上实例编译运行结果如下:
+Due date: February 09, 2014
+或者，__你可以使用 < 标志__。__它表明先前被格式化的参数要被再次使用__。例如：
+实例
+```
+import java.util.Date;
+  
+public class DateDemo {
+ 
+   public static void main(String args[]) {
+       // 初始化 Date 对象
+       Date date = new Date();
+        
+       // 显示格式化时间
+       __System.out.printf("%s %tB %<te, %<tY", __
+__                         "Due date:", date);__
+   }
+}
+```
+
+运行实例 »
+以上实例编译运行结果如下:
+Due date: February 09, 2014

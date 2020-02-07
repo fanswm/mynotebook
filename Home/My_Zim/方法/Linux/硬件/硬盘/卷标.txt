@@ -1,0 +1,18 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+
+====== 卷标 ======
+创建日期 星期三 27 十一月 2019
+
+ext格式：
+sudo mkfs.exfat -n YOUR_LABEL_NAME /dev/sdxx
+
+若是fat格式，使用：
+mlabel -i /dev/yourpartition ::new-label
+
+获取:UUID:
+sudo blkid
+
+/dev/sda1: UUID="83c6ff3d-7b91-4b28-b202-c5be2277465f" TYPE="ext4"
+
+

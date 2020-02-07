@@ -1,0 +1,28 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-10T10:05:24+08:00
+
+====== 挣钱 ======
+Created Monday 10 December 2018
+
+知识变现:
+a.知乎live
+b.饭团
+c.知识星球（小密圈）
+d.荔枝微课
+e.千聊
+f.分答
+g.短书
+
+
+
+https://www.zhihu.com/question/27182640/answer/381318073?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
+[[Study:其他:开源:开源概念:挣钱]]
+
+
+程序员客栈：imrdr:150：im
+猪八戒网： 150:zbj:abhex@163:
+自由人： hex@163.com: z_bynonum: 昵称imrdr: 
+解决网：imrdr:hex163:123
+

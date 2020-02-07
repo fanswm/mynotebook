@@ -1,0 +1,50 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-02-03T08:14:44+08:00
+
+====== 那些工作之外的技术挣钱方式 ======
+Created Saturday 03 February 2018
+
+https://juejin.im/entry/5a73baf3f265da4e853d280f
+
+Overview
+
+挣钱，左边是手，意味着你需要用双手去辛苦劳动获取报酬；赚钱，左边是贝，意味着你可以通过钱再生钱。本文先为大家推荐一些个人见过或实践过的技术挣钱方式。
+私活
+
+    线上(海外)。[freelancer](https://www.freelancer.com/),[odesk.elance](https://www.upwork.com/?r)等.
+    线上(国内):
+[CSTO](http://www.csto.com/home), 
+[码市](https://mart.coding.net/),
+[智城外包](http://www.taskcity.com/),
+[实现网](https://shixian.com/),
+[猪八戒](http://www.zbj.com/)(泛)等.
+    熟人介绍，个人影响力，QQ群等。
+
+写作
+
+    写博客。个人博客经营.
+    文章投稿。如[InfoQ](https://www.infoq.com/)投稿(稿费是千字150)等.
+    线上live。如知乎Live(泛),
+    出书(纸版)。非常廉价，如果为了赚钱非常不值得.
+        版税制。税率一般6%~12%.我第一本书税率7%，第二本9~12%.
+        印数。
+        一次性付酬.
+    电子书。工具推荐GitBook,发布,百度阅读,多看等.
+
+教育培训
+
+    在线教育。如慕课网,极客学院,网易云课堂,designcode等，价格非常诱人
+    线下培训/技术峰会。为企业培训，公开课，技术峰会演讲，价格诱人.
+    咨询。如各种微信群，缘创派,在行,极牛,Get社区等. 推荐阅读《咨询的奥秘》.
+
+公司内推
+
+    公司内部岗位（如BAT等），至少3k+.
+    外部推荐，如JobDeer，各大微信群等.
+
+个人产品/个人品牌
+
+    开发个人产品，如App，社区，软件等,可持续发展.
+    网红/大咖/牛人…
+

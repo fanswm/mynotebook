@@ -1,0 +1,50 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-03T16:51:45+08:00
+
+====== 修改用户名（同时修改用户组名和家目录） ======
+Created Wednesday 03 January 2018
+
+### 修改用户名
+`usermod -l new_username old_username`
+举个例子，假设我们有一个名叫 dan 的用户想要重命名为 susan，那么在终端下执行下面命令：
+
+`$ sudo usermod -l susan dan`
+这只会更改用户名，而其他的东西，比如用户组，家目录，UID 等都保持不变。
+
+注意：- 你需要从要改名的帐号中登出并杀掉该用户的所有进程，要杀掉该用户的所有进程可以执行下面命令，
+
+`$ sudo pkill -u dan`
+`$ sudo pkill -9 -u dan`
+
+### 修改家目录
+要同时更改家目录，我们需要在执行 usermod 命令的同时加上 -d 选项，
+
+`$ sudo usermod -d /home/susan -m susan`
+
+### 更改用户 UID
+执行下面命令修改用户 UID，
+
+`$ sudo usermod -u 2000 susan`
+这里 2000 就是用户的新 UID。
+
+### 修改用户组名
+要把用户组名从 dan 修改为 susan，我们需要使用 groupmod 命令。使用下面命令来修改用户组名，
+
+`$ groupmod -n susan dan`
+做完修改后，可以使用 id 命令来检查，
+
+`$ id susan`
+这篇教导如何修改用户名的指南就此结束了。有任何疑问或建议，欢迎给我们留言。
+
+via: http://linuxtechlab.com/rename-user-in-linux-rename-home-directory/
+
+作者：Shusain[1] 译者：lujun9972[2] 校对：wxy[3]
+
+本文由 LCTT[4] 原创编译，Linux中国[5] 荣誉推出
+
+[1]: http://linuxtechlab.com/author/shsuain/
+[2]: https://github.com/lujun9972
+[3]: https://github.com/wxy
+[4]: https://github.com/LCTT/TranslateProject
+[5]: https://linux.cn/article-9192-1.html?utm_source=rss&utm_medium=rss

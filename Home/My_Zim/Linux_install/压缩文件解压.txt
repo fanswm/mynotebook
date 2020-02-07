@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T13:46:08+08:00
+
+====== 压缩文件解压 ======
+Created Friday 24 November 2017
+
+## 安装
+```
+sudo apt-get install rar unrar
+# 解压
+rar x ./xxxx.rar
+```

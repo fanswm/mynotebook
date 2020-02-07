@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-30T11:29:57+08:00
+
+====== 插件识别 ======
+Created Saturday 30 December 2017
+
+[WHATFONT](http://www.chengyinliu.com/whatfont.html)
+
+网站识别虽然精准，但是步骤相对来说比较繁琐。其实在浏览器中，也可以安装类似的插件来完成这些操作。WHATFONT 的插件就可以帮助你快速定位字体信息，当你进入一个网站时，在浏览器顶栏中点击插件的图标，鼠标就带上识别功能。将鼠标移动到任意文本位置即可显示字体名称，再次点击鼠标即会显示字体详细信息。该插件除了提供了 Safari 插件以外，还提供了 Chrome 插件和书签栏插件，方便大家使用。
+
+除了在电脑浏览器上，在手机端的浏览器也有一样的插件。安装好了 [WhatFont](https://itunes.apple.com/cn/app/whatfont/id927575094?l=en&mt=8) 在 Safari 中的 Share Sheet 中的第二行中点击「更多」打开 WhatFont 开关。当你任意进入一个网站选择一行文字后，点击 Share Sheet 里的 WhatFont 按钮，即会弹窗显示字体的相关信息，也是非常的方便了。

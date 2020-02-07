@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-26T22:22:26+08:00
+
+====== 查找ubuntu 软件包 ======
+创建日期 星期四 26 十二月 2019
+
+https://launchpad.net/ubuntu/

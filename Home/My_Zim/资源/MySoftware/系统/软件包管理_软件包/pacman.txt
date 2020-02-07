@@ -1,0 +1,21 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-03T19:33:24+08:00
+
+====== pacman ======
+创建日期 星期三 03 四月 2019
+
+官方中文文檔：  https://wiki.archlinux.org/index.php/Pacman_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+
+https://wiki.archlinux.org/index.php/Pacman_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%88%A0%E9%99%A4%E8%BD%AF%E4%BB%B6%E5%8C%85
+也可以访问 https://www.archlinux.org/groups/ 查看可用的包组。
+
+ 位置： /etc/pacman.conf​
+
+回滚：  https://wiki.archlinux.org/index.php/Arch_Linux_Archive_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+
+如何恢复所有包到指定日期： https://wiki.archlinux.org/index.php/Arch_Linux_Archive_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%E6%89%80%E6%9C%89%E5%8C%85%E5%88%B0%E6%8C%87%E5%AE%9A%E6%97%A5%E6%9C%9F
+
+ 
+
+https://archive.archlinux.org/repos/2019/11/30/

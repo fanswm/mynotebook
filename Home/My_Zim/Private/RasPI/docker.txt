@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-13T11:19:44+08:00
+
+====== docker ======
+Created Wednesday 13 December 2017
+
+sudo curl -sSL https://get.daocloud.io/docker | sh
+sudo docker version
+sudo docker run -d --name ttrssdb nornagon/postgres
+sudo docker run -d --link ttrssdb:db -p 80:80 -e SELF_URL_PATH=http://172.17.0.1 fischerman/docker-ttrss
+sudo docker ps -a
+sudo docker ps
+sudo docker start 4e441dc5d0c7
+sudo docker ps
+sudo ./chcpu.bash
+docker version
+sudo docker version
+clear
+sudo docker ps -a
+sudo docker ps
+sudo docker ps -a
+sudo docker restart 4e441dc5d0c7
+sudo docker ps

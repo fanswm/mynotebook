@@ -1,0 +1,6 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-21T08:54:45+08:00
+
+====== Sunday 21 Jan 2018 ======
+我试验了一个Android软件，养成好习惯：Fabulous

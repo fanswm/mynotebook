@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-18T17:10:31+08:00
+
+====== GRAPHBERRY ======
+Created Monday 18 December 2017
+
+http://www.graphberry.com/category/icons
+
+
+GRAPHBERRY 是一个完全免费的素材网站，其中图标类的素材就有二十二项。图标的种类从写实到扁平化都有，可以满足你平时制作内容的基本需求。图标文件的格式大多为 PSD 格式，需要你使用 Photoshop 或者 Affinity Photo 等设计软件打开。除了图标之外，GRAPHBERRY 还提供了 Mockups、UI Kit 以及一些网站设计案例。如果你绝对某一个项目对你非常有用，你也可以在项目的详情页面买一杯咖啡送给他。

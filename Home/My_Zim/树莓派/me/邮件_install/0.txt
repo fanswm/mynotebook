@@ -1,0 +1,46 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-26T11:49:07+08:00
+
+====== 0 ======
+Created Monday 26 November 2018
+
+Linux Mutt 寄信出現 GPGME: CMS protocol not available 修復
+發表於 2017 年 07 月 25 日 由 Tsung
+Linux CLI 使用 Mutt 寄信、收信蠻方便的，Debian 升級到 Stretch 後，寄信就會出現下述訊息：
+
+GPGME: CMS protocol not available
+
+註：於 CLI 界面使用 Cron 寄信，命令參數：mutt -s "This is Title" root < $content_file
+
+
+Linux Mutt 寄信出現 GPGME: CMS protocol not available 修復
+
+避免 Cron 每次執行都出現 GPGME: CMS protocol not available 的訊息，只要於執行此 Cron 的 User 設定下述即可：
+
+vim ~/.muttrc
+set crypt_use_gpgme = no
+測試：mutt -s "This is Title" root < $content_file
+$ mutt -D # 列出所有設定值
+$ mutt -D | grep use_gpg
+$ mutt -y # 可以用此來看有沒有警告訊息
+註：Mutt 我只用在收信和發本機的 Mail，所以不需要 GPG
+
+
+error:
+.msmtprc: contains secrets and therefore must have no more than user read/write permissions
+A: $chmod 0600 .msmtprc
+
+error:
+msmtp: authentication failed (method LOGIN)
+msmtp: server message: 535 Error: authentication failed
+msmtp: could not send mail (account default from /home/pi/.msmtprc)
+发送信件出错，子进程已退出 77 (Insufficient permission.)。
+
++ 详细的日志错误/var/log/mmlog
+
+msmtp: authentication failed (method LOGIN)
+msmtp: server message: 535 Error: authentication failed
+msmtp: could not send mail (account default from /home/pi/.msmtprc)
+发送信件出错，子进程已退出 77 (Insufficient permission.)。
+无法发送此信件。

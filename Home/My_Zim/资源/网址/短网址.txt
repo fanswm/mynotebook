@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-21T14:18:53+08:00
+
+====== 短网址 ======
+Created Wednesday 21 November 2018
+
+dwz.cn
+
+[[MySoftware:网站 博客 建站:Apache:apache2:如何使用 Apache 构建 URL 缩短服务]]

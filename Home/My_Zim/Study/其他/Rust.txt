@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-21T17:56:06+08:00
+
+====== Rust ======
+Created Wednesday 21 November 2018
+
++ 官网： https://www.rust-lang.org/
++ 官方教程： https://doc.rust-lang.org/book/
+
++ install
+`curl https://sh.rustup.rs -sSf | sh`
+
+
+如何在 Linux 中安装 Rust 编程语言 https://linux.cn/article-10392-1.html?utm_source=rss&utm_medium=rss

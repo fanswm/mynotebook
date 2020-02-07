@@ -1,0 +1,26 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T16:18:35+08:00
+
+====== 测试字符串相等性 ======
+Created Thursday 07 December 2017
+
+错误的写法：
+
+if (name.compareTo("John") == 0) ...  
+if (name == "John") ...  
+if (name.equals("John")) ...  
+if ("".equals(name)) ...
+
+上面的代码没有错，但是不够好。compareTo不够简洁，==原义是比较两个对象是否一样。另外比较字符是否为空，最好判断它的长度。
+
+正确的写法：
+
+if ("John".equals(name)) ...  
+if (name.length() == 0) ...  
+if (name.isEmpty()) ...
+
+作者：java联盟
+链接：https://juejin.im/post/5a27aa33518825619a028f69
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

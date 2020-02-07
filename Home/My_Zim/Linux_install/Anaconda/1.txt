@@ -1,0 +1,53 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-07T20:33:21+08:00
+
+====== 1 ======
+创建日期 星期五 07 二月 2020
+
+## anaconda
+
++ download:Anaconda2-4.4.0-Linux-x86_64.sh 
++ `./Anaconda2-4.4.0-Linux-x86_64.sh `
+> install
+
++ `source ~/.bashrc`
+> source
+
++ `conda update conda`
++ `conda update anaconda`
+> update
+
+## 添加Anaconda的TUNA镜像
+
+`conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/`
+> TUNA的help中镜像地址加有引号，需要去掉
+
+## 设置搜索时显示通道地址
+
+`conda config --set show_channel_urls yes`
+
+
+链接：http://www.jianshu.com/p/2f3be7781451
+
+https://www.anaconda.com/support/
+https://anaconda.org/
+
+
+20200108：
+尝试注册没有成功。
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/fdd/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+	eval "$__conda_setup"
+else
+	if [ -f "/home/fdd/anaconda3/etc/profile.d/conda.sh" ]; then
+		. "/home/fdd/anaconda3/etc/profile.d/conda.sh"
+	else
+		export PATH="/home/fdd/anaconda3/bin:$PATH"
+	fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<

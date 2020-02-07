@@ -1,0 +1,30 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T16:17:46+08:00
+
+====== 错误的使用StringBuffer ======
+Created Thursday 07 December 2017
+
+__错误的写法：__
+
+StringBuffer sb = new StringBuffer();  
+sb.append("Name: ");  
+sb.append(name + '\n');  
+sb.append("!");  
+...  
+String s = sb.toString();
+
+问题在第三行，append char比String性能要好，另外就是初始化StringBuffer没有指定size，导致中间append时可能重新调整内部数组大小。如果是JDK1.5最好用StringBuilder取代StringBuffer，除非有线程安全的要求。还有一种方式就是可以直接连接字符串。缺点就是无法初始化时指定长度。
+
+__正确的写法__：
+StringBuilder sb = new StringBuilder(100);  
+sb.append("Name: ");  
+sb.append(name);  
+sb.append("\n!");  
+String s = sb.toString();
+或者这样写：String s = "Name: " + name + "\n!";
+
+作者：java联盟
+链接：https://juejin.im/post/5a27aa33518825619a028f69
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

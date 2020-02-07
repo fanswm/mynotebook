@@ -1,0 +1,100 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-27T11:27:14+08:00
+
+====== 源代码管理笔记本(全平台) ======
+创建日期 星期六 27 四月 2019
+
+厉害的设计师都有自己的素材库, 譬如 Eagle
+作为一个合格且优雅的攻城狮, 需要经常整理自己的代码, 并有一个属于自己的重用代码库
+把好的代码管理起来, 方便后续使用, 缩短开发周期, 极大的提高效率
+文章目录
+1.Cacher
+2.Leanote
+3.Lapton
+4.Snippet Store
+5.VNote
+
+以下是一些个人使用过, 认为很棒的代码片段管理软件
+发现一款更赞的笔记本, Notion
+https://blog.csdn.net/a308601801/article/details/87904239
+
+1.Cacher
+其实GitHub上是有提供代码片段管理功能的, 名字叫gist
+Cacher是它的一个桌面版Interface, 分为免费版, 个人专业版和协作版
+
+官网地址: https://www.cacher.io/
+
+界面 大概这个样子, windows, mac, linux 三端都支持
+
+价格也是十分合理的, 当然也可免费使用, 限制是 private 库最多只能有15个, 提倡代码共享哈, 个人是很支持的
+
+2.Leanote
+中文名蚂蚁笔记
+
+GitHub上开源的笔记本软件, 界面简介, 功能强大, 真的是一款贴合需求十分人性化的笔记本, 同样支持 windows, mac, linux 三端
+使用官方的云服务器的话, 是需要付费的, 价格50/年, 如果担心自己笔记的安全性问题, 甚至可以设置同步到私人服务器
+
+因为是开源的, 所以想要什么功能的话, 就大胆提交吧!
+
+官网地址:https://leanote.com/
+GitHub地址:https://github.com/leanote/leanote
+
+以下是界面
+
+
+3.Lapton
+同样是一款 GitHub gist Interface, 三端支持, 无敌良心, 十二分的推荐
+
+特点如下:
+无限数量公共/私密片段
+无限数量标签
+语法高亮
+支持 MarkDown
+支持 Jupyter Notebook viewer
+支持 macOS/Win/Linux
+github 企业支持
+支持沉浸模式
+可定制, 支持快捷键
+支持搜索
+可使用代理
+免费, 开源
+
+目前还没有官网
+GitHub地址: https://github.com/hackjutsu/Lepton
+
+界面如下:
+
+
+4.Snippet Store
+一款刚起步的开源笔记本, 支持本地模式
+简洁, 有设计感, 目前仅支持英文和越南语 - . -, 应该是个越南人开发的
+
+官网地址: https://zerox-dg.github.io/SnippetStoreWeb/
+GitHub地址: https://github.com/ZeroX-DG/SnippetStore
+
+界面是这样的
+
+
+5.VNote
+开源免费
+使用 Qt 和 C++ 编写
+支持 Linux, Windows, macOS
+纯真的 MarkDown 笔记本, 还支持甘特图等高级操作
+重要的是支持中文!!!
+
+这么良心的软件哪里找?!
+
+官网地址: https://tamlok.github.io/vnote/en_us/#!index.md
+GitHub地址: https://github.com/tamlok/vnote
+
+
+另外 OneNote 是博主最喜欢的笔记本了, 2016版功能超级强大, 目前来说不支持 Markdown 和代码高亮真的是十分遗憾,
+只能通过下载插件来解决, 体验并不好. 不过听说将来 OneNote 也将支持 Markdown 语法, 十分期待!
+
+以上就是代码片段管理神器的全部推荐啦, 如果你也有好用的效率神器, 欢迎在下方留言~
+--------------------- 
+作者：RayfunC 
+来源：CSDN 
+原文：https://blog.csdn.net/a308601801/article/details/86543015 
+版权声明：本文为博主原创文章，转载请附上博文链接！

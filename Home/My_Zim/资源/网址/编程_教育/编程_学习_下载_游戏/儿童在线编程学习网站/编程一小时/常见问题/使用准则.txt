@@ -1,0 +1,29 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-05T23:11:49+08:00
+
+====== 使用准则 ======
+Created 星期四 05 十二月 2019
+
+Can I use Code.org’s logo for an event, flyers, or on my website?
+
+Can I use Code.org’s logo for an event, flyers, or on my website?
+Avatar
+Josh
+May 04, 2019 03:38
+Follow
+According to our Terms of Service, we do not grant any third party groups the right to use the Code.org name or any of the Code.org trademarks, logos, domain names, and other distinctive brand assets without permission. You can visit our Brand Assets Usage Policy page for information on how to obtain permission and how to use our brand assets.
+
+Where appropriate, we encourage the use of the Hour of Code logo, which you can download at:   https://hourofcode.com/promote/resources#logo. 
+ 
+Note that "Hour of Code" itself is trademarked to avoid abuse. Usage of the Hour of Code logo must abide by the following rules:
+ 
+1. Any reference to "Hour of Code" should be used in a fashion that doesn't suggest that it's your own brand name, but rather referencing the Hour of Code as a grassroots movement. Allowable use: "Participate in the Hour of Code™ at ACMECorp.com". Prohibited use: "Try Hour of Code by ACME Corp".
+ 
+2. Use a "TM" superscript in the most prominent places you mention "Hour of Code", both on your web site and in app descriptions.
+ 
+3. Include language on the page (or in the the footer), including links to the CSEdWeek and Code.org web sites, that says the following:
+ 
+“The 'Hour of Code™' is a nationwide initiative by Computer Science Education Week and Code.org to introduce millions of students to one hour of computer science and computer programming.”
+ 
+4. No use of "Hour of Code" in app names.

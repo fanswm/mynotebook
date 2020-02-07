@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-02T14:01:47+08:00
+
+====== ranger：内容浏览 预览 ======
+创建日期 星期二 02 四月 2019
+
+ranger：内容浏览/预览
+
+另一款内容预览软件，界面没有 mc 那么漂亮，标记拷贝也没它强，但是预览功能做的很不错，如果你习惯 vim 键位的话，你会发现ranger有些地方比 mc做的好不少：
+
+上下键（或者j, k）移动光标，内容预览自动出现在右边，左键可以回退上一层目录，q退出，如果你对预览很依赖，你会喜欢上 ranger 这款软件，apt-get 直接安装即可。
+https://github.com/ranger/ranger

@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T08:58:50+08:00
+
+====== 文件编码 ======
+Created Sunday 03 December 2017
+
+文件编码
+ 
+set encoding=utf-8

@@ -1,0 +1,22 @@
+﻿Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T13:51:34+08:00
+
+====== MongoDB ======
+Created Friday 24 November 2017
+
+__## 安装mongodb:__
++ `sudo apt-get update && sudo apt-get upgrade -y`
++ `sudo apt-get install mongodb`
+
+__## 测试mongodb安装:__
++ `mkdir /home/myusername/mongodata`
+
+__## 用以下命令启动mongod:__
++ `mongod --dbpath /home/myusername/mongodata`
+
+> 这时mongod已经启动，重新打开一个终端, 键入mongo进入交互程序：
++ `mongo`
+> show dbs
+
+> mongodb安装到此为止

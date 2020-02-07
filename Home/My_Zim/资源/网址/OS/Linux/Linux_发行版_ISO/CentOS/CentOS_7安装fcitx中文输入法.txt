@@ -1,0 +1,56 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-07T20:28:57+08:00
+
+====== CentOS 7安装fcitx中文输入法 ======
+创建日期 星期五 07 二月 2020
+
+安装步骤如下：
+
+1、加入EPEL源
+
+  EPEL7几乎是CentOS必备的源: sudo yum install epel-release
+
+2、添加mosquito-myrepo源
+
+  mosquito-myrepo是一个私人制作的第三方源，其中包含了fcitx输入法，支持的发行版：Fedora 19/20/21/rawhide 以及RHEL/CentOS 7。
+
+sudo yum-config-manager --add-repo=https://copr.fedoraproject.org/coprs/mosquito/myrepo/repo/epel-7/mosquito-myrepo-epel-7.repo
+
+3、安装输入法
+
+  可以选择下面的各种输入法中的某一个或多个:
+
+yum install fcitx-googlepinyin fcitx-cloudpinyin # 谷歌拼音输入法
+yum install fcitx-rime fcitx-cloudpinyin # 中州韵输入法
+yum install fcitx-libpinyin fcitx-cloudpinyin # libpinyin输入法
+yum install fcitx-sunpinyin sunpinyin-data fcitx-cloudpinyin # sunpinyin输入法
+
+4、清理工作
+
+  鉴于多个repo的版本冲突会造成一些麻烦，最好的办法还是在安装完需要的软件之后就禁用该repo，需要的时候再启用。
+
+  编辑/etc/yum.repos.d/mosquito-myrepo-epel-7.repo，将其中的enable=1改成enable=0即可。
+
+   vi /etc/yum.repos.d/mosquito-myrepo-epel-7.repo
+
+   
+
+5、设置输入法切换快捷键
+
+   应用程序-->其它-->Fcitx配置
+
+   
+
+   在输入法Tab页点击+添加在步骤三安装的输入法
+
+   
+
+   在全局配置Tab页配置输入法切换的快捷键（默认的Ctrl+Shift不能切换，本人设置为Ctrl+Q切换）
+
+   
+
+   到此，在CentOS 7上安装fcitx中文输入法的步骤已全部讲完，希望我的讲解可以帮助大家进步。 
+———————————————— 
+版权声明：本文为CSDN博主「屈文哲」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。 
+原文链接：https://blog.csdn.net/quwenzhe/article/details/46594195

@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-11T15:25:17+08:00
+
+====== What the fuck Python ======
+Created Tuesday 11 December 2018
+
+https://github.com/leisurelicht/wtfpython-cn
+https://github.com/satwikkansal/wtfpython
+https://zhuanlan.zhihu.com/p/51264676?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
+这个Python资源在GitHub上标星超8000，现在被翻译成了中文
+
+最近，GitHub上一个关于Python的工程完工了。一个名为“暮晨”的贡献者，把一个非常有趣的Python项目，翻译成了中文版。这个项目是《What the f*ck Python!》，专门介绍 Python 里面那些奇奇怪怪的语言坑。
+

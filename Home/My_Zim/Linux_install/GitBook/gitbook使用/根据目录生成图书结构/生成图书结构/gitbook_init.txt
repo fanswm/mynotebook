@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T18:41:01+08:00
+
+====== gitbook init ======
+创建日期 星期二 21 十一月 2017
+
+gitbook init
+
+# 查看建立的目录和文件:
+tree . 

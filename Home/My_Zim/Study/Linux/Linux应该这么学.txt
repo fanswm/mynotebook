@@ -1,0 +1,3616 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-06T11:35:20+08:00
+
+====== Linux应该这么学 ======
+Created Thursday 06 December 2018
+
+安装KVM前我们要检查真实物理机是否支持虚拟化功能：
+$ grep vmx /proc/cpuinfo
+	#intel处理器的虚拟化的技术标志为vmx
+	#amd处理器的虚拟化的技术标志为svm
+安装KVM以及相关的依赖软件包:
+$ yum -y groupinstall "Virtualization Host"
+$ yum -y groupinstall "Virtualization Host"
+$ yum -y install virt-{install, viewer,manager}
+
+配置真实机的网络:
+$ echo "net.ipv4.ip_forward=1" > /etc/sysctl.d/99-ipforward.conf
+$ sysctl -p /etc/sysctl.d/99-ipforward.conf
+$ vim /etc/sysconfig/network-scripts/ifcfg-eno1677736
+DEVICE="eno1677736"
+ONBOOT="yes"
+#IPADDR="192.168.10.10"
+#NETMASK="255.255.255.0"
+#GATEWAY="192.168.10.1"
+HWADDR="网卡的MAC地址"
+#DNBS1="192.168.10.1"
+BRIDGE=virbr0
+
+创建用于桥接网卡的配置文件(与上面的文件很相似):
+$ vim /etc/sysconfig/network-scripts/ifcfg-virbr0
+DEVICE="virbr0"
+TYPE=BRIDGE
+ONBOOT="yes"
+BOOTPROTO=static
+IPADDR="192.168.10.10"
+NETMASK="255.255.255.0"
+GATEWAY="192.168.10.1"
+DNBS1="192.168.10.1"
+
+检查KVM模块是否被加载以及能否正常的使用CPU虚拟化功能：
+$ lsmod | grep kvm
+
+检查桥接的网卡配置是否启用成功：
+$ ip show virbr0
+
+获取虚拟机列表(默认为空是正常的):
+$ virsh -c qemu:///system list
+
+配置虚拟机参数:
+$ vir-manager
+
+重置root密码:
+先确认是否是RHEL6或RHEL7；
+开机后在内核上键入"e";
+在linux16这行的后面输入"rd.rbreak",并敲击“ctrl+x”;
+进入到系统的紧急求援模式；
+依次输入以下命令：
+mount -o remount,rw /sysroot
+chroot /sysroot
+echo "linuxprobe" | passwd --stdin root
+exit
+reboot
+重启时会很慢，耐心等待即可。
+
+重要的守护进程：
+crond	计划任务
+dhcpd	动态IP地址分配服务
+httpd	网站服务
+lpd	打印服务
+named	域名解析服务（DNS）
+nfs	文件共亨服务（NFS）
+smb	文件共享与打印服务(SAMBA)
+syslog	系统日志
+gpm	鼠标进程
+
+
+RPM:
+安装软件:rpm -ivh filename.rpm
+升级软件:rpm -Uvh filename.rpm
+卸载软件:rpm -e filename.rpm
+查询软件的详细信息:rpm -qpi filename.rpm
+列出软件的文件信息:rpm -qpl filename.rpm
+查询文件属于哪个RPM:rpm -qf filename
+
+设置时间：
+设置系统时间为2015年9月1日8点半：
+$ date -s"201509001 8:30:00"
+
+递归下载<linux就该这么学>的整站页面与所有的资料,
+下载完成后保存到"www.linuxprobe.com"的目录:
+$ wget -r -p http://www.linuxprobe.com
+
+纯文本浏览器elinks:
+安装
+$ yum install elinks
+
+uptime命令用于查看系统的负载情况，格式为：uptime
+sosreport命令用于收集系统配置并诊断信息后输出结论文档，
+格式为：sosreport
+
+od命令：
+-ta	默认字符
+-tc	ASCII字符
+-to	八进制
+-td	十进制
+-tx	十六进制
+-tf	浮点数
+
+tr命令：
+用于转换文本文件中的字符，“tr [old] [new]”
+
+wc命令：
+统计指定文本的行数、字数、字节数
+
+cut命令：
+通过列来提取文本字符
+
+文件的三种时间：
+mtime:内容修改时间；
+ctime:更改权限与属性的时间；
+atime:读取文件内容的时间；
+
+变量：!$代表上一个命令的参数;
+
+将硬盘的MBR信息copy出来:
+$ dd if=/dev/sda of=/dev/sda_image count=1 bs=512K
+
+创建名为ABC的用户,并定义家目录路径,UID以及登陆解释器(不允许登陆):
+$ useradd -d /home/linux -u 8888 -s /sbin/nologin abc
+
+passwd命令:
+-l:锁定用户禁止基登陆;
+-u:解除锁定,允许用户登陆;
+--stdin	:echo "newpassword" | passwd --stdin username
+
+tar命令：
+打包并压缩文件：“tar -zcvf 压缩包名.tar.gz 文件名”
+解压并展开压缩包：“tar -zxvf 压缩包名.tar.gz”
+-c	创建压缩文件
+-x	解开压缩文件
+-t	查看压缩包内有哪些文件
+-z	用Gzip压缩或解压
+-j	用bzip2压缩或解压
+-v	显示压缩或解压的过程
+-f	目标文件名
+-p	保留原始的权限与属性
+-P	使用绝对路径来压缩
+-C	指定解压到的目录
+
+
+grep命令：
+grep 关键词	文本文件
+-b	将可执行文件当作文本文件来搜索
+-c	仅显示找到的次数
+-i	忽略大小写
+-n	显示行号
+-V	反向选择---仅列出没的“关键词的行”
+
+找出系统不允许登录的账号：
+$ grep /sbin/nologin /etc/passwd
+
+find命令：
+find [查找路径] 寻找条件 操作
+-name	匹配名称
+-perm	匹配权限（mode为完全匹配，-mode为包含即可）
+-user	匹配所有者
+-group	匹配所有组
+-mtime -n +n	匹配修改内容的时间 -n指n天以内，+n指n
+-nouser	匹配无所有者的文件
+-newer	f1 !f2	匹配比文件f1新却比文件f2旧的文件
+-type b/d/c/p/l/f	匹配文件类型（块设备，目录，字符设备，管道，链接文件，文件）
+-size	匹配文件的大小（+50k查找超过50k的文件）
+-prune	忽略某个目录
+--exec {}\;	后面可接对搜索到的结果进一步处理的命令
+例：
+搜索在/etc中所有以host开头的文件：
+$ find /etc -name "host*" -print
+搜索整个系统中所有包含SUID的文件（SUID的数字表示法是4，而减号表示只要包含即可）。
+$ find / -perm -4000 -print
+查找用户abc的文件，并复制到/root/finded目录：
+重点是“-exec {} \;”其中{}代表find命令搜索出的文件，记住结尾必须是\;
+$ find / -user abc -exec cp -arf {} /root/finded/\;
+
+问题：找出不允许用户登录的用户：
+$ grep "/sbin/nologin" /etc/passwd | wc -l
+把root的密码设置成abcd:
+$ echo "abcd" | passwd --stdin root
+
+输出重定向：
+符号	作用
+命令 > 文件	将标准输出重定向到一个文件中（清空原有文件）
+命令 2> 文件	将错误输出重定向到一个文件中（清空原有文件）
+命令 >> 文件	将标准输出重定向到一个文件中（追加到原有文件后）
+命令 2>> 文件	将错误输出重定向到一个文件中（追加到原有文件后）
+命令 >> 文件 2>$1	将标准输出与错误输出共同写到一个文件中（追加）
+
+输入重定向：
+命令 < 文件	将文件做为命令的标准输入
+命令 < 分界符	从标准输入中读入，直到遇见“分界符”才停止
+命令 < 文件1 > 文件2	将文件1做为命令的标准输入并将标准输出到文件2
+
+通配符	含义
+* 匹配0个或多个字符
+？	匹配任意单个字符
+[0-9]	匹配范围内的数字
+[abc]	匹配已给出的任意字符
+
+bash解释器还支持很多的特殊字符扩展：
+字符	作用
+\反斜杠	转义后面的单个字符
+''单引号	转义所有的字符
+""双引号	变量依然有效
+``反引号	执行命令语句
+
+重要的环境变量：
+HOME	用户的主目录
+SHELL	当前的SHELL是哪个程序
+HISTSIZE	历史命令记录条数
+MAIL	邮件信箱文件
+LANG	语系
+RANDOM	随机数字
+PS1	bash提示符
+HISTFILESIZE	histroy命令存储数量
+PATH	在路径中的目录查找执行文件
+EDITOR	默认文本编辑器
+USER	当前登录的用户名
+
+
+export命令用于将局部变量提升为全局变量：export 变量名＝变量值
+
+重新启动网卡：
+$ systemctl restart network
+
+查看系统中所有可用的shell解释器：
+$ cat /etc/shells
+
+已经被定义好的shell预定义变量：
+$O	当前执行shell脚本的程序名
+$1-9,${10},${11}...	参数的位置变量
+$#	一共有多少个参数
+$*	所有位置变量的值
+$?	判断上一条命令是否执行成功,0为成功,非0为失败
+
+
+
+判断用户的参数:
+
+文件测试:[ 操作符 文件或目录名 ]
+操作符	作用
+-d	测试是否为目录
+-e	测试文件或目录是否存在
+-f	判断是否为文件
+-r	测试当前用户是否有权限读取.
+-w	测试当前用户是否有权限写入.
+-x	测试当前用户是否有权限执行.
+
+
+逻辑测试:表达式1 操作符	表达式2
+操作符	作用
+&&	与
+||	或
+!	否
+
+整数值比较:[ 整数1 操作符 整数2]
+操作符	作用
+-eq	判断是否等于
+-ne	不等于
+-gt	大于
+-lt	小于
+-le	小于或等于
+-ge	大于或等于
+
+显示上一条命令执行结果:
+$ echo $?
+
+获取当前可用的内存量，并将此值赋值给变量FreeMem:
+(1)首先用free -m查看以m为单位的内存使用情况;
+(2)然后grep cache:过滤出剩余内存的行最
+(3)后用awk ‘{print $3}’
+(4)过滤只保留第三列，而FreeMem=`语句`则表示执行里面的语句后赋值给变量。
+$ FreeMem=`free -m | grepcache: | awk '{print $3}'`
+验证变量是否已经获得可用内存量：
+$ echo $FreeMem
+609
+
+判断此值是否小与1024(单位是M)，若小于则提示内存不足：
+$ [ $FreeMem -lt 1024 ] && echo "Insufficient Memory"
+Insufficient Memory
+
+
+字符串比较:[字符串1 操作符 字符串2]
+
+操作符	作用
+
+=	比较字符串内容是否相同。
+
+!=	比较字符串内容是否不同。
+
+-z	判断字符串内容是否为空。
+
+
+
+条件测试语句:
+
+测试DIR目录是否存在,如果不存在,则创建这个目录:
+$ vim mkmydir.sh
+
+#!/bin/bash
+DIR="D:\\CODDE"
+
+if [ ! -e $DIR ]
+then
+mkdir -p $DIR
+fi
+
+为ping命令追加-c参数代表发送数据包的个数，
+-i代表每0.2秒发一个数据包，
+-W则为3秒即超时。
+而$1为用户输入的第一个参数（IP地址），
+$?为上一条命令的执行结果，判断是否等于0(即成功)。
+
+$ vim Example.sh
+
+#!/bin/bash
+
+ping -c 3 -i 0.2 -W 3 $1 &> /dev/null
+if [ $? -eq 0 ]
+then
+	echo "Host $1 is up."
+else
+	echo "Host $1 is down."
+fi
+
+
+随机生成一个0-999的整数，判断并提示用户输入的值过高或过低，只有当用户猜中才结束程序。
+脚本中的$RANDOM是一个随机变量，用于在%1000后会得到一个介于0-999的整数后赋值给PRICE变量，while
+后面的true代表该循环会永久循环执行：
+
+
+计划任务服务:
+
+at <时间>	安排一次性任务
+atq或at -l	查看任务列表
+at -c 序号	预览任务与设置环境
+atrm 序号	删除任务
+
+直接用echo语句将要执行的命令传送给at命令:
+
+$ echo "systemctl start httpd" | at 23:30
+
+交换式的方法，（输完成后敲击Ctrl+d来保存退出）：
+$ at 23:30
+at > systemctl start httpd
+at >
+job 3 at Mon Apr 27 23:30:00 2015
+$ atq
+3 Mon Apr 27 23:30:00 2015 a root
+
+删除的时候只需要用atrm命令与任务编号就可以啦~
+$ atrm 3
+
+如果想对某个用户设置多个计划任务，则可直接用”crontab -e“命令
+将命令逐条添加即可，让计划任务自动在每周1-5的凌晨1点打包网站目
+录后自动清除/tmp目录下的所有文件:
+
+$ crontab -e
+crontab: installing new crontab
+$ crontab -l
+25 3 * * 1,3,5 /usr/bin/tar -czvf backup.tar.gz /home/wwwroot
+0 1* * 1-5 /usr/bin/rm -rf /tmp/*
+
+
+文件类型：
+-:普通文件，d:目录文件，l:链接文件，b:块设备文件，
+c:字符设备文件，p:管道文件
+
+SUID:让执行者临时拥有属主的权限（仅对拥有执行权限的二进制程序有效）;
+
+SGID:
+功能一：让执行者临时拥有属组的权限（对拥有执行权限的二进制程序设置）;
+功能二：在该目录中创建的文件自动继承此目录的用户组（只可以对目录设置）;
+
+SBIT(Sticky Bit):只可管理自己的数据而不能删除他人文件(仅对目录有效);
+
+文件的隐藏属性:
+
+chattr命令用于设置文件的隐藏权限，格式为：“chattr [参数] 文件”。
+
+参数	作用
+i	将无法对文件进行修改,若对目录设置后则仅能修改子文件而不能新建
+	或删除。
+a	仅允许补充（追加）内容.无法覆盖/删除(Append Only)。
+S	文件内容变更后立即同步到硬盘(sync)。
+s	彻底从硬盘中删除，不可恢复(用0填充原文件所在硬盘区域)。
+A	不再修改这个文件的最后访问时间(atime)。
+b	不再修改文件或目录的存取时间。
+D	检查压缩文件中的错误。
+d	当使用dump命令备份时忽略本文件/目录。
+c	默认将文件或目录进行压缩。
+u	当删除此文件后依然保留其在硬盘中的数据，方便日后恢复。
+t	让文件系统支持尾部合并（tail-merging）。
+X	可以直接访问压缩文件的内容。
+
+
+lsattr命令用于显示文件的隐藏权限，格式为：“lsattr [参数] 文件”。
+
+参数	作用
+a	显示所有文件和目录。
+l	显示隐藏属性的全称（默认简写成一个字母）。
+R	递归处理，将指定目录下的所有文件及子目录一并处理。
+d	若目标文件为目录，请加此参数。
+
+添加仅允许追加的隐藏权限（无法删除与覆盖）:
+$ chattr +a test.txt
+$ lsattr test.txt
+-----a----------test.txt
+$ chattr -a test.txt
+
+
+$ visudo
+只用超级用户才可以使用visudo命令编辑sudo程序的配置文件（/etc/sudoers）
+仅允许linuxprobe用户以root用户身份执行cat命令:
+$ visudo
+linuxprobe ALL=(root) /bin/cat
+
+文件访问控制列表:
+
+通俗来说ACL就是设置指定的特定用户或用户组对某个文件的
+操作权限。
+
+setfacl命令用于增加或者修改ACL规则，格式为：”setfacl [参数] 文件”。
+
+参数	作用
+-R	递归(对目录使用)
+-m	设置文件的acl规则
+-b	删除acl规则
+
+getfacl命令用于显示文件的ACL规则，格式为：”getfacl 文件”。
+
+设置linuxprobe对/root有rwx权限：
+$ setfacl -Rm u:linuxprobe:rwx /root
+
+[linuxprobe@linuxprobe ~]# getfacl /root
+
+# file: .
+# owner: root
+# group: root
+user::r-x
+user:linuxprobe:rwx
+group::r-x
+mask::rwx
+other::---
+
+
+主要常见的目录定义：
+
+目录名称	应放置文件的内容
+/boot		开机所需文件——内核,开机菜单及所需配置文件等
+/dev		任何设备与接口都以文件形式存放在此目录
+/etc		配置文件
+/home		用户主目录
+/bin		单用户维护模式下还能够被操作的命令
+/lib		开机时用到的函数库及/bin与/sbin下面命令要调用的函数
+/sbin		开机过程中需要的
+/media		一般挂载或删除的设备
+/opt		放置第三方的软件
+/root		系统管理员的主文件夹
+/srv		一些网络服务的数据目录
+/tmp		任何人均可使用的“共享”临时目录
+/proc		虚拟文件系统，例如系统内核，进程，外部设备及网络状态等
+/usr/local	用户自行安装的软件
+/usr/sbin	非系统开机时需要的软件/命令/脚本
+/usr/share	帮助与说明文件，也可放置共享文件。
+/var		主要存放经常变化的文件，如日志。
+/lost+found	当文件系统发生错误时，将一些丢失的文件片段存放在这里
+
+系统内核的设备管理器(Udev):
+Udev会根据内核发出的uevent来动态添加或删除/dev目录中的设备文件，命名流程如下：
+udev功能流程图常见的硬件命名如下：
+
+硬件设备	文件名称
+IDE设备		/dev/hd[a-d]
+SCSI/SATA/U盘	/dev/sd[a-p]
+软驱		/dev/fd[0-1]
+打印机		/dev/lp[0-15]
+光驱		/dev/cdrom
+鼠标		/dev/mouse
+磁带机		/dev/st0或/dev/ht0(IDE设备)
+
+因为现在的IDE设备已经很少见啦，所以一般硬盘设备都会是以“/dev/sd”开头的，
+而一台主机上可以有多块硬盘，系统便会用a-p来代表16块不同的硬盘（默认从a开
+始分配）且分区编号也很有讲究。
+主分区编号从1开始至4结束，按顺序（也可指定分配数字）。
+逻辑分区从编号5开始按顺序（也可指定分配数字）。
+
+每个文件的权限与属性都会记录在inode table中（每个文件都会占用一个独立的inode表格，默认为
+128bytes），记录着：
+该文件的访问权限	(read,write,execute)
+该文件的所属主与组	(owner,group)
+该文件的大小		(size)
+该文件的创建或状态修改时间(ctime)
+该文件的最后一次访问时间(atime)
+该文件的修改时间	(mtime)
+文件的特殊权限		(SUID,SGID,SBIT)
+该文件的真实数据地址	(point)
+
+df命令
+用于查看挂载点信息与磁盘使用量，
+格式为：“df [选项] [文件]”。
+查看挂载信息与硬盘使用量:“df -h”
+
+参数	作用
+-a	显示出所有的文件系统（包括虚拟的）
+--total	展出出总体使用量
+-h	更易读的容量格式如1K,234M,2G…
+-i	展示出Inode的信息（默认是磁盘使用信息）
+-T	显示出文件系统的类型
+
+查看到所有已挂载的挂载信息与硬盘使用情况：
+$ df -h
+
+du命令
+用于查看磁盘的使用量，
+格式为：“ du [选项] [文件]”。
+
+查看根目录中各文件夹所占空间:
+$ du -sh /
+
+查看当前目录下各文件所占空间:
+$ du -sh *
+
+参数	作用
+
+-a	评估每个文件而非目录整体占用量。
+-c	评估每个文件并计算出总占用量总和
+-h	更易读的容量格式如1K,234M,2G…
+-s	仅显示占用量总和。
+
+查看到该挂载目录的占用硬盘量：
+$ du -sh /newFS/
+
+RAID
+常见的组合有0、1、5和10：
+
+RAID0将多块硬盘通过硬件或软件的方式串联在一起，成为一个大的卷集，
+将数据依次写入到各个硬盘中，这样性能会极大提升，但若任意一块硬盘
+故障则整个系统的数据都会受到破坏。
+RAID1实现原来是在数据写入硬盘时也会在另外一块闲置的硬盘上生成镜像
+文件，在不影响性能的情况下最大限度保证数
+据资料的可靠性，只要在一对镜像盘中还有一块硬盘可以使用，那么数据也
+不会丢失，具有很好的硬盘冗余能力，虽
+然对数据来讲绝对的安全，但成本却明显增加，磁盘利用率仅为50%。
+RAID5:需要至少三块(含)硬盘，兼顾存储性能、数据安全和储存成本。
+
+
+磁盘容量配额
+quota的磁盘配额可以限制用户的硬盘可用空间或最大创建文件数量，并且还
+有软/硬限制的区别：
+
+软限制:当达到软限制时会提示用户，但允许用户在规定期限内继续使用。
+硬限制:当达到硬限制时会提示用户，且强制终止用户的操作。
+
+查看内核是否支持quota功能：
+$ dmesg | grep quota
+[ 3.140241] VFS: Disk quotas dquot_6.5.2
+
+查看quota程序包是否已经安装：
+$ rpm -q quota
+quota-4.01-11.el7.x86_64
+
+查看boot目录是否支持quota功能（noquota表示暂时不支持）：
+$ mount | grep boot
+/dev/sda1 on /boot type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
+
+让/boot目录支持quota功能：
+
+$ vim /etc/fstab
+UUID=6e97ef8f-51f1-4781-8f1c-0acb9f631b32 /boot xfs defaults,uquota 0 0
+
+重启主机后即可生效：
+$ reboot
+
+查看boot目录是否支持quota功能(usrquota表示已经支持)：
+$ mount | grep boot
+/dev/sda1 on /boot type xfs (rw,relatime,seclabel,attr2,inode64,usrquota)
+
+xfs_quota命令用于管理XFS文件系统的quota硬盘配额，格式为：“quota [参数] 
+配额文件系统”。
+
+参数	作用
+-c 命令	以交换式或参数的形式设置要执行的命令。
+-p	设置提示或报错信息的程序名称，默认为xfs_quota。
+-x	专家模式，能够对quota做更多复杂的配置。
+
+使用xfs_quota命令设置对tom用户在/boot目录的磁盘配额，具体要求如下：
+使用quota专家模式限制磁盘软限制为3m、磁盘硬限制为6m、文件软限制为3个且
+文件硬限制为6个。
+$ xfs_quota -x -c 'limit bsoft=3m bhard=6m isoft=3 ihard=6 tom' /boot
+
+获取当前/boot目录上的quota配额限制：
+$ xfs_quota -x -c report /boot
+User quota on /boot (/dev/sda1) Blocks
+User ID Used Soft Hard Warn/Grace
+--------------------
+root 95084 0 0 00 [--------]
+tom 0 3072 6144 00 [--------]
+
+正常创建了一个为5M的文件：
+[tom@linuxprobe ~]$ dd if=/dev/zero of=/boot/tom bs=5M count=1
+1+0 records in
+1+0 records out
+5242880 bytes (5.2 MB) copied, 0.123966 s, 42.3 MB/s
+
+创建8M文件时强制终止并报错了：
+[tom@linuxprobe ~]$ dd if=/dev/zero of=/boot/tom bs=8M count=1
+dd: error writing ‘/boot/tom’: Disk quota exceeded
+1+0 records in
+0+0 records out
+6291456 bytes (6.3 MB) copied, 0.0201593 s, 312 MB/s
+
+查看当前用户的quota限制（显示硬盘配额已占满）：
+[tom@linuxprobe ~]$ quota
+Disk quotas for user tom (uid 1001):
+Filesystem blocks quota limit grace files quota limit grace
+/dev/sda1 6144* 3072 6144 6days 1 3 6
+
+edquota命令用于超级用户编辑其他用户的quota配额限制，
+格式为：“edquota [参数] [用户]”。
+
+编辑tom的配额限制，将硬盘的硬限制修改为8m(8192k)：
+$ edquota -u tom
+Disk quotas for user tom (uid 1001):
+Filesystem blocks soft hard inodes soft hard
+/dev/sda1 6144 3072 8192 1 3 6
+
+在Linux系统中的ln命令能够让用户创建出两种不同类型的文件快捷方式，
+一定要注意区分：
+硬链接(hard link)可以被理解为一个“指向原始文件inode的指针”，系统
+不为它分配独立的inode与文件，所以实际上来讲硬链接文件与原始文件其实
+是同一个文件，只是名字不同。于是每添加一个硬链接，该文件的inode连
+接数就会增加1，直到该文件的inode连接数归0才是彻底删除。概括来说因为
+硬链接实际就是指向原文件inode的指针，即便原始文件被删除依然可以通过
+链接文件访问，但是不能跨文件系统也不能链接目录文件。
+
+软链接也称为符号链接（symbolic link）即“仅仅包含它索要链接文件的路径
+名”因此能做目录链接也可以跨越文件系统，但原始文件被删除后链接文件也
+将失效，如同Winodw.中的“快捷方式”。
+
+ln命令用于创建链接文件，格式为：“ln [选项] 目标”。
+创建硬链接:“ln 文件名链接名”
+创建软链接:“ln -s 文件名连接名”
+
+第7章Iptables与Firewalld防火墙。
+
+其实Iptables服务与Firewalld服务都不
+是真正的防火墙，它们都只是用来定义防火墙规则功能的“防火墙管理工具”，
+将定义好的规则交由内核中的netfilter即网络过滤器来读取，从而真正实现防火
+墙功能，所以其实在配置规则的思路上是完全一致的，而我会在本章中将iptables
+命令与firewalld服务的使用方法都教授给你们，坦白讲日常工作无论用那种都是可
+行的。
+
+对应到iptables命令中则常见的控制类型有：
+ACCEPT:允许通过.
+LOG:记录日志信息,然后传给下一条规则继续匹配.
+REJECT:拒绝通过,必要时会给出提示.
+DROP:直接丢弃,不给出任何回应.
+
+而规则链则依据处理数据包的位置不同而进行分类：
+PREROUTING:在进行路由选择前处理数据包
+INPUT:处理入站的数据包
+OUTPUT:处理出站的数据包
+FORWARD:处理转发的数据包
+POSTROUTING:在进行路由选择后处理数据包
+
+raw表:		确定是否对该数据包进行状态跟踪
+mangle表:	为数据包设置标记
+nat表:		修改数据包中的源、目标IP地址或端口
+filter表:	确定是否放行该数据包（过滤）
+默认的表和链的示意图规则表的先后顺序:raw→mangle→nat→filter
+
+规则链的先后顺序:
+入站顺序:	PREROUTING→INPUT
+出站顺序:	OUTPUT→POSTROUTING
+转发顺序:	PREROUTING→FORWARD→POSTROUTING
+
+还有三点注意事项：
+1.没有指定规则表则默认指filter表。
+2.不指定规则链则指表内所有的规则链。
+3.在规则链中匹配规则时会依次检查，匹配即停止（LOG规则例外），
+	若没匹配项则按链的默认状态处理。
+
+
+iptables命令用于管理防火墙的规则策略，
+格式为：“iptables [-t 表名] 选项[链名] [条件] [-j 控制类型]”。
+
+基本的命令参数
+参数	作用
+-P		设置默认策略:iptables -P INPUT (DROP|ACCEPT)
+-F		清空规则链
+-L		查看规则链
+-A		在规则链的末尾加入新规则
+-I num		在规则链的头部加入新规则
+-D num		删除某一条规则
+-s		匹配来源地址IP/MASK，加叹号"!"表示除这个IP外。
+-d		匹配目标地址
+-i 网卡名称	匹配从这块网卡流入的数据
+-o 网卡名称	匹配从这块网卡流出的数据
+-p		匹配协议,如tcp,udp,icmp
+--dport num	匹配目标端口号
+--sport num	匹配来源端口号
+
+查看已有的规则：
+$ iptables -L
+
+清空已有的规则：
+$ iptables -F
+
+将INPUT链的默认策略设置为拒绝：当INPUT链默认规则设置为拒绝时，
+我们需要写入允许的规则策略。这个动作的目地是当接收到数据包时，
+按顺序匹配所有的允许规则策略，当全部规则都不匹配时，拒绝这个数据包。
+$ iptables -P INPUT DROP
+
+允许所有的ping操作：
+$ iptables -I INPUT -p icmp -j ACCEPT
+
+在INPUT链的末尾加入一条规则，允许所有未被其他规则匹配上的数据包：
+因为默认规则表就是filter，所以其中的”-t filter“一般省略不写，效
+果是一样的。
+$ iptables -t filter -A INPUT -j ACCEPT
+
+删除上面的那条规则：
+$ iptables -D INPUT 2
+
+模拟训练A:仅允许来自于192.168.10.0/24域的用户连接本机的ssh服务。
+Iptables防火墙会按照顺序匹配规则，请一定要保证“允许”规则是在
+“拒绝”规则的上面。
+$ iptables -I INPUT -s 192.168.10.0/24 -p tcp --dport 22 -j ACCEPT
+$ iptables -A INPUT -p tcp --dport 22 -j REJECT
+
+模拟训练B:不允许任何用户访问本机的12345端口。
+$ iptables -I INPUT -p tcp --dport 12345 -j REJECT
+$ iptables -I INPUT -p udp --dport 12345 -j REJECT
+
+模拟实验C(答案模式):拒绝其他用户从”eno16777736“网卡访问本机http服
+务的数据包。
+$ iptables -I INPUT -i eno16777736 -p tcp --dport 80 -j REJECT
+
+模拟训练D:禁止用户访问www.my133t.org。
+$ iptables -I FORWARD -d www.my133t.org -j DROP
+
+模拟训练E:禁止IP地址是192.168.10.10的用户上网
+$ iptables -I FORWARD -s 192.168.10.10 -j DROP
+
+iptables命令执行后的规则策略仅当前生效，若想重启后依然保存规则需
+执行”service iptables save“。
+
+SNAT即源地址转换技术，能够让多个内网用户通过一个外网地址上网，解决
+了IP资源匮乏的问题，确实很实用。
+现在需要将”192.168.10.0“网段的内网IP用户经过地址转换技术变成外网
+IP地址”111.196.211.212“，这样一来内网IP用户就都可以通过这个外网IP
+上网了，使用iptables防火墙即可实现SNAT源地址转换，根据需求命令如下：
+$ iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -O eno16777736 -j SNAT --to-source 111.196.211.212
+解释:
+POSTROUTING:路由选择后再处理
+192.168.10.0/24: 局域网段的地址
+eno16777736:外网接口的名称
+111.196.211.212:外网接口的IP地址
+
+SNAT的命令不知读者有无这种经历，当使用联通或者电信上网的时候，每次
+拨号都会重新分配新的IP地址，那么若网关IP经常变动怎么办？
+这种外网IP地址不稳定的情况即可使用MASQUERADE(动态伪装):能够自动的寻
+找外网地址并改为当前正确的外网IP地址:
+$ iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -j MASQUERADE
+
+DNAT即目地地址转换技术，则能够让外网IP用户访问局域网内不同的服务器。
+现在希望互联网中的客户机访问到内网”192.168.10.6“这台提供网站服务的
+主机，那么只需在网关系统上运行这条命令：
+$ iptables -t nat -A PREROUTING -i eno16777736 -d 61.240.149.149 -p tcp --dport 80 -j DNAT --to-destination 192.168.10.6
+注:
+PREROUTING:路由选择之前处理
+61.240.149.149:外网接口的IP地址
+80: 发布的端口
+192.168.10.6:Web主机的IP地址
+
+
+端口转发功能可以将原本到某端口的数据包转发到其他端口:
+firewall-cmd --permanent --zone=<区域> --add-forward-port=port=<源端口号>:proto=<协议>:toport=<目标端口号>:toaddr=<目标IP地址>
+
+将访问192.168.10.10主机888端口的请求转发至22端口：
+$ firewall-cmd --permanent --zone=public --add-forward-port=port=888:proto=tcp:toport=22:toaddr=192.168.10.10
+
+success
+
+使用客户机的ssh命令访问192.168.10.10主机的888端口：
+$ ssh -p 888 192.168.10.10
+
+另外流量均衡技术也是常用的技术，比如将一台主机作为网站的前端服务器，
+将访问流量分流至内网中3台不同的主机上。
+
+$ iptables-APREROUTING-ieth0-ptcp--dport80-mstate--stateNEW-mnth--counter0--every3--packet0-
+jDNAT--to-destination192.168.10.10:80iptables-APREROUTING-ieth0-ptcp--dport80-mstate--stateNEW-mnth--counter0--every3--packet0-
+jDNAT--to-destination192.168.10.11:80iptables-APREROUTING-ieth0-ptcp--dport80-mstate--stateNEW-mnth--counter0--every3--packet0-
+jDNAT--to-destination192.168.10.12:80
+
+
+Firewalld防火墙 
+Firewalld服务是红帽RHEL7系统中默认的防火墙管理工具，特点是拥有运行
+时配置与永久配置选项且能够支持动态更新以及“zone”的区域功能概念，
+使用图形化工具firewall-config或文本管理工具firewall-cmd.
+
+防火墙的网络区域定义了网络连接的可信等级，我们可以根据不同场景来调用不同的firewalld区域，区域规则有：
+
+区域		默认规则策略
+
+trusted		允许所有的数据包。
+home		拒绝流入的数据包，除非与输出流量数据包相关或
+		是ssh,mdns,ipp-client,samba-client与dhcpv6-client服
+		务则允许。
+internal	等同于home区域
+work		拒绝流入的数据包，除非与输出流量数据包相关或是ssh,
+		ipp-client与dhcpv6-client服务则允许。
+public		拒绝流入的数据包，除非与输出流量数据包相关或是ssh,
+		dhcpv6-client服务则允许。
+external	拒绝流入的数据包，除非与输出流量数据包相关或是ssh服
+		务则允许。
+dmz		拒绝流入的数据包，除非与输出流量数据包相关或是ssh服务
+		则允许。
+block		拒绝流入的数据包，除非与输出流量数据包相关。
+drop		拒绝流入的数据包，除非与输出流量数据包相关。
+
+
+简单来讲就是为用户预先准备了几套规则集合，我们可以根据场景的不同选择合
+适的规矩集合，而默认区域是public。
+
+
+如果想要更高效的配置妥当防火墙，那么就一定要学习字符管理工具firewall-cmd
+命令,命令参数有：
+
+参数			作用
+--get-default-zone	查询默认的区域名称。
+--set-default-zone=<区域名称>	设置默认的区域，永久生效。
+--get-zones		显示可用的区域。
+--get-services		显示预先定义的服务。
+--get-active-zones	显示当前正在使用的区域与网卡名称。
+--add-source=		将来源于此IP或子网的流量导向指定的区域。
+--remove-source=	不再将此IP或子网的流量导向某个指定区域。
+--add-interface=<网卡名称>	将来自于该网卡的所有流量都导向某个指定区域。
+--change-interface=<网卡名称>	将某个网卡与区域做关联。
+--list-all	显示当前区域的网卡配置参数，资源，端口以及服务等信息。
+--list-all-zones	显示所有区域的网卡配置参数，资源，端口以及服务等信息。
+--add-service=<服务名>	设置默认区域允许该服务的流量。
+--add-port=<端口号/协议>	允许默认区域允许该端口的流量。
+--remove-service=<服务名>	设置默认区域不再允许该服务的流量。
+--remove-port=<端口号/协议>	允许默认区域不再允许该端口的流量。
+--reload		让“永久生效”的配置规则立即生效，覆盖当前的。
+
+
+特别需要注意的是firewalld服务有两份规则策略配置记录，必需要能够区分：
+RunTime:当前正在生效的。
+Permanent:永久生效的。
+
+当下面实验修改的是永久生效的策略记录时，必须执行”–reload“参数后才
+能立即生效，否则要重启后再生效。
+
+查看当前的区域：
+$ firewall-cmd --get-default-zone
+
+查询eno16777728网卡的区域：
+$ firewall-cmd --get-zone-of-interface=eno16777728
+
+在public中分别查询ssh与http服务是否被允许：
+$ firewall-cmd --zone=public --query-service=ssh
+$ firewall-cmd --zone=public --query-service=http
+
+
+设置默认规则为dmz：
+$ firewall-cmd --set-default-zone=dmz
+
+让“永久生效”的配置文件立即生效：
+$ firewall-cmd --reload
+
+
+启动/关闭应急状况模式，阻断所有网络连接：
+应急状况模式启动后会禁止所有的网络连接，一切服务的请求
+也都会被拒绝，当心，请慎用。
+$ firewall-cmd --panic-on
+$ firewall-cmd --panic-off
+
+
+模拟训练A:允许https服务流量通过public区域，要求立即生效且永久有效：
+方法一:分别设置当前生效与永久有效的规则记录：
+$ firewall-cmd --zone=public --add-service=https
+$ firewall-cmd --permanent --zone=public --add-service=https
+方法二:设置永久生效的规则记录后读取记录：
+$ firewall-cmd --permanent --zone=public --add-service=https
+$ firewall-cmd --reload
+
+模拟训练B:不再允许http服务流量通过public区域，要求立即生效且永久生效：
+$ firewall-cmd --permanent --zone=public --remove-service=http
+$ firewall-cmd --reload
+
+模拟训练C:允许8080与8081端口流量通过public区域，立即生效且永久生效：
+$ firewall-cmd --permanent --zone=public --add-port=8080-8081/tcp
+$ firewall-cmd --reload
+
+模拟训练D:查看模拟实验C中要求加入的端口操作是否成功：
+$ firewall-cmd --zone=public --list-ports
+8080-8081/tcp
+$ firewall-cmd --permanent --zone=public --list-ports
+8080-8081/tcp
+
+模拟实验E:将eno16777728网卡的区域修改为external，重启后生效：
+$ firewall-cmd --permanent --zone=external --change-interface=eno16777728
+$ firewall-cmd --get-zone-of-interface=eno16777728
+
+再次提示:请读者们再仔细琢磨下立即生效与重启后依然生效的差别，千万不要修改错了。
+
+模拟实验F:设置富规则，拒绝192.168.10.0/24网段的用户访问ssh服务：
+
+firewalld服务的富规则用于对服务、端口、协议进行更详细的配置，规则的优先级最高。
+
+$ firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source 
+address="192.168.10.0/24" service name="ssh" reject" success
+
+
+
+Tcp_wrappers(即TransmissionControlProtocol(TCP)Wrappers)是一款基于IP层的ACL
+访问控制列表流量监控程序:
+限制只有192.168.10.0/24网段的主机可以访问本机的httpd服务：
+编辑允许规则：
+$ vim /etc/hosts.allow
+httpd:192.168.10.
+
+拒绝其他所有的主机：
+$ vim /etc/hosts.deny
+httpd:*
+
+
+
+分析下nfs服务的单元配置文件吧：
+$ cat /etc/systemd/system/nfs.target.wants/nfs-lock.service
+
+红帽RHEL7系统中systemd用”目标(target)“代替了“运行级别”这个概念。
+Sysvinit运行级别	Systemd目标名称				作用	
+0			runlevel0.target, poweroff.target	关机
+1			runlevel1.target, rescue.target		单用户模式
+2			runlevel2.target, multi-user.target	等同于级别3
+3			runlevel3.target, multi-user.target	多用户的文本界面
+4			runlevel4.target, multi-user.target	等同于级别3
+5			runlevel5.target, graphical.target	多用户的图形界面
+6			runlevel6.target, reboot.target		重启
+emergency		emergency.target			紧急Shell
+
+
+将默认的运行级别修改为“多用户，无图形模式”：
+$ ln -sf /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
+
+将默认的运行级别修改为“图形化模式”：
+$ ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
+
+
+systemctl管理服务的启动、重启、停止、重载、查看状态的命令：
+Sysvinit命令(红帽RHEL6系统)	Systemctl命令（红帽RHEL7系统）	作用
+
+service foo start		systemctl start foo.service	启动服务
+service foo restart		systemctl restart foo.service	重启服务
+service foo stop		systemctl stop foo.service	停止服务
+service foo reload		systemctl reload foo.service	重新加载配置文件（不终止服务）
+service foo status		systemctl status foo.service	查看服务状态
+
+
+systemctl设置服务的开机启动、不启动、查看各级别下服务启动状态的命令：
+Sysvinit命令(红帽RHEL6系统)	Systemctl命令（红帽RHEL7系统）	作用
+
+chkconfig foo on		systemctl enable foo.service	开机自动启动
+chkconfig foo off		systemctl disable foo.service	开机不自动启动
+chkconfig foo			systemctl is-enabled foo.service查看特定服务是否为开机自启动
+chkconfig --list		systemctl list-unit-files --type=service查看各个级别下服务的启动与禁用情况
+
+
+Linux系统中时刻运行着许许多多的进程，如果能够合理的管理它们，绝对有益
+于系统的性能优化，系统进程总共有5种不同的状态：
+
+R(运行):正在运行或在运行队列中等待。
+S(中断):休眠中, 在等待某个条件的形成或接受到信号。
+D(不可中断):收到信号不唤醒和不可运行, 进程必须等待直到有中断发生。
+Z:(僵死):进程已终止, 但进程描述符存在, 直到父进程调用wait4()系统调用后释放。
+T:(停止):进程收到SIGSTOP, SIGSTP, SIGTIN, SIGTOU信号后停止运行。
+
+$ ps
+USER	PID	%CPU	%MEM	VSZ	RSS	TTY	STAT	START	TIME	COMMAND
+进程的
+所有者	进程ID号运算器
+		占用率	内容占
+			用率	虚拟内存
+				使用量(单
+				位是KB)	占用的固
+					定内存量
+					(单位是KB)
+						所在
+						终端	进程
+							状态	被启动的
+								时间	实际使用
+									CPU的
+									时间	命令名称与
+										参数
+
+top命令
+第1行:系统时间，运行时间，登陆用户数，系统负载（分别为1分钟、5分钟、
+	15分钟的平均值）。
+第2行:进程总数，运行中的，睡眠中的，停止的，僵尸的。
+第3行:用户占用资源，系统内核占用资源，改变过优先级的进程，空闲的资源，
+	等待输入输出的时间。
+	此行数据均为CPU数据并以百分比格式显示，例如”99.2 id”意味着
+	有99.2%的CPU资源正在空闲中。
+第4行:物理内存总量，使用量，空闲量，作为内核缓存的内存量。
+第5行:虚拟内存总量，使用量，空闲量，已被提前加载的内存数据。
+
+进程的信息区中包含了各个进程的详细信息，含义如下：
+
+PID:进程ID号
+USER:进程的所有者
+PR:优先级
+NI:优先级（负值表示优先级更高）
+VIRT:虚拟内存使用量
+RES:物理内存使用量
+SHR:共享内存大小
+S:进程状态（上文中有提到）
+%CPU:运算器的使用百分比
+%MEM:内存的使用百分比
+TIME+:使用CPU的时间(单位是1/100秒)
+COMMAND:命令名称
+
+
+pidof命令用于查询某个特定程序的进程PID值，
+	格式为：“pidof [参数] [程序名称]”。
+
+查询”sshd”进程的PID值:”
+$ pidof sshd”
+
+kill命令用于终止某个特定PID号码的进程，
+格式为：“kill [参数] [进程PID号]”。
+
+强制终止PID为4674的进程:
+$ kill -9 4674
+	.其中的”-9″代表强制终止(SIGKILL)，也是最常用的一种信号参数，
+查看全部请执行”kill -l”
+
+killall命令用于终止某个特定名称的所有进程，
+格式为：“killall [参数] [进程名称]”。
+终止名称为”sshd”的进程:”killall sshd”
+
+在终端中运行一个命令后如果想立即的停止它，可以使用
+组合键”Ctrl+c“，这样命令的进程将会彻底的被终止。
+
+但还有一种玩法是”Ctrl+z“，它是将命令的进程暂停
+（也叫挂载到后台或扔到后台）
+
+
+使用jobs命令可以查看到所有在后台运行着的进程:
+$ jobs
+
+运行bg命令让后台的程序继续执行，现在后台中只有一个进程，所以省略
+了编号，完整格式应为”bg 1“：
+$ bg
+
+运行fg命令将后台的进程再调回前台，程序依然在运行，此时你可以敲击
+组合键”ctrl+c“啦：
+$ fg
+
+
+sshd服务的配置文件解析：
+$ cat/etc/ssh/sshd_config
+
+参数	作用
+
+#Port 22		默认的sshd服务端口。
+#ListenAddress 0.0.0.0	设定sshd服务端监听的IP地址。
+#Protocol 2		SSH协议的版本号。
+#HostKey /etc/ssh/ssh_host_key	SSH协议版本为1时，私钥存放的位置。
+HostKey /etc/ssh/ssh_host_rsa_key	SSH协议版本为2时，RSA私钥存放的位置。
+#HostKey /etc/ssh/ssh_host_dsa_key	SSH协议版本为2时，DSA私钥存放的位置。
+#PermitRootLogin yes		设定是否允许root用户直接登录。
+#StrictModes yes		当远程用户私钥改变时则直接拒绝连接。
+#MaxAuthTries 6			最大密码尝试次数
+#MaxSessions 10			最大终端数
+#PasswordAuthentication yes	是否允许密码验证
+#PermitEmptyPasswords no	是否允许空密码登陆（很不安全）
+
+安全密钥验证:
+
+使用密码验证终归会存在着被骇客暴力破解或嗅探监听的危险，其实也可以让ssh服务基于密钥进行安全验证（可
+无需密码验证）。
+
+第1步:在本地主机中生成“密钥对”并将公钥传送到远程主机中：
+$ ssh-keygen
+
+将生成好的公钥密钥传送至远程主机：
+$ ssh-copy-id 192.168.10.20
+
+第2步:首先要在远程主机中修改sshd服务的配置文件（修改后记得重启服务）：
+
+	第(1)步：编辑ssh服务程序主配置文件。
+	第(2)步：将允许密码验证的参数设置为no
+	第(3)步：将允许密钥验证的参数设置为yes
+	第(4)步：保存并退出配置文件
+	第(5)步：重启ssh服务程序后即可生效
+第3步:远程登录.
+
+远程传输命令 
+
+要想将一些文件通过网络传送给其他主机，又恰好两台主机都是Linux系统，
+我们便可以直接用scp命令传输文件到另外一台主机~
+scp命令用于在网络中安全的传输文件，
+格式为：“scp [参数] 本地文件远程帐户@远程IP地址:远程目录”。
+
+将本地文件/root/out.txt传送到远程主机的/home目录：
+$ scp /root/out.txt 192.168.10.20:/home
+
+强大的scp命令还可以将远程主机的文件传输到本地呢，
+格式为”scp [参数] 远程用户@远程IP地址:远程文件本地目录“。
+
+将远程主机的/etc/issue.net文件下载到本地的/root目录：
+$ scp linuxprobe@192.168.10.20:/etc/issue.net /root
+
+使用Apache服务部署静态网站:
+目前提供WEB网络服务的程序有Apache、Nginx或IIS等等
+
+iis7 Windows系统中默认Web服务程序是IIS(InternetInformationServices)，
+这是一款图形化的网站管理工具，IIS程序不光能提供Web网站服务，
+还能够提供FTP、NMTP、SMTP等服务功能，但只能在Windows系统中使用。
+
+nginx——最初于2004年10月4日为俄罗斯知名门户站点而开发的，
+作为一款轻量级的网站服务软件，因其稳定性和丰富的功能而深受信赖，
+但最最最被认可的是低系统资源、占用内存少且并发能力强，目前国内如新浪、
+网易、腾讯等门户站均使用。
+
+Apache——取自美国印第安人土著语Apache,寓意着拥有高超的作战策略和无穷的
+耐性，由于其跨平台和安全性广泛被认可且拥有快速、可靠、简单的API扩展。目
+前拥有很高的Web服务软件市场占用率，全球使用最多的Web服务软件，开源、跨
+平台（可运行于Unix,linux,windows中）。
+支持基于IP或域名的虚拟主机
+支持多种方式的HTTP认证
+集成代理服务器模块
+安全Socket层(SSL)
+能够实时见识服务状态与定制日志
+多种模块的支持
+
+Tomcat——属于轻量级的Web服务软件，一般用于开发和调试JSP代码，通常认
+为Tomcat是Apache的扩展程序。
+
+总结来说Nginx程序作为Web服务软件届的后起之秀已经通过自身的努力与优势赢
+得了大批站长的信赖，例如咱们的《Linux就该这么学》就是基于Nginx服务部署的，
+不得不说真的很棒！但是Apache程序作为老牌的Web服务软件因其卓越的稳定性与
+安全性成为了红帽RHEL7系统中默认的网站服务软件，同样也是红帽RHCSA与RHCE考
+试认证中避不开的考题。
+
+常见的主机空间包括虚拟主机、VPS、云服务器与独立服务器：
+虚拟主机:在一台服务器中分出一定的磁盘空间供用户放置网站、存放数据等，
+仅提供基础的网站访问、数据存放与传输流量功能，能够极大的降低用户费用，
+也几乎不需要管理员维护除网站数据以外的服务，适合小型网站。
+
+VPS(Virtual Private Server):在一台服务器中利用OpenVZ、Xen或KVM等虚拟化
+技术模拟出多个“主机”，每个主机都有独立的IP地址、操作系统，实现不同VPS
+之间磁盘空间、内存、CPU资源、进程与系统配置间的完全隔离，管理员可自由
+使用分配到的主机中的所有资源，所以需要有一定的维护系统的能力，适合小型网站。
+
+云服务器(ECS):是一种整合了计算、存储、网络，能够做到弹性伸缩的计算服务，
+其使用起来与VPS几乎一样，但差别是云服务器建立在一组集群服务器中，每个服
+务器都会保存一个主机的镜像（备份），大大的提升了安全稳定性，另外还具备
+了灵活性与扩展性，用户只需按使用量付费的即可，适合大中小型网站。
+
+独立服务器:这台服务器仅提供给您使用，详细来讲又可以区分为租用方式
+与托管方式:
+租用方式:用户只需将硬件配置要求告知IDC服务商，服务器硬件设备由机房负责
+维护，运维管理员一般需要自行安装相应的软件并部署网站服务，租期可以为月、
+季、年，减轻了用户初期对硬件设备的投入，适合大中型网站。
+
+托管方式:用户需要自行购置服务器后交给IDC服务供应商的机房进行管理
+(缴纳管理服务费用)，用户对服务器硬件配置有完全的控制权，自主性强，
+但需要自行维护、修理服务器硬件设备，适合大中型网站。
+
+另外有必要提醒读者，选择主机空间供应商时请一定要注意看口碑，综合分析再决
+定购买，某些供应商会有限制功能、强制添加广告、隐藏扣费或强制扣费等恶劣行
+为，一定一定不要上当!
+
+启动Apache服务程序：
+$ systemctl start httpd
+
+设置为开机自启动：
+$ systemctl enable httpd
+
+配置服务文件参数 
+服务目录	/etc/httpd
+配置文件	/etc/httpd/conf/httpd.conf
+网站数据目录	/var/www/html
+访问日志	/var/log/httpd/access_log
+错误日志	/var/log/httpd/error_log
+
+
+打开Apache服务程序的配置文件：
+
+$ vim /etc/httpd/conf/httpd.conf
+
+初次看到配置文件可真的吓了一跳，353行!这没有一周研究不完吧!
+
+其实吓唬你们的了,所有以#号开始的叫注释行，这些只是描述介绍而已，
+真正的参数有：
+
+ServerRoot	服务目录
+ServerAdmin	管理员邮箱
+User		运行服务的用户
+Group		运行服务的用户组
+ServerName	网站服务器的域名
+DocumentRoot	网站数据目录
+Listen		监听的IP地址与端口号
+DirectoryIndex	默认的索引页页面
+ErrorLog	错误日志文件
+CustomLog	访问日志文件
+Timeout		网页超时时间,默认为300秒.
+Include		需要加载的其他文件
+
+
+Apche服务程序的配置文件内容分为三种类型：
+“注释行信息”，“全局配置”，“区域配置”。
+
+httpd配置文件分析默认的网站数据是存放在/var/www/html目录中的，
+首页名称是index.html，来动手写入一个文件替换到默认页面吧。
+使用echo命令将指定的字符写入到网站数据目录中的index.html文件中：
+$ echo "Welcome To LinuxProbe.Com" > /var/www/html/index.html
+再次打开浏览器，键入  http://127.0.0.1 ，好棒，成功了！
+
+
+要想将网站数据放在/home/wwwroot目录，该如何操作呢？
+编辑Apache服务程序的主配置文件：
+$ vim /etc/httpd/conf/httpd.conf
+	将在119行的DocumentRoot参数修改为”/home/wwwroot“,
+	再把在123行的”/var/www“修改为”/home/wwwroot“
+建立网站数据目录：
+$ mkdir /home/wwwroot
+创建首页文件：
+$ echo "The New Web Directory" > /home/wwwroot/index.html
+重新启动Apache服务：
+$ systemctl restart httpd
+再来打开浏览器看下效果吧，依然是键入   http://127.0.0.1：
+好奇怪!!为什么会是默认页面？只有首页页面不存在或有问题才会显
+示Apache服务程序的默认页面啊。
+Apache默认页面那么进一步来访问”   http://127.0.0.1/index.html
+“，怎么样？惊讶到了吗？访问页面的行为是被禁止的。
+Forbidden
+You don’t have permission to access /index.html on this server.
+
+我们的操作与刚刚的前面的实验一样啊，但这次的访问行为会被禁止呢？
+这就要先了解下SElinux啦。
+
+
+强制访问控制安全子系统 
+selinuxSELinux全称为Security-Enhanced Linux是美国国家安全局在Linux社
+区帮助下开发的一个强制访问控制的安全子系统，SELinux属于MAC强制访问控
+制（Mandatory Access Control）——即让系统中的各个服务进程都受到约束，
+即仅能访问到所需要的文件。
+
+以本人的亲身经历不得不说国内很多运维人员对SELinux的理解不深，导致该功能在
+很多服务器中直接被禁用。
+模式一: enforcing –安全策略强制启用模式，将会拦截服务的不合法请求。
+模式二: permissive –遇到服务越权访问只会发出警告而不强制拦截。
+模式三: disabled –对于越权的行为不警告，也不拦截。
+
+有时关闭SELinux后确实能够减少报错几率，但这极其的不推荐并且本书实验环境均
+为开启状态，确保您的SELinux服务是默认启用的:
+第1步:切换到SELinux服务的配置文件目录”/etc/selinux“。
+第2步:编辑config文件将模式改为强制启用，记得保存哦！
+如果发现SELINUX=permissive或disabled那就赶紧改过来吧：
+$ cd /etc/selinux
+$ vim config
+	SELINUX=enforcing
+此时可以来查询下当前的SELinux服务状态：
+$ getenforce 
+Enforcing
+
+允许SELinux策略 
+为了确认是这个讨厌的SELinux服务在捣鬼，我们来先关闭它试试吧：
+$ setenforce 0
+
+检查状态，现在已经是“禁止模式”了：
+$ getenforce
+Permissive
+
+打开浏览器再键入  http://127.0.0.1，果然成功了！
+果然是因为没有配置好SELinux服务，再次开启它吧：
+$ setenforce 1
+
+刚刚浏览器里报错说“禁止，你没有访问index.html文件的权限”，
+那怎么开启SELinux的允许策略呢？
+
+SELinux安全策略包括域和安全上下文：
+	SELinux域:对进程资源进行限制（查看方式:ps -Z）
+
+	SELinux安全上下文:对系统资源进行限制（查看方式:ls -Z）
+
+使用”ls -Z“命令检查下新旧网站数据目录的SELinux安全上下文有何不同吧：
+$ ls -Zd /var/www/html
+drwxr-xr-x. root root system_u:object_r:httpd_sys_content_t:s0/var/www/html
+
+$ ls -Zd /home/wwwroot
+drwxrwxrwx. root root unconfined_u:object_r:home_root_t:s0/home/wwwroot
+
+SELinux安全上下文是由冒号间隔的四个字段组成的，以原始网站数据目录的安全
+上下文为例分析下吧:
+用户段:root表示root账户身份，user_u表示普通用户身份，system_u表示系统进程身份。
+角色段:object_r是文件目录角色，system_r是一般进程角色。
+类型段:进程和文件都有一个类型用于限制存取权限。
+
+解决办法就是将当前网站目录”/home/wwwroot“的安全上下文修改成
+system_u:object_r:httpd_sys_content_t:s0就可以啦~
+semanage命令用于查询与修改SELinux的安全上下文，
+格式为：“semanage [选项] [文件]”。
+
+参数	作用
+-l	查询
+-a	增加
+-m	修改
+-d	删除
+
+
+restorecon命令用于恢复SELinux文件安全上下文，
+格式为：“restorecon [选项] [文件]”。
+-i	忽略不存在的文件
+-e	排除目录
+-R	递归处理(针对目录使用)
+-v	显示详细的过程
+-F	强制恢复
+
+
+修改网站数据目录的安全上下文：
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot
+
+修改网站数据的安全上下文（*代表所有文件或目录）：
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/*
+
+这样操作后查看到SELinux安全上下文依然没有改变，不要着急，再执行
+下restorecon命令即可：
+$ restorecon -Rv /home/wwwroot/
+
+再来刷新浏览器后看到正常页面：
+Apache配置成功的页面真可谓是一波三折，原本以为将Apache服务配置妥当就
+大功告成，结果却受到了SELinux安全上下文的限制，看来真是要细心才行。
+
+
+个人用户主页功能 
+
+Apache服务程序中有个默认未开启的个人用户主页功能，
+能够为所有系统内的用户生成个人网站，确实很实用哦~
+
+第1步:开启个人用户主页功能：
+
+$ vim /etc/httpd/conf.d/userdir.conf
+将第17行的UserDir disabled前加一个#，代表该行被注释掉，不再起作用。
+将第23行的UserDir public_html前的#号去除，表示该行被启用。
+注意:UserDir参数表示的是需要在用户家目录中创建的网站数据目录的名
+称(即public_html)
+
+重启Apache服务程序：
+$ systemctl restart httpd
+
+第2步:创建个人用户网站数据。
+
+切换至普通会员linuxprobe的家目录：
+$ su -linuxprobe
+
+创建网站数据目录public_html：
+$ mkdir public_html
+
+写入首页文件内容：
+$ echo "This is linuxprobe's website" > public_html/index.html
+
+给予网站目录755的访问权限：
+$ chmod -Rf 755 ./
+
+我们打开浏览器，访问地址为”  http://127.0.0.1/~用户名“，
+不出意外果然是报错页面，肯定是SELinux服务在捣蛋。
+
+第3步:设置SELinux允许策略。
+这次报错并不是因为用户家的网站数据目录SELinux安全上下文没有设置了，
+而是因为SELinux默认就不允许Apache服务个人用户主页这项功能。
+
+getsebool命令用于查询所有SELinux规则的布尔值，
+格式为：“getsebool -a”。
+SELinux策略布尔值:只有0/1两种情况，0或off为禁止，1或on为允许。
+
+setsebool命令用于修改SElinux策略内各项规则的布尔值，
+格式为：“setsebool [选项] 布尔值=[0|1]”。
+
+参数	作用
+-P	永久生效
+
+查看并搜索所有与家目录有关的SELinux策略：
+$ getsebool -a | grep home
+
+ftp_home_dir --> off
+git_cgi_enable_homedirs --> off
+git_system_enable_homedirs --> off
+httpd_enable_homedirs --> off
+mock_enable_homedirs --> off
+mpd_enable_homedirs --> off
+openvpn_enable_homedirs --> on
+samba_create_home_dirs --> off
+samba_enable_home_dirs --> off
+sftpd_enable_homedirs --> off
+sftpd_write_ssh_home --> off
+spamd_enable_home_dirs --> on
+ssh_chroot_rw_homedirs --> off
+tftp_home_dir --> off
+use_ecryptfs_home_dirs --> off
+use_fusefs_home_dirs --> off
+use_nfs_home_dirs --> off
+use_samba_home_dirs --> off
+xdm_write_home --> off
+
+将个人用户网站功能策略设置为允许：
+$ setsebool -P httpd_enable_homedirs=on
+
+刷新浏览器访问linuxprobe用户的个人网站，果然成功了：
+
+第4步:增加密码安全验证。
+
+有时候并不希望所有人都可以留意访问到自己的个人网站，
+那就可以使用Apache密码口令验证功能增加一道安全防护吧。
+使用htpasswd命令生成密码数据库（-c参数用于第一次生成）：
+$ htpasswd -c /etc/httpd/passwd linuxprobe
+
+编辑配置文件开启密码验证（具体参数见下图）：
+$ vim /etc/httpd/conf.d/userdir.conf
+<Directory "/home/* /public_html">
+	AllowOverride all(红)
+	authuserfile /etc/httpd/passwd
+	authname "My privately website"(红)
+	authtype basic(红)
+<Directory>
+
+Apache密码验证如果口令输入错误会直接禁止访问:
+
+这里的User Name是linuxprobe，密码并非该用户的系统密码，
+而是htpasswd命令创建的网站密码，不要搞混哦~
+
+
+Apache的虚拟主机功能(Virtual Host)是可以让一台服务器基于IP、主机名
+或端口号实现提供多个网站服务的技术。
+
+
+基于IP地址 
+
+这种情况很常见:一台服务器拥有多个IP地址，当用户访问不同IP地址时显示不同
+的网站页面。
+
+第1步:使用nmtui命令为网卡添加多个IP地址（192.168.10.10/20/30）：
+重新启动网卡设备后使用ping命令检查是否配置正确（这项很重要，一定要测试
+好再进行下一步!）。
+第2步:分别创建网站数据目录。
+在/home/wwwroot目录下分别创建三个网站数据目录：
+
+$ mkdir -p /home/wwwroot/10
+$ mkdir -p /home/wwwroot/20
+$ mkdir -p /home/wwwroot/30
+
+分别在这三个网站数据目录中写入主页文件，内容为该网站的IP地址：
+$ echo "IP:192.168.10.10" > /home/wwwroot/10/index.html
+$ echo "IP:192.168.10.20" > /home/wwwroot/20/index.html
+$ echo "IP:192.168.10.30" > /home/wwwroot/30/index.html
+
+第3步:在配置文件中描述基于IP地址的虚拟主机。
+
+<VirtualHost 192.168.10.10>
+DocumentRoot /home/wwwroot/10ServerName www.linuxprobe.com<Directory /home/wwwroot/10 >
+AllowOverride None
+Require all granted</Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.10.20>
+DocumentRoot /home/wwwroot/20ServerName bbs.linuxprobe.com<Directory /home/wwwroot/20 >
+AllowOverride NoneRequire all granted</Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.10.30>
+DocumentRoot /home/wwwroot/30ServerName tech.linuxprobe.com<Directory /home/wwwroot/30 >
+AllowOverride NoneRequire all granted</Directory>
+</VirtualHost>
+
+第4步:修改网站数据目录的SELinux安全上下文。
+需要分别修改网站数据目录以及网页文件的SELinux安全上下文：
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/10
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/10/*
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/20
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/20/*
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/30
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/30/*
+
+立即恢复SELinux安全上下文：
+$ restorecon -Rv /home/wwwroot
+
+第5步:分别访问192.168.10.10/20/30验证结果
+
+验证基于IP地址的虚拟主机功能的结果请注意:当您完成本实验后请还原虚拟
+机快照再进行下一个实验，否则可能导致配置文件冲突而报错。
+
+
+基于主机名 
+
+当服务器无法为每个网站都分配到独立IP地址时，可以试试让Apache服务程序
+自动识别来源主机名或域名然后跳转到指定的网站。
+
+第1步:配置网卡IP地址与hosts文件。
+配置IP地址hosts文件作用是定义IP地址与主机名的映射关系，即强制将某个主机
+名地址解析到指定的IP地址。
+
+$ vim /etc/hosts
+//每行只能写一条，格式为IP地址+空格+主机名（域名）。
+
+192.168.10.10 www.linuxprobe.com
+192.168.10.10 bbs.linuxprobe.com
+192.168.10.10 tech.linuxprobe.com
+
+第2步:分别创建网站数据目录：
+$ mkdir -p /home/wwwroot/www
+$ mkdir -p /home/wwwroot/bbs
+$ mkdir -p /home/wwwroot/tech
+
+分别在网站目录中写入不同的首页文件：
+$ echo "WWW.linuxprobe.com" > /home/wwwroot/www/index.html
+$ echo "BBS.linuxprobe.com" > /home/wwwroot/bbs/index.html
+$ echo "TECH.linuxprobe.com" > /home/wwwroot/tech/index.html
+
+第3步:在配置文件中描述基于主机名称的虚拟主机。
+编辑主配置文件(/etc/httpd/conf/httpd.conf)，在主配置文件的末尾按下面
+格式定义虚拟主机信息：
+
+<VirtualHost 192.168.10.10>
+DocumentRoot "/home/wwwroot/www"
+ServerName "www.linuxprobe.com"
+<Directory "/home/wwwroot/www">
+Allow Override None
+Require all granted
+</directory>
+</VirtualHost>
+<VirtualHost 192.168.10.10>
+DocumentRoot "/home/wwwroot/bbs"
+ServerName "bbs.linuxprobe.com"
+<Directory "/home/wwwroot/bbs">
+
+AllowOverride None
+Require all granted
+</Directory>
+</VirtualHost>
+<VirtualHost 192.168.10.10>
+DocumentRoot "/home/wwwroot/tech"
+ServerName "tech.linuxprobe.com"
+<Directory "/home/wwwroot/tech">
+AllowOverride None
+Require all granted
+</directory>
+</VirtualHost>
+
+读者们可以直接复制上面的参数到主配置文件(/etc/httpd/conf/httpd.conf)的
+末尾然后重启apache网站服务程序。
+
+因为在红帽RHCSA、RHCE或RHCA考试后都要重启您的实验机再执行判分脚本。
+所以请读者在日常工作中也要记得将需要的服务加入到开机
+启动项中:”systemctl enable httpd“。
+
+第4步:修改网站数据目录的SELinux安全上下文:
+
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/www
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/www/*
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/bbs
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/bbs/*
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/tech
+$ semanage fcontext -a -t httpd_sys_content_t /home/wwwroot/tech/*
+
+让新的SELinux安全上下文立即生效：
+$ restorecon -Rv /home/wwwroot/
+
+第5步:分别访问网站验证结果
+
+验证虚拟主机功能结果请注意:当您完成本实验后请还原虚拟机快照再进行
+下一个实验，否则可能导致配置文件冲突而报错。
+
+
+
+基于端口号 
+
+我们可以让服务器开启多个服务端口后，然后让用户能够通过访问服务器的指
+定端口来找到想要的网站。
+
+第1步:配置服务器的IP地址：
+
+第2步:分别创建网站数据目录。
+分别创建端口为6111,6222的网站数据目录：
+$ mkdir -p /home/wwwroot/6111
+$ mkdir -p /home/wwwroot/6222
+
+分别在网站数据目录中写入不同内容的主页文件：
+$ echo "port:6111" > /home/wwwroot/6111/index.html
+$ echo "port:6222" > /home/wwwroot/6222/index.html
+
+第3步:在配置文件中描述基于端口号的虚拟主机。
+编辑主配置文件(/etc/httpd/conf/httpd.conf)，找到约在42行
+的Listen 80，并在下面追加:
+Listen 6111Listen 6222
+
+然后在主配置文件的末尾按下面格式定义虚拟主机信息:
+<VirtualHost 192.168.10.10:6111>
+DocumentRoot “/home/wwwroot/6111”
+ServerNamewww.linuxprobe.com
+<Directory “/home/wwwroot/6111”>
+AllowOverride None
+Require all granted
+</Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.10.10:6222>
+DocumentRoot “/home/wwwroot/6222”
+ServerName bbs.linuxprobe.com
+<Directory “/home/wwwroot/6222”>
+AllowOverride None
+Require all granted
+</Directory>
+</VirtualHost>
+
+读者们可以直接复制上面的参数到主配置文件(/etc/httpd/conf/httpd.conf)的
+末尾然后重启apache网站服务程序。
+
+因为在红帽RHCSA、RHCE或RHCA考试后都要重启您的实验机再执行判分脚本。
+
+所以请读者在日常工作中也要记得将需要的服务加入到开机启动项
+中:”systemctl enable httpd“。
+
+什么!竟然报错了:
+
+Job for httpd.service failed. See 'systemctl status httpd.service' 
+and 'journalctl -xn' for details.
+
+这是因为SELinux服务检测到6111与6222端口原本并不属于Apache服务端口，
+但现在却被以Apache的名义监听了.
+
+第4步:修改网站数据目录的SELinux安全上下文并允许端口监听。
+修改网站数据目录的安全上下文：
+
+$ semanage fcontext -a -t httpd_user_content_t /home/wwwroot
+$ semanage fcontext -a -t httpd_user_content_t /home/wwwroot/6111
+$ semanage fcontext -a -t httpd_user_content_t /home/wwwroot/6111/*
+$ semanage fcontext -a -t httpd_user_content_t /home/wwwroot/6222
+$ semanage fcontext -a -t httpd_user_content_t /home/wwwroot/6222/*
+
+让新的SElinux安全上下文立即生效：
+$ restorecon -Rv /home/wwwroot/
+
+使用semanage命令搜索在SELinux系统中有关http服务的端口号：
+$ semanage port -l| grep http
+
+http_cache_port_t tcp 8080, 8118, 8123, 10001-10010
+http_cache_port_t udp 3130
+http_port_t tcp 80, 81, 443, 488, 8008, 8009, 8443, 9000
+pegasus_http_port_t tcp 5988
+pegasus_https_port_t tcp 5989
+
+默认包括80,81,443,488,8008,8009,8443,9000却没有咱们定义的端口号，
+那么添加进去就可以了：
+$ semanage port -a -t http_port_t -p tcp 6111
+$ semanage port -a -t http_port_t -p tcp 6222
+
+再来看下SELinux的端口规则（已经添加成功了）：
+$ semanage port -l| grep http
+
+http_cache_port_t tcp 8080, 8118, 8123, 10001-10010
+http_cache_port_t udp 3130
+http_port_t tcp 6222, 6111, 80, 81, 443, 488, 8008, 8009, 8443, 9000
+pegasus_http_port_t tcp 5988
+pegasus_https_port_t tcp 5989
+
+再次尝试启动Apache网站服务程序就没有问题了：
+$ systemctl restart httpd
+
+第5步:分别访问网站验证结果：
+请注意:当您完成本实验后请还原虚拟机快照再进行下一个实验，否则可能导
+致配置文件冲突而报错。
+
+基于端口虚拟主机实验成功
+
+Apache的访问控制 
+
+我们还可以基于主机名、IP地址以及客户端特征做Apache网页资源的访问控制，
+常用的指令有：
+Order(排序)，Allow(允许)，Deny(拒绝)，Satisfy(满足)。
+
+其中Order指令用于定义Allow或Deny起作用的顺序，分别实现了允许或者拒绝
+某个主机访问服务器网页资源。
+匹配原则为:按顺序匹配规则并执行，若未匹配成功则执行后面的执行。
+
+比如说”Order Allow,Deny“则代表着先将客户端与允许规则进行对比，若匹配
+成功则允许访问，反之则直接拒绝。
+
+创建网站数据目录和首页文件：
+
+$ mkdir /var/www/html/server
+$ echo "Successful" > /var/www/html/server/index.html
+
+根据浏览器的变量特征，只允许IE浏览器访问本网站数据。
+$ vim /etc/httpd/conf/httpd.conf
+
+//在大约129行的地方添加参数.
+<Directory "/var/www/html/server">
+SetEnvIf User-Agent “Internet Explorer” ie=1
+Order allow,deny
+Allow from env=ie
+
+保存配置文件后记得重启服务(systemctl restart httpd)，然后用Firefox浏
+览器尝试访问网站页面：
+
+限制访问那么如果希望仅允许火狐浏览器访问本页面，请将配置文件修改为:
+<Directory“/var/www/html/server”>
+SetEnvIfUser-Agent“Firefox” ff=1
+Orderallow,deny
+Allow from env=ff
+</Directory>
+
+
+根据来访源地址，仅限192.168.10.10的主机访问本网站:
+此时我们就需要两台主机来完成实验了，请配置主机IP地址后能够互相通信。
+
+主机名称	操作系统		IP地址
+本地主机	红帽RHEL7操作系统	192.168.10.10
+远程主机	红帽RHEL7操作系统	192.168.10.20
+
+$ vim /etc/httpd/conf/httpd.conf
+//在大约129行的地方添加参数.
+Order allow,deny
+Allow from 192.168.10.20
+
+保存配置文件后记得重启服务(systemctl restart httpd)，然后用Firefox
+浏览器尝试访问网站页面：
+
+访问失败然后再使用远程主机（192.168.10.20）尝试访问页面，顺利的成功了
+
+
+
+文件传输协议 
+
+文件传输协议（FTP,FileTransferProtocol），即能够让用户在互联网中上传、
+下载文件的文件协议，而FTP服务器就是支持FTP传输协议的主机，要想完成文件
+传输则需要FTP服务端和FTP客户端的配合才行。
+
+FTP连接过程FTP协议占用两个端口号：
+21端口:命令控制，用于接收客户端执行的FTP命令。
+20端口:数据传输，用于上传、下载文件数据。
+
+FTP数据传输的类型：
+主动模式:FTP服务端主动向FTP客户端发起连接请求。
+被动模式:FTP服务端等待FTP客户端的连接请求。
+
+
+Vsftpd即“VerySecureFTPDaemon”是一款运行在类Unix操作系统的FTP服务端程序，Vsftpd主打的是安全性、
+完全开源及免费、速率高、支持IPv6、虚拟用户功能等等其他FTP服务端软件不具备的功能。
+
+安装vsftpd服务程序包：
+$ yum install vsftpd -y
+
+清空默认的防火墙默认规则：
+$ iptables -F
+
+保存清空后的防火墙规则表：
+$ service iptables save
+
+Vsftpd的程序与配置文件：
+
+主程序			/usr/sbin/vsftpd
+用户禁止登陆列表	/etc/vsftpd/ftpusers
+			/etc/vsftpd/user_list
+主配置文件		/etc/vsftpd/vsftpd.conf
+
+
+先来分析下vsftpd程序的主配置文件吧：
+$cat/etc/vsftpd/vsftpd.conf
+
+主配置文件长达123行，但大部分是以#号开始的，这些都是注释信息，
+我们可以过滤掉它们。
+
+备份vsftpd的主配置文件：
+$ mv /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf_bak
+
+过滤掉所有包含#号的行，并将过滤结果写回到vsftpd.conf文件中：
+$ grep -v "#" /etc/vsftpd/vsftpd.conf_bak > /etc/vsftpd/vsftpd.conf
+
+此时再分析下vsftpd程序的主配置文件吧：
+$ cat /etc/vsftpd/vsftpd.conf
+
+anonymous_enable=YES
+local_enable=YES
+write_enable=YES
+local_umask=022
+dirmessage_enable=YES
+xferlog_enable=YES
+connect_from_port_20=YES
+xferlog_std_format=YES
+listen=NO
+listen_ipv6=YES
+pam_service_name=vsftpd
+userlist_enable=YES
+tcp_wrappers=YES
+
+vsftpd程序配置文件参数的作用：
+
+参数			作用
+
+listen=[YES|NO]		是否以独立运行的方式监听服务。
+listen_address=IP地址	设置要监听的IP地址。
+listen_port=21		设置FTP服务的监听端口。
+download_enable＝[YES|NO]	是否允许下载文件。
+
+userlist_enable=[YES|NO]	
+userlist_deny=[YES|NO]		是否启用“禁止登陆用户名单”。
+max_clients=0		最大客户端连接数，0为不限制。
+max_per_ip=0		同一IP地址最大连接数，0位不限制。
+anonymous_enable=[YES|NO]	是否允许匿名用户访问。
+anon_upload_enable=[YES|NO]	是否允许匿名用户上传文件。
+anon_umask=022		匿名用户上传文件的umask值。
+anon_root=/var/ftp	匿名用户的FTP根目录。
+anon_mkdir_write_enable=[YES|NO]	是否允许匿名用户创建目录。
+anon_other_write_enable=[YES|NO]	是否开放匿名用户其他写入权限。
+anon_max_rate=0		匿名用户最大传输速率(字节)，0为不限制。
+local_enable=[YES|NO]	是否允许本地用户登陆FTP。
+local_umask=022		本地用户上传文件的umask值。
+local_root=/var/ftp	本地用户的FTP根目录。
+chroot_local_user=[YES|NO]	是否将用户权限禁锢在FTP目录，更加的安全。
+local_max_rate=0	本地用户最大传输速率(字节)，0为不限制。
+
+
+vsftpd程序提供的FTP服务可选认证方式，
+分别为匿名访问、本地用户和虚拟用户：
+
+匿名访问:任何人无需验证口令即可登入FTP服务端。
+本地用户:使用FTP服务器中的用户、密码信息。
+虚拟用户:创建独立的FTP帐号资料。
+
+顾名思义匿名访问就是所有人均可随意登入FTP服务，这样自然会产生安全问题，
+一般用于存放公开的数据。
+而本地用户与虚拟用户则需要用户提供帐号及口令后才能登入FTP服务，更加的安
+全，而虚拟用户则是最安全的。
+
+
+主机名称	操作系统	IP地址
+FTP服务端	红帽RHEL7操作系统	192.168.10.10
+FTP客户端	红帽RHEL7操作系统	192.168.10.20
+
+匿名访问模式 
+
+FTP匿名访问模式是比较不安全的服务模式，尤其在真实的工作环境中千万不要存
+放敏感的数据，以免泄露。
+vsftpd程序默认已经允许匿名访问模式，我们要做的就是开启匿名用户的上传和
+写入权限，写入下面的参数：
+$ vim /etc/vsftpd/vsftpd.conf
+
+参数			作用
+anonymous_enable=YES	允许匿名访问模式。
+anon_umask=022		匿名用户上传文件的umask值。
+anon_upload_enable=YES	允许匿名用户上传文件
+anon_mkdir_write_enable=YES	允许匿名用户创建目录
+anon_other_write_enable=YES	允许匿名用户修改目录名或删除目录
+
+确认填写正确后保存并退出vsftpd.conf文件，然后重启vsftpd服务程序并设置
+为开机自启动。
+$ systemctl restart vsftpd
+$ systemctl enable vsftpd
+$ ln-s'/usr/lib/systemd/system/vsftpd.service'\
+	'/etc/systemd/system/multi-user.target.wants/vsftpd.service
+
+因为在红帽RHCSA、RHCE或RHCA考试后都要重启您的实验机再执行判分脚本。
+所以请读者在日常工作中也要记得将需要的服务加入
+到开机启动项中:”systemctl enable vsftpd“。
+
+如果重启vsftpd服务程序时没有报错，此时便可以使
+用FTP客户机(192.168.10.20)尝试登入FTP服务了。
+
+ftp命令用于使用FTP服务，格式为：“ftp [参数] [FTP主机]”。
+红帽RHEL7系统中ftp命令默认没有安装，请执行”yum install ftp -y“即可
+安装完毕。
+
+在客户端尝试登入FTP服务：
+$ ftp 192.168.10.10
+
+Connected to 192.168.10.10 (192.168.10.10).
+220 (vsFTPd 3.0.2)
+Name (192.168.10.10:root): anonymous
+331 Please specify the password.
+Password:敲击回车
+230 Login successful.
+
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> cd pub
+250 Directory successfully changed.
+ftp> mkdir files
+550 Permission denied.
+
+上面操作中已经将防火墙规则清空，在vsftpd.conf文件中也已经允许匿名用
+户创建目录与写入权限，那怎么会被拒绝了呢？
+
+这里建议读者先不要往下看，思考后用自己的方法解决下这个问题，长期这样
+你的Linux的排错能力一定会练出来的。
+
+回想前面的参数细节，匿名访问模式的FTP根目录为/var/ftp：
+$ ls -ld /var/ftp/pub
+drwxr-xr-x. 3 root root 16 Jul 13 14:38 /var/ftp/pub
+
+原来匿名用户的FTP根目录所有者/组都是root，所以匿名用户没有写入权限，
+那我们将所有者修改为ftp试试吧。
+$ chown ftp /var/ftp/pub
+
+此时再用ftp命令尝试登入FTP服务并创建文件：
+ftp> mkdir files
+550 Create directory operation failed.
+
+可恶!又报错了!!虽然这次报错代码还是550，但前面提示权限拒绝，这次是操
+作失败，马上想到是SELinux服务在捣鬼。
+查看所有与ftp相关的SELinux规则：
+$ getsebool -a | grep ftp
+
+ftp_home_dir --> off
+ftpd_anon_write --> off
+ftpd_connect_all_unreserved --> off
+ftpd_connect_db --> off
+ftpd_full_access --> off
+ftpd_use_cifs --> off
+ftpd_use_fusefs --> off
+ftpd_use_nfs --> off
+ftpd_use_passive_mode --> off
+httpd_can_connect_ftp --> off
+httpd_enable_ftp_server --> off
+sftpd_anon_write --> off
+sftpd_enable_homedirs --> off
+sftpd_full_access --> off
+sftpd_write_ssh_home --> off
+tftp_anon_write --> off
+tftp_home_dir --> off
+
+设置SELinux服务对ftp服务的访问规则策略为允许。
+
+$ setsebool -P ftpd_full_access=on
+
+此时再来创建文件或目录就没有问题了：
+
+$ ftp 192.168.10.10
+
+Connected to 192.168.10.10 (192.168.10.10).
+220 (vsFTPd 3.0.2)
+Name (192.168.10.10:root): anonymous
+331 Please specify the password.
+Password:敲击回车
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+
+ftp> cd pub
+250 Directory successfully changed.
+ftp> mkdir files
+257 "/pub/files" created
+ftp> rename files database
+350 Ready for RNTO.
+250 Rename successful.
+ftp> rmdir database
+250 Remove directory operation successful.
+ftp> exit
+221 Goodbye.
+
+请注意:当您完成本实验后请还原虚拟机快照再进行下一个实验，
+否则可能导致配置文件冲突而报错。
+
+本地用户模式
+既然要使用本地用户模式，而本地用户模式确实要比匿名访问模式更加的安
+全，所以本实验中会关闭匿名访问模式。
+vsftpd服务程序默认已经允许本地用户模式，我们要做的是添加设置本地用户
+模式权限的参数：
+
+$ vim /etc/vsftpd/vsftpd.conf
+参数			作用
+
+anonymous_enable=NO	禁止匿名访问模式。
+local_enable=YES	允许本地用户模式。
+write_enable=YES	设置可写入权限。
+local_umask=022		本地用户模式创建文件的umask值。
+userlist_deny=YES	参数值为YES即禁止名单中的用户，参数值为NO则代表仅允许名单中的用户。
+userlist_enable=YES	允许“禁止登陆名单”，名单文件为ftpusers与user_list。
+
+重启vsftpd服务程序并设置为开机自启动。
+$ systemctl restart vsftpd
+$ systemctl enable vsftpd
+$ ln -s '/usr/lib/systemd/system/vsftpd.service' 
+	'/etc/systemd/system/multi-user.target.wants/vsftpd.service
+
+因为在红帽RHCSA、RHCE或RHCA考试后都要重启您的实验机再执行判分脚本。
+所以请读者在日常工作中也要记得将需要的服务加入到开机启动项中:”systemctl enable vsftpd“。
+
+我们先来看下ftpusers或user_list文件中禁止登陆用户名单.
+
+创建个普通用户吧：
+$ useradd linuxprobe
+
+为linuxprobe用户设置密码：
+$ passwd linuxprobe
+
+在客户端尝试登入FTP服务：
+$ ftp 192.168.10.10
+
+Name (192.168.10.10:root): linuxprobe
+Password:输入用户的本地密码
+ftp> mkdir files
+有了上面配置匿名访问模式的经验，这次再遇到了“操作被拒绝”，应该马上想到SELinux了吧。
+
+查看所有与ftp相关的SELinux规则：
+$ getsebool -a | grep ftp
+
+ftp_home_dir --> off
+ftpd_anon_write --> off
+ftpd_connect_all_unreserved --> off
+ftpd_connect_db --> off
+ftpd_full_access --> off
+ftpd_use_cifs --> off
+ftpd_use_fusefs --> off
+ftpd_use_nfs --> off
+ftpd_use_passive_mode --> off
+httpd_can_connect_ftp --> off
+httpd_enable_ftp_server --> off
+sftpd_anon_write --> off
+sftpd_enable_homedirs --> off
+sftpd_full_access --> off
+sftpd_write_ssh_home --> off
+tftp_anon_write --> off
+tftp_home_dir --> off
+
+设置SELinux对FTP服务的规则为允许：
+$ setsebool -P ftpd_full_access=on
+
+此时再来创建文件或目录就没有问题了：
+$ ftp 192.168.10.10
+请注意:当您完成本实验后请还原虚拟机快照再进行下一个实验，否则可能导致配置文件冲突而报错。
+
+虚拟用户模式:
+Vsftpd服务配置虚拟用户模式的操作步骤相对复杂一些，具体流程如下：
+
+第1步:建立虚拟FTP用户数据库文件。
+第2步:创建FTP根目录及虚拟用户映射的系统用户。
+第3步:建立支持虚拟用户的PAM认证文件。
+第4步:在vsftpd.conf文件中添加支持配置。
+第5步:为虚拟用户设置不同的权限。
+第6步:重启vsftpd服务，验证实验效果。
+
+第1步:建立虚拟FTP用户数据库文件。
+
+切换至vsftpd程序目录：
+$ cd /etc/vsftpd/
+
+创建用于生成FTP用户数据库的原始帐号和密码文件：
+$ vim vuser.list
+//单数行为帐号，双数行为密码。
+
+linuxprobe
+pa33w0rd
+blackshield
+pa22w1rd
+
+使用db_load命令用HASH算法生成FTP用户数据库文件vuser.db：
+$ db_load -T -t hash -f vuser.list vuser.db
+
+查看数据库文件的类型：
+$ file vuser.db
+
+FTP用户数据库内容很敏感，所以权限给小一些：
+$ chmod 600 vuser.db
+
+删除原始的帐号和密码文件：
+$ rm -f vuser.list
+
+第2步:创建FTP根目录及虚拟用户映射的系统用户。
+创建用户virtual并设置为不允许登陆系统并定义该用户的家目录：
+$ useradd -d /var/ftproot -s /sbin/nologin virtual
+
+查看该用户的家目录权限：
+$ ls -ld /var/ftproot/
+
+为保证其他用户可以访问，给予rwxr-xr-x权限：
+$ chmod -Rf 755 /var/ftproot/
+
+第3步:建立支持虚拟用户的PAM认证文件：
+$ vim /etc/pam.d/vsftpd.vu
+
+//参数db用于指向刚刚生成的vuser.db文件，但不要写后缀。
+authrequiredpam_userdb.so db=/etc/vsftpd/vuser
+accountrequiredpam_userdb.so db=/etc/vsftpd/vuser
+
+第4步:在vsftpd.conf文件中添加支持配置。
+$ vim /etc/vsftpd/vsftpd.conf
+
+参数				作用
+anonymous_enable=NO		禁止匿名开放模式。
+local_enable=YES		允许本地用户模式。
+guest_enable=YES		开启虚拟用户模式。
+guest_username=virtual		指定虚拟用户帐号。
+pam_service_name=vsftpd.vu	指定pam文件。
+allow_writeable_chroot=YES	允许禁锢的FTP根目录可写而不拒绝用户
+				登入请求。
+
+第5步:为虚拟用户设置不同的权限
+现在不论是linuxprobe还是blackshield帐户，他们的权限都是相同的——默
+认不能上传、创建、修改文件，如果希望用户blackshield能够完全的管理FTP
+内的资料，就需要让FTP程序支持独立的用户权限配置文件了：
+
+指定用户独立的权限配置文件存放的目录：
+$ vim /etc/vsftpd/vsftpd.conf
+user_config_dir=/etc/vsftpd/vusers_dir
+
+创建用户独立的权限配置文件存放的目录：
+$ mkdir /etc/vsftpd/vusers_dir/
+
+切换进入到该目录中：
+$ cd /etc/vsftpd/vusers_dir/
+
+创建空白的linuxprobe的配置文件：
+$ touch linuxprobe
+
+指定blackshield用户的具体权限：
+$ vim blackshield
+anon_upload_enable=YES
+anon_mkdir_write_enable=YES
+anon_other_write_enable=YES
+
+第6步:重启vsftpd服务，验证实验效果。
+确认填写正确后保存并退出vsftpd.conf文件，重启vsftpd程序并设置为开机后
+自动启用：
+$ systemctl restart vsftpd
+$ systemctl enable vsftpd
+$ ln -s '/usr/lib/systemd/system/vsftpd.service'
+	'/etc/systemd/system/multi-user.target.wants/vsftpd.service
+
+可插拔认证模块PAM 
+可插拔认证模块PAM(PluggableAuthenticationModules)是一种认证机制，通
+过一些动态链接库和统一的API将系统提供的服务与认证方式分开，使得系统
+管理员可以根据需求灵活的调整服务程序的不同认证方式。
+
+读者不必精通PAM模块，也不用对参数做细致的讲解，只需认识PAM模块的重要
+目录：
+/lib/security:pam认证模块。
+/etc/pam.d:针对不同服务而定义好的pam配置文件。
+
+例如vsftpd程序就会在其主配置文件(“/etc/vsftpd/vsftpd.conf“)中写入下
+面的参数：
+pam_service_name=vsftpd
+表示登陆FTP服务器时是根据/etc/pam.d/vsftpd的文件内容进行安全认证的。
+因为我们平时不会经常修改PAM配置文件，而且PAM模块相对比较复杂，所以不在
+本章中继续讲解，读者必需能够理解刚刚实验中出现的vsftpd.vu文件的作用以
+及存放位置。
+
+
+使用Samba或NFS实现文件共享
+
+安装Samba服务软件包：
+$ yum install samba
+
+浏览Samba配置文件：
+$ cat /etc/samba/smb.conf
+
+备份原始的配置文件：
+$ mv /etc/samba/smb.conf /etc/samba/smb.conf.bak
+
+过滤掉无用的内容：
+先使用cat命令读入Smb配置文件后通过grep命令-v参数（反向选择）去掉所有注释
+信息，然后分别删选掉包含#号的行(“#”)，包含;号的行(“;”)以及所有的空
+白行(“^$”)，最后最后将过滤后的信息覆盖写入到/etc/samba/smb.conf文件中。
+
+$ cat /etc/samba/smb.conf.bak | grep -v "#" 
+	| grep -v ";" | grep -v "^$" > /etc/samba/smb.conf
+
+让我们来看看过滤后的配置文件吧：
+
+[global]		#全局参数。
+workgroup = MYGROUP	#工作组名称。
+server string = Samba Server Version %v		#服务器介绍信息,参数%v为显示SMB版本号。
+log file = /var/log/samba/log.%m		#定义日志文件存放位置与名称，参数%m为来访的主机名。
+max log size = 50				#定义日志文件最大容量为50Kb。
+security = user					#安全验证的方式,总共有4种。
+#share:来访主机无需验证口令，更加方便，但安全性很差。
+#user:需由SMB服务验证来访主机提供的口令后才可建立访问,更加的安全。
+#server:使用独立的远程主机验证来访主机提供的口令（集中管理帐号）。
+#domain:使用PDC来完成验证
+
+passdb backend = tdbsam				#定义用户后台的类型，共有3种。
+#smbpasswd:使用SMB服务的smbpasswd命令给系统用户设置SMB密码。
+#tdbsam:创建数据库文件并使用pdbedit建立SMB独立的用户。
+#ldapsam:基于LDAP服务进行帐户验证。
+
+load printers = yes				#设置是否当Samba服务启动时共享打印机设备。
+cups options = raw				#打印机的选项
+
+[homes]						#共享参数
+comment = Home Directories			#描述信息
+browseable = no					#指定共享是否在“网上邻居”中可见。
+writable = yes					#定义是否可写入操作，与"read only"相反。
+
+[printers]					#打印机共享参数
+comment = All Printers
+path = /var/spool/samba				#共享文件的实际路径(重要)。
+browseable = no
+guest ok = no					#是否所有人可见，等同于"public"参数。
+writable = no
+printable = yes
+
+标准的Samba共享参数是这样的：
+
+参数					作用
+
+[linuxprobe]				共享名称为linuxprobe
+comment =Do not arbitrarily modify the database file	警告用户不要随意修改数据库
+path = /home/database			共享文件夹在/home/database
+public = no				关闭所有人可见
+writable = yes				允许写入操作
+
+安全共享文件 
+
+使用Samba服务口令验证方式可以让共享文件更加的安全，做到仅让信任的用户
+访问，而且验证过程也很简单，要想使用口令验证模式，我们需要先需要创建
+Samba服务独立的数据库。
+
+第1步:检查当前是否为user验证模式。
+$ cat /etc/samba/smb.conf
+security=user
+passdb backend=tdbsam
+
+第2步:创建共享文件夹：
+$ mkdir /database
+
+第3步:描述共享文件夹信息。
+在SMB服务主配置文件的最下面追加共享文件夹的配置参数：
+
+[database]
+comment = Do not arbitrarily modify the database file
+path = /database
+public = no
+writable = yes
+
+保存smb.conf文件后重启启动SMB服务：
+$ systemctl restart smb
+
+添加到开机启动项：
+$ systemctl enable smb
+$ ln -s '/usr/lib/systemd/system/smb.service'
+	'/etc/systemd/system/multi-user.target.wants/smb.service'
+
+第4步：使用Windows主机尝试访问
+此时访问Samba服务报错, 还记得防火墙和SELinux规则吧。
+
+第5步:清空防火墙规则链：
+Windows访问Samba主机提示报错，我们怀疑是Iptables阻止了访问操作，
+于是执行：
+$ Iptables -F
+$ service iptables save
+
+因为Windows系统的缓存关系，可能需要先重启下Windows主机再尝试访
+问Samba共享。
+Windows系统被要求验证帐户口令
+
+第6步:创建SMB服务独立的帐号。
+
+现在Windows系统要求先验证后才能访问共享，而SMB服务配置文件中密码
+数据库后台类型为”tdbsam“，所以这个帐户和口令是Samba服务的独立
+帐号信息，我们需要使用pdbedit命令来创建SMB服务的用户数据库。
+
+pdbedit命令用于管理SMB服务的帐户信息数据库，
+格式为：“pdbedit [选项] 帐户”。
+
+参数			作用
+-a 用户名		建立Samba用户
+-x 用户名		删除Samba用户
+-L			列出用户列表
+-Lv			列出用户详细信息的列表
+
+创建系统用户：
+$ useradd smbuser
+
+将此系统用户提升为SMB用户：
+$ pdbedit -a -u smbuser
+
+第7步:使用Windows主机验证共享结果：
+
+第8步：允许SELinux规则
+将共享目录的所有者和所有组设置为smbuser用户：
+$ chown -Rf smbuser:smbuser /database
+
+允许SELinux对于SMB用户共享家目录的布尔值：
+$ setsebool -P samba_enable_home_dirs on
+
+将共享目录的SELinux安全上下文设置妥当：
+$ semanage fcontext -a -t samba_share_t /database
+
+使新的安全上下文立即生效：
+$ restorecon -Rv /database/
+
+第9步：使用Windows主机验证共享结果
+我们配置好Samba服务后又陆续的调整好了Iptables防火墙与SELinux安
+全规则，现在终于可以正常的使用共享了
+
+第10步：使用Linux主机验证共享结果
+
+创建挂载目录：
+$ mkdir /database
+
+在root家目录创建认证文件(依次为SMB用户名、SMB用户密码、SMB共享域)：
+$ vim auth.smb
+username=smbuser
+password=redhat
+domain=MYGROUP
+
+此文件太重要了，权限应该给小一些：
+$ chmod -Rf 600 auth.smb
+
+配置其挂载信息（内容依次为远程共享信息、本地挂载目录、文件系统类型、
+认证文件以及开机自检选项）：
+$ vim /etc/fstab
+//192.168.10.10/database /database cifs credentials=/root/auth.smb 0 0
+
+使用mount命令的-a参数挂载所有在fstab文件中定义的文件信息：
+$ mount -a
+
+成功挂载Samba的共享目录（能够看到共享文件了）：
+$ cat /database/Memo.txt
+
+安装Bind服务程序 
+伯克利互联网域名服务BIND(BerkeleyInternetNameDaemon)是一款全球互联网使用
+最广泛的能够提供安全可靠、快捷高效的域名解析服务程序。并且Bind服务程序还
+支持chroot（changeroot）监牢安全机制，chroot机制会限制bind服务程序仅能对
+自身配置文件进行操作，从而保证了整个服务器的安全，让既然如此，那么我们也
+就选择安装bind-chroot吧：
+$ yum install bind-chroot
+
+域名解析服务Bind的程序名称叫做named，服务程序的配置文件如下：
+
+主程序			/usr/sbin/named
+主配置文件		/etc/named.conf
+区域配置文件		/etc/named.rfc1912.zones
+
+
+那么先来分析下主配置文件吧(有两处需要修改，请跟着一起操作.):
+$ vim /etc/named.conf
+
+// Provided by Red Hat bind package to configure the ISC BIND named(8) DNS
+// server as a caching only nameserver (as a localhost DNS resolver only).
+// See/usr/share/doc/bind*/sample/ for example named configuration files.
+
+options {
+//将下行中的127.0.0.1修改为any，代表允许监听任何IP地址。
+listen-on port 53 { 127.0.0.1; };
+listen-on-v6 port 53 { ::1; };
+directory "/var/named";
+dump-file "/var/named/data/cache_dump.db";
+statistics-file "/var/named/data/named_stats.txt";
+memstatistics-file "/var/named/data/named_mem_stats.txt";
+//将下行中的localhost修改为any，代表允许任何主机查询。
+allow-query { localhost; };
+recursion yes;
+dnssec-enable yes;
+dnssec-validation yes;
+dnssec-lookaside auto;
+/* Path to ISC DLV key */
+bindkeys-file "/etc/named.iscdlv.key";
+managed-keys-directory "/var/named/dynamic";
+pid-file "/run/named/named.pid";
+session-keyfile "/run/named/session.key";
+};
+logging {
+channel default_debug {
+file "data/named.run";
+severity dynamic;
+};
+};
+//此文件内定义了全球13台根DNS服务器的IP地址
+zone "." IN {
+type hint;
+file "named.ca";
+};
+//此文件保存着正向与反向解析的区域信息，非常的重要。
+include "/etc/named.rfc1912.zones";
+include "/etc/named.root.key";
+当用户访问一个域名时(不考虑hosts文件等因素)，正常情况会向指定的DNS主机
+发送递归查询请求，如果该DNS主机中没有该域名的解析信息那么会不断向上级
+DNS主机进行迭代查询，其中最高等级(权威)的根DNS主机有13台，分别为:
+
+根DNS服务器IP地址文件:/var/named/named.ca
+
+名称	管理单位		地理位置		IP地址
+A	INTERNIC.NET		美国-弗吉尼亚州		198.41.0.4
+B	美国信息科学研究所	美国-加利弗尼亚州	128.9.0.107
+C	PSINet公司		美国-弗吉尼亚州		192.33.4.12
+D	马里兰大学		美国-马里兰州		128.8.10.90
+E	美国航空航天管理局	美国加利弗尼亚州	192.203.230.10
+F	因特网软件联盟		美国加利弗尼亚州	192.5.5.241
+G	美国国防部网络信息中心	美国弗吉尼亚州		192.112.36.4
+H	美国陆军研究所		美国-马里兰州		128.63.2.53
+I	Autonomica公司		瑞典-斯德哥尔摩		192.36.148.17
+J	VeriSign公司		美国-弗吉尼亚州		192.58.128.30
+K	RIPE NCC		英国-伦敦		193.0.14.129
+L	IANA			美国-弗吉尼亚州		199.7.83.42
+M·	WIDE Project		日本-东京		202.12.27.33
+
+
+将系统的DNS地址修改为本机
+$ vim /var/named.conf
+为了避免经常修改主配置文件named.conf而导致DNS服务出错，
+所以规则的区域信息保存在了”/etc/named.rfc1912.zones“文
+件中，这个文件用于定义域名与IP地址解析规则保存的文件位置
+以及区域服务类型等内容，一定要谨慎修改。
+
+
+正向解析区域文件格式服务类型可以有三种:hint(根区域)、
+master(主区域)、slave(辅助区域)。
+正向解析区域文件格式:
+
+zone "linuxprobe.com" IN {
+	type master;//服务类型
+	file "linuxprobe.com.zone";//域名与IP地址解析规则保存
+	allow-update {none;};	//允许哪些客户动态更新解析信息
+}
+
+
+反向解析区域文件格式zone区域中IP信息必需反写(如上图演示)，
+并且后面要写上”in-addr.arpa“。
+
+反向解析区域文件格式:
+
+zone "10.168.192.in-addr.arpa" IN {//表示为192.168.10.0/24网段的反向解析区域
+	type master;
+	file "192.168.10.arpa";
+}
+
+接下来的实验中会分别对主配置文件、区域信息文件与区域数据文件做修改，
+当怀疑因配置参数而出错时可执行
+named-checkconf或named-checkzone命令来分别用于检查主配置与区域数据文
+件中语法或参数的错误。
+
+
+ 正向解析实验 
+
+第1步:配置区域数据信息。
+
+正向解析的作用是根据主机名(域名)查找到对应的IP地址，区域文件中已有一些默认
+信息，可不必理会，直接在下面追加即可：
+
+$ vim /etc/named.rfc1912.zones
+
+zone "linuxprobe.com" IN {
+type master;
+file "linuxprobe.com.zone";
+allow-update {none;};
+}
+
+第2步：配置解析数据信息：
+我们可以直接复制正向解析模板文件:”/var/named/named.localhost“，填写信息后
+即可直接使用。
+切换工作目录到bind(named)数据目录：
+$ cd /var/named/
+
+查看区域数据文件的权限：
+$ ls -al named.localhost
+-rw-r-----. 1 root named 152 Jun 21 2007 named.localhost
+
+执行cp命令时加入-a，代表连通复制原来文件的属性、所有者、组等信息：
+
+$ cp -a named.localhost linuxprobe.com.zone
+
+编辑linuxprobe.com域名的区域数据文件：
+$ vim linuxprobe.com.zone
+
+重启named服务让配置文件立即生效:
+$ systemctl restart named
+
+$TTL 1D
+#生存周期为1天
+
+第3步:检验解析结果。
+nslookup命令用于检测能否从网络DNS服务器中查询到域名与IP地址的解析记录，
+检测named服务的解析能否成功。
+此为查询DNS服务器的信息：
+$ nslookup
+> www.linuxprobe.com
+
+Server: 127.0.0.1
+Address: 127.0.0.1#53
+
+顺利的将域名的对应IP地址解析出来了：
+
+Name: www.linuxprobe.com
+Address: 192.168.10.10
+
+> bbs.linuxprobe.com
+Server: 127.0.0.1
+Address: 127.0.0.1#53
+Name: bbs.linuxprobe.com
+Address: 192.168.10.20
+> mail.linuxprobe.com
+Server: 127.0.0.1
+Address: 127.0.0.1#53
+Name: mail.linuxprobe.com
+Address: 192.168.10.10
+> ns.linuxprobe.com
+Server: 127.0.0.1
+Address: 127.0.0.1#53
+Name: ns.linuxprobe.com
+Address: 192.168.10.10
+
+反向解析实验 
+
+反向解析的作用是根据IP地址查找到对应的主机名（域名），在区域文
+件(named.rfc1912.zones)中默认已存在一些注释内容与区域信息，可不需要删除
+上面实验及默认区域信息，直接在下面追加即可。
+
+第1步：配置区域数据信息。
+$ vim /etc/named.rfc1912.zones
+
+zone "10.168.192.in-addr.arpa" IN {
+type master;
+file "192.168.10.arpa";
+};
+
+第2步：配置解析数据信息。
+反向解析数据文件模版为:”/var/named/named.loopback“，我们可复制并填写信
+息后即可直接使用：
+$ cp -a named.loopback 192.168.10.arpa
+
+编辑192.168.10.0/24网段的数据文件：
+$ vim 192.168.10.arpa
+
+第3步:检验解析结果。
+
+重启named服务程序，让配置文件立即生效：
+$ systemctl restart named
+
+执行nslookup命令检查反向解析结果：
+$ nslookup
+
+> 192.168.10.10
+Server: 127.0.0.1
+Address: 127.0.0.1#53
+10.10.168.192.in-addr.arpa name = ns.linuxprobe.com.
+10.10.168.192.in-addr.arpa name = www.linuxprobe.com.
+10.10.168.192.in-addr.arpa name = mail.linuxprobe.com.
+> 192.168.10.20
+Server: 127.0.0.1
+Address: 127.0.0.1#53
+20.10.168.192.in-addr.arpa name = bbs.linuxprobe.com.
+
+
+
+部署从服务器 (略)
+
+
+
+安全的加密传输 
+
+DNS服务是互联网的基础建设设施，几乎所有的网络应用都依赖于DNS服务做出的
+查询结果，如果互联网中的DNS服务不能正常提供解析服务，那么即使Web或Email
+服务都运行正常，也无法让用户顺利使用到它们了。
+
+13台根DNS服务器以及互联网中的DNS服务器绝大多数(超过95%)是基于BIND服务程序
+搭建的，BIND服务程序为了能够安全的提供解析服务而支持了TSIG(TSIGRFC 2845)加
+密机制，TSIG主要是利用密码编码方式保护区域信息的传送(Zone Transfer)，也就是
+说保证了DNS服务器之间传送区域信息的安全。
+
+TSIG仅有一组密码，而不区分公/私钥，所以一般只会分配给可信任的从服务器。
+
+
+
+部署缓存服务器(略)
+
+
+
+
+分离解析技术 
+
+假如喜欢《Linux就该这么学》的海外留学生越来越多，但网站服务器架设在北京市，
+那么留学生访问起来速度一定很慢，而将服务器架设在美国，那又会让国内用户访问
+变得很麻烦，于是我们便可以采用分离解析的办法，虽然访问的是相同的网址，但国内
+用户访问北京服务器，而留学生则直接访问美国服务器。
+
+分离解析:当来自于不同IP地址的用户查询相同域名时会为其提供不同的解析结果，大致
+流程为：
+
+第1步：在区域信息文件中填写不同的Zone区域信息。
+第2步：建立独立的区域数据文件。
+第3步：重新启动named服务并验证结果。
+
+
+
+动态主机管理协议 
+
+DHCP动态主机管理协议(DynamicHostConfigurationProtocol)是一种基于UDP协议且仅限
+用于局域网的网络协议，主要用途是为局域网内部设备或网络供应商自动分配IP地址，
+通常会应用在大型的局域网环境中或局域网内存在比较多的移动办公设备，DHCP协议
+能够实现集中的管理、分配IP地址。
+
+DHCP服务程序能够使局域网内的主机自动且动态的获取IP地址、子网掩码、网关地址
+以及DNS服务器地址等信
+息，且能够有效的提升地址使用率，提高配置效率，减少管理和维护成本。
+
+DHCP协议能够保证任何IP地址在同一时刻只能由一台DHCP客户机使用，且能够为指定主机分配固定的IP地
+址。
+
+DHCP工作原理DHCP服务程序的常见术语：
+
+作用域:一个完整的IP地址段，DHCP服务根据作用域来管理网络的分布、分配IP地址及
+其他配置参数。
+
+超级作用域:用于支持同一物理网络上多个逻辑IP地址子网段，包含作用域的列表，
+		并对子作用域统一管理。
+排除范围:将某些IP地址在作用域中排除，确保这些IP地址不会被提供给DHCP客户机。
+地址池:在定义DHCP服务的作用域并应用排除范围后，剩余用来动态分配给DHCP客户机
+		的IP地址范围。
+租约:即DHCP客户机能够使用动态分配到的IP地址的时间。
+预约:保证局域子网中特定设备总是获取到相同的IP地址。
+
+
+安装dhcpd服务程序 
+
+dhcpd服务程序用于提供DHCP协议服务，确认镜像挂载且yum仓库配置完毕后即可开始安
+装：
+$ yum install dhcp
+
+dhcpd服务程序与配置文件：
+
+主配置文件
+/etc/dhcp/dhcpd.conf
+
+执行程序
+/usr/sbin/dhcpd
+/usr/sbin/dhcrelay
+
+
+先来分析下dhcp程序的主配置文件吧：
+
+$ cat /etc/dhcp/dhcpd.conf
+
+# DHCP Server Configuration file.
+
+# see /usr/share/doc/dhcp*/dhcpd.conf.example
+
+# see dhcpd.conf(5) man page
+
+是的，你没有看错！dhcpd服务程序的配置文件默认只有注释语句，需要参考下模板文件：
+$ cat /usr/share/doc/dhcp*/dhcpd.conf.example
+
+一个标准的DHCP配置文件应该包括全局配置参数、子网网段声明、地址配置选项以及
+地址配置参数：
+
+$ vim /etc/dhcp/dhcpd.conf
+ddns-update-style interim;//全局配置参数
+ignore clinet-updates;
+subnet 192.168.10.0 netmask 255.255.255.0 {//子网段声明
+	.....;
+	option routes 192.168.10.1	//地址选项
+	option subnet-mask 255.255.255.0
+	.....;
+	defaults-lease-time 21600;//地址配置参数
+	max-lease-time 43200;
+	.....;
+}
+
+
+
+dhcp配置文件全局配置参数用于定义整个配置文件的全局参数，而子网网段声明用于
+配置整个子网段的地址属性，具体参数有：
+
+参数			作用
+
+ddns-update-style 类型	定义DNS服务动态更新的类型，类型包括:
+			none（不支持动态更新），interim（互动更新模式）
+			与ad-hoc(特殊更新模式)。
+allow/ignore client-updates	允许/忽略客户机更新DNS记录。
+default-lease-time 21600	默认超时时间。
+max-lease-time 43200		最大超时时间。
+option domain-name-servers 8.8.8.8	定义DNS服务器地址。
+option domain-name "domain.org"		定义DNS域名。
+range				定义用于分配的IP地址池。
+option subnet-mask		定义客户机的子网掩码。
+option routers			定义客户机的网关地址。
+broadcase-address 广播地址	定义客户机的广播地址。
+ntp-server IP地址		定义客户机的网络时间服务器（NTP）。
+nis-serversIP地址		定义客户机的NIS域服务器的地址。
+hardware 硬件类型MAC地址	指定网卡接口的类型与MAC地址。
+server-name 主机名		通知DHCP客户机服务器的主机名。
+fixed-address IP地址		将某个固定IP地址分配给指定主机。
+time-offset 偏移差		指定客户机与格林尼治时间的偏移差。
+
+
+CL访问控制 
+
+Squid服务的ACL访问控制是非常有用的功能，可以根据特定条件来进行数据缓存或限
+制用户的访问，ACL元素的定义语法为：
+
+acl aclname acltype string
+acl aclname acltype "file"
+src定义来源地址（即用户的客户机IP地址）：
+acl aclname src ip-address/netmask
+acl aclname src addr1-addr2/netmask
+dst定义目标地址（即用户请求的网站IP地址）：
+acl aclname dst ip-address/netmask
+port用于指定访问端口：
+acl aclname port 80 1024
+acl aclname port 0-1024
+url_regex用于限制网址中的关键词：
+acl aclname url_regex [-i] pattern
+proto用于定义要代理的协议：
+acl aclname proto HTTP FTP
+method用于指定请求的方法：
+acl aclname method GET POST
+
+访问控制列表由多个规则条目组成的，根据指定的条件来允许或限制访问请求，
+匹配顺序会由上至下，一旦匹配则立即结束，通常会在控制列表的最下面写
+上“deny all”或者“allow all”来避免安全隐患。
+仅允许192.168.10.20的主机使用本地Squid服务，拒绝其余主机：
+acl client src 192.168.10.20
+http_access allow client
+http_access deny all
+
+拒绝客户机使用代理服务器访问带有关键词“linux”的网站：
+acl deny_keyword url_regex -i linux
+http_access deny deny_keyword
+
+拒绝客户机使用代理服务器访问《Linux就该这么学》的网站：
+acl deny_url url_regex http://www.linuxprobe.com
+http_access deny deny_url
+
+禁止客户机使用代理服务器下载以mp3与rar为后缀的文件：
+acl badfile urlpath_regex -i \.mp3$ \.rar$
+http_access deny badfile
+
+
+
+使用MariaDB数据库管理系统。
+
+数据库管理系统 
+
+数据库管理系统(即Database Management System)是一种能够对数据库进行建立、
+使用和维护的软件程序，数据库管理系统通过将计算机中具体的物理数据转换成适合用
+户理解的抽象逻辑数据，方便用户维护数据库的安全和可用性。
+
+MYSQL是一款大家都非常熟知的数据库管理系统，技术成熟、配置简单、开源免费并且
+有良好的扩展性，但是MYSQL在被Oracle公司收购后日渐陷从开源转变为了封闭，缓慢的
+更新让众多Linux发行版（如红帽RHEL7、Fedora、Centos、OpenSUSE、Slackware等等）
+以及诸多已经决定放弃使用这个往日最具人气的数据库管理系统，而转向到了MariaDB。
+
+MariaDB是MYSQL数据库管理系统的一个由开源社区维护的分支产品，完全兼容于MYSQL，
+坦白讲虽然Google与Wikipedia这样的行业巨头已经采用了MariaDB，但并不意味着会
+比MYSQL有明显的性能提升，而是从技术垄断角度作出的决定。
+
+初始化mariaDB服务程序 
+
+MariaDB相对于MYSQL来讲确实在功能上有很多扩展特性，比如微秒的支持、线程池、
+子查询优化、组提交、进度报告等。
+
+安装mariaDB服务程序：
+$ yum install mariadb mariadb-server
+
+启动mariadb服务程序并添加到开机启动项中：
+$ systemctl start mariadb
+$ systemctl enable mariadb
+$ ln -s '/usr/lib/systemd/system/mariadb.service'\
+	'/etc/systemd/system/multi-user.target.wants/mariadb.service'
+
+为了保证数据库的安全性，一定要进行初始化工作：
+第1步：设定root用户密码。
+第2步：删除匿名帐号。
+第3步：禁止root用户从远程登陆。
+第4步：删除test数据库并取消对其的访问权限。
+第5步：刷新授权表，让初始化后的设定立即生效。
+
+初始化数据库服务程序：
+$ mysql_secure_installation
+...
+Enter current password for root (enter for none): 
+		当前数据库密码为空，直接敲击回车。
+Set root password? [Y/n] y
+New password: 输入要为root用户设置的数据库密码。
+Re-enter new password: 重复再输入一次密码。
+Password updated successfully!
+
+Remove anonymous users? [Y/n] y（删除匿名帐号）
+Disallow root login remotely? [Y/n] y(禁止root用户从远程登陆)
+Remove test database and access to it? [Y/n] y(删除test数据库并取消对
+其的访问权限)
+Reload privilege tables now? [Y/n] y(刷新授权表，让初始化后的设定立即生效)
+
+设置防火墙对数据库服务的允许策略：
+$ firewall-cmd --permanent --add-service=mysql
+$ firewall-cmd --reload
+
+使用root用户登陆到数据库中：
+$ mysql -u root -p
+Enter password: 此处输入root用户在数据库中的密码。
+Welcome to the MariaDB monitor. Commands end with ; or \g.
+
+查看当前已有的数据库：
+MariaDB [(none)]> show databases;
+
+修改当前用户在数据库中的密码（示例中的密码为redhat）：
+
+MariaDB [(none)]> set password = password('redhat');
+
+使用旧的密码将不能再登陆到数据库：
+$ mysql -u root -p
+
+管理数据库与表单数据 
+创建用户并授权 
+
+创建一个新的数据库用户：
+创建数据库用户的命令:CREATE USER 用户名@主机名IDENTIFIED BY ‘密码’;
+MariaDB [(none)]> create user luke@localhost IDENTIFIED BY 'linuxprobe';
+Query OK, 0 rows affected (0.00 sec)
+
+进入到mysql数据库中：
+MariaDB [(none)]> use mysql;
+
+查看新创建的用户、主机、姓名与密码信息：
+MariaDB [mysql]> select host,user,password from user where user="luke";
+
+退出数据库后使用新用户登陆：
+MariaDB [mysql]> exit
+
+$ mysql -u luke -p
+Enter password: 此处输入luke用户的数据库密码
+
+此时只能查看到一个数据库：
+MariaDB [(none)]> show databases;
+
+数据库GRANT命令的授权操作常用方案：
+
+命令						作用
+
+GRANT 权限ON 数据库.表单名称TO 用户名@主机名	对某个特定数据库中的特定表单给予授权。
+
+GRANT 权限ON 数据库.* TO 用户名@主机名		对某个特定数据库中的所有表单给予授权。
+
+GRANT 权限ON *.* TO 用户名@主机名		对所有数据库及所有表单给予授权。
+
+GRANT 权限1,权限2 ON 数据库.* TO 用户名@主机名	对某个数据库中的所有表单给予多个授权。
+
+GRANT ALL PRIVILEGES ON *.* TO 用户名@主机名	对所有数据库及所有表单给予全部授权，（谨慎操作）。
+
+切换回root用户登陆数据库并进入到mysql数据库中：
+$ mysql -u root -p
+MariaDB [(none)]> use mysql;
+
+给予luke用户对user表单的查询、更新、删除、插入权限：
+MariaDB [mysql]> GRANT SELECT,UPDATE,DELETE,INSERT on mysql.user to luke@localhost;
+
+查看luke用户当前的授权：
+MariaDB[(none)]&gt; show grants for luke@localhost;
+
+再次切换到luke用户后查看可用的数据库：
+$ mysql -u luke -p
+
+进入到mysql数据库中看到user表单了：
+MariaDB [(none)]> use mysql
+MariaDB [mysql]> show tables;
+
+切换回root用户后取消刚刚全部的授权：
+MariaDB [(none)]> revoke SELECT,UPDATE,DELETE,INSERT on mysql.user from luke@localhost;
+
+再次查看luke用户的授权：
+MariaDB[(none)]&gt; show grantsforluke@localhost;
+
+创建数据库与表单 
+
+常用的数据库表单管理命令有：
+
+用法							作用
+
+CREATE database 数据库名称。				创建新的数据库。
+
+DESCRIBE 表单名称;					描述表单。
+
+UPDATE 表单名称SET attribute=新值WHERE attribute > 原始值;	更新表单中的数据。
+
+USE 数据库名称;						指定使用的数据库。
+
+SHOW databases;						显示当前已有的数据库。
+
+SHOW tables;					显示当前数据库中的表单。
+
+SELECT * FROM 表单名称;				从表单中选中某个记录值。
+
+DELETE FROM 表单名WHERE attribute=值;		从表单中删除某个记录值。
+
+
+
+创建一个新的数据库：
+MariaDB [(none)]> create database linuxprobe;
+
+查看当前已有的数据库：
+MariaDB [(none)]> show databases;
+
+切换到指定的数据库：
+MariaDB [(none)]> use linuxprobe;
+
+创建新的数据库表单：
+MariaDB [linuxprobe]> create table mybook(name char(15),price int,pages int);
+
+查看表单的结构描述：
+MariaDB [linuxprobe]> describe mybook;
+
+管理表单数据 
+
+向表单内插入新的书籍数据：
+MariaDB [linuxprobe]> INSERT INTO mybook(name,price,pages) VALUES('linuxprobe','60',518);
+
+查看表单中的数据值：
+MariaDB [linuxprobe]> select * from mybook;
+
++------------+-------+-------+
+| name | price | pages |
++------------+-------+-------+
+| linuxprobe | 60 | 518 |
++------------+-------+-------+
+1 rows in set (0.01 sec)
+
+将价格修改为55元：
+MariaDB [linuxprobe]> update mybook set price=55 ;
+
+只看书籍的名字和价格：
+MariaDB [linuxprobe]> select name,price from mybook;
+
++------------+-------+
+| name | price |
++------------+-------+
+| linuxprobe | 55 |
++------------+-------+
+1 row in set (0.00 sec)
+
+删除书籍表单中的内容：
+MariaDB [linuxprobe]> delete from mybook;
+MariaDB [linuxprobe]> select * from mybook;
+
+连续加入4条书籍记录值：
+MariaDB [linuxprobe]> INSERT INTO mybook(name,price,pages) VALUES('linuxprobe1','30',518);
+
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [linuxprobe]> INSERT INTO mybook(name,price,pages) VALUES('linuxprobe2','50',518);
+
+Query OK, 1 row affected (0.05 sec)
+
+MariaDB [linuxprobe]> INSERT INTO mybook(name,price,pages) VALUES('linuxprobe3','80',518);
+
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [linuxprobe]> INSERT INTO mybook(name,price,pages) VALUES('linuxprobe4','100',518);
+
+Query OK, 1 row affected (0.00 sec)
+
+where命令用于在数据库匹配查询的条件，可用的条件有：
+参数	作用
+=	相等。
+<>或!=	不相等。
+>	大于。
+<	小于。
+>=	大于或等于。
+<=	小于或等于。
+BETWEEN	在某个范围内。
+LIKE	搜索一个例子。
+IN	在列中搜索多个值。
+
+
+查看价格大于75元的书籍：
+MariaDB [linuxprobe]> select * from mybook where price>75;
+
+搜索价格不等于80元的书籍：
+MariaDB [linuxprobe]> select * from mybook where price!=80;
+
+数据库的备份与恢复
+mysqldump命令用于备份数据库数据，格式为：“mysqldump [参数] [数据库名称]”。
+
+参数		作用
+-u		数据库的用户名称。
+-p		密码提示符。
+--no-data	至备份数据库的描述结构，而不要数据。
+--lock-all-tables	备份完成后将不再允许修改数据。
+
+
+将书籍数据库文件（即linuxprobe）导出到家目录：
+$ mysqldump -u root -p linuxprobe > /root/linuxprobeDB.dump
+
+删除书籍数据库：
+MariaDB [linuxprobe]> drop database linuxprobe;
+
+MariaDB [(none)]> show databases;
+
+创建一个空的数据库：
+MariaDB [(none)]> create database linuxprobe;
+
+导入刚刚备份的数据库：
+$ mysql -u root -p linuxprobe < /root/linuxprobeDB.dump 
+
+果然又看到了刚刚创建的mybook表单：
+$ mysql -u root -p
+MariaDB [linuxprobe]> show tables;
+
+
+
+使用PXE+Kickstart部署无人值守安装。
+
+无人值守系统 
+
+坦白来讲，使用光盘或U盘这种传统物理方式安装系统效率真的很低，尤其当
+需要批量部署系统时更是明显。
+
+一般的机房设备都会在数百台以上，即便购买了数百张系统光盘，那您也必需对
+每台设备初始化安装向导，免不了会
+有选错的参数，更何况如此多的设备没有几天肯定装不完吧。
+
+其实我们可以用PXE+DHCP+TFTP+VSftpd+Kickstart部署出无人值守安装系统，
+这种系统能够实现自动化运维、避免了重复性劳动，帮助提升工作效率，对于DHCP已经
+是咱们学习过的了，所以这里就不再多说，小伙伴们如果
+忘记了可以翻去前面章节复习下。
+
+无人值守安装流程PXE(Preboot executeenvironment)是一种能够让计算机通过网络
+启动的引导方式，只要网卡支持PXE协议即可使用。
+
+Kickstart是一种无人值守的安装方式，工作原理就是预先把原本需要运维人员手工
+填写的参数保存成一个ks.cfg文件，当安装过程中出现需要填写参数时则自动匹配
+Kickstart生成的文件，所以只要Kickstart文件包含了安装过程中所有需要人工填写
+的参数，那么运维人员就完全不需要干预，等待安装完毕即可。
+
+简单文本传输协议TFTP(TrivialFileTransferProtocol)是一种基于UDP协议的传输协
+议，其与前面学习的vsftpd服务程序的FTP协议有很大不同，TFTP协议不具备FTP的许
+多功能（例如列出目录，密码认证等等），但TFTP协议配置非常简单，而且资源消耗
+更低，非常适合传输不敏感的文件。
+
+
+源码安装程序 
+
+在前面的章节中提到过在红帽软件包管理器（RPM）公布之前要想在Linux系统中安装
+软件只能采取“源码包”的方式安装服务程序，但是源码安装程序真是一件非常困难，
+耗费耐心的事情，不仅需要运维人员掌握更多的知识、高超的技能、甚至要很有耐心
+才能安装好一个程序，并且在安装、升级、卸载时还要考虑到其他程序、库的依赖关
+系，所以我们在前面的课程中都依赖于YUM仓库或RPM来安装服务程序，但这样也会有一
+些弊端。
+
+opensource很多软件产品只会以源码包的方式发布，如果只会用RPM命令就只能去互
+联网大海洋中慢慢寻找到由第三方组织或黑客们编写的RPM软件包后才能安装程序了，
+并且源码程序的可移植性非常好，可以针对不同的系统架构而正确运行，但RPM软件
+包则必需严格符合限制使用的平台和架构后才能顺利安装，所以建议即便在工作中可
+以很舒服的用Yum仓库来安装服务程序，源码安装的流程也一定要记清：
+
+第1步，解压文件：
+源码包通常会使用tar工具归档然后用gunzip或bzip2进行压缩，后缀格式会分
+别为.tar.gz与tar.bz2 ，解压方法：
+$ tar czvf FileName.tar.gz
+$ tar jxvf FileName.tar.bz2
+
+第2步，切换到解压后的目录：
+$ cd FileDirectory
+
+第3步：准备编译工作：
+在开始安装服务程序之前，需要执行configure脚本，他会自动的对当前系统进行一
+系列的评估，如源文件、软件依赖性库、编译器、汇编器、连接器检查等等，如果有
+需求，还可以使用–prefix参数来指定程序的安装路径（很实用），而当脚本检查系
+统环境符合要求后，则会在当前目录下生成一个Makefile文件。
+$ ./configure –prefix=/usr/local/program
+
+第4步：生成安装程序：
+刚刚生成的Makefile文件会保存有系统环境依赖关系和安装规则，接下来需要使
+用make命令来根据MakeFile文件提供的规则使用合适的SHELL来编译所有依赖的源
+码，然后make命令会生成一个最终可执行的安装程序。
+$ make
+
+第5步：安装服务程序：
+如果在configure脚本阶段中没有使用–prefix参数，那么程序一般会被默认安装
+到/usr/local/bin目录中。
+$ make install
+
+第6步：清理临时文件（可选）：
+$ make clean
+
+卸载服务程序的命令（请不要随便执行!!!）：
+$ make uninstall
+
+其实读者可能最纳闷的是漫长的configure与make步骤，RPM包为什么就可以那么
+有效率的安装，而不需要检测系统环境呢？
+其实原因很简单，RPM软件包是根据特定系统和平台而指定的，经常一种程序会提
+供很多RPM包的格式（如i386/x86_64等等），用户需要找到适合当前自己系统的RPM包
+后才能顺利的安装，而源码包的程序作者肯定希望自己的软件能够被安装到更多的系统
+中，被更多的用户使用，所以就必需要用configure脚本来检查用户当前系统的
+情况，最终制定出一份可行的安装方案。
+
+部署LNMP架构 
+
+LNMP（即Linux+Nginx+MYSQL+PHP）是目前非常热门的动态网站部署架构，
+一般是指：
+Linux:如RHEL、Centos、Debian、Fedora、Ubuntu等系统。
+Nginx:高性能、低消耗的HTTP与反向代理服务程序。
+MYSQL:热门常用的数据库管理软件。
+PHP:一种能够在服务器端执行的嵌入HTML文档的脚本语言。
+
+通过将这四种开源软件部署在一起，便成为了一个免费、高效、扩展性强、资源消耗低
+的动态网站环境了。
+
+设置防火墙允许数据库与网站服务策略：
+$ iptables -F
+$ firewall-cmd --permanent --add-service=mysql
+$ firewall-cmd --permanent --add-service=http
+$ firewall-cmd --reload
+
+下载所有需要使用的软件包到/usr/local/src目录（17个文件）：
+$ cd /usr/local/src
+$ wget http://www.linuxprobe.com/Tools/cmake-2.8.11.2.tar.gz
+$ wget http://www.linuxprobe.com/Tools/Discuz_X3.2_SC_GBK.zip
+$ wget http://www.linuxprobe.com/Tools/freetype-2.5.3.tar.gz
+$ wget http://www.linuxprobe.com/Tools/jpegsrc.v9a.tar.gz
+$ wget http://www.linuxprobe.com/Tools/libgd-2.1.0.tar.gz
+$ wget http://www.linuxprobe.com/Tools/libmcrypt-2.5.8.tar.gz
+$ wget http://www.linuxprobe.com/Tools/libpng-1.6.12.tar.gz
+$ wget http://www.linuxprobe.com/Tools/libvpx-v1.3.0.tar.bz2
+$ wget http://www.linuxprobe.com/Tools/mysql-5.6.19.tar.gz
+$ wget http://www.linuxprobe.com/Tools/nginx-1.6.0.tar.gz
+$ wget http://www.linuxprobe.com/Tools/openssl-1.0.1h.tar.gz
+$ wget http://www.linuxprobe.com/Tools/php-5.5.14.tar.gz
+$ wget http://www.linuxprobe.com/Tools/pcre-8.35.tar.gz
+$ wget http://www.linuxprobe.com/Tools/t1lib-5.1.2.tar.gz
+$ wget http://www.linuxprobe.com/Tools/tiff-4.0.3.tar.gz
+$ wget http://www.linuxprobe.com/Tools/yasm-1.2.0.tar.gz
+$ wget http://www.linuxprobe.com/Tools/zlib-1.2.8.tar.gz
+
+安装编译工具及库文件（需要安装的程序比较多，请复制全！）：
+
+$ yum install -y apr* autoconf automake bison bzip2 bzip2* compat* cpp curl curl-devel 
+fontconfig fontconfig-devel freetype freetype* freetype-devel gcc gcc-c++ gd gettext gettext-devel glibc 
+kernel kernel-headers keyutils keyutils-libs-devel krb5-devel libcom_err-devel libpng libpng-devel libjpeg* 
+libsepol-devel libselinux-devel libstdc++-devel libtool* libgomp libxml2 libxml2-devel libXpm* libtiff libtiff* 
+make mpfr ncurses* ntp openssl openssl-devel patch pcre-devel perl php-common php-gd policycoreutils 
+telnet t1lib t1lib* nasm nasm* wget zlib-devel
+
+安装cmake编译工具（解压与编译过程已省略）：
+$ cd /usr/local/src
+$ ls
+$ tar xzvf cmake-2.8.11.2.tar.gz
+$ cd cmake-2.8.11.2/
+$ ./configure
+$ make 
+$ make install
+
+
+配置Mysql服务 
+
+创建用于执行mysql服务程序的帐号：
+$ cd /usr/local/src
+$ useradd mysql -s /sbin/nologin
+
+创建数据库程序和文件的目录，并设置目录的所属与所组：
+$ mkdir -p /usr/local/mysql/var
+$ chown -Rf mysql:mysql /usr/local/mysql/var
+
+安装Mysql服务程序（解压与编译过程已省略）：
+$ tar xzvf mysql-5.6.19.tar.gz
+$ cd mysql-5.6.19/
+$ cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -
+DMYSQL_DATADIR=/var/local/mysql/var -DSYSCONFDIR=/etc
+
+删除系统默认的配置文件：
+$ rm -rf /etc/my.cnf
+
+生成系统数据库（生成信息已省略）：
+$ cd /usr/local/mysql/
+$ ./scripts/mysql_install_db --user=mysql --basedir=/usr/local/mysql --
+datadir=/usr/local/mysql/var
+$ make
+$ make install
+
+创建配置文件的软连接文件：
+$ ln -s /usr/local/mysql/my.cnf /etc/my.cnf 
+
+将mysqld服务程序添加到开机启动项：
+$ cp ./support-files/mysql.server /etc/rc.d/init.d/mysqld
+$ chmod 755 /etc/init.d/mysqld
+$ chkconfig mysqld on
+
+编辑启动项的配置文件：
+$ vim /etc/rc.d/init.d/mysqld 
+
+//分别修改第46与47行，basedir为程序安装路径，datadir为数据库存放目录。
+basedir=/usr/local/mysql
+datadir=/usr/local/mysql/var
+
+重启mysqld服务程序：
+$ systemctl restart mysqld
+
+把mysql服务程序命令目录添加到环境变量中（永久生效）：
+$ vim /etc/profile
+//在配置文件的最下面追加：
+export PATH=$PATH:/usr/local/mysql/bin
+
+$ source /etc/profile
+
+将mysqld服务程序的库文件链接到默认的位置：
+$ mkdir /var/lib/mysql
+$ ln -s /usr/local/mysql/lib/mysql /usr/lib/mysql
+$ ln -s /usr/local/mysql/include/mysql /usr/include/mysql
+$ ln -s /tmp/mysql.sock /var/lib/mysql/mysql.sock
+
+初始化mysqld服务程序：
+$ mysql_secure_installation
+Set root password? [Y/n] y 
+
+New password: 输入要为root用户设置的数据库密码。
+Re-enter new password: 重复再输入一次密码。
+
+Remove anonymous users? [Y/n] y（删除匿名帐号）
+
+Disallow root login remotely? [Y/n] y(禁止root用户从远程登陆)
+
+Remove test database and access to it? [Y/n] y(删除test数据库并
+取消对其的访问权限)
+
+Reload privilege tables now? [Y/n] y(刷新授权表，让初始化后的设定立即生效)
+
+
+
+配置Nginx服务 
+
+Nginx是一款相当优秀的用于部署动态网站的服务
+程序，Nginx最初是为俄罗斯门户站点而设计的网
+站服务软件，作为作为一款轻量级的网站服务软
+件，因其稳定性和丰富的功能而深受信赖，但最最
+最被认可的是低系统资源、占用内存少且并发能力
+强，目前国内如新浪、网易、腾讯等门户站均在使用，市场占有份额一直保持
+在15-16%左右。Nginx程序的稳定性来自于它采用了分阶段的资源分配技术，使
+得CPU与内存占用率会非常低，所以使用Nginx程序部署动态网站环境不仅十分
+的稳定、高效，而且消耗更少的系统资源，丰富的模块功能也几乎与Apache程序数
+量相同，现在已经完全的支持了proxy、rewrite、mod_fcgi、ssl、vhosts等常
+用模块。而且还支持了热部署技术，即能够可以7*24不间断提供服务，即便运行
+数月也无须重启，而且还可以在不暂停服务的情况下直接对Nginx服
+务程序进行升级。
+
+Nginx与Apache坦白来讲，虽然Nginx程序的代码质量非常高，代码很规范，技术
+成熟，模块扩展也很容易，但Nginx依然存在不少问题，比如Nginx是由俄罗斯人
+创建的，所以在资料文档方面还并不完善，中文教材的质量更是鱼龙混杂，但Nginx
+近年来增长势头迅猛，预测未来应该能够在轻量级HTTP服务器市场有不错的未来。
+
+安装PCRE（Perl兼容的正则表达式库，解压与编译过程已省略）：
+$ cd /usr/local/src
+$ mkdir /usr/local/pcre
+$ tar xzvf pcre-8.35.tar.gz 
+$ ./configure --prefix=/usr/local/pcre
+$ make
+$ make install 
+
+安装openssl服务程序（解压与编译过程已省略）：
+$ cd /usr/local/src
+$ mkdir /usr/local/openssl
+$ tar xzvf openssl-1.0.1h.tar.gz
+$ cd pcre-8.35/
+$ ./configure --prefix=/usr/local/openssl
+$ make
+$ make install 
+
+把openssl服务程序命令目录添加到环境变量中（永久生效）：
+$ vim /etc/profile
+//将配置文件最下面的参数追加参数为：
+export PATH=$PATH:/usr/local/mysql/bin:/usr/local/openssl/bin
+
+$ source /etc/profile
+
+安装zlib数据压缩函数库（解压与编译过程已省略）：
+$ cd /usr/local/src
+$ mkdir /usr/local/zlib
+$ tar xzvf zlib-1.2.8.tar.gz 
+$ ./configure --prefix=/usr/local/zlib
+$ make
+$ make install
+
+创建用于执行nginx服务的用户：
+$ cd /usr/local/src
+$ useradd www -s /sbin/nologin
+
+安装nginx服务程序（openssl,zlib,pcre要写成源码解压路径!!!）：
+$ tar xzvf nginx-1.6.0.tar.gz 
+$ cd nginx-1.6.0/
+$ ./configure --prefix=/usr/local/nginx --without-http_memcached_module --user=www --
+group=www --with-http_stub_status_module --with-http_ssl_module --with-http_gzip_static_module --with-
+openssl=/usr/local/src/openssl-1.0.1h --with-zlib=/usr/local/src/zlib-1.2.8 --with-pcre=/usr/local/src/pcre-8.35
+
+$ make
+$ make install
+
+创建nginx程序脚本（将下面的参数直接复制进去即可）：
+$ vim /etc/rc.d/init.d/nginx
+
+#!/bin/bash
+# nginx -this script starts and stops the nginx daemon
+# chkconfig: -85 15
+# description: Nginx is an HTTP(S) server, HTTP(S) reverse \
+# proxy and IMAP/POP3 proxy server
+# processname: nginx
+# config: /etc/nginx/nginx.conf
+# config: /usr/local/nginx/conf/nginx.conf
+# pidfile: /usr/local/nginx/logs/nginx.pid
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ "$NETWORKING" = "no" ] && exit 0
+nginx="/usr/local/nginx/sbin/nginx"
+prog=$(basename $nginx)
+NGINX_CONF_FILE="/usr/local/nginx/conf/nginx.conf"
+[ -f /etc/sysconfig/nginx ] && . /etc/sysconfig/nginx
+lockfile=/var/lock/subsys/nginx
+
+make_dirs() {
+# make required directories
+user=`$nginx -V 2>&1 | grep "configure arguments:" | sed 's/[^*]*--user=\([^ ]*\).*/\1/g' -`
+	if [ -z "`grep $user /etc/passwd`" ]; then
+		useradd -M -s /bin/nologin $user
+	fi
+options=`$nginx -V 2>&1 | grep 'configure arguments:'`
+
+for opt in $options; do
+	if [ `echo $opt | grep '.*-temp-path'` ]; then
+		value=`echo $opt | cut -d "=" -f 2`
+		if [ ! -d "$value" ]; then
+			# echo "creating" $value
+			mkdir -p $value && chown -R $user $value
+		fi
+	fi
+done
+}
+
+start() {
+	[ -x $nginx ] || exit 5
+	[ -f $NGINX_CONF_FILE ] || exit 6
+	make_dirs
+	echo -n $"Starting $prog: "
+	daemon $nginx -c $NGINX_CONF_FILE
+	retval=$?
+	echo
+	[ $retval -eq 0 ] && touch $lockfile
+	return $retval
+}
+
+stop() {
+	echo -n $"Stopping $prog: "
+	killproc $prog -QUIT
+	retval=$?
+	echo
+	[ $retval -eq 0 ] && rm -f $lockfile
+	return $retval
+}
+
+restart() {
+	#configtest || return $?
+	stop
+	sleep 1
+	start
+}
+
+reload() {
+	#configtest || return $?
+	echo -n $"Reloading $prog: "
+	killproc $nginx -HUP
+	RETVAL=$?
+	echo
+}
+
+force_reload() {
+	restart
+}
+
+configtest() {
+	$nginx -t -c $NGINX_CONF_FILE
+}
+
+rh_status() {
+	status $prog
+}
+
+rh_status_q() {
+	rh_status >/dev/null 2>&1
+}
+
+
+case "$1" in
+start)
+	rh_status_q && exit 0
+	$1
+	;;
+stop)
+	rh_status_q || exit 0
+	$1
+	;;
+restart|configtest)
+	$1
+	;;
+reload)
+	rh_status_q || exit 7
+	$1
+	;;
+force-reload)
+	force_reload
+	;;
+status)
+	rh_status
+	;;
+condrestart|try-restart)
+	rh_status_q || exit 0
+	;;
+*)
+	echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest}"
+	exit 2
+esac
+
+$ chmod 755 /etc/rc.d/init.d/nginx
+
+重启nginx服务程序并添加到开机启动项：
+$ /etc/rc.d/init.d/nginx restart
+$ chkconfig nginx on
+
+此时可以通过访问IP来判断nginx服务是否顺利运行
+
+
+配置php服务 
+
+安装yasm汇编器（解压与编译过程已省略）：
+$ cd /usr/local/src
+$ tar zxvf yasm-1.2.0.tar.gz
+$ cd yasm-1.2.0
+$ ./configure
+$ make
+$ make install
+
+安装libmcrypt加密算法扩展库（解压与编译过程已省略）：
+$ cd /usr/local/src
+$ tar zxvf libmcrypt-2.5.8.tar.gz
+$ cd libmcrypt-2.5.8
+$ ./configure
+$ make
+$ make install
+
+安装libvpx视频编码器（解压与编译过程已省略）：
+$ cd /usr/local/src
+$ tar xjvf libvpx-v1.3.0.tar.bz2
+$ cd libvpx-v1.3.0
+$ ./configure --prefix=/usr/local/libvpx --enable-shared --enable-vp9
+$ make
+$ make install
+
+安装Tiff标签图像文件格式（解压与编译过程已省略）：
+$ cd /usr/local/src
+$ tar zxvf tiff-4.0.3.tar.gz
+$ cd tiff-4.0.3
+$ ./configure --prefix=/usr/local/tiff --enable-shared
+$ make
+$ make install
+
+安装libpng图片（png格式）函数库（解压与编译过程已省略）：
+$ cd /usr/local/src
+$ tar zxvf libpng-1.6.12.tar.gz
+$ cd libpng-1.6.12
+$ ./configure --prefix=/usr/local/libpng --enable-shared
+$ make
+$ make install
+
+安装freetype字体引擎（解压与编译过程已省略）：
+$ cd /usr/local/src
+$ tar zxvf freetype-2.5.3.tar.gz
+$ cd freetype-2.5.3
+$ ./configure --prefix=/usr/local/freetype --enable-shared
+$ make
+$ make install
+
+安装libpng图片（jpeg格式）函数库（解压与编译过程已省略）：
+$ cd /usr/local/src
+$ tar zxvf jpegsrc.v9a.tar.gz
+$ cd jpeg-9a
+$ ./configure --prefix=/usr/local/jpeg --enable-shared
+$ make
+$ make install
+
+安装libgd图像处理程序（解压与编译过程已省略）：
+$ cd /usr/local/src
+$ tar zxvf libgd-2.1.0.tar.gz
+$ cd libgd-2.1.0
+$ ./configure --prefix=/usr/local/libgd --enable-shared --with-jpeg=/usr/local/jpeg --
+with-png=/usr/local/libpng --with-freetype=/usr/local/freetype --with-fontconfig=/usr/local/freetype --with-
+xpm=/usr/ --with-tiff=/usr/local/tiff --with-vpx=/usr/local/libvpx
+$ make
+$ make install
+
+安装t1lib图片生成函数库（解压与编译过程已省略）：
+$ cd/usr/local/src
+$ tar zxvf t1lib-5.1.2.tar.gz
+$ cd t1lib-5.1.2
+$ ./configure --prefix=/usr/local/t1lib --enable-shared
+$ make
+$ make install
+
+将函数库文件放至合适的位置：
+$ cd /usr/local/src
+$ ln -s /usr/lib64/libltdl.so /usr/lib/libltdl.so
+$ cp -frp /usr/lib64/libXpm.so* /usr/lib/
+
+安装php服务程序（命令比较长，请一定要复制完整!!!）：
+$ tar -zvxf php-5.5.14.tar.gz
+$ cd php-5.5.14
+$ export LD_LIBRARY_PATH=/usr/local/libgd/lib
+$ ./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc--with-
+mysql=/usr/local/mysql --with-mysqli=/usr/local/mysql/bin/mysql_config --with-mysql-sock=/tmp/mysql.sock --
+with-pdo-mysql=/usr/local/mysql --with-gd --with-png-dir=/usr/local/libpng --with-jpeg-dir=/usr/local/jpeg --with-
+freetype-dir=/usr/local/freetype --with-xpm-dir=/usr/ --with-vpx-dir=/usr/local/libvpx/ --with-zlib-dir=/usr/local/zlib 
+
+--with-t1lib=/usr/local/t1lib --with-iconv --enable-libxml --enable-xml --enable-bcmath --enable-shmop --enable-
+sysvsem --enable-inline-optimization --enable-opcache --enable-mbregex --enable-fpm --enable-mbstring --enable-ftp --
+enable-gd-native-ttf --with-openssl --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --without-
+pear --with-gettext --enable-session --with-mcrypt --with-curl --enable-ctype
+
+$ make
+$ make install
+
+复制php服务程序的配置文件到安装目录：
+$ cp php.ini-production /usr/local/php/etc/php.ini
+
+删除默认的php配置文件：
+$ rm -rf /etc/php.ini
+
+创建php配置文件的软连接到/etc/目录中：
+$ cp /usr/local/php/etc/php-fpm.conf.default\
+	 /usr/local/php/etc/php-fpm.conf
+$ ln -s /usr/local/php/etc/php-fpm.conf\
+	 /etc/php-fpm.conf
+$ ln -s /usr/local/php/etc/php.ini /etc/php.ini
+
+编辑php服务程序的配置文件：
+$ vim /usr/local/php/etc/php-fpm.conf
+//将第25行参数前面的分号去掉。
+pid = run/php-fpm.pid
+//修改第148和149行，将user与group修改为www。
+user = www
+group = www
+
+添加php-fpm服务程序到开机启动项：
+$ cp sapi/fpm/init.d.php-fpm /etc/rc.d/init.d/php-fpm
+$ chmod +x /etc/rc.d/init.d/php-fpm
+$ chkconfig php-fpm on
+
+为了保障网站的安全性，禁用掉不安全的功能：
+$ vim /usr/local/php/etc/php.ini
+//修改第305行的disable_functions参数，追加参数为：
+disable_functions = 
+passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,
+proc_open,proc_get_status,ini_alter,ini_alter,ini_restore,dl,
+openlog,syslog,readlink,symlink,popepassthru,
+stream_socket_server,escapeshellcmd,dll,popen,disk_free_space,
+checkdnsrr,checkdnsrr,getservbyname,getservbyport,
+disk_total_space,posix_ctermid,posix_get_last_error,posix_getcwd,
+posix_getegid,posix_geteuid,posix_getgid,posix_getgrgid,
+posix_getgrnam,posix_getgroups,posix_getlogin,posix_getpgid,
+posix_getpgrp,posix_getpid,posix_getppid,posix_getpwnam,
+posix_getpwuid,posix_getrlimit,posix_getsid,posix_getuid,
+posix_isatty,posix_kill,posix_mkfifo,posix_setegid,posix_seteuid,
+posix_setgid,posix_setpgid,posix_setsid,posix_setuid,
+posix_strerror,posix_times,posix_ttyname,posix_uname
+
+配置nginx服务程序支持php：
+$ vim /usr/local/nginx/conf/nginx.conf
+//将第2行前面的#号去掉并修改为user www www ;
+//将第44行参数修改为index index.html index.htm index.php;
+//将第64-71行前面的#号去掉，修改为：
+location ~ \.php$ {
+ root html;
+ fastcgi_pass 127.0.0.1:9000;
+fastcgi_index index.php;
+ fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+ include fastcgi_params;
+ }
+
+重启nginx与php-fpm服务程序：
+$ systemctl restart nginx
+$ systemctl restart php-fpm
+
+
+搭建discuz论坛 
+
+将discuz论坛数据放至网站目录(解压过程已省略)：
+$ cd /usr/local/src/
+$ unzip Discuz_X3.2_SC_GBK.zip
+$ rm -rf /usr/local/nginx/html/{index.html,50x.html}
+$ mv upload/* /usr/local/nginx/html/
+$ chown -Rf www:www /usr/local/nginx/html
+$ chmod -Rf 755 /usr/local/nginx/html
+
+第1步：接受许可协议
+第2步，检查部署环境
+第3步：选择全新安装discuz!X论坛
+第4步，填写数据库与论坛管理员信息
+第5步，等待安装完毕
+第6步，discuz论坛顺利安装完毕
+第7步，访问论坛主页面
+
+

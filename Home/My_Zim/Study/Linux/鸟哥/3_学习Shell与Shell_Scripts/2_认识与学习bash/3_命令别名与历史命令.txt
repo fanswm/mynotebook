@@ -1,0 +1,117 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-11T16:42:19+08:00
+
+====== 3 命令别名与历史命令 ======
+Created Monday 11 December 2017
+
+3. 命令别名与历史命令
+　　3.1 命令别名配置： alias, unalias
+　　3.2 历史命令： history, HISTSIZE
+
+__命令别名配置： alias, unalias__
+
+[root@www ~]# alias lm='ls -al | more'
+另外，命令别名的配置还可以取代既有的命令喔！举例来说，我们知道 root 可以移除 (rm) 任何数据！所以当你以 root 的身份在进行工作时，需要特别小心， 但是总有失手的时候，那么 rm 提供了一个选项来让我们确认是否要移除该文件，那就是 -i 这个选项！所以，你可以这样做：
+
+__[root@www ~]# alias rm='rm -i'__
+那么以后使用 rm 的时候，就不用太担心会有错误删除的情况了！这也是命令别名的优点啰！ 那么如何知道目前有哪些的命令别名呢？就使用 alias 呀！
+
+[root@www ~]# alias
+__alias cp='cp -i'__
+__alias l.='ls -d .* --color=tty'__
+__alias ll='ls -l --color=tty'__
+__alias lm='ls -l | more'__
+__alias ls='ls --color=tty'__
+__alias mv='mv -i'__
+__alias rm='rm -i'__
+__alias which='alias | /usr/bin/which --tty-only --show-dot --show-tilde'__
+由上面的数据当中，你也会发现一件事情啊，我们在第十章的 vim 程序编辑器里面提到 vi 与 vim 是不太一样的，vim 可以多作一些额外的语法检验与颜色显示，默认的 root 是单纯使用 vi 而已。 如果你想要使用 vi 就直接以 vim 来开启文件的话，使用『 alias vi='vim' 』这个配置即可。 至于如果要取消命令别名的话，那么就使用 unalias 吧！例如要将刚刚的 lm 命令别名拿掉，就使用：
+
+[root@www ~]# unalias lm
+那么命令别名与变量有什么不同呢？命令别名是『新创一个新的命令， 你可以直接下达该命令』的，至于变量则需要使用类似『 echo 』命令才能够呼叫出变量的内容！ 这两者当然不一样！很多初学者在这里老是搞不清楚！要注意啊！ ^_^
+
+例题：
+DOS 年代，列出目录与文件就是 dir ，而清除屏幕就是 cls ，那么如果我想要在 linux 里面也使用相同的命令呢？
+答：
+很简单，透过 clear 与 ls 来进行命令别名的建置：
+alias cls='clear'
+alias dir='ls -l'
+
+__历史命令：history__
+前面我们提过 bash 有提供命令历史的服务！那么如何查询我们曾经下达过的命令呢？就使用 history 啰！当然，如果觉得 histsory 要输入的字符太多太麻烦，可以使用命令别名来配置呢！ 不要跟我说还不会配置呦！ ^_^
+
+[root@www ~]# alias h='history'
+如此则输入 h 等于输入 history 啰！好了，我们来谈一谈 history 的用法吧！
+
+[root@www ~]# history [n]
+[root@www ~]# history [-c]
+[root@www ~]# history [-raw] histfiles
+__选项与参数：__
+__n   ：数字，意思是『要列出最近的 n 笔命令行表』的意思！__
+__-c  ：将目前的 shell 中的所有 history 内容全部消除__
+__-a  ：将目前新增的 history 命令新增入 histfiles 中，若没有加 histfiles ，__
+	__  则默认写入 ~/.bash_history__
+__-r  ：将 histfiles 的内容读到目前这个 shell 的 history 记忆中；__
+__-w  ：将目前的 history 记忆内容写入 histfiles 中！__
+
+范例一：列出目前内存内的所有 history 记忆
+[root@www ~]# history
+# 前面省略
+ 1017  man bash
+ 1018  ll
+ 1019  history 
+ 1020  history
+# 列出的信息当中，共分两栏，第一栏为该命令在这个 shell 当中的代码，
+# 另一个则是命令本身的内容喔！至于会秀出几笔命令记录，则与 HISTSIZE 有关！
+
+范例二：列出目前最近的 3 笔数据
+[root@www ~]# history 3
+ 1019  history 
+ 1020  history
+ 1021  history 3
+
+__范例三：立刻将目前的数据写入 histfile 当中__
+__[root@www ~]# history -w__
+# 在默认的情况下，会将历史纪录写入 ~/.bash_history 当中！
+[root@www ~]# echo $HISTSIZE
+1000
+在正常的情况下，历史命令的读取与记录是这样的：
+
+当我们以 bash 登陆 Linux 主机之后，系统会主动的由家目录的 ~/.bash_history 读取以前曾经下过的命令，那么 ~/.bash_history 会记录几笔数据呢？这就与你 bash 的 HISTFILESIZE 这个变量配置值有关了！
+
+假设我这次登陆主机后，共下达过 100 次命令，『等我注销时， 系统就会将 101~1100 这总共 1000 笔历史命令升级到 ~/.bash_history 当中。』 也就是说，历史命令在我注销时，会将最近的 HISTFILESIZE 笔记录到我的纪录文件当中啦！
+
+当然，也可以用 history -w 强制立刻写入的！那为何用『升级』两个字呢？ 因为 ~/.bash_history 记录的笔数永远都是 HISTFILESIZE 那么多，旧的信息会被主动的拿掉！ 仅保留最新的！
+那么 history 这个历史命令只可以让我查询命令而已吗？呵呵！当然不止啊！ 我们可以利用相关的功能来帮我们运行命令呢！举例来说啰：
+
+__[root@www ~]# !number__
+__[root@www ~]# !command__
+__[root@www ~]# !!__
+__选项与参数：__
+__number  ：运行第几笔命令的意思；__
+__command ：由最近的命令向前搜寻『命令串开头为 command』的那个命令，并运行；__
+__!!      ：就是运行上一个命令(相当于按↑按键后，按 Enter)__
+
+[root@www ~]# history
+   66  man rm
+   67  alias
+   68  man history
+   69  history 
+[root@www ~]# !66  <==运行第 66 笔命令
+[root@www ~]# !!   <==运行上一个命令，本例中亦即 !66 
+[root@www ~]# !al  <==运行最近以 al 为开头的命令(上头列出的第 67 个)
+经过上面的介绍，瞭乎？历史命令用法可多了！如果我想要运行上一个命令， 除了使用上下键之外，我可以直接以『 !! 』 来下达上个命令的内容，此外， 我也可以直接选择下达第 n 个命令，『 !n 』来运行，也可以使用命令标头，例如 『 !vi 』来运行最近命令开头是 vi 的命令列！相当的方便而好用！
+
+基本上 history 的用途很大的！但是需要小心安全的问题！尤其是 root 的历史纪录文件，这是 Cracker 的最爱！因为不小心的 root 会将很多的重要数据在运行的过程中会被纪录在 ~/.bash_history 当中，如果这个文件被解析的话，后果不堪吶！无论如何，使用 history 配合『 ! 』曾经使用过的命令下达是很有效率的一个命令下达方法！
+
+
+同一账号同时多次登陆的 history 写入问题
+有些朋友在练习 linux 的时候喜欢同时开好几个 bash 接口，这些 bash 的身份都是 root 。 这样会有 ~/.bash_history 的写入问题吗？想一想，因为这些 bash 在同时以 root 的身份登陆， 因此所有的 bash 都有自己的 1000 笔记录在内存中。因为等到注销时才会升级记录文件，所以啰， 最后注销的那个 bash 才会是最后写入的数据。唔！如此一来其他 bash 的命令操作就不会被记录下来了 (其实有被记录，只是被后来的最后一个 bash 所覆盖升级了) 。
+
+由于多重登陆有这样的问题，所以很多朋友都习惯单一 bash 登陆，再用工作控制 (job control, 第四篇会介绍) 来切换不同工作！ 这样才能够将所有曾经下达过的命令记录下来，也才方便未来系统管理员进行命令的 debug 啊！
+
+
+__无法记录时间__
+历史命令还有一个问题，那就是无法记录命令下达的时间。由于这 1000 笔历史命令是依序记录的， 但是并没有记录时间，所以在查询方面会有一些不方便。如果读者们有兴趣，__其实可以透过 ~/.bash_logout 来进行 history 的记录，并加上 date 来添加时间参数，__也是一个可以应用的方向喔！ 有兴趣的朋友可以先看看情境模拟题一吧！
+

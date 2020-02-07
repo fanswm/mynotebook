@@ -1,0 +1,28 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-01T14:00:27+08:00
+
+====== 如何修改树莓派的主机名 ======
+创建日期 星期五 01 三月 2019
+
+在支持 mDNS(multicast DNS) 的局域网中，使用主机名加上”.local”即可直接访问主机名对应的设备。例如，树莓派 Raspbian 系统默认的主机名为 raspberrypi，那么当树莓派接入网络之后，就可以使用 ping raspberrypi.local 来获得树莓派IP地址，当然也可以通过 http://raspberrypi.local 来访问树莓派的80端口上的 Web 服务（如果已经部署了的话）。
+
+下面要介绍的是，如果修改树莓派的主机名，这样即便在有多个树莓派同时运行时也可以加以区分。
+
+首先登录树莓派，修改 hosts 文件，命令如下：
+
+1
+sudo nano /etc/hosts
+你会看到下面这行：
+
+127.0.1.1    raspberrypi
+将 raspberrypi 替换成要修改的名字。然后按 Ctrl+O 保存所做的修改，按 Ctrl+X 退出。下面是一个修改后的例子：
+
+127.0.1.1    shumeipai
+修改 hostname 文件
+
+1
+sudo nano /etc/hostname
+默认情况下，这个文件只包含 raspberrypi 这一个名字。请将这里也替换成要修改的名字。
+
+最后，重启树莓派。

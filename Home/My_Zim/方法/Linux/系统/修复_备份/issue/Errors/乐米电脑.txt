@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-22T11:16:55+08:00
+
+====== 乐米电脑 ======
+Created 星期日 22 七月 2018
+
+acad2007\program files\root\support\dfst.dll
+vel.arx
+fail to get CommCntrController
+2018/7/22
+

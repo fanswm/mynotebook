@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T06:55:58+08:00
+
+====== PyCharm ======
+创建日期 星期三 22 十一月 2017
+
+for Python
+
+http://www.jetbrains.com/pycharm/
+http://www.jetbrains.com/pycharm/download/#section=linux
+
+sudo snap install [pycharm-professional|pycharm-community] --classic
+
+Python IDE之 pycharm的十大奇技淫巧（分享自知乎网）https://zhuanlan.zhihu.com/p/52040964?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+

@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-04T22:41:09+08:00
+
+====== QEMU ======
+创建日期 星期日 04 十一月 2018
+
+
+https://www.qemu.org/
+因为本书是关于安装和运行 FreeDOS 的，所以我需要实际运行 FreeDOS。你可以在任何 PC 模拟器中启动 FreeDOS，包括 VirtualBox、QEMU、GNOME Boxes、PCem 和 Bochs。但我喜欢 QEMU[10] 的简单性。QEMU 控制台允许你以 PPM 格式转储屏幕，这非常适合抓取截图来包含在书中

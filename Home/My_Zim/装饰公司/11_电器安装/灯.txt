@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-24T16:51:04+08:00
+
+====== 灯 ======
+Created Tuesday 24 July 2018
+
+人体感应灯

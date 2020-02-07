@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-21T15:09:20+08:00
+
+====== 在线制作树状图 ======
+创建日期 星期一 21 一月 2019
+
+http://www.lizibuluo.com/tree/
+
+LZ树状图是一个在线制作树状图网站，它只需要很简单的拖拽操作，就可以帮你轻松制作：LZ柱形折线图 ， LZ日程表 ，LZ饼状图 ， LZ雷达图 ，LZ思维导图等等。
+

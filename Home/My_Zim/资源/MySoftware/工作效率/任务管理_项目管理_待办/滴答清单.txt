@@ -1,0 +1,14 @@
+﻿Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-27T13:35:44+08:00
+
+====== 滴答清单 ======
+Created Monday 27 November 2017
+
+功能简述：多平台同步的待办事项和任务提醒软件
+适用平台：现在的平台基本都支持
+
+https://www.dida365.com/
+
+abstracth@163.com
+123

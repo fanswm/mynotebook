@@ -1,0 +1,18 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-04-05T11:20:02+08:00
+
+====== 作为函数的参数 ======
+Created Thursday 05 April 2018
+
+数组可以作为参数传递给方法。
+
+例如，下面的例子就是一个打印 int 数组中元素的方法:
+public static void printArray(int[] array) {
+  for (int i = 0; i < array.length; i++) {
+    System.out.print(array[i] + " ");
+  }
+}
+
+下面例子调用 printArray 方法打印出 3，1，2，6，4 和 2：
+printArray(new int[]{3, 1, 2, 6, 4, 2});

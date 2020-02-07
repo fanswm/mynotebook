@@ -1,0 +1,69 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-24T13:13:00+08:00
+
+====== 重装系统之前这样备份你的油猴脚本 ======
+Created Wednesday 24 January 2018
+
+重装系统之前这样备份你的油猴脚本
+Eric_hong Eric_hong 01月19日  74  11
+
+https://sspai.com/post/42878
+
+前段时间，家里电脑💻重装系统时，需要解决如何备份 Chrome 扩展神器之一 Tampermonkey 上几十款用户脚本，便于在新系统上同步这些用户脚本，无需再次重复搜索、安装。
+
+所以这篇使用技巧的分享文希望解决的正是，如何实现大量油猴脚本备份和同步的需求，碰到重装电脑或者不同设备之间，快速迁移同步油猴脚本。
+
+油猴网站的收藏功能
+
+对于经常查找油猴脚本的用户来说，[GreasyFork](https://greasyfork.org/zh-CN/) 是一个发现优秀脚本的站点，用户注册登录 GF 账号后，可以将喜欢的脚本收藏起来，点开要安装的油猴脚本页面，提示可将脚本添加到收藏或者新的收藏集里，以后只需要打开个人中心，即可看到曾经收藏过的用户脚本。
+
+通过网站在线收藏油猴脚本的方法，方便记录了用户曾经安装过的脚本，并且保证了重装脚本时会是更新的版本。不过这个方法的缺点是需要用户依次打开不同的脚本页面，手动安装。而另一个主打收录国外优秀脚本的网站 [OpenUser](https://openuserjs.org/) 未提供在线收藏功能。
+
+油猴扩展内置的备份同步功能
+
+各大平台的油猴扩展如 [Tampermonkey](https://tampermonkey.net/)、[Greasemonkey](https://www.greasespot.net/)、[Violentmonkey](https://violentmonkey.github.io/)，它们本身已经内置了脚本备份和同步功能，这个方法是我比较推荐的，只要设置好油猴扩展的备份同步选项，即可让扩展默默地保存好你使用的脚本。
+
+下面是 Tampermonkey、Violentmonkey 和 Greasemonkey 扩展备份同步功能的具体实现方法：
+
+Tampermonkey
+
+Tampermonkey 是支持最多平台（Chrome、Firefox、Edge、Safari、Opera、Dolphin、UC）的油猴扩展，最新版本 v4.5。打开 Tampermonkey 后台设置的「实用工具」标签页，首先可以选择导出备份的内容，包括了安装的脚本、Tampermonkey 的全局设置参数，剩下的就是导出导入的方案：
+
+
+云备份。Tampermonkey 支持将数据备份到 Google Drive、Dropbox、OneDrive，完成首次备份后，点击「显示备份」，可查询备份在云存储的数据，如果有的话还将提供导入的选项。
+
+压缩包。支持导出为 ZIP 压缩包，内容包括了油猴扩展本身、脚本数据。
+
+文件。经测试（即使更换了不同的电脑），文件导出功能一直处于加载状态，并能成功，所以我不推荐大家使用这一方法。
+
+URL。支持脚本的在线地址导入 Tampermonkey，实现脚本安装。
+
+
+除了以上导出、导入油猴脚本的方法外，Tampermonkey 还支持 TESLA 功能自动同步脚本。切换扩展后台设置的标签页后，在「通用」选框的配置模式，选择初学者或者高级模式，将出现 TESLA 功能选项，勾选 启用 TESLA 后，用户安装的脚本就可以随着你的 Google 账号进行同步。
+
+Violentmonkey
+
+Violentmonkey 支持的平台比 Tampermonkey 稍差，除了不支持 Safari、Edge 外，包括 Chrome、Firefox、Opera、QQ、Maxthon 均提供支持，最新版本 v2.8.24。
+
+Violentmonkey 在设置页面提供了两种脚本备份的方法：
+
+
+导出为 ZIP 文件。数据导出框中默认全选了安装的油猴脚本，用户可自由选择要导出的脚本，并且 Violentmonkey 还支持导出脚本数据，单独保存下来的 ZIP 压缩文件里已经包括了脚本的 js 文件。用户可将 ZIP 文件保存到电脑或者网盘后达到备份的目的。需要重装浏览器的话，将原 ZIP 文件通过扩展数据导入的功能即可完成脚本的恢复。
+
+
+云存储同步。在同步的选项中，Violentmonkey 支持将脚本同步到 Google Drive、Dropbox、OneDrive 三大云储存服务中，如果勾选了「同步脚本状态」、「授权失效后自动重新授权」，使 Violentmonkey 较长时间保持备份同步的状态。即使用户更换了电脑设备或者重装系统，只需登录曾经授权的存储服务，立刻完成同步的功能。
+
+Greasemonkey
+
+
+Greasemonkey 目前是 Firefox 浏览器的独占扩展，最新版本 v4.1。比较遗憾的是，Greasemonkey 扩展本身并没有提供备份和同步的功能，暂时还没找到比较简单高效的备份方案，如果读者有较好的方法，欢迎留言指正。
+
+养成良好的备份习惯
+数据无价
+以上就是油猴脚本数据备份的使用技巧。对于安装了大量脚本的用户来说，养成良好的备份习惯，避免出现重装系统或者更换设备使用油猴扩展时，繁琐地去逐个查找安装，用好油猴扩展本身内置的导出导入功能，会是优先选择的方案。
+
+如果你还在寻找有哪些优秀的油猴脚本，可以前往下面的页面了解更多的内容：
+
+全方位强化你的浏览器，我们推荐多达 40+ 款实用的油猴脚本  https://sspai.com/post/42380
+用 Chrome 的人都需要知道的「神器」扩展：「油猴」使用详解  https://sspai.com/post/40485

@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-06-29T07:33:19+08:00
+
+====== thonny ======
+创建日期 星期五 29 六月 2018
+
+IDE,
+apt-get install thonny
+# by ubuntu
+
+学习用 Thonny 写代码： 一个面向初学者的Python IDE https://linux.cn/article-9784-1.html?utm_source=rss&utm_medium=rss

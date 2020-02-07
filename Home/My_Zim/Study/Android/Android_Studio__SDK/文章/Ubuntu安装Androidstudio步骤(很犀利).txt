@@ -1,0 +1,124 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T20:04:08+08:00
+
+====== Ubuntu安装Androidstudio步骤(很犀利) ======
+创建日期 星期二 21 十一月 2017
+
+1、下载JDK ,我下载的是jdk-7u51-linux-i586.tar.gz
+
+我这里有jvm文件夹，直接cd过去：
+
+$ cd /usr/lib/jvm/
+
+拷贝下载的jdk-7u51-linux-i586.tar.gz到jvm文件夹：
+
+$ sudo cp ~/下载/jdk-7u51-linux-i586.tar.gz /usr/lib/jvm
+
+解压：
+
+$ sudo tar -zxvf jdk-7u51-linux-i586.tar.gz
+
+设置环境变量：
+
+$ sudo gedit /etc/profile
+
+在文档结尾追加：
+
+export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_51
+
+export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+
+export CLASSPATH=$CLASSPATH:.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+
+将系统默认的java修改过来：
+
+$ sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.7.0_51/bin/java 300
+
+$ sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk1.7.0_51/bin/javac 300
+
+$ sudo update-alternatives --config java
+
+$ sudo update-alternatives --config javac
+
+检测一下，输入：
+
+$ java -version
+
+显示：
+
+java version "1.7.0_51"
+
+Java(TM) SE Runtime Environment (build 1.7.0_51-b13)
+
+Java HotSpot(TM) Server VM (build 24.51-b03, mixed mode)
+
+----------------------------------------华丽的分割---------------------------------------------------
+
+2、下载android studio包android-studio-bundle-133.970939-linux.tgz
+
+解压：$ sudo tar zxvf android-studio-bundle-133.970939-linux.tgz
+
+解压后文件夹名为android-studio。
+
+移动：$ sudo mv android-studio /opt/
+
+打开文件夹：$ cd /opt/android-studio/bin/
+
+运行：$ sudo studio.sh
+
+oh shit，提示命令不存在，怎么回事？额，恩，不是这么打的吧？！
+
+再次运行：$ sudo ./studio.sh
+
+OK，打开了。
+
+----------------------------------------华丽的分割---------------------------------------------------
+
+3、新建一个test工程试试。
+
+第一次新建工程后会提示下载gradle，这是android studio 必须的部分，耗时很长，慢慢等吧。终端提示如下：
+
+Downloading http://services.gradle.org/distributions/gradle-1.9-all.zip
+
+.......................................................................................................................................................................................
+
+两个小时？吃个饭洗个澡回来继续，好了。
+
+select me
+
+然后新建一个ADK，运行ADK。
+
+遇到问题：
+
+Waiting for device.
+
+/opt/android-studio/sdk/tools/emulator -avd AVD_for_Nexus_S_by_Google -netspeed full -netdelay none
+
+PANIC: Could not open: AVD_for_Nexus_S_by_Google
+
+提示找不到，为啥找不到？原来虚拟机启动程序去/home/username/.android目录里去找android虚拟机了。
+
+实际上，创建好的android虚拟机保存在/root/.android文件夹下，怎么办呢？我打算当一回骗子。
+
+先删除/home/username/.android：
+
+~$ sudo rm -r .android
+
+做个链接：
+
+~$ sudo ln -s /root/.android ./.android
+
+然后再运行试试看，哇，我服了我自己了，竟然看到虚拟机界面了。。。。
+
+select me
+
+虚拟机启动之后，运行一下咱的test程序：
+
+select me
+
+以上，一个完整的android studio环境搭建完成，并且test测试通过。至于插件啥的，我业余选手，暂时不折腾。
+
+转载至：
+
+http://blog.sina.com.cn/s/blog_b15639e00101tor5.html

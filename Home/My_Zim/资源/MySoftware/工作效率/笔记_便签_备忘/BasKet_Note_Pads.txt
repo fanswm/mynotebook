@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-06T08:08:35+08:00
+
+====== BasKet Note Pads ======
+Created Friday 06 July 2018
+
+http://basket.kde.org/

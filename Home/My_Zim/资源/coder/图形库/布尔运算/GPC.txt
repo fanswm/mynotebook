@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-06T22:40:12+08:00
+
+====== GPC ======
+Created Sunday 06 January 2019
+
+GPC: GPC General 
+  Polygon Clipper library from The University of Manchester 据说鲁棒性和速度都不如Clipper，但是顺便也提一下。支持的语言包括C/C#/Delphi/Java/Perl/Python/Haskell/Lua/VB.Net等。
+
+http://www.cs.man.ac.uk/~toby/alan/software/
+

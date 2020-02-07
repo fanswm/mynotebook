@@ -1,0 +1,349 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-04T11:25:17+08:00
+
+====== R-Pi NAS ======
+Created Tuesday 04 December 2018
+
+R-Pi NAS
+Back to RPi Guides.
+https://elinux.org/R-Pi_NAS
+
+Raspberry Pi Network Attached Storage
+
+
+Contents [hide] 
+1	What does it do?
+2	What do you need?
+3	What skill level is required?
+4	How does it work?
+5	Overview of this project
+6	Configure a Samba server on Debian RPi
+6.1	Before you start
+6.2	Connect the RPi to a network
+6.3	Install the samba software
+6.4	Enable security on the Samba server on the RPi
+6.5	Configure private storage areas on the RPi
+6.6	Configure a public storage area on the RPi
+7	Adding USB Storage
+7.1	Remount USB storage on startup
+8	Configuring the Samba client on a Windows PC
+9	Configuring the Samba client on a Linux PC
+10	Configuring the Samba client on a Mac
+11	Configuring the Samba client on an Android smartphone
+What does it do?
+This project configures your Raspberry Pi to share files with any other computer on your local network. You can add a large hard disk to the RPi and use this to store your important files/photos/videos in a central location.
+
+The files on your RPi can be easily accessed from any type of computer which is connected to your network, for example a Windows PC, a Linux PC, A Mac, a smartphone, etc. In a classroom, each student can have access to a private area, and also a public area for sharing files.
+
+Warning: Make sure that you store your important files in more than one location. If the hard disk connected to the RPi becomes faulty, you may not be able to access your files.
+
+Note: There are two major classes of Network Attached Storage
+
+Low-power NAS. This is used as a safe or convenient place to store files for very occasional access. The priority is on low cost and low energy usage. This guide is suitable for this type of NAS.
+High-power NAS. This is used to provide instant access to files or to stream HD video. The priority is speed. This guide is NOT suitable for this type of NAS.
+What do you need?
+A Raspberry Pi, model B.
+A boot SD card for the Raspberry Pi.
+A large USB-connected hard drive.
+An Ethernet cable to connect to the local network.
+What skill level is required?
+This project does not require any coding or compilation. Very basic Linux and networking knowledge would be useful, but not essential.
+
+You need to...
+
+Edit configuration files on the RPi
+Enter basic Linux commands to configure users and passwords
+Use standard software tools (Windows/Linux/Mac) to add a network drive to your PC
+Connect computers using ethernet cables
+How does it work?
+The RPi is configured as a Samba server and can expose its files to any Samba client. Samba was originally a Windows-only protocol named Server Message Block (SMB), but has become popular for other operating systems.
+
+There are other methods possible (for example ftp) but Samba is very popular because it is built into Windows and Mac OS X, and is very easy to install in all versions of Linux.
+
+The end effect is that the PC user will be able to read and write to a new drive which appears to be locally-attached but is actually attached to the RPi.
+
+Note that Samba is is very easy to use but is not suitable for high performance. You may not be able to access high-definition video quickly enough using Samba.
+
+Overview of this project
+This project includes instructions to configure the Samba server (where the files are stored centrally) and the Samba client (the user's computer). You must follow the instructions for one of the following servers and at least one of the following clients.
+
+Configure a Samba server on Debian RPi
+Configuring the Samba client on a Windows PC
+Configuring the Samba client on a Linux PC
+Configuring the Samba client on a Mac
+Configuring the Samba client on an Android smartphone
+Configure a Samba server on Debian RPi
+Before you start
+To follow the instructions below, you must enter commands into a terminal. You must open a terminal before starting the instructions below. If necessary, search the internet for instructions by using search terms like "open terminal Gnome" or "open terminal LXDE" etc depending on your chosen desktop environment.
+
+You may find it useful to open a web browser on the RPi so you can copy commands from this web page and paste them into the terminal. This saves a lot of work and errors. Most terminal programs allow you to paste by using a menu selections "Edit" then "Paste".
+
+If you do not understand a command, do not paste it in blindly. You can learn more about commands by reading the manual, by using the "man" command. For example, to find out more about the mkdir command, give the command "man mkdir". Press "q" to exit the man program.
+
+A lot of commands start with "sudo". The sudo prefix allows a normal user to enter commands which will affect all other users of the system.
+
+Connect the RPi to a network
+Check that you have an internet connection.
+
+Command:
+
+ping www.google.com
+Expect something like
+
+64 bytes from a.b.c.d: icmp_seq=n ttl=n time=n
+64 bytes from a.b.c.d: icmp_seq=n ttl=n time=n
+64 bytes from a.b.c.d: icmp_seq=n ttl=n time=n
+where a, b, c d and n are replaced by numbers.
+
+Press Control-C to stop the ping program
+
+If you do not see the above response, you do not have an internet connection, so this must be fixed before you can continue.
+
+Install the samba software
+Command:
+
+sudo apt-get install samba samba-common-bin
+Expect:
+
+Do you want to continue? [Y/n]
+Answer by pressing "y", then the [enter] key.
+
+Make a copy of your samba configuration file, just in case something goes wrong with later instructions.
+
+Command:
+
+sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.old
+Enable security on the Samba server on the RPi
+Note: This section is optional, but highly recommended. It forces the samba server to ask for a username and password before allowing another computer to connect.
+
+Edit the samba configuration file
+
+sudo nano /etc/samba/smb.conf
+Search for the section marked ##### Authentication #####
+
+Change the text
+
+#  security = user
+to
+
+   security = user
+Note that you must use the arrow keys to move around in the nano editor, you cannot use the mouse.
+
+Save the edited file
+
+Press Control-X
+Press y
+Press [enter]
+Restart samba to use the new configuration file.
+
+sudo /etc/init.d/samba restart
+Expect:
+
+Stopping Samba daemons: nmdb smdb
+Starting Samba daemons: nmdb smdb
+Configure private storage areas on the RPi
+Configure samba to allow each user to access his home directory.
+
+Open the smb.conf file in nano
+
+sudo nano /etc/samba/smb.conf
+Search for the section starting [homes]
+
+In the [homes] section, change from
+
+  read only = yes
+to
+
+  read only = no
+Save the edited file
+
+Press Control-X
+Press y
+Press [enter]
+Restart samba to use the new configuration file.
+
+sudo /etc/init.d/samba restart
+Expect:
+
+Stopping Samba daemons: nmdb smdb
+Starting Samba daemons: nmdb smdb
+By default, the username pi is defined. To allow pi to be a samba user
+
+sudo smbpasswd -a pi
+You will be asked to enter pi's password twice.
+
+If you want to use another username for Samba, add a new user
+
+sudo useradd john -m -G users
+sudo passwd john
+You will be asked to enter john's password twice.
+
+if smbpasswd doesn't work try
+
+pdbedit -a -u john
+
+Alternatively you can
+
+sudo apt-get install samba-common-bin
+which will allow you to use smbpasswd
+
+Allow this user to be a samba user
+
+sudo smbpasswd -a john
+You will be asked to enter john's password twice.
+
+Configure a public storage area on the RPi
+If you have more than one user, you may wish to define a public area where everybody can share files. This section is optional.
+
+Create a directory to store public files
+
+sudo mkdir /home/shares
+sudo mkdir /home/shares/public
+sudo chown -R root:users /home/shares/public
+sudo chmod -R ug=rwx,o=rx /home/shares/public
+Edit the samba configuration file
+
+sudo nano /etc/samba/smb.conf
+At the end of the file, add the following lines
+
+[public]
+  comment = Public Storage
+  path = /home/shares/public
+  valid users = @users
+  force group = users
+  create mask = 0660
+  directory mask = 0771
+  read only = no
+Save the edited file
+
+Press Control-X
+Press y
+Press [enter]
+Restart samba to use the new configuration file.
+
+sudo /etc/init.d/samba restart
+Expect:
+
+Stopping Samba daemons: nmdb smdb
+Starting Samba daemons: nmdb smdb
+Adding USB Storage
+If you are going to add some drives to share, and you have not already done so add them. For a tutorial on how to connect USB flash drives and hard drives to your Pi, see: Adding USB Drives to a Raspberry Pi
+
+After reading the above tutorial you will want to tweak where your drives are mounted so that they mount in the share area. First create a directory then mount the drive there.
+
+sudo mkdir /home/shares/public/disk1
+sudo mount /dev/sdxx /home/shares/public/disk1
+Where sdxx is where your drive is in the file system's device hierarchy. i.e. /dev/sda1
+
+Remount USB storage on startup
+When Raspberry Pi is rebooted Samba service will automatically restart, but USB disk will not be automatically mounted. This can be remedied by editing /etc/fstab
+
+sudo nano /etc/fstab
+and adding following line
+
+/dev/sdxx /home/shares/public/disk1 auto noatime 0 0
+Where sdxx is where your drive is in the file system's device hierarchy. i.e. /dev/sda1 .
+
+If you're having troubles with permissions, use gid and uid options. So, instead of previous line, add following to /etc/fstab
+
+/dev/sdxx /home/shares/public/disk1 auto gid=pi,uid=pi,noatime 0 0
+Again, sdxx is where your drive is in the file system's device hierarchy. i.e. /dev/sda1 .
+
+Configuring the Samba client on a Windows PC
+A Windows PC uses Samba automatically, no extra software is required.
+
+In Windows, Network Attached Storage is known as a "network drive". Open up the Windows help and search for the term "network drive", you should see something like
+
+RPI NAS Win1.JPG
+
+If you follow the instructions, you will be asked to select a drive letter (Z: is default but you can select anything available) and the path to the network drive. (The following screen may be slightly different depending on your version of Windows)
+
+RPI NAS Win2.JPG
+
+Enter the path to the RPi and click on "Finish". The path is in the format \\computer_name\directory. In this example, the computer name is "bigdisk" and the user wishes to attach to the directory "john". Note that you may also enter the computer name in IP address format, such as "192.168.0.2".
+
+If you enabled security on the RPi server, you will be asked for a username and a password.
+
+RPI NAS Win3.JPG
+
+This must be a valid username and password on the RPi server. To access a public area, any username is acceptable. To access a private area, the username must match the last part of the folder path (the part after the \ character).
+
+Note that a Windows user can attach to multiple network drives at the same time. It is quite common for a user to attach to his private files (commonly drive H: is used to represent a home directory) and also attach to a public storage (commonly drive P: is used to represent a public drive).
+
+Configuring the Samba client on a Linux PC
+There are several ways that Linux can be configured to access samba shares. The simplest, user-level way of doing this is to open a file manager (e.g. nautilus, thunar), use shortcut Control+l, and enter
+
+smb://<server>/<share>
+Nautilus-server-connection.png Nautilus-share-access.png
+
+(Note: the 'Domain' field is not usually required)
+
+where server is of course the IP address or hostname of the R-Pi, and share is the share you wish to connect to. Many file managers also have network browsing capabilities, normally accessible by clicking 'Network' in the bookmarks sidebar. Shares of a particular server can be browsed using the shortcut Control+l, and entering
+
+smb://<server>
+For file managers to successfully mount shares under GNOME and XFCE environments, gvfs backends (debian/ubuntu package gvfs-backends) needs to be installed. For KDE, a file manager such as Dolphin and working KIO slaves (usually installed as part of KDE) are required. Shares can be accessed under Dolphin in the same way as Nautilus or Thunar.
+
+Nautilus-server-browsing.png
+
+Samba shares can also be mounted from the command-line. The cifs-utils package is usually required for this, as in newer samba versions cifs has superseded the smb protocol. The simplest way to mount, under the command-line, is to run as root:
+
+mount -t cifs -o username=<username>,password='<password>' //server/share /mountpoint
+(The mount point is a folder you must create in your filesystem to virtually access the server). Very often, however, a server needs to be accessed frequently, and so would be more efficient to add it to file /etc/fstab (entries separated by tabs):
+
+//server/share	/mountpoint	cifs	username=<username>,password=<password>	0	0
+However, this is insecure as /etc/fstab is readable by all users, who could therefore read the passwords. The way around this is to create a credentials file and change its permissions so that only certain users can access it, and then use the following fstab line:
+
+//server/share	/mountpoint	cifs	credentials=/path/to/credentials	0	0
+Where credentials is a file storing the username and password, like this:
+
+username=<username>
+password=<password>
+Other options can also be added to the /etc/fstab file to match your needs (add them in the fourth column, comma separated):
+
+user - enables mounting of the share by normal users
+
+noauto - prevents the share from being automatically mounted at system startup
+
+guest - use this to mount a share that is not password protected
+
+When entries have been added to /etc/fstab, they are either mounted at startup or by hand. Accessing by hand is now much easier - the user only needs to run
+
+mount //server/share
+or
+
+mount /mount/point
+if the server details are in /etc/fstab. Don't forget that only root can use the 'mount' command to access shares, unless the 'user' option is present in a share's /etc/fstab line. The 'fusesmb' command is another way of mounting shares at user-level, but is not as reliable and requires configuration beyond the scope of this wiki.
+
+
+Configuring the Samba client on a Mac
+As with most OS X stuff the "it just works" fits this one. As long as; the Linux and Mac networking is setup right with both boxes on the same network and the "Finder Preferences" on the Mac is set to show "Connected Servers". When you open the "Finder" on the Mac the R-Pi's host name will show in the right of the finder window under the heading "SHARED". When you click on the name for the first time a message at the top of "Finder" window will show on the right "Connection Failed" with a button on the left marked "Connect as" press the button and the Mac will ask for "User name" and "Password" use the one set in the "SAMBA" setup and the shared discs will appear in the "Finder".
+
+Configuring the Samba client on an Android smartphone
+There are multiple Samba clients for Android. The following shows only one example called File Expert, but you can search for the text "smb" in the Android Market (Google Play) to find other apps.
+
+Install the app "File Expert".
+
+Open the app "File Expert"
+
+Press the "+" on the top right.
+
+Click on "Network"
+
+Click on "Windows/Samba sharing"
+
+Click on "Create new account"
+
+Leave server domain empty
+
+Set computer name to "raspberrypi"
+
+Set nickname to "john"
+
+Set username to "john"
+
+Set password to the password for John's account
+
+Click on "Okay"
+
+Click on the server named "pi" in the "File Sharing Servers" list.

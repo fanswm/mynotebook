@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-25T13:43:34+08:00
+
+====== Simple Translate ======
+Created Monday 25 December 2017
+
+Simple Translate：最简单快捷的翻译扩展
+
+
+https://addons.mozilla.org/zh-CN/firefox/addon/simple-translate/
+
+https://addons.mozilla.org/en-US/firefox/addon/simple-translate/?src=optionpage
+

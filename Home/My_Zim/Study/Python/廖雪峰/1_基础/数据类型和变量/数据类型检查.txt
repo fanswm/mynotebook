@@ -1,0 +1,25 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-27T08:01:53+08:00
+
+====== 数据类型检查 ======
+Created Saturday 27 January 2018
+
+数据类型检查可以用内置函数__isinstance()__实现：
+
+def my_abs(x):
+    if not isinstance(x, (int, float)):
+        raise TypeError('bad operand type')
+    if x >= 0:
+        return x
+    else:
+        return -x
+
+添加了参数检查后，如果传入错误的参数类型，函数就可以抛出一个错误：
+
+>>> my_abs('A')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 3, in my_abs
+TypeError: bad operand type
+

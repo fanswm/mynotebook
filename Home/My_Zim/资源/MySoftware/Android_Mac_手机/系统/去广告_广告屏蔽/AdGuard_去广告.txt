@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-28T16:23:30+08:00
+
+====== AdGuard 去广告 ======
+Created Friday 28 December 2018
+
+Adguard是一款手机去除广告神器，它可以轻松去除视频广告，软件的开屏广告，浏览器广告。
+
+首先，你可以将软件设置为中文，Settings-General-Language，就可以设置为中文了，然后直接点击首先的开启按钮，软件就设置成功了。

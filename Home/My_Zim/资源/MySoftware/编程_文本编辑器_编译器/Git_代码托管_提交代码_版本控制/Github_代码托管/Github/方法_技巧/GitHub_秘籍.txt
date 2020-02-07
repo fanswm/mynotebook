@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-10T13:36:17+08:00
+
+====== GitHub 秘籍 ======
+创建日期 星期三 10 四月 2019
+
+如果你是 GitHub 新人，又想快速融入这个社区，不妨收下这份 GitHub 秘籍。让它带着你快速了解 GitHub 的使用技巧。
+
+这个项目涵盖了 GitHub 上的许多实用小技巧，无论是如何克隆仓库，还是快速添加许可证，都可以在这份秘籍中找到。此外，GitHub 秘籍还包含 git 的一些使用技巧，让我们在管理自己的项目时可以事半功倍。
+
+你可以在 GitHub 上查看 GitHub 使用技巧。
+https://github.com/tiimgreen/github-cheat-sheet
+
+GitHub 秘籍
+正所谓「授人以鱼，不如授人以渔」，少数派之前也为大家介绍了 GItHub 上的搜索技巧，你可以跟着 这篇文章 [ https://sspai.com/post/46061 ]  在 GitHub 上搜索到自己感兴趣的项目。如果你也有 GitHub 上的优质项目想要推荐，不妨在评论区与我们一起分享。

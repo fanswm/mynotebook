@@ -1,0 +1,62 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-27T10:55:46+08:00
+
+====== 查询合并符合条件的多个结果 ======
+Created Monday 27 November 2017
+
+http://mp.weixin.qq.com/s?__biz=MzUzODI3ODk1Mw==&mid=2247483916&idx=1&sn=61b51e824c2a3fb2a690c4a2741548d2&chksm=fadb6f4acdace65c625b94b0aafb75e2b939c867874245ce6a3375d73f2524cf48b59fcbc461&mpshare=1&scene=1&srcid=1127yjb44RnsnsfpuS0flxUN#rd
+
+附件：
+[[./VBA常用小代码306：查询合并符合条件的多个结果.xlsm]] 
+
+
+代码如下：
+
+```
+Sub DicFinds()
+    Dim d As Object, Arr, Brr, i&, Kstr, s$
+    Set d = CreateObject("scripting.dictionary")
+    '后期字典
+    Arr = Range("a1:b" & Cells(Rows.Count, 1).End(xlUp).Row)
+    '数据源装入数组Arr
+    For i = 1 To UBound(Arr)
+        s = Arr(i, 1)
+        If Not d.exists(s) Then
+        '如果字典不存在关键词s那么……
+            d(s) = "/" & Arr(i, 2) & "/"
+            '姓名作为key,特长作为条目
+            '"/"的作用除了间隔符外，也为了避免在张三丰中查询到张三的存在，误认为重复。
+        ElseIf InStr(1, d(s), "/" & Arr(i, 2) & "/", vbTextCompare) = 0 Then
+            '如果字典存在关键词s那么……
+            '用instr函数判断字典键值s的条目中是否已存在相关特长，如果不存在，和字典原有条目合并后装入字典……
+            d(s) = d(s) & Arr(i, 2) & "/"
+        End If
+    Next
+    Brr = Range("d1:f" & Cells(Rows.Count, 4).End(xlUp).Row)
+    '查询区域装入数组brr
+    For i = 2 To UBound(Brr)
+    '遍历brr
+        s = Brr(i, 1)
+        If d.exists(s) Then
+            Kstr = d(s) '字典key值对应的条目字符串
+            Brr(i, 2) = Mid(Kstr, 2, Len(Kstr) - 2)
+            '使用MID+LEN函数提取去除首尾"\"后的字符串
+        Else
+            Brr(i, 2) = "" '否则查询结果为空
+        End If
+    Next
+    With Range("d1:f" & Cells(Rows.Count, 4).End(xlUp).Row)
+        .NumberFormat = "@" '设置单元格文本格式，避免文本数值变形
+        .Value = Brr 'brr数组放回单元格区域
+    End With
+    Set d = Nothing
+    MsgBox "查询结束。"
+End Sub
+```
+
+小贴士：
+
+1，代码使用了字典，把符合条件的多个结果合并为一个字符串作为item，回想下前几期的内容，可以得出以下3个字典常用的套路。累加计数：d(s)=d(s)+1；累加求和：d(s)=d(s)+val(arr(i,2));合并同类项：d(s)=d(s)&arr(i,2)。
+
+2，代码使用了instr函数判断值是否有重复。关于instr函数，前几天我们分享过了，参考：VBA常用小代码101：批量改变单元格部分字符格式。该函数的主要作用是判断一个字符在一个字符串中首次出现的位置，也就可以判断某个字符在指定字符串中是否存在，搭配间隔符后，即可精确判断重复项的问题。

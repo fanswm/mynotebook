@@ -1,0 +1,182 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-04T15:29:58+08:00
+
+====== 基于 Linux 内核新特性的网关设计实践 ======
+创建日期 星期四 04 四月 2019
+
+基于 Linux 内核新特性的网关设计实践
+2019-03-31 20:26
+
+转自：UCloud http://blog.ucloud.cn/archives/4123%E4%BD%9C%E8%80%85： 文旭
+
+
+
+UCloud 外网网关是为了承载外网IP、负载均衡等产品的外网出入向流量，当前基于 Linux 内核的 OVS/GRE 隧道/netns/iptables 等实现，很好地支撑了现有业务。同时，我们也在不断跟踪 Linux 内核社区的新技术发展，并将之用于下一代外网网关的设计。这些新特性可将系统性能和管理能力再提上一档，满足未来几年的需求。在方案设计研发过程中发现，新特性存在不少缺陷和 Bug，为此我们向 Linux 内核社区回馈了 10 多个补丁，并融入到 Linux 内核 5.0 版本中，帮助完善内核功能并提升稳定性。
+
+当前业界的多租户外网网关很多都是基于 OpenFlow 的 OpenvSwitch（OVS）方案，然而随着内核路由转发功能的不断完善，利用内核原生路由转发方式进行设计多租户外网网关系统成为一种可能。在这种方式下能有效的使用传统 iproute2 路由工具以及 iptables、nftables 等防火墙工具，并且随着 SwitchDev 技术的兴起，未来将网关系统迁移到 Linux Switch 上也成为一种可能。
+
+现有 Linux 内核 3.x 的不足
+当前广泛使用的内核版本为 3.x 系列，例如 CentOS 7 全系列标准支持的内核为 3.10 版本，Fedora/Ubuntu 等 Linux 发行版也有大量使用。在 3.x 系列内核下存在着 IP 隧道管理复杂、租户隔离性能损耗等问题。
+
+IP 隧道管理复杂
+Linux 内核创建 IP 隧道设备来建立点对点的隧道连接，创建时需指定隧道目标和隧道密钥。因为宿主机之间两两建立连接，面向宿主机的目的地址众多，这样就会导致网关节点上需要创建成千上万的隧道设备，在大规模业务环境下，隧道的管理将变得及其复杂。
+多租户隔离导致的性能下降
+公有云需要实现多租户隔离以确保用户间的安全和隐私
+由于 VPC 网络下不同租户的内网地址可以重合，导致路由也有重合的可能性，此时需要通过大量的策略路由去隔离租户的路由规则，由于策略路由的链表属性，性能会随着链表长度的增加而急剧下降。
+由于防火墙和 NAT 的实现基于同样链式的 iptables，性能损耗同样可观。
+netns 带来性能开销
+通过 netns 实现租户路由和防火墙规则的隔离，但是 netns 会引入虚拟网卡和协议栈重入开销，使整体性能下降 20% 左右。
+三项内核新技术
+为了解决原有方案存在的困扰，我们调研了大量行业主流方案和内核上游的新动向，发现轻量级隧道Lightweight tunneling（简称 lwtunnel）、虚拟路由转发Virtual Routing Forwarding（简称 VRF）以及 nftable & netfilter 流卸载flow offload三项内核新技术的特性，可以帮助规避原方案存在的缺陷。
+
+1、轻量级隧道
+Linux 内核在 4.3 版本中引入了轻量级隧道，它提供了通过路由方式设置隧道属性的方法，这样可以避免管理大量的隧道设备。
+创建隧道设备时指定 external 模式，利用路由设置的轻量级隧道通过 tun 设备发送报文。
+
+# ip l add dev tun type gretap external
+# ifconfig tun 1.1.1.7/24 up
+# ip r r 2.2.2.11 via 1.1.1.11 dev tun encap ip id 1000 dst 172.168.0.1 key 
+2、虚拟路由转发
+Linux 内核在 4.3 版本中引入了 VRF 的初步支持，并在 4.8 版本形成完备版本。虚拟路由转发可以将一台 Linux Box 的物理路由器当多台虚拟路由器使用，能很好的解决租户路由隔离问题，避免直接使用策略路由。因此，可以将不同租户的网卡加入租户所属的虚拟路由器中来实现多租户的虚拟路由。
+
+
+
+# ip link add user1 type vrf table1
+# ip link add user1 type vrf table2
+# ip l set user1 up
+# ip l set user2 up
+# ip l set dev eth1 master user1
+# ip l set dev eth1 master user2
+# ip r a default via 192.168.0.1 dev eth1 table 1 onlink
+# ip r a default via 192.168.0.1 dev eth1 table 2 onlink
+3、流卸载
+
+nftables 是一种新的数据包分类框架，旨在替代现存的 {ip,ip6,arp,eb}_tables。在 nftables 中，大部分工作是在用户态完成的，内核只知道一些基本指令（过滤是用伪状态机实现的）。nftables 的一个高级特性就是映射，可以使用不同类型的数据并映射它们。例如，我们可以映射 iif 设备到专用的规则集合（之前创建的存储在一个链中）。由于是哈希映射的方式，可以完美的避免链式规则跳转的性能开销。
+
+Linux 内核在版本 4.16 引入了流卸载功能，它为 IP 转发提供了基于流的卸载功能。当一条新建连接完成首回合原方向和反方向的报文时，完成路由，防火墙和 NAT 工作后，在处理反方向首报文的 forward 钩子，根据报文路由、NAT 等信息创建可卸载流到接收网卡 ingress 钩子上。后续的报文可以在接收 ingress 钩子上直接转发，不需要再进入 IP 栈处理。此外，将来流卸载还将支持硬件卸载模式，这将极大提高系统转发性能。
+
+
+
+# nft add table firewall
+# nft add flowtable f fb1 { hook ingress priority 0 \; devices = { eth0, eth1 } \; }
+# nft add chain f ftb-all {type filter hook forward priority 0 \; policy accept \; }
+# nft add rule f ftb-all ct zone 1 ip protocol tcp flow offload @fb1
+方案设计与优化实践
+通过对上述三项新技术的研究，我们发现可以尝试设计一套基于路由的方式，实现多租户层叠网络的外网网关。在方案设计过程中，我们也碰到了诸如 lwtunnel 和流卸载功能不足，以及 VRF 和流卸载不能一起有效的工作等问题。最终我们都设法解决了，并针对这些内核的不足提交补丁给 Linux 内核社区。
+
+1、lwtunnel 发送报文 tunnel_key 丢失
+问题描述：我们利用 lwtunnel 路由方式发送报文时，创建了一个 external 类型的 gretap 隧道，我们将命令设置了 id 为 1000，但是发送成功报文中没有 tunnel_key 字段。
+
+# ip l add dev tun type gretap
+# ifconfig tun 1.1.1.7/24 up
+# ip r r 2.2.2.11 via 1.1.1.11 dev tun encap ip id 1000 dst 172.168.0.1
+问题定位：我们研究 iproute2 代码，发现由于 TUNNEL_KEY 的标志并没有开放给用户态，所以 iproute2 工具并没有对 lwtunnel 路由设置 TUNNEL_KEY，导致报文不会创建 tunnel_key 字段。
+
+提交补丁：我们给内核和用户态 iproute2 分别提交补丁来解决这一问题：
+
+iptunnel: make TUNNEL_FLAGS available in uapi[1]
+iproute: Set ip/ip6 lwtunnel flags[2]
+提交补丁后，可以通过以下方式设置路由：
+
+ip r r 2.2.2.11 via 1.1.1.11 dev tun encap ip id 1000 dst 172.168.0.1 key
+2、lwtunnel 对指定密钥的 IP 隧道无效
+问题发现：为了能有效隔离租户路由，我们给每个租户创建一个基于 tunnel_key 的 gretap 隧道设备。如下图，创建一个 tunnel_key 1000 的 gretap 隧道设备，把隧道设备加入租户所属 VRF，隧道设备能有效地接收报文，但并不能发送报文。
+
+# ip l add dev tun type gretap key 1000
+# ifconfig tun 1.1.1.7/24 up
+# ip r r 2.2.2.11 via 1.1.1.11 dev tun encap ip id 1000 dst 172.168.0.1 key
+问题定位：研究内核发现，IP 隧道在非外部模式下即使指定了轻量级隧道路由，发送报文也没有使用它，导致报文路由错误被丢弃。
+
+提交补丁：
+
+ip_tunnel: Make none-tunnel-dst tunnel port work with lwtunnel[3]
+提交补丁后，在未指定 tunnel_dst 的非外部模式 IP 隧道下，能使用轻量级隧道路由进行发送报文。
+
+3、外部 IP 隧道 ARP 无法正常运行
+问题描述：邻居 IP 隧道进行了 ARP 请求，但是本端的 ARP 回应报文的隧道头中并没带 tunnel_key 字段。
+
+# ip l add dev tun type gretap external
+# ifconfig tun 1.1.1.7/24 up
+# ip r r 2.2.2.11 via 1.1.1.11 dev tun encap ip id 1000 dst 172.168.0.1 key
+问题定位：研究代码发现，隧道收到了对端的 ARP 请求，在发送报文 ARP 回复的时候会复制请求报文的隧道信息，但是遗漏了所有 tun_flags。
+
+提交补丁：
+
+iptunnel: Set tun_flags in the iptunnel_metadata_reply from src[4]
+4、流卸载不能与 DNAT 有效工作
+问题描述：防火墙创建规则从 eth0 收到目的地址 2.2.2.11 的报文，DNAT 为 10.0.0.7， 流卸载无法工作。
+
+问题定位：分析发现，客户端 1.1.1.7 -> 2.2.2.7 DNAT 到服务器 10.0.0.7，第一个回复的反向报文（syc+ack）使用了错的目的地址获取反向路由。
+
+daddr = ct->tuplehash[!dir].tuple.dst.u3.ip
+此时 dir 为反方向，所以 daddr 获取为原方向的目的地址，这个值是 2.2.2.7，但是由于被 DNAT过，真正的路由不应该通过 2.2.2.7 去获取，而是应该根据 10.0.0.7 这个值去获取。
+
+addr = ct->tuplehash[dir].tuple.src.u3.ip
+提交补丁：
+
+netfilter: nft_flow_offload: Fix reverse route lookup[5]
+5、流卸载不能与 VRF 有效工作
+问题描述：将网卡 eth0 和 eth1 加入 VFR 后，流卸载不起作用。
+
+# ip addr add dev eth0 1.1.1.1/24
+# ip addr add dev eth1 1.1.1.1/24
+# ip link add user1 type vrf table 1
+# ip l set user1 up
+# ip l set dev eth0 master user1
+# ip l set dev eth1 master user1
+问题定位：查看代码发现，原方向和反方向首报文进入协议堆栈后 skb->dev 会设置为 vrf device user1，创建流卸载规则的 iif 就是 user1。但是卸载规则下发在 eth0 和 eth1 的 ingress 钩子上，所以后续报文在 eth0 和 eth1 的 ingress 钩子上不能匹配流规则规则。
+
+提交补丁：
+
+netfilter: nft_flow_offload: fix interaction with vrf slave device[6]
+最终，我们根据两个方向查找路由的结果，设置流卸载规则的 iif 和 oif 信息来解决此问题。
+
+6、VRF PREROUTING 钩子重入问题
+问题描述：配置网卡加入 VRF，防火墙 ingress 方向规则为接收目的地址 2.2.2.11 、TCP 目的端口 22 的报文，egress 方向规则为丢弃 TCP 目的端口 22 的报文。出现异常结果: 收到目的地址 2.2.2.11 TCP 22 目的端口的报文却被丢弃。
+
+问题定位：研究发现网卡加入 VRF 后收到的报文会两次进入 PREROUTING 钩子，因为在进入 IP 栈时会进第一次PREROUTING 钩子，然后被 VRF 设备接管后会再次进入 PREROUTING 钩子。上述规则第一次在 rule-1000-ingress chain中 dst nat 为 10.0.0.7，第二次由于报文被 DNAT 后会错误的进入 rule-1000-egress，导致报文被丢弃。
+
+提交补丁：我们给内核加了一个支持判断网卡类型的 match 项目，让用户态避免可知的第二次无效重入，内核态和用户态 nftables 分别提交了如下的补丁：
+
+netfilter: nft_meta: Add NFT_META_I/OIFKIND meta type[7]
+meta: add iifkind and oifkind support[8]
+使用方法：
+
+nft add rule firewall rules-all meta iifkind "vrf" counter accept
+原型验证
+最终，我们成功地利用 lwtunnel、VRF 和流卸载实现多租户外网网关的原型验证。验证过程如下：
+
+1、首先创建原型环境
+a. netns cl 模拟外网客户端，地址为 1.1.1.7，隧道源地址 172.168.0.7，配置发送路由；
+b. netns ns1 模拟租户 1，内网地址为 10.0.0.7，外网地址为 2.2.2.11，隧道源地址 172.168.0.11 tunnel_key 1000，配置发送路由；
+c. netns ns2 模拟租户 2，内网地址为 10.0.0.7，外网地址为 2.2.2.12，隧道源地址 172.168.0.12 tunnel_key 2000，配置发送路由；
+d. Host 模拟外网网关，隧道源地址 172.168.0.1，创建租户 VRF user1 和 use2，创建租户 IP 隧道 tun1 和 tun2，配置转发路由。
+
+原型环境图如下：
+
+
+
+2、创建防火墙规则
+a. 租户 1 入向允许 TCP 目的端口 22 和 ICMP 访问，出向禁止访问外部 TCP 22 目的端口；
+b. 租户 2 入向允许 TCP 端口 23 和 ICMP 访问，出向禁止访问外部 TCP 23 目的端口；
+c. 在租户 tun1 和 tun2 设备上支持流卸载。
+
+最终，客户端可以通过 2.2.2.11 成功访问 user1 tcp 22 端口服务，user1 不能访问客户端 tcp 22 端口服务；客户端可以通过 2.2.2.12 成功访问 user2 tcp 23 端口服务，user1 不能访问客户端 tcp 23 端口服务。
+
+在后续硬件功能完善以及网卡厂商支持后，我们还会做进一步的开发验证。
+
+写在最后
+以上是本项目涉及的部分核心问题，这些补丁特性都可以在 Linux 内核 5.0 版本里获取。我们把这期间为 Linux 内核社区贡献的补丁整理成了一份列表[9]，希望能为开发者提供帮助，读者可以点击阅览。
+
+Linux 作为成熟的开源套件，一直是云厂商使用的主流操作系统，但在技术的更新迭代过程中，一些新特性在实际应用上也会存在稳定性、兼容性等方面的问题。我们在研究使用上游技术的同时，也一直积极探索、丰富开源技术功能，帮助提高开源技术稳定性。并将产出持续回馈给社区，与社区共同构建一个繁荣的开源生态。
+
+[1]: https://git.kernel.org/pub/scm/linux/kernel/git/davem/net-next.git/commit/?id=1875a9ab01dfa96b06cb6649cb1ce56efa86c7cb
+[2]: https://git.kernel.org/pub/scm/network/iproute2/iproute2.git/commit/?id=3d65cefbefc86a53877f1e6461a9461e5b8fd7b3
+[3]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=d71b57532d70c03f4671dd04e84157ac6bf021b0
+[4]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=7bdca378b2301b1fc6a95c60d6d428408ae4e39e
+[5]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=a799aea0988ea0d1b1f263e996fdad2f6133c680
+[6]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=10f4e765879e514e1ce7f52ed26603047af196e2
+[7]: https://git.kernel.org/pub/scm/linux/kernel/git/davem/net-next.git/commit/?id=0fb4d21956f4a9af225594a46857ccf29bd747bc
+[8]: http://git.netfilter.org/nftables/commit/?id=512795a673f999fb04b84dbbbe41174e9c581430
+[9]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/?qt=author&q=wenxu%40ucloud.cn

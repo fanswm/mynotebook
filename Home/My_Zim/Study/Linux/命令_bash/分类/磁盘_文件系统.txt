@@ -1,0 +1,68 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:19:11+08:00
+
+====== 磁盘 文件系统 ======
+Created Sunday 03 December 2017
+
+mount
+
+挂载文件系统。
+
+__umount__
+
+卸载文件系统。
+	有时候卸载USB移动硬盘的时候会提示设备忙(Device is busy)，只需要加上 –l 参数就行了：
+	umount -l /home/shares/public/
+
+fsck
+
+检查并修复 Linux 文件系统。
+
+dumpe2fs
+
+导出 ext2/ext3/ext4 文件系统信息。
+
+dump
+
+ext2/3/4 文件系统备份工具。
+
+fdisk
+
+磁盘分区命令，适用于 2TB 以下磁盘分区。
+
+parted
+
+磁盘分区命令，没有磁盘大小限制，常用于 2TB 以下磁盘分区。
+
+mkfs
+
+格式化创建 Linux 文件系统。
+
+partprobe
+
+更新内核的硬盘分区表信息。
+
+e2fsck
+
+检查 ext2/ext3/ext4 类型文件系统。
+
+mkswap
+
+创建 Linux 交换分区。
+
+swapon
+
+启用交换分区。
+
+swapoff
+
+关闭交换分区。
+
+sync
+
+将内存缓冲区内的数据写入磁盘。
+
+resize2fs
+
+调整 ext2/ext3/ext4 文件系统大小。

@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-15T16:40:36+08:00
+
+====== 将图片一键几何化 ======
+创建日期 星期一 15 四月 2019
+
+Geometrize
+https://link.zhihu.com/?target=https%3A//www.samcodes.co.uk/project/geometrize-haxe-web/
+点击 【 Settings 】 ，设置不透明度等，在这里选择组成图片的形状。这里有 7 个形状可供选择，并且，可以多选。
+点击【 Open Image 】选择导入图片，点击【 Run 】开始生成图片，这里可以看到图形数量的变化。
+也可以点击【 Random Image 】选择随机图片，【 Geometrize 】有数百个图片，随机出现。同样点击【 Run 】，图片开始生成。图片处理结束，在右下角选择需要的格式保存。
+如果你有更高的要求，可以在这里点击【 Geometrize 】跳转到应用下载界面。打开应用之后同样可以选择导入图片或是随机图片。我们看到右边可以进行更细致的设置、还提供更多下载格式。
+最后，你可以点击文中超链直接跳转使用，也可以直接登陆网站 topbook.cc ，或者在 Topbook 微信公众号后台回复 geometrize 直接体验。

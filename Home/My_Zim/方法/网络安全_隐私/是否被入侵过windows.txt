@@ -1,0 +1,152 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-28T16:27:06+08:00
+
+====== 是否被入侵过windows ======
+Created Thursday 28 December 2017
+
+http://www.cnblogs.com/pannengzhi/p/windows-self-check.html
+
+我们经常会感觉电脑行为有点奇怪, 比如总是打开莫名其妙的网站, 或者偶尔变卡(网络/CPU), 似乎自己"中毒"了,
+但X60安全卫士或者X讯电脑管家扫描之后又说你电脑"非常安全", 那么有可能你已经被黑客光顾过了. 这种时候也许要专业的取证人员出场,
+但似乎又有点小提大作. 因此本文介绍一些低成本的自检方法, 对于个人用户可以快速判断自己是否已经被入侵过.
+
+1. 异常的日志记录
+通常我们需要检查一些可疑的事件记录, 比如:
+
+“Event log service was stopped.”(事件记录服务已经停止)
+“Windows File Protection is not active on this system.”(Windows文件保护未开启)
+“The protected System file [file name] was not restored to its original, valid version because of the Windows File Protection…”(受保护的系统文件XXX无法还原)
+“The MS Telnet Service has started successfully.”(Telnet服务开启成功)
+除此之外, 还可以看看有没有大量失败的登录日志或者被锁定的账户.
+
+查看事件日志有两种方式:
+
+1) 通过图形界面查看, 开始->运行 eventvwr.msc
+
+2) 通过命令行查看, 主要是使用eventquery.vbs脚本:
+
+C:> eventquery.vbs | more
+或者只看某个条目下的日志:
+
+C:> eventquery.vbs /L security
+eventquery.vbs是使用可以查看命令行帮助或者微软的官方文档.
+
+2. 异常的进程和服务
+即在我们熟知的Windows任务管理器中查看是否有奇怪的进程在运行, 重点关注用户名是SYSTEM(系统)或者Administrator(管理员), 以及在管理员组的用户.
+当然, 你最好能熟悉正常的进程和服务, 不然也不知道某个进程是不是"异常"的. 如果不熟悉也不要紧, 对着任务管理器不认识的进程, 挨个google一遍也就能大概了解了.
+
+查找异常进程
+使用Ctrl+Alt+Del快捷键或者开始->运行taskmgr.exe打开任务管理器即可看到运行中的进程. 当然也可以使用命令行查看进程:
+
+C:> tasklist
+C:> wmic process list full
+查找异常服务
+1). 图形界面: 开始->运行 services.msc
+2). 命令行:
+
+C:> net start
+C:> sc query
+
+查找和每个进程关联的服务:
+
+C:> tasklist /svc
+3. 异常的文件和注册表
+如果磁盘可用空间突然减小, 我们可以查找文件看是否有异常. 通过开始菜单依次点击:
+
+开始->查找->文件或目录
+然后设置查找选项, 比如文件大小大于10000KB, 或者创建/修改时间在一周以内, 并搜索相关文件.
+
+对于注册表, 通常是查找自启动的注册点, 并检查对应的应用程序, 常见的启动点为:
+
+HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+HKLM\Software\Microsoft\Windows\CurrentVersion\Runonce
+HKLM\Software\Microsoft\Windows\CurrentVersion\RunonceEx
+HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+HKCU\Software\Microsoft\Windows\CurrentVersion\Runonce
+HKCU\Software\Microsoft\Windows\CurrentVersion\RunonceEx
+注: HKLM和HKCU分别是HKEY_LOCAL_MACHINE和HKEY_CURRENT_USER的缩写.
+
+查看注册表有两种方式:
+
+1) 图形界面: 开始->运行 regedit.exe
+
+2) 命令行reg query <key>, 例:
+
+C:> reg query HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+当然除此之外还有很多注册点可以进行自启动, 这个在下面说.
+
+4. 异常的计划任务
+接下来是查看异常的计划任务, 重点关注那些以管理员组或者SYSTEM权限, 或者是以空白用户名定时启动的任务.
+
+查看定时任务
+1) 图形界面, 可以通过开始菜单搜索Task Scheduler打开, 或者:
+
+开始->运行 taskschd.msc /s
+2) 命令行输出计划任务:
+
+C:> schtasks
+查看自启动程序
+1) 图形界面, 开始->运行 msconfig.exe
+
+2) 命令行:
+
+C:> wmic startup list full
+其他自启动入口
+要注意的是, msconfig这些命令只是列出了部分开机自动启动的程序, Windows开机自启动的方式很多, 包括劫持系统程序/动态运行库等方式,
+其中涉及到许多注册表入口, 感兴趣的朋友可以查看网上的其他文章.
+
+5. 异常的网络流量
+常用的网络相关自检命令:
+
+检查防火墙配置:
+
+C:> netsh firewall show config
+
+查看共享文件, 检查是否是主动分享的:
+
+C:> net view \127.0.0.1
+
+查看本机活跃的会话:
+
+C:> net session
+
+查看本机对其他系统打开的会话:
+
+C:> net use
+
+查看NetBIOS over TCP/IP 的激活状态:
+
+C:> nbtstat -S
+
+查看当前网络连接和监听情况:
+
+C:> netstat -na
+
+持续输出上述信息, 每3秒刷新一次:
+
+C:> netstat -na 3
+
+查看网络连接对应的进程id(-o)和进程名字(-b)
+
+C:> netstat -naob
+
+注: netstat -b 除了显示进程名字, 还显示了进程所加载的DLL信息, 所以持续输出的话会消耗比较多的CPU资源.
+对于其他选项, 可以通过netstat -h查看帮助.
+
+6. 异常帐号
+重点查看新添加进管理员组的帐号.
+
+1) 图形界面方式:
+
+开始->运行 lusrmgr.msc -> 点击用户组 -> 双击管理员
+然后查看里面的用户列表.
+
+2) 命令行方式:
+
+C:> net user
+C:> net localgroup administrators
+小结
+当发现电脑突然变卡的时, 应当及时查看任务管理器看是否有某个异常进程占用了大量CPU资源; 当系统异常死机时,
+应当及时检查对应日志, 看是否是某个程序执行exp导致的崩溃. 总而言之, 最好经常按照上述方式快速对系统做一遍检查,
+以即使找出可能是电脑入侵引起的反常迹象, 以免导致个人信息和财产遭受损害.

@@ -1,0 +1,272 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-04T13:48:23+08:00
+
+====== 10 个 Python 图像编辑工具 ======
+创建日期 星期四 04 四月 2019
+
+10 个 Python 图像编辑工具
+2019-04-03 11:39
+
+译自：https://opensource.com/article/19/3/python-image-manipulation-tools%E4%BD%9C%E8%80%85： Parul Pandey
+原创：LCTT https://linux.cn/article-10679-1.html%E8%AF%91%E8%80%85： Hank Chow
+
+以下提到的这些 Python 工具在编辑图像、操作图像底层数据方面都提供了简单直接的方法。
+
+
+
+当今的世界充满了数据，而图像数据就是其中很重要的一部分。但只有经过处理和分析，提高图像的质量，从中提取出有效地信息，才能利用到这些图像数据。
+
+常见的图像处理操作包括显示图像，基本的图像操作，如裁剪、翻转、旋转；图像的分割、分类、特征提取；图像恢复；以及图像识别等等。Python 作为一种日益风靡的科学编程语言，是这些图像处理操作的最佳选择。同时，在 Python 生态当中也有很多可以免费使用的优秀的图像处理工具。
+
+下文将介绍 10 个可以用于图像处理任务的 Python 库，它们在编辑图像、查看图像底层数据方面都提供了简单直接的方法。
+
+1、scikit-image
+scikit-image[1] 是一个结合 NumPy[2] 数组使用的开源 Python 工具，它实现了可用于研究、教育、工业应用的算法和应用程序。即使是对于刚刚接触 Python 生态圈的新手来说，它也是一个在使用上足够简单的库。同时它的代码质量也很高，因为它是由一个活跃的志愿者社区开发的，并且通过了同行评审peer review。
+
+资源
+scikit-image 的文档[3]非常完善，其中包含了丰富的用例。
+
+示例
+可以通过导入 skimage 使用，大部分的功能都可以在它的子模块中找到。
+
+图像滤波image filtering：
+
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+from skimage import data,filters
+
+image = data.coins() # ... or any other NumPy array!
+edges = filters.sobel(image)
+plt.imshow(edges, cmap='gray')
+Image filtering in scikit-image
+
+Image filtering in scikit-image
+
+使用 match_template()[4] 方法实现模板匹配template matching：
+
+Template matching in scikit-image
+
+Template matching in scikit-image
+
+在展示页面[5]可以看到更多相关的例子。
+
+2、NumPy
+NumPy[6] 提供了对数组的支持，是 Python 编程的一个核心库。图像的本质其实也是一个包含像素数据点的标准 NumPy 数组，因此可以通过一些基本的 NumPy 操作（例如切片、掩膜mask、花式索引fancy indexing等），就可以从像素级别对图像进行编辑。通过 NumPy 数组存储的图像也可以被 skimage 加载并使用 matplotlib 显示。
+
+资源
+在 NumPy 的官方文档[7]中提供了完整的代码文档和资源列表。
+
+示例
+使用 NumPy 对图像进行掩膜mask操作：
+
+import numpy as np
+from skimage import data
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+image = data.camera()
+type(image)
+numpy.ndarray #Image is a NumPy array:
+
+mask = image < 87
+image[mask]=255
+plt.imshow(image, cmap='gray')
+NumPy
+
+NumPy
+
+3、SciPy
+像 NumPy 一样，SciPy[8] 是 Python 的一个核心科学计算模块，也可以用于图像的基本操作和处理。尤其是 SciPy v1.1.0 中的 scipy.ndimage[9] 子模块，它提供了在 n 维 NumPy 数组上的运行的函数。SciPy 目前还提供了线性和非线性滤波linear and non-linear filtering、二值形态学binary morphology、B 样条插值B-spline interpolation、对象测量object measurements等方面的函数。
+
+资源
+在官方文档[10]中可以查阅到 scipy.ndimage 的完整函数列表。
+
+示例
+使用 SciPy 的高斯滤波[11]对图像进行模糊处理：
+
+from scipy import misc,ndimage
+
+face = misc.face()
+blurred_face = ndimage.gaussian_filter(face, sigma=3)
+very_blurred = ndimage.gaussian_filter(face, sigma=5)
+
+#Results
+plt.imshow(<image to be displayed>)
+Using a Gaussian filter in SciPy
+
+Using a Gaussian filter in SciPy
+
+4、PIL/Pillow
+PIL (Python Imaging Library) 是一个免费 Python 编程库，它提供了对多种格式图像文件的打开、编辑、保存的支持。但在 2009 年之后 PIL 就停止发布新版本了。幸运的是，还有一个 PIL 的积极开发的分支 Pillow[12]，它的安装过程比 PIL 更加简单，支持大部分主流的操作系统，并且还支持 Python 3。Pillow 包含了图像的基础处理功能，包括像素点操作、使用内置卷积内核进行滤波、颜色空间转换等等。
+
+资源
+Pillow 的官方文档[13]提供了 Pillow 的安装说明自己代码库中每一个模块的示例。
+
+示例
+使用 Pillow 中的 ImageFilter 模块实现图像增强：
+
+from PIL import Image,ImageFilter
+#Read image
+im = Image.open('image.jpg')
+#Display image
+im.show()
+
+from PIL import ImageEnhance
+enh = ImageEnhance.Contrast(im)
+enh.enhance(1.8).show("30% more contrast")
+Enhancing an image in Pillow using ImageFilter
+
+Enhancing an image in Pillow using ImageFilter
+
+源码[14]
+5、OpenCV-Python
+OpenCV（Open Source Computer Vision 库）是计算机视觉领域最广泛使用的库之一，OpenCV-Python[15] 则是 OpenCV 的 Python API。OpenCV-Python 的运行速度很快，这归功于它使用 C/C++ 编写的后台代码，同时由于它使用了 Python 进行封装，因此调用和部署的难度也不大。这些优点让 OpenCV-Python 成为了计算密集型计算机视觉应用程序的一个不错的选择。
+
+资源
+入门之前最好先阅读 OpenCV2-Python-Guide[16] 这份文档。
+
+示例
+使用 OpenCV-Python 中的金字塔融合Pyramid Blending将苹果和橘子融合到一起：
+
+Image blending using Pyramids in OpenCV-Python
+
+Image blending using Pyramids in OpenCV-Python
+
+源码[17]
+6、SimpleCV
+SimpleCV[18] 是一个开源的计算机视觉框架。它支持包括 OpenCV 在内的一些高性能计算机视觉库，同时不需要去了解位深度bit depth、文件格式、色彩空间color space之类的概念，因此 SimpleCV 的学习曲线要比 OpenCV 平缓得多，正如它的口号所说，“将计算机视觉变得更简单”。SimpleCV 的优点还有：
+
+即使是刚刚接触计算机视觉的程序员也可以通过 SimpleCV 来实现一些简易的计算机视觉测试
+录像、视频文件、图像、视频流都在支持范围内
+资源
+官方文档[19]简单易懂，同时也附有大量的学习用例。
+
+示例
+SimpleCV
+
+SimpleCV
+
+7、Mahotas
+Mahotas[20] 是另一个 Python 图像处理和计算机视觉库。在图像处理方面，它支持滤波和形态学相关的操作；在计算机视觉方面，它也支持特征计算feature computation、兴趣点检测interest point detection、局部描述符local descriptors等功能。Mahotas 的接口使用了 Python 进行编写，因此适合快速开发，而算法使用 C++ 实现，并针对速度进行了优化。Mahotas 尽可能做到代码量少和依赖项少，因此它的运算速度非常快。可以参考官方文档[21]了解更多详细信息。
+
+资源
+文档[22]包含了安装介绍、示例以及一些 Mahotas 的入门教程。
+
+示例
+Mahotas 力求使用少量的代码来实现功能。例如这个 Finding Wally[23] 游戏：
+
+Finding Wally problem in Mahotas
+
+Finding Wally problem in Mahotas
+
+Finding Wally problem in Mahotas
+
+Finding Wally problem in Mahotas
+
+源码[24]
+8、SimpleITK
+ITK[25]（Insight Segmentation and Registration Toolkit）是一个为开发者提供普适性图像分析功能的开源、跨平台工具套件，SimpleITK[26] 则是基于 ITK 构建出来的一个简化层，旨在促进 ITK 在快速原型设计、教育、解释语言中的应用。SimpleITK 作为一个图像分析工具包，它也带有大量的组件[27]，可以支持常规的滤波、图像分割、图像配准registration功能。尽管 SimpleITK 使用 C++ 编写，但它也支持包括 Python 在内的大部分编程语言。
+
+资源
+有很多 Jupyter Notebooks[28] 用例可以展示 SimpleITK 在教育和科研领域中的应用，通过这些用例可以看到如何使用 Python 和 R 利用 SimpleITK 来实现交互式图像分析。
+
+示例
+使用 Python + SimpleITK 实现的 CT/MR 图像配准过程：
+
+SimpleITK animation
+
+SimpleITK animation
+
+源码[29]
+9、pgmagick
+pgmagick[30] 是使用 Python 封装的 GraphicsMagick 库。GraphicsMagick[31] 通常被认为是图像处理界的瑞士军刀，因为它强大而又高效的工具包支持对多达 88 种主流格式图像文件的读写操作，包括 DPX、GIF、JPEG、JPEG-2000、PNG、PDF、PNM、TIFF 等等。
+
+资源
+pgmagick 的 GitHub 仓库[32]中有相关的安装说明、依赖列表，以及详细的使用指引[33]。
+
+示例
+图像缩放：
+
+Image scaling in pgmagick
+
+Image scaling in pgmagick
+
+源码[34]
+边缘提取：
+
+Edge extraction in pgmagick
+
+Edge extraction in pgmagick
+
+源码[35]
+10、Pycairo
+Cairo[36] 是一个用于绘制矢量图的二维图形库，而 Pycairo[37] 是用于 Cairo 的一组 Python 绑定。矢量图的优点在于做大小缩放的过程中不会丢失图像的清晰度。使用 Pycairo 可以在 Python 中调用 Cairo 的相关命令。
+
+资源
+Pycairo 的 GitHub 仓库[38]提供了关于安装和使用的详细说明，以及一份简要介绍 Pycairo 的入门指南[39]。
+
+示例
+使用 Pycairo 绘制线段、基本图形、径向渐变radial gradients：
+
+Pycairo
+
+Pycairo
+
+源码[40]
+总结
+以上就是 Python 中的一些有用的图像处理库，无论你有没有听说过、有没有使用过，都值得试用一下并了解它们。
+
+via: https://opensource.com/article/19/3/python-image-manipulation-tools
+
+作者：Parul Pandey[41] 选题：lujun9972[42] 译者：HankChow[43] 校对：wxy[44]
+
+本文由 LCTT[45] 原创编译，Linux中国[46] 荣誉推出
+
+[1]: https://scikit-image.org/
+[2]: http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy
+[3]: http://scikit-image.org/docs/stable/user_guide.html
+[4]: http://scikit-image.org/docs/dev/auto_examples/features_detection/plot_template.html#sphx-glr-auto-examples-features-detection-plot-template-py
+[5]: https://scikit-image.org/docs/dev/auto_examples
+[6]: http://www.numpy.org/
+[7]: http://www.numpy.org/
+[8]: https://www.scipy.org/
+[9]: https://docs.scipy.org/doc/scipy/reference/ndimage.html#module-scipy.ndimage
+[10]: https://docs.scipy.org/doc/scipy/reference/tutorial/ndimage.html#correlation-and-convolution
+[11]: https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.gaussian_filter.html
+[12]: https://python-pillow.org/
+[13]: https://pillow.readthedocs.io/en/3.1.x/index.html
+[14]: http://sipi.usc.edu/database/
+[15]: https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_setup/py_intro/py_intro.html
+[16]: https://github.com/abidrahmank/OpenCV2-Python-Tutorials
+[17]: https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_pyramids/py_pyramids.html#pyramids
+[18]: http://simplecv.org/
+[19]: http://examples.simplecv.org/en/latest/
+[20]: https://mahotas.readthedocs.io/en/latest/
+[21]: https://openresearchsoftware.metajnl.com/articles/10.5334/jors.ac/
+[22]: https://mahotas.readthedocs.io/en/latest/install.html
+[23]: https://blog.clarifai.com/wheres-waldo-using-machine-learning-to-find-all-the-waldos
+[24]: https://mahotas.readthedocs.io/en/latest/wally.html
+[25]: https://itk.org/
+[26]: http://www.simpleitk.org/
+[27]: https://itk.org/ITK/resources/resources.html
+[28]: http://insightsoftwareconsortium.github.io/SimpleITK-Notebooks/
+[29]: https://github.com/InsightSoftwareConsortium/SimpleITK-Notebooks/blob/master/Utilities/intro_animation.py
+[30]: https://pypi.org/project/pgmagick/
+[31]: http://www.graphicsmagick.org/
+[32]: https://github.com/hhatto/pgmagick
+[33]: https://pgmagick.readthedocs.io/en/latest/
+[34]: https://pgmagick.readthedocs.io/en/latest/cookbook.html#scaling-a-jpeg-image
+[35]: https://pgmagick.readthedocs.io/en/latest/cookbook.html#edge-extraction
+[36]: https://cairographics.org/
+[37]: https://pypi.org/project/pycairo/
+[38]: https://github.com/pygobject/pycairo
+[39]: https://pycairo.readthedocs.io/en/latest/tutorial.html
+[40]: http://zetcode.com/gfx/pycairo/basicdrawing/
+[41]: https://opensource.com/users/parul-pandey
+[42]: https://github.com/lujun9972
+[43]: https://github.com/HankChow
+[44]: https://github.com/wxy
+[45]: https://github.com/LCTT/TranslateProject
+[46]: https://linux.cn/article-10679-1.html?utm_source=rss&utm_medium=rss

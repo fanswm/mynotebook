@@ -1,0 +1,157 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-30T14:48:15+08:00
+
+====== 渗透测试向导之子域名枚举 ======
+Created Tuesday 30 January 2018
+
+https://note.youdao.com/web/#/file/66A34CF09AB3498C9E421AD23D0DDC46/note/87743A27EC3742C4B8045971A53E9EDC/
+
+作为一名渗透测试者或专业的漏洞赏金猎人，大多数情况下，当开始测试时仅仅知道一个域名或一系列域名。但是我们必须要展开广泛的侦查才能发现更多有意义的东西，例如服务器、web 应用程序、属于目标组织的域等等，以便有更多的机会发现漏洞。
+
+我写了篇介绍开源情报收集技术的博文，这种方法被广泛的应用在侦查阶段。
+
+子域名枚举是信息侦查阶段中关键的一部分。本文以简洁的方式介绍了几种子域名枚举技术。
+
+在 Gitbook 上将发表这一主题的文章来深入探讨这些技术。我们在2017年 Bugcrowd LevelUp 会议的“ Esoteric sub-domain enumerationtechniques ” 议题中也谈到了这些技巧。
+
+什么是子域名枚举？
+
+子域名枚举是查找一个或多个域的子域的过程。这是侦察阶段的重要组成部分。
+
+为什么要进行子域名枚举？
+
+子域名枚举可以在测试范围内发现更多的域或子域，这将增大漏洞发现的几率。
+
+有些隐藏的、被忽略的子域上运行的应用程序可能帮助我们发现重大漏洞。
+
+在同一个组织的不同域或应用程序中往往存在相同的漏洞。
+
+Yahoo! 由于在 yahoo.com 子域上部署了易受攻
+
+子域名枚举方法
+
+1、Google 和 Bing 等搜索引擎支持各种高级搜索来优化搜索查询。这些搜索语法通常被称为“Google dorks”。 
+
+我们可以在 Google 搜索中使用“site：” 关键字来查找某个域的所有子域。谷歌还支持额外参数来排除我们不感兴趣的子域名，例如 “site：*.wikimedia.org -www -store -jobs -uk”，就排除了 www.wikimedia.org、store.wikimedia.org、jobs.wikimedia.org、uk.wikimedia.org 等域。 
+
+使用 site 关键字在google搜索中找到的域名。 
+
+Bing 搜索引擎也支持一些高级搜索。与 Google 一样，Bing 也支持 “site：” 运算符，或许您可能希望排除 Google 搜索的结果。 
+
+使用 “site” 关键字在bing搜索引擎中找到的子域名。 
+
+2、有许多拥有大量 DNS 数据集的第三方服务，可通过他们来检索给定域的子域。
+
+VirusTotal 运行自己的被动 DNS 复制服务，它是通过存储用户提交的 URL 解析结果来建立的。为了检索域的信息，你只需要在搜索栏中输入域名 
+
+使用 virustotal 收集子域名 
+
+在 VirusTotla 中发现的子域名
+
+DNSdumpster 是另一个有趣的工具，可以挖掘出指定域潜藏的大量子域。
+
+使用DNSdumpster搜索子域
+
+Sublist3r 是一个流行的工具，它使用各种资源来枚举子域。通过诸如 Google，Yahoo，Bing，百度和 Ask 等许多搜索引擎来枚举。Sublist3r 还使用 Netcraft，Virustotal，ThreatCrowd，DNSdumpster 和 ReverseDNS 等第三方服务来枚举子域。
+
+使用 sublist3r 枚举子域
+
+3、证书透明度（Certificate Transparency，CT）是一个实验性的 IETF 开源标准和开源框架，证书颁发机构（Certificate Authority，CA）必须将每个 SSL 或 TLS 证书发布到公共日志中。
+
+SSL 或 TLS 证书通常包含域名，子域名和电子邮件地址。这使得它们成为攻击者的信息宝库。我在“证书透明度”一书中撰写了一系列技术性博客文章，深入介绍了这一技术，您可以在 这里阅读本系列文章。
+
+使用收集 CT（Certificate Transparency）日志的搜索引擎，是发现某个域证书最简单的方法。以下是一些流行的搜索引擎：
+
+1. https://crt.sh/
+
+2. https://censys.io/
+
+3. https://developers.facebook.com/tools/ct/
+
+4. https://google.com/transparencyreport/https/ct/
+使用crt.sh查找某个组织主域下的子域名
+
+我们编写了几个脚本来简化使用 CT 日志搜索引擎查找子域的过程。脚本在我们的 github仓库中可用。
+
+来自uber.com CT日志的子域
+
+使用 CT 进行子域枚举的不利之处在于，在 CT 日志中找到的域名可能不再存在，因此无法解析为 IP 地址。您可以使用像 massdns 这样的工具，结合 CT 日志来快速识别可解析的域名。
+
+# ct.py - extracts domain names from CT Logs(shippedwith massdns)# massdns - will find resolvable domains & adds them to a file ./ct.py icann.org | ./bin/massdns -r resolvers.txt -tA -q -a -o -w icann_resolvable_domains.txt -
+使用massdns来查找可解析的域名
+
+4、基于字典的枚举是另一种查找具有通用名称的子域的技术。DNSRecon 是一个功能强大的 DNS 枚举工具，它的一个特点是使用预定义的单词表进行基于字典的子域枚举。
+
+$ python dnsrecon.py -n ns1.insecuredns.com -d insecuredns.com -D subdomains-top1mil-5000.txt -t brt
+使用DNSRecon的基于字典的枚举
+
+5、置换扫描是识别子域的另一个有趣的技术。在这项技术中，我们使用已知域或子域的组合来确定新的子域。
+
+Altdns 是一个可以发现符合既定模式的子域的工具 
+
+$ python altdns.py -i icann.domains -o data_output -wicann.words -r -s results_output.txt
+使用AltDNS查找与某些排列或替换匹配的子域
+
+6、 找到自治系统编号（ASN）将有助于我们识别属于某个组织的网络块，该分块可能具有有效的域。
+
+使用 dig 或 host 来解析给定域的 IP 地址。 
+
+可以找到 IP 地址 ASN 的工具： https://asn.cymru.com/cgi-bin/whois.cgi
+
+可以找到域名 ASN 的工具： http://bgp.he.net/
+使用 IP 地址找到 AS 编号
+
+找到的 ASN 号码可用于查找域的网络块。Nmap 脚本可以来实现 ：
+
+https://nmap.org/nsedoc/scripts/targets-asn.html
+
+$ nmap --script targets-asn --script-args targets-asn.asn=17012 > netblocks.txt
+使用AS编号查找网络块的NSE脚本
+
+7、 区域传输是 DNS 的一种事务，DNS 服务器将全部或部分区域文件的副本传递给另一台 DNS 服务器。
+
+如果区域传输没有被安全的配置，任何人都可以启动一个名称服务器的区域传输并获得区域文件的副本。在设计上，区域文件包含大量有关该区域和驻留在区域中主机的信息。
+
+$ dig +multi AXFR @ns1.insecuredns.com insecuredns.com
+使用DIG工具对域名服务器成功地进行区域传输
+
+8、 由于 DNSSEC 处理不存域的方式，可以“漫游” DNSSEC 区域并枚举该区域中的所有域。你可以从这里了解更多关于这个技巧。
+
+对于使用 NSEC 记录的 DNSSEC 区域，可以使用 ldns-walk等工具执行区域漫游。 
+
+$ ldns-walk @ ns1.insecuredns.com insecuredns.com
+带NSEC记录的DNSSEC区域
+
+某些 DNSSEC 区域使用 NSEC3 记录，这些记录使用哈希域名来防止攻击者收集纯文本域名。攻击者可以收集所有的子域哈希值，并在线下破解哈希值。
+
+像 nsec3walker这样的工具可以帮助我们自动化收集 NSEC3 哈希和破解哈希。安装 nsec3walker href=”https://dnscurve.org/nsec3walker.html“>之后，可以使用以下命令来枚举 NSEC3 保护区的子域。
+
+# Collect NSEC3 hashes of a domain$ ./collect icann.org > icann.org.collect# Undo the hashing, expose the sub-domain information.$ ./unhash < icann.org.collect > icann.org.unhash# Listing only the sub-domain part from the unhashed data$ cat icann.org.unhash | grep "icann" | awk '{print $2;}'del.icann.org.access.icann.org.charts.icann.org.communications.icann.org.fellowship.icann.org.files.icann.org.forms.icann.org.mail.icann.org.maintenance.icann.org.new.icann.org.public.icann.org.research.icann.org.
+9、 有些项目收集互联网的扫描数据，并将其提供给研究人员和安全社区。这些数据集是子域信息的宝库。尽管在这个庞大的数据集中查找子域犹如大海捞针，但也是值得的。 
+
+正向 DNS 数据集作为 Project Sonar 的一部分发布。这些数据是通过提取来自多个源的域名并且给每个域发送 ANY 请求来收集的。这些数据是 gzip 格式的 json 文件。我们可以解析数据集来查找给定域的子域。数据集是很大的（压缩后约 20 + GB，未压缩约有 300 + GB）。
+
+# Command to parse& extract sub-domains for a given domain$ curl -silent https://scans.io/data/rapid7/sonar.fdns_v2/20170417-fdns.json.gz | pigz -dc | grep “.icann.org” | jq
+使用 FDNS 数据集收集子域名
+
+比较
+
+我们用上面谈到的方法来对 icann.org 进行检测并比较一下不同方法带来的结果。下面的条形图展示了使用不同的方法找到唯一且可解析的子域的数目。与我们联系可以了解收集这些信息的方法。
+
+不同方法找到的唯一且可解析子域的数目
+
+整理和收集
+
+我们为子域名枚举技术、相关工具和一些资源做了个简单的整理，将所有方法呈现出来方便查找使用：
+
+https://gist.github.com/yamakira/2a36d3ae077558ac446e4a89143c69ab
+
+简单的整理和搜集
+
+*本文作者：Twosecurity1，转载请注明来自FreeBuf.COM
+
+Twosecurity1
+Twosecurity1
+1 篇文章
+等级： 1级

@@ -1,0 +1,143 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-29T16:19:53+08:00
+
+====== Android 设备刷机通用指南 ======
+创建日期 星期三 29 五月 2019
+
+Android 设备刷机通用指南
+05月17日
+青雪唐元
+目录
+配置 Android SDK 的环境变量
+解锁 Bootloader
+刷入第三方 Recovery
+类原生 Android 系统 ROM 推荐
+总结
+附录
+Matrix 精选
+Matrix 是少数派的写作社区，我们主张分享真实的产品体验，有实用价值的经验与思考。我们会不定期挑选 Matrix 最优质的文章，展示来自用户的最真实的体验和观点。
+
+文章代表作者个人观点，少数派仅对标题和排版略作修改。
+
+2018 年我第一次接触刷机，初出茅庐的我为我的小米平板 1 刷上了系统 Lineage OS 15.1，并写下了 使用 Mac 为小米平板刷 lineage OS。彼时自己对于刷机这个过程颇为生疏，只是小心翼翼的按照教程一步一步操作，生怕有一丝一毫不一致的地方，而其背后每一步骤的原因却无从得知，故有意撰此文。一方面让准备刷机的人多一个教程可以参考，另一方面藉此机会充实自己，了解一些 Android 开发知识，也算是满足自己的好奇心罢。
+
+出于知识内容所限，本文仅讨论线刷模式，不讨论卡刷模式。
+
+配置 Android SDK 的环境变量
+SDK 的全称叫做软件开发工具包 (Software Development Kit) ，Android SDK 里面包含安卓软件的开发工具，这些开发工具均在 SDK 的安装目录下，拥有它们我们才能对 Android 中的软件进行安装、卸载等相关操作。当我们在终端输入指令要求启动某个工具或应用程序时，系统会优先在当下的目录中进行查找，如果没有则会在系统 Path 指定的路径下进行查找；而我们配置环境变量的这个过程，就是把 SDK 的安装目录记录在系统 Path 的指定路径中，让我们在终端能够直接使用 SDK 中的开发工具。该过程也叫做配置 ADB (Android Debug Bridge) 环境变量。
+
+Mac 系统下的环境变量配置
+参见：使用 Mac 为 Android 手机刷原生系统  https://sspai.com/post/38535
+
+Windows 系统下的环境变量配置
+Windows 系统下由于其系统特点，目前（我知道的）有三种方案，将在以下展开，三种方法均适用于 Windows 10 系统，其他系统可能有些出入，读者可部分参考。
+
+方案一：配置环境变量
+参见：win10 如何配置 Android 开发环境变量 https://jingyan.baidu.com/article/295430f180cd520c7e00509e.html
+
+该方案和 Mac 系统下环境变量配置的原理一致，都是对系统进行操作。虽看起来步骤多，好处就在于一劳永逸，一次配置「终身」受用，除非你重装了系统，个人优先推荐该方法。
+
+方案二：快速安装与使用 ADB
+1 将 platform-tools 数据包解压，进入解压后的文件夹，按住 Shift 键的同时在空白处单击鼠标右键，选择「在此处打开命令窗口」（在 Win 10 创意者更新中被改为「在此处打开Powershell窗口」）；
+2 输入 adb version 检测环境变量配置是否完成；
+这个方案相当偷懒，其实这个步骤并没有实现系统的环境变量配置，只是提供了一个临时的环境，但是无论如何这个方法是最方便的，而且对于新手而言非常友好。
+
+方案二：直接访问 SDK 目录
+1 将 platform-tools 放在一个接近硬盘根目录如 C:\adb 这样的地方便于访问，这时我们需要访问的目录为 C:\adb\platform-tools；
+2 在运行命令窗口中输入 cmd 打开命令符窗口，并按下回车执行；
+3 输入 cd adb\platform-tools ，并按下回车执行，进入目录；
+4 输入 adb version 检测环境变量配置是否完成。
+该方案和方案一比较像，都是偏向于临时解决环境配置问题，但是都没有实现系统的环境变量配置，因此每次使用时都要重新访问一次 SDK 的所在目录。
+
+该方案看似简单、容易操作，但弊端明显，只有你在进入该目录的情况下，才符合「环境变量已配置」的条件，不建议没有代码基础的人操作。
+
+解锁 Bootloader
+一般而言，每个 Android 设备都会有 Fastboot / Bootloader 模式，它是负责引导操作系统内核启动的引导程序，只有在该模式是无锁的情况下，我们才能自由的 root 我们的设备、自定义或安装一个更加好用的第三方 ROM 固件，否则很容易损伤设备。
+与封闭的 iOS 系统不同， Android 系统是开源的，因而相应的各大厂商所开发的 Fastboot / Bootloader 模式也各有不同。尽管系统是开源的，但是各厂商为了对自己的设备有着更多的支配权，多数情况下都会对其 Fastboot / Bootloader 模式上锁。这就是为什么我们在刷机教程里经常看到 「Bootloader 解锁」这一步了。
+
+Bootloader 解锁通用步骤
+打开「开发者选项」，不同设备打开的方式不同，请读者根据自己设备机型自行百度一下；
+先后打开「USB 调试」与「启用 OEM 解锁」（没有「启用 OEM 解锁」选项的设备则不用理会），该过程需要满足网络流（ke）畅（xue）；
+进入 Bootloader 界面等候；
+打开 Terminal / CMD ，输入 Bootloader 解锁指令，并按下回车执行；如果你的设备为 Android 5.0 及以下，则解锁指令为 fastboot oem unlock ；如果你的设备为 Android 6.0 及以上，则解锁指令为 fastboot flashing unlock；
+在设备端此时会弹出 Bootloader 解锁的确认界面，使用音量键移动关标选择确认，按下电源键开始解锁；
+解锁后设备会被清除数据并重新启动，待设备开机后检查「USB 调试」选项；
+重新进入 Bootloader 界面等候；
+注意事项
+解锁 Fastboot / Bootloader 模式后，可能会使保修相关服务失效；
+解锁 Bootloader 的过程中，可能会还原设备一切资料，切记在此前做好资料备份工作；
+解锁 Bootloader 的过程中，有一定损坏设备的风险；
+该 Bootloader 解锁方式大体上对于 Android 设备通用，但是鉴于各厂商 Android 设备差异实在太大，建议如果有官方解锁通道就先去申请官方解锁，没有解锁通道再尝试该方法。当然对于从来没有放开 Bootloader 解锁权限的品牌（可自行百度），还是该放弃放弃吧。
+刷入第三方 Recovery
+设备一般都会自带一个官方初始的一个 Recovery ，其作用主要用于恢复出厂设置与OTA安装/升级，但是由于官方 Recovery 不能识别第三方 ROM ，而第三方 Recovery 却可以，所以我们一般在刷机之前都会先刷入第三方 Recovery 。
+目前比较推荐的第三方 Recovery 是 TWRP，该项目是一个社区开源项目，挂载在 GitHub 上。也许你会发现之前也有人推荐过 CWM ，很遗憾的是，该项目已于2014年停止了维护，如果你用的设备型号比较老的话，可能会用到它。
+
+刷入第三方 Recovery 的通用步骤
+准备好设备匹配的第三方 Recovery 版本，后缀为.img；
+重启手机至 bootloader 模式，电脑端运行 Terminal/CMD；
+输入 cd 你的第三方 Recovery 文件路径 ，并按下回车执行，以此来定向第三方 Recovery 的文件位置，接着输入 fastboot boot xxx.img（xxx 为具体的文件名），并按下回车执行，此时 Recovery 已经刷入，手机会重启至 Recovery 相应界面。
+注意事项
+该过程中需要定向 Recovery 的位置，故而如果你在 Windows 系统下的环境变量配置时用的是方案三，在这里会比较麻烦，解决方法是把你的第三方 Recovery 文件放在 platform-tools 目录下，让两个目录一致。
+类原生 Android 系统 ROM 推荐
+Lineage OS  https://lineageos.org/
+Lineage OS 是 Android 的最大售后市场分销，以前称为 CyanogenMod。2016年开源项目 CyanogenMod 被宣布停止，被复刻为 Lineage OS ，由原团队 CyanogenMod 继续开发，源代码于 GitHub 可用。 https://github.com/lineageos
+
+Resurrection Remix OS  https://resurrectionremix.com/
+Resurrection Remix OS 基于 LineageOS 15.1，包含大量附加功能和定制选项。因为它提供了许多功能，所以成为了 Android 设备最受欢迎的自定义ROM，源代码于 GitHub 可用.
+
+
+Resurrection Remix OS
+crDroid
+crDroid 基于 Lineage OS，在此基础上附加其他性能调整和额外功能，源代码于 GitHub 可用。 https://github.com/ResurrectionRemix
+
+
+crDroid https://crdroid.net/
+Pixel Experience  https://download.pixelexperience.org/
+Pixel Experience 基于 Android 开源项目 (AOSP) 与 Code Aurora 项目（CAF）开发，由于 Pixel Experience 中包含谷歌全家桶，故而相比与其他 ROM 包来说要大些，源代码于 GitHub 中可用。 https://github.com/crdroidandroid    https://github.com/PixelExperience
+
+Paranoid Android
+Paranoid Android 的制作团队就是 Oxygen OS 的制作团队，该制作团队的核心成员被 Oneplus 聘请，为 Oneplus 做 ROM 开发，源代码于 GitHub 中可用。
+
+AOSPEXTENDED ROM  https://www.aospextended.com/
+AOSPEXTENDED ROM 基于 Android 开源项目 (AOSP) 开发，它提供了各种自定义特性和底层主题引擎，源代码于 GitHub 中可用。  https://github.com/AospExtended
+
+ 
+XOSP  https://xosp.org/
+XOSP 是基于 CyanogenMod 13 的 ROM ，混合了很多 Xperia 的特性，带来不一样的感受。因为是 Xperia + AOSP 的混合体，因此命名为XOSP。
+
+魔趣 ROM  https://www.mokeedev.com/
+魔趣 ROM 基于 Android 开源项目 (AOSP) 开发，Slogan 是「可能是中国最好的安卓开源系统」，源代码于 GitHub 可用。  https://github.com/MoKee
+
+总结
+这些是我这些天各种查资料总结到的，由于个人能力与知识水平所限，会存在一些不足之处。如前辈们发现文中有错漏的问题，诚求各位不吝赐教。
+
+附录
+常用 ADB 命令
+代码	含义
+adb reboot bootloader	在 bootloader 模式下重启
+adb push	将文件从本地系统复制到 Android 手机的位置
+adb pull	将文件从 Android 复制到您的系统
+adb devices	显示所有连接的 adb 兼容设备
+adb backup	备份 Android 设备
+adb install	将应用程序从系统的 apk 文件位置安装到 Android 设备上
+adb reboot	在正常模式下重新启动 Android 手机
+adb connect	通过 WiFi 网络使用adb命令
+adb shell screencap	获取设备的屏幕截图
+常用 Fastboot 命令
+代码	含义
+fastboot devices	显示连接的 Android 设备的序列号
+fastboot oem unlock	解开 bootloader 锁（Android 5.0 及以下）
+fastboot oem lock	恢复 bootloader 锁（Android 5.0 及以下）
+fastboot flashing unlock	解开 bootloader 锁（Android 6.0 及以上）
+fastboot flashing lock	恢复 bootloader 锁
+fastboot flash recovery (filename)	在 bootloader 模式中向设备刷入文件
+关联阅读：
+Android 玩机终极指南  https://sspai.com/post/43338
+参考链接
+五步搞定 Android 开发环境部署——非常详细的 Android 开发环境搭建教程 https://www.cnblogs.com/zoupeiyang/p/4034517.html
+How to quickly install and use ADB  https://www.xda-developers.com/quickly-install-adb/
+What are Android SDK Platform Tools & How to Use ADB and Fastboot  http://www.it4nextgen.com/android-sdk-platform-tools-adb-fastboot/
+一贴解决几乎一切刷机问题！adb 和 fastboot 命令简易教程！  http://bbs.xiaomi.cn/t-21200023-5-o1#comment_top
+[教程] 采用神盾内核的lineageOS 14.1/ 15.1（更新至1103/1112）刷机教程 刷机常用知识 - 小米社区官方论坛 http://www.miui.com/thread-10947082-1-1.html
+Android Fastboot 与 Recovery 和刷机 https://www.jianshu.com/p/d960a6f517d8

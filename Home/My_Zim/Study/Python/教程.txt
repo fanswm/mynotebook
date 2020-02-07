@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-26T08:26:14+08:00
+
+====== 教程 ======
+Created Sunday 26 November 2017
+
+书：
+Think Python: How to Think like a Computer Scientist   /   “Python for Everybody: Exploring Data In Python 3”
+
+知乎专栏：
+https://zhuanlan.zhihu.com/p/35563090

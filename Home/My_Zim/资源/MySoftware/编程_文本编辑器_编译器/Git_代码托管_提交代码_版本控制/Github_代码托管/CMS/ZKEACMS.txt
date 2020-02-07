@@ -1,0 +1,36 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-15T16:24:31+08:00
+
+====== ZKEACMS ======
+Created Monday 15 October 2018
+
+项目名称：ZKEACMS
+ 
+也叫纸壳CMS，是一个可视化设计的CMS系统（内容管理系统）。看完这个系统，会让你对前端，后端，数据库有一个全新的认识。
+ 
+页面布局
+ 
+页面布局是可以直接在线设计的：
+ 
+页面
+ 
+页面也是可以在线设计，编辑的：
+
+显示模板
+ 
+模板是可以直接在线编辑的：
+
+可视化样式编辑
+ 
+样式是可视化直接编辑的：
+
+
+添加内容板块
+ 
+直接从现有板块中快速添加：
+
+项目地址
+ 
+SeriaWei/ZKEACMS.Core​github.com
+https://github.com/SeriaWei/ZKEACMS.Core

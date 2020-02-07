@@ -1,0 +1,39 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-02-18T07:56:28+08:00
+
+====== 内置命令 ======
+创建日期 星期日 18 二月 2018
+
+Bourne Shell 内置命令：内置命令继承自 Bourne Shell。
+Bash 内置命令：特定于 Bash 的内置命令表。
+修改 Shell 行为：修改 shell 属性和可选行为的内置命令。
+特别的内置命令：由 POSIX 特别分类的内置命令。
+
+__如何查看所有 bash 内置命令__
+有以下的命令：
+
+$ help
+$ help | less
+$ help | grep read 
+
+另外一种选择是使用下列命令：
+
+compgen -b
+compgen -b | more
+
+
+__仅得到所有带简短描述的内置命令的列表，执行如下:__
+
+$ help -d
+
+__找出一个命令是内部的（内置）还是外部的__
+使用 type 命令或 command 命令：
+
+type -a command-name-here 
+
+或者：
+
+command -V ls 
+command -V cd 
+command -V foo

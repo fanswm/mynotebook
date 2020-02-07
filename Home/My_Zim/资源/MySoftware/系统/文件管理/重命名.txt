@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-17T16:58:45+08:00
+
+====== 重命名 ======
+创建日期 星期日 17 三月 2019
+
+拖把更名器
+book - Windows 这款不足 1M 的神器，能 1 秒重命名 1000 个文件！（分享自知乎网）https://zhuanlan.zhihu.com/p/59376896?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

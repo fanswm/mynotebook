@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T14:20:22+08:00
+
+====== My Zim ======
+Created Tuesday 21 November 2017
+abstracthex-notes
+
+记录原则：
+	尽量扁平化
+	不重复记录
+	以关键词记录，不再分到底是软件还是网址，或者是方法。有的地方大致分。
+	

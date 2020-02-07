@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-05T20:59:58+08:00
+
+====== short ======
+Created Monday 05 March 2018
+
+ __short 数据类型是 16 位、有符号的以二进制补码表示的整数__
+最小值是 -32768（-2^15）；
+最大值是 32767（2^15 - 1）；
+Short 数据类型也可以像 byte 那样节省空间。一个short变量是int型变量所占空间的二分之一；
+默认值是 0；
+例子：short s = 1000，short r = -20000。

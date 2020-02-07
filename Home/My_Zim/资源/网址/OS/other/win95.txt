@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-17T22:07:56+08:00
+
+====== win95 ======
+创建日期 星期日 17 二月 2019
+
+
+开发者把 Windows 95 做成了软件，是时候重温一下经典的扫雷和纸牌了
+2018年08月24日
+i9NGbgNq i9NGbgNq
+Windows 95 是微软操作系统上的一块里程碑，经典的左下角「开始」菜单、《空当接龙》游戏都是从这一代开始加入 Windows 系统的。现在，聊天软件 Slack 的开发者 Felix Rieseberg 把 Windows 95 变成了一个可以在 macOS、Windows、Linux 上运行的应用程序，只要 下载安装，你就能在电脑上重温这款经典的操作系统。
+
+打开应用，点击「Start Windows 95」就会进入 Windows 95 的操作界面。虽然这个图形用户界面现在看起来可能有点朴素单调，但在 1995 年还是很先进的。使用鼠标操作起来就和 Windows 10 一样，只不过点击图标后程序打开得有点慢，没有最新的操作系统那么流畅。
+
+
+macOS 版的安装包只有 129 MB 大小，却能完整运行 Windows 95 的各类程序，并且内存占用也仅有 200 MB 左右。测试下来，Windows 95 的写字板、扫雷、电话拨号器、MS Paint 等内置程序都能正常运行，就是 Internet Explorer 打开后显示页面无法加载，开发者甚至还加入了「插入软盘（Insert Floppy Disk）」功能，可以加在 .img 格式的文件。
+
+由于微软在 Windows 8 之后移除了系统内置的几款经典游戏，所以除了怀旧一下 Windows 95 熟悉的操作界面，你还可以在系统中重温一下陪伴我们多年的经典小游戏。
+
+
+目前，开发者已经在 Github 上发布了这个项目的源代码和安装包。想要体验经典的 Windows 95 操作系统的可以前往下载。
+https://sspai.com/post/46876
+https://github.com/felixrieseberg/windows95/releases

@@ -1,0 +1,240 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-06T17:07:28+08:00
+
+====== 使用 Docker 构建自己的镜像 ======
+创建日期 星期三 06 三月 2019
+
+使用 Docker 构建自己的镜像
+ https://zhuanlan.zhihu.com/p/34488175
+简介
+Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
+-- 百度百科
+Docker 的介绍我就不多说了，简单来说就是能实现快速、自动化的部署和发布应用服务，具体的优势可百度。本文主要着重于实际操作，如何从零构建自己的镜像及快速部署应用。这篇文章主要介绍了使用 Dockerfile 脚本构建镜像，搭建简单的容器服务。
+
+目前 Docker 有两套版本，一套是早期的 Docker 程序，版本号为 v1.*，CentOS 系统使用 yum 安装的默认就是这个版本。另一套是后期发展的整个 Docker 生态，版本号是 v17.*，分为社区版及企业版。本文以下使用 Linux CentOS 7 系统（其他 Linux 系统的使用方式类似），Docker 社区版 Docker-CE v17.12，Docker-CE 各个系统的安装方式请参考 Docker 安装文档。
+
+开始之前
+Docker 有两个核心概念需要理清以下，镜像和容器。镜像的英文名称是 image，镜像是一个抽象的服务，镜像一旦构建之后就不能改变，但是可以重新构建，镜像有版本控制。可以使用 docker images 命令查看所有的镜像。而容器的英文名称是 container，是镜像的实例，是具体运行的服务，也就是一个镜像运行一次就产生一个容器。容器可以将当前的状态打包成一个新的镜像，使用 docker ps -a 可以查看所有的容器。
+
+举一个面向对象编程的例子，镜像就是一个类，而容器就是这个类的某一个实例，镜像是容器的模版，是静态的，而容器是运行时动态的。理清这个概念之后，我们就可以着手构建镜像了，而我们部署只需要从这个镜像生成一个新的容器就可以了。
+
+构建镜像
+Docker 主要有两种方式构建镜像，一种是从一个镜像开始，手动进行各种操作，然后提交，构建镜像，类似于操作完成后使用 Git 提交构建一个新的镜像。第二种是使用一个构建脚本（Dockerfile）自动打包成新的镜像。这两种方式各有应用场景，第一种适用于自己试验或尝试一些新想法，属于手动型，而第二种则属于自动构建，便于构建自动化 DevOps 及版本控制，文本就介绍使用 Dockerfile 构建镜像的方法。
+
+现在我们以构建一个自己的 PHP 基础环境为例，镜像包含了 Nginx，PHP7 的服务环境，用于快速部署 PHP 应用。
+
+首先，建立一个项目目录，假设为 docker-nginx-php7，此目录作为项目的根目录，因为 Docker 的构建脚本 Dockerfile 是纯文本文件，所以可以使用 git 等版本控制工具进行管理。
+
+第二步创建 Dockerfile 文件，Dockerfile 是 Docker 默认的脚本文件名，也可以指定其他名称，Dockerfile 的官方文档请参考 Dockerfile 文档。Dockerfile 脚本每行一个命令，一般命令用大写字母，后面接命令参数，# 开头的行是注释。下面一步步讲讲主要使用的命令。
+
+FROM centos:7
+MAINTAINER wwtg99 <wwtg99@126.com>
+第一行 FROM 用于指定基础镜像，就是本镜像是在哪个镜像的基础上修改而来的。一般的操作系统基础镜像 Docker 官方都有提供，我们也可以从自己构建的镜像逐步扩展，构建自己的镜像树。FROM 后面跟的是 <镜像名称>:<版本号>，如果省略冒号及后面的版本号，则默认使用 latest 版本。
+
+第二行 MAINTAINER 是镜像的作者和邮箱。
+
+# Install base library
+RUN set -x && \
+	yum install -y gcc \
+	gcc-c++ \
+	autoconf \
+	automake \
+	libtool \
+	wget \
+	make \
+	cmake
+RUN 命令用于在构建阶段执行程序，这里就是 Bash 脚本，这段安装了一些基本的库（基础镜像非常小，删减了很多不必要的程序）。
+
+# Install library
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
+	yum install epel-release && \
+	rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm && \
+	yum install -y zlib \
+	zlib-devel \
+	openssl \
+	openssl-devel \
+	pcre-devel \
+	libxml2 \
+	libxml2-devel \
+	libcurl \
+	libcurl-devel \
+	libpng-devel \
+	libjpeg-devel \
+	freetype-devel \
+	libmcrypt-devel \
+	openssh-server \
+	postgresql-devel \
+	git \
+	python-setuptools
+接着安装 PHP 的一些依赖库。
+
+# Add dir & user
+RUN mkdir -p /data/{www,phpext,conf,log,script} && \
+	useradd -r -s /sbin/nologin -d /data/www -m -k no www && \
+	chown -R www:www /data/www && \
+	chown -R www:www /data/log
+这里创建了数据的目录，以及用于执行 PHP 脚本的用户。
+
+# Install PHP
+RUN yum install -y php71w php71w-fpm php71w-cli php71w-common php71w-devel \
+	php71w-gd php71w-pdo php71w-mysql php71w-mbstring php71w-bcmath \
+	php71w-fpm php71w-opcache php71w-pgsql php71w-process php71w-xml
+然后开始安装 PHP，这里 PHP 的组件可以根据需要删减。
+
+# Install PHP mongo
+RUN wget https://pecl.php.net/get/mongodb-1.4.0.tgz -O /data/phpext/mongodb-1.4.0.tgz && \
+	tar zxf /data/phpext/mongodb-1.4.0.tgz -C /data/phpext
+WORKDIR /data/phpext/mongodb-1.4.0
+RUN /usr/bin/phpize && \
+	./configure --with-php-config=/usr/bin/php-config && \
+	make && make install && \
+	echo "extension=mongodb.so" > /etc/php.d/mongodb.ini
+安装 PHP 的 Mongo 库，有些项目会遇到，我们这里一并安装了。其中这里有个 WORKDIR 的命令，用于切换当前的工作目录，切换对其后的所有命令生效，可以再使用 WORKDIR 命令切换。
+
+# Install nginx
+RUN yum install -y nginx
+# Install supervisor
+RUN easy_install supervisor && \
+	mkdir -p /var/{log/supervisor,run/{sshd,supervisord}}
+# Install composer
+RUN wget https://getcomposer.org/installer -O /data/phpext/composer-setup.php
+WORKDIR /data/phpext
+RUN php composer-setup.php && ln -s /data/phpext/composer.phar /bin/composer
+安装 Nginx、Supervisor 和 composer。
+
+# Clean OS
+RUN yum clean all && \
+	rm -rf /tmp/* /var/cache/{yum,ldconfig} /etc/my.cnf{,.d} && \
+	mkdir -p --mode=0755 /var/cache/{yum,ldconfig} && \
+	find /var/log -type f -delete
+清除安装的临时文件。
+
+# Add conf
+RUN mkdir -p /data/conf/{nginx,supervisord}
+ADD conf/nginx.conf /etc/nginx/nginx.conf
+ADD conf/php-fpm.conf /etc/php-fpm.d/www.conf
+ADD conf/supervisord.conf /etc/supervisord.conf
+这步添加配置文件，使用 ADD 命令将本地文件添加到镜像的文件系统中。所以我们要先在 docker-nginx-php7 目录下建立一个 conf 目录，放入我们自定义的配置文件。
+
+# Create volume
+VOLUME ["/data/www", "/data/conf/nginx", "/data/conf/supervisord", "/data/log", "/data/script"]
+VOLUME 命令用于将镜像内部的文件点暴露，可以在运行时挂载其他的路径作为数据卷。简单地说就是我们这里指定镜像中的目录，在运行这个容器时我们挂载一个其他的目录上去，替换镜像中的这个目录。这里我暴露的几个目录，/data/www 是网站的根目录，运行时我们挂载我们自己的网站根目录上去，就可以不修改镜像运行任意的 PHP 网站。/data/conf/nginx 和 /data/conf/supervisord 分别是 Nginx 和 Supervisord 的配置目录，这样可以在运行时指定配置文件，替换默认的配置文件。/data/log 是默认的日志文件，挂载一个外部的文件目录可以方便查看与收集。/data/script 是脚本文件，我后面放一个自定义的脚本，可以在运行时执行一些自定义的命令。
+
+WORKDIR /data/www
+ADD index.php /data/www/
+
+# Start script
+ADD script.sh /data/script/
+ADD start.sh /
+RUN chmod +x /start.sh
+这里我们需要准备一个 index.php，用于不指定网站根目录时作为默认的网站首页。然后我们添加两个脚本，将 script.sh 添加到之前的脚本目录，用于执行一些自定义的脚本，也可以在运行时替换这个文件，目前这个脚本可以留空。
+
+start.sh 脚本作为镜像的启动脚本，添加到镜像的根目录上。
+
+# Set port
+EXPOSE 80 443
+# Start web server
+CMD ["/bin/bash", "/start.sh"]
+这里 EXPOSE 用于暴露镜像的 80 和 443 端口，而 CMD 命令用于指定运行镜像后默认执行 start.sh 脚本。
+
+现在我们再来看看 start.sh 脚本中的内容，
+
+# run user script
+if [[ -f "/data/script/script.sh" ]]; then
+  source /data/script/script.sh
+fi
+
+/usr/bin/supervisord -n -c /etc/supervisord.conf
+脚本的内容很简单，如果存在 script.sh 脚本，则执行，然后使用 Supervisor 运行 Nginx 和 PHP-fpm 进程。
+
+完整的 Dockerfile 文件、脚本和配置文件可以参考 https://github.com/wwtg99/docker-nginx-php7。
+
+这样我们就编写了一个基础的 PHP 环境的构建脚本，接着在 docker-nginx-php7 目录下运行命令
+
+docker build -t wwtg99/docker-nginx-php7:0.1 --rm .
+这条命令就会根据我们编写的 Dockerfile 构建镜像。其中使用 -t 参数指定的是镜像的名称和版本号，--rm 参数可以移除构建中生成的临时容器，注意最后一个点，用于使用默认的 Dockerfile 文件，也可以指定其他文件。
+
+至此，一个完整的镜像就构建完成了。
+
+运行容器
+镜像构建完成后，我们就需要使用这个构建好的镜像来部署我们的服务。从镜像生成容器的命令如下，
+
+docker run -d --name nginx-php -p 8080:80  wwtg99/docker-nginx-php7:0.1
+这个命令就会生成一个名称为 nginx-php 的容器，运行的就是我们的镜像服务。其中 -d 参数指定后台运行，-p 8080:80 参数将镜像暴露的 80 端口映射到我们主机的 8080 端口，最后指定镜像的名称和版本，如果不指定版本，则默认使用 latest 版本。这样，访问本机的 8080 端口（例如 http://localhost:8080 ）就可以访问我们镜像提供的服务了，默认显示的是我们编写的 index.php 首页。我们可以用我们自己的服务目录挂载到 /data/www volume 上，来提供我们自定义的服务。
+
+docker run -d --name nginx-php -p 8080:80 -v /your_server_dir:/data/www  wwtg99/docker-nginx-php7:0.1
+注意，当我们使用目录挂载到镜像的 volume 上时，挂载的目录将会替代镜像中的目录，也就是原先目录中的文件将不存在！例如，我这边如果挂载了配置文件夹的目录，那么原先的配置文件就不存在了。具体的使用方法请参见 git 仓库的说明。
+
+完善与提升
+构建镜像这只是最基础的一步，接下来还有很多值得提升的地方。
+
+常用命令
+
+Docker 使用过程中有许多常用的命令，完整列表可以查看docker help
+
+# 镜像操作
+docker images  # 查看镜像
+docker rmi <镜像ID或名称>  # 删除镜像
+docker search <关键词>  # 在镜像仓库中搜索
+docker pull <镜像>  # 从镜像仓库拉取镜像
+docker save -o image.tar <镜像ID或名称>  # 将镜像保存到文件
+docker load -i image.tar  # 从文件载入镜像
+
+# 容器操作
+docker ps  # 查看运行的容器
+docker ps -a  # 查看所有的容器
+docker restart <容器ID或名称>  # 重启容器
+docker stop <容器ID或名称>  # 停止容器
+docker start <容器ID或名称>  # 启动停止的容器
+docker rm <容器ID或名称>  # 删除容器，必须先停止，使用 -f 参数强制删除
+docker logs <容器ID或名称>  # 查看容器的日志
+docker exec <容器ID或名称> <命令>  # 在容器中执行命令
+docker exec -ti <容器ID或名称> bash  # 典型的用法是登陆容器的 bash
+docker top <容器ID或名称>  # 查看容器的进程
+docker inspect <容器ID或名称>  # 查看容器的底层信息，如 IP 等
+构建优化
+
+Docker 的镜像采用的是分层架构，一层一层堆叠成一个镜像。而 Dockerfile 的命令就会生成一个层，要优化镜像减少层的数量，可以减少命令的数量。例如，尽量把脚本执行整合到一个 RUN 命令下面。而在测试阶段，可以拆分命令，因为构建时每个命令是一步，而每次构建可以重用之前构建的步，以提高构建速度。例如，第一次构建后修改了第八步的命令，则第二次构建时会重用前七步，直接从第八步开始。
+
+我们这边构建的是一个基础的 PHP 环境，如果我们开发了一些 PHP 的应用，完全可以在此镜像的基础上构建我们的具体应用，这样我们运行镜像是就不需要再挂载网站目录了。具体可以参考 image-filter 和 predict-height 这两个项目。
+
+容器通信
+
+当我们有多个服务（例如微服务架构），或者一个服务有网页端、数据库端，我们往往需要将他们拆分成独立的镜像。这样既便于各自独立管理升级，降低服务间的偶合性，也便于服务的横向扩展。多个容器之间就涉及到了容器间的网络通信，docker 可以构建复杂的私有网络，很好的隔离服务。这是一个很大的主题，这里就不多展开，就讲讲最简单的 link 方式（目前的 docker 版本已经不推荐使用）。
+
+首先，我们启动一个数据库容器，
+
+docker run -d --name db mariadb:latest
+接着，我们启动我们的网页服务，
+
+docker run -d --name web --link db:db wwtg99/docker-nginx-php7:0.1
+使用 --link 参数我们就不需要通过 db 的 IP 或端口暴露来达到连接的目的了。其实，--link 的操作方式就是在 web 容器中的 hosts 增加了 db 对应的 IP 地址，在 web 容器中 db 就等于 db 容器的 IP 了。
+
+镜像仓库
+
+Docker 也提供了 Dockerhub 来存储镜像，可以方便用户上传、下载别人的公开镜像，当然也可以自己构建镜像仓库。具体操作这里就不赘述了。
+
+自动编排
+
+当我们需要运行多个容器，一个个 docker run 就显得不那么自动化了，docker 提供了一个 docker-compose 工具，用于自动编排 docker 容器。安装 docker-compose 可以参考安装文档或者使用 pip install docker-compose 安装。这里只简单减少以下配置文件。
+
+然后编写 docker-composer.yml，使用 docker-compose up -d 运行。
+
+version: '3'
+services:
+	db:
+		container_name: db
+		image: mariadb:latest
+	web:
+		container_name: web
+		image: 'wwtg99/docker-nginx-php7:0.1'
+		depends_on:
+		 - db
+		links:
+		 - 'db:db'
+这就构建了和上面一样的两个容器，后面就可以使用 kubernetes 来进行集群化部署了，这里就不再扩展了。
+
+结束语
+这篇文章算是 Docker 使用的入门文章，主要是一些 docker 的基本使用，后续的完善和提升章节算是抛砖引玉，做一些简单介绍，以后再做一些深入的文章。实际生产环境中基本都会用后面介绍的自动化方式，做整个自动化部署流程。
+https://github.com/wwtg99/docker-nginx-php7/tree/master/conf

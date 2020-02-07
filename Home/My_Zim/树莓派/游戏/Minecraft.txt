@@ -1,0 +1,118 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-04T15:33:57+08:00
+
+====== Minecraft ======
+Created Tuesday 04 December 2018
+
+
+树莓派安装运行 Minecraft 1.8.9 教程
+2017年9月10日 Spoony 未分类 8
+
+
+本文来自 Gloomy Ghost 的投稿，介绍了如何在树莓派2B上安装运行 Minecraft 1.8.9。
+更新系统
+
+1
+sudo apt-get update && sudo apt-get -y upgrade
+安装相应的显示程序
+
+1
+sudo apt-get -y install xcompmgr libgl1-mesa-dri && sudo apt-get -y install libalut0 libalut-dev && sudo apt-get -y install mesa-utils
+配置显卡显示选项
+
+1
+sudo raspi-config
+找到Advanced Options，设置GL Driver为GL (Full KMS)。
+
+
+
+超频
+这个不用我教了吧，超到 High(1000MHz)就行了。
+
+
+
+然后重启。
+
+1
+sudo reboot
+测试显卡是否配置完成
+
+1
+glxgears
+
+
+一、使用官方账号游戏
+
+获取官方启动器
+
+1
+mkdir ~/Minecraft; mkdir ~/Minecraft/Natives; cd ~/Minecraft && wget http://ouav818sk.bkt.clouddn.com/raspimc/Minecraft.jar
+这里我创建2个文件夹，用于存放文件，运行mc启动器，下载游戏文件。
+
+1
+java -jar Minecraft.jar
+下载配置文件
+
+
+
+登陆
+
+
+
+新建配置
+
+
+
+版本选择1.8.9
+
+
+
+下载安装
+
+
+
+
+
+二、无账号游戏
+
+下载 Hello Minecraft!! Launcher
+
+1
+mkdir ~/Minecraft; mkdir ~/Minecraft/Natives; cd ~/Minecraft && wget https://github.com/huanghongxun/HMCL/releases/download/v2.5.3/HMCL-2.5.3.88.jar
+这里我创建2个文件夹，用于存放文件，运行mc启动器，下载游戏文件。
+
+1
+java -jar HMCL-2.5.3.88.jar
+下载运行库文件
+
+1
+cd ~/Minecraft/Natives && wget http://ouav818sk.bkt.clouddn.com/raspimc/liblwjgl.so && wget http://ouav818sk.bkt.clouddn.com/raspimc/libopenal.so
+更新lwjgl
+
+1
+cd ~/.minecraft/libraries/org/lwjgl/lwjgl/lwjgl/2.9.4-nightly-20150209 && rm lwjgl-2.9.4-nightly-20150209.jar; wget http://ouav818sk.bkt.clouddn.com/raspimc/lwjgl-2.9.4-nightly-20150209.jar
+（基于Roger Allen的教程：http://rogerallen.github.io/jetson/2014/07/31/minecraft-on-jetson-tk1/
+复制运行脚本）
+
+1
+cd ~/Minecraft/ && wget http://ouav818sk.bkt.clouddn.com/raspimc/run.sh && sudo chmod +x run.sh
+编辑 run.sh（正版）
+编辑下面的配置，填上你的游戏账户信息。
+MINECRAFT_LOGIN
+MINECRAFT_USERNAME
+MINECRAFT_PASSWORD
+完成正版登陆
+
+
+
+运行游戏
+
+1
+./run.sh
+
+
+
+
+相关代码如果觉得不方便，可以到[这里]()查看，我把所有命令整合了一下。
+http://shumeipai.nxez.com/2017/09/10/raspberry-pi-2-installation-run-minecraft-189-tutorial.html

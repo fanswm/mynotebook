@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:50:01+08:00
+
+====== Calligra 套件 ======
+Created Wednesday 24 October 2018
+
+Calligra 套件[63]为用户提供了一套总共 8 个应用程序，涵盖办公、管理、图表等各个范畴。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Calligra 套件。
+
+$ sudo apt-get install calligra
+https://www.calligra.org/tour/calligra-suite/

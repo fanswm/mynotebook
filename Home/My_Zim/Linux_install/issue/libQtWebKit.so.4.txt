@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-28T11:05:52+08:00
+
+====== libQtWebKit.so.4 ======
+创建日期 星期四 28 二月 2019
+
+sudo apt install libqtwebkit4

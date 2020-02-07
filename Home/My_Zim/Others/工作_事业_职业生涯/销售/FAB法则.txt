@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-09-15T10:56:22+08:00
+
+====== FAB法则 ======
+Created 星期日 15 九月 2019
+
+FAB法则，即属性，作用，益处的法则。FAB对应是三个英文单词：
+	Feature属性、
+	Advantage作用
+	和Benefit益处，
+	按照这样的顺序来介绍，就是说服性演讲的结构，它达到的效果就是让客户相信你的是最好的。
+https://baike.baidu.com/item/FAB%E6%B3%95%E5%88%99/5070591?fr=aladdin
+
+

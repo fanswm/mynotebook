@@ -1,0 +1,78 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:15:09+08:00
+
+====== 文件和目录操作 ======
+Created Sunday 03 December 2017
+
+ls
+
+全拼 list，功能是列出目录的内容及其内容属性信息。
+
+cd
+
+全拼 change directory，功能是从当前工作目录切换到指定的工作目录。
+
+cp
+
+全拼 copy，其功能为复制文件或目录。
+
+find
+
+查找的意思，用于查找目录及目录下的文件。
+
+mkdir
+
+全拼 make directories，其功能是创建目录。
+
+mv
+
+全拼 move，其功能是移动或重命名文件。
+
+pwd
+
+全拼 print working directory，其功能是显示当前工作目录的绝对路径。
+
+rename
+
+用于重命名文件。
+
+rm
+
+全拼 remove，其功能是删除一个或多个文件或目录。
+
+rmdir
+
+全拼 remove empty directories，功能是删除空目录。
+
+touch
+
+创建新的空文件，改变已有文件的时间戳属性。
+
+tree
+
+功能是以树形结构显示目录下的内容。
+
+basename
+
+显示文件名或目录名。
+
+dirname
+
+显示文件或目录路径。
+
+chattr
+
+改变文件的扩展属性。
+
+lsattr
+
+查看文件扩展属性。
+
+file
+
+显示文件的类型。
+
+md5sum
+
+计算和校验文件的 MD5 值。

@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-27T13:30:13+08:00
+
+====== Snipaste 截图工具 ======
+Created Monday 27 November 2017
+
+功能简述：简单但强大的截图工具，可以把截图 pin 到屏幕上
+适用平台：Mac 、 Linux
+
+
+Windows 上最好的免费截图标注工具：Snipaste
+https://sspai.com/post/34962
+

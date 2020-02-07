@@ -1,0 +1,45 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-07T21:36:17+08:00
+
+====== 编译安装 ======
+Created 星期二 07 一月 2020
+
+安装 pobject:
+https://pygobject.readthedocs.io/en/latest/getting_started.html#ubuntu-getting-started
+
+Installing the system provided PyGObject:
+
+		Open a terminal
+		Execute sudo apt install python3-gi python3-gi-cairo gir1.2-gtk-3.0
+		Change the directory to where your hello.py script can be found (e.g. cd Desktop)
+		Run python3 hello.py
+
+Installing from PyPI with pip:
+
+		Open a terminal and enter your virtual environment
+		Execute sudo apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-3.0 to install the build dependencies and GTK
+		Execute pip3 install pycairo to build and install Pycairo
+		Execute pip3 install PyGObject to build and install PyGObject
+		Change the working directory to where your hello.py script can be found
+		Run python3 hello.py
+
+下载：
+git clone github.com/zim-desktop-wiki
+cd zim-desktop-wiki
+sudo ./setup.py install
+sudo  update-desktop-database
+sudo update-mime-database /usr/local/share/mime
+
+############################################
+Writing /usr/local/lib/python3.6/dist-packages/zim-0.72.1.egg-info
+To register zim with the desktop environment, please run
+the following two commands:
+* update-desktop-database
+* update-mime-database /usr/local/share/mime
+###############################
+
+过程中发现，没有gi, 查找到最后，是因为以下这个文件夹内没 有。
+cd /usr/local/lib/python3.6/dist-packages
+最终原因是因为当前环境下的python指向的是主文件夹内的anaconda，把anaconda禁用之后，就可以了。
+

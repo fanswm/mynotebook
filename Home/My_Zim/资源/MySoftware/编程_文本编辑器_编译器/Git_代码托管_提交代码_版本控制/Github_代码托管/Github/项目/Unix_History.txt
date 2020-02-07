@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-19T16:12:34+08:00
+
+====== Unix History ======
+Created Wednesday 19 December 2018
+
+https://github.com/dspinellis/unix-history-repo

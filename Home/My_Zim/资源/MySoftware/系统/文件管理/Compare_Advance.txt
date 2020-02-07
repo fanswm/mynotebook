@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-27T17:23:19+08:00
+
+====== Compare Advance ======
+Created Thursday 27 December 2018
+
+文件夹对比和备份
+
+官方网站：http://www.bauerapps.com/compare-folders-windows-compare-advance/
+
+国内下载：http://www.iplaysoft.com/3-free-local-file-sync-tools.html
+
+有的时候我们需要把电脑里的重要文件备份到移动硬盘，但是每次电脑里面的文件总会修改或者新增，怎么才能快速发现那些文件被改动了，哪些是新增的呢？这款软件就可以方便实现这些功能，选择两个文件夹，进行Compare，之后即可看到两个文件夹的差异，包括一定的的文件修改。
+
+
+之后可以进行同步操作，可以指定备份顺序，也可以选择备份或者镜像模式，前者只拷贝新文件到备份文件夹，后者保持两个文件夹内容完全一样。
+
+
+检测和备份的速度都非常快，推荐给大家使用。
+
+后来我用 FileGee 代替了这个软件，设定源目录和目标目录，然后就可以进行对比并备份了，对于重要的数据，可以用这个软件定期备份到移动硬盘等安全的介质中。可以开机自启动，可以定时启动，第一次设定好之后就不再需要人工操作了。
+
+官方网站：http://cn.filegee.com

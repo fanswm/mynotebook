@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-18T21:21:40+08:00
+
+====== Reepio ======
+创建日期 星期四 18 一月 2018
+
+[Reepio](https://reep.io/) 号称采用了 peer-to-peer 传输技术，网站本身并不会存储文件，分享的文件只会在主动上传和接收文件的设备之间传输。另外，Reepio 使用了 DTLS 的 SSL 加密，避免受到中间人攻击。
+
+
+Reepio 除了提供友好的上传提示外，还有在分享页面中设置密码访问和统计下载次数的功能。如果用户传输分享的是影片视频，Reepio 还会提供在线 Stream 在线播放功能。
+
+

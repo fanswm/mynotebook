@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T16:40:31+08:00
+
+====== 添加删除 ppa源 软件源 ======
+Created Tuesday 21 November 2017
+
+__- 添加 PPA 源的命令为：__
+
+> sudo add-apt-repository ppa:user/ppa-name
+
+> 例如，要添加一个用户名为 eugenesan 到 java 源中，则命令为
+sudo add-apt-repository ppa:eugenesan/java
+
+- 添加好更新一下： `sudo apt-get update`
+__- 删除命令格式则为：__
+
+> sudo add-apt-repository -r ppa:user/ppa-name
+
+> 如sudo add-apt-repository -r ppa:eugenesan/java然后进入 /etc/apt/sources.list.d 目录，将相应 ppa 源的保存文件删除。

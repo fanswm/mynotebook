@@ -1,0 +1,27 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-15T14:30:45+08:00
+
+====== thefuck ======
+创建日期 星期二 15 一月 2019
+
+那个极爽的命令行纠错软件 The Fuck 是如何工作的
+https://linux.cn/article-8478-1.html?pr
+
+命令行的生活是如此的 F**K
+https://linux.cn/article-8471-1.html
+
+https://github.com/nvbn/thefuck
+
+
+On Ubuntu / Mint, install The Fuck with the following commands:
+
+sudo apt update
+sudo apt install python3-dev python3-pip python3-setuptools
+sudo pip3 install thefuck
+
+# It is recommended that you place this command in your .bash_profile, .bashrc, .zshrc or other startup script:
+
+eval $(thefuck --alias)
+# You can use whatever you want as an alias, like for Mondays:
+eval $(thefuck --alias FUCK)

@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-07T21:23:04+08:00
+
+====== Arch ======
+创建日期 星期五 07 二月 2020
+
+__# 我在ArchLinux 上的安装（之前没有安装Java或OpenJDK）：__ 
++ `tar -zxvf jdk-8_linux-x64_bin.tar.gz` 
++ `sudo su` 
++ `mv jdk-8 /usr/lib/jvm` 
++ `cd /usr/lib/jvm` 
++ `ln -s /usr/lib/jvm/jdk-8 /usr/lib/jvm/jdk8` 
+
++ sudo vim /etc/profile #添加环境变量：
+```
+export JAVA_HOME=/usr/local/java
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:${PATH}
+```
+
++ `java -version` # 测试
+

@@ -1,0 +1,224 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-10T07:20:05+08:00
+
+====== 安全测试者偏爱的安全测试工具 ======
+创建日期 星期三 10 一月 2018
+
+年度盘点 | 安全测试者偏爱的安全测试工具
+2018-01-08 AngelaY FreeBuf
+国外网站Concise Courses总结了安全测试者常用且好用的安全测试工具，本文摘录并分类整理列举一二，供安全从业者与爱好者参考。
+
+
+
+无线类
+Metasploit （免费）
+
+2003年，美国网络安全研究员兼开发者 Moore 启动了 Metasploit 项目，目的是创建一个开源平台，获取 Exploit 代码用于研究与开发。随后，Metasploit 框架得以开发与发展，目前已经成为广泛用于渗透测试和研究的开源漏洞利用框架。2009 年，Metasploit 被 Rapid7 公司收购，但直到 2013 年，仍然由 HD 管理。Metasploit 的受欢迎程度无需细说，这个框架已经被翻译成数十种语言，基本每个安全从业者都对此有所了解和研究。
+
+Metasploit 原框架是免费的，但 Rapid 7 收购之后，新的 Metasploit Pro 和 Metasploit Express 版本都需要收费。当然，后两者的功能也更丰富，能够为中小企业和企业级组织提供安全项目和高级渗透测试等完整安全解决方案，在 IT 安全审计中也广泛使用。所有的 Metasploit 版本都可在 Unix（包括Linux和Mac OS X）和 Windows 上运行。
+
+
+
+Metasploit 主要有五大用途：
+
+A.选择和配置漏洞利用代码，可以为 Windows，Unix / Linux 和 Mac OS X 系统提供近 1000 个漏洞
+
+B.检查目标
+
+C. 选择并配置要发送到目标的有效载荷（如远程外壳或VNC服务器）。
+
+D. 绕过IDS / IPS系统（Intruston检测系统）
+
+E. 执行利用
+
+2. Wifiphisher（免费）
+
+Wifiphisher 可以对无线 WiFi网络执行快速的自动钓鱼测试，借以发现账户和密码凭据。Wifiphisher 的特色在于它使用了社交工程攻击，其主要利用过程为：Wifiphisher 从用户合法的 AP 中取消用户的身份验证，再让用户验证实现攻击所必须的 Evil Twin AP。随后， Wifiphisher 将通过代理向用户提供一个 HTML 网页，通知用户固件升级已经完成，并要求用户再次进行认证。在这个过程中，用户的无线密码就已经泄露，而用户则会毫不知情，继续浏览网页。
+
+Wifiphisher 完全免费，可以从 GitHub 下载，支持 Kali Linux 系统，目前有一些用户也可在其他平台上使用这款工具，但还是 Linux 最安全。
+
+当然，要想实现成功利用，用户还需要配置支持“接入点”（AP）模式、且能够在“监视器模式”下执行注入攻击的无线网络适配器。此外，设备驱动也应该支持网络连接。
+
+更多详情可参考 FreeBuf 之前发布的相关文章。
+
+
+
+密码破解类
+John the Ripper （免费）
+John The Ripper 算是很有名的密码破解（黑客）工具了。除了名字炫酷，John the Ripper 使用效果也很好，与 Metasploit 同属于 Rapid7 家族。
+
+在密码分析中，密码破解主要是指从计算机系统或网络中存储或已经传输的数据中恢复或窃取密码的过程。最常见的密码破解方式就是“暴力破解”，也就是计算机系统通过交叉检查密码的可用加密哈希来猜测正确密码。而在明文密码中，“暴力破解”则演变自“字典攻击”。如果被猜测的密码有哈希值，那么密码破解获得的就是“彩虹”表。这些过程已是众所周知。而 John The Ripper 的优势在于，可以离线破解密码。
+
+
+
+John the Ripper 既有免费版本又有收费的“商业版本”。对密码破解特定操作系统感兴趣的渗透测试人员一般都会使用商业版本，其性能和速度都有所优化。对于普通用户而言，开源免费版本的 John The Ripper 也够用。核心用户还可以在 Rapid7 官网获取 Pro 版本。
+
+John The Ripper 最初基于 Unix 系统开发，现在可各种平台上运行。这些平台中有 11 个是 DOS、Unix、BeOS、Win32 和 OpenVMS 的架构特定版本。
+
+THC Hydra （免费）
+THC Hydra 的知名成都也不需细说。使用 THC Hydra 可以对五十多种协议执行非常快速的字典攻击。THC Hydra 主要通过 PoC 代码实现，可轻松添加新模块，让远程系统轻易获得未经授权的访问。其特点是快速高效，但需要稳定的网络环境，只能在线使用，可将字典攻击和暴力破解结合，在登录页面尝试各种密码和登录组合。
+
+THC Hydra 可免费使用，在Linux，Windows / Cygwin，Solaris，FreeBSD / OpenBSD，QNX（黑莓10）和OSX上都已经进行测试。
+
+Aircrack （免费）
+Aircrack-ng 由数据包嗅探器、检测器、WPA / WPA2-PSK 解密器、WEP 和用于 802.11 无线局域网的分析工具组成。Aircrack-ng 支持无线网络接口控制器，驱动程序支持原始监控模式，可以嗅探 802.11a、802.11b 和 802.11g 流量。从 0.9 版本开始，Aircracl-ng 套件中就包含了由达姆施塔特理工大学某研究小组制作的新攻击向量“PTW”，可以减少解密 WEP 密钥所需初始化向量（IV）的数量。Aircrack-ng 的重点是无线安全领域。主要功能包括监视捕获数据包，将数据导出到文本文件供第三方工具处理；重复攻击；伪造接入点；使用数据包注入解除身份验证；通过捕获和注入来测试WiFi卡和驱动程序功能；破解 WPA 和 WPA PSK（WPA 1和WPA 2）。
+
+Aircrack-ng 可免费使用，网上有很多相关教程，其安装教程可以看这里。
+
+Aircrack-ng 可以在 FreeBSD、OSX、Wubdows、OpenBSD 和 Linux 等多平台上运行，其 Linux 版本已经打包为 OpenWrt 版本，并转移到 Maemo、Zaurus 和 Android 平。目前，iPhone 也开放了 Aircrack-ng 的PoC 端口。
+
+
+
+端口扫描类
+Nmap （免费）
+Nmap 的威力很多安全测试者都领略过。Nmap 是 Network Mapper 的缩写。Nmap 可以检查原始 IP 数据包、获取网络上可用的主机（服务器信息；了解主机正在使用的服务（应用程序名称和版本）、操作系统（包括操作系统版本和可能的修补程序）以及目标正在使用的数据包过滤器/防火墙类型和版本。就连 Metasploit 也要借助 Nmap 进行网络发现和安全审计。
+
+此外，需要注意的是，Nmap 还有个 GUI 版本的 Zenmap。安全测试中在进行渗透测试时，可以直接使用 Zenmap，因为它可以预先加载所有命令行，不必在命令终端上输入并运行 “nmap”来加载命令帮助提示。
+
+
+
+Nmap 完全免费，适用于所有主流计算机操作系统。其官方二进制包可用于 Linux、Windows、Mac OS X 和 AmigaOS。使用 Kali Linux 或 BackBox 可进行 Nmap 的快速安装，因为二者随 Nmap 一起提供，便于轻松更新程序。
+
+NetScanTools （免费）
+NetScanTools 是一个不同测试工具的集合，有助于进行互联网信息收集和网络故障排除。使用者可以利用 NetScanTools 自动研究 IPv4 和 IPv6 的地址、域名、主机名、电子邮件地址和 URL。这些自动化工具可由用户自主启动，也就是说，用户可以同时使用几种工具来进行研究，然后结果将显示在 Web 浏览器中。对于网络工程、网络安全、网络管理、网络培训、或网络犯罪调查工作人员来说，NetScanTools 很有用。
+
+NetScanTools 有免费版本也有商业版本，只在 Microsoft Windows 操作系统上运行。
+
+
+
+Web 漏洞扫描类
+Burp Suite （免费）
+FreeBuf 有一系列关于 Burp Suite 的文章和公开课，受到很多人的欢迎。
+
+Burp Suite 其实是一个平台，包含不同类型的工具，相互间有许多接口，连接便利，能加快渗透应用程序的进程。不同的工具共享相同的框架，用于显示和处理 HTTP 消息、身份验证、耐久性、日志记录、警报、代理和可扩展性。更多详情可以进入 FreeBuf 公开课查看学习。
+
+Burp Suite 需要付费，但也有免费和试用版本可以使用，适用于 Linux、MAC OS X 和 Windows 操作系统。
+
+
+
+Nikto （免费）
+Nikto 是一个开放源代码的 Web 服务器扫描程序，可以在 Web 服务器上执行超过 6700 个潜在危险文件和程序的测试。也可在超过 2700 台服务器上检查 1250 多个旧服务器的版本和特定的版本问题。此外，Nikto 还可检查服务器配置项目（如多个索引文件、HTTP 服务器选项等），还能尝试识别已安装的软件和 Web 服务器。其插件和扫描项目经常可以自动更新。
+
+其具体功能包括 SSL 支持；完整的 HTTP 代理支持；检查过时的服务器组件；以XML、HTML、CSV 或 NBE 等各种格式保存报告；通过使用模板引擎轻松自定义报告；通过输入文件在服务器或多服务器上扫描多个端口；识别通过头文件、文件和图标识别安装的软件；使用 NTLM 和 Basic 进行主机验证；检查常见的“parking”站点；在特定时间自动暂停等等。
+
+
+
+虽然 Nikto 并不可隐藏踪迹，却可以在尽可能快的时间内测试网络服务器，还能支持 LibWhisker 的反 IDS方法。
+
+其实，并非所有的检查都是为了查找安全问题。但是安全工程师和网站管理员有时不知道他们的服务器上存在“仅检查信息”类型的检查。而通过使用 Nikto，这些“信息类型”的检查会在打印出的信息中标记出来，还能扫描到另一些针对日志文件中未知项目的检查。
+
+Nikto 可免费使用。由于 Nikto 基于 perl，因此只在大多数安装了 Perl 翻译器的系统上运行。
+
+加密类
+1. Gnupg PGP（免费）
+GnuPG（也叫 PGP）是 Phil Zimmerman 编写的加密系统，只能通过命令行控制运行，有成千上万的安全专家使用。能帮助用户加密、签署数据与通信信息，保护数据免受风险。GnuPG 还附带一个有效的密钥管理系统，可管理所有类型的公共密钥目录。此外，GNuPG 可与 S / MIME 和Secure Shell（ssh）等多个应用程序一起使用。
+
+GnuPG 也被视为 PGP 标准的开源实例，是 OpenPGP（也被称为 RFC4880 或 PGP）的免费版本，可在 Linux、Microsoft Windows 和 Mac OS X 上运行。
+
+
+
+2. Keepass（免费）
+Keepass 是一款开源的密码管理器，支持高级加密标准和Twofish算法，可以存储多个密码，并使用一个主密码解锁。也就是说，只需要记住一个强密码，就能记住不同账户的不同密码。使用 keepass，还能在网页表单中自动填写密码。Keepass 使用时不需要安装，因此可以用 USB 等设备携带，非常方便。此外，Keepass 还能将数据库从一台计算机传输到另一台计算机，并帮助用户生成强密码。
+
+
+
+3. Openvpn （免费）
+OpenVPN 是由 OpenVPN Technologies 开发的工具，遵循传统 VPN 原则，下载量超过 300 万次，可以让同行使用共享的密钥、用户名、密码或证书相互验证。如果用户在多客户端服务器配置环境中使用 Openvpn，则将允许服务器为每个客户端发布身份验证证书。 该工具还为用户提供了一个可扩展框架，旨在简化特定于站点的定制。
+
+OpenVPN 软件免费，能在 Linux、Windows 和 MAC OS X 系统上运行，也可在手机端使用。
+
+
+
+防火墙类
+1. Netfilter （免费）
+
+Netfilter 是一款经典的防火墙渗透测试工具，其核心用途是在 Linux 2.4.x 及更高版本内核中过滤数据包、网络地址、端口、（NA [P] T协议内的）转译内容和其他数据包审计。Netfilter 相当于 Linux 内核中的一系列 hook，可以让内核模块在网络堆栈中执行回调函数。然后回调网络堆栈内遍历相应 hook 的每个包内注册的回调函数。
+
+Netfilter 涉及到 iptables，iptables 是一个用于定义规则集的通用表结构。 IP 表中的每个规则由多个分类器（iptables matches）和一个连接的动作（iptables target）组成。 Netfilter、ip_tables、连接跟踪（ip_conntrack，nf_conntrack）和 NAT 子系统共同构建起 Netfilter 框架。
+
+Netfilter 可免费试用，但是只适用于 Linux 系统。
+
+
+
+2. OpenBSD PF （免费）
+
+OpenBSD PF 可用于过滤 TCP/IP 流量并运行 Network Address Translation，还能对 TCP/IP 流量进行规范化和调整，并提供带宽控制和数据包优化。OpenBSD PF 还可实现被动操作系统检测等功能。
+
+OpenBSD 3.0 版本之后，包过滤已经成为“GENERIC OpenBSD 内核”的一部分。以前的 OpenBSD 内核版本附带不同的防火墙/ NAT，但现在的版本已经不再支持这个功能。
+
+OpenBSD PF 完全免费，只适用于Linux操作系统。
+
+
+
+入侵检测类
+1. OSSIM（免费）
+
+OSSIM 有助于安全从业者处理 SIEM 相关的问题：事件收集、规范化和事件关联等。OSSIM 主要用于对一系列工具进行汇编。这些工具如果联合使用，可以让安全管理员和网络管理员详细了解主机、物理访问设备、网络和服务器的各个方面。事实上，OSSIM 包含 OSSEC HIDS 和 Nagios 等多个工具的功能。由于 OSSIM 由安全工程师开发，所以也融入了安全专业人员的实际经验：如果没有采取安全可视化所必须的基本安全控制，SIEM 就是无效的。在这种理念的指导下，OSSIM 更加有用、有效。
+
+OSSIM 可免费使用，仅适用于Linux操作系统。
+
+
+
+2. OSSEC HIDS （免费）
+
+OSSEC HIDS 基于可扩展且开源的主机，是一个多平台入侵检测系统，具有强大的关联能力和分析引擎功能，可以实现完整性检查、日志分析、基于时间的警报、日志分析和主动响应。OSSEC HIDS 通常用作 SEM/SIM 解决方案，且由于其强大的日志分析引擎功能，许多大学、ISP 提供商和公司都在使用 OSSEC HIDS 监视和分析其 IDS、防火墙、身份验证日志和 Web 服务器。
+
+OSSEC HIDS 可免费使用，适用于大多数操作系统，包括 Linux、MacOS、Solaris、HP-UX、AIX 和 Windows。
+
+
+
+Debugger 类
+1. GDB：GNU Project Debugger （免费）
+GDB（GNU project Debugger）允许用户审核并发现运行中的 web 应用或程序（软件）所执行的内容。GDB 可以帮助开发人员或程序员查找他们所开发的应用或程序崩溃的原因，也有助于检测代码中是否存在漏洞。GDB 主要有四大用途：检测程序启动时的状况，详细检测可能影响程序运行的任何事情；检测在特定的阶段或特定的时间停止程序时的状况；研究并解释程序停止正常工作的原因；改变程序中的内容，便于修复 bug。
+
+GDB 是符合 GNU 通用公共许可证的免费工具，且在 DBX 调试器之后建模，可在许多类 Unix 系统上运行，适用于包括 C、C ++、Ada、Free Pascal、Fortan、Java 等在内的多种编程语言。
+
+
+
+2. IDA Pro （免费）
+IDA 是一个多平台（包括 Linux）多处理器反汇编程序及调试工具，经常被程序员和开发人员用于调试应用程序、评估不正常运行的代码。此外，IDA Pro 可帮助用户分析可能存在的漏洞。IDA Pro 相当于多目标反汇编器和多目标调试器。其中，多目标反汇编器是一个针对大量处理器的反汇编模块，具有完整的可扩展性和交互性，并且尽可能接近高级源代码。而多目标调试器是一个调试器，可以针对反汇编器收集的数据进行动态分析，还具备调试器的完整功能。IDA Pro 的开发者表示，“IDA 反汇编程序尽可能地接近原始源代码”，因此广受欢迎。
+
+IDA Pro 最新完整版本是商业版本，需要收费，不过其早期的低配版本（版本 5.0 及以下）可以免费下载，所有版本适用于 Windows，Linux 和 macOS X 操作系统。
+
+
+
+3. Immunity Debugger （免费）
+Immunity CANVAS 测试工具可用于测试系统是否安全。这个工具附带特意设计的漏洞利用模块，可用于发现 exploit。Immunity CANVAS 可帮助企业具体了解其系统安全概况。
+
+具体来说，Immunity Debugger 可用于分析恶意软件，编写 exploit 和逆向工程的二进制文件。这个工具建立在一个包括函数图形的可靠用户界面上，是业界第一个只用于堆创建的分析工具。此外，Immunity Debugger 还是 Python API，易于扩展。
+
+Immunity Debugger 支持所有 Windows 操作系统。
+
+
+
+4. OllyDbg （免费）
+OllyDbg 是一个可以分析调试器的 32 位汇编器。由于采用二进制代码分析，因此在源不可用的情况下，使用 OllyDbg 分析就很有用。OllyDbg 拥有良好的用户界面，具有追踪寄存器、循环、进程、API 调用以及高级代码分析功能，能够识别程序、开关语句、表格、常量和字符串等，还能用于调试 DLL。 OllyDbg 还能调试多线程应用程序，并可以添加到正在运行的程序中。OllyDbg 完全支持 Unicode，并动态识别 ASCII 和 Unicode 字符串。
+
+OllyDbg 的所有官方版本都是免费的，但源代码并未公开。它只适用于 Windows 系统，且不可在 Win32s 上运行。
+
+
+
+5. WinDbg （免费）
+WinDbg 与 OllyDbg 类似，是微软发布的 Windows 多用途调试器。WinDbg 基于 GUI 应用程序运行，主要可在 Windows 操作系统遇到崩溃或其他“蓝屏死机”的情况下调试内存转储，也可用于调试用户模式的应用程序、驱动程序和操作系统本身（内核模式下调试），还能够通过匹配各种条件（例如，时间戳、CRC、单个甚至多处理器版本），从服务器自动加载调试符号文件（例如 PDB 文件）。
+
+WinDbg 所有官方版本都是免费的，只适用于 Windows 操作系统。值得注意的是，许多 WinDbg 用户也倾向于使用 Visual Studio 调试器。
+
+
+
+应用扫描工具
+1. NTBScan （免费）
+NTBScan 需要命令行控制运行，扫描本地或远程 TCP/IP 网络上打开的 NETBIOS 域名服务器。 NBTScan 基于标准 Windows 工具 nbtstat 的功能和处理结构，但是可以在大部分 IP 地址上运行。NTBScan 的作者表示，由于以前的类似工具只能在 Windows 平台上运行，所以就开发了 NBTScan，便于在多个主流平台上运行。
+
+NTBScan 用简便的 C 语言编写，大小不足 40 KB，也不需要特殊的库或 DLL，在 MS-DOS 命令窗口中运行。此外，NTBScan 也适用于Linux！
+
+
+
+2. THC Amap （免费）
+THC Amap 的主要作者和开发人员表示，THC Amap 是第一个可以进行应用程序协议检测的工具。但是相比之下，nmap -sV 命令更适合进行应用程序指纹识别。
+
+
+
+*参考来源：concise courses，AngelaY 编译整理，转载请注明来自 FreeBuf.COM
+
+http://mp.weixin.qq.com/s?__biz=MjM5NjA0NjgyMA==&mid=2651067083&idx=3&sn=0346da94bfa20c683366e964f5414d5d&chksm=bd1f80408a680956bf2cb3cbb404d6b4e495ab52102a5b71ecef3c16681c8f27617c782f245d&mpshare=1&scene=23&srcid=0109SSJs6AZwdsbUIkasVwCC&mType=Group#rd

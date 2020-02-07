@@ -1,0 +1,72 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-21T14:07:43+08:00
+
+====== 用免费开源的虚拟机软件 VirtualBox 将 Windows 带到 macOS 上 ======
+创建日期 星期四 21 二月 2019
+
+用免费开源的虚拟机软件 VirtualBox 将 Windows 带到 macOS 上
+2018年07月17日
+信使六号 信使六号 责编: Hum
+如果 Mac 用户想要同时使用 Windows，主要有以下 3 种方法：
+
+通过重启切换操作系统：苹果官方提供了启动转换助理（Boot Camp Assistant），可以让我们在 Mac 上安装第二个 Windows 操作系统。但它的问题主要在于切换操作系统需要重新启动，适合 Windows 的重度需求者。
+
+通过工具运行部分兼容的 Windows 软件：通过 Wine / Crossover 这样的软件，我们可以在 Mac 上直接安装和打开部分兼容的 Windows 软件，但它的适用范围有限，实际使用体验不佳。
+
+通过虚拟机在 Mac 中直接运行 Windows：通过 Parallels Desktop、VMware 等软件 ，将整个 Windows 化为 Mac 中的一个窗口，无需重新启动，适用的软件范围更广，体验更好。
+
+因此，对于 Windows 的轻度需求用户，综合考虑使用体验的话，Windows 虚拟机将会是更好的选择。好的体验往往伴随着贵的价格，Parallels Desktop、VMware Fusion 等软件确实制作精良，却也价格不菲。在抱着试试的心态寻找代替品时，我找到了一款现在由甲骨文公司负责开发的免费开源的虚拟机软件——VirtualBox。
+
+在实际使用过程中，我发现 VirtualBox 虽然免费，但也具备了一款虚拟机软件的基本功能：
+
+支持从 Linux 到 Windows 到 macOS 的诸多操作系统
+支持 macOS 触控板手势、快捷键，以及自动独占键盘
+共享剪贴板、共享文件，以及双向拖放 (beta)
+系统快照与多语言支持…
+VirtualBox 使用体验
+Mac 和 Windows 上的 Office 字体库有一定的区别，同一份文档在 Mac 和 Windows 上可能会具有不同的外观。涉及到撰写编辑的时候，我会选择在 VirtualBox 里使用 Windows 的 Office，倒不是因为 Office for Mac 不好用，只是为了确保别人看到的文档和表格和我看到的完全一致。
+
+null
+另外我也会用 VirtualBox 上的 Windows 来读写 NTFS 格式的 U 盘。我也知道在 macOS 下我们可以通过一些软件实现这个目的，但我总想既然 NTFS 是为 Windows 而生的，那还不如就用一个虚拟机解决之，用 Windows 来读写 NTFS 格式的 U 盘。
+
+除此之外，偶尔我也会玩玩 Windows only 的古董 RPG 游戏了。如果你在使用 Mac 的同时仍然想不时体验 Windows 及其应用软件，或是需要偶尔用用 Windows 上的软件或者玩玩 Windows 的轻量级的游戏，VirtualBox 正是你想要的。
+
+安装 VirtualBox 与 Windows 10
+如果读到这里你对 VirtualBox 产生了兴趣，认为它可以胜任你日常的使用情境，我们就来看看如何安装 VirtualBox，以及如何用它安装 Windows。
+
+安装 VirtualBox
+安装 VirtualBox 有两种办法，一种是普通安装，直接到 官网 下载它的 dmg 格式文件。另一种是通过 Homebrew 来安装，这需要你对 Homebrew 有一定的了解。
+
+打开「终端」，确保你已 安装 Homebrew，输入 brew cask install virtualbox 并回车即可开始安装。
+
+如果你想在虚拟机里读写 USB 设备，由于 VirtualBox 非常精简，这个功能你需要安装 VirtualBox Extension Pack，输入 brew cask install virtualbox-extension-pack 即可。
+
+新建虚拟机
+null
+安装完毕后打开 VirtualBox，你应该能看到一个本地化语言的界面，不过在点按「新建」之前，按 ⌘Command , 打开偏好设置，前往「语言」并切换至中文，否则之后的界面将不全是中文界面。
+
+null
+现在点按「新建」，输入名称「Windows 10」，你应该可以发现下面的类型和版本已自动更正，点按「继续」。
+
+null
+基本上接下来一路沿用默认就可以了，分配内存、创建虚拟硬盘……完成以后双击左边生成的 Windows 10 虚拟机。
+
+安装 Windows 10
+null
+选择你的 Windows 10 映像（下载 Windows 10 光盘映像），点按启动。安装 Windows 基本上一路点点点继续就可以了，不过注意选择「自定义：仅安装 Windows」而不是「升级」。
+
+null
+进一步配置
+最后不要忘了在 Windows 10 中安装增强功能，在 VirtualBox VM 菜单栏点按设备 > 安装增强功能。注意允许安装的所有过程。
+
+null
+null
+如果你错过了上面弹出的通知，你可以手动运行安装程序。
+
+null
+你可能会想在 macOS 与虚拟机间交换文件，你可以设置共享文件夹以在虚拟机中读写 macOS 文件夹。
+
+null
+你可以将虚拟机切换到全屏，调度中心 etc. 其他手势仍然可用，现在你可以开始在 Mac 上享受 Windows 应用软件了。
+https://sspai.com/post/45699

@@ -1,0 +1,227 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-19T20:54:54+08:00
+
+====== 一键打造你的Doker矿机 ======
+创建日期 星期五 19 一月 2018
+
+http://blog.51cto.com/storysky/2060369
+从什么时候开始流行CPU挖矿了？记得以前不都是用GPU吗？原来现在虚拟币的种类已经这么多了！大概研究了一下，目前CPU算力有优势的有这么几种虚拟币,貌似还都是匿名币
+
+ZEC(零币)算法 Equihash 目前市场价格4000+
+
+XMR(门罗币) 算法CryptoNight 目前价格4000+
+
+BCN(字节币?) 算法CryptNote 目前价格 几分...
+
+近期公司有几台机器被种了挖矿木马，清除之余研究了一下有关CPU挖矿的工具，发现了 xmr-stak-cpu 这个东西
+
+上网搜了搜，找到了GITHUB上的主页，好像刚升级不久
+
+https://github.com/fireice-uk/xmr-stak
+
+还有个早先点的版本地址为：https://github.com/fireice-uk/xmr-stak-cpu
+
+找了一台测试机安装一下试试：
+
+
+	
+# git clone https://github.com/fireice-uk/xmr-stak
+# cd xmr-stak/
+# ls
+CI  CMakeLists.txt  CONTRIBUTING.md  doc  Dockerfile  LICENSE  README.md  scripts  THIRD-PARTY-LICENSES  xmrstak
+ 
+好像没有可以执行的文件，不过我发现了Dockerfile，然后又在 scripts文件夹里找到了build_xmr-stak_docker.sh 难道是自动创建一个docker 来挖矿？打开来看看
+ 
+# vim scripts/build_xmr-stak_docker/build_xmr-stak_docker.sh
+#!/bin/bash -uex
+ 
+if  $EUID -ne 0 ; then
+   echo "This script must be run as root"
+   exit 1
+fi
+ 
+if [ -d xmr-stak ]; then
+  git -C xmr-stak clean -fd
+else
+  git clone https://github.com/fireice-uk/xmr-stak.git
+fi
+ 
+wget -c https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run
+chmod a+x cuda_*_linux-run
+ 
+########################
+# Fedora 27
+########################
+# CUDA is not going to work on Fedora 27 beacuse it's only support these distributions: http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
+docker run --rm -it -v $PWD:/mnt fedora:27 /bin/bash -c "
+set -x ;
+dnf install -y -q cmake gcc-c++ hwloc-devel libmicrohttpd-devel libstdc++-static make openssl-devel;
+cd /mnt/xmr-stak ;
+cmake -DCUDA_ENABLE=OFF -DOpenCL_ENABLE=OFF . ;
+make ;
+"
+ 
+test -d fedora_27 || mkdir fedora_27
+mv xmr-stak/bin/* fedora_27
+git -C xmr-stak clean -fd
+ 
+ 
+########################
+# Ubuntu (17.04)
+########################
+docker run --rm -it -v $PWD:/mnt ubuntu:17.04 /bin/bash -c "
+set -x ;
+apt update -qq ;
+apt install -y -qq libmicrohttpd-dev libssl-dev cmake build-essential libhwloc-dev ;
+cd /mnt/xmr-stak ;
+/mnt/cuda_*_linux-run --silent --toolkit ;
+cmake -DCUDA_ENABLE=OFF -DOpenCL_ENABLE=OFF . ;
+...
+ 
+呵呵，果然不出所料，这个脚本针对 CentOS 和 Ubuntu系列linux系统自动创建建立一个Docker镜像然后安装xmr-stak
+编辑一下这个脚本，只留下一个操作系统，我这里只留下了 Ubuntu 17部分
+原来的脚本是跑完了docker 安装完成就吧容器删掉，而我现在想把这个容器留下于是就改了改，最后变成下面这个样子
+ 
+#!/bin/bash -uex
+ 
+if  $EUID -ne 0 ; then
+   echo "This script must be run as root"
+   exit 1
+fi
+ 
+if [ -d xmr-stak ]; then
+  git -C xmr-stak clean -fd
+else
+  git clone https://github.com/fireice-uk/xmr-stak.git
+fi
+ 
+########################
+# Ubuntu (17.04)
+########################
+docker run -itd --name "xmr" -v $PWD:/mnt ubuntu:17.04 /bin/bash
+docker exec -it "xmr" /bin/bash -c "
+set -x ;
+apt update -qq
+apt install -y -qq libmicrohttpd-dev libssl-dev cmake build-essential libhwloc-dev ;
+cd /mnt/xmr-stak ;
+cmake -DCUDA_ENABLE=OFF -DOpenCL_ENABLE=OFF . ;
+make install;
+"
+
+我的linux 不需要CUDA 删掉 CUDA部分的代码
+
+直接执行(运行前请确定是否已经安装Docker)
+
+	
+# ./build_xmr-stak_docker.sh
++  0 -ne 0 
++ '[' -d xmr-stak ']'
++ git clone https://github.com/fireice-uk/xmr-stak.git
+Cloning into 'xmr-stak'...
+git-remote-https: /usr/local/lib/libldap_r-2.4.so.2: no version information available (required by /usr/lib/x86_64-linux-gnu/lib
+git-remote-https: /usr/local/lib/liblber-2.4.so.2: no version information available (required by /usr/lib/x86_64-linux-gnu/libcu
+remote: Counting objects: 3441, done.
+remote: Compressing objects: 100% (29/29), done.
+remote: Total 3441 (delta 16), reused 16 (delta 3), pack-reused 3409
+Receiving objects: 100% (3441/3441), 1.01 MiB | 24.00 KiB/s, done.
+Resolving deltas: 100% (2403/2403), done.
+Checking connectivity... done.
++ docker run -itd --name xmr -v /data1/soft:/mnt update-ubuntu /bin/bash
+f88a7614bd41821be42b584f76a1892184cd06155058c25c6bbdfb8c245cb571
++ docker exec -it xmr /bin/bash -c '
+.....
+#脚本里包含了 apt-get update 时间会比较久，如果你觉得不需要也可以去掉。如果上面这些步骤一切正常，那么就可以进入刚健的容器去试试挖矿了
+# docker exec -it xmr /bin/bash
+# cd /mnt/xmr-stak/bin/
+# ls
+libxmr-stak-backend.a  libxmr-stak-c.a  xmr-stak
+# ./xmr-stak 
+Please enter:
+- Currency: 'monero' or 'aeon'
+...
+上面是选择你想挖的币种类、矿池地址、钱包地址等等设置完之后会自动执行，如果出现下面这个就说明连接成功了,我测试用的是国内的一个门罗币矿池mine.ppxxmr.com:3333
+
+	
+[2018-01-12 11:07:21] : Fast-connecting to mine.ppxxmr.com:3333 pool ...
+[2018-01-12 11:07:21] : Pool mine.ppxxmr.com:3333 connected. Logging in...
+[2018-01-12 11:07:21] : Difficulty changed. Now: 15000.
+[2018-01-12 11:07:21] : Pool logged in.
+[2018-01-12 11:07:29] : Difficulty changed. Now: 15000.
+[2018-01-12 11:07:29] : New block detected.
+[2018-01-12 11:07:37] : Result accepted by the pool.
+[2018-01-12 11:07:47] : Result accepted by the pool.
+[2018-01-12 11:08:04] : Difficulty changed. Now: 10465.
+[2018-01-12 11:08:04] : New block detected.
+[2018-01-12 11:08:11] : Result accepted by the pool.
+[2018-01-12 11:08:17] : Result accepted by the pool.
+网站上也出现了你挖矿的进度，如下图
+
+QQ截图20180112191138.jpg
+
+
+终止进程后发现，bin下面多了两个文件 cpu.txt 和 config.txt
+1
+2
+	
+# ls
+config.txt  cpu.txt  libxmr-stak-backend.a  libxmr-stak-c.a  xmr-stak
+
+打开来看看
+
+	
+# vim config.txt 
+/*
+ * pool_address    - Pool address should be in the form "pool.supportxmr.com:3333". Only stratum pools are supported.
+ * wallet_address  - Your wallet, or pool login.
+ * pool_password   - Can be empty in most cases or "x".
+ * use_nicehash    - Limit the nonce to 3 bytes as required by nicehash.
+ * use_tls         - This option will make us connect using Transport Layer Security.
+ * tls_fingerprint - Server's SHA256 fingerprint. If this string is non-empty then we will check the server's cert against it.
+ * pool_weight     - Pool weight is a number telling the miner how important the pool is. Miner will mine mostly at the pool
+ *                   with the highest weight, unless the pool fails. Weight must be an integer larger than 0.
+ *
+ * We feature pools up to 1MH/s. For a more complete list see M5M400's pool list at www.moneropools.com
+ */
+"pool_list" :
+[
+		{"pool_address" : "mine.ppxxmr.com:3333", "wallet_address" : "xxxxxxxxxqC4PTWdaAZ3V15d83kCEEGRiXVXeQwsS1PGd7s7wDjigA2grkxcsDfxEDtuDomBzpFiGtNyPMy+$NUMBER", "pool_password" : "", "use_nicehash" : false, "use_tls" : false, "tls_fingerprint" : "", "pool_weight" : 1 },
+],
+/*
+ * currency to mine
+ * allowed values: 'monero' or 'aeon'
+ */
+"currency" : "monero",
+/*
+...
+
+刚才的设置应该都存在这里了，
+
+# vim cpu.txt
+...
+"cpu_threads_conf" :
+[
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 0 },
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 2 },
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 4 },
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 6 },
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 8 },
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 10 },
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 1 },
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 3 },
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 5 },
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 7 },
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 9 },
+	{ "low_power_mode" : false, "no_prefetch" : true, "affine_to_cpu" : 11 },
+],
+
+cpu.txt是我们调整CPU使用效率的文件，如果觉得资源耗太多可以减少一些
+
+好了，再次执行的时候就不用进行设置了
+1
+2
+	
+# nohup ./xmr-stak &
+[1] 714
+
+看一下资源消耗，瞬间就上10了哈哈，看看这点算力和这么高的负载，咱们就测测就得了 hoho

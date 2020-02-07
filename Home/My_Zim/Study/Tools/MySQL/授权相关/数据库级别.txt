@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-06T11:57:25+08:00
+
+====== 数据库级别 ======
+Created Wednesday 06 December 2017
+
+授权：
+
+mysql> grant all on 数据库名.* to 用户名
+撤销权限：：
+
+mysql> revoke all on 数据库名.* from 用户名

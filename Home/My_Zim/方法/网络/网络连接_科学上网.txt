@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-20T11:59:33+08:00
+
+====== 网络连接 科学上网 ======
+Created Saturday 20 January 2018
+
+https://github.com/bannedbook/fanqiang/wiki/Chrome%E4%B8%80%E9%94%AE%E7%BF%BB%E5%A2%99%E5%8C%85
+
+
+https://lvii.gitbooks.io/outman/content/ss.linux.html
+
+https://firmianay.github.io/2015/12/14/linux_ss.html
+
+
+
+https://github.com/wcmbeta/GFWdata
+https://www.kancloud.cn/chandler/common_software/490153
+

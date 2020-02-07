@@ -1,0 +1,91 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-29T08:16:40+08:00
+
+====== 手把手教你使用终端复用神器 Tmux ======
+Created Thursday 29 November 2018
+
+手把手教你使用终端复用神器 Tmux，丢掉鼠标不是梦[视频]
+
+PegasusWang
+PegasusWang
+公众号同知乎名。知乎Python后端工程师 Pythonista/Vimer
+​关注他
+王赟 Maigo
+https://zhuanlan.zhihu.com/p/43687973?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
+、
+韦易笑
+等 947 人赞了该文章
+今天给大家介绍下如何使用终端复用神器 tmux，笔者现在每天无论是本机开发还是登录服务器几乎都离不开它了。
+
+为什么要使用 tmux ？
+
+很多开发者经常登录到服务器都遇到这些尴尬：
+
+想同时打开多个目录不得不开很多终端标签来回切换
+开了一个 vim 窗口之后，想切到其他目录不得不重新打开个一个终端窗口 ssh 到服务器
+运行一个脚本，服务器断掉失联之后当前进程被服务器给无情地杀掉，不得不用 nohup 等方式让脚本在后台跑
+每次 ssh 到服务器都要重新切到工作目录，打开多个进程等，之前的工作记录会丢失
+鼠标是个伟大的发明，但不幸的是，开发者使用终端的时候在鼠标和键盘之间来回移动和定位，不仅浪费时间，还可能会影响你的思路
+......
+今天介绍的 tmux 可以说很好地解决了这些问题，并且能够解放我们的双手，在终端下摆脱对鼠标的依赖。
+
+什么是 tmux ?
+
+Tmux 是一个终端复用工具，用于在一个终端窗口中运行多个终端会话，比如我们可以实现非常炫酷的效果:
+
+
+
+
+安装也比较简单, mac 用户
+
+# 安装 brew
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# 使用 brew 安装 tmux
+brew install tmux
+ubuntu 用户可以 sudo apt-get install tmux 安装它。
+
+Tmux 概念和使用
+
+tmux 默认的快捷键前缀是 ctrl+b ，当然你也可以修改它，不过这里为了简化，我都使用默认按键。（小提示：我把 capslock 键修改成了 ctrl 键，因为 Ctrl 使用特别频繁，很多键盘键位 ctrl 键使用起来不是特别方便，尤其是笔记本键盘，小指头会疼）
+
+tmux 中有几个重要概念：
+
+会话(session): 建立一个 tmux 工作区会话，会话可以长期驻留，重新连接服务器不会丢失，我们只需重新 tmux attach 到之前的工作区就可以恢复会话
+窗口(window): 容纳多个窗格
+窗格(pane): 可以在窗口中分成多个窗格
+
+
+
+视频里我会介绍这些概念并从零开始演示我日常是如何使用 tmux 的，我们仅仅使用它的最基本用法，无需记忆那么多的快捷键就能愉快地使用 tmux 了。
+
+
+手把手教你用终端复用神器 tmux
+使用一些第三方工具比如 tmuxp/terminator，我们甚至还可以将 tmux session 管理自动化，比如为一个项目配置 tmuxp 文件然后直接加载生成 tmux 会话，感兴趣可以看看这一篇文章里的演示。
+
+Pegasus Wang：玩玩 tmuxp [视频]
+​zhuanlan.zhihu.com
+图标
+除此之外，共享账户使用原生 tmux attach 到同一个会话或者使用 wemux 之类的工具还能实现结对编程，比如在一个窗口里打开两个 pane，左边的人用 vim，右边的人用 emcas 分别编辑。或者让两台电脑 attach 到同一个会话，在其中一个电脑写代码也会在另一个电脑同步显示，营造一种电脑g自己会写代码的诡异场景。
+
+
+
+
+如果你自己懒得配置，也可以使用别人配置好的 tmux，比如这个：
+
+__gpakosz/.tmux__  https://github.com/gpakosz/.tmux
+​github.com
+图标
+
+
+
+参考
+
+Tmux 速成教程：技巧和调整
+
+tmux-cheatsheet.markdown
+
+Tmux使用手册
+
+本书简介 | tmux-Productive-Mouse-Free-Development_zh

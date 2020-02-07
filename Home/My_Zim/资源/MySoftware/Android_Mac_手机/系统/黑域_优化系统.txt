@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-03T17:19:08+08:00
+
+====== 黑域 优化系统 ======
+Created Wednesday 03 January 2018
+
+打破你对 Android 流畅性的担忧
+
+http://coolapk.com/apk/me.piebridge.brevent?mt=8&uo=4&ct=appcards
+
+虽然 Android 相比 iOS 更加开放，但随之而来的一个弊端就是，缺乏管制的应用们往往会为了最大化满足自己的需求而占用多余的系统资源。尽管 Android O 进一步加强了对后台应用的限制，但在国内生态下，不经 Play Store 审查的「全家桶」们总能找到办法常驻后台，更不要说大部分机型仍然运行着 Android N，甚至更早的、后台管理不严格的系统了。
+
+所以为了对付这些在后台吞噬资源、使你的手机又卡又费电的应用们，我__推荐你使用 「黑域」 来限制它们的活动__。无需 Root 你的手机，你就可以为应用们设置被待机（App Standby）或强行退出的触发方式及时间。如果你的手机已经 Root，你也可以选择另一款应用「绿色守护」来达到类似的效果。
+
+关联阅读：
+
+[Android 系统的黑域：阻止运行的涅槃重生](https://sspai.com/post/35942)
+

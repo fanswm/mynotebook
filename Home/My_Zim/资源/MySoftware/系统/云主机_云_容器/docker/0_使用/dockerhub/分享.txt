@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-12T16:03:25+08:00
+
+====== 分享 ======
+创建日期 星期二 12 三月 2019
+
+docker tag <image> username/repository:tag  	# 标记 <image> 以上传到镜像库
+docker push username/repository:tag            	# 将已标记的镜像上传到镜像库
+
+tag的作用主要有两点：
+一是为镜像起一个容易理解的名字，
+二是可以通过docker tag来重新指定镜像的仓库，这样在push时自动提交到仓库。
+
+将同一IMAGE_ID的所有tag，合并为一个新的
+# docker tag 195eb90b5349 seanlook/ubuntu:rm_test
+
+新建一个tag，保留旧的那条记录
+# docker tag Registry/Repos:Tag New_Registry/New_Repos:New_Tag

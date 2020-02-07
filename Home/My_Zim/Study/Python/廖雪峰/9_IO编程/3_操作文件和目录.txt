@@ -1,0 +1,105 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-02T16:55:34+08:00
+
+====== 3 操作文件和目录 ======
+创建日期 星期四 02 一月 2020
+
+如果我们要操作文件、目录，可以在命令行下面输入操作系统提供的各种命令来完成。比如dir、cp等命令。
+
+如果要在Python程序中执行这些目录和文件的操作怎么办？其实操作系统提供的命令只是简单地调用了操作系统提供的接口函数，__Python内置的os模块也可以直接调用操作系统提供的接口函数。__
+
+打开Python交互式命令行，我们来看看如何使用os模块的基本功能：
+
+>>> import os
+>>> __os.name # 操作系统类型__
+'posix'
+
+如果是posix，说明系统是Linux、Unix或Mac OS X，如果是nt，就是Windows系统。
+
+要获取详细的系统信息，__可以调用uname()函数：__
+
+>>> os.uname()
+posix.uname_result(sysname='Darwin', nodename='MichaelMacPro.local', release='14.3.0', version='Darwin Kernel Version 14.3.0: Mon Mar 23 11:59:05 PDT 2015; root:xnu-2782.20.48~5/RELEASE_X86_64', machine='x86_64')
+
+注意uname()函数在Windows上不提供，也就是说，os模块的某些函数是跟操作系统相关的。
+
+__环境变量__
+
+__在操作系统中定义的环境变量，全部保存在os.environ这个变量中，可以直接查看：__
+
+>>> os.environ
+environ({'VERSIONER_PYTHON_PREFER_32_BIT': 'no', 'TERM_PROGRAM_VERSION': '326', 'LOGNAME': 'michael', 'USER': 'michael', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/mysql/bin', ...})
+
+要__获取某个环境变量的值__，可以调用__os.environ.get('key')__：
+
+>>> __os.environ.get('PATH')__
+'/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/mysql/bin'
+>>> os.environ.get('x', 'default')
+'default'
+
+__操作文件和目录__
+
+操作文件和目录的函数__一部分放在os模块中__，__一部分放在os.path模块__中，这一点要注意一下。查看、创建和删除目录可以这么调用：
+
+# 查看__当前目录的绝对路径__:
+>>> __os.path.abspath('.')__
+'/Users/michael'
+# 在某个目录下__创建一个新目录__，__首先把新目录的完整路径表示出来:__
+>>> __os.path.join('/Users/michael', 'testdir')__
+'/Users/michael/testdir'
+# 然后__创建一个目录:__
+>>>__ os.mkdir('/Users/michael/testdir')__
+# 删掉一个目录:
+>>> __os.rmdir('/Users/michael/testdir')__
+
+__把两个路径合成一个时，不要直接拼字符串，而要通过os.path.join()函数__，__这样可以正确处理不同操作系统的路径分隔符__。在Linux/Unix/Mac下，os.path.join()返回这样的字符串：
+
+part-1/part-2
+
+而Windows下会返回这样的字符串：
+
+part-1\part-2
+
+同样的道理，__要拆分路径时，也不要直接去拆字符串，而要通过os.path.split()函数，这样可以把一个路径拆分为两部分，后一部分总是最后级别的目录或文件名：__
+
+>>> os.path.split('/Users/michael/testdir/file.txt')
+('/Users/michael/testdir', 'file.txt')
+
+__os.path.splitext()__可以直接让你__得到文件扩展名__，很多时候非常方便：
+
+>>> __os.path.splitext('/path/to/file.txt')__
+('/path/to/file', '.txt')
+
+这些合并、拆分路径的函数__并不要求目录和文件要真实存在，它们只对字符串进行操作__。
+
+__文件操作__使用下面的函数。假定当前目录下有一个test.txt文件：
+
+# 对文件__重命名__:
+>>> __os.rename('test.txt', 'test.py')__
+# __删掉__文件:
+>>> __os.remove('test.py')__
+
+但是__复制__文件的函数居然__在os模块中不存在__！原因是复制文件__并非由操作系统提供的系统调用__。理论上讲，我们通过上一节的读写文件可以完成文件复制，只不过要多写很多代码。
+
+幸运的是__shutil模块__提供了__copyfile()的函数__，你还可以在shutil模块中找到很多实用函数，它们__可以看做是os模块的补充__。
+
+最后看看如何利用Python的特性来__过滤文件__。比如我们要__列出当前目录下的所有目录__，只需要一行代码：
+
+>>> __[x for x in os.listdir('.') if os.path.isdir(x)]__
+['.lein', '.local', '.m2', '.npm', '.ssh', '.Trash', '.vim', 'Applications', 'Desktop', ...]
+
+要__列出所有的.py文件，也只需一行代码__：
+
+>>> __[x for x in os.listdir('.') if os.path.isfile(x) and os.path.splitext(x)[1]=='.py']__
+['apis.py', 'config.py', 'models.py', 'pymonitor.py', 'test_db.py', 'urls.py', 'wsgiapp.py']
+
+是不是非常简洁？
+小结
+
+__Python的os模块封装了操作系统的目录和文件操作，要注意这些函数有的在os模块中，有的在os.path模块中。__
+练习
+
+	利用os模块编写一个能实现dir -l输出的程序。
+
+	编写一个程序，能在当前目录以及当前目录的所有子目录下查找文件名包含指定字符串的文件，并打印出相对路径。

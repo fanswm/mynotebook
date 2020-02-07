@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-17T16:43:53+08:00
+
+====== ss ======
+创建日期 星期五 17 五月 2019
+
+ss 全称 socket statistics，是一个可以替代 netstat 的网络连接查看工具。
+
+直接执行 ss 即可进行查看：
+
+常用参数有：
+
+ss -A tcp ：指定查看协议
+
+ss -ltp ：显示进程名称和 PID
+

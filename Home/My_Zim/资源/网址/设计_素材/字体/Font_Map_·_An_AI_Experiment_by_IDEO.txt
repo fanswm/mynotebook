@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-22T11:44:00+08:00
+
+====== Font Map · An AI Experiment by IDEO ======
+创建日期 星期五 22 二月 2019
+
+http://fontmap.ideo.com/
+设计新颖的字体网站，将字体用地图一样分布开，想要什么字体一眼便能够找到，用户体验极佳，可惜目前仅支持英文字体。

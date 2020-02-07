@@ -1,0 +1,58 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-26T20:40:43+08:00
+
+====== 修改UUID ======
+创建日期 星期日 26 一月 2020
+
+修改硬盘UUID：
+
+1、新建和改变分区的UUID
+
+sudo uuidgen | xargs tune2fs /dev/sda5 -U
+2、将原有UUID写会到分区
+
+tune2fs -U c1b9d5a2-f162-11cf-9ece-0020afc76f16 /dev/sda5
+
+
+
+
+由于sda5是通过dd命令复制过来的，存在2个相同的UUID。
+uuidgen可以产生一个随机的编号。
+在tune2fs修改前，需要使用e2fsck -f进行校验。
+
+__root@xydpc:~# uuidgen__
+9b1a8381-36fd-48c1-bae0-7e7cb9d4c408
+__root@xydpc:~# e2fsck -f /dev/sda5__
+e2fsck 1.44.1 (24-Mar-2018)
+第 1 步：检查inode、块和大小
+第 2 步：检查目录结构
+第 3 步：检查目录连接性
+第 4 步：检查引用计数
+第 5 步：检查组概要信息
+/dev/sda5：167166/393216 文件（0.3% 为非连续的）， 1256324/1572864 块
+__root@xydpc:~# tune2fs /dev/sda5 -U 9b1a8381-36fd-48c1-bae0-7e7cb9d4c408__
+tune2fs 1.44.1 (24-Mar-2018)
+在启用了校验值的文件系统上设置 UUID 需要花费一段时间。
+Proceed anyway (or wait 5 seconds to proceed) ? (y,N) y
+__root@xydpc:~# blkid /dev/sda5__
+/dev/sda5: UUID="9b1a8381-36fd-48c1-bae0-7e7cb9d4c408" TYPE="ext4" PARTLABEL="archLinux" PARTUUID="97f3794f-40f9-46d8-8e49-0ae10e2a87b2"
+__root@xydpc:~#__
+
+
+在fstab中修改为新的UUID，已保持在启动时自动挂载。
+
+__root@xydpc:~# mount /dev/sda5 /mnt__
+__root@xydpc:~# vi /mnt/etc/fstab__
+  1 # Static information about the filesystems.
+  2 # See fstab(5) for details.
+  3 
+  4 # <file system> <dir> <type> <options> <dump> <pass>
+  5 # /dev/sda5
+  6 UUID=9b1a8381-36fd-48c1-bae0-7e7cb9d4c408       /               ext4            rw,relatime     0 1
+  7 
+
+参考资料：
+Linux下查看硬盘UUID和修改硬盘UUID（转）
+linux下硬盘uuid查看及修改设置
+

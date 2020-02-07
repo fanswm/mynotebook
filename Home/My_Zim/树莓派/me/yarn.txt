@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-28T21:25:12+08:00
+
+====== yarn ======
+创建日期 星期三 28 十一月 2018
+## To install the Yarn package manager, run:
+	 curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+	 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+	 sudo apt-get update && sudo apt-get install yarn
+
+https://yarnpkg.com/en/docs/install#debian-stable
+```
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update && sudo apt-get install yarn
+```

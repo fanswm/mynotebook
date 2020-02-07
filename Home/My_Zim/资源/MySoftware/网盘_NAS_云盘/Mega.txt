@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-23T12:02:32+08:00
+
+====== Mega ======
+Created Tuesday 23 October 2018
+
+https://mega.nz/
+Mega[11] 也是一个出色的云存储解决方案，它的亮点除了高度的安全性之外，还有为用户免费提供高达 50 GB 的免费存储空间。它使用端到端加密，以确保用户的数据安全，所以如果忘记了恢复密钥，用户自己也无法访问到存储的数据。
+
+参考阅读：在 Ubuntu 下载 Mega 云存储客户端[12]
+https://mega.nz/sync!linux
+
+10/30/18
+abstract hex
+iamfswm@gmail.com

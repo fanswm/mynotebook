@@ -1,0 +1,25 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-04-05T11:05:50+08:00
+
+====== 创建数组 ======
+Created Thursday 05 April 2018
+
+Java语言使用new操作符来创建数组，语法如下：
+
+__arrayRefVar = new dataType[arraySize];__
+
+上面的语法语句做了两件事：
+
+    一、使用 dataType[arraySize] 创建了一个数组。
+    二、把新创建的数组的引用赋值给变量 arrayRefVar。
+
+数组变量的声明，和创建数组可以用一条语句完成，如下所示：
+
+__dataType[] arrayRefVar = new dataType[arraySize];__
+
+另外，你还可以使用如下的方式创建数组。
+
+dataType[] arrayRefVar = {value0, value1, ..., valuek};
+
+数组的元素是通过索引访问的。数组索引从 0 开始，所以索引值从 0 到 arrayRefVar.length-1。

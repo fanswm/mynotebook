@@ -1,0 +1,215 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-30T15:07:41+08:00
+
+====== 渗透测试框架 Fsociety搞定各种姿势脚本 ======
+Created Tuesday 30 January 2018
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本 2cat2018-01-18现金奖励共369545人围观 ，发现 28 个不明物体 WEB安全工具
+*本文作者：2cat，本文属 FreeBuf 原创奖励计划，未经许可禁止转载。
+
+Fsociety是一款最新的渗透测试框架，可以帮助各位兄弟在安全测试过程中拥有变身成黑客所需要的各种姿势脚本。
+
+ 这个工具刚刚出现，目前大概分为以下9类，后续还会更新其他几类（Shell Checker，POET，Weeman）
+
+ (一)  菜单
+
+信息收集
+
+密码攻击
+
+无线测试
+
+渗透工具
+
+嗅探和欺骗
+
+Web Hacking
+
+Private Web Hacking
+
+后期开发
+
+安装和更新
+(二)  信息收集
+
+NMAP
+
+Setoolkit
+
+Host To IP
+
+WPScan
+
+CMS扫描仪
+
+XSStrike
+
+Dork – Google Dorks被动漏洞审计
+(三)  密码攻击
+
+Cupp
+
+Ncrack
+(四)  无线测试
+
+Reaver
+
+Pixiewps
+
+Bluetooth蜜罐
+(五)  渗透工具
+
+ATSCAN
+
+sqlmap
+
+Shellnoob
+
+commix
+
+FTP Auto Bypass
+
+JBoss Autopwn
+(六)  嗅探和欺骗
+
+Setoolkit
+
+SSLtrip
+
+pyPISHER
+
+SMTP邮件程序
+(七)  网络黑客
+
+Drupal Hacking
+
+Inurlbr
+
+WordPress和Joomla扫描
+
+Gravity Form Scanner
+
+文件上传检查工具
+
+WordPress利用扫描工具
+
+WordPress插件扫描工具
+
+Shell and Directory Finder
+
+Joomla！1.5 – 3.4.5远程代码执行
+
+Vbulletin 5.X远程代码执行
+
+BruteX – Automatically brute force all services running on a target
+
+Arachni – Web应用程序安全扫描程序框架
+(八)  Private Web Hacking
+
+获取所有网站
+
+获取joomla网站
+
+获取WordPress的网站
+
+Control Panel Finder
+
+Zip Files Finder
+
+Upload File Finder
+
+Get server users
+
+SQli Scanner
+
+Ports Scan (range of ports)
+
+ports Scan (common ports)
+
+Get server Info
+
+Bypass Cloudflare
+(九)  后期开发
+
+Shell Checker
+
+POET
+
+Weeman
+下面介绍一下具体使用的方式方法，。
+
+ 由于此款安全测试框架暂时为beta版本，初次使用会存在一此小问题，本人已经做了小白鼠，给大家把坑趟了一遍，为各位兄弟减少一些试错成本，有不完善的地方还请多多包涵。
+
+ https://github.com/thehappydinoa/fsociety    //直接下载略过
+
+root@2cats:~/fsociety# ./install.sh   //安装
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+提示安装失败，经检查发现安装源文件网址有误，如下图。
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+第一个坑，后期顺利完成安装。
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+直接fsociety启动框架程序。
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+下面我们选择2个功能简单测试一下，是否好用。
+
+以Nmap为例，Pentest前期大家经常用到的工具。
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+我们测试一下Nmap简单扫描功能（选择1）
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+输入要扫描的目标IP地址，子网，网段，主机。
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+注意：
+
+第二个坑，nmap自动生成的日志文件nmap-2018-01-15_03:19:31不能写入，初步判断应该是没有logs目录，果断在当前目录下创建个logs文件夹（mkdir logs）。
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+解决办法：
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+再次执行可以正常打印并输出端口信息，收集信息如下图。
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+下面我再测试一个模块，XSStrike相信有很多人应该也会用到，就是各种xss扫描。初次使用会直接下载安装此模块。
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+下面测试具体使用情况。
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+我们随便找个web站点测试一下xsstrike，是否可以正常使用。
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+测试结果正常，可以xss的模糊测试，发现3个反射xss漏洞。
+
+2018最新款渗透测试框架，Fsociety搞定各种姿势脚本
+
+好了，这次就分享就到此了。
+
+ Fsociety毕竟还是一个beta版本，此框架中的部分模块还会存在一些各种各样的小BUG，在后面的使用过程中可能会陆续出现，但总体来说还是非常不错，使用起来很方便。给大家抛砖引玉一下，有兴趣的小伙伴可以继续研究，有了新发现一起分享。
+
+*本文作者：2cat，本文属 FreeBuf 原创奖励计划，未经许可禁止转载。
+
+http://www.freebuf.com/sectool/160300.html
+

@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:05:36+08:00
+
+====== 加强版状态栏 ======
+Created Sunday 03 December 2017
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+ 
+let g:airline_theme='papercolor'

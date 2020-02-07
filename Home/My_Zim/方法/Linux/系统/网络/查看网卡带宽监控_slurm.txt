@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-17T16:38:21+08:00
+
+====== 查看网卡带宽监控 slurm ======
+创建日期 星期五 17 五月 2019
+
+slurm
+slurm 是一个网卡带宽监控命令行实用程序，它会自动生成 ASCII 图形输出。使用之前先用如下命令进行安装：
+
+apt-get install slurm
+使用如下命令进行输出：
+
+slurm -i <网卡名称>
+slurm 界面中可以执行如下选项：
+
+I：显示lx/tx状态
+c：切换到经典界面
+r：手动刷新界面
+q：退出工具

@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T15:57:50+08:00
+
+====== Geek uninataller ======
+Created Thursday 07 December 2017
+
+Geek uninstaller 的特点是简单，无论是软件界面还是软件操作处处都体现着简洁。在 Geek uninstaller 里只要选择一个要卸载的软件，然后右键选择强行删除即可完成卸载和自动清理。
+这是和普通卸载最大的不同，因为普通情况下我们还需要面临弹窗的选择与反馈网页的跳出。Geek uninstaller的强行删除避开了这些烦人的操作，简洁有效。在卸载完成后都会扫描检查是否有文件和注册表残留。一旦发现就进行清扫。
+
+Geek uninataller 别的功能就只有查看注册表条目、安装文件夹、程序网站了。可以说，这是一款专注卸载功能的软件，软件体积小。小到刚好能够帮助我们快速高效地卸载软件，卸载完没有任何文件残留。

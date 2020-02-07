@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:58:26+08:00
+
+====== Taskwarrior ======
+Created Wednesday 24 October 2018
+
+Taskwarrior[80] 是一个用于管理个人任务的开源跨平台命令行应用，它的速度和无干扰的环境是它的两大特点。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Taskwarrior。
+
+$ sudo apt-get update
+$ sudo apt-get install taskwarrior
+
+https://taskwarrior.org/

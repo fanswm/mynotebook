@@ -1,0 +1,35 @@
+﻿Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-11T15:42:49+08:00
+
+====== 如何参与开发以及贡献代码 ======
+Created Tuesday 11 December 2018
+
++ Fork
+> 直接点击右上角的"Fork“即可
++ Clone
+> 接下来要做的事情就是把仓库代码Clone到本地。注意这里克隆的是你自己账户下的纸壳CMS项目，而不是官方的项目地址
++ Coding
+> 代码克隆下来以后就可以开始开发了，开发相关可以先查看相关文档。
+开发的时候，您可以选择创建新的分支，这样可以与主分支分开。用单独分支开发是推荐的做法。
++ Commit
+> 在代码修改完成以后，就要提交代码了。先将您的代码提交到本地仓库，并在提交的时候做一些简单的说明。
++ Push
+> 接下来需要把代码同步到远端仓库GitHub上。可以在刚才提交完成以后，直接点击Push
++ Pull Request
+> 在代码提交到GitHub以后，就可以发起来个Pull Request（拉取请求）
+点击GitHub上项目主界面上的”New pull request(在你自己的仓库里)
+注意选择将代码合并到开发分支（develop）
+最后，点击”Create pull request“
+输入简单说明，再次点击”Create pull request“就可以了
+你的代码并不会马上就合并到纸壳CMS的分支中，需要等待作者的查阅后才会被合并。
++ Synchronization
+> 在Fork了代码仓库一段时间后，你账号里的仓库可能就不是最新的了。可以通过发起拉取请求同步最新代码。GitHub会告诉你当前分支的差异信息(在你Fork的仓库的左边，显示分支的下面一行. 例如：This branch is 1 commit ahead, 1 commit behind SeriaWei: master.)，
+++ 然后点击拉取请求(myusername:compare?)即可.
+> 这里要注意，__GitHub上的显示是把右边的代码合并到左边，所以要把自己的仓库转到左边如果不是在左边的话。__
+++ 右边选择纸壳CMS官方仓库
+++ 然后点击”Create pull request“，再合并即可：
+++ 点击确认合并，就可以将代码合并过来了：
+
+
+

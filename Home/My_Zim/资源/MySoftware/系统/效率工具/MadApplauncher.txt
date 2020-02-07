@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-01T18:02:16+08:00
+
+====== MadApplauncher ======
+Created Friday 01 December 2017
+
+MadApplauncher（常用软件快捷方式）Windows

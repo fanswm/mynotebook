@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-15T11:48:25+08:00
+
+====== Coursera ======
+Created Monday 15 October 2018
+
+Coursera 是世界上最大的在线学习平台之一，于 2012 年由斯坦福大学的两位计算机科学教授 Daphne Koller 和 Andrew Ng（机器学习大牛吴恩达）创办。目前该平台上已有 149 所大学 / 机构提供的超过 2000 门课程，注册用户超过 2500 万（截止 2018 年 5 月）。Coursera 区别于其他在线平台（如 Udacity、Udemy、edX 等）的特点在于：与全世界高等教育机构深度合作，提供大量计算机科学、数据科学、信息技术、数学、语言学习、艺术人文、商科等热门领域的优秀课程资源。
+
+https://www.coursera.org/
+
+https://sspai.com/post/47396
+
+
+imrdr

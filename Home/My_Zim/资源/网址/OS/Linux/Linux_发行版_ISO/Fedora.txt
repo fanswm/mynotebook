@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-17T15:47:37+08:00
+
+====== Fedora ======
+创建日期 星期五 17 五月 2019
+
+将 Fedora 29 升级到 Fedora 30 https://linux.cn/article-10854-1.html?utm_source=rss&utm_medium=rss
+
+使用 LVM 升级 Fedora https://linux.cn/article-11250-1.html?utm_source=rss&utm_medium=rss
+
+https://lists.fedoraproject.org/pipermail/devel-announce/2010-July/000647.html
+
+https://docs.fedoraproject.org/en-US/quick-docs/creating-and-using-a-live-installation-image/index.html

@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:53:12+08:00
+
+====== Gnome Screenshot ======
+Created Wednesday 24 October 2018
+
+Gnome Screenshot[69] 过去曾经和 Gnome 一起捆绑，但现在已经独立出来。它以易于共享的格式进行截屏。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Gnome Screenshot。
+
+$ sudo apt-get update
+$ sudo apt-get install gnome-screenshot
+
+https://gitlab.gnome.org/GNOME/gnome-screenshot

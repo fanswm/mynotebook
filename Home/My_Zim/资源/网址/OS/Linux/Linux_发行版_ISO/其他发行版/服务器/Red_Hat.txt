@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-02T13:57:13+08:00
+
+====== Red Hat ======
+Created Friday 02 November 2018
+
+https://link.zhihu.com/?target=https%3A//www.redhat.com/en/technologies/linux-platforms/enterprise-linux

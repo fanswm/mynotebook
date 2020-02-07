@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-30T13:37:54+08:00
+
+====== tagstore ======
+创建日期 星期三 30 一月 2019
+
+https://karl-voit.at/tagstore/
+tagstore是一个研究软件，用于开发一种在本地磁盘驱动器上存储文件和文件夹的有趣方式
+
+类似的还有：
+https://en.wikipedia.org/wiki/Personal_wiki
+
+MoinMoin https://en.wikipedia.org/wiki/MoinMoin
+TWiki https://en.wikipedia.org/wiki/TWiki
+TheBrain https://en.wikipedia.org/wiki/TheBrain

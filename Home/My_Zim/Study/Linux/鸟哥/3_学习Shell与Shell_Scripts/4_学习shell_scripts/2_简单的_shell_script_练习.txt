@@ -1,0 +1,137 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-11T16:44:45+08:00
+
+====== 2 简单的 shell script 练习 ======
+Created Monday 11 December 2017
+
+2. 简单的 shell script 练习
+　　2.1 简单范例： 对谈式脚本, 随日期变化, 数值运算
+　　2.2 script 的运行方式差异 (source, sh script, ./script)
+ 大标题的图示简单的 shell script 练习
+在第一支 shell script 撰写完毕之后，相信你应该具有基本的撰写功力了。 接下来，在开始更深入的程序概念之前，我们先来玩一些简单的小范例好了。 底下的范例中，达成结果的方式相当的多，建议你先自行撰写看看，写完之后再与鸟哥写的内容比对， 这样才能更加深概念喔！好！不罗唆，我们就一个一个来玩吧！
+
+
+小标题的图示简单范例
+底下的范例在很多的脚本程序中都会用到，而底下的范例又都很简单！值得参考看看喔！
+
+
+对谈式脚本：变量内容由使用者决定
+很多时候我们需要使用者输入一些内容，好让程序可以顺利运行。 简单的来说，大家应该都有安装过软件的经验，安装的时候，他不是会问你『要安装到那个目录去』吗？ 那个让使用者输入数据的动作，就是让使用者输入变量内容啦。
+
+你应该还记得在十一章 bash 的时候，我们有学到一个 read 命令吧？现在，请你以 read 命令的用途，撰写一个 script ，他可以让使用者输入：1. first name 与 2. last name， 最后并且在萤幕上显示：『Your full name is: 』的内容：
+
+[root@www scripts]# vi sh02.sh
+#!/bin/bash
+# Program:
+#	User inputs his first name and last name.  Program shows his full name.
+# History:
+# 2005/08/23	VBird	First release
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+export PATH
+
+read -p "Please input your first name: " firstname  # 提示使用者输入
+read -p "Please input your last name:  " lastname   # 提示使用者输入
+echo -e "\nYour full name is: $firstname $lastname" # 结果由萤幕输出
+将上面这个 sh02.sh 运行一下，你就能够发现使用者自己输入的变量可以让程序所取用，并且将他显示到萤幕上！ 接下来，如果想要制作一个每次运行都会依据不同的日期而变化结果的脚本呢？
+
+
+随日期变化：利用 date 进行文件的创建
+想像一个状况，假设我的服务器内有数据库，数据库每天的数据都不太一样，因此当我备份时， 希望将每天的数据都备份成不同的档名，这样才能够让旧的数据也能够保存下来不被覆盖。 哇！不同档名呢！这真困扰啊？难道要我每天去修改 script ？
+
+不需要啊！考虑每天的『日期』并不相同，所以我可以将档名取成类似： backup.2009-02-14.data ， 不就可以每天一个不同档名了吗？呵呵！确实如此。那个 2009-02-14 怎么来的？那就是重点啦！接下来出个相关的例子： 假设我想要创建三个空的文件 (透过 touch) ，档名最开头由使用者输入决定，假设使用者输入 filename 好了，那今天的日期是 2009/02/14 ， 我想要以前天、昨天、今天的日期来创建这些文件，亦即 filename_20090212, filename_20090213, filename_20090214 ，该如何是好？
+
+[root@www scripts]# vi sh03.sh
+#!/bin/bash
+# Program:
+#	Program creates three files, which named by user's input 
+#	and date command.
+# History:
+# 2005/08/23	VBird	First release
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+export PATH
+
+# 1. 让使用者输入文件名称，并取得 fileuser 这个变量；
+echo -e "I will use 'touch' command to create 3 files." # 纯粹显示资讯
+read -p "Please input your filename: " fileuser         # 提示使用者输入
+
+# 2. 为了避免使用者随意按 Enter ，利用变量功能分析档名是否有配置？
+filename=${fileuser:-"filename"}           # 开始判断有否配置档名
+
+# 3. 开始利用 date 命令来取得所需要的档名了；
+date1=$(date --date='2 days ago' +%Y%m%d)  # 前两天的日期
+date2=$(date --date='1 days ago' +%Y%m%d)  # 前一天的日期
+date3=$(date +%Y%m%d)                      # 今天的日期
+file1=${filename}${date1}                  # 底下三行在配置档名
+file2=${filename}${date2}
+file3=${filename}${date3}
+
+# 4. 将档名创建吧！
+touch "$file1"                             # 底下三行在创建文件
+touch "$file2"
+touch "$file3"
+上面的范例鸟哥使用了很多在十一章介绍过的概念： 包括小命令『 $(command) 』的取得信息、变量的配置功能、变量的累加以及利用 touch 命令辅助！ 如果你开始运行这个 sh03.sh 之后，你可以进行两次运行：一次直接按 [Enter] 来查阅档名是啥？ 一次可以输入一些字节，这样可以判断你的脚本是否设计正确喔！
+
+
+数值运算：简单的加减乘除
+各位看官应该还记得，我们可以使用 declare 来定义变量的类型吧？ 当变量定义成为整数后才能够进行加减运算啊！此外，我们也可以利用『 $((计算式)) 』来进行数值运算的。 可惜的是， bash shell 里头默认仅支持到整数的数据而已。OK！那我们来玩玩看，如果我们要使用者输入两个变量， 然后将两个变量的内容相乘，最后输出相乘的结果，那可以怎么做？
+
+[root@www scripts]# vi sh04.sh
+#!/bin/bash
+# Program:
+#	User inputs 2 integer numbers; program will cross these two numbers.
+# History:
+# 2005/08/23	VBird	First release
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+export PATH
+echo -e "You SHOULD input 2 numbers, I will cross them! \n"
+read -p "first number:  " firstnu
+read -p "second number: " secnu
+total=$(($firstnu*$secnu))
+echo -e "\nThe result of $firstnu x $secnu is ==> $total"
+在数值的运算上，我们可以使用『 declare -i total=$firstnu*$secnu 』 也可以使用上面的方式来进行！基本上，鸟哥比较建议使用这样的方式来进行运算：
+
+var=$((运算内容))
+不但容易记忆，而且也比较方便的多，因为两个小括号内可以加上空白字节喔！ 未来你可以使用这种方式来计算的呀！至於数值运算上的处理，则有：『 +, -, *, /, % 』等等。 那个 % 是取余数啦～举例来说， 13 对 3 取余数，结果是 13=4*3+1，所以余数是 1 啊！就是：
+
+[root@www scripts]# echo $(( 13 % 3 ))
+1
+这样了解了吧？多多学习与应用喔！ ^_^
+
+小标题的图示script 的运行方式差异 (source, sh script, ./script)
+不同的 script 运行方式会造成不一样的结果喔！尤其影响 bash 的环境很大呢！脚本的运行方式除了前面小节谈到的方式之外，还可以利用 source 或小数点 (.) 来运行喔！那么这种运行方式有何不同呢？当然是不同的啦！让我们来说说！
+
+
+利用直接运行的方式来运行 script
+当使用前一小节提到的直接命令下达 (不论是绝对路径/相对路径还是 $PATH 内)，或者是利用 bash (或 sh) 来下达脚本时， 该 script 都会使用一个新的 bash 环境来运行脚本内的命令！也就是说，使用者种运行方式时， 其实 script 是在子程序的 bash 内运行的！我们在第十一章 BASH 内谈到 export 的功能时，曾经就父程序/子程序谈过一些概念性的问题， 重点在於：『当子程序完成后，在子程序内的各项变量或动作将会结束而不会传回到父程序中』！ 这是什么意思呢？
+
+我们举刚刚提到过的 sh02.sh 这个脚本来说明好了，这个脚本可以让使用者自行配置两个变量，分别是 firstname 与 lastname，想一想，如果你直接运行该命令时，该命令帮你配置的 firstname 会不会生效？看一下底下的运行结果：
+
+[root@www scripts]# echo $firstname $lastname
+	<==确认了，这两个变量并不存在喔！
+[root@www scripts]# sh sh02.sh
+Please input your first name: VBird <==这个名字是鸟哥自己输入的
+Please input your last name:  Tsai 
+
+Your full name is: VBird Tsai      <==看吧！在 script 运行中，这两个变量有生效
+[root@www scripts]# echo $firstname $lastname
+	<==事实上，这两个变量在父程序的 bash 中还是不存在的！
+上面的结果你应该会觉得很奇怪，怎么我已经利用 sh02.sh 配置好的变量竟然在 bash 环境底下无效！怎么回事呢？ 如果将程序相关性绘制成图的话，我们以下图来说明。当你使用直接运行的方法来处理时，系统会给予一支新的 bash 让我们来运行 sh02.sh 里面的命令，因此你的 firstname, lastname 等变量其实是在下图中的子程序 bash 内运行的。 当 sh02.sh 运行完毕后，子程序 bash 内的所有数据便被移除，因此上表的练习中，在父程序底下 echo $firstname 时， 就看不到任何东西了！这样可以理解吗？
+
+sh02.sh 在子程序中运行
+图 2.2.1、sh02.sh 在子程序中运行
+
+利用 source 来运行脚本：在父程序中运行
+如果你使用 source 来运行命令那就不一样了！同样的脚本我们来运行看看：
+
+[root@www scripts]# source sh02.sh
+Please input your first name: VBird
+Please input your last name:  Tsai
+
+Your full name is: VBird Tsai
+[root@www scripts]# echo $firstname $lastname
+VBird Tsai  <==嘿嘿！有数据产生喔！
+竟然生效了！没错啊！因为 source 对 script 的运行方式可以使用底下的图示来说明！ sh02.sh 会在父程序中运行的，因此各项动作都会在原本的 bash 内生效！这也是为啥你不注销系统而要让某些写入 ~/.bashrc 的配置生效时，需要使用『 source ~/.bashrc 』而不能使用『 bash ~/.bashrc 』是一样的啊！
+
+sh02.sh 在父程序中运行
+图 2.2.2、sh02.sh 在父程序中运行

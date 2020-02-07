@@ -1,0 +1,37 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-01T22:01:34+08:00
+
+====== System requirements ======
+创建日期 星期三 01 五月 2019
+
+
+System requirements
+Windows
+
+	Microsoft® Windows® 7/8/10 (32- or 64-bit)
+	3 GB RAM minimum, 8 GB RAM recommended; plus 1 GB for the Android Emulator
+	2 GB of available disk space minimum,
+	4 GB Recommended (500 MB for IDE + 1.5 GB for Android SDK and emulator system image)
+	1280 x 800 minimum screen resolution
+
+Mac
+
+	Mac® OS X® 10.10 (Yosemite) or higher, up to 10.13 (macOS High Sierra)
+	3 GB RAM minimum, 8 GB RAM recommended; plus 1 GB for the Android Emulator
+	2 GB of available disk space minimum,
+	4 GB Recommended (500 MB for IDE + 1.5 GB for Android SDK and emulator system image)
+	1280 x 800 minimum screen resolution
+
+Linux
+
+	GNOME or KDE desktop
+
+	Tested on Ubuntu® 14.04 LTS, Trusty Tahr (64-bit distribution capable of running 32-bit applications)
+	64-bit distribution capable of running 32-bit applications
+	GNU C Library (glibc) 2.19 or later
+	3 GB RAM minimum, 8 GB RAM recommended; plus 1 GB for the Android Emulator
+	2 GB of available disk space minimum,
+	4 GB Recommended (500 MB for IDE + 1.5 GB for Android SDK and emulator system image)
+	1280 x 800 minimum screen resolution
+

@@ -1,0 +1,47 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:12:44+08:00
+
+====== find ======
+Created 星期四 30 十一月 2017
+
+find find [PATH] [option] [action] | 在文件树种查找文件，并作出相应的处理
+选项与参数：
+1. 与时间有关的选项：共有 -atime, -ctime 与 -mtime 和-amin,-cmin与-mmin，以 -mtime 说明
+	-mtime n ：n 为数字，意义为在 n 天之前的『一天之内』被更动过内容的档案；
+	-mtime +n ：列出在 n 天之前(不含 n 天本身)被更动过内容的档案档名；
+	-mtime -n ：列出在 n 天之内(含 n 天本身)被更动过内容的档案档名。
+	-newer file ：file 为一个存在的档案，列出比 file 还要新的档案档名
+2. 与使用者或组名有关的参数：
+	-uid n ：n 为数字，这个数字是用户的账号 ID，亦即 UID
+	-gid n ：n 为数字，这个数字是组名的 ID，亦即 GID
+	-user name ：name 为使用者账号名称！例如 dmtsai
+	-group name：name 为组名，例如 users ；
+	-nouser ：寻找档案的拥有者不存在 /etc/passwd 的人！
+	-nogroup ：寻找档案的拥有群组不存在于 /etc/group 的档案！
+3. 与档案权限及名称有关的参数：
+	-name filename：搜寻文件名为 filename 的档案（可使用通配符）
+	-size [+-]SIZE：搜寻比 SIZE 还要大(+)或小(-)的档案。这个 SIZE 的规格有：
+		c: 代表 byte
+		k: 代表 1024bytes。所以，要找比 50KB还要大的档案，就是『 -size +50k 』
+	-type TYPE ：搜寻档案的类型为 TYPE 的，类型主要有：
+		一般正规档案 (f)
+		装置档案 (b, c)
+		目录 (d)
+		连结档 (l)
+		socket (s)
+		FIFO (p)
+	-perm mode ：搜寻档案权限『刚好等于』 mode的档案，这个mode为类似chmod的属性值，举例来说，-rwsr-xr-x 的属性为4755！
+	-perm -mode ：搜寻档案权限『必须要全部囊括 mode 的权限』的档案，举例来说，
+		我们要搜寻-rwxr--r-- 亦即 0744 的档案，使用-perm -0744，当一个档案的权限为 -rwsr-xr-x ，亦即 4755 时，也会被列出来，因为 -rwsr-xr-x 的属性已经囊括了 -rwxr--r-- 的属性了。
+	-perm +mode ：搜寻档案权限『包含任一 mode 的权限』的档案，举例来
+		说，我们搜寻-rwxr-xr-x ，亦即 -perm +755 时，但一个文件属性为 -rw-------也会被列出来，因为他有 -rw.... 的属性存在！
+4. 额外可进行的动作：
+	-exec command ：command 为其他指令，-exec 后面可再接额外的指令来处理搜寻到的结果。
+	-print ：将结果打印到屏幕上，这个动作是预设动作！
+	eg:
+		find / -perm +7000 -exec ls -l {} \; ,额外指令以-exec开头，以\;结尾{}代替前面找到的内容
+	| xargs 
+		-i  默认的前面输出用{}代替 
+		eg:
+			find . -name "*.log" | xargs -i mv {} test4

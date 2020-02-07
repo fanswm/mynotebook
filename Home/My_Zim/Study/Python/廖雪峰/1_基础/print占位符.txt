@@ -1,0 +1,35 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-04T13:49:03+08:00
+
+====== print占位符 ======
+Created Monday 04 December 2017
+
+常见的占位符有：
+%d    整数
+%f    浮点数
+%s    字符串
+%x    十六进制整数
+
+其中，格式化整数和浮点数还可以指定是否补0和整数与小数的位数：
+>>> '%2d-%02d' % (3, 1)
+' 3-01'
+>>> '%.2f' % 3.1415926
+'3.14'
+如果你不太确定应该用什么，%s永远起作用，它会把任何数据类型转换为字符串.
+
+
+打印不换行：
+Python2的写法是：
+
+print 'hello',
+
+Python3的写法是：
+
+print('hello', end='')
+
+对于python2和python3都兼容的写法是：
+
+from __future__ import print_function
+
+print('hello', end='')

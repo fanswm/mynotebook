@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-08-10T11:30:54+08:00
+
+====== inotify-tools ======
+Created Friday 10 August 2018
+
+假设大家拥有一套shell脚本，并希望追踪文件何时被关闭或者修改——那么inotify-tools正是为此而生。其包含一套C库与一组Linux命令行程序，用于为inotify提供一套简单的使用界面。根据维基百科的介绍，inotify是“一套Linux内核子系统，能够作为扩展文件系统以通知一切指向该文件系统的变更，同时将变更报告至其它应用”。如果大家需要以异步方式操作文件，并希望对文件创建、修改或者删除事件加以追踪，那么这款软件包将值得一试。

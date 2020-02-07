@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-22T11:33:41+08:00
+
+====== Zine ======
+Created Thursday 22 November 2018
+
+https://zine.la/editor/#/article
+
+教程:
+https://zine.la/booklet/e51572fbe29d488187a1f8a87424308c/
+
+Zine 是一个独特而创新的笔记应用。
+如果你是想记记日记，使用其他笔记应用完全可以，但是如果你不太满足，想让自己写的东西像杂志质感的排版，而Zine 刚好能满足你。
+不管你在家，在地铁，所有地方都可随意编辑，各种字体，颜色，大小，在所有平台的阅读体验都是一致的，而且全平台可以同步编辑。
+而且Zine 除了是一个笔记应用，它也是一个内容平台，Zine 会根据你的兴趣每天向你推荐5 篇文章，你还可以开通自己的专栏，分享你的知识与经验。

@@ -1,0 +1,271 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-09-23T14:24:35+08:00
+
+====== IPv6 Win7 小白指引 ======
+Created 星期一 23 九月 2019
+
+https://github.com/XX-net/XX-Net/wiki/IPv6-Win7-%E5%B0%8F%E7%99%BD%E6%8C%87%E5%BC%95
+
+1.开启本地路由器UPnP服务，如有光猫请设置成桥接使用自己的路由器拨号
+
+下图为IPv6成连接后的路由器显示
+路由器UPnP
+2.恢复IPv6组策略默认设置
+
+开始——运行——输入：gpedit.msc
+参照下图依次打开：计算机配置 —— 管理模板 —— 网络 —— TCP/IP 设置 —— IPv6 转换技术，如有已配置或禁用、启用等均修改为“未配置” IPv6组策略
+3.恢复防火墙默认设置
+
+开始 —— 控制面板 —— 查看方式“大图标” —— Windows 防火墙 —— 还原默认设置 防火墙设置
+4.设置本地连接 IPv4 和 IPv6 的 DNS
+IPv4 DNS
+180.76.76.76
+114.114.114.114
+	
+	参考 http://ip.cn/dns.html
+
+IPv4 DNS 设置
+IPv6 DNS
+2001:4860:4860::8888
+2001:4860:4860::8844
+
+IPv6 DNS 设置
+5.执行一键批处理开启 IPv6 操作
+
+	请将下列命令保存成 IPV6_1.bat 文件并以管理员权限执行
+	其中的网络连接请根据自己实际使用情况修改为您本机上述第三步配置DNS的网络连接，如网络连接或网络连接2、网络连接3……
+
+@echo off
+
+net start "ip helper"
+netsh int ipv6 reset
+
+netsh int teredo set state default
+netsh int 6to4 set state default
+netsh int isatap set state default
+netsh int teredo set state server=teredo.remlab.net
+netsh int ipv6 set teredo enterpriseclient
+netsh int ter set state enterpriseclient
+route DELETE ::/0
+netsh int ipv6 add route ::/0 "网络连接"
+netsh int ipv6 set prefix 2002::/16 30 1
+netsh int ipv6 set prefix 2001::/32 5 1
+Reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Dnscache\Parameters /v AddrConfigControl /t REG_DWORD /d 0 /f
+
+netsh int teredo set state default
+netsh int 6to4 set state default
+netsh int isatap set state default
+netsh int teredo set state server=teredo.remlab.net
+netsh int ipv6 set teredo enterpriseclient
+netsh int ter set state enterpriseclient
+route DELETE ::/0
+netsh int ipv6 add route ::/0 "网络连接"
+netsh int ipv6 set prefix 2002::/16 30 1
+netsh int ipv6 set prefix 2001::/32 5 1
+Reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Dnscache\Parameters /v AddrConfigControl /t REG_DWORD /d 0 /f
+
+ipconfig /all
+ipconfig /flushdns
+netsh int ipv6 show teredo
+netsh int ipv6 show route
+netsh int ipv6 show int
+netsh int ipv6 show prefix
+netsh int ipv6 show address
+route print
+cmd
+
+	请将下列命令保存成 IPV6_2.bat 文件并以管理员权限执行
+
+@echo off
+
+net start "ip helper"
+netsh int ipv6 reset
+
+netsh int teredo set state default
+netsh int 6to4 set state default
+netsh int isatap set state default
+netsh int teredo set state server=teredo.remlab.net
+netsh int ipv6 set teredo enterpriseclient
+netsh int ter set state enterpriseclient
+route DELETE ::/0
+netsh int ipv6 add route ::/0 "Teredo Tunneling Pseudo-Interface"
+netsh int ipv6 set prefix 2002::/16 30 1
+netsh int ipv6 set prefix 2001::/32 5 1
+Reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Dnscache\Parameters /v AddrConfigControl /t REG_DWORD /d 0 /f
+
+netsh int teredo set state default
+netsh int 6to4 set state default
+netsh int isatap set state default
+netsh int teredo set state server=teredo.remlab.net
+netsh int ipv6 set teredo enterpriseclient
+netsh int ter set state enterpriseclient
+route DELETE ::/0
+netsh int ipv6 add route ::/0 "Teredo Tunneling Pseudo-Interface"
+netsh int ipv6 set prefix 2002::/16 30 1
+netsh int ipv6 set prefix 2001::/32 5 1
+Reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Dnscache\Parameters /v AddrConfigControl /t REG_DWORD /d 0 /f
+
+ipconfig /all
+ipconfig /flushdns
+netsh int ipv6 show teredo
+netsh int ipv6 show route
+netsh int ipv6 show int
+netsh int ipv6 show prefix
+netsh int ipv6 show address
+route print
+cmd
+
+	请先执行IPV6_1.bat再执行IPV6_2.bat，查看命令行执行结果，如报错请查看
+	#7241 #7051 #6918 #6991 #7150 #7164
+
+6. 打开 http://test-ipv6.com/ 查看 IPv6 连接测试
+
+IP测试
+测试2
+7.点击XX-net本地配置打开 IPv6 并保存设置
+
+XX设置
+8.一万 IP 等着您，Good Luck!!
+
+ip10000
+9.其它
+
+	IPv6 使用一段时间连接失败时或 IPv6 可用地址为零时，请转到 XX-net 的 web 界面，点击高级——检查所有 IP ——运行，如检查完毕有效 IP 仍为零请运行一遍 IPv6_2.bat，点击屏幕右下角 XX-net 图标选择重启 GAEporxy 再通过检查 IP 来获取有效 IP
+
+	IPv6 使用一段时间连接失败时请打开 http://test-ipv6.com/ 查看是否无法获取 IPv6 地址，如无法获取时请再运行一遍 IPv6_2.bat
+
+	IPv6_2.bat运行报错请打开命令行运行以下命令
+
+	netsh int ipv6 show teredo
+
+	查看 Teredo 服务器连接
+	状态——probe （请求中）
+	状态——offline （离线）
+	状态——qualified （正常使用）
+	请将IPv6_2.bat中的
+
+	netsh interface teredo set state server=teredo.remlab.net
+
+teredo.remlab.net 修改为以下备选 Teredo 服务器中的一个（有两处修改，请注意）
+Teredo 服务器
+teredo-debian.remlab.net
+teredo.trex.fi
+teredo2.remlab.net
+teredo.iks-jena.de
+
+替换一次就保存一次，再运行 IPv6_2.bat，再来用netsh int ipv6 show teredo检查查看 Teredo 服务器状态，直到状态显示为qualified就可以重启 GAEporxy 再通过检查 IP 来获取有效 IP，请保持耐心多试几次（有时 ping 不通的 Teredo 服务器也是可用的）一定会成功。
+
+	IPv6 相关命令及说明
+
+	停用“ip helper”服务
+
+	net stop "ip helper"
+
+	启用“ip helper”服务
+
+	net start "ip helper"
+
+	显示 Teredo 信息
+
+	netsh interface ipv6 show teredo
+
+	Teredo、6to4、isatap 重置
+
+netsh interface teredo set state default
+netsh interface 6to4 set state default
+netsh interface isatap set state default
+
+	关闭和卸载 Teredo、6to4、isatap
+
+netsh interface teredo set state disable
+netsh interface 6to4 set state disabled
+netsh interface isatap set state disabled
+
+	重新启用 Teredo
+
+	netsh interface Teredo set state type=default
+
+	设置Teredo服务器
+
+netsh interface teredo set state server=teredo.remlab.net
+netsh interface teredo set state server=teredo-debian.remlab.net
+netsh interface teredo set state server=teredo.trex.fi
+
+	设置Teredo服务器为teredo.ipv6.microsoft.com（此teredo服务器已报废）
+
+	netsh interface ipv6 set teredo client teredo.ipv6.microsoft.com
+
+	设置isatap服务器（服务器 ping 不通）
+
+	　netsh int IPV6 isatap set router isatap.scu.edu.cn
+
+	手动解决Windows7对IPv6支持的瑕疵
+
+	netsh interface IPV6 set global randomizeidentifiers=disabled
+
+	启用 Teredo
+
+netsh interface ipv6 set teredo enterpriseclient
+netsh int ter set state enterpriseclient
+
+	手动换算IPv4并设置本地连接IPv6地址
+		换算IPv4地址：http://ip-lookup.net/conversion.php
+		修改本地连接IPv6地址
+		子网前缀长度 48
+	提供方 	DNS
+	Google IPv6 DNS 	2001:4860:4860::8888
+	2001:4860:4860::8844
+	OpenDNS IPv6 DNS 	2620:0:ccc::2
+	2620:0:ccd::2
+	HE IPv6 DNS 	2001:470:20::2
+
+ipconfig /all
+ipconfig /flushdns
+netsh int ipv6 show int
+netsh int ipv6 show route
+
+	看看 teredo 状态是不是qualified
+
+	netsh int ipv6 show teredo
+
+	删除多余回路
+
+	　route DELETE ::/0
+
+	添加路由 (这一步重启后需要重新再做一遍)
+
+	netsh int ipv6 add route ::/0 "Teredo Tunneling Pseudo-Interface"
+
+	在“start.bat”中添加下面两句，实现XX-net执行自启
+
+netsh int ipv6 add route ::/0 "Teredo Tunneling Pseudo-Interface"
+SET PYTHONPATH="%~dp0%start.vbs" console
+
+	优先级
+
+netsh int ipv6 show prefix
+netsh int ipv6 set prefix 2002::/16 30 1
+netsh int ipv6 set prefix 2001::/32 5 1
+
+	查看 Teredo Tunneling Pseudo-Interface 接口
+
+	route print
+
+	显示IPv6地址
+
+	netsh interface ipv6 show address
+
+	显示 IPv6 路由
+
+	netsh interface ipv6 show route
+
+	重启 IPv6，再重启计算机
+
+	netsh interface ipv6 reset
+
+	重启网卡（"本地连接 2"换成自己要重启的网卡名）
+
+netsh interface set interface "本地连接 2" disabled
+netsh interface set interface "本地连接 2" enabled
+

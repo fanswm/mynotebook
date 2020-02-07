@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T17:00:42+08:00
+
+====== RecordMyDesktop ======
+Created Tuesday 21 November 2017
+
+recordMyDesktop[71] 是一个开源的会话记录器，它也能记录桌面会话的音频。
+
+使用以下命令在 Ubuntu 和 Debian 安装 recordMyDesktop。
+
+$ sudo apt-get update
+$ sudo apt-get install gtk-recordmydesktop
+
+http://recordmydesktop.sourceforge.net/about.php

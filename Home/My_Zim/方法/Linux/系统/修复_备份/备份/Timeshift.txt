@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-23T11:56:47+08:00
+
+====== Timeshift ======
+Created Tuesday 23 October 2018
+
+https://github.com/teejee2008/timeshift
+Timeshift
+Timeshift[4] 能够通过增量快照来保护用户的系统数据，而且可以按照日期恢复指定的快照，类似于 Mac OS 中的 Time Machine 功能和 Windows 中的系统还原功能。
+
+制作快照的软件 TimeShift ，可以对整个分区进行备份，以分区为单位进行恢复。这里安装它即可：
+
+sudo apt install timeshift
+
+https://github.com/teejee2008/timeshift
+
+sudo add-apt-repository -y ppa:teejee2008/ppa
+sudo apt-get update
+sudo apt-get install timeshift

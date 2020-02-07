@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-02-24T13:16:40+08:00
+
+====== 3 开发环境配置 ======
+创建日期 星期六 24 二月 2018
+
++ 下载sdk
++ 配置环境变量；
++ 测试：`java -version`
++ 

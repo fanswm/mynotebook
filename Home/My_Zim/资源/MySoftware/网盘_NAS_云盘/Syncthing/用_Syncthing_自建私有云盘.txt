@@ -1,0 +1,256 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-29T12:02:13+08:00
+
+====== 用 Syncthing 自建私有云盘 ======
+Created Friday 29 December 2017
+
+自建的私有云网盘软件很多，比如 Seafile、ownCloud 等，功能很实用，而 Syncthing 最大的特色是采用了与 Resilio Sync (BitTorrent Sync) 类似的 P2P 分布式技术，无需中心服务器，即可让多台设备互相实时同步文件，用过 Resilio Sync 的朋友都明白这种同步方式的优势了。它们两者的实现方式很相似，区别是 Resilio 属于商业软件，需付费使用，在国内已慢慢变得访问（被）困难（墙），而 Syncthing 不仅完全免费且开源，相比 Resilio 还增加了「文件版本控制」、「单向同步」等堪称杀手级的功能特性。
+
+Syncthing 功能上非常接近于 Resilio Sync / BT Sync，不过说它是一款用于搭建网盘的服务器软件或者云存储服务应用似乎并不十分恰当，相较于 Seafile、NextCloud 等服务器工具，Syncthing 实际上更像是一款文件/文件夹同步工具。你可以非常轻松简单地让同一路由器下的多台 PC 电脑、NAS 设备实现局域网互相同步，也可以在 VPS 服务器或 24 小时不关机且有公网 IP 的电脑上安装和配置 Syncthing，让其成为真正意义上的云同步网盘。
+
+更难得的是 Syncthing 开源且免费，跨平台支持 Windows，Mac，Linux，Android。（稍有些遗憾的是目前暂不支持iOS平台）当然也支持树莓派平台，下面应读者要求，树莓派实验室为大家介绍如何在树莓派上安装 Syncthing！（VPS 等 Linux 平台上安装方法类同，也可以参考本文）
+
+
+获取软件包
+
+1
+2
+3
+4
+5
+6
+#进入用户所在目录
+cd ~
+#下载软件包，如果发现不能顺畅下载，那可能是墙的锅，手动下载了再通过 SFTP 上传到 /home/pi 目录下也可以
+wget https://github.com/syncthing/syncthing/releases/download/v0.14.42/syncthing-linux-arm-v0.14.42.tar.gz
+#解压
+tar -zxvf syncthing-linux-arm-v0.14.42.tar.gz
+注：Syncthing 的版本迭代比较频繁，你可以在这个页面获取最新的安装包。页面中文件名为 syncthing-linux-arm-版本号.tar.gz 的就是树莓派可用的版本。
+
+部署、测试
+
+解压之后当前目录下多了一个名为 syncthing-linux-arm-v0.14.42 的目录。
+
+1
+2
+3
+4
+5
+6
+#强迫症表示要重命名缩短一下：
+mv syncthing-linux-arm-v0.14.42 syncthing
+#进入 syncthing 目录
+cd syncthing
+#给主程序加上执行权限
+chmod +x syncthing
+
+先运行主程序看看是个什么东东
+
+1
+~/syncthing/syncthing
+
+
+结果输出一些程序初始化信息，包括网络监听端口、WebUI（操作界面） URL 等，表示部署成功。先不要急着访问 WebUI，因为还需要少量配置。先 Ctrl+C 中止程序。
+
+配置
+
+运行下面的命令编辑 Syncthing 的配置文件：
+
+1
+sudo nano /home/pi/.config/syncthing/config.xml
+
+找到下面的内容
+
+1
+2
+3
+4
+<gui enabled="true" tls="false">
+<address>127.0.0.1:8384</address>
+<apikey>XXXXXX</apikey>
+</gui>
+将 127.0.0.1:8384 修改为 0.0.0.0:8384 以便让其他终端可以访问到 Syncthing 的 WebUI。
+
+
+
+下面再次运行主程序
+
+1
+~/syncthing/syncthing
+不要中断程序，尝试用电脑或者手机的浏览器访问 Syncthing 的 WebUI，地址为
+http://%E6%A0%91%E8%8E%93%E6%B4%BE%E7%9A%84IP%E5%9C%B0%E5%9D%80:8384
+
+
+
+打开之后，会让你设置用户名和密码。下面再大致了解下几个关键的界面：
+
+
+
+
+
+
+到这一步就已经可以投入使用了！
+但是使用这个命令运行 Syncthing，程序需要一直在前台运行。为了让它在后台默默执行可以这样：
+
+~/syncthing/syncthing &
+如果你希望让 Syncthing 可以自动开机运行，可以继续往下阅读。
+
+设置开机自动运行
+
+在 /etc/init.d 目录下建立启动文件
+
+sudo nano /etc/init.d/syncthing
+输入以下内容：
+
+
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          Syncthing
+# Required-Start:    $local_fs $remote_fs $network
+# Required-Stop:     $local_fs $remote_fs $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Syncthing
+# Description:       Syncthing is for backups
+### END INIT INFO
+  
+# Documentation available at
+# http://refspecs.linuxfoundation.org/LSB_3.1.0/LSB-Core-generic/LSB-Core-generic/iniscrptfunc.html
+# Debian provides some extra functions though
+. /lib/lsb/init-functions
+  
+DAEMON_NAME="syncthing"
+DAEMON_USER=pi
+DAEMON_PATH="/home/pi/syncthing/syncthing"
+DAEMON_OPTS=""
+DAEMON_PWD="${PWD}"
+DAEMON_DESC=$(get_lsb_header_val $0 "Short-Description")
+DAEMON_PID="/var/run/${DAEMON_NAME}.pid"
+DAEMON_NICE=0
+DAEMON_LOG='/var/log/syncthing'
+  
+[ -r "/etc/default/${DAEMON_NAME}" ] && . "/etc/default/${DAEMON_NAME}"
+  
+do_start() {
+  local result
+  
+    pidofproc -p "${DAEMON_PID}" "${DAEMON_PATH}" > /dev/null
+    if [ $? -eq 0 ]; then
+        log_warning_msg "${DAEMON_NAME} is already started"
+        result=0
+    else
+        log_daemon_msg "Starting ${DAEMON_DESC}" "${DAEMON_NAME}"
+        touch "${DAEMON_LOG}"
+        chown $DAEMON_USER "${DAEMON_LOG}"
+        chmod u+rw "${DAEMON_LOG}"
+        if [ -z "${DAEMON_USER}" ]; then
+            start-stop-daemon --start --quiet --oknodo --background \
+                --nicelevel $DAEMON_NICE \
+                --chdir "${DAEMON_PWD}" \
+                --pidfile "${DAEMON_PID}" --make-pidfile \
+                --exec "${DAEMON_PATH}" -- $DAEMON_OPTS
+            result=$?
+        else
+            start-stop-daemon --start --quiet --oknodo --background \
+                --nicelevel $DAEMON_NICE \
+                --chdir "${DAEMON_PWD}" \
+                --pidfile "${DAEMON_PID}" --make-pidfile \
+                --chuid "${DAEMON_USER}" \
+                --exec "${DAEMON_PATH}" -- $DAEMON_OPTS
+            result=$?
+        fi
+        log_end_msg $result
+    fi
+    return $result
+}
+  
+do_stop() {
+    local result
+  
+    pidofproc -p "${DAEMON_PID}" "${DAEMON_PATH}" > /dev/null
+    if [ $? -ne 0 ]; then
+        log_warning_msg "${DAEMON_NAME} is not started"
+        result=0
+    else
+        log_daemon_msg "Stopping ${DAEMON_DESC}" "${DAEMON_NAME}"
+        killproc -p "${DAEMON_PID}" "${DAEMON_PATH}"
+        result=$?
+        log_end_msg $result
+        rm "${DAEMON_PID}"
+    fi
+    return $result
+}
+  
+do_restart() {
+    local result
+    do_stop
+    result=$?
+    if [ $result = 0 ]; then
+        do_start
+        result=$?
+    fi
+    return $result
+}
+  
+do_status() {
+    local result
+    status_of_proc -p "${DAEMON_PID}" "${DAEMON_PATH}" "${DAEMON_NAME}"
+    result=$?
+    return $result
+}
+  
+do_usage() {
+    echo $"Usage: $0 {start | stop | restart | status}"
+    exit 1
+}
+  
+case "$1" in
+start)   do_start;   exit $? ;;
+stop)    do_stop;    exit $? ;;
+restart) do_restart; exit $? ;;
+status)  do_status;  exit $? ;;
+*)       do_usage;   exit  1 ;;
+esac
+保存之后运行
+
+
+#加可执行权限
+sudo chmod +x /etc/init.d/syncthing
+#添加默认启动
+sudo update-rc.d syncthing defaults
+之后你还可以通过这四个命令管理 Syncthing，顾名思义。
+
+
+sudo service syncthing start
+sudo service syncthing stop
+sudo service syncthing restart
+sudo service syncthing status
+
+
+如后面你要开机自动运行可以使用
+
+
+sudo update-rc.d syncthing remove
+与 BTSync 的比较
+
+Syncthing 与 BTSync 有着相似的功能，均很强大。
+1.Syncthing 与 BTSync 相比，Syncthing 是开源的，MIT协议。可免费用于商业用途，而 BTSync 相反。
+2.Syncthing 的方式更侧重个人资料的同步，BTSync 还可以在同步的基础上进行分享。
+3.Syncthing 暂无 iOS 版本。
+
+各种平台的客户端可以在官网免费获取：
+https://syncthing.net/
+（Windows 版的 Syncthing 官方还提供了一个图形界面版的「SyncTrayzor」工具）
+
+GitHub:
+https://github.com/syncthing/syncthing
+
+有价值的参考：
+在安卓设备上使用 Syncthing
+正文的脚本出处
+
+Enjoy！有任何使用经验欢迎在树莓派实验室文章下面留言分享~
+
+本文来自：树莓派实验室
+链接地址：http://shumeipai.nxez.com/2017/12/28/install-syncthing-on-raspberry-pi.html

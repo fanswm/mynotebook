@@ -1,0 +1,21 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-28T20:19:44+08:00
+
+====== i remember ======
+创建日期 星期五 28 十二月 2018
+
+I Remember http://i-remember.fr/en
+
+一个关于回忆的网站（强烈建议，亲身体验）
+
+Intro
+
+Home page
+
+所有的光斑都是用户登录网站留下的回忆，就像浩瀚银河
+
+通过鼠标，可以在回忆的银河中穿行
+
+
+滚动鼠标滑轮，可以逐渐缩小搜索范围

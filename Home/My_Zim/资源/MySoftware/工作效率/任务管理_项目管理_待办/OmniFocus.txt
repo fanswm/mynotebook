@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-10T12:00:05+08:00
+
+====== OmniFocus ======
+Created Wednesday 10 January 2018
+
+在使用 OmniFocus 进行任务管理的你，需要一份教程 http://sspai.com/post/42726

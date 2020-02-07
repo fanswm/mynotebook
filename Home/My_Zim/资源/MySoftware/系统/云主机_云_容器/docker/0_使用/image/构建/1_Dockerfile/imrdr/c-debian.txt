@@ -1,0 +1,52 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-12T15:51:52+08:00
+
+c-debian
+创建日期 星期二 12 三月 2019
+
+FROM debian
+MAINTAINER abstracthex <abstract.hex@gmail.com>
+
+# Update debian repo
+RUN cp /etc/apt/sources.list /etc/apt/source.list.old 
+RUN echo "deb http://mirrors.163.com/debian/ stretch main" > /etc/apt/sources.list
+RUN echo "deb http://mirrors.163.com/debian/ stretch-updates main" >> /etc/apt/sources.list
+RUN echo "deb http://mirrors.163.com/debian-security/ stretch/updates main" >> /etc/apt/sources.list
+
+#在使用apt-get安装依赖时，可能会有对话框，制作镜像时如果不选择会导致失败，解决办法也很简单:
+ENV DEBIAN_FRONTEND noninteractive
+
+# Install basic dependencies
+RUN apt-get update && apt-get install -y apt-transport-https apt-utils
+RUN apt-get upgrade -y && apt-get  install -y cmake git wget neovim
+
+#bashrc
+RUN touch ~/.bashrc && echo "alias la='ls -la'" > ~/.bashrc && \
+	echo "alias ll='ls -l'" >> ~/.bashrc && \
+	echo "alias ls='ls --color=auto'" >> ~/.bashrc && \
+	echo "alias c='clear'" >> ~/.bashrc && \
+	echo "alias cp='cp -i'" >> ~/.bashrc && \
+	echo "alias df='df -h'" >> ~/.bashrc && \
+	echo "alias du='du -h --max-depth=1 | sort -hr'" >> ~/.bashrc && \
+	echo "alias ln='ln -i'" >> ~/.bashrc && \
+	echo "alias mv='mv -i'" >> ~/.bashrc && \
+	echo "alias ping='ping -c 3'" >> ~/.bashrc && \
+	echo "alias vim='nvim'" >> ~/.bashrc && \
+	echo "alias wget='wget -c'" >> ~/.bashrc
+
+# Install anaconda for python 3.6
+#RUN wget --quiet https://repo.continuum.io/archive/Anaconda3-5.3.1-Linux-x86_64.s    h -O ~/anaconda.sh && /bin/bash ~/anaconda.sh -b -p /opt/conda && rm ~/anaconda.s    h && echo "export PATH=/opt/conda/bin:$PATH" >> ~/.bashrc
+
+# Set timezone
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
+# Set locale
+ENV LANG C.UTF-8 LC_ALL=C.UTF-8
+
+# Clean OS
+RUN apt-get autoremove -y
+
+# Initialize workspace
+RUN mkdir -p ~/github
+WORKDIR ~/github

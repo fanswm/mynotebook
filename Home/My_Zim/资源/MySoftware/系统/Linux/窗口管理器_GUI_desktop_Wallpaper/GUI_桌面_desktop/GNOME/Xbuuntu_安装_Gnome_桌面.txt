@@ -1,0 +1,39 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-02T06:58:16+08:00
+
+====== Xbuuntu 安装 Gnome 桌面 ======
+创建日期 星期四 02 五月 2019
+
+# 参考文章： https://www.yfeer.com/142.html
+sudo apt-get update && sudo apt-get upgrade -y
+apt-get install x-window-system-core gnome-core
+# 弹出对话框中选择窗口管理器，我选ligdm；
+
+
+##################################
+{{./在debian中安装gnome.png}}
+
+# 以下imrdr没有操作：
+安装中文显示(建议安装）：
+apt-get install language-pack-gnome-zh  #让gnome面板、菜单显示中文 
+apt-get install language-pack-gnome-zh-base 
+apt-get install language-pack-zh             #中文语言包 
+apt-get install language-pack-zh-base 
+apt-get install language-support-zh        #中文语言支持 
+apt-get install scim        #scim中文输入法平台
+
+安装登录管理器（一般不选）：
+apt-get install gdm
+
+说明： gdm（gnome display manager）即gnome图形界面显示管理器，还有kdm/xdm等，它将使您可以在启动时直接进入GUI桌面环境，而勿需通过 startx 来启动GUI。
+
+安装新利得软件管理器（可选）:
+apt-get install synaptic
+
+卸载gnome桌面环境：
+apt-get --purge remove liborbit2
+
+进入图形界面： startx
+
+退出图形桌面： ctrl + alt + backspace

@@ -1,0 +1,66 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-15T15:53:58+08:00
+
+====== Argument list too long 错误与解决方法 ======
+Created Monday 15 January 2018
+
+# crontab -e
+
+编辑完后保存退出后，报错 no space left on device
+
+根据上面的报错了解到是磁盘空间满了，那么首先是检查磁盘空间，
+
+
+# df -h
+
+查看到是 / var 磁盘分区空间已经达到 100%，至此定位了问题所在。是 / var 磁盘空间饱满导致，因为 crontab 会在保存时将文件信息写到 / var 目录下面，然而这个磁盘没有空间了，所以报错。
+
+接着通过命令 du –sh * 命令检查 / var 目录下面的所有文件或者目录的大小，发现 / var/spool/clientmqueue 目录占用了 / var 整个分区大小的 90%，那么 / var/spool/clientmqueue 目录下的文件都是怎么产生的，能否删除，基本上都是邮件信息，可以删除
+
+
+# rm *
+
+/bin/rm :argument list too long
+
+当在 linux 系统中试图传递太多参数给一个命令时，就会出现 “argument list too long” 错误，这是 linux 系统一直以来都有的限制，查看这个限制可以通过命令 “getconf ARG_MAX” 来实现，
+
+
+# getconf ARG_MAX
+
+# more /etc/issue 查看版本
+
+
+解决方法：1、
+
+# rm [a-n]* -rf
+
+# rm [o-z]* -rf
+
+2、使用 find 命令来删除
+
+# find /var/spool/clientmqueue –type f –print –exec rm –f {} ;
+
+3、通过 shell 脚本
+
+#/bin/bash
+
+RM_DIR=’/var/spool/clientmqueue’
+
+cd $RM_DIR
+
+for I in `ls`
+
+do
+
+rm –f $i
+
+done
+
+4、重新编译内核
+
+需要手动增加内核中分配给命令行参数的页数，打开 kernel source 下面的 include/linux/binfmts.h 文件，找到如下行：
+
+#denfine MAX_ARG_PAGES 32
+
+将 32 改为更大的值，例如 64 或者 128，然后重新编译内核

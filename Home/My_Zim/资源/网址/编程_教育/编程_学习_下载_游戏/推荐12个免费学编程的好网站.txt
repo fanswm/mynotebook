@@ -1,0 +1,79 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-15T15:25:42+08:00
+
+====== 推荐12个免费学编程的好网站 ======
+创建日期 星期一 15 四月 2019
+
+12. 实验楼
+这是我的私心。实验楼是自家网站，自家网站不放在前排，就好比有好吃的不先给好朋友吃而是给敌人吃，那我是做不到了。
+image
+
+实验楼有大量的基础课以及练手项目都是免费课程，直接在云端Linux环境中学习。从最热门的Python语言，到新兴的大数据、机器学习，并且以动手实战为主，更加扎实掌握知识。
+https://www.shiyanlou.com
+
+11. Codecademy
+Codecademy的大名相信大家都听过，这个就不多介绍了，免费课程很多很全面。大家真的要好好利用资源呀。
+https://www.codecademy.com/
+
+10. Free Code Camp
+Free Code Camp是一个非营利组织，大家可以在该平台学习HTML，CSS以及JavaScript等前端知识。
+
+很有意思的是，该网站创始人Quincy Larson，当初是因为来中国旅行，看到中国小孩子学编程的热情被感动到了，因此才创立了该网站。
+http://freecodecamp.com/
+
+9. The Odin Project
+奥丁就是雷神索尔的父亲，九大国度的统治者。奥丁项目这个网站是一个开源的编程，目前有Web开发，Ruby语言，数据库，以及许多前端的课程供大家学习。
+<header contenteditable="true" style="position: absolute; bottom: 0px; right: 0px;"></header>
+image
+
+该项目有三大理念值得人敬佩：1. 教育资源应当是免费的；2. 动手才能真正地学好；3. 开源是最棒哒。
+http://www.theodinproject.com/
+
+8. Harvard University CS50 Class
+哈佛大学的计算机科学课程，大家可以学到扎实的计算机基础知识和灵活的思维方式。这个课程已经有好多年的历史，在网上也是一直疯传，网易云也有字幕版本，大家可以花时间去看看。
+http://online-learning.harvard.edu/course/cs50-introduction-computer-science
+
+7. HTML Dog
+一听到这个名字相信大家就懂这个网站主要是干嘛的了，前端狗哇；放心狗在国外是褒义词。网站有HTML，CSS， JavaScript的教程，案例，技巧合集等等，非常值得大家去学习。
+http://htmldog.com/
+
+6. Khan Academy
+可汗学院的大名相信大家都知道，但是有多少人真正做到每天去上面学习的呢？可汗学院几乎是全球影响力最大的在线教育平台之一，多次获得微软、谷歌等许多公司以及政府的资助。
+https://www.khanacademy.org/
+
+5. Coursera
+Coursera目前有与来自28个国家的145所大学合作提供在线课堂。上面的资源都是非常高质量的。但是有数据统计尽管有数百万人注册课堂，课程完成率仅有7%-9%。全世界都一样，只有少数人能够坚持下去啊。
+www.coursera.org
+
+4. edX
+edX是由麻省理工大学和哈佛大学联合创建的在线开放课堂，也是非盈利的组织。目前也已经有超过50所大学参与提供在线课堂等学习项目。
+www.edx.org
+
+3. 麻省理工开放课
+麻省理工学院的公开课。尽管很多人表示没有视频，其实有很多是音频/视频的，尤其计算机相关的一些课程。
+https://ocw.mit.edu/index.htm
+2. David Walsh
+David Walsh是一个拥有多年Web开发经验的工程师，该网站是他分享自己技术经验的一个博客，里面有大量的网页开发与前端相关的干货，建议大家去看看。
+https://davidwalsh.name/
+
+1. Udemy
+Udemy也是国外大名鼎鼎的在线教育平台，上面的课程都是由各类老师们或者有特长的人自己发布。
+
+
+
+
+
+
+
+
+尽管很多课程都是收费的，但是目前开发相关的课程，有1200多门都是免费学习的，并且都评分不低。
+https://www.udemy.com
+
+我知道你们要说什么：这这这这得多好的英语水平才能用得上啊？！！！你要知道，大家都是这么想的，所以大家都没有去使用这些资源。
+假如你用心提升下自己的英语，将能够超越多少人哇！其实提高英语不仅对你学习有帮助，对编程本身也有好处。当然，实在学不好英语，还有实验楼陪着你。
+
+作者：实验楼
+链接：https://www.jianshu.com/p/2a9abfe7dfb4
+来源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。

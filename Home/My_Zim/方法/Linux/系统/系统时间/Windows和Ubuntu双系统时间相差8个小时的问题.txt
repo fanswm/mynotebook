@@ -1,0 +1,39 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-17T14:46:47+08:00
+
+====== Windows和Ubuntu双系统时间相差8个小时的问题 ======
+创建日期 星期日 17 十一月 2019
+
+https://www.cnblogs.com/zongfa/p/7723369.html
+
+由于要学编程，在windows 10上安装了Ubuntu16.04双系统。但是却造成windows时间老是比实际时间慢八个小时，Ubuntu会与网络同步时间，但是在程序中调用主板时间时仍然是UTC时间。最近才在网上看到，原来原因在于widows认为BIOS时间是本地时间，ubuntu认为BIOS时间是UTC时间，这样从ubuntu重启到ubuntu会发现时间相差8小时，ubuntu会经常与NTP服务器时间进行同步，但windows不会。
+
+先接触两个概念：
+世界协调时间(Universal Time Coordinated,UTC)
+格林威治时间(Greenwich Mean Time,GMT)
+（关于这两个计时概念大家可以网上搜索，我们这里要知道的是ubuntu和windows的系统时间在这两种计时基础上如何计算的和解决方法）
+
+先来说windows
+windows相信大家接触的比较多了，系统直接以本地硬件时间作为基准，也就是CMOS中的时间（部分情况下，BIOS被放电后时间被复原成出厂默认时间，然后系统时间跟着就跑了，就是因为这个原因），而这个时间就是我们平时所设置的GTM+8东八区的北京时间。
+
+再来说ubuntu
+ubuntu的计时方式是先以本地硬件时间作为UTC，然后在加上时区的时间差后，作为当前系统时间的。这样以来，同样的本地硬件时间，在两个不同的系统中就会出现因为计算方式不同而出现差异。
+
+例如：在ubuntu下设定时间为北京时间中午12：00，硬件时间就是UTC下的4：00，此时在windows下看到的就会是4：00，出现了时间差异。
+
+所以我们需要将ubuntu的时间改成本地时间
+
+以前的方法是
+
+编辑/etc/default/rcS 将UTC=yes改成UTC=no
+
+16.04使用systemd启动之后，时间也改成了由timedatectl来管理
+
+先在ubuntu下更新一下时间，确保时间无误：
+
+sudo apt-get install ntpdate
+ sudo ntpdate time.windows.com
+然后将时间更新到硬件上：
+
+sudo hwclock --localtime --systohc

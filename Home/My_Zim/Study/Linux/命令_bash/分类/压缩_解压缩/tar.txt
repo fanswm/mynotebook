@@ -1,0 +1,49 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-29T22:55:54+08:00
+
+====== tar ======
+Created Wednesday 29 November 2017
+
+ “tar”命令是磁带归档(Tape Archive)，对创建一些文件的的归档和它们的解压很有用。
+
+root@tecmint:~# tar -zxvf abc.tar.gz (记住'z'代表了.tar.gz)
+
+root@tecmint:~# tar -jxvf abc.tar.bz2 (记住'j'代表了.tar.bz2)
+
+root@tecmint:~# tar -cvf archieve.tar.gz(.bz2) /path/to/folder/abc
+
+注意： "tar.gz"代表了使用gzip归档，“bar.bz2”使用bzip压缩的，它压缩的更好但是也更慢。 
+
+
+tar [主选项+辅选项] 文件或者目录 | 多个目录或档案打包、压缩成一个大档案
+
+-t  察看打包档案的内容含有哪些档名，重点在察看『档名』就是了；
+
+	-x  解打包或解压缩的功能，可以搭配 -C (大写) 在特定目录解开
+
+辅选项：
+
+	-j  透过 bzip2 的支持进行压缩/解压缩：此时档名最好为 *.tar.bz2
+
+	-z  透过 gzip 的支持进行压缩/解压缩：此时档名最好为 *.tar.gz
+
+	-v  在压缩/解压缩的过程中，将正在处理的文件名显示出来！
+
+	-f filename -f 后面要立刻接要被处理的档名！
+
+	-C 目录   这个选项用在解压缩，若要在特定目录解压缩，可以使用这个选项。
+
+	--exclude FILE：在压缩打包过程中忽略某文件 eg: tar --exclude /home/zenghao -zcvf myfile.tar.gz /home/* /etc
+
+	-p  保留备份数据的原本权限与属性，常用于备份(-c)重要的配置文件
+
+	-P(大写）  保留绝对路径，亦即允许备份数据中含有根目录存在之意；
+
+eg:
+
+	压 缩：tar -jcvf filename.tar.bz2 要被压缩的档案或目录名称
+
+	查 询：tar -jtvf filename.tar.bz2
+
+	解压缩：tar -jxvf filename.tar.bz2 -C 欲解压缩的目录

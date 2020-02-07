@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-06T22:42:16+08:00
+
+====== Matter.js ======
+Created Sunday 06 January 2019
+
+Matter.js Matter.js - a 2D rigid body JavaScript physics engine 一个基于HTML5的2D物理库，主要的语言是Javascript。从性能和功能上来将，都优于前面讲的Box2D的JS port，例如一些布料模拟，柔性物体模拟，圆角物体模拟等都有不错的表现。可以先玩一下Matter.js Physics Engine Demo
+
+作者：罗必成
+链接：https://www.zhihu.com/question/35876186/answer/65565316
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+http://brm.io/matter-js/

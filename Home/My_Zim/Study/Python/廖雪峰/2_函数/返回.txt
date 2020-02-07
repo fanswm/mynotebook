@@ -1,0 +1,21 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-27T08:03:20+08:00
+
+====== 返回 ======
+Created Saturday 27 January 2018
+
+__返回多个值__
+```
+import math
+
+def move(x, y, step, angle=0):
+	nx = x + step * math.cos(angle)
+	ny = y - step * math.sin(angle)
+	__return nx, ny__
+```
+
+但其实这只是一种假象，Python函数返回的仍然是单一值
+原来返回值是一个tuple！但是，在语法上，返回一个tuple可以省略括号，而多个变量可以同时接收一个tuple，按位置赋给对应的值
+
+raise

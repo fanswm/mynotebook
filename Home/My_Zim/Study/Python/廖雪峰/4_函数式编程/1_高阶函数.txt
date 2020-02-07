@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-29T18:05:57+08:00
+
+====== 1 高阶函数 ======
+Created Monday 29 January 2018
+
+变量可以指向函数
+函数名也是变量
+注：由于abs函数实际上是定义在__import builtins__模块中的，所以要让修改abs变量的指向在其它模块也生效，要用import builtins; builtins.abs = 10。
+传入函数
+
+既然变量可以指向函数，函数的参数能接收变量，那么一个函数就可以接收另一个函数作为参数，这种函数就称之为__高阶函__数。

@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-06T12:03:57+08:00
+
+====== iSlide（原Nordri tools） ======
+Created Friday 06 July 2018
+
+https://www.islide.cc/

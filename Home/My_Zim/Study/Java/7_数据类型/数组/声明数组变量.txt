@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-10T05:26:34+08:00
+
+====== 声明数组变量 ======
+Created 星期六 10 三月 2018
+
+首先必须声明数组变量，才能在程序中使用数组。下面是声明数组变量的语法：
+
+dataType[] arrayRefVar;   // __首选的方法__
+ 
+或
+ 
+dataType arrayRefVar[];  // 效果相同，但不是首选方法
+注意: __建议使用 dataType[] arrayRefVar 的声明风格声明数组变量__。 dataType arrayRefVar[] 风格是来自 C/C++ 语言 ，在Java中采用是为了让 C/C++ 程序员能够快速理解java语言。
+
+实例
+下面是这两种语法的代码示例：
+
+double[] myList;         // 首选的方法
+ 
+或
+ 
+double myList[];         //  效果相同，但不是首选方法

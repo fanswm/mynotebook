@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-21T15:13:44+08:00
+
+====== 转换 ======
+创建日期 星期一 21 一月 2019
+
+在线图片格式转换
+https://jinaconvert.com/cn/
+
+腾讯智图
+https://zhitu.isux.us/
+腾讯智图是腾讯ISUX前端团队出品的一个专门用于图片压缩和图片格式转换的平台，其功能包括针对png,jpeg,gif等各类格式图片的压缩。
+

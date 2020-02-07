@@ -1,0 +1,47 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-07T20:41:46+08:00
+
+====== error ======
+创建日期 星期五 07 二月 2020
+
+# Cannot find the fakeroot binary
+
+ins fakeroot
+
+```shell
+# error:
+#  .cache/yay/kazam/PKGBUILD:行26: patch：未找到命令
+==> 错误： 在 build() 中发生一个错误。
+	正在放弃...
+Error making: kazam
+```
+
+ins patch
+
+```error
+正在开始 package()...
+Traceback (most recent call last):
+  File "setup.py", line 8, in <module>
+	from DistUtilsExtra.command import *
+ModuleNotFoundError: No module named 'DistUtilsExtra'
+==> 错误： 在 package() 中发生一个错误。
+	正在放弃...
+Error making: kazam
+```
+conda install -c pdrops python-distutils-extra
+
+```sehll
+conda install -c pdrops python-distutils-extra
+Collecting package metadata (current_repodata.json): failed
+
+UnavailableInvalidChannel: The channel is not accessible or is invalid.
+  channel name: pdrops
+  channel url: https://mirrors.tuna.tsinghua.edu.cn/anaconda/pdrops
+  error code: 404
+
+You will need to adjust your conda configuration to proceed.
+Use `conda config --show channels` to view your configuration's current state,
+and use `conda config --show-sources` to view config file locations.
+```
+

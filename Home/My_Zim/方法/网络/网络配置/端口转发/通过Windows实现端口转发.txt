@@ -1,0 +1,42 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-14T15:43:41+08:00
+
+====== 通过Windows实现端口转发 ======
+Created Monday 14 January 2019
+
+这里介绍一个使用两台云服务器访问外网的方法，一台国内服务器，一台国外服务器，国内服务器通过端口转发来用于中转，中转的好处是，服务器对服务器是很快的，国内对国内也很快，国内服务器对国外也快一些，这种方法比直接访问国外服务器的速度要快一些。
+
+　　首先要找到你国内云服务器的内网ip，不是你的公网IP，使用命令ipconfig即可找到。
+
+　　对于Windows Server 2008以下版本的系统，需要安装IPV6才行，如果是Windows Server 2008或者以上的系统则默认已经支持。
+
+　　之后，使用Portproxy模式下的Netsh命令即能实现Windows系统中的端口转发，转发命令如下
+
+　　netsh interface portproxy add v4tov4 listenaddress=localaddress listenport=localport connectaddress=destaddress
+
+　　解释一下这其中的参数意义
+
+　　1.listenaddress -- 等待连接的本地ip地址
+
+　　2.listenport -- 本地监听的TCP端口（待转发）
+
+　　3.connectaddress -- 被转发端口的本地或者远程主机的ip地址
+
+　　4.connectport -- 被转发的端口
+
+　　这里举个例子，服务器内网IP是172.16.0.4，需要将8080端口转发到国外服务器104.104.104.104的9999端口，那么命令如下：
+
+　　netsh interface portproxy add v4tov4  listenaddress=172.16.0.4 listenport=8080 connectaddress=104.104.104.104 connectport=9999
+
+　　下面的命令是用来展示系统中的所有转发规则：
+
+　　netsh interface  portproxy show  v4tov4
+
+　　删除刚才创建的那个转发的命令：
+
+　　netsh interface  portproxy delete v4tov4 listenaddress=172.16.0.4 listenport=8080
+
+　　注意：连接时请确保防火墙（Windows防火墙或者其他的第三方防护软件）允许外部连接到一个全新的端口，如果不允许，那么只能自行添加一个新的Windows防火墙规则。
+通过Windows实现端口转发 https://www.williamlong.info/archives/5575.html
+ 

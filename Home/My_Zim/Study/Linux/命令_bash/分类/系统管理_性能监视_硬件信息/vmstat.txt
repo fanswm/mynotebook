@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-01T08:08:56+08:00
+
+====== vmstat ======
+Created Friday 01 December 2017
+
+vmstat | 对操作系统的虚拟内存、进程、CPU活动进行监控
+
+
+
+dstat：vmstat 代替者  http://dag.wiee.rs/home-made/dstat/
+
+可能不少人都用过，但是本问题下好像没人提？
+
+能输出比 vmstat 更加：美观，整洁，强大的内容。
+

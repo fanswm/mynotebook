@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-17T16:46:40+08:00
+
+====== Win10 创建一个可引导的介质 ======
+Created Monday 17 December 2018
+
+https://www.microsoft.com/en-us/software-download/windows10ISO
+
+下载并运行 Windows 10 介质创建工具[1]。一旦你运行这个工具，它将会引导你完成在一个 USB 或者 DVD-R 上创建 Windows 安装介质的所需步骤。注意：即使你已经安装了 Windows 10，创建一个可引导的介质也是一个不错的主意，万一刚好系统出错了且需要你重新安装。

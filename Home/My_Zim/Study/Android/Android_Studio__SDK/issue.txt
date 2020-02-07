@@ -1,0 +1,62 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-01T22:22:55+08:00
+
+====== issue ======
+创建日期 星期三 01 五月 2019
+
+我参考： https://www.jianshu.com/p/9977ca2c26b4
+
+Android Studio:
+Unable to access Android SDK add-on list; 
+设置HTTP Proxy:
+Manual proxy configration:
+
+Host name:127.0.0.1
+Port number:8085
+
+we have detected that your system can run the Android emulator in an accelerated perfomance mode.
+Linux-based system support virtual machine acceleration through th KVM(Kernel-mod Virtual Machine) software package.
+Search fo install instructions for your particular Linux configuration [Android KVM Linux Installation](https://developer.android.com/r/studio-ui/emulator-kvm-setup.html) that KVM is enabled for faster Android emulator performance.
+
+#####################KVM
+Configure VM acceleration on Linux
+
+Linux-based systems support VM acceleration through the KVM software package. Follow the instructions for installing KVM on your Linux system, and verify that KVM is enabled. For Ubuntu systems, see Ubuntu KVM Installation.
+Requirements
+
+Running KVM requires specific user permissions. Make sure that you have sufficient permissions as specified in the KVM installation instructions.
+
+To use VM acceleration on Linux, your computer must also meet these requirements:
+
+	For Intel processors: Support for Virtualization Technology (VT-x), Intel EM64T (Intel 64) features, and Execute Disable (XD) Bit functionality enabled.
+	For AMD processors: Support for AMD Virtualization (AMD-V).
+
+Check whether KVM is currently installed on Linux
+
+You can use the emulator -accel-check command-line option to check whether you have KVM installed. Alternatively, you can install the cpu-checker package containing the kvm-ok command.
+
+The following example shows how to use the kvm-ok command:
+
+$ sudo apt-get install cpu-checker
+$ egrep -c '(vmx|svm)' /proc/cpuinfo
+12
+$ kvm-ok
+INFO: /dev/kvm exists
+KVM acceleration can be used
+
+Install KVM on Linux
+
+Use the following command to install KVM:
+
+sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils ia32-libs-multiarch
+########################end
+Failed to load module "canberra-gtk-module"
+解决：
+sudo apt-get install libcanberra-gtk-module
+
+Check the components you want to update/install. Click Next to continue.
+Target folder is neither empty nor does it point to an existing SDK installation.
+
+The selected directory is not a valid home for JDK.
+

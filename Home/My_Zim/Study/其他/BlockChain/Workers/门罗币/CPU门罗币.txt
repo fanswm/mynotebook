@@ -1,0 +1,73 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-20T08:25:32+08:00
+
+====== CPU门罗币 ======
+Created 星期六 20 一月 2018
+
+使用闲置服务器的CPU算力挖门罗币
+
+首先，我们需要注册一个钱包。几乎所有的虚拟币交易所都支持门罗币（Monero）的交易，我们在任何一家交易所注册一个账号后就可以获得一个Monero钱包地址。如果你不知道哪里可以注册账号，挖矿:可以到这个链接上注册https:hitbtc.com，注册好后在后台获得Monero钱包地址。
+然后我们要选择一个矿池。门罗币矿池有很多，挖矿:在门罗币的官网http:moneropools.com中列举了很多个矿池，可以选择想加入的矿池，比如选择这里选择的是xmr.nanopool.org。
+
+接下来就是安装矿机了。选择Ubuntu 16.04 amd64位系统，登录服务器，执行下列命令安装矿机软件：
+
+add-apt-repository ppa:ubuntu-toolchain-r/test
+apt update
+apt install gcc-5 g++-5 make
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 1 --slave /usr/bin/g++ g++ /usr/bin/g++-5
+curl -L http://www.cmake.org/files/v3.4/cmake-3.4.1.tar.gz | tar -xvzf - -C /tmp/
+cd /tmp/cmake-3.4.1/ && ./configure && make && sudo make install && cd -
+update-alternatives --install /usr/bin/cmake cmake /usr/local/bin/cmake 1 --force
+apt install libmicrohttpd-dev libssl-dev libhwloc-dev
+
+git clone https://github.com/fireice-uk/xmr-stak-cpu xmr-stak
+cd xmr-stak
+cmake .
+make install
+这样我们就安装好了挖矿软件。进入binary目录后运行一遍那个程序，会给出推荐的CPU配置信息，然后我们编辑binary目录下面config.txt, 填上你自己的钱包地址、矿池地址、Payment ID等信息并且填写CPU配置信息（可微调），之后执行 ./xmr-stak-cpu就可以自动开始挖矿啦。挖到Payout数目之后矿池就会自动把门罗币打到你之前开的钱包之中。
+
+下面是CentOS系统配置方法：
+
+yum install centos-release-scl cmake3 hwloc-devel libmicrohttpd-devel openssl-devel
+yum install devtoolset-4-gcc*
+scl enable devtoolset-4 bash
+git clone https://github.com/fireice-uk/xmr-stak-cpu xmr-stak
+cd xmr-stak
+cmake3
+make install
+以下是Debian系统配置方法：
+
+echo "deb http://ftp.us.debian.org/debian unstable main contrib non-free" >> /etc/apt/sources.list.d/unstable.list
+apt-get update
+apt-get install -t unstable gcc-5 g++-5 make
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 1 --slave /usr/bin/g++ g++ /usr/bin/g++-5
+curl -L http://www.cmake.org/files/v3.4/cmake-3.4.1.tar.gz | tar -xvzf - -C /tmp/
+cd /tmp/cmake-3.4.1/ && ./configure && make && make install && cd -
+update-alternatives --install /usr/bin/cmake cmake /usr/local/bin/cmake 1 --force
+apt install libmicrohttpd-dev libssl-dev libhwloc-dev
+git clone https://github.com/fireice-uk/xmr-stak-cpu xmr-stak
+cd xmr-stak
+cmake
+make install
+以下是Windows系统配置方法：
+1.在C盘根目录下新建文件夹xmr-stak-dep
+2.安装Visual Studio 2017 挖矿:Community版https:www.visualstudio.comdownloads, 安装时请加上Desktop development with C++和Toolset for Visual Studio C++ 2015.3 v140...这两个组件。
+挖矿:3.安装https:cmake.orgfilesv3.9cmake-3.9.0-rc3-win64-x64.msi, 安装时务必选择Add CMake to the system PATH for all users
+挖矿:4.下载https:github.comfireice-ukxmr-stak-depreleasesdownloadv1xmr-stak-dep.zip并解压到C:xmr-stak-dep\
+5.在命令行中执行：
+
+cd C:\xmr-stak-dep\
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsMSBuildCmd.bat"
+set CMAKE_PREFIX_PATH=C:\xmr-stak-dep\hwloc;C:\xmr-stak-dep\libmicrohttpd;C:\xmr-stak-dep\openssl
+mkdir build
+cd build
+cmake -G "Visual Studio 15 2017 Win64" -T v141,host=x64
+msbuild xmr-stak-cpu.sln /p:Configuration=Release
+cd bin\Release
+copy ..\..\..\config.txt
+这样就安装好了Windows版本的矿机。
+
+挖矿:本文来源于https:qing.suarticle129.html，有删改。
+
+标签: 教程, 挖矿

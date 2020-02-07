@@ -1,0 +1,79 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-14T21:09:51+08:00
+
+====== 0 ======
+创建日期 星期二 14 五月 2019
+
+19-5-14
+下午7:13	Gradle sync started
+
+下午7:20	Project setup started
+
+下午7:20	Source generation ended in 2 s 119 ms
+
+下午7:20	Gradle sync finished in 7 m 8 s 525 ms
+
+下午7:20	Syncing only active variant
+				You can disable this experimental feature from
+				File → Settings → Experimental → Gradle → Only sync the active variant
+
+下午8:22	* daemon not running; starting now at tcp:5037
+
+下午8:22	* daemon started successfully
+
+下午8:29	Executing tasks: [:app:assembleDebug]
+
+下午8:30	Emulator: emulator: WARNING: Host CPU is missing the following feature(s) required for x86 emulation: SSSE3
+
+下午8:30	Emulator: Hardware-accelerated emulation may not work properly!
+
+下午8:30	Emulator: qemu-system-i386: warning: host doesn't support requested feature: CPUID.01H:ECX.ssse3 [bit 9]
+
+下午8:35	Gradle build finished in 5 m 49 s 155 ms
+
+下午8:40	Emulator: Process finished with exit code 0
+
+下午8:42	Executing tasks: [:app:assembleDebug]
+
+下午8:42	Emulator: emulator: WARNING: Host CPU is missing the following feature(s) required for x86 emulation: SSSE3
+
+下午8:42	Emulator: Hardware-accelerated emulation may not work properly!
+
+下午8:42	Emulator: qemu-system-i386: warning: host doesn't support requested feature: CPUID.01H:ECX.ssse3 [bit 9]
+
+下午8:42	Gradle build finished in 17 s 285 ms
+
+下午8:42	Emulator: Warning: restoring GLES1 context from snapshot. App may need reloading.
+
+下午8:43	ADB rejected shell command (getprop): closed
+
+下午8:43	Emulator: Process finished with exit code 0
+
+下午8:53	Executing tasks: [:app:assembleDebug]
+
+下午8:53	Emulator: emulator: WARNING: Host CPU is missing the following feature(s) required for x86 emulation: SSSE3
+
+下午8:53	Emulator: Hardware-accelerated emulation may not work properly!
+
+下午8:53	Gradle build finished in 7 s 640 ms
+
+下午8:53	Emulator: qemu-system-i386: warning: host doesn't support requested feature: CPUID.01H:ECX.ssse3 [bit 9]
+
+下午8:53	Emulator: Warning: restoring GLES1 context from snapshot. App may need reloading.
+
+下午8:55	Emulator: Process finished with exit code 0
+
+下午8:55	ADB rejected shell command (getprop): closed
+
+下午9:00	Executing tasks: [:app:assembleDebug]
+
+下午9:00	Emulator: emulator: WARNING: Host CPU is missing the following feature(s) required for x86 emulation: SSSE3
+
+下午9:00	Emulator: Hardware-accelerated emulation may not work properly!
+
+下午9:00	Gradle build finished in 5 s 733 ms
+
+下午9:00	Emulator: qemu-system-i386: warning: host doesn't support requested feature: CPUID.01H:ECX.ssse3 [bit 9]
+
+下午9:01	Emulator: Warning: restoring GLES1 context from snapshot. App may need reloading.

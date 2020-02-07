@@ -1,0 +1,28 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-15T11:41:37+08:00
+
+====== 命令行模糊搜索神器fzf ======
+创建日期 星期二 15 一月 2019
+
+命令行模糊搜索神器fzf [视频]
+PegasusWang
+PegasusWang
+公众号同知乎名。前知乎Python后端工程师 Pythonista/Vimer
+​关注他
+42 人赞了该文章
+今天介绍一个常用的命令行模糊搜索工具 fzf(fuzzy finder)。 平常在我们在使用一些命令的过程中，经常需要进行一些模糊搜索。比如快速搜索和编辑一个文件，快速定位到一个目录，或者搜索最近的历史命令执行等。
+
+It's an interactive Unix filter for command-line that can be used with any list; files, command history, processes, hostnames, bookmarks, git commits, etc.
+如果使用的是 mac 可以很方便的安装：
+
+brew install fzf
+
+# To install useful key bindings and fuzzy completion:
+$(brew --prefix)/opt/fzf/install
+或者用源码安装：
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
+https://zhuanlan.zhihu.com/p/54731763?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

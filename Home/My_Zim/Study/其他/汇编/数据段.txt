@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-02T17:05:08+08:00
+
+====== 数据段 ======
+Created Wednesday 02 January 2019
+
+例如,将123B0~123B9的内存单元定义为数据段,累加前3个单元中的数据:
+mov ax,123bh
+mov ds,ax
+mov al,0
+add al,[0]
+add al,[1]
+add al,[2]

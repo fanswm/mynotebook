@@ -1,0 +1,121 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-20T11:45:32+08:00
+
+====== 6 个高质量电子书网站 ======
+创建日期 星期三 20 二月 2019
+
+遭遇「书荒」？来这 6 个高质量电子书网站看看
+2018年08月02日
+Eric_hong Eric_hong
+Kindle 凭着电子墨水屏的先天优势，在一众电子设备中拥有更舒适的阅读体验，但仅仅依靠设备内置的 Amazon Kindle 电子书书店，在书籍资源方面似乎显得单薄。
+
+秉承无版权纠纷的原则下，我搜集了一些电子书资源站点，整理它们各自的电子书资源特点，以及电子书格式转换和书本推送至 Kindle 设备的操作技巧，希望能够丰富大家获取电子书资源的途径，真正做到为电子书书架「添砖加瓦」。
+
+书格
+书格 是一个自由开放的数字古籍图书馆，专注于不同类型古书籍的保护与文化艺术作品数字化传播，网站创建于 2013 年，最早起源是豆瓣用户 未曾 在 2012 年建立的 PDF 小站。网站收录资源的首要准则是限定为公共版权领域的书籍，分享的书籍资源来源于世界各个图书馆或机构的公开内容。由于书格分享的书籍大多图文较多，所以暂时只发布 PDF 格式的文件。
+
+书格首页
+书格首页
+书格提倡开放式共享资源，无须用户注册即可浏览下载网站的任何资源，用户可以在 站内搜索 查看已发布资源列表，或者直接进入书格的 网盘目录 浏览下载。根据书格公布的数据显示，截止今年 3 月底，网站已经发布超过 1600 套书籍资源，所有资源大小约 616 GB。在书格的资源分类中，我们可以按照学术分类（史地、社会科学、艺术等）和兴趣分类（永乐大典系列、练字参考、要看图多的等）找到不同类型的书籍。
+
+书格提供多个网盘资源
+书格提供多个网盘资源
+图灵社区
+图灵社区 主要专注于科技书籍的出版，包括计算机、数学统计、科普等领域，提供免费和付费的电子书。用户可以使用网银或者支付宝的购买方式，大部分电子书同时提供了三种阅读方式：在线阅读、MOBI 推送、PDF 下载，部分书籍只提供其中部分格式。
+
+图灵社区
+图灵社区
+图灵社区的图书分类除了按照常规分类（计算机、科普、设计、高等数学等）外，还可以按不同的 Tag 标签查找感兴趣的书籍。如果你有更准确的书籍信息（ISBN 码、作译者、出版日期），通过图灵社区的 高级搜索 功能精确地找到对应资源。
+
+在用户的 个人设置 页面中，图灵社区提供了推送邮箱的功能，填写好 Kindle 个人邮箱，如果遇到推送失败的话，可以尝试将 no-reply@ituring.com.cn 加入 Kindle 已认可的发件人电子邮箱列表中。
+
+设置推送邮箱
+设置推送邮箱
+电子书购买页面提示「推送 mobi」
+电子书购买页面提示「推送 mobi」
+Project Gutenberg 古登堡计划
+Project Gutenberg 是国外最知名的电子书分享网站，最初在 1971 年 7 月由 Michael Hart 发起，主要提供大量版权过期后进入公有领域的书籍，目前藏书量超过了 5 万多本。你可以从网站提供的 TOP 100 下载排行榜 获取最受用户欢迎的电子书。
+
+古登堡计划
+古登堡计划
+古登堡计划也收录了中文经典书籍，以下载四大名著之一三国演义为例子，在下载页面中，用户可以将电子书转存至 Dropbox、Google Drive、OneDrive 云盘，网站提供了 HTML、ePub、Kindle（mobi、azw 格式） 和富文本多种电子书格式。
+
+电子书下载页面
+电子书下载页面
+Wikibooks 维基教科书
+Wikibooks 维基教科书 项目隶属于 维基媒体基金会 旗下，网站主要收集教科书或者用户自己编辑的书籍，提倡分析人人可编辑的自由教学读本，目前已经收录超过 3000 本共 80000 多页的电子书。
+
+维基教科书
+维基教科书
+在维基教科书的 中文索引页面 中，我们可以找到相当丰富的教学类电子书资源，涵盖了自然科学、数学、社会科学、语言、人文科学、工程学、艺术、计算机科学与技术以及部分中小学、大学课本。维基教科书为每一个网页页面提供了 PDF 文件下载的选项，稍显遗憾的是相较于英文目前中文资源数量还比较有限。
+
+中文索引页面有多种科目分类
+中文索引页面有多种科目分类
+维基媒体基金会的类似项目还有 维基文库，目前已经收录了超过 29 万篇文档，主要领域包括了已出版的文献、译文、历史档案、文献作者生平等，同样提供了 PDF 格式的电子文件。
+
+Planet eBook
+Planet eBook 被视为古典文学电子书爱好者的乐园，所收录的小说和书籍均可免费下载和共享，提供的电子书格式包括 ePub、PDF、MOBI，每本收录的书籍都提供了精致的介绍页面，电子书的文字排版和图文质量都有不错的水准。如果你是外文小说的阅读爱好者，Planet eBook 肯定是一个不容错过的电子书平台。
+
+Planet eBook
+Planet eBook
+Gitbook
+Github 上总能找到一些相当优秀的资源，其中有朋友 分享 了一份免费的编程中文书籍索引排行榜，榜单中按照编程知识领域，推荐不同的教程和电子书资源，包含了开发者网站、Gitbook 电子书资源和部分视频教学资源。
+
+Github 上编程中文书籍索引页面
+Github 上编程中文书籍索引页面
+Gitbook 是一个由用户自主制作和分享电子书的平台，从多人协作、Markdown 写作、评论互动等多个环节上为电子书出版和共享提供了一站式解决方案。Gitbook 制作好的电子书支持输出 ePub, MOBI 和 PDF 格式，Explore 页面 集中列出了已整理出版的电子书，用户可以按语言分类和电子书主题查找电子书资源。
+
+Gitbook Explore 页面发现电子书
+Gitbook Explore 页面发现电子书
+文件格式转换和推送技巧
+下载书籍后，下一步要做的就是把书传送到 Kindle 里。Kindle 原生系统支持的格式包括：AZW、TXT、PDF、MOBI、PRC、HTML、DOC、DOCX 以及 JPG，但网上电子书资源大部分会是 ePub 和 PDF 格式，这时就需要文件格式转换和 PDF 重排工具（PDF 在 Kindle 设备上的阅读效果并不理想），我收集了以下几款实用工具：
+
+Calibre 是一款强大的本地电子书管理工具，支持 Windows、macOS 和 Linux 三大平台，本身支持市面绝大部分的文件导入和转换，选中需要转换的书籍后，点击选择「转换书籍」，在打开的转换页面中选择右上角输出格式，选择电子书设备支持的输出格式。另外用户还能够调整转换电子书的更多细节选项，包括输出界面、字体、内容目录等。
+
+Calibre 转换电子书格式
+Calibre 转换电子书格式
+延伸阅读：最强大的本地电子书管理工具：Calibre 使用指南
+
+K2pdfopt 是一款可以优化 PDF 文件、提升在移动设备上阅读体验 PDF 文档的开源软件，支持 Windows、macOS 和 Linux 三大平台，还提供了命令行版本，以 Windows 平台的 GUI 版本为例，
+
+在 File list 区域添加一个或者多个 PDF 文档；
+Output Folder 区域填写转换后文档的保存路径，留空即保存在源文件所在目录；
+Device 一栏选择自己的设备，K2pdfopt 支持 Kindle、Kobo、Nook 多款硬件产品；
+Conversion Mode 一栏一般选择默认的 default 模式即可（仅仅希望裁边的话，选择 Trim 模式）；
+最后点击软件界面右下角 Preview 按钮可预览效果，点击 Convert All Files 即可开始转换。
+k2pdfopt 软件界面
+k2pdfopt 软件界面
+AConvert 是一款电子书转换在线工具，支持输出 AZW3、EPUB、DOCX、HTML、MOBI、PDF、RTF 和 TXT 格式，选择本地文件上传或在线地址。在转换结果的下载页面中，用户可以将转换后的文档保存至 Dropbox、Google Drive，或者通过扫描二维码下载文档。同类型的在线工具还有 ConvertIO、ToePub。
+
+AConvert 首页
+AConvert 首页
+
+
+AConvert 转换结果页面
+AConvert 转换结果页面
+Dropbox + IFTTT 实现云盘电子书推送至 Kindle 设备。部分电子书平台提供将电子书文件转存至类似 Dropbox 云存储空间里，这时候再利用 IFTTT 提供的任务规则可以实现将云盘电子书资源自动推送至 Kindle 设备上，简单说一下操作步骤：
+
+在 Dropbox 建立一个专门存放和推送电子书的文件夹，比如 sendtokindle；
+打开 IFTTT 网站上 Send files from Dropbox to your Kindle 页面，首次使用需要获得 Dropbox 和 Gmail 授权；
+完成授权操作后，在 New file in your folder 一栏填写 Dropbox 保存电子书的文件夹名称，留空的话会自动创建名为 Kindle 的文件夹，Send an email 一栏填写 Kindle 设备的专属个人邮箱；
+最后，其他选项保持默认状态即可，设置完成后将电子书保存在 Dropbox 专门的文件夹，就会自动推送至 Kindle 设备。
+IFTTT 实现云盘资源推送 Kindle 设备
+IFTTT 实现云盘资源推送 Kindle 设备
+以上就是我个人搜集的优秀电子书资源站点和书籍格式转换和传输的一些技巧，如果你了解更多的电子书网站，欢迎在评论中与大家分享。
+https://sspai.com/post/45931
+https://www.amazon.cn/Kindle%E5%95%86%E5%BA%97/b/ref=sa_menu_top_kindle_l1_store?ie=UTF8&node=116087071
+https://shuge.org/
+http://www.ituring.com.cn/
+http://www.gutenberg.org/
+https://en.wikibooks.org/wiki/Main_Page
+https://www.planetebook.com/
+https://www.gitbook.com/
+https://calibre-ebook.com/
+	https://sspai.com/post/43843?from=pricetag
+http://www.willus.com/k2pdfopt/
+https://www.aconvert.com/cn/ebook/
+	https://convertio.co/zh/ebook-converter/
+	https://toepub.com/zh/
+
+

@@ -1,0 +1,26 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-09-30T07:55:12+08:00
+
+====== Steam平台 ======
+Created Sunday 30 September 2018
+
+Steam 让我们在 Linux 上玩 Windows 的游戏更加容易
+https://linux.cn/article-10054-1.html
+
+如何使用 Steam Play 在 Linux 上玩仅限 Windows 的游戏
+https://linux.cn/article-10061-1.html?utm_source=rss&utm_medium=rss
+
+Steam对linux系统的要求 https://github.com/ValveSoftware/steam-for-linux
+
+Ubuntu 16.04 LTS 64位下安装steam游戏平台：
+https://blog.csdn.net/jianwen_hi/article/details/51843385
+
+
+
+__较为简易的安装方法__
+```
+sudo add-apt-repository multiverse
+sudo apt update
+sudo apt install steam
+```

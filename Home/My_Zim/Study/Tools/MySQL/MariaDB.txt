@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-01T11:55:19+08:00
+
+====== MariaDB ======
+创建日期 星期五 01 三月 2019
+
+sudo apt-get install -y mariadb-server sqlite
+不过MariaDB并不是装上就完了，还得稍微做一点初始化的工作
+
+sudo mysql_secure_installation

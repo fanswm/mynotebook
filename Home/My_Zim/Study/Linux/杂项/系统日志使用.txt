@@ -1,0 +1,36 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-19T15:35:14+08:00
+
+====== 系统日志使用 ======
+Created Tuesday 19 December 2017
+
+### 存储位置:/var/log
+
+### 大多数现代操作系统上，重要的日志由 systemd 初始化系统存储。
+
+> 由 systemd 记录的日志以二进制格式存储，这使得它们消耗的空间更小，更容易被浏览，也更容易被导出成其他各种格式，不过坏处就是你必须使用特定的工具才能查看。好在这个工具已经预安装在你的系统上了：它的名字叫 journalctl，而且默认情况下，它会将每个守护进程的所有日志都记录到一个地方。
+
+### 查看的工具: journalctl
+
+> 例:
+下面是 journalctl 中摘录的一条日志记录：
+
+> Jul 06 11:53:47 aaathats3as pulseaudio[2216]: [pulseaudio] alsa-util.c: Disabling timer-based scheduling because running inside a VM.
+这条独立的日志记录以此包含了
+	记录的日期和时间、
+	计算机名、
+	记录日志的进程名、
+	记录日志的进程 PID，
+	以及日志内容本身。
+
+若系统中某个程序运行出问题了，则可以__查看日志文件并搜索（使用 / 加上要搜索的关键字）程序名称__。有可能导致该程序出问题的错误会记录到系统日志中.
+
+Google 就很适合来搜索奇怪的 Linux 问题。不过搜索时请注意你只输入了日志的实际内容，行首的那些信息（日期、主机名、进程 ID) 对搜索来说是无意义的，会干扰搜索结果。
+搜索特定的日志行会显示出精确的，有用的结果。这种搜索通常很有用.
+
+在桌面系统中最常见的这类日志包括
+用于记录 openSUSE 包管理器的行为的 __/var/log/zypper.log__； 
+记录系统启动时消息的 __/var/log/boot.log ，__
+开机时这类消息往往滚动的特别快，根本看不过来；
+__/var/log/ntp__ 用来记录 Network Time Protocol （NTP）守护进程同步时间时发生的错误。 另一个存放硬件故障信息的地方是 “Kernel Ring Buffer”（内核环状缓冲区），你可以输入 __demesg -H__ 命令来查看（这条命令也会调用 less 分页器来查看）

@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-28T11:46:31+08:00
+
+====== 在窗格之间移动 ======
+创建日期 星期一 28 一月 2019
+
+按 Ctrl+b, ← - 选择左边的窗格
+按 Ctrl+b, → - 选择右边的窗格
+按 Ctrl+b, ↑ - 选择上边的窗格
+按 Ctrl+b, ↓ - 选择下边的窗格
+按 Ctrl+b, { - 来向左交换窗格
+按 Ctrl+b, } - 来向右交换窗格
+按 Ctrl+b, o - 切换到下一个窗格（从左到右，从上到下）
+按 Ctrl+b, ; - 移动到先前活动的窗格

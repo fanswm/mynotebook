@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:16:28+08:00
+
+====== Emacs ======
+Created Wednesday 24 October 2018
+
+Emacs
+Emacs[14] 是一个高度可配置的文本编辑器，最流行的一个分支 GNU Emacs 是用 Lisp 和 C 编写的，它的最大特点是可以自文档化、可扩展和可自定义。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Emacs。
+
+$ sudo add-apt-repository ppa:kelleyk/emacs
+$ sudo apt update
+$ sudo apt install emacs25
+
+[[Linux install:Anaconda:在 Emacs 上配置 Anaconda]]

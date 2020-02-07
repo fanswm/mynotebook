@@ -1,0 +1,114 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-08-19T14:06:58+08:00
+
+====== 3 种方法给你的 Slack 换套好看的皮肤 ======
+Created 星期一 19 八月 2019
+
+https://sspai.com/post/56188
+备受欢迎的 Slack 是一个专为办公设计的即时通讯软件。Slack 有着非常具有标识度的配色方案：深紫色 / 浅绿色 / 明白色。不过，熟悉的主题颜色总有看腻的一天。如何给 Slack 搭配一个漂亮的主题配色？我们有下面这些方法。
+
+
+Material - Palenight 主题
+Slack 自己的主题配置
+首先，我们完全可以直接使用 Slack 自己的主题配置，在「Preference - Sidebar」里面，我们可以对 Slack 侧边栏进行颜色的搭配。Slack 为我们提供了 10 种不同的侧边栏主题配色供我们直接使用，我们也可以直接自定义一个配色方案。
+
+
+Slack 侧边栏主题配置
+除此之外，Slack Themes 这个网站里面也提供了非常多的 Slack 侧边栏主题搭配，我们可以在网站上面直接预览主题，挑选配色，然后将颜色代码直接复制粘贴进刚刚 Slack 自己的主题设置项目里面，即可应用主题。
+
+
+Slack Themes 网站
+虽然我们在 Slack 里面完全可以直接自定义侧边栏的颜色主题，但是对整体界面配色方案进行大幅修改还是需要稍微动动手才能成功。接下来，我再来推荐几个 Mac 上面非常酷炫的魔改 Slack 整体配色主题的方法。
+
+对 Slack 的整体界面进行魔改
+安全食用注意事项
+在动手之前，我极力推荐大家事先对 Slack 的本体进行备份。以 Mac 为例：在  /Applications 文件夹下找到  Slack.app，然后「右键 - 拷贝」即可。由于接下来我们会对 Slack 客户端的核心代码进行修改，因此进行必要的备份一定没有错。
+
+接下来的全部过程是在 Mac 下进行的，Slack 客户端是 Mac App Store 上面 4.0.1 版本（最新版本）。如果你的 Slack 是从官网下载，或者客户端版本不是 4.0 以上，下面的操作都有可能失败，请各位同学务必留意。
+
+Material 主题
+第一个为大家介绍的主题就是大名鼎鼎的 Material 主题配色家族。在代码编辑器界非常著名的 Material 主题配色，我们的 Slack 也可以拥有！
+
+
+Material 配色方案合集 - 来自 Material 主题官网
+首先我们使用 Homebrew 安装 Node.js。
+
+brew install node
+
+安装 Node.js
+接下来，我们打开位于 mallowigi/slack-themes 的主题仓库，点击绿色「Clone or download - Download ZIP」，下载仓库。
+
+
+下载仓库至本地
+关闭全部 Slack 应用后，在终端（Terminal.app）中进入刚刚下载好的仓库目录（如果是默认下载目录，那么路径即为 ~/Downloads/slack-themes），输入下面命令以管理员身份直接运行 ./main（如果要求输入密码直接输入即可。）：
+
+sudo ./main
+到这里我们就进入了 Slack 主题更换界面：
+
+
+Slack 主题更换命令行界面
+我们直接回车选择 Apply Theme……
+
+
+选择主题
+接下来，我们在列表中直接选择一个主题即可。我选择了 Monokai Pro：
+
+
+配置完成
+到这里我们的主题就已经更换成功，再次打开 Slack 应用之后，我们会发现全新的 Slack 主题已经配置完成！
+
+
+Slack Monokai Pro 主题
+Slack 的 Material 主题方案有着多达 15 种不同的亮暗配色，有兴趣的同学可以直接前往  mallowigi/slack-themes 去看一下。
+
+夜空黑 - Dark 主题
+接下来是一个更为定制化的 Slack 主题替换方案。虽然作者叫这个主题为「夜空黑 - Dark 主题」，但是由于这一途径的代码被封装的相对完好，因此我们完全可以利用这一方案进行更为深度的魔改。
+
+首先我们需要用到上文介绍的主题中使用的  Node.js，同时需要再另外安装 npx、asar：
+
+npm install --global npx asar
+
+安装 npx、asar
+接下来我们同样，在 GitHub 上面下载 GitHub - Nockiro/slack-black-theme 仓库到本地。解压缩之后，我们在终端中进入仓库，并输入下面的两条命令来给脚本  darkSlack.sh 可执行权限，并执行脚本：
+
+# 赋予脚本可执行权限
+
+sudo chmod +x darkSlack.sh
+
+
+
+# 执行脚本
+
+./darkSlack.sh
+
+执行脚本之后，我们选择 Slack 版本为 4：
+
+
+赋予权限、执行脚本、选择 Slack 版本为 4
+之后，我们重启 Slack 应用，就可以看到暗黑色调的全新 Slack 啦。
+
+
+Slack - Dark 主题
+利用这个方案，我们不仅可以设置「夜空黑 - Dark 主题」，还可以自己进行主题颜色定制。我们在刚刚下载好的仓库中找到 interjectCode.js 这一文件，利用文本编辑器打开：
+
+
+替换主题颜色样式代码
+接下来，我们找到 :root { ... } 这一行，可以看到注释里面作者也告诉了我们「修改这四行代码来定制主题」。我们可以选择将这四行代码末尾的 HEX 十六进制色号进行修改，替换为比如：
+
+--primary: #CCC;
+
+--text: #999;
+
+--background: #222;
+
+--background-elevated: #444;
+
+再重新执行脚本，重启 Slack，我们的 Slack 就变成了「深空灰色」：
+
+
+Slack - 深空灰色主题
+在这一主题仓库的使用文档里面，作者给出了更多的色彩搭配，有兴趣的同学可以直接前往 Nockiro/slack-black-theme 观看，也可以自己定义颜色进行搭配。
+
+小结
+虽然看起来上面的这几个主题替换方法有些繁琐，但是事实上每种方法的使用几乎都不到两行命令就能搞定，我们只需要稍微动动手，就能为我们的 Slack 定制一个崭新的漂亮主题。感谢阅读。

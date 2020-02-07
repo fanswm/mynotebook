@@ -1,0 +1,27 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-04T15:23:57+08:00
+
+====== U盘被写保护，无法打开，怎么办 ======
+创建日期 星期四 04 四月 2019
+
+Linux下，dosfsck
+
+Windows: 进入命令行，·format 盘符:/fs:fat32
+https://baijiahao.baidu.com/s?id=1615914396306806035&wfr=spider&for=pc
+http://www.upantool.com/jiaocheng/xiufu/2012/1943.html
+
+
+以下，试过，不行。
+一、U盘特色
+有的U盘会有一个小开关，拨动这个小开关可以主动切换到写保护模式，将开关拨动到非锁定位置，再次插入。
+二、软解锁
+1、开始-->运行-->regedit-->确定，进入注册表。
+2、查看HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\Control\与
+HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\两项中是否有StorageDevicePolicies子项，且该子项中是否有WriteProtect值，如果有则将其值改为0后跳到第5步；如没有则进行下一步。
+3、查看HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\StorageDevicePolicies
+如无StorageDevicePolicies该项，则新建（在Control上点右键-->新建-->项，将新建项重命名为
+StorageDevicePolicies）
+4、在右边栏内新建立Dword值，命名为WriteProtect，值为0
+5、重启计算机后插入U盘，正常。
+三、你的U盘有损坏，需要格式化！

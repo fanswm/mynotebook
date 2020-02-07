@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-24T16:03:59+08:00
+
+====== 灯开关 ======
+Created Tuesday 24 July 2018
+
+卧室灯开关一般双控

@@ -1,0 +1,202 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-26T20:20:33+08:00
+
+====== VS Code 新手指南 ======
+创建日期 星期日 26 一月 2020
+
+“VS Code 写代码是真好用、真爽。”
+
+想必你也已经听过身边不止一个人这么说。最近的 JS 2019 报告中，VS Code 也是以压倒性的优势获胜第一，其他的编辑器只能被无情碾压在地上摩擦……
+
+
+JS 2019 报告
+但是呢，VS Code 并不是像 PyCharm/WebStorm 那样开箱即用的，需要额外安装一些插件、掌握一些快捷键和技巧，才能顺手的用起来。
+
+我们花了一周的时间，为你整理了可能是最全的 VS Code 新手指南，分为快捷键速查表、10个超好用插件、新手使用教程三部分，让小白也能快速上手、效率加倍。
+
+● 快捷键速查表
+先上两张我们整理的 VS Code 常用快捷键的速查表：
+
+
+Mac 快捷键
+
+Windows/Linux 快捷键
+快捷键用熟了，才能发现 VS Code 有多方便。真正的大神写起代码来那是手不离键盘。
+
+● 10个超好用插件
+
+🔎Chinese(Simplified) Language Pack for Visual Studio Code[1]
+
+👨‍💻Microsoft
+
+📥3,358,698 下载量
+
+
+安装之后一秒汉化 VS code ，再也不用担心看不懂英文。
+
+
+
+
+🔎City Lights theme[2]
+
+👨‍💻Yummygum
+
+📥54,054 下载量
+
+
+这是一个不错的主题插件，不过挑选主题还是看个人，也可以在直接搜索 “theme”能得到很多主题，找到合适自己的。
+
+
+
+​🔎Beautify[3]
+
+👨‍💻HookyQR
+
+📥3,998,071 下载量
+
+可以放大标记，调整代码间距，快速格式化代码，可以让杂乱的 HTML、CSS、JS代码瞬间变得整齐，利于他人阅读，也方便后期维护。
+
+
+🔎vscode-icons[4]
+
+👨‍💻VSCode Icons Team
+
+📥4,237,487 下载量
+
+设置文件图标，根据各种类型的文件，设置对应的文件图标，我们看文件列表的时候，一目了然，能快速找到需要的文件（特别是文件多，类型也多的时候）。
+
+
+
+🔎Image preview[5]
+
+👨‍💻Kiss Tamás
+
+📥123,990下载量
+
+光标悬浮在图片路径上时，显示图片预览，这样我们在敲代码的时候一下子就能知道有没有引用了正确的图片或图标。
+
+
+
+🔎Code Spell Checker[6]
+
+👨‍💻Street Side Software
+
+📥970,955下载量
+
+我们日常敲代码很多命名都是使用英文单词，粗心的小伙伴可能会拼错，这个插件就是单词拼写错时的拯救神器，它可以标志错的单词，还可以提示单词的正确拼法。有了它，就再也不用因为单词拼错找半天的 bug 了
+
+
+
+🔎Live Server[7]
+
+👨‍💻Ritwick Server
+
+📥3,551,236下载量
+
+做前端开发的时候，我们需要打开浏览器进行预览和调试页面。这个插件就可以实现静态、动态页面的实时预览，保存就能看见页面更新，不需要手动去刷新。
+
+
+
+🔎indent-rainbow[8]
+
+👨‍💻oderwat
+
+📥567,061下载量
+
+写代码的时候，能提示我们的缩进是否到位，每步交替四种不同的颜色，没有到位的话颜色变红，看着代码整整齐齐的就很舒心。
+
+
+
+🔎Rainbow Brackets[9]
+
+👨‍💻2gua
+
+📥367,290下载量
+
+为圆括号，方括号和弯曲的括号提供彩色；相同颜色表示相同级别的括号，孤立的右括号以红色突出显示，对写 JavaScript 的人比较有用。
+
+
+
+🔎Polacode-2019[10]
+
+👨‍💻Jeff Hykin
+
+📥4,704下载量
+
+可以把代码保存成美观的图片，主题不同，代码配色方案也不同，也可以自己设置边框颜色、大小、阴影，在教程或者文档中提供代码示例时挺有用的。
+
+
+● VS Code 新手使用教程
+① 安装 VS code
+
+VS Code 官方下载地址：https://code.visualstudio.com
+
+根据自己的电脑下载对应的版本，然后安装即可。
+
+
+
+② 进入 VS code
+
+界面上分为这几个部分，先整体了解下每个部分是做什么的
+
+
+
+
+③ 安装 VS Code 插件
+
+
+上面提到的超好用的插件，在这里就可以安装。
+
+
+
+④ 开始写代码
+
+首先在自己的电脑新建一个文件夹
+
+
+然后在 VScode 里面打开这个文件夹，也可以按快捷键 (Command /Ctrl+ O)
+
+
+新建文件（Command/Control + N)，要写后缀名，VScode 才能识别出来是什么类型的文件。
+
+
+
+
+⑤ 开始运行代码
+
+编辑代码，保存，用的是上面推荐的 Live Server 插件预览，安装插件后，右键选择 " Open with Live Server "打开或点击右下角的 "Go Live"。
+
+
+
+● 写在最后
+这篇干货总结写了很久，也是想把关于 VS Code 你应该知道的一切都在这一篇文章里告诉你。
+
+如果你也感受到了 VS Code 的强大，就赶在 2020 年之前尽快用起来吧！
+
+哪怕对你们有一点点帮助，我就很开心啦 😘
+
+
+
+作者：凉皮
+
+编辑：西西姐
+
+各位知友想要随时查看麻瓜编程的最新动态，可把麻瓜编程添加到置顶！操作分两步：
+
+在首页-关注页的搜索栏下方，查看「最常访问」，点击麻瓜编程。
+点击右上角的「置顶」即可。
+
+参考
+^汉化包插件地址 https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans
+^City Lights theme https://marketplace.visualstudio.com/items?itemName=Yummygum.city-lights-theme
+^Beautify https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify
+^vscode-icons https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons
+^Image preview https://marketplace.visualstudio.com/items?itemName=kisstkondoros.vscode-gutter-preview
+^Code Spell Checker https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
+^Live Server https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
+^indent-rainbow https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
+^Rainbow Brackets https://marketplace.visualstudio.com/items?itemName=2gua.rainbow-brackets
+^Polacode https://marketplace.visualstudio.com/items?itemName=jeff-hykin.polacode-2019
+
+https://zhuanlan.zhihu.com/p/99462672?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

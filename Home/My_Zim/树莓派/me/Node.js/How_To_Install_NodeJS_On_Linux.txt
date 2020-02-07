@@ -1,0 +1,231 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-10T20:56:54+08:00
+
+====== How To Install NodeJS On Linux ======
+Created Sunday 10 February 2019
+
+How To Install NodeJS On Linux
+BY SK · PUBLISHED JANUARY 24, 2018 · UPDATED SEPTEMBER 21, 2018
+
+Install Nodejs On Linux
+NodeJS is an open source, cross-platform, and lightweight JavaScript run-time environment that can be used to build scalable network applications. It is fast and efficient server-side software built on Chrome’s V8 JavaScript engine. Initially, JavaScript was primarily used for client-side scripting. But, Nodejs enables JavaScript to be used for server-side scripting, and runs scripts server-side to produce dynamic web pages. Another notable thing is Nodejs has a command-line utility called npm, a package manager to install, manage nodejs libraries and applications. Nodejs package ecosystem is the largest ecosystem of open source libraries in the world.
+
+NodeJS v10.0.0 has been released yesterday. It is the seventh major nodejs release since the launch of NodeJS foundation. This major release ships with some prominent features as listed below.
+
+Full support for N-API
+Easy getting started with Time-Travel Debugging via a new Visual Studio Code Extension
+TTD support for generators and async functions
+Support for Inspector protocol
+Increased stability and other assorted improvements
+For more details, refer the Node.js 10.0.0 releases notes.
+
+Recommended Download – Free eBook: “Jump Start Node.js ($19 Value FREE For a Limited Time)
+In this tutorial, we will see how to install Node.js on popular Linux operating systems including Arch Linux, Debian, Ubuntu, RHEL, CentOS, Fedora etc.
+
+Install NodeJS on Linux
+There are quite a few ways to install Nodejs. The first method is for those who wants to use the stable NodeJS version. The second method and third methods can get you the latest available versions. In particular, the third method is the best way to avoid permission issues while installing packages globally. I will explain all of them.
+
+1. __Install Nodejs using your distribution’s package manager (Stable, but outdated versions)__
+
+Nodejs is available in the default repositories of most Linux distributions. It might not be latest version, but stable. If you want to have a stable Node.js on your Linux, you better install it using your distribution’s package manager as shown below.
+
+On Arch Linux and its derivatives like Antergos, Manajaro Linux, run the following command to install it:
+
+$ sudo pacman -S nodejs npm
+On Debian, Ubuntu, Linux Mint:
+
+__$ sudo apt-get install nodejs npm__
+On RHEL, CentOS, you need to enable EPEL repository first.
+
+$ sudo yum install epel-release
+And, then install Nodejs using command:
+
+$ sudo yum install nodejs npm
+On Fedora:
+
+$ sudo dnf install nodejs npm
+Note: Since the packages from the default repositories are outdated, you will get the following error when you try to install any NodeJS modules using npm.
+
+/usr/bin/env: ‘node’: No such file or directory
+To solve this error, you need to create symlink as shown below.
+
+$ sudo ln -s /usr/bin/nodejs /usr/bin/node
+2. __Install Nodejs from NodeSource__
+
+Like I already said, nodejs is available in the default repositories, but it might be bit outdated. To install the most recent version, install the latest version from NodeSource as shown below.
+
+On Debian, Ubuntu distributions:
+
+Add Nodejs 8.x repository:
+
+$ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+For Nodejs 9.x:
+
+$ curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+Then, install Node.js using command:
+
+$ sudo apt-get install nodejs npm
+On RHEL, CentOS:
+
+Run the following command as root user to add Node.js v8 LTS repository:
+
+$ curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+To add Node.js v9 repository:
+
+$ curl --silent --location https://rpm.nodesource.com/setup_9.x | sudo bash -
+Then install, as root:
+
+$ yum install nodejs npm
+For Fedora, follow the same instructions above.
+
+Install build tools (Optional)
+
+To compile and install native addons from npm repository, you may also need to install build tools.
+
+To install build tools on Debian, Ubuntu distributions, run the following command:
+
+$ sudo apt-get install -y build-essential
+On RHEL based systems:
+
+$ sudo yum groupinstall 'Development Tools'
+On Fedora:
+
+$ sudo dnf groupinstall 'Development Tools'
+3. Install Nodejs using NVM (Recommended method)
+
+This is yet another way to install Nodejs. This is the best way to avoid permissions issues. NVM (Node Version Manager) is a bash script used to manage multiple Node.js versions. It allows us to install, uninstall node.js, and switch from one version to another. Good thing is we can install to any available Node.js version of our choice, using NVM.
+
+To install nvm, use the latest install script from here:
+
+$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.10/install.sh | bash
+Or,
+
+$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.10/install.sh | bash
+The above command will clone the nvm repository to ~/.nvm and add the source line to your profile (~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc).
+
+Sample output will be:
+
+% Total % Received % Xferd Average Speed Time Time Time Current
+ Dload Upload Total Spent Left Speed
+100 12818 100 12818 0 0 11566 0 0:00:01 0:00:01 --:--:-- 11579
+=> Downloading nvm as script to '/home/ostechnix/.nvm'
+
+=> Appending nvm source string to /home/ostechnix/.bashrc
+=> Appending bash_completion source string to /home/ostechnix/.bashrc
+=> Close and reopen your terminal to start using nvm or run the following to use it now:
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+Restart your Terminal once before start using NVM.
+
+To verify whether NVM is installed or not, run:
+
+$ command -v nvm
+Sample output:
+
+nvm
+It should output ‘nvm’ if the installation was successful.
+
+Now, we can install Nodejs and npm.
+
+First, run the following command to view the list of available Nodejs versions:
+
+$ nvm ls-remote
+Sample output:
+
+ [...]
+ v8.11.0 (LTS: Carbon)
+ v8.11.1 (Latest LTS: Carbon)
+ v9.0.0
+ v9.1.0
+ v9.2.0
+ v9.2.1
+ v9.3.0
+ v9.4.0
+ v9.5.0
+ v9.6.0
+ v9.6.1
+ v9.7.0
+ v9.7.1
+ v9.8.0
+ v9.9.0
+ v9.10.0
+ v9.10.1
+ v9.11.0
+ v9.11.1
+ v10.0.0
+To install/update to the most recent Nodejs version, just run:
+
+$ nvm install node
+Alternatively, you can run the following to install any Nodejs version of your choice.
+
+For example, to install Nodejs v9.3.0, run:
+
+$ nvm install v9.3.0
+Sample output:
+
+Downloading and installing node v9.3.0...
+Downloading https://nodejs.org/dist/v9.3.0/node-v9.3.0-linux-x64.tar.xz...
+######################################################################## 100.0%
+Computing checksum with sha256sum
+Checksums matched!
+Now using node v9.3.0 (npm v5.6.0)
+Creating default alias: default -> v9.3.0
+Similarly, you can install any number of versions you want.
+
+To view the list of installed Nodejs versions, run:
+
+$ nvm list
+Sample output:
+
+-> v10.0.0
+default -> node (-> v10.0.0)
+node -> stable (-> v10.0.0) (default)
+stable -> 10.0 (-> v10.0.0) (default)
+iojs -> N/A (default)
+lts/* -> lts/carbon (-> N/A)
+lts/argon -> v4.9.1 (-> N/A)
+lts/boron -> v6.14.1 (-> N/A)
+lts/carbon -> v8.11.1 (-> N/A)
+As you see in the above output, I have installed v10.0.0.
+
+If you have installed more than one version, you can switch between different Nodejs versions as below.
+
+$ nvm use node
+Or you can just run it to be more specific:
+
+$ nvm run node v9.3.0
+To set a particular Nodejs version as the default, run:
+
+$ nvm alias default v9.3.0
+Sample output would be:
+
+default -> v9.3.0
+To remove the particular Nodejs version, run:
+
+$ nvm uninstall v9.3.0
+Sample output:
+
+Uninstalled node v9.3.0
+To view the currently installed and default Nodejs version, run:
+
+$ node --version
+Or,
+
+$ node -v
+Sample output:
+
+v10.0.0
+Check npm version:
+
+$ npm -v
+Sample output:
+
+5.6.0
+Recommended Download – Free eBook: “The Art & Science of JavaScript ($29 Value FREE For a Limited Time)”
+And, that’s all. You know now how to install Nodejs on your Linux distribution. As you can see, installing Nodejs is fairly easy. Anyone can install and setup the Nodejs within few minutes.
+
+If you find our guides useful, please share them on your social networks and support OSTechNix. We will be writing more good stuffs everyday. Stay tuned!
+https://www.ostechnix.com/install-node-js-linux/

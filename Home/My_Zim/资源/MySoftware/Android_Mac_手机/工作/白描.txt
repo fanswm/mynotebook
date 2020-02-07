@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-08T18:19:36+08:00
+
+====== 白描 ======
+Created Monday 08 January 2018
+
+https://baimiao.uzero.cn/?mt=8&uo=4&ct=appcards
+
+作为一款 OCR 文字识别 App，白描的基础功自然不必多说。除了百度 API 的强大中文技术积累外，白描还对长图、表格等特殊文件格式做了深度适配和优化。此外，你还可以利用白描直接将文本翻译成其它语言，省去打开其它 App 的功夫。

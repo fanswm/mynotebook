@@ -1,0 +1,31 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-10T13:44:02+08:00
+
+====== 国内镜像地址 ======
+创建日期 星期日 10 三月 2019
+
+Docker 官方中国区
+https://registry.docker-cn.com
+
+网易
+http://hub-mirror.c.163.com
+
+ustc
+https://docker.mirrors.ustc.edu.cn
+
+$ docker --registry-mirror=https://registry.docker-cn.com daemon
+
+OR
+
+nano /etc/docker/daemon.json
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+#修改保存后重启 Docker 以使配置生效
+systemctl restart docker
+--------------------- 
+作者：HD2killers 
+来源：CSDN 
+原文：https://blog.csdn.net/HD2killers/article/details/81042274 
+版权声明：本文为博主原创文章，转载请附上博文链接！

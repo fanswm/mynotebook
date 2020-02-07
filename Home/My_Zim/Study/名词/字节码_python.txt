@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-07-15T21:43:41+08:00
+
+====== 字节码 python ======
+Created Sunday 15 July 2018
+
+https://linux.cn/article-9816-1.html?utm_source=rss&utm_medium=rss
+如果你曾经编写过 Python，或者只是使用过 Python，你或许经常会看到 Python 源代码文件——它们的名字以 .py 结尾。你可能还看到过其它类型的文件，比如以 .pyc 结尾的文件，或许你可能听说过它们就是 Python 的 “字节码” 文件。（在 Python 3 上这些可能不容易看到 —— 因为它们与你的 .py 文件不在同一个目录下，它们在一个叫 __pycache__ 的子目录中）或者你也听说过，这是节省时间的一种方法，它可以避免每次运行 Python 时去重新解析源代码。
+Python 如何工作
+
+Python 经常被介绍为它是一个解释型语言 —— 其中一个原因是在程序运行时，你的源代码被转换成 CPU 的原生指令 —— 但这样的看法只是部分正确。Python 与大多数解释型语言一样，确实是将源代码编译为一组虚拟机指令，并且 Python 解释器是针对相应的虚拟机实现的。这种中间格式被称为 “字节码”。
+
+因此，这些 .pyc 文件是 Python 悄悄留下的，是为了让它们运行的 “更快”，或者是针对你的源代码的 “优化” 版本；它们是你的程序在 Python 虚拟机上运行的字节码指令。

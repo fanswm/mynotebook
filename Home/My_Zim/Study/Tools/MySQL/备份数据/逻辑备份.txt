@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-06T11:58:21+08:00
+
+====== 逻辑备份 ======
+Created Wednesday 06 December 2017
+
+时机：数据库服务开启。

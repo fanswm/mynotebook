@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-05T20:58:49+08:00
+
+====== 字符类型 ======
+Created Monday 05 March 2018
+
+char：
+
+    char类型是一个单一的 16 位 Unicode 字符；
+    最小值是 \u0000（即为0）；
+    最大值是 \uffff（即为65,535）；
+    __char 数据类型可以储存任何字符；__
+    例子：char letter = 'A';。
+

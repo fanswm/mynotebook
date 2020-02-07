@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-15T15:43:03+08:00
+
+====== B端 C端 ======
+Created Monday 15 January 2018
+
+B/S	Browser/Server
+B/C	商家/顾客
+A/B/C	管理员/服务端/用户

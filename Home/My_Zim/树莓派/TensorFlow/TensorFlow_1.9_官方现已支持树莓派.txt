@@ -1,0 +1,41 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-20T11:55:18+08:00
+
+====== TensorFlow 1.9 官方现已支持树莓派 ======
+创建日期 星期三 20 二月 2019
+
+TensorFlow 1.9 官方现已支持树莓派！
+2018年8月3日 Spoony 未分类 6
+
+
+
+树莓派实验室按：TensorFlow 是谷歌研发的第二代人工智能学习系统，可被用于语音识别或图像识别等多项机器学习和深度学习领域。今天，TensorFlow 官方宣称开始支持树莓派平台，这意味着树莓派设备在人工智能方向的应用和学习上变得更加容易。
+
+TensorFlow 在 2015 年首次发布之时，我们希望它成为一个任何人都可以使用的开源的机器学习框架。为此，我们将它扩展到了 Linux、MacOS、Windows、iOS 以及 Android 平台。而今，在树莓派基金会的协力下，我们宣布最新的 TensorFlow 1.9 版本将可以通过树莓派预装的  Python pip 包系统安装！如果你使用的是 Raspbian 9 (stretch)，你可以在终端运行下面的命令进行安装：
+
+1
+2
+sudo apt install libatlas-base-dev
+pip3 install tensorflow
+然后在终端运行 python3，像在其他平台使用 TensorFlow 一样使用它就好了。下面是一个 hello world 的例子:
+
+1
+2
+3
+4
+5
+# Python
+import tensorflow as tf
+tf.enable_eager_execution()
+hello = tf.constant(‘Hello, TensorFlow!’)
+print(hello)
+如果系统输出你下面的内容，说明已经可以开始使用了！
+
+Hello, TensorFlow!
+这里有 更多安装方面的细节在 TensorFlow 官网（需自备梯子）。
+
+我们对此感到很兴奋，因为树莓派被许多创意开发者使用，并且广泛用于编程教育。因此使 TensorFlow 更易于安装将有助于向新用户开放机器学习这一技术方向。
+
+Raspberry Pi 项目的创始人 Eben Upton 说：“现代计算机教育涵盖基础和前瞻性主题至关重要。考虑到这一点，我们很高兴能与 Google 合作推出基于树莓派的 TensorFlow 机器学习平台。我们期待看到有趣的应用程序！”
+http://shumeipai.nxez.com/2018/08/03/tensorflow-officially-supports-the-raspberry-pi.html

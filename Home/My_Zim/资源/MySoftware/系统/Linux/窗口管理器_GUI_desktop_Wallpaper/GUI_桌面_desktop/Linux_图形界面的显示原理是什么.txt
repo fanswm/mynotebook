@@ -1,0 +1,121 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-30T15:24:05+08:00
+
+====== Linux 图形界面的显示原理是什么 ======
+创建日期 星期四 30 五月 2019
+
+https://www.zhihu.com/question/321725817/answer/669568568?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+先将理论知识再说怎么做.
+
+X窗口系统:X Window System.这是MIT 1984年提出的以位图图像显示图形化界面的一套软件规范及协议.
+
+X Window System使用最广的软件实现是Xorg.
+
+X Window System使用C/S架构,服务端和客户端可以基于网络通信.
+
+客户端(也就是各种软件)将绘图请求发给服务端,服务端操纵显卡或视频终端把位图图像绘制出来,并处理键盘鼠标的事件,发送给客户端.注意,和人交互的是服务端.
+
+来自Wikipedia
+
+而为了方便编写GUI程序,程序员开发出GTK,QT这种图形库,这些图形库作为X window的客户端工作.
+
+WSL是Windows的一个子系统,科学的(非官方)名称为GNU/NT:lxcore.微软没有从Linux抄一行代码,实现了Linux大部分二进制接口,但是目前没有实现Linux的显卡驱动功能,因此即使WSL中安装了Xorg,也会不能启动.
+
+要想使用WSL显示GUI,必须要利用X window可以使用网络远程显示的特性,在Windows可以使用GUI的子系统win32中安装X server.
+
+那么Xfce是干什么的呢?
+
+为了管理众多的窗口怎么在屏幕上显示,需要窗口管理器(Window manager).窗口管理器可以实现一个屏幕上显示多个X程序,实现调整程序大小,标题栏,最大化,最小化,关闭按钮,虚拟桌面这些功能.
+
+没有WM,一次只能运行一个GUI程序,而且分辨率锁死,显然很不符合使用习惯.
+
+为了实现窗口之间的特效,还需要窗口合成器.窗口合成器可以制造半透明之类的特效.
+
+Xfce使用的窗口管理器为Xfwm,此外还有Gnome的mutter,KDE的Kwin等
+
+xfwm设置与帮助信息
+
+Windows也有类似的概念,其窗口管理器为Desktop Window Manager(DWM.exe),win7酷炫的Aero就算dwm实现的,win8之后虽然砍掉了毛玻璃,但是dwm成为关键进程,不能像win7一样关掉.
+
+为了使用方便,一般还需要Windows里任务栏,开始按钮,通知区域这种功能,Linux里一般称之为面板.
+
+xfce的面板
+
+Linux还有一个组件叫显示管理器（display manager）,用于开机后显示登陆界面,并启动窗口管理器等X组件.没有显示管理器,Linux开机会显示命令行登陆界面,需要使用命令行登陆后手动启动Xserver和窗口管理器才能显示GUI,显示管理器自动的完成这些工作.常见的有GDM,KDM,LightDM,LXDM
+
+此外为了显示桌面图标,还需要一个文件管理器.
+
+把窗口管理器,显示管理器,合成器,文件管理器及其他应用,主题,GTK+/QT等图形库,连同通用的组件,比如Xorg,进程间通信用的Dbus等等库或程序,打包起来,就形成当今Linux下的桌面环境(Desktop environment),Gnome,KDE,Xfce,Ubuntu放弃的Unity,国产Deepin的DDE,都是桌面环境.也可以使用各种组件拼接出自己的桌面环境.
+--------------------
+下面介绍WSL下的解决方案.
+开启WSL功能并安装一个发行版.除了商店里的也可以看一下 yuk7/ArchWSL Archlinux
+安装Windows上的X server
+安装Xfce
+startxfce4
+可选的Windows端的Xserver有:
+
+(以下付费内容与我没有利益相关,我只是列举目前最好用的解决方案)
+VcXsrv Windows X Server 开源免费的选择,基于已经不更新的Xming
+MobaXterm free Xserver and tabbed SSH client for Windows 个人免费,专业版收费,功能强大,专业版$69 / 49€
+Buy X410 - Microsoft Store 应用商店收费,现在打二折 港区78港币(折合￥67),国区 ￥71 流畅度比其他的都高
+总之你要下载其中的一个.建议设置开机启动,
+
+然后需要在WSL里设置环境变量.
+
+export DISPLAY=:0
+export LIBGL_ALWAYS_INDIRECT=1
+export RUNLEVEL=3
+
+建议保存在.bashrc等shell的启动文件里.
+
+打开GUI程序,如果报错cannot open display: :0,说明X server没有打开或配置有问题.
+
+实际上VSCode支持在WSL中打开Win32版本,但是很多扩展在win32下不支持调用WSL中的程序
+
+注意,WSL发行版默认没有中文字体,中文GUI会乱码方块,可以借用Windows的字体
+
+root权限创建/etc/fonts/local.conf
+
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+	<dir>/mnt/c/Windows/Fonts</dir>
+</fontconfig>
+--------------------
+虽然直接输入Code就能启动VSCode,但是还是建议安装Xfce
+
+一方面这是所有DE中对WSL兼容性最好的,既不简陋,也没有强制使用3D合成器(目前WSL不支持3D加速,OpenGL不能使用)
+
+另一方面Xfce可以提供一些设置界面，修改默认主题和字体就不需要改配置文件了
+
+其次可以使用单一窗口模式（即在Windows窗口中绘制整个Linux屏幕，就像虚拟机一样）.
+
+此外Xfce会启动DBus,如果单独启动GUI程序,有可能报错找不到dbus-daemon.
+
+X410官方对单窗口模式的展示
+
+首先安装Xfce,各个发行版都有对应的包.
+
+建议卸载没有用的屏保 sudo apt purge xscreensaver (对于Ubuntu)
+
+然后命令行输入startxfce4启动,命令行不能关闭.
+
+最终效果:
+
+单窗口模式
+
+多窗口模式,Linux下的VSCode打开Windows的Bochs
+
+WSL与Hyper-V虚拟机的CPU性能相当,磁盘性能较差,图形性能都等于0.上方为WSL的Xfce面板
+
+提示:1903之后的Windows可以在资源管理器或者任何支持网络路径的win32程序中打开
+
+\\wsl$\
+
+查看WSL发行版的文件,并使用编辑器编辑.
+--------------------
+现在VSCode已经支持远程开发了,这意味着我们不再需要在WSL中运行VSCode了.
+
+Remote Development with Visual Studio Code​code.visualstudio.com
+

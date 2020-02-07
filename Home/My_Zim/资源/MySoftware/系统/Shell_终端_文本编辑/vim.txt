@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T06:55:17+08:00
+
+====== vim ======
+创建日期 星期三 22 十一月 2017
+
+Vim 从入门到精通
+https://github.com/wsdjeg/vim-galore-zh_cn/blob/master/README.md?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

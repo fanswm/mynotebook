@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-10T14:30:58+08:00
+
+====== 编程 ======
+Created Monday 10 December 2018
+
+在程序员客栈、云沃客、解放号接任务赚钱，这些都是程序员远程工作平台，价格非常的高！
+
+比如上面这个每天的价格800，而且还是远程工作哦。

@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-07T15:33:22+08:00
+
+====== 0 Drawing ======
+创建日期 星期二 07 一月 2020
+
+画图，标注，
+
+https://maoschanz.github.io/drawing/
+
+sudo add-apt-repository ppa:cartes/drawing
+sudo apt-get update
+ins drawing

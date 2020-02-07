@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-12T16:28:55+08:00
+
+====== 登录 ======
+创建日期 星期二 12 三月 2019
+
++ 登录容器
+运行中的容器其实就是一个完备的Linux操作系统，我们可以登录访问当前容器，登录后可以在容器中进行常规的Linux操作。
+`docker exec -it container-id/container-name bash`

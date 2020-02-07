@@ -1,0 +1,38 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-29T18:05:11+08:00
+
+====== 列表生成式 List Comprehensions ======
+Created Monday 29 January 2018
+
+List Comprehensions
+
+要生成list [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]可以用__list(range(1, 11))__
+
+__列表生成式__则可以用一行语句代替循环生成上面的list：
+
+>>> [x * x for x in range(1, 11)]
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+筛选：
+>>> [x * x for x in range(1, 11) __if x % 2 == 0__]
+[4, 16, 36, 64, 100]
+
+还可以__使用两层循环，__可以生成全排列：
+
+>>> [m + n for m in 'ABC' for n in 'XYZ']
+['AX', 'AY', 'AZ', 'BX', 'BY', 'BZ', 'CX', 'CY', 'CZ']
+
+列出__当前目录下的所有文件和目录名__，可以通过一行代码实现：
+
+>>> import os # 导入os模块，模块的概念后面讲到
+>>> [d for d in os.listdir('.')] # os.listdir可以列出文件和目录
+['.emacs.d', '.ssh', '.Trash', 'Adlm', 'Applications', 'Desktop', 'Documents', 'Downloads', 'Library', 'Movies', 'Music', 'Pictures', 'Public', 'VirtualBox VMs', 'Workspace', 'XCode']
+
+列表生成式也可以__使用两个变量__来生成list：
+
+>>> d = {'x': 'A', 'y': 'B', 'z': 'C' }
+>>> [k + '=' + v for k, v in d.items()]
+['y=B', 'x=A', 'z=C']
+
+但是，受到内存限制，__列表容量肯定是有限的。__

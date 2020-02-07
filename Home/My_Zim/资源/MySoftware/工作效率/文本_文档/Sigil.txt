@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-04T22:39:12+08:00
+
+====== Sigil ======
+创建日期 星期日 04 十一月 2018
+
+LibreOffice 可以直接导出到 EPUB 格式，但它不是个好的转换器。我没有尝试使用 LibreOffice 6.1 创建 EPUB，但在 LibreOffice 6.0 中没有包含我的图像。它还以奇怪的方式添加了样式。我使用 Sigil[9] 来调整 EPUB 并使一切看起来正常。Sigil 甚至还有预览功能，因此你可以看到 EPUB 的样子。
+
+https://sigil-ebook.com/

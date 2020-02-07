@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-18T17:11:45+08:00
+
+====== iconmonstr ======
+Created Monday 18 December 2017
+
+在平时的正式文稿里，我们使用黑白图标的频率可以说是比较高的了。iconmonstr 就是一个专门为你提供黑白图标的素材站点，从很基本的图形元素，到生活中常见的图标，甚至日常的社交 Logo，在这里你都可以找到。而且 iconmonstr 还为了提供 SVG、EPS、PSD、PNG 四种格式，方便你即使不用专业设计软件也可以愉快的使用它们。如果你还想有更快的操作，你也可以直接在官网下载它提供的 Iconic Font，而且值得一提的是他们一直在保持着更新。
+
+https://iconmonstr.com/

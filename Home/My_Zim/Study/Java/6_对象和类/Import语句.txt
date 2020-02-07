@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-05T17:45:27+08:00
+
+====== Import语句 ======
+Created Monday 05 March 2018
+
+在Java中，如果给出一个__完整的限定名__，包括包名、类名，那么Java编译器就可以很容易地定位到源代码或者类。Import语句就是__用来提供一个合理的路径，使得编译器可以找到某个类__。
+
+例如，下面的命令行将会命令编译器__载入java_installation/java/io路径下的所有类__
+
+__import java.io.*;__
+
+
+import 是__为了简化使用 package 之后的实例化的代码__。假设 ./aaa/bbb/ccc/ 下的 A 类，假如没有 import，实例化A类为：new aaa.bbb.ccc.A()，使用 import aaa.bbb.ccc.A 后，就可以直接使用 new A() 了，也就是编译器匹配并扩展了 aaa.bbb.ccc. 这串字符串。
+

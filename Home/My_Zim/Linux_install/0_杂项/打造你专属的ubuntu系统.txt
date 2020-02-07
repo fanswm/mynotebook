@@ -1,0 +1,140 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-18T18:57:20+08:00
+
+====== 打造你专属的ubuntu系统 ======
+创建日期 星期四 18 一月 2018
+
+https://juejin.im/post/59f9c9856fb9a0452b488e11
+
+前言：作为一名程序员重装系统是在所难免的，每次重装系统后都要安装一些必要的软件及进行一系列的环境配置，Windows倒还好，Linux上软件的安装及环境的配置都需要查找资料获取相应的命令，为了以后重装系统后不到处查找资料，就把一些常用的软件的安装命令及系统的配置命令记录下来。
+
+注：本文软件的安装及环境的配置都是基于Ubuntu16.04的。
+### 删除软件
+#### 删除libreoffice
+`sudo apt-get remove libreoffice-common `
+
+#### 删除Amazon的链接
+`sudo apt-get remove unity-webapps-common `
+#### 删除一些不常用的软件
+`sudo apt-get remove thunderbird totem rhythmbox empathy brasero simple-scan gnome-mahjongg aisleriot gnome-mines cheese transmission-common gnome-orca webbrowser-app gnome-sudoku`
+`sudo apt-get remove onboard deja-dup`
+#### 更新
+  通过以下命令便可以更新系统和软件
+sudo apt-get update
+sudo apt-get upgrade
+主题美化
+  Ubuntu原生的主题真是不敢恭维，个人比较喜欢Mac的主题，这里就说一下怎样把主题变为Mac主题。
+安装 MacUbuntu OS Theme、Icons 和 Cursors
+sudo add-apt-repository ppa:noobslab/macbuntu
+sudo apt-get update
+sudo apt-get install macbuntu-os-icons-lts-v7
+sudo apt-get install macbuntu-os-ithemes-lts-v7
+安装Unity Tweak Tool 及启用主题
+  上面的命令是将主题下载到本地，可以通过Unity Tweak Tool进行主题的设置，下面是Unity Tweak Tool 的安装命令。
+sudo apt-get install unity-tweak-tool 
+通过以下命令打开软件
+unity-tweak-tool
+打开之后的界面如下
+
+然后，就可以设置下载过的主题了。
+安装 Slingscold（替代Launchpad）
+sudo add-apt-repository ppa:noobslab/macbuntu
+sudo apt-get update
+sudo apt-get install slingscold
+Slingscold就是显示本地中已安装的软件
+
+安装 Plank Dock
+sudo apt-get install plank
+安装后通过一下命令启动
+plank
+启动后的界面如下
+
+安装之后并不是这样的，这里我们需要安装plank主题，安装plank主题的命令如下
+sudo add-apt-repository ppa:noobslab/macbuntu
+sudo apt-get update
+sudo apt-get install macbuntu-os-plank-theme-lts-v7
+安装之后，调出plank后按住ctrl键右击鼠标便可以调出菜单，再点击菜单中的首选项就能够更换plank的主题了。
+设置plank为开机启动
+  每次手动启动plank太麻烦，设置开机启动就省了很多事，关于怎样设置开机启动可以看这里，ubuntu16.04添加应用开机启动。下图是设置plank开机启动的命令
+
+修改状态栏“Ubuntu桌面”为“Mac OS X”
+  以下命令便可以将状态栏“Ubuntu桌面”设置为“Mac OS X”
+cd && wget -O Mac.po http://drive.noobslab.com/data/Mac/change-name-on-panel/mac.po
+cd /usr/share/locale/zh_CN/LC_MESSAGES
+sudo msgfmt -o unity.mo ~/Mac.po;rm ~/Mac.po
+如果系统用的不是中文，只需要将上述命令中的“zh_CN”换成其他语言就行了，如系统是英语，则将“zh_CN”换成“en”。
+软件的安装
+安装搜狗输入法
+  搜狗输入法有Linux版，可以到官网下载，下载之后通过一下命令进行安装
+sudo dpkg -i sogoupinyin_2.1.0.0086_amd64.deb
+如果安装中要遇到缺少依赖的问题，可以通过一下命令添加依赖
+sudo apt-get -f install
+然后再次运行安装命令即可。
+安装chrome或chromium
+安装chrome
+sudo apt-get install libappindicator1 libindicator7  
+sudo dpkg -i google-chrome-stable_current_amd64.deb   
+sudo apt-get -f install  
+安装chromium
+sudo add-apt-repository ppa:a-v-shkop/chromium
+sudo apt-get update
+sudo apt-get install chromium-browser
+安装解压rar
+  Ubuntu上是不能直接解压rar文件的，需要安装unrar，以下是安装命令
+sudo apt-get install unrar
+安装wps
+  可以在官网下载安装包，然后通过以下命令进行安装
+sudo dpkg -i wps-office_10.1.0.5672~a21_amd64.deb 
+同样，如果提示缺少依赖，运行一下命令
+sudo apt-get -f install
+然后再次安装。
+解决wps提示字体缺失问题
+
+下载字体文件：https://pan.baidu.com/s/1eS6xIzo。
+解压缩，定位到解压后的文件夹运行以下命令。
+
+sudo cp mtextra.ttf  symbol.ttf  WEBDINGS.TTF  wingding.ttf  WINGDNG2.ttf  WINGDNG3.ttf  /usr/share/fonts 
+这样就能成功解决字体缺失的问题了。
+安装 shadowsocks-qt5
+sudo add-apt-repository ppa:hzwhuang/ss-qt5
+sudo apt-get update
+sudo apt-get install shadowsocks-qt5
+安装markdown软件
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 
+sudo add-apt-repository 'deb http://typora.io linux/'
+sudo apt-get update
+sudo apt-get install typora
+安装为知笔记
+sudo add-apt-repository ppa:wiznote-team 
+sudo apt-get update 
+sudo apt-get install wiznote
+安装网易云音乐
+  官网下载安装包，安装方法同“安装搜狗输入法”。
+安装录屏软件（SimpleScreenRecorder）
+sudo add-apt-repository ppa:maarten-baert/simplescreenrecorder
+sudo apt-get update
+sudo apt-get install simplescreenrecorder
+将视屏转为Gif动图
+下载ffmpeg
+sudo add-apt-repository ppa:jonathonf/ffmpeg-3
+sudo apt-get update
+sudo apt-get install ffmpeg
+将视频转换为Gif命令
+ffmpeg -i out.ogv out.gif
+消除图片抖动
+  使用默认的ffmpeg转换后的gif图片像素会有抖动，因此需要使用滤镜,可以将下面的内容保存为脚本gifenc.sh
+#!/bin/sh  
+palette="/tmp/palette.png"  
+filters="fps=15,scale=320:-1:flags=lanczos"  doudong
+ffmpeg -v warning -i $1 -vf "$filters,palettegen" -y $palette  
+ffmpeg -v warning -i $1 -i $palette -lavfi "$filters [x]; [x][1:v] paletteuse" -y $2  
+然后执行以下命令即可消除抖动
+./gifenc.sh out.ogv anim.gif  
+结束语
+  这篇文章就先介绍这么多，以后可能还会继续补充，欢迎持续关注
+
+作者：wizardev
+链接：https://juejin.im/post/59f9c9856fb9a0452b488e11
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

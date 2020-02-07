@@ -1,0 +1,71 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-25T20:31:05+08:00
+
+====== MongoDB启动异常 报错 及 正确的关闭方法 ======
+创建日期 星期一 25 十一月 2019
+
+
+报错1：
+[ftdc] Unclean full-time diagnostic data capture shutdown detected, found interim file, some metrics may have been lost.
+
+解决办法：
+
+1、删除掉diagnostic数据：
+
+rm -f /var/lib/mongo/diagnostic.data/*
+2、启动mongodb。
++++++++++++++另外一个+++++++++++++++++++++++++
+解决办法如下:
+
+./mongod --repair --dbpath=/data/mongodb/db
+执行成功后，再启动Mongo服务就可以了.
+++++++++++++++++++++++++++++++++++++++
+
+进入MongoDB的bin目录下，
+
+ sudo ./mongod
+报错2：
+2018-07-20T22:42:08.645+0800 I STORAGE  [initandlisten] exception in initAndListen: DBPathInUse: Unable to lock the lock file:
+
+(Unknown error). Another mongod instance is already running on the /data/db directory, terminating.
+
+2018-07-20T22:42:08.645+0800 I CONTROL  [initandlisten] now exiting
+2018-07-20T22:42:08.645+0800 I CONTROL  [initandlisten] shutting down with code:100
+
+解决办法：mongodb非正常关闭 删除mongod.lock文件即可.(lock文件所在路径各有不同)
+
+sudo rm /data/db/mongod.lock
+报错3：
+2018-07-20T22:29:17.982+0800 I CONTROL  [initandlisten] MongoDB starting : pid=3499 port=27017 dbpath=/data/db 64-bit host=xumovm
+
+......
+
+2018-07-20T21:12:05.974+0800 E STORAGE  [initandlisten] Failed to set up listener: SocketException: Address already in use
+
+解决办法：
+
+找到mongo之前运行的PID号，关掉它，重新输入启动命令
+
+sudo netstat -anp|more
+激活Internet连接 (服务器和已建立连接的)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+ PID/Program name    
+tcp        0      0 127.0.0.1:27017         0.0.0.0:*               LISTEN     
+ 2515/./mongod       
+ 
+sudo kill 2515
+__正确的关闭方法：停止Mongodb__
+方法一：查看进程，使用kill命令；不能使用kill -9
+
+方法二：在在客户端进去，使用shutdown命令
+
+/usr/local/mongodb/bin:$ ./mongod
+> __use admin;__ 
+switched to db admin 
+> __db.shutdownServer();__
+ server should be down...
+
+————————————————
+版权声明：本文为CSDN博主「dashen180309」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/dashen180309/article/details/81138730

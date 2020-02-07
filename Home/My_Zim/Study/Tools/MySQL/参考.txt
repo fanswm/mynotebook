@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-06T12:00:25+08:00
+
+====== 参考 ======
+Created Wednesday 06 December 2017
+
+掘金:https://juejin.im/entry/5a2655b46fb9a045204c1298
+	MySQL 安全建议: https://dev.mysql.com/doc/refman/5.7/en/security-against-attack.html
+
+	权限类型: https://dev.mysql.com/doc/refman/5.7/en/privileges-provided.html
+
+	备份相关: https://dev.mysql.com/doc/refman/5.7/en/backup-types.html

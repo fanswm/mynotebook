@@ -1,0 +1,118 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-07T21:19:05+08:00
+
+====== i3 ======
+创建日期 星期五 07 二月 2020
+
+ins i3status
+147 pacman -Sg gnome
+148 pacman -Ss gdm
+149 pacman -Sg i3
+150 pacman -Ss i3status
+151 pacman -Ss i3-gnome
+152 ins i3
+153 ins i3-gaps i3lock
+154 ins i3-gnome-git
+155 ins rofi
+156 sudo reboot
+157 rofi
+158 vim .config/i3/config
+159 exec google-chrome-stable
+160 vim .config/i3/config
+161 gnome-terminal
+162 c
+163 clear
+164 c
+165 ls
+166 clear
+167 vim .config/i3/config
+168 exit
+169 vim .config/i3/config
+170 sudo reboot
+171 rofi --help
+172 c\n
+173 vim .config/i3/config
+174 exit
+175 ls
+176 sudo reboot
+177 free -h
+178 c
+179 sudo reboot
+180 vim .config/i3/config
+181 rofi -h
+182 c
+183 vim .config/i3/config
+184 sudo reboot
+185 vim .config/i3/config
+186 rofi -h
+187 rofi -show fb
+188 rofi -show drun
+189 rofi -combi-modi window,drun -show combi -modi combi
+190 rofi -dump-Xresources
+191 vim .config/i3/config
+192 sudo reboot
+193 vim .config/i3/config
+194 exit
+195 sudo pacman -Rs i3-gnome-git
+196 ins feh
+197 vim .config/i3/config
+198 cd
+199 mkdir pics
+200 df -h
+201 sudo mount /dev/sdb10 /mnt
+202 sudo umount /mnt
+203 sudo mount /dev/sdb11 /mnt
+204 cd /mnt
+205 ls
+206 cd fanswm
+207 ls
+208 cd picture
+209 ls
+210 cd ..
+211 ls
+212 cp -R ./picture ~/pics
+213 cd
+214 sudo umount /mnt
+215 c
+216 sudo reboot
+217 cd pics
+218 ls
+219 ll
+220 cd picture
+221 ls
+222 ll
+223 cp ./* ../
+224 cd ..
+225 ls
+226 rmdir ./picture
+227 cd picture
+228 ls
+229 cd ..
+230 rm -rf ./picture
+231 exit
+232 reboot
+233 top
+234 ps aux | grep time
+235 sudo pacman -Syu
+236 ins compton
+237 c
+238 vim .config/i3/config
+239 ins terminator
+240 ins ttf-font-awesome
+241 pacman -Ss ibus
+242 ibus 
+243 ibus-table-createdb
+244 ibus-daemon 
+245 yay -S polybar-git
+246 sudo pacman -Syu
+247 sudo pacman -S polybar-git
+248 c
+249 vim .config/i3/config
+250 exit
+251 ls
+252 cat ./manjaro_install.txt
+253 vim ./manjaro_install.txt
+254 c
+255 exit
+256 vim .config/i3/config

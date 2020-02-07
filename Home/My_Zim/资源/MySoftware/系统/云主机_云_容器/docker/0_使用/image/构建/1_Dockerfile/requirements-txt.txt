@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-05T11:33:28+08:00
+
+====== requirements-txt ======
+创建日期 星期二 05 三月 2019
+
+requirements.txt
+```
+Flask
+Redis
+```

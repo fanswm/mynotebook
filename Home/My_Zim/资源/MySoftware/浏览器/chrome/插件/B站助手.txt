@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-08-10T11:44:06+08:00
+
+====== B站助手 ======
+Created Friday 10 August 2018
+
+https://bilihelper.guguke.net/
+时至今日，已经拥有了关注内容更新推送、视频下载、自动签到、直播辅助等数项涵盖全站板块的功能。此外，你还可以利用哔哩哔哩助手反查具体弹幕发送者，方便屏蔽喷子们。

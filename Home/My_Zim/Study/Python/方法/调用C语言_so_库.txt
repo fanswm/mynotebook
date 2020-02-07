@@ -1,0 +1,315 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-11T21:13:58+08:00
+
+====== 调用C语言 so 库 ======
+创建日期 星期六 11 一月 2020
+
+__共享库__
+
+　　__使用C语言编译产生共享库，然后python使用ctype库里的cdll来打开共享库。__
+
+__　　举例如下，C语言代码为__
+
+/* func.c */
+int func(int a)
+{
+		return a*a;
+}
+
+__　　python代码为__
+#!/usr/bin/env python
+#test_so.py
+__from ctypes import cdll__
+import os
+
+p = os.getcwd() + '/libfunc.so'	# 库的位置
+f = cdll.LoadLibrary(p)
+print f.func(99)
+
+	
+$ gcc -fPIC -shared func.c -o libfunc.so
+$ ./test_so.py
+9801
+
+　　
+
+　__　subprocess__
+
+　　C语言设计一个完整的可执行文件，然后python通过subprocess来执行该可执行文件，本质上是__fork+execve。__
+
+　　举例如下，C语言代码为
+/* test.c */
+#include <stdio.h>
+int func(int a)
+{
+		return a*a;
+}
+
+int main(int argc, char **argv)
+{
+		int x;
+
+		sscanf(argv[1], "%d", &x);
+		printf("%d\n", func(x));
+		return 0;
+}
+
+　　Python代码为
+#!/usr/bin/env python
+# test_subprocess.py
+import os
+import subprocess
+
+subprocess.call([os.getcwd()+__'/a.out', '99'__])
+
+$ gcc test.c -o a.out
+$ ./test_subprocess.py
+9801
+
+　　
+
+　__　C语言中运行python程序__
+
+　__　C语言使用popen/system或者直接以系统调用级fork+exec来运行python程序也是一种混编的手段了。__
+
+　__　举例如下，Python代码如下__
+
+#!/usr/bin/env python
+# test.py
+import sys
+x = int(sys.argv[1])
+print x*x
+
+　　__C语言代码如下__
+/* test.c */
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+		FILE *f;
+		char s[1024];
+		int ret;
+
+		f = popen("./test.py 99", "r");
+		while((ret=fread(s,1,1024,f))>0) {
+				fwrite(s,1,ret,stdout);
+		}
+		fclose(f);
+		return 0;
+}
+
+__　　测试如下__
+$ gcc test.c
+$ ./a.out
+9801
+
+　　
+
+　　python对C语言扩展的支持
+
+　　很多编程语言都为C语言扩展添加了支持，这有两种原因：__(1)语言设计之初，可以充分的利用C语言已有的库来做很多扩展；(2)C语言的运行效率高。__
+
+　　python也不例外，从诞生那天起，很多库都是C语言写的。python的C语言扩展中涉及到python的数据结构与C语言的对应，扩展方法其实是用C语言编写一个共享库，只是这个共享库中的接口是一个规范的，可以被python识别的。
+
+　　为了说明如何扩展，我这里先假设一个在python下的函数功能，代码如下
+
+def func(*a):
+	res=1
+	for i in range(len(a)):
+		res *= sum(a[i])
+	return res
+
+　　如上，希望的函数功能是，参数是任意多个数字组成的列表（姑且排除其他数据结构），__返回每个列表的元素之和的乘积。__
+
+　　姑且先把python代码写了，如下所示
+复制代码
+复制代码
+
+#!/usr/bin/env python
+# test.py
+import colin
+
+def func(*a):
+	res=1
+	for i in range(len(a)):
+		res *= sum(a[i])
+	return res
+
+a = [1,2,3]
+b = [4,5,6]
+c = [7,8]
+d = [9]
+e = [10,11,12,13,14]
+
+f = colin.func2(99)
+g = colin.func3(a,b,c,d,e)
+h = func3(a,b,c,d,e)
+print "f = ",f
+print "g = ",g
+print "h = ",h
+
+　　带上之前一直测试的平方func，这个实现相对简单，希望python写出来的func可以和C语言扩展出来的结果一致。
+
+　　先用C语言写上这些函数的实现，其中func3用上了一个表示任意多个任意长的数组的数据结构y_t,而x_t用来表示单个数组。
+复制代码
+复制代码
+
+/* colin.h */
+#ifndef Colin_h
+#define Colin_h
+typedef struct {
+		int *a;
+		int len;
+} x_t;
+typedef struct {
+		x_t *ax;
+		int len;
+} y_t;
+int func2(int a);
+int func3(y_t *p);
+void free_y_t(y_t *p);
+#endif
+
+复制代码
+复制代码
+
+　　
+复制代码
+复制代码
+
+/* colin.c */
+#include "colin.h"
+#include <stdlib.h>
+
+int func2(int a)
+{
+		return a*a;
+}
+
+int func3(y_t *p)
+{
+		int result;
+		int sum;
+		int i, j;
+
+		result = 1;
+		for(i=0;i<p->len;i++) {
+				sum = 0;
+				for(j=0;j<p->ax[i].len;j++)
+						sum += p->ax[i].a[j];
+				result *= sum;
+		}
+
+		return result;
+}
+
+void free_y_t(y_t *p)
+{
+		int i;
+		for(i=0;i<p->len;i++) {
+				free(p->ax[i].a);
+		}
+		free(p->ax);
+}
+
+复制代码
+复制代码
+
+　　上面定义了三个函数，func2代表平方，func3代表之前所说的功能，又因y_t这个结构可能都是动态分配出来的，所以给个归还内存的方法。
+
+　　刚才说过python扩展的话，需要把这个共享库的接口“标准化”一下。于是我们就包装一下，并给个python加载的入口。
+复制代码
+复制代码
+
+/* wrap.c */
+#include <Python.h>
+#include <stdlib.h>
+#include "colin.h"
+PyObject* wrap_func2(PyObject* self, PyObject* args)
+{
+		int n, result;
+		/* 从参数列表中导出一个整形，用"i" */
+		if (!PyArg_ParseTuple(args, "i", &n))
+				return NULL;
+
+		/* 用C语言的库实现来计算 */
+		result = func2(n);
+		/* 计算结果必须要导成python识别的类型 */
+		return Py_BuildValue("i", result);
+}
+
+PyObject* wrap_func3(PyObject* self, PyObject* args)
+{
+		int n, result;
+		int i, j;
+		int size, size2;
+		PyObject *p,*q;
+		y_t *y;
+
+		y = malloc(sizeof(y_t));
+		/* 先数数有多少个参数，也就是列表的个数 */
+		size = PyTuple_Size(args);
+		/* 把数组的个数先分配了 */
+		y->len = size;
+		y->ax = malloc(sizeof(x_t)*size);
+		/* 遍历python里各个列表(参数) */
+		for(i=0;i<size;i++) {
+				/* 先获得第i个参数，是一个列表 */
+				p = PyTuple_GetItem(args, i);
+				/* 获得列表的长度 */
+				size2 = PyList_Size(p);
+				/* 为数组分配好空间 */
+				y->ax[i].len = size2;
+				y->ax[i].a = malloc(sizeof(int)*size2);
+				/* 遍历列表，依次把列表里的数转到数组里 */
+				for(j=0;j<size2;j++) {
+						q = PyList_GetItem(p, j);
+						PyArg_Parse(q,"i",&y->ax[i].a[j]);
+				}
+		}
+
+		/* 用C语言的库实现来计算 */
+		result = func3(y);
+		free_y_t(y);
+		free(y);
+		/* 结果转成python识别格式 */
+		return Py_BuildValue("i", result);
+}
+
+/* 这是接口列表，加载时是只加载此列表的地址，所以这个数据结构不能放栈（局部变量）内，会被清掉 */
+static PyMethodDef colinMethods[] =
+{
+		{"func2", wrap_func2, METH_VARARGS, "Just a test"},
+		{"func3", wrap_func3, METH_VARARGS, "Just a test"},
+		{NULL, NULL, METH_NOARGS, NULL}
+};
+
+/* python加载的时候的接口 */
+/* 注意，既然库名叫colin,此函数必须交initcolin */
+void initcolin()
+{
+		PyObject *m;
+		m = Py_InitModule("colin", colinMethods);
+}
+
+复制代码
+复制代码
+
+　　过程中，我猜测PyArg_VaParse应该功能更为强大，可是反复测没有成功，也没细看文档。
+
+　　测试一下
+	
+$ gcc -I /usr/include/python2.7/ -fPIC -shared colin.c wrap.c -o colin.so
+$ ./test.py
+f =  9801
+g =  729000
+h =  729000
+
+　　可以看到，C语言写的函数和python写的函数结果一致。
+
+　　
+
+ 
+
+出处：http://www.cnblogs.com/Colin-Cai/p/7594551.html

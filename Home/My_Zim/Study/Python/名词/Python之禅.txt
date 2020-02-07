@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-27T16:54:57+08:00
+
+====== Python之禅 ======
+Created Thursday 27 December 2018
+
+`import this`

@@ -1,0 +1,23 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-18T21:19:10+08:00
+
+====== Send Anywhere ======
+创建日期 星期四 18 一月 2018
+
+[SendAnywhere](https://send-anywhere.com/) 虽然也支持无需下载任何客户端即可完成上传、分享和下载的工作，但其依然在跨平台上有着更出色的表现，支持 Windows、macOS、Linux 三大桌面端，iOS、 Android、Windows Phone 三大移动平台（WP 还算吗？），以及 Chrome、Outlook、Gmail、Wordpress、Slack 等工具平台，官方还提供了 API 开发接口。
+
+
+在不下载任何客户端的情况下，SendAnywhere 有下面几点抢眼的表现：
+
+Web 网站主界面。主界面给出了清晰的上传区域和支持最大 4GB 大小的单个文件，SendAnywhere 还支持一次性上传多个文件，最多可传输 100GB 大小的文件。
+
+三种分享方式。支持「6 位数字密钥」+「二维码分享」+「超链接分享」，虽然我未登录 SendAnywhere 的账号，但依然不影响使用，文件上传完之后，将自动生成二维码和专属超链接，好友只需要打开超链接或者直接扫描二维码即可转到文件下载页面。SendAnywhere 还提供了电子邮件发送的方式，类似使用 Email 附件上传的形式。
+
+安全性。如果用户注册 SendAnywhere 账号服务，可以查看、删除曾经分享过的文件。另外针对不同的分享方式，SendAnywhere 会设置一定的分享时间，6 位数字密钥和二维码的分享方式都会保存 10 分钟，如果在 10 分钟之内还未被任何设备接收，则本次分享作废，需要重新分享。超链接分享方式则会保存 48 小时，而且在这 48 小时内可多次下载分享的文件。
+
+扩展阅读：[免费全平台的文件分享利器：SendAnywhere](https://sspai.com/post/40047)
+
+
+这可能是最好用的跨平台文件传输神器！
+https://zhuanlan.zhihu.com/p/58371554?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

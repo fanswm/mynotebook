@@ -1,0 +1,26 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:52:47+08:00
+
+====== Kazam 录制视频 ======
+Created Wednesday 24 October 2018
+
+Kazam[68] 可以用于捕获屏幕截图，它的输出对于任何支持 VP8/WebM 和 PulseAudio 视频播放器都可用。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Kazam。
+
+$ sudo add-apt-repository ppa:kazam-team/unstable-series
+$ sudo apt update
+$ sudo apt install kazam python3-cairo python3-xlib
+
+https://launchpad.net/kazam
+
+Arch Linux:
+
+yay -Ss kazam
+aur/kazam 1.4.5-7 (+123 0.72%) (Out-of-date 2020-01-12) 
+	A screencasting program with design in mind
+
+yay -S kazam
+[[+error]]
+ins fakeroot

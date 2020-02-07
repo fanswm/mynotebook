@@ -1,0 +1,97 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-13T19:19:07+08:00
+
+====== 使用MySQL ======
+创建日期 星期一 13 一月 2020
+
+MySQL是Web世界中使用最广泛的数据库服务器。SQLite的特点是轻量级、可嵌入，但不能承受高并发访问，适合桌面和移动应用。而MySQL是为服务器端设计的数据库，__能承受高并发访问__，同时占用的内存也远远大于SQLite。
+
+此外，MySQL内部__有多种数据库引擎__，最常用的引擎是__支持数据库事务的InnoDB__。
+安装MySQL
+
+可以直接从MySQL官方网站下载最新的Community Server 5.6.x版本。MySQL是跨平台的，选择对应的平台下载安装文件，安装即可。
+
+安装时，MySQL会提示输入root用户的口令，请务必记清楚。如果怕记不住，就把口令设置为password。
+
+在Windows上，安装时请选择UTF-8编码，以便正确地处理中文。
+
+在Mac或Linux上，需要编辑MySQL的配置文件，把数据库默认的编码全部改为UTF-8。MySQL的配置文件__默认存放在/etc/my.cnf或者/etc/mysql/my.cnf：__
+
+__[client]__
+__default-character-set = utf8__
+
+__[mysqld]__
+__default-storage-engine = INNODB__
+__character-set-server = utf8__
+__collation-server = utf8_general_ci__
+
+重启MySQL后，可以通过MySQL的客户端命令行__检查编码：__
+
+$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor...
+...
+
+mysql> __show variables like '%char%';__
++--------------------------+--------------------------------------------------------+
+| Variable_name            | Value                                                  |
++--------------------------+--------------------------------------------------------+
+| character_set_client     | utf8                                                   |
+|--------------------------|--------------------------------------------------------|
+| character_set_connection | utf8                                                   |
+| character_set_database   | utf8                                                   |
+| character_set_filesystem | binary                                                 |
+| character_set_results    | utf8                                                   |
+| character_set_server     | utf8                                                   |
+| character_set_system     | utf8                                                   |
+| character_sets_dir       | /usr/local/mysql-5.1.65-osx10.6-x86_64/share/charsets/ |
++--------------------------+--------------------------------------------------------+
+8 rows in set (0.00 sec)
+
+看到utf8字样就表示编码设置正确。
+
+注：__如果MySQL的版本≥5.5.3，可以把编码设置为utf8mb4，utf8mb4和utf8完全兼容，但它支持最新的Unicode标准，可以显示emoji字符。__
+安装MySQL驱动
+
+由于MySQL服务器以独立的进程运行，并通过网络对外服务，所以，需要支持Python的MySQL驱动来连接到MySQL服务器。MySQL官方提供了__mysql-connector-python驱__动，但是安装的时候需要给pip命令加上参数--allow-external：
+
+$__ pip install mysql-connector-python --allow-external mysql-connector-python__
+
+如果上面的命令安装失败，可以试试另一个驱动：
+
+$ __pip install mysql-connector__
+
+我们演示如何连接到MySQL服务器的test数据库：
+
+# __导入MySQL驱动:__
+__>>> import mysql.connector__
+# 注意把password设为你的root口令:
+>>> conn = mysql.connector.connect(user='root', password='password', database='test')
+>>> cursor = conn.cursor()
+# 创建user表:
+>>> cursor.execute('create table user (id varchar(20) primary key, name varchar(20))')
+# 插入一行记录，注意MySQL的占位符是%s:
+>>> cursor.execute('insert into user (id, name) values (%s, %s)', ['1', 'Michael'])
+>>> cursor.rowcount
+1
+# 提交事务:
+>>> conn.commit()
+>>> cursor.close()
+# 运行查询:
+>>> cursor = conn.cursor()
+>>> cursor.execute('select * from user where id = %s', ('1',))
+>>> values = cursor.fetchall()
+>>> values
+[('1', 'Michael')]
+# 关闭Cursor和Connection:
+>>> cursor.close()
+True
+>>> conn.close()
+
+由于Python的DB-API定义都是通用的，所以，操作MySQL的数据库代码和SQLite类似。
+小结
+
+	__执行INSERT等操作后要调用commit()提交事务；__
+
+	__MySQL的SQL占位符是%s。__

@@ -1,0 +1,1354 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-26T20:25:14+08:00
+
+====== 3W字长文讲透Nginx高阶用法 ======
+创建日期 星期日 26 一月 2020
+
+https://zhuanlan.zhihu.com/p/100124676?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
+Nginx 状态页
+基于nginx模块ngx_http_auth_basic_module实现，在编译安装nginx的时候需要添加编译参数--with-http_stub_status_module，否则配置完成之后监测会是提示语法错误。
+查看是否加载了ngx_http_auth_basic_module模块
+[root@CentOS7 ~]#/apps/nginx/sbin/nginx -V
+nginx version: nginx/1.14.2
+built by gcc 4.8.5 20150623 (Red Hat 4.8.5-36) (GCC)
+built with OpenSSL 1.0.2k-fips  26 Jan 2017
+TLS SNI support enabled
+configure arguments: --prefix=/apps/nginx --user=nginx --group=nginx --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_stub_status_module --with-http_gzip_static_module --with-pcre --with-stream --with-stream_ssl_module --with-stream_realip_module --with-http_perl_module
+[root@CentOS7 ~]#vim /apps/nginx/conf/nginx.conf
+		location /nginx_status {
+				stub_status;
+				allow 192.168.36.0/24;
+				deny all;
+		}
+
+[root@CentOS7 ~]#/apps/nginx/sbin/nginx -s reload
+访问测试
+
+[root@CentOS-Test ~]#curl 192.168.36.104/nginx_status
+Active connections: 1
+server accepts handled requests
+ 124 124 223  # 这三个数字分别对应accepts,handled,requests三个值
+Reading: 0 Writing: 1 Waiting: 0
+
+Active connections：当前处于活动状态的客户端连接数，包括连接等待空闲连接数。
+accepts：统计总值，Nginx自启动后已经接受的客户端请求的总数。
+handled：统计总值，Nginx自启动后已经处理完成的客户端请求的总数，通常等于accepts，除非有因
+worker_connections限制等被拒绝的连接。
+requests：统计总值，Nginx自启动后客户端发来的总的请求数。
+Reading：当前状态，正在读取客户端请求报文首部的连接的连接数。
+Writing：当前状态，正在向客户端发送响应报文过程中的连接数。
+Waiting：当前状态，正在等待客户端发出请求的空闲连接数，开启 keep-alive的情况下,这个值等于active – (reading+writing),
+Nginx第三方模块
+添加第三方模块：echo-nginx-module
+[root@CentOS7 ~]#yum install git -y
+[root@CentOS7 ~]#git clone https://github.com/openresty/echo-nginx-module.git
+[root@CentOS7 ~]#cd nginx-1.14.2/
+[root@CentOS7 nginx-1.14.2]#./configure \  # 重新编译安装
+> --prefix=/apps/nginx \
+> --user=nginx --group=nginx \
+> --with-http_ssl_module \
+> --with-http_v2_module \
+> --with-http_realip_module \
+> --with-http_stub_status_module \
+> --with-http_gzip_static_module \
+> --with-pcre \
+> --with-stream \
+> --with-stream_ssl_module \
+> --with-stream_realip_module \
+> --with-http_perl_module \
+> --add-module=/root/echo-nginx-module  # 添加echo模块
+
+[root@CentOS7 nginx-1.14.2]#make && make install  # make安装
+[root@CentOS7 ~]#vim /apps/nginx/conf.d/pc.conf
+[root@CentOS7 ~]#cat /apps/nginx/conf.d/pc.conf
+server {
+  listen 80;
+  server_name www.darius.com;
+  error_log logs/www_darius_com_error.log;
+  access_log logs/www_darius_com_access.log;
+  location /main {
+	index index.html;
+	default_type text/html;
+	echo_reset_timer;
+	echo_location /sub1;
+	echo_location /sub2;
+	echo "took $echo_timer_elapsed sec for total.";
+  }
+  location /sub1 {
+	echo_sleep 1;
+	echo sub1;
+  }
+  location /sub2 {
+	echo_sleep 1;
+	echo sub2;
+  }
+}
+[root@CentOS7 ~]#/apps/nginx/sbin/nginx -t
+nginx: the configuration file /apps/nginx/conf/nginx.conf syntax is ok
+nginx: configuration file /apps/nginx/conf/nginx.conf test is successful
+[root@CentOS7 ~]#/apps/nginx/sbin/nginx -s reload
+访问测试
+
+[root@CentOS7 ~]#curl www.darius.com/main
+sub1
+sub2
+took 2.008 sec for total.
+Nginx变量使用
+nginx的变量可以在配置文件中引用，作为功能判断或者日志等场景使用，变量可以分为内置变量和自定义变量，内置变量是由nginx模块自带，通过变量可以获取到众多的与客户端访问相关的值。
+
+内置变量
+$remote_addr;
+# 存放了客户端的地址，注意是客户端的公网IP，也就是一家人访问一个网站，则会显示为路由器的公网IP。
+$args；
+# 变量中存放了URL中的指令，例如 http://www.darius.com/main/index.do?
+id=20190221&partner=search中的id=20190221&partner=search
+$document_root；
+# 保存了针对当前资源的请求的系统根目录，如/apps/nginx/html
+$document_uri；
+# 保存了当前请求中不包含指令的URI，注意是不包含请求的指令，比如
+http://www.darius.com/main/index.do?id=20190221&partner=search 会被定义为/main/index.do
+$host；
+#存放了请求的host名称。
+$http_user_agent；
+# 客户端浏览器的详细信息
+$http_cookie；
+# 客户端的cookie信息
+limit_rate 10240;
+echo $limit_rate;
+# 如果nginx服务器使用limit_rate配置了显示网络速率，则会显示，如果没有设置， 则显示0
+$remote_port；
+# 客户端请求Nginx服务器时随机打开的端口，这是每个客户端自己的端口
+$remote_user；
+# 已经经过Auth Basic Module验证的用户名
+$request_body_file；
+# 做反向代理时发给后端服务器的本地资源的名称
+$request_method；
+# 请求资源的方式，GET/PUT/DELETE等
+$request_filename；
+# 当前请求的资源文件的路径名称，由root或alias指令与URI请求生成的文件绝对路径，如/apps/nginx/html/main/index.html
+$request_uri；
+# 包含请求参数的原始URI，不包含主机名，如：/main/index.do?id=20190221&partner=search
+$scheme；
+# 请求的协议，如ftp，https，http等
+$server_protocol；
+# 保存了客户端请求资源使用的协议的版本，如HTTP/1.0，HTTP/1.1，HTTP/2.0等
+$server_addr；
+# 保存了服务器的IP地址
+$server_name；
+# 请求的服务器的主机名
+$server_port；
+# 请求的服务器的端口号
+自定义变量
+假如需要自定义变量名称和值，使用指令set $variable value;，则方法如下：
+
+set $name magedu;
+echo $name;
+set $my_port $server_port;
+echo $my_port;
+echo "$server_name:$server_port";
+范例
+1、查看Nginx内置变量
+[root@CentOS7 ~]#vim /apps/nginx/conf.d/pc.conf
+[root@CentOS7 ~]#cat /apps/nginx/conf.d/pc.conf
+server {
+  listen 80;
+  server_name www.darius.com;
+  error_log logs/www_darius_com_error.log;
+  access_log logs/www_darius_com_access.log;
+  location /main {
+	index index.html;
+	default_type text/html;
+	echo $request_uri;
+  }
+}
+[root@CentOS7 ~]#/apps/nginx/sbin/nginx -s reload
+[root@CentOS7 ~]#curl www.darius.com/main
+/main
+[root@CentOS7 ~]#curl www.darius.com/main/xxx
+/main/xxx
+2、查看Nginx自定义变量
+[root@CentOS7 ~]#vim /apps/nginx/conf.d/pc.conf
+[root@CentOS7 ~]#cat /apps/nginx/conf.d/pc.conf
+server {
+  listen 80;
+  server_name www.darius.com;
+  error_log logs/www_darius_com_error.log;
+  access_log logs/www_darius_com_access.log;
+  location /main {
+	index index.html;
+	default_type text/html;
+	set $name Darius;
+	echo $name;
+  }
+}
+[root@CentOS7 ~]#/apps/nginx/sbin/nginx -s reload
+[root@CentOS7 ~]#curl www.darius.com/main
+Darius
+自定义Nginx访问日志
+访问日志是记录客户端即用户的具体请求内容信息，全局配置模块中的error_log是记录nginx服务器运行时的日志保存路径和记录日志的level，因此有着本质的区别，而且Nginx的错误日志一般只有一个，但是访问日志可以在不同server中定义多个，定义一个日志需要使用access_log指定日志的保存路径，使用log_format指定日志的格式，格式中定义要保存的具体日志内容。
+
+默认的日志格式
+log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+					  '$status $body_bytes_sent "$http_referer" '
+					  '"$http_user_agent" "$http_x_forwarded_for"';
+
+	access_log  logs/access.log  main;
+自定义json格式日志
+[root@CentOS7 ~]#vim /apps/nginx/conf/nginx.conf
+	log_format access_json '{"@timestamp":"$time_iso8601",'
+						   '"host":"$server_addr",'
+						   '"clientip":"$remote_addr",'
+						   '"size":$body_bytes_sent,'
+						   '"responsetime":$request_time,'
+						   '"upstreamtime":"$upstream_response_time",'
+						   '"upstreamhost":"$upstream_addr",'
+						   '"http_host":"$host",'
+						   '"uri":"$uri",'
+						   '"domain":"$host",'
+						   '"xff":"$http_x_forwarded_for",'
+						   '"referer":"$http_referer",'
+						   '"tcp_xff":"$proxy_protocol_addr",'
+						   '"http_user_agent":"$http_user_agent",'
+						   '"status":"$status"}';
+	access_log /apps/nginx/logs/access_json.log access_json;
+重新加载nginx并访问测试日志格式
+
+[root@CentOS7 ~]#/apps/nginx/sbin/nginx -s reload
+
+[root@CentOS7 ~]#tail -f /apps/nginx/logs/access_json.log
+{"@timestamp":"2019-05-30T18:58:23+08:00","host":"192.168.36.104","clientip":"192.168.36.110","size":15,"responsetime":0.000,"upstreamtime":"-","upstreamhost":"-","http_host":"192.168.36.104","uri":"/index.html","domain":"192.168.36.104","xff":"-","referer":"-","tcp_xff":"","http_user_agent":"curl/7.29.0","status":"200"}
+python实现json格式的日志访问统计
+[root@CentOS7 logs]#cat nginx_json.py
+#!/usr/bin/env python
+#coding:utf-8
+status_200= []
+status_404= []
+with open("access_json.log") as f:
+	for line in f.readlines():
+		line = eval(line)
+		if line.get("status") == "200":
+			status_200.append(line.get)
+		elif line.get("status") == "404":
+			status_404.append(line.get)
+		else:
+			print("状态码 ERROR")
+f.close()
+print "状态码200的有--:",len(status_200)
+print "状态码404的有--:",len(status_404)
+
+# 保存日志文件到指定路径并进测试：
+[root@CentOS7 ~]# python nginx_json.py
+....
+状态码200的有--: 403428
+状态码404的有--: 125712
+Nginx压缩功能
+Nginx支持对指定类型的文件进行压缩然后再传输给客户端，而且压缩还可以设置压缩比例，压缩后的文件大小将比源文件显著变小，这样有助于降低出口带宽的利用率，降低企业的IT支出，不过会占用相应的CPU资源。Nginx对文件的压缩功能是依赖于模块ngx_http_gzip_module
+
+# 启用或禁用gzip压缩，默认关闭
+gzip on | off;
+
+# 压缩比由低到高从1到9，默认为1
+gzip_comp_level level;
+
+# 禁用IE6 gzip功能
+gzip_disable "MSIE [1-6]\.";
+
+# gzip压缩的最小文件，小于设置值的文件将不会压缩
+gzip_min_length 1k;
+
+# 启用压缩功能时，协议的最小版本，默认HTTP/1.1
+gzip_http_version 1.0 | 1.1;
+
+# 指定Nginx服务需要向服务器申请的缓存空间的个数*大小，默认32 4k|16 8k;
+gzip_buffers number size;
+
+# 指明仅对哪些类型的资源执行压缩操作；默认为gzip_types text/html，不用显示指定，否则出错
+gzip_types mime-type ...;
+
+# 如果启用压缩，是否在响应报文首部插入“Vary: Accept-Encoding”
+gzip_vary on | off;
+配置文件修改
+
+gzip on;
+	gzip_comp_level 5;
+	gzip_min_length 1;
+	gzip_types text/plain application/javascript application/x-javascript text/cssapplication/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+	gzip_vary on;
+
+[root@CentOS7 ~]#/apps/nginx/sbin/nginx -t
+nginx: the configuration file /apps/nginx/conf/nginx.conf syntax is ok
+nginx: configuration file /apps/nginx/conf/nginx.conf test is successful
+[root@CentOS7 ~]#/apps/nginx/sbin/nginx -s reload
+访问测试
+
+[root@CentOS-Test ~]#curl --head --compressed http://www.darius.com/test1.html
+HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 30 May 2019 11:26:49 GMT
+Content-Type: text/html
+Last-Modified: Thu, 30 May 2019 11:26:31 GMT
+Connection: keep-alive
+Vary: Accept-Encoding
+ETag: W/"5cefbde7-720"
+Content-Encoding: gzip
+HTTPS 功能
+Web网站的登录页面都是使用https加密传输的，加密数据以保障数据的安全，HTTPS能够加密信息，以免敏感信息被第三方获取，所以很多银行网站或电子邮箱等等安全级别较高的服务都会采用HTTPS协议，HTTPS其实是有两部分组成：HTTP + SSL / TLS，也就是在HTTP上又加了一层处理加密信息的模块。服务端和客户端的信息传输都会通过TLS进行加密，所以传输的数据都是加密后的数据。
+
+https 实现过程
+客户端发起HTTPS请求：
+客户端访问某个web端的https地址，一般都是443端口
+服务端的配置：
+采用https协议的服务器必须要有一套证书，可以通过一些组织申请，也可以自己制作，目前国内很多网站都自己做的，当你访问一个网站的时候提示证书不可信任就表示证书是自己做的，证书就是一个公钥和私钥匙，就像一把锁和钥匙，正常情况下只有你的钥匙可以打开你的锁，你可以把这个送给别人让他锁住一个箱子，里面放满了钱或秘密，别人不知道里面放了什么而且别人也打不开，只有你的钥匙是可以打开的。
+传送证书：
+服务端给客户端传递证书，其实就是公钥，里面包含了很多信息，例如证书得到颁发机构、过期时间等等。
+客户端解析证书：
+这部分工作是有客户端完成的，首先回验证公钥的有效性，比如颁发机构、过期时间等等，如果发现异常则会弹出一个警告框提示证书可能存在问题，如果证书没有问题就生成一个随机值，然后用证书对该随机值进行加密，就像2步骤所说把随机值锁起来，不让别人看到。
+传送4步骤的加密数据：
+就是将用证书加密后的随机值传递给服务器，目的就是为了让服务器得到这个随机值，以后客户端和服务端的通信就可以通过这个随机值进行加密解密了。
+服务端解密信息：
+服务端用私钥解密5步骤加密后的随机值之后，得到了客户端传过来的随机值(私钥)，然后把内容通过该值进行对称加密，对称加密就是将信息和私钥通过算法混合在一起，这样除非你知道私钥，不然是无法获取其内部的内容，而正好客户端和服务端都知道这个私钥，所以只要机密算法够复杂就可以保证数据的安全性。
+传输加密后的信息:
+服务端将用私钥加密后的数据传递给客户端，在客户端可以被还原出原数据内容。
+客户端解密信息：
+客户端用之前生成的私钥获解密服务端传递过来的数据，由于数据一直是加密的，因此即使第三方获取到数据也无法知道其详细内容。
+ssl 配置参数
+nginx 的https 功能基于模块ngx_http_ssl_module实现，因此如果是编译安装的nginx要使用参数ngx_http_ssl_module开启ssl功能，但是作为nginx的核心功能，yum安装的nginx默认就是开启的，编译安装的nginx需要指定编译参数--with-http_ssl_module开启
+
+ssl on | off;
+# 为指定的虚拟主机配置是否启用ssl功能，此功能在1.15.0废弃，使用listen [ssl]替代。
+
+ssl_certificate /path/to/file;
+# 当前虚拟主机使用使用的公钥文件，一般是crt文件
+
+ssl_certificate_key /path/to/file;
+# 当前虚拟主机使用的私钥文件，一般是key文件
+
+ssl_protocols [SSLv2] [SSLv3] [TLSv1] [TLSv1.1] [TLSv1.2];
+# 支持ssl协议版本，早期为ssl现在是TSL，默认为后三个
+
+ssl_session_cache off | none | [builtin[:size]] [shared:name:size];
+# 配置ssl缓存
+
+	off：关闭缓存
+	none: 通知客户端支持ssl session cache，但实际不支持
+	builtin[:size]：使用OpenSSL内建缓存，为每worker进程私有
+	[shared:name:size]：在各worker之间使用一个共享的缓存，需要定义一个缓存名称和缓存空间大小，一兆可以存储4000个会话信息，多个虚拟主机可以使用相同的缓存名称。
+
+ssl_session_timeout time;  # 客户端连接可以复用ssl session cache中缓存的有效时长，默认5m
+自签名证书创建
+# 创建自签名CA证书
+[root@CentOS7 ~]#cd /apps/nginx/
+[root@CentOS7 nginx]#mkdir certs
+[root@CentOS7 nginx]# cd certs/
+[root@CentOS7 certs]#openssl req -newkey rsa:4096 -nodes -sha256 -keyout ca.key -x509 -days 3650 -out ca.crt  # 自签名CA证书
+Generating a 4096 bit RSA private key
+.............................................................................................................................................................................................................................................................................................................................................++
+........................................................................................++
+writing new private key to 'ca.key'
+--------------------
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+--------------------
+Country Name (2 letter code) [XX]:CN  # 国家代码
+State or Province Name (full name) []:BeiJing  # 省份
+Locality Name (eg, city) [Default City]:BeiJing  # 城市名称
+Organization Name (eg, company) [Default Company Ltd]:magedu.com  # 公司名称
+Organizational Unit Name (eg, section) []:magedu  # 部门
+Common Name (eg, your name or your server's hostname) []:M36  # 通用名称
+Email Address []:  # 邮箱
+[root@CentOS7 certs]#ll ca.crt
+-rw-r--r-- 1 root root 2009 5月  30 19:34 ca.crt
+
+# 创建自定义额key和csr文件
+
+[root@CentOS7 certs]#openssl req -newkey rsa:4096 -nodes -sha256 -keyout www.darius.com.key -out www.darius.com.csr
+Generating a 4096 bit RSA private key
+............++
+..........................++
+writing new private key to 'www.darius.com.key'
+--------------------
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+--------------------
+Country Name (2 letter code) [XX]:CN
+State or Province Name (full name) []:BeiJing
+Locality Name (eg, city) [Default City]:BeiJing
+Organization Name (eg, company) [Default Company Ltd]:magedu.com
+Organizational Unit Name (eg, section) []:magedu
+Common Name (eg, your name or your server's hostname) []:M36
+Email Address []:
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+
+[root@CentOS7 certs]#ll
+总用量 16
+-rw-r--r-- 1 root root 2009 5月  30 19:34 ca.crt
+-rw-r--r-- 1 root root 3272 5月  30 19:34 ca.key
+-rw-r--r-- 1 root root 1695 5月  30 19:38 www.darius.com.csr
+-rw-r--r-- 1 root root 3272 5月  30 19:38 www.darius.com.key
+
+# 证书签发
+[root@CentOS7 certs]#openssl x509 -req -days 3650 -in www.darius.com.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out www.darius.com.crt
+Signature ok
+subject=/C=CN/ST=BeiJing/L=BeiJing/O=magedu.com/OU=magedu/CN=M36
+Getting CA Private Key
+
+验证证书内容
+[root@CentOS7 certs]#openssl x509 -in www.darius.com.crt -noout -text
+Certificate:
+	Data:
+		Version: 1 (0x0)
+		Serial Number:
+			fe:15:2c:1a:9d:a5:df:f5
+	Signature Algorithm: sha256WithRSAEncryption
+		Issuer: C=CN, ST=BeiJing, L=BeiJing, O=magedu.com, OU=magedu, CN=M36
+		Validity
+			Not Before: May 30 11:42:02 2019 GMT
+			Not After : May 27 11:42:02 2029 GMT
+		Subject: C=CN, ST=BeiJing, L=BeiJing, O=magedu.com, OU=magedu, CN=M36
+		Subject Public Key Info:
+			Public Key Algorithm: rsaEncryption
+				Public-Key: (4096 bit)
+修改Nginx配置文件
+[root@CentOS7 ~]#vim /apps/nginx/conf.d/pc.conf
+[root@CentOS7 ~]#cat /apps/nginx/conf.d/pc.conf
+server {
+  listen 80;
+  listen 443 ssl;
+  ssl_certificate /apps/nginx/certs/www.darius.com.crt;
+  ssl_certificate_key /apps/nginx/certs/www.darius.com.key;
+  ssl_session_cache shared:sslcache:20m;
+  ssl_session_timeout 10m;
+  server_name www.darius.com;
+  error_log logs/www_darius_com_error.log;
+  access_log logs/www_darius_com_access.log;
+  location / {
+	index index.html;
+	root /data/nginx/html/pc;
+  }
+}
+
+[root@CentOS7 ~]#/apps/nginx/sbin/nginx -t
+nginx: the configuration file /apps/nginx/conf/nginx.conf syntax is ok
+nginx: configuration file /apps/nginx/conf/nginx.conf test is successful
+[root@CentOS7 ~]#/apps/nginx/sbin/nginx -s reload
+访问测试
+
+
+关于favicon.ico
+favicon.ico 文件是浏览器收藏网址时显示的图标，当客户端使用浏览器问页面时，浏览器会自己主动发起请求获取页面的favicon.ico文件，但是当浏览器请求的favicon.ico文件不存在时，服务器会记录404日志，而且浏览器也会显示404报错。
+
+具体配置
+# 一：服务器不记录访问日志：
+		# location = /favicon.ico {
+		#   log_not_found off;
+		#   access_log off;
+		# }
+# 二：将图标保存到指定目录访问：
+		# location ~ ^/favicon\.ico$ {
+		location = /favicon.ico {
+		  root /data/nginx/images123;
+		}
+显示效果
+
+修改Nginx Server版本信息
+# 修改Nginx源码文件，此配置文件需要在nginx.conf的http中添加server_tokens  off;开启nginx版本隐藏才能实现预期效果
+[root@CentOS7 nginx-1.14.2]#vim src/http/ngx_http_header_filter_module.c
+ 49 static u_char ngx_http_server_string[] = "Server: Darius/10.0" CRLF;
+
+# 停止Nginx服务，重新编译Nginx
+[root@CentOS7 nginx-1.14.2]#/apps/nginx/sbin/nginx -s stop
+[root@CentOS7 nginx-1.14.2]#./configure --prefix=/apps/nginx --user=nginx --group=nginx --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_stub_status_module --with-http_gzip_static_module --with-pcre --with-stream --with-stream_ssl_module --with-stream_realip_module --add-module=/root/echo-nginx-module
+
+[root@CentOS7 nginx-1.14.2]#make && make ×××tall
+
+启动服务
+[root@CentOS7 nginx-1.14.2]#/apps/nginx/sbin/nginx
+
+检测
+[root@CentOS7-Test ~]#curl -I www.darius.com
+HTTP/1.1 200 OK
+Server: Darius/10.0
+
+# 修改src/core/nginx.h文件无需开启隐藏功能，起到修改版本信息的效果
+[root@CentOS7 nginx-1.14.2]# vim src/core/nginx.h
+ 13 #define NGINX_VERSION      "10.0"
+ 14 #define NGINX_VER          "Darius/" NGINX_VERSION
+
+Nginx Rewrite相关功能
+Nginx服务器利用ngx_http_rewrite_module 模块解析和处理rewrite请求，此功能依靠 PCRE(perl compatibler egularexpression)，因此编译之前要安装PCRE库，rewrite是nginx服务器的重要功能之一，用于实现URL的重写，URL的重写是非常有用的功能，比如它可以在我们改变网站结构之后，不需要客户端修改原来的书签，也无需其他网站修改我们的链接，就可以设置为访问，另外还可以在一定程度上提高网站的安全性。
+
+if指令
+用于条件匹配判断，并根据条件判断结果选择不同的Nginx配置，可以配置在server或location块中进行配置，Nginx的if语法仅能使用if做单次判断，不支持使用if else或者if elif这样的多重判断
+
+location /main {
+	index index.html;
+	default_type text/html;
+	if ( $scheme = http ) {
+	  echo "if --> $scheme";
+  }
+  }
+[root@CentOS7 conf.d]#nginx -t
+nginx: the configuration file /apps/nginx/conf/nginx.conf syntaxis ok
+nginx: configuration file /apps/nginx/conf/nginx.conf test is successful
+[root@CentOS7 conf.d]#nginx -s reload
+
+检测
+[root@CentOS7-Test ~]#curl www.darius.com/main
+if --> http
+使用正则表达式对变量进行匹配，匹配成功时if指令认为条件为true，否则认为false，变量与表达式之间使用以下符号链接
+=：#比较变量和字符串是否相等，相等时if指令认为该条件为true，反之为false。
+!=: #比较变量和字符串是否不相等，不相等时if指令认为条件为true，反之为false。
+~：#表示在匹配过程中区分大小写字符，（可以通过正则表达式匹配），满足匹配条件为真，不满足为假。
+~*: #表示在匹配过程中不区分大小写字符，（可以通过正则表达式匹配），满足匹配条件为真，不满足问假。
+!~：#区分大小写不匹配，不满足为真，满足为假，不满足为真。
+!~*:#为不区分大小写不匹配，满足为假，不满足为真。
+
+-f 和 ! -f:判断请求的文件是否存在和是否不存在
+-d 和 ! -d: #判断请求的目录是否存在和是否不存在。
+-x 和 ! -x: #判断文件是否可执行和是否不可执行。
+-e 和 ! -e: #判断请求的文件或目录是否存在和是否不存在(包括文件，目录，软链接)。
+
+注：如果$变量的值为空字符串或是以0开头的任意字符串，则if指令认为该条件为false，其他条件为true。
+set指令
+指定key并给其定义一个变量，变量可以调用Nginx内置变量赋值给key，另外set定义格式为set $key $value，及无论是key还是value都要加$符号。
+
+[root@CentOS7 conf.d]#vim pc.conf
+  location /set {
+	root index.html;
+	default_type text/html;
+	set $name Darius;
+	echo $name;
+	set $my_port $server_port;
+	echo $my_port;
+  }
+
+[root@CentOS7 conf.d]#nginx -t
+nginx: the configuration file /apps/nginx/conf/nginx.conf syntaxis ok
+nginx: configuration file /apps/nginx/conf/nginx.conf test is successful
+[root@CentOS7 conf.d]#nginx -s reload
+
+检测
+[root@CentOS7-Test ~]#curl www.darius.com/set
+Darius
+80
+break指令
+用于中断当前相同作用域(location)中的其他Nginx配置，与该指令处于同一作用域的Nginx配置中，位于它前面的配置生效，位于后面的指令配置就不再生效了，Nginx服务器在根据配置处理请求的过程中遇到该指令的时候，回到上一层作用域继续向下读取配置，该指令可以在server块和location块以及if块中使用，使用语法如下：
+
+[root@CentOS7 conf.d]#vim pc.conf
+  location /set {
+	root index.html;
+	default_type text/html;
+	set $name Darius;
+	echo $name;
+	break;
+	set $my_port $server_port;
+	echo $my_port;
+  }
+
+[root@CentOS7 conf.d]#nginx -s reload
+
+检测
+[root@CentOS7-Test ~]#curl www.darius.com/set
+Darius
+return指令
+从nginx版本0.8.2开始支持，return用于完成对请求的处理，并直接向客户端返回响应状态码，比如其可以指定重定向URL(对于特殊重定向状态码，301/302等) 或者是指定提示文本内容(对于特殊状态码403/500等)，处于此指令后的所有配置都将不被执行，return可以在server、if和location块进行配置
+
+location /main {
+	index index.html;
+	default_type text/html;
+	if ( $scheme = http ) {
+	  return 666 "not allow http"; # 可以是返回给客户端指定的HTTP状态码、也可以是返回给客户端的状态码及响应体内容（可以调用变量）、或者返回给客户端URL地址
+	  # echo "if-----> $scheme";  # return后面的将不再执行
+  }
+
+[root@CentOS7-Test ~]#curl www.darius.com/main
+not allow http
+[root@CentOS7-Test ~]#curl -I www.darius.com/main
+HTTP/1.1 666
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 03:52:37 GMT
+Content-Type: text/html
+Content-Length: 14
+Connection: keep-alive
+rewrite_log指令
+设置是否开启记录ngx_http_rewrite_module模块日志记录到error_log日志文件当中，可以配置在http、server、location或if当中，需要日志级别为notice
+
+[root@CentOS7 conf.d]#vim ../conf/nginx.conf
+error_log  logs/error.log  notice;  # 开启错误日志notice级别
+
+[root@CentOS7 conf.d]#vim pc.conf  # 启用rewrite_log指令
+  location /set {
+	root index.html;
+	default_type text/html;
+	set $name Darius;
+	echo $name;
+	rewrite_log on;
+	break;
+	set $my_port $server_port;
+	echo $my_port;
+  }
+
+[root@CentOS7 conf.d]#nginx -t
+nginx: the configuration file /apps/nginx/conf/nginx.conf syntax is ok
+nginx: configuration file /apps/nginx/conf/nginx.conf test is successful
+[root@CentOS7 conf.d]#nginx -s reload
+
+访问并验证
+[root@CentOS7 conf.d]#tail -f /apps/nginx/logs/*.log
+==> /apps/nginx/logs/error.log <==
+2019/06/01 12:01:46 [warn] 11234#0: *40 using uninitialized "my_port" variable, client: 192.168.36.110, server: www.darius.com, request: "GET /set/aaa HTTP/1.1", host: "www.darius.com"
+rewrite指令
+通过正则表达式的匹配来改变URI，可以同时存在一个或多个指令，按照顺序依次对URI进行匹配，rewrite主要是针对用户请求的URL或者是URI做具体处理
+URI(universal resource identifier)：通用资源标识符，标识一个资源的路径，可以不带协议。
+URL(uniform resource location):统一资源定位符，是用于在Internet中描述资源的字符串，是URI的子集，主要包括传输协议(scheme)、主机(IP、端口号或者域名)和资源具体地址(目录和文件名)等三部分，一般格式为 scheme:// 主机名[:端口号][/资源路径],如：http://www.a.com:8080/path/file/index.html 就是一个URL路径，URL必须带访问协议。
+每个URL都是一个URI，但是URI不都是URL。
+例如：
+http://example.org/path/to/resource.txt #URI/URL
+ftp://example.org/resource.txt #URI/URL
+/absolute/path/to/resource.txt #URI
+rewrite 四种flag使用介绍
+redirect；
+# 临时重定向，重写完成后以临时重定向方式直接返回重写后生成的新URL给客户端，由客户端重新发起请求；使用相对路径,或者 http:// 或 https:// 开头，状态码：302
+permanent；
+# 永久重定向，重写完成后以永久重定向方式直接返回重写后生成的新URL给客户端，由客户端重新发起请求，状态码：301
+last；
+# 重写完成后停止对当前URI在当前location中后续的其它重写操作，而后对新的URL启动新一轮重写检查，不建议在location中使用
+break；
+# 重写完成后停止对当前URL在当前location中后续的其它重写操作，而后直接跳转至重写规则配置块之后的其它配置；结束循环，建议在location中使用
+注：其中前两种是跳转型的flag，后两种是代理型，跳转型是指有客户端浏览器重新对新地址进行请求，代理型是在WEB服务器内部实现跳转的。
+rewrite域名永久重定向
+[root@CentOS7 conf.d]#vim ../conf/nginx.conf
+		location / {
+			root   html;
+			index  index.html index.htm;
+			rewrite / http://www.darius.com permanent;  # 永久重定向301
+			#rewrite / http://www.darius.com redirect;  # 临时重定向302
+		}
+
+[root@CentOS7 conf.d]#nginx -t
+nginx: the configuration file /apps/nginx/conf/nginx.conf syntax is ok
+nginx: configuration file /apps/nginx/conf/nginx.conf test is successful
+[root@CentOS7 conf.d]#nginx -s reload
+
+重定向检测
+[root@CentOS7-Test ~]#curl 192.168.36.104
+<html>
+<head><title>301 Moved Permanently</title></head>
+<body bgcolor="white">
+<center><h1>301 Moved Permanently</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+[root@CentOS7-Test ~]#curl -L 192.168.36.104
+www.darius.com
+[root@CentOS7-Test ~]#curl -I 192.168.36.104
+HTTP/1.1 301 Moved Permanently
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 04:27:42 GMT
+Content-Type: text/html
+Content-Length: 178
+Connection: keep-alive
+Location: http://www.darius.com
+
+rewrite 临时重定向
+[root@CentOS7-Test ~]#curl -I 192.168.36.104
+HTTP/1.1 302 Moved Temporarily
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 04:28:32 GMT
+Content-Type: text/html
+Content-Length: 154
+Connection: keep-alive
+Location: http://www.darius.com
+
+rewrite之URI重定向
+location /last {
+	rewrite ^/last/(.*) /test$1 last;
+	return 888 "last";
+  }
+  location /break {
+	rewrite ^/break/(.*) /test$1 break;
+	return 666 "break";
+  }
+  location /test {
+	return 999 "test";
+  }
+
+[root@CentOS7 conf.d]#nginx -t
+nginx: the configuration file /apps/nginx/conf/nginx.conf syntax is ok
+nginx: configuration file /apps/nginx/conf/nginx.conf test is successful
+[root@CentOS7 conf.d]#nginx -s reload
+
+# break不会跳转到其他location中
+[root@CentOS7-Test ~]#curl -L -i http://www.darius.com/break/index.html
+HTTP/1.1 404 Not Found
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 06:12:04 GMT
+Content-Type: text/html
+Content-Length: 162
+Connection: keep-alive
+Vary: Accept-Encoding
+
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+# last会跳转到其他location中继续执行匹配操作
+[root@CentOS7-Test ~]#curl -L -i http://www.darius.com/last/index.html
+HTTP/1.1 999
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 06:12:11 GMT
+Content-Type: text/html
+Content-Length: 4
+Connection: keep-alive
+
+test
+rewrite实现页面自动跳转https
+server {
+  listen 80;
+  listen 443 ssl;
+  server_name www.darius.com;
+  error_log /apps/nginx/logs/www_darius_com_error.log;
+  access_log /apps/nginx/logs/www_darius_com_access.log access_json;
+  ssl_certificate /apps/nginx/certs/www.darius.com.crt;
+  ssl_certificate_key /apps/nginx/certs/www.darius.com.key;
+  ssl_session_cache shared:sslcache:20m;
+  ssl_session_timeout 10m;
+  location / {
+	root /data/nginx/html/pc;
+	index index.html;
+	if ( $scheme = http ){
+	  rewrite (.*) https://www.darius.com;
+	}
+  }
+}
+[root@CentOS7 conf.d]#nginx -s reload
+
+访问测试
+[root@CentOS7-Test ~]#curl -L -i -k http://www.darius.com
+HTTP/1.1 302 Moved Temporarily
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 06:29:34 GMT
+Content-Type: text/html
+Content-Length: 154
+Connection: keep-alive
+Location: https://www.darius.com
+
+HTTP/1.1 200 OK
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 06:29:37 GMT
+Content-Type: text/html
+Content-Length: 7
+Last-Modified: Thu, 30 May 2019 03:06:03 GMT
+Connection: keep-alive
+Vary: Accept-Encoding
+ETag: "5cef489b-7"
+Accept-Ranges: bytes
+
+pc web
+
+判断文件是否存在
+# 当用户访问到公司网站时，输入一个错误的URL，可以将用户访问的浏览页面重定向到公司官网首页上
+  location / {
+	root /data/nginx/html/pc;
+	index index.html;
+	if ( !-f $request_filename ){
+	  rewrite (.*) http://www.darius.com/index.html;
+	}
+  }
+
+浏览测试
+[root@CentOS7-Test ~]#curl -L -i http://www.darius.com/asdfg
+HTTP/1.1 302 Moved Temporarily
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 06:56:26 GMT
+Content-Type: text/html
+Content-Length: 154
+Connection: keep-alive
+Location: http://www.darius.com/index.html
+
+HTTP/1.1 200 OK
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 06:56:26 GMT
+Content-Type: text/html
+Content-Length: 7
+Last-Modified: Thu, 30 May 2019 03:06:03 GMT
+Connection: keep-alive
+Vary: Accept-Encoding
+ETag: "5cef489b-7"
+Accept-Ranges: bytes
+
+pc web
+Nginx防盗链
+防盗链基于客户端携带的referer实现，referer是记录打开一个页面之前记录是从哪个页面跳转过来的标记信息，如果别人只链接了自己网站图片或某个单独的资源，而不是打开了网站的整个页面，这就是盗链，referer就是之前的那个网站域名，正常的referer信息有以下几种：
+
+none：请求报文首部没有referer首部，比如用户直接在浏览器输入域名访问web网站，就没有referer信息。
+blocked：请求报文有referer首部，但无有效值，比如为空。
+server_names：referer首部中包含本主机名及即nginx 监听的server_name。
+arbitrary_string：自定义指定字符串，但可使用*作通配符。
+regular expression：被指定的正则表达式模式匹配到的字符串,要使用~开头，例如：
+	~.*\.magedu\.com。
+盗链测试
+
+[root@CentOS7 conf.d]#cat a.conf
+server {
+  listen 80;
+  charset utf-8;
+  server_name www.a.com;
+  location / {
+	root /data;
+	index index.html;
+  }
+}
+[root@CentOS7 conf.d]#cat /data/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>盗链页面</title>
+</head>
+<body>
+<a href="http://www.darius.com">测试盗链</a>
+<img src="http://www.darius.com/logo.png">
+</body>
+</html>
+
+被盗链日志查看
+[root@CentOS7 conf.d]#tail -f /apps/nginx/logs/*.log
+==> /apps/nginx/logs/www_darius_com_access.log <==
+{"@timestamp":"2019-06-01T15:21:30+08:00","host":"192.168.36.104","clientip":"192.168.36.1","size":0,"responsetime":0.000,"upstreamtime":"-","upstreamhost":"-","http_host":"www.darius.com","uri":"/logo.png","domain":"www.darius.com","xff":"-","referer":"http://www.a.com/","tcp_xff":"","http_user_agent":"Mozilla/5.0 (Windows NT 10.0; WOW64; rv:67.0) Gecko/20100101 Firefox/67.0","status":"304"}
+开启防盗链机制
+基于访问安全考虑，nginx支持通过ungx_http_referer_module模块检查访问请求的referer信息是否有效实现防盗链功能
+
+location / {
+	root /data/nginx/html/pc;
+	index index.html;
+	valid_referers none blocked server_names *.magedu.com www.magedu.* api.online.test/v1/hostlist ~\.google\. ~\.baidu\.;
+	if ($invalid_referer) {
+	  return 403;
+	}
+  }
+[root@CentOS7 conf.d]#nginx -s reload
+页面访问测试
+
+
+Nginx反向代理
+反向代理：反向代理也叫reverse proxy，指的是代理外网用户的请求到内部的指定web服务器，并将数据返回给用户的一种方式，这是用的比较多的一种方式。
+Nginx除了可以在企业提供高性能的web服务之外，另外还可以将本身不具备的请求通过某种预定义的协议转发至其它服务器处理，不同的协议就是Nginx服务器与其他服务器进行通信的一种规范，主要在不同的场景使用以下模块实现不同的功能：
+
+ngx_http_proxy_module： 将客户端的请求以http协议转发至指定服务器进行处理。
+ngx_stream_proxy_module：将客户端的请求以tcp协议转发至指定服务器处理。
+ngx_http_fastcgi_module：将客户端对php的请求以fastcgi协议转发至指定服务器助理。
+ngx_http_uwsgi_module：将客户端对Python的请求以uwsgi协议转发至指定服务器处理。
+Nginx http的反向代理实现
+反向代理配置参数
+proxy_pass; 用来设置将客户端请求转发给的后端服务器的主机，可以是主机名、IP地址：端口的方式，也可以代理到预先设置的主机群组，需要模块gx_http_upstream_module支持。
+server {
+  listen 80;
+  charset utf-8;
+  server_name www.a.com;
+  location /app {
+	proxy_pass http://192.168.36.110:80;  # 不带斜线将访问的/web,等于访问后端服务器  http://192.168.36.103:80/web/index.html ，即后端服务器配置的站点根目录要有web目录才可以被访问，这是一个追加/web到后端服务器。  带斜线，等于访问后端服务器的 http://192.168.36.103:80/index.html 内容返回给客户端  
+	index index.html;
+  }
+}
+
+访问测试
+[root@CentOS7 conf.d]#curl -L -i http://www.a.com/app
+HTTP/1.1 301 Moved Permanently
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 08:24:33 GMT
+Content-Type: text/html; charset=iso-8859-1
+Content-Length: 234
+Connection: keep-alive
+Location: http://192.168.36.110/app/
+
+HTTP/1.1 200 OK
+Date: Sat, 01 Jun 2019 08:24:31 GMT
+Server: Apache/2.4.6 (CentOS)
+Last-Modified: Sat, 25 May 2019 03:41:28 GMT
+ETag: "19-589ae171491d6"
+Accept-Ranges: bytes
+Content-Length: 25
+Content-Type: text/html; charset=UTF-8
+
+<h1>Real Server 110</h1>
+
+proxy_hide_header; 用于nginx作为反向代理的时候，在返回给客户端http响应的时候，隐藏后端服务版本相应头部的信息，可以设置在http/server或location块
+[root@CentOS7 conf.d]#vim a.conf
+server {
+  listen 80;
+  charset utf-8;
+  server_name www.a.com;
+  location /app {
+	index index.html;
+	proxy_pass http://192.168.36.110:80;
+	proxy_hide_header Location;  # 若想隐藏多个head头部信息需要再次定义proxy_hide_header,不支持在后面接着写
+  }
+}
+
+[root@CentOS7 conf.d]#nginx -s reload
+[root@CentOS7 conf.d]#curl -L -I http://www.a.com/app
+HTTP/1.1 301 Moved Permanently
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 08:30:47 GMT
+Content-Type: text/html; charset=iso-8859-1
+Connection: keep-alive
+proxy_pass_request_body on | off; 是否向后端服务器发送HTTP包体部分,可以设置在http/server或location块，默认即为开启
+proxy_pass_request_headers on | off; 是否将客户端的请求头部转发给后端服务器，可以设置在http/server或location块，默认即为开启
+proxy_set_header; 可以更改或添加客户端的请求头部信息内容并转发至后端服务器，比如在后端服务器想要获取客户端的真实IP的时候，就要更改每一个报文的头部，如下：
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+# proxy_set_header HOST $remote_addr;
+# 添加HOST到报文头部，如果客户端为NAT上网那么其值为客户端的共用的公网IP地址。
+proxy_hide_header field; 用于隐藏后端服务器特定的响应首部，默认nginx在响应报文中不传递后端服务器的首部字段Date, Server, XPad, X-Accel等
+proxy_connect_timeout time; 配置nginx服务器与后端服务器尝试建立连接的超时时间，默认为60秒
+proxy_connect_timeout 60s；
+# 60s为自定义nginx与后端服务器建立连接的超时时间
+proxy_read_time time; 配置nginx服务器向后端服务器或服务器组发起read请求后，等待的超时时间，默认60s
+proxy_send_time time；
+# 配置nginx项后端服务器或服务器组发起write请求后，等待的超时时间，默认60s
+proxy_http_version 1.0; 用于设置nginx提供代理服务的HTTP协议的版本，默认http 1.0
+proxy_ignore_client_abort off; 当客户端网络中断请求时，nginx服务器中断其对后端服务器的请求。即如果此项设置为on开启，则服务器会忽略客户端中断并一直等着代理服务执行返回，如果设置为off，则客户端中断后Nginx也会中断客户端请求并立即记录499日志，默认为off。
+proxy_headers_hash_bucket_size 64; 当配置了 proxy_hide_header和proxy_set_header的时候，用于设置nginx保存HTTP报文头的hash表的上限。
+proxy_headers_hash_max_size 512; 设置proxy_headers_hash_bucket_size的最大可用空间
+server_names_hash_bucket_size 512; server_name hash表申请空间大小
+server_names_hash_max_szie 512; 设置服务器名称hash表的上限大小
+反向代理--缓存功能
+proxy_cache zone | off; 默认off 指明调用的缓存，或关闭缓存机制
+proxy_cache_key string; 缓存中用于“键”的内容，默认值：proxy_cache_key $scheme$proxy_host$request_uri;
+proxy_cache_valid [code ...] time; 定义对特定响应码的响应内容的缓存时长，定义在http{...}中
+示例
+# 调用缓存功能，需要定义在相应的配置段，如server{...}；或者location等
+proxy_cache proxycache;
+proxy_cache_key $request_uri;
+proxy_cache_valid 200 302 10m; # 对200、302类响应码缓存10分钟
+proxy_cache_valid 404 1m; # 对404类响应码缓存1分钟
+proxy_cache_path; 定义可用于proxy功能的缓存；
+
+使用方法：
+proxy_cache_path path [levels=levels] [use_temp_path=on|off]
+keys_zone=name:size [inactive=time] [max_size=size] [manager_files=number]
+[manager_sleep=time] [manager_threshold=time] [loader_files=number]
+[loader_sleep=time] [loader_threshold=time] [purger=on|off] [purger_files=number]
+[purger_sleep=time] [purger_threshold=time];
+示例：在http配置定义缓存信息
+proxy_cache_path /var/cache/nginx/proxy_cache # 定义缓存保存路径，proxy_cache会自动创
+建
+levels=1:2:2； # 定义缓存目录结构层次，1:2:2可以生成2^4x2^8x2^8=1048576个目录
+keys_zone=proxycache:20m； # 指内存中缓存的大小，主要用于存放key和metadata（如：使用次数）
+inactive=120s； # 缓存有效时间
+max_size=1g; # 最大磁盘占用空间，磁盘存入文件内容的缓存空间最大值
+
+5. proxy_cache_use_stale; 在被代理的后端服务器出现哪种情况下，可直接使用过期的缓存响应客户端
+```bash
+proxy_cache_use_stale error | timeout | invalid_header | updating | http_500 | http_502 | http_503 | http_504 | http_403 | http_404 | off ; #默认是off
+proxy_cache_methods GET | HEAD | POST ...; 对哪些客户端请求方法对应的响应进行缓存，GET和HEAD方法总是被缓存
+proxy_set_header field value; 设定发往后端主机的请求报文的请求首部的值
+Context: http, server, location
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+请求报文的标准格式如下：
+X-Forwarded-For: client1, proxy1, proxy2
+缓存配置
+[root@CentOS7 conf.d]#vim ../conf/nginx.conf  # 配置在nginx.conf http配置段
+	proxy_cache_path /data/nginx/proxycache levels=1:1:1 keys_zone=proxycache:20m inactive=120s max_size=1g;
+
+[root@CentOS7 conf.d]#cat a.conf
+server {
+  listen 80;
+  charset utf-8;
+  server_name www.a.com;
+  location /app {    # 要缓存的URL或者放在server配置项对所有URL都进行缓存
+	index index.html;
+	proxy_pass http://192.168.36.110:80;
+	proxy_hide_header Location;
+	proxy_hide_header Connection;
+	proxy_set_header clientip $remote_addr;
+	proxy_cache proxycache;
+	proxy_cache_key $request_uri;
+	proxy_cache_valid 200 302 301 10m;
+	proxy_cache_valid any 1m;
+  }
+}
+[root@CentOS7 conf.d]#nginx -t
+nginx: the configuration file /apps/nginx/conf/nginx.conf syntax is ok
+nginx: configuration file /apps/nginx/conf/nginx.conf test is successful
+[root@CentOS7 conf.d]#nginx -s reload
+访问验证
+[root@CentOS7 conf.d]#curl -L http://www.a.com/app
+[root@CentOS7 conf.d]#ab -n 2000 -c 200 http://www.a.com/app
+Total transferred:      822000 bytes
+HTML transferred:       468000 bytes
+Requests per second:    9413.58 [#/sec] (mean)
+Time per request:       21.246 [ms] (mean)
+Time per request:       0.106 [ms] (mean, across all concurrent requests)
+Transfer rate:          3778.30 [Kbytes/sec] received
+
+# 缓存路径结构及文件大小
+[root@CentOS7 conf.d]#tree /data/nginx/proxycache/
+/data/nginx/proxycache/
+├── 2
+│   └── e
+│       └── 8
+└── 7
+	└── 5
+		└── b
+			└── 606c5106afffe9fd4f2021504afe7b57
+
+6 directories, 1 file
+
+验证文件内容
+[root@CentOS7 conf.d]#head -n100 /data/nginx/proxycache/7/5/b/606c5106afffe9fd4f2021504afe7b57
+HTTP/1.1 200 OK
+Date: Sat, 01 Jun 2019 09:51:06 GMT
+Server: Apache/2.4.6 (CentOS)
+Last-Modified: Sat, 01 Jun 2019 09:50:35 GMT
+ETag: "1388-58a4010131b0d"
+Accept-Ranges: bytes
+Content-Length: 5000
+Connection: close
+Content-Type: text/html; charset=UTF-8
+添加自定义头部信息
+nginx基于模块ngx_http_headers_module可以实现对头部报文添加指定的key与值
+
+# 添加自定义首部，如下：
+add_header name value [always];
+add_header X-Via $server_addr;
+add_header X-Cache $upstream_cache_status;
+add_header X-Accel $server_name;
+add_trailer name value [always];
+添加自定义响应信息的尾部， 1.13.2版后支持
+Nginx配置
+[root@CentOS7 conf.d]#cat a.conf
+server {
+  listen 80;
+  charset utf-8;
+  server_name www.a.com;
+  location /app {
+	index index.html;
+	proxy_pass http://192.168.36.110:80;
+	proxy_set_header clientip $remote_addr;
+	proxy_cache proxycache;
+	proxy_cache_key $request_uri;
+	proxy_cache_valid 200 302 301 10m;
+	proxy_cache_valid any 1m;
+	add_header X-Via $server_addr;
+	add_header X-Cache $upstream_cache_status;
+	add_header X-Accel $server_name;
+  }
+}
+[root@CentOS7 conf.d]#nginx -s reload
+
+[root@CentOS7 conf.d]#curl -i http://www.a.com/app
+HTTP/1.1 301 Moved Permanently
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 10:12:16 GMT
+Content-Type: text/html; charset=iso-8859-1
+Content-Length: 234
+Connection: keep-alive
+Location: http://192.168.36.110/app/
+X-Via: 192.168.36.104
+X-Cache: MISS  # 第一次访问没有使用缓存，再次进行访问测试
+X-Accel: www.a.com
+
+[root@CentOS7 conf.d]#curl -i http://www.a.com/app
+HTTP/1.1 301 Moved Permanently
+Server: Darius/10.0
+Date: Sat, 01 Jun 2019 10:12:18 GMT
+Content-Type: text/html; charset=iso-8859-1
+Content-Length: 234
+Connection: keep-alive
+Location: http://192.168.36.110/app/
+X-Via: 192.168.36.104
+X-Cache: HIT   # 第二次访问命中缓存
+X-Accel: www.a.com
+自定义头部
+
+
+第二次访问命中缓存
+
+
+Nginx http反向代理高级应用
+Nginx可以基于ngx_http_upstream_module模块提供服务器分组转发、权重分配、状态监测、调度算法等高级功能
+
+http upstream 配置参数
+upstream name {
+
+} 
+# 自定义一组服务器，配置在http内
+
+server address [parameters];
+# 配置一个后端web服务器，配置在upstream内，至少要有一个server服务器配置。
+# server支持的parameters如下：
+weight=number # 设置权重，默认为1。
+max_conns=number # 给当前server设置最大活动链接数，默认为0表示没有限制。
+max_fails=number # 对后端服务器连续监测失败多少次就标记为不可用。
+fail_timeout=time # 对后端服务器的单次监测超时时间，默认为10秒。
+backup # 设置为备份服务器，当所有服务器不可用时将重新启用次服务器。
+down # 标记为down状态。
+resolve # 当server定义的是主机名的时候，当A记录发生变化会自动应用新IP而不用重启Nginx。
+
+hash KEY consistent；
+# 基于指定key做hash计算，使用consistent参数，将使用ketama一致性hash算法，适用于后端是Cache服务器（如varnish）时使用，consistent定义使用一致性hash运算，一致性hash基于取模运算。
+
+# 所谓取模运算，就是计算两个数相除之后的余数，比如10%7=3, 7%4=3
+hash $request_uri consistent; # 基于用户请求的uri做hash
+
+ip_hash； # 源地址hash调度方法，基于的客户端的remote_addr(源地址)做hash计算，以实现会话保持
+
+least_conn; # 最少连接调度算法，优先将客户端请求调度到当前连接最少的后端服务器
+多台web服务器实现反向代理
+[root@CentOS7 conf.d]#vim ../conf/nginx.conf
+	upstream app1 {
+	  #hash $request_uri consistent;
+	  #ip_hash；  # 指定ip_hash算法，根据session调度到同一台后端主机上，当此台主机宕机，则强制切换到另一台存活的主机上
+	  #least_conn;
+	  server 192.168.36.110:80 weight=1 fail_timeout=5s max_fails=3;  # 后端服务器状态监测：fail_timeout连续检测多少次失败，max_fails检测时长
+	  server 192.168.36.106:80 weight=1 fail_timeout=5s max_fails=3;
+	  server 192.168.36.101:80 weight=1 fail_timeout=5s max_fails=3 backup;  # 备用服务器，当其余反向代理服务器宕机，启用备用服务器
+	}
+[root@CentOS7 conf.d]#vim a.conf
+server {
+  listen 80;
+  charset utf-8;
+  server_name www.a.com;
+  location / {
+	index index.html;
+	root /data/nginx/html/pc;
+  }
+  location /app {
+	index index.html;
+	proxy_pass http://app1;
+  }
+}
+[root@CentOS7 conf.d]#nginx -s reload
+
+访问测试
+[root@CentOS7 conf.d]#while true;do curl  http://www.a.com/app/index.html;sleep 0.5;done
+192.168.36.110
+192.168.36.106
+192.168.36.110
+192.168.36.106
+启用ip_hash算法
+[root@CentOS7 conf.d]#vim ../conf/nginx.conf
+	upstream app1 {
+	  #hash $request_uri consistent;
+	  #least_conn;
+	  server 192.168.36.110:80 weight=1 fail_timeout=5s max_fails=3;
+	  server 192.168.36.106:80 weight=1 fail_timeout=5s max_fails=3;
+	  ip_hash;
+	}
+[root@CentOS7 conf.d]#nginx -s reload
+
+访问测试：
+[root@CentOS7 conf.d]#while true;do curl  http://www.a.com/app/index.html;sleep 0.5;done
+192.168.36.106
+192.168.36.106
+192.168.36.106
+192.168.36.106
+192.168.36.106
+192.168.36.106
+
+宕机测试
+[root@CentOS7 conf.d]#while true;do curl  http://www.a.com/app/index.html;sleep 0.5;done
+192.168.36.106
+192.168.36.106
+192.168.36.106
+192.168.36.106
+192.168.36.110   # 请求被强制切换到存活主机上
+192.168.36.110
+....
+192.168.36.106  # 当修复好宕机主机重新工作，请求将重新回到原来的主机上
+192.168.36.106
+192.168.36.106
+Nginx动静分离
+upstream web {
+	server  192.168.36.1 weight=1 max_fails=2  fail_timeout=2;
+	server  192.168.36.2 weight=1 max_fails=2  fail_timeout=2;
+} 
+
+upstream image  {
+	server  192.168.36.3 weight=1 max_fails=2  fail_timeout=2;
+	server  192.168.36.4 weight=1 max_fails=2  fail_timeout=2;
+} 
+
+upstream php {
+	server  192.168.36.5 weight=1 max_fails=2  fail_timeout=2;
+	server  192.168.36.6 weight=1 max_fails=2  fail_timeout=2;
+} 
+
+location  /{
+	root html/web;
+	index  index.php index.html;
+}
+
+location ~* \.php$ {
+	fastcgi_proxy  http://php;
+}
+
+location ~* "\.(.jpg|png|jpeg|gif)" {
+	proxy_pass http://image;
+}
+Nginx Tcp负载均衡
+Nginx在1.9.0版本开始支持tcp模式的负载均衡，在1.9.13版本开始支持udp协议的负载，udp主要用于DNS的域名解析，其配置方式和指令和http 代理类似，其基于ngx_stream_proxy_module模块实现tcp负载，另外基于模块ngx_stream_upstream_module实现后端服务器分组转发、权重分配、状态监测、调度算法等高级功能。
+
+Tcp负载均衡配置参数
+stream { #定义stream
+  upstream backend { #定义后端服务器
+	hash $remote_addr consistent; #定义调度算法
+	server backend1.example.com:12345 weight=5; #定义具体server
+	server 127.0.0.1:12345 max_fails=3 fail_timeout=30s;
+	server unix:/tmp/backend3;
+  } 
+  upstream dns { #定义后端服务器
+	server 192.168.0.1:53535; #定义具体server
+	server dns.example.com:53;
+  } 
+  server { #定义server
+	listen 12345; #监听IP:PORT
+	proxy_connect_timeout 1s; #连接超时时间
+	proxy_timeout 3s; #转发超时时间
+	proxy_pass backend; #转发到具体服务器组
+  } 
+  server {
+	listen 127.0.0.1:53 udp reuseport;
+	proxy_timeout 20s;
+	proxy_pass dns;
+  } 
+  server {
+	listen [::1]:12345;
+	proxy_pass unix:/tmp/stream.socket;
+  }
+}
+负载均衡实验环境
+
+基于Redis的负载均衡实例
+安装并配置Redis服务
+[root@CentOS7-1 ~]#yum install -y redis
+[root@CentOS7-1 ~]#vim /etc/redis.conf
+[root@CentOS7-1 ~]#egrep "^bind" /etc/redis.conf
+bind 0.0.0.0
+[root@CentOS7-1 ~]#systemctl start redis
+[root@CentOS7-1 ~]#systemctl enable redis
+Created symlink from /etc/systemd/system/multi-user.target.wants/redis.service to /usr/lib/systemd/system/redis.service.
+[root@CentOS7-1 ~]#ss -ntl | grep 6379   # Redis基于6379端口进行工作
+LISTEN     0      128          *:6379                     *:*
+Nginx配置
+[root@CentOS7 ~]#mkdir /apps/nginx/tcp
+[root@CentOS7 ~]#cd /apps/nginx/tcp/
+[root@CentOS7 tcp]#vim tcp.conf
+stream {
+  upstream redis_server {
+	server 192.168.36.110:6379 max_fails=3 fail_timeout=30s;
+  }
+  server {
+	listen 192.168.36.104:6379;
+	proxy_connect_timeout 3s;
+	proxy_timeout 3s;
+	proxy_pass redis_server;
+  }
+}
+
+[root@CentOS7 tcp]#vim ../conf/nginx.conf
+include /apps/nginx/tcp/tcp.conf;   # 注意此处的include与http模块平级，建议写在http模块上方
+
+[root@CentOS7 tcp]#nginx -t
+nginx: the configuration file /apps/nginx/conf/nginx.conf syntax is ok
+nginx: configuration file /apps/nginx/conf/nginx.conf test is successful
+[root@CentOS7 tcp]#nginx -s reload
+
+# 查看6379端口是否开启
+[root@CentOS7 tcp]#ss -ntl | grep 6379
+LISTEN     0      128    192.168.36.104:6379                     *:*
+
+# 测试通过Nginx负载连接Redis
+[root@CentOS7-1 ~]#redis-cli -h 192.168.36.104
+192.168.36.104:6379> set name darius
+OK
+192.168.36.104:6379> get name
+"darius"
+192.168.36.104:6379>
+基于Mysql的负载均衡实例
+服务器安装Mariadb
+[root@CentOS7-1 ~]#yum install -y mariadb mariadb-server
+[root@CentOS7-1 ~]#systemctl start mariadb   # 启动mariadb数据库服务
+[root@CentOS7-1 ~]#systemctl enable mariadb   # 开机自启动数据库服务
+[root@CentOS7-1 ~]#ss -ntl | grep 3306   # 检查端口是否启动
+LISTEN     0      50           *:3306                     *:*
+
+Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service to /usr/lib/systemd/system/mariadb.service.
+[root@CentOS7-1 ~]#mysql_secure_installation   # 对数据库进行安全加固
+
+# 对数据库进行授权操作
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'root'@'192.168.36.%' IDENTIFIED BY 'centos';
+Query OK, 0 rows affected (0.00 sec)
+MariaDB [(none)]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+Nginx配置
+[root@CentOS7 tcp]#vim tcp.conf
+stream {
+  upstream mysql_server {
+	least_conn;
+	server 192.168.36.110:3306 max_fails=3 fail_timeout=30s;
+  }
+  server {
+	listen 192.168.36.104:3306;
+	proxy_connect_timeout 3s;
+	proxy_timeout 3s;
+	proxy_pass mysql_server;
+  }
+}
+[root@CentOS7 tcp]#nginx -t
+nginx: the configuration file /apps/nginx/conf/nginx.conf syntax is ok
+nginx: configuration file /apps/nginx/conf/nginx.conf test is successful
+[root@CentOS7 tcp]#nginx -s reload
+
+# 对负载端口进行检查
+[root@CentOS7 tcp]#ss -ntl | grep 3306
+LISTEN     0      128    192.168.36.104:3306                     *:*
+####测试通过nginx负载连接Mysql
+
+[root@CentOS7-1 ~]#mysql -uroot -pcentos -h 192.168.36.104
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 16
+Server version: 5.5.60-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE Darius;
+Query OK, 1 row affected (0.00 sec)
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+|--------------------|
+| Darius             |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+
+MariaDB [(none)]>
+【年薪30w工程师吐血整理资料大合集】

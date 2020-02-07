@@ -1,0 +1,18 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T06:57:37+08:00
+
+====== Atom ======
+创建日期 星期三 22 十一月 2017
+
+- CentOS: [http://blog.csdn.net/lm409/article/details/60876236](http://blog.csdn.net/lm409/article/details/60876236)
+- rpm -ivh atom.x86_64.rpm
+
+
+https://ide.atom.io/
+Atom IDE[29] 是一个加强版的 Atom 编辑器，它添加了大量扩展和库以提高性能和增加功能。总之，它是各方面都变得更强大了的 Atom 。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Atom。
+
+$ sudo apt-get install snapd
+$ sudo snap install atom --classic

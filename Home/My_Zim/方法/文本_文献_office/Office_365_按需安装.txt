@@ -1,0 +1,96 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-30T08:36:02+08:00
+
+====== Office 365 按需安装 ======
+创建日期 星期日 30 十二月 2018
+
+https://sspai.com/post/52163
+Office 365 如何按需安装
+12月25日
+唐小筑 唐小筑
+为了减少设定上的麻烦，Windows 上微软采用了 C2R（Click To Run）的方式来安装 Office 365 或 2016 等，但同时我们失去了选择的权利。比如，订阅了 Office 365 家庭版，安装过程中会自动将 Word、Excel、PowerPoint、OneNote、Outlook、Publisher 和 Access 全家桶全部装到电脑，而我们许多人只需要前三者。总之，按需安装既可以节省电脑储存空间，又可以安抚好强迫症患者，比如我。
+
+macOS 上可以在安装 Office 的时候直接勾选想安装的应用，不想安装的取消勾选即可。所以，本文只介绍如何在 Windows 上按需安装 Office 365 中的应用。
+
+操作步骤
+1. 打开 官方配置编辑器，在「Add Product」中选择相应信息和语言选择后点击「Add」，最后点击「Add Product」
+
+2. 在「Exclude Programs」 中取消勾选拒绝安装的应用，点击「Save」
+
+3. 在输出栏上侧点击「Export」，然后点击「Download Office Deployment Tool」（感谢 iamCristYe 提供的信息）
+
+4. 在包含「setup.exe」以及「configuration.xml」的文件夹上按右键的同时按着 ⇧Shift 选择在此打开命令窗口，复制命令 setup.exe /configure configuration.xml 到命令窗口并按回车键以执行，就会跳出下图所示的窗口，大功告成。
+
+
+可能的错误信息
+找不到命令 setup.exe，但它确实存在于当前位置。默认情况下，Windows PowerShell 不会从当前位置加载命令。如果信任此命令，请改为键入 .\setup.exe。
+
+按照提示修改命令即可：
+
+.\setup.exe /configure configuration.xml 
+本质相同的其它教程
+1. 下载 Office 2016 部署工具，双击，根据提示解压到桌面
+
+2. 记事本打开「configuration.xml」并删除全部内容
+
+3. 复制以下内容到「configuration.xml」并保存
+
+<Configuration>
+<Add SourcePath="" OfficeClientEdition="32">
+<Product ID="O365ProPlusRetail">
+<Language ID="zh-cn" />
+<ExcludeApp ID="Access" />
+<ExcludeApp ID="Publisher" />
+<ExcludeApp ID="OneNote" />
+<ExcludeApp ID="Outlook" />
+<ExcludeApp ID="Groove" />
+<ExcludeApp ID="Lync" />
+</Product>
+</Add>
+</Configuration>
+4. 在包含「setup.exe」以及「configuration.xml」的文件夹上按右键的同时按着 Shift 选择在此打开命令窗口，复制命令 setup.exe /configure configuration.xml  到命令窗口并按回车键以执行，就会跳出与之前方法最后一步相同的窗口，大功告成。
+
+以下为配置代码详细的解释，你也可以直接观阅 微软官方提供的教程。
+
+<Configuration>
+<Add SourcePath="" OfficeClientEdition="32">  
+	// SourcePath - 镜像文件的位置，保留空白意味着会自动下载安装包
+	// OfficeClientEdition - 安装 32 或 64 位，微软通常建议安装 32 位
+<Product ID="O365ProPlusRetail">
+	// 指 Office 的产品 ID 如 O365ProPlusRetail、HomeStudentRetail，详细参阅产品 ID 说明
+<Language ID="zh-cn" />
+	// 语言版本：简体中文（zh-cn） 繁体中文（zh-tw） 
+<ExcludeApp ID="Access" />
+<ExcludeApp ID="Publisher" />
+<ExcludeApp ID="OneNote" />
+<ExcludeApp ID="Outlook" />
+<ExcludeApp ID="Groove" />
+<ExcludeApp ID="Lync" />
+	// 不安装的软件列表，软件对应 ID 见下文
+</Product>
+</Add>
+</Configuration>
+产品的对应 ID 如下，你可以直接查看官方文档 Office 产品 ID 说明。
+
+ID="Access"
+ID="Excel"
+ID="Groove"
+ID="InfoPath"
+ID="Lync"
+ID="OneDrive"
+ID="OneNote"
+ID="Outlook"
+ID="PowerPoint"
+ID="Publisher"
+ID="SharePointDesigner"
+ID="Visio"
+ID="Word"
+对于商务用 OneDrive，请使用 Groove
+对于商务用 Skype，请使用 Lync
+微软提供的详细解释，请移步此处：Office 部署工具的配置选项
+
+文中的旧教程主要参照：神腦國際達人觀點編輯群
+
+
+http://officedev.github.io/Office-IT-Pro-Deployment-Scripts/XmlEditor.html

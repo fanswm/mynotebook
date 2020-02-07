@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-08-10T11:31:49+08:00
+
+====== 1010软件 ======
+Created Friday 10 August 2018
+

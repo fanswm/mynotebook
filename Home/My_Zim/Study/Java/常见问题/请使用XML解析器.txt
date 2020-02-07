@@ -1,0 +1,23 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T16:20:32+08:00
+
+====== 请使用XML解析器 ======
+Created Thursday 07 December 2017
+
+错误的写法：
+
+int start = xml.indexOf("<name>") + "<name>".length();  
+int end = xml.indexOf("</name>");  
+String name = xml.substring(start, end);
+
+正确的写法：
+
+SAXBuilder builder = new SAXBuilder(false);  
+Document doc = doc = builder.build(new StringReader(xml));  
+String name = doc.getRootElement().getChild("name").getText();
+
+作者：java联盟
+链接：https://juejin.im/post/5a27aa33518825619a028f69
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

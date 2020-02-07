@@ -1,0 +1,27 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-24T18:18:37+08:00
+
+====== imrdr 操作 ======
+创建日期 星期日 24 十一月 2019
+
+#在树莓派上：
+# 参考： https://github.com/docker/compose/releases
+sudo curl -L https://github.com/docker/compose/releases/download/1.25.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo chmod +x [[/usr/local/bin/docker-compose]]
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+
+# 检查安装情况以及版本。
+docker-compose --version
+
+#####################
+docker-compose:行1: Not: 未找到命令
+###############end#################
+鉴定结果：未完成安装。
+
+####
+compose 常用命令
+docker-compose up -d  # 后台启动
+docker-compose down    # 销毁
+docker-compose restart # 重启
+##########

@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-08-10T11:25:17+08:00
+
+====== 横幅 ======
+Created Friday 10 August 2018
+
+figlet,
+figlet, 一款简单的横幅制作工具
+
+多年以来，互联网上一直在利用ASCII码生成横幅字体。大家知道它们是如何产生的吗？答案正是figlet。大家可以利用多种不同字体进行横幅渲染; 另外，如果大家不打算在自有设备上运行figlet，还可以使用在线Figlet服务器及服务。

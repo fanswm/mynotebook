@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-15T06:43:00+08:00
+
+====== 搭建家庭 NAS 服务器有什么好方案 ======
+创建日期 星期五 15 二月 2019
+
+https://www.zhihu.com/question/21359049/answer/34375825?utm_source=weibo&utm_campaign=market1979
+2018.12.18：更新Plex简介；2019.1.2：更新Webmin简介；2019.1.10：更新Linux环境Web面板介绍;2019.1.14：增补远程控制思路，增补Windows Admin Center截图；2019.1.18：增补Linux环境NAS搭建思路；2019.1.21：增补FreeNAS/OMV介绍；2019.1.25：增加自攒MicroServer方案。这些年软硬件及个人对NAS的认知也在不断更新，期间有一些新的想法方便大家避坑。折腾NAS的四年中，本人换来换去用过方案很多，黑群晖、Linux、Windows、OS X、各种虚拟机混搭等等，现在感觉搭建家用NAS的目的是简单易用，而不是把自己搞到身心俱疲。
+

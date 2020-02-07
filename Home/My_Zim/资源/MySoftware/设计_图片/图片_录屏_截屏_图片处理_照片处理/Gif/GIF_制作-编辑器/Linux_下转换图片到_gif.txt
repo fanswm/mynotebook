@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-22T13:44:13+08:00
+
+====== Linux 下转换图片到 gif ======
+创建日期 星期五 22 二月 2019
+
+使用如下命令：
+
+$ convert -delay 50 *.jpg c.gif
+delay 是 gif 显示图形的间隔，单位是10ms, 50是 500 ms.
+上述的命令把本地的jpg转换成 c.gif 文件。

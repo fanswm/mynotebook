@@ -1,0 +1,34 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-05-01T21:31:42+08:00
+
+====== KVM ======
+创建日期 星期三 01 五月 2019
+
+查看CPU是否支持KVM
+
+ egrep "(svm|vmx)" [[/proc/cpuinfo]]
+
+##################
+你将在输出中看到 vmx（Intel-VT 技术）或 svm （AMD-V 支持）。
+####################
+
+# https://www.cnblogs.com/ccskun/p/5527014.html
+
+$ sudo apt-get install cpu-checker
+$ egrep -c '(vmx|svm)' /proc/cpuinfo
+12
+$ kvm-ok
+
+# sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils ia32-libs-multiarch
+# 上面这个命令是Android 官网给出的安装kvm的解决办法。但是我的CPU不是ia32的。我采用的是下面这个命令，参考的是上面那个网址的。
+```
+sudo apt-get install qemu-kvm  qemu  virt-manager  virt-viewer  libvirt-bin  bridge-utils
+```
+# 输出信息：
+```
+update-initramfs: Generating /boot/initrd.img-4.18.0-18-generic
+I: The initramfs will attempt to resume from /dev/sda6
+I: (UUID=e7511e28-3ccc-4983-95a2-e8e48d7df033)
+I: Set the RESUME variable to override this.
+```

@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:40:33+08:00
+
+====== GNOME 终端 ======
+Created Wednesday 24 October 2018
+
+GNOME 终端[46] 是 GNOME 的默认终端模拟器。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Gnome 终端。
+
+$ sudo apt-get install gnome-terminal
+https://github.com/GNOME/gnome-terminal

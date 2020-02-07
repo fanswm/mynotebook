@@ -1,0 +1,57 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-19T16:45:19+08:00
+
+====== 丢失 DLL 文件？这个工具帮你一键安装 Windows 运行库：AiO Runtimes ======
+创建日期 星期二 19 二月 2019
+
+https://sspai.com/post/46142
+丢失 DLL 文件？这个工具帮你一键安装 Windows 运行库：AiO Runtimes | App+1
+2018年08月14日
+DerQi DerQi
+经常使用 Windows 的你，不知道有没有遇到过这样的情况：
+
+在刚刚安装好系统的，亦或者是因种种原因误删了系统文件的设备上，原本好端端地顺利安装了的程序突然无法正常启动了。屏幕上只有一个警示⚠弹窗提示着看不懂的「XXX.dll 文件缺失」。
+
+令人头大的错误提示
+令人头大的错误提示
+有经验的读者知道这种情况大多是 Windows 运行库缺失所致。简单解释来说，运行库（Runtime）也叫运行时，是许多软件在开发中所依靠的「库」，「库」里有软件运行中要调用的内容。运行库并没有预先集成在系统中，需要用户自行下载、更新。
+
+遇到这种情况最直接的解决方法就是把那串不知道什么鬼的 DLL 文件名在搜索引擎逐字输入、回车、下载、移动到指定的系统文件目录下，搞定。
+
+——但是这种解决方法难免要面临种种问题，且不说那些从网站上下载下来的文件是否安全，文件应该移动至的具体位置也经常让人摸不到头脑。一个不小心就有可能导致系统损坏。
+
+为了解决这个小问题，早早就有大大小小的网站对常用的多个运行库进行了整合处理，打包成运行库整合包提供给用户下载。但是据我所知，目前国内比较有知名度的几个整合包总是会有许多令人裹足不前的情况。往往由于网络上的广泛传播，很难在搜索引擎的搜索结果中辨别可靠的资源站点，一眼望去恶意捆版甚至是病毒传播比比皆是。
+
+因此今天推荐的这款 AiO Runtimes 或许就是你在找的完美解决方案了。
+
+All in One Runtimes 是它的全称。故名思义，就是一款将所有常见运行库整合到一起的运行库整合包了。
+
+ 
+ 
+相较于其他运行库整合包，AiO Runtimes 的优势就在于内容简洁和操作快捷。启动整合包后会立刻进入 30 秒倒计时，如果用户不选择点击「Pause（暂停）」按钮，倒计时结束后会自动开始安装全部运行库，1 可以说是真正的一键挂机完成任务了。
+
+AiO Runtimes 还会自动甄别当前系统环境中所需要的运行库，比方说 .NET Framework 4.6 会被自动安装在 Windows 7 和 Windows 8.1 中，而由于 Windows 10 不需要则不会进行安装。当然你也可以根据你自己的情况手动选择需要的运行库，比如你认为不再需要安装 Adobe Flash Player，则只需要在界面左侧取消勾选这一项即可。
+
+AiO Runtimes 内整合的运行库必要且全面，其整合内容包括：
+
+.NET Framework 4.6 + Updates
+Java Runtime Environment 8
+DirectX 9.0c Zusatzdateien
+Allgemeine Runtime Dateien
+Microsoft Visual C++ Runtimes (v2005 - v2015)
+Microsoft Visual J# 2.0 SE
+Microsoft Silverlight 5
+Adobe Flash Player (Opera, FireFox, Internet Explorer)
+Shockwave Player 12 (Internet Explorer Plugin)
+这些运行库基本保证了绝大多数 Windows 软件的正常启动所需，无需再费心手动安装其他运行库。
+
+另外，AiO Runtimes 还十分「纯净」。整合包本身不包含任何捆绑内容以及运行库安装以外任何额外内容，可以安心的从官网下载使用。
+
+再加上 AiO Runtimes 仅有一个 300 MB 大小的 EXE 运行文件，你完全可以将其复制到你的 U 盘里随身携带，给任何需要的设备快速装机。可以称的上是绝佳的装机工具了。
+
+小小的缺憾
+AiO Runtimes 有一个说不上问题的问题，就是操作界面所使用的语言为德语。但实际上界面上的全部按钮仅有「Installieren（安装）」和 「Pause（暂停）」这两个，应该说完全没有理解上的障碍了。
+
+你可以在这个 官方网站 免费下载 AiO Runtimes。
+https://sereby.org/site/All%20in%20One%20Runtimes&lang=en

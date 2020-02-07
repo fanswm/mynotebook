@@ -1,0 +1,67 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-09-19T13:45:51+08:00
+
+====== windows上运行的SSH服务器-OpenSSH 总结 ======
+Created Wednesday 19 September 2018
+
+https://blog.csdn.net/sinianliushui/article/details/79171499
+
+下面介绍两款在windows上运行的SSH服务器，当然在windows平台上最好的莫过于VShell了（使用F-Secure SSH Server也可以，但有中文显示的问题，可以淘汰了）。
+
+1、OpenSSH for Windows（适用于2K/XP，98/2003没有测试）
+
+去 http://sshwindows.sourceforge.net/download/ 下载，2004年7月9号的3.8.1p1 版本。
+
+ 安装比较简单，不多说，软件带了服务器端和客户端，由于喜欢使用secureCRT，所以没选client。
+
+配置（查看docs/quickstart.txt）：
+
+1）运行cmd，进入OpenSSH安装目录的bin目录
+
+2）运行“mkgroup -l >> ../etc/group”命令
+
+3）运行“mkpasswd -l -u administrator>> ../etc/passwd”
+
+注意需是机器上存在的用户，否则出现“mkpasswd: [2221] 用户名找不到”错误。
+
+4）运行“net start opensshd”
+
+建议把bin目录中的ls.exe和mkdir.exe删掉，因为用不着（而且一旦不小心运行了这两个命令，ssh就死掉了，重新连也连不上了）。
+
+呵呵，用secureCRT连连看，行不行，连接上后和cmd用法一样。
+
+--------------------
+
+Microsoft Windows 2000 [Version 5.00.2195]
+(C) 版权所有 1985-2000 Microsoft Corp.
+
+C:/Program Files/OpenSSH>netstat -an
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State
+  TCP    0.0.0.0:21             0.0.0.0:0              LISTENING
+  TCP    0.0.0.0:22             0.0.0.0:0              LISTENING
+  ...
+  TCP    127.0.0.1:1680         0.0.0.0:0              LISTENING
+  TCP    127.0.0.1:43958        0.0.0.0:0              LISTENING
+  TCP    210.38.*.*:22       172.21.88.88:1102      ESTABLISHED
+  TCP    210.38.*.*:22       172.21.88.88:1139      ESTABLISHED
+ （为安全用*表示，可以同时连多个）
+
+我在Windows7上安装Cygwin,配置完成后，输入ssh localhost,出现Connection closed by 127.0.0.1，
+
+想问下这个问题怎么解决，求大神帮忙指点！
+da搜索| 浏览 2900 次|举报
+我有更好的答案
+推荐于2016-07-30 17:44:31最佳答案
+问题描述：
+	在Win7下Cygwin中，使用ssh localhost命令，出现Connection closed by 127.0.0.1的问题。
+解决方案：
+	1、开始——运行——services.msc
+	2、右键CYGWIN sshd——属性——登录选项卡——选择“此账户”——浏览——高级——立即查找——选择你的账户名（必须为管理员权限）——输入密码（必须要有，空密码不接受）——确定。
+	3、重启CYGWIN sshd服务即可。
+	这样就以你的账户的名义启动了这个服务。而后ssh localhost成功。
+	这样做的一个缺点可能是你要给电脑设个密码。
+问题3 使用ssh administrator@127.0.0.1 -p 22登录说密码不对 ，使用Administrator正常

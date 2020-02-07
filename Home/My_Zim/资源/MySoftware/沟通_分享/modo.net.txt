@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T07:11:18+08:00
+
+====== modo.net ======
+创建日期 星期三 22 十一月 2017
+
+[https://www.modo.net/](https://www.modo.net/) 
+
+将所有的数字化文件，包括文档、照片和视频，归集在一起，在同一个地方以可视化的方式精彩呈现。modo 将成为检索线上文档的绝佳场所，帮助你查看、编辑和分享分散在各种云服务、电子邮件及社交媒体中的线上数据。

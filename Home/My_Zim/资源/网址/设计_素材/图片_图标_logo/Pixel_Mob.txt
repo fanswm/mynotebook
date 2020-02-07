@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-16T11:26:09+08:00
+
+====== Pixel Mob ======
+创建日期 星期二 16 四月 2019
+
+https://pixelmob.co/
+Pixel Mob 是一个免费高清图片网站，除了搜索之外没有任何额外的功能，界面也非常清爽。

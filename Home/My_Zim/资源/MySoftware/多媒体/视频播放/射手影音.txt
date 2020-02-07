@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-26T16:35:07+08:00
+
+====== 射手影音 ======
+Created Wednesday 26 December 2018
+
+https://www.splayer.org/
+射手播放器 没有广告，字幕匹配很方便！

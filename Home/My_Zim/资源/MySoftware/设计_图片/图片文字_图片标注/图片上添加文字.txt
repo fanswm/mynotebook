@@ -1,0 +1,31 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-19T17:11:20+08:00
+
+====== 图片上添加文字 ======
+创建日期 星期二 19 三月 2019
+
+https://tecadmin.net/write-text-on-image-using-linux-command/
+
+How to Write Text On Image using Linux Command
+Written by Rahul, Updated on November 28, 2013
+ Linux Tutorials 
+Linux provides an convert command to add any text on an image. In order to use this command you need to install ImageMagick package on your system.
+
+This tutorial will help you to Write Text On Image with examples. For these examples we are taking below image to write some text.
+
+image-text-add-1
+
+Eg 1: Writing Some Text
+# TEXT="Welcome to TecAdmin.net"
+# convert -font helvetica -fill blue -pointsize 36 -draw "text 15,50 '$TEXT'" image1.jpg image2.jpg
+image-text-add-eg-1
+
+Eg 2: Writing Current Date/Time
+# TEXT=`date`
+# convert -font helvetica -fill blue -pointsize 36 -draw "text 15,50 '$TEXT'" image1.jpg image3.jpg
+image-date-add-eg-2
+
+Thank You! for using this article.
+
+https://www.instructables.com/id/Add-text-to-images-with-Linux-convert-command/

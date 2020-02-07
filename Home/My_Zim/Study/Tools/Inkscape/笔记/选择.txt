@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-28T17:11:38+08:00
+
+====== 选择 ======
+Created Tuesday 28 November 2017
+
+## 多选
++ `Shift + click`
++ `ESC` > 取消所有选择
+

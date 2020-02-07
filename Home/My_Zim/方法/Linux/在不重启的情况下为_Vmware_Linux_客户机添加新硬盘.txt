@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-16T15:11:44+08:00
+
+====== 在不重启的情况下为 Vmware Linux 客户机添加新硬盘 ======
+Created Tuesday 16 January 2018
+
+在不重启的情况下为 Vmware Linux 客户机添加新硬盘 https://linux.cn/article-9231-1.html?utm_source=rss&utm_medium=rss

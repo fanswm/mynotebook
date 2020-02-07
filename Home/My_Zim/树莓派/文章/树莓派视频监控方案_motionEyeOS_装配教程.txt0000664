@@ -1,0 +1,128 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-23T14:32:11+08:00
+
+====== 树莓派视频监控方案 motionEyeOS 装配教程 ======
+创建日期 星期二 23 四月 2019
+
+树莓派视频监控方案 motionEyeOS 装配教程
+2019年4月17日 Spoony 未分类 0
+
+
+
+我们介绍过很多树莓派（Raspberry Pi）配合摄像头做视频监控和拍照的方案，这些方案大多是基于 Raspbian 自带的摄像头模块操作工具 raspistill 和 raspivid，或者是需要自行安装 motion、avconv 或 GStreamer 软件来实现拍照和视频拍摄。那么有没有一个专门的树莓派摄像头系统软件呢？当然有，motionEyeOS 了解一下~
+
+软硬件清单
+motionEyeOS
+树莓派 ZERO W
+摄像头模块（日视或夜视）
+适用于树莓派 ZERO 的摄像头软排线
+microSD 卡
+电源适配器
+
+如果对性能方面有要求的话，也可以采用树莓派3B+。我们打算用树莓派 ZERO W，因为它尺寸小而且集成了无线网卡，可以很方便地安放在任何地方。这里墙裂推荐使用树莓派 ZERO W 摄像头套件，它包含了一个能将树莓派主板和红外夜视摄像头合体在一起的3D打印外壳。
+
+
+
+安装 motionEyeOS
+和安装其他树莓派系统一样，首先下载到 motionEyeOS 系统镜像文件。
+https://github.com/ccrisan/motioneyeos/releases
+
+
+
+如果是树莓派ZERO，这里选择 motioneyeos-raspberrypi-xxx.img.xz；如果使用的是树莓派2B或3B则分别下载 motioneyeos-raspberrypi2-xxx.img.xz 或 motioneyeos-raspberrypi3-xxx.img.xz。
+
+xz 是压缩格式，需要用解压工具（在Windows上可以使用7-zip）解压出 img 文件，然后将 img 文件刷入到 microSD 卡。刷系统的步骤参考参考 安装树莓派系统到SD卡。
+
+配置无线网络
+这里说的是配置无线网络，如果你使用树莓派的有线网络则可以跳过这一步。配置方法参考这篇教程：
+无屏幕和键盘配置树莓派WiFi和SSH
+
+请注意此步骤，如果配置出错可能导致树莓派无法启动，那么就要重新刷入系统再试一次了。
+
+组装树莓派和摄像头
+将 SD 卡插入树莓派，用软排线将树莓派和摄像头连接起来，最后给树莓派上电。
+
+
+首次启动系统
+如果没有连接显示器，首次启动时建议等待时间久一些，系统需要花几分钟完成分区配置、摄像头检测等流程。
+
+如果你将显示器接到树莓派上的话，还可以看到启动的每一步的执行情况和从路由器获得的IP地址，如图。
+
+
+确认一下树莓派所连接的路由器开启了DHCP，一切顺利的话可以进路由器管理页面找到树莓派的IP地址（也可以试试用工具找到树莓派的IP地址）。
+
+
+
+在浏览器的地址栏输入树莓派的IP地址，即可进入 motionEyeOS Web 界面。运气好的话，应该看到摄像头的内容了：
+
+
+motionEyeOS 功能强大，点界面上方的 “person” 图标登录进去之后可以做一些高级配置。默认用户名 admin，密码留空。
+
+
+
+基础配置
+在通用设置中可以修改管理员密码和监控密码。
+
+
+
+点击 “Apply” 按钮保存设置。
+
+在通用设置中，可以将高级设置（Advanced Settings）开启，会出现更多选项，看起来马上变得专业多了是不是？这里可以设置时区、主机名、关机和重启摄像头。
+
+
+
+更多配置
+以下图片展示了 motionEyeOS 全部可配置的选项。
+
+
+
+> Video Device（视频设备）
+这里用来设置监控回传视频的分辨率、帧率等视频质量参数，如果你希望旋转画面也可以在这里设置。
+
+Camera Name = “Garden”
+Video Resolution = 1600×1200
+Frame Rate = 2
+> Video Streaming（视频流）
+这些设置允许你根据网络情况调节传输到浏览器的视频流相关的参数。
+
+Streaming Frame Rate = 1
+Streaming Image Resizing = ON
+Streaming Resolution = 50%
+Motion Optimization = ON
+> Still Images（保存照片）
+这里可以设置保存多久的照片。
+
+Preserve Pictures “For One Month”
+> Movies（保存视频）
+设置保存的格式，以及保存多久的视频。
+
+Movie Format = H.264 (.mp4)
+Preserve Movies “For One Week”
+> Motion Detection（运动检测）
+你可以设置运动检测来让摄像头只在检测到画面变化之后才工作，一段时间之后自动停止，直到再次检测到画面变化。这样可以节省很多资源。下面的参数用于调节触发条件：
+
+Frame Change Threshold = 10%
+Light Switch Detection = 75%
+Motion Gap = 20
+Captured Before = 5
+Captured After = 5
+Minimum Motion Frames = 10
+Show Frame Changes = ON
+查看保存的照片和视频
+在摄像头运行过程中，点击右上角的图标，可以进入到已保存的照片和视频的清单。
+
+
+
+相关资料
+更多有关 motionEyeOS 和 树莓派 Zero 摄像头套件的连接：
+
+motionEyeOS gitHub
+motionEyeOS gitHub Wiki
+motionEyeOS Installation
+motionEyeOS gitHub Wiki
+motionEyeOS FAQ
+树莓派 Zero 摄像头套件
+
+文章标题：树莓派视频监控方案 motionEyeOS 装配教程 - 树莓派实验室
+固定链接：http://shumeipai.nxez.com/2019/04/17/raspberry-pi-zero-w-cctv-camera-with-motioneyeos.html

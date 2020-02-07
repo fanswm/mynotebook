@@ -1,0 +1,50 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-12-05T22:33:58+08:00
+
+====== 常见问题2英文 ======
+Created 星期四 05 十二月 2019
+
+FAQs
+1，__What is the Hour of Code?__
+The Hour of Code started as a one-hour introduction to computer science, designed to demystify "code", to show that anybody can learn the basics, and to broaden participation in the field of computer science. It has since become a worldwide effort to celebrate computer science, starting with 1-hour coding activities but expanding to all sorts of community efforts. Check out the tutorials and activities. This grassroots campaign is supported by over 400 partners and 200,000 educators worldwide.
+2，__When is the Hour of Code?__
+The Hour of Code takes place each year during Computer Science Education Week. The 2019 Computer Science Education Week will be December 9-15, but you can host an Hour of Code all year-round. Computer Science Education Week is held annually in recognition of the birthday of computing pioneer Admiral Grace Murray Hopper (December 9, 1906).
+3，__Why computer science?__
+Every student should have the opportunity to learn computer science. It helps nurture problem-solving skills, logic and creativity. By starting early, students will have a foundation for success in any 21st-century career path. See more stats here.
+4，__How do I participate in the Hour of Code?__
+Start planning here by reviewing our how-to guide. You can organize an Hour of Code event at your school or in your community — like in an extracurricular club, non-profit or at work. Or, just try it yourself when Dec. 9 arrives.
+5，__Who is behind the Hour of Code?__
+The Hour of Code is driven by the Hour of Code and Computer Science Education Week Advisory and Review Committees as well as an unprecedented coalition of partners that have come together to support the Hour of Code — including Microsoft, Apple, Amazon, Boys and Girls Clubs of America and the College Board.
+__I don't know anything about coding. Can I still host an event?__
+Of course. Hour of Code activities are self-guided. All you have to do is try our current tutorials, pick the tutorial you want, and pick an hour — we take care of the rest. We also have options for every age and experience-level, from kindergarten and up. Start planning your event by reading our how to guide.
+6，__What devices should I use for my students?__
+Code.org tutorials work on all devices and browsers. You can see more information about Code.org's tutorial tech needs here. Tech needs for non-Code.org tutorials can be found on code.org/learn in the tutorial specific description. Don't forget we also offer unplugged activities if your school can't accommodate the tutorials!
+7，__Do I need computers for every participant?__
+No. We have Hour of Code tutorials that work on PCs, smartphones, tablets, and some that require no computer at all! You can join wherever you are, with whatever you have.
+Here are a few options:
+Work in pairs. Research shows students learn best with pair programming, sharing a computer and working together. Encourage your students to double up.
+Use a projected screen. If you have a projector and screen for a Web-connected computer, your entire group can do an Hour of Code together. Watch video portions together and take turns solving puzzles or answering questions.
+Go unplugged. We offer tutorials that require no computer at all.
+8，__Are there limitations to how I can use the Hour of Code logo or name?__
+Hour of Code is trademarked. We don't want to prevent its usage, but we want to make sure its usage fits within a few limits. Please see these guidelines for usage.
+__How can I make an Hour of Code tutorial?__
+If you're interested in becoming a tutorial partner, see our guidelines and instructions. We'd like to host a variety of engaging options, but the primary goal is to optimize the experience for students and teachers who are new to computer science.
+9，__Do students need to log on using an account?__
+No. Absolutely no signup or login is required for students to try the Hour of Code. Most of the follow-on courses require account creation to save student progress. Also, signing up for the Hour of Code does NOT automatically create a Code Studio account. If you do want to create accounts for your students, please follow these instructions.
+10，__Where can I print certificates for my students?__
+Go to our certificates page where you can print certificates for your entire class ahead of time. You can also print out special certificates for students doing the Minecraft tutorial.
+__Which activity should I do with high school students?__
+Our Star Wars and Minecraft tutorials are great for high schoolers, especially the Star Wars JavaScript version and the free play level on both tutorials. Alternately, we recommend trying one of the beginner tutorials on code.org/learn to start, such as the tutorial with Angry Birds or with Anna and Elsa. A high school student should be able to finish one of these in 30 minutes and can then try a more advanced tutorial in JavaScript, such as Khan Academy or CodeHS.
+11，__How do you count Hours of Code?__
+The Hour of Code tracker isn't an exact measurement of usage. We do not count unique student IDs perfectly when tracking participation in the Hour of Code, especially because we don't require students to log in or register. As a result, we both over-count and under-count participants at the same time. Read all the details here.
+12，__Why don't I see my dot on the map?__
+We're so sorry you aren't seeing your event on the Hour of Code map. Because of the tens of thousands of organizers who sign up, the map aggregates the data and displays one point for several events. If you click the events page link below the map you will be directed to a list of all events by state and can find your event listed there. Additionally, given the thousands of people signing up for the Hour of Code, the map and event list usually takes 48 hours to update. Check back in a few days!
+13，__How much can one learn in an hour?__
+The goal of the Hour of Code is not to teach anybody to become an expert computer scientist in one hour. One hour is only enough to learn that computer science is fun and creative, that it is accessible at all ages, for all students, regardless of background. The measure of success of this campaign is not in how much CS students learn - the success is reflected in broad participation across gender and ethnic and socioeconomic groups, and the resulting increase in enrollment and participation we see in CS courses at all grade levels. Millions of the participating teachers and students have decided to go beyond one hour - to learn for a whole day or a whole week or longer, and many students have decided to enroll in a whole course (or even a college major) as a result.
+
+Besides the students, another "learner" is the educator who gains the confidence after one hour that they can teach computer science even though they may not have a college degree as a computer scientist. Tens of thousands of teachers decide to pursue computer science further, either attending PD or offering follow-on online courses, or both. And this applies to school administrators too, who realize that computer science is something their students want and their teachers are capable of.
+
+Above all, what all participants can learn in an hour is that we can do this.
+14，__How do I keep learning after the Hour of Code?__
+Anyone can host an Hour of Code at any time. The tutorials stay up year-round. You can expect all our tutorials and curriculum to be available on our site in perpetuity. Please go to our resources for event how-to guides and other resources to help make your Hour of Code event a success.

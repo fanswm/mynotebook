@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-18T15:37:01+08:00
+
+====== chafa ======
+Created 星期一 18 二月 2019
+
+chafa 是一个命令行图像转换器和查看器[2]。它可以帮助你在不离开终端的情况下欣赏图像。语法非常简单：
+
+chafa /path/to/your/image
+你可以将几乎任何类型的图像投射到 chafa，包括 JPG、PNG、TIFF、BMP 或几乎任何 ImageMagick 支持的图像 - 这是 chafa 用于解析输入文件的引擎。最酷的部分是 chafa 还可以在你的终端内显示非常流畅的 GIF 动画！
+
+安装说明
+chafa 还没有为 Fedora 打包，但从源代码构建它很容易。首先，获取必要的构建依赖项：
+
+sudo dnf install -y autoconf automake libtool gtk-doc glib2-devel ImageMagick-devel
+接下来，克隆代码或从项目的 GitHub 页面下载快照，然后 cd 到 chafa 目录，这样就行了：
+
+git clone https://github.com/hpjansson/chafa
+./autogen.sh
+make
+sudo make install
+大的图像在第一次运行时可能需要一段时间处理，但 chafa 会缓存你加载的所有内容。下一次运行几乎是瞬间完成的。
+https://linux.cn/article-9903-1.html?utm_source=rss&utm_medium=rss

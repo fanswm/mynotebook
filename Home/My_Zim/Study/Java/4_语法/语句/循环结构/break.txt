@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-08T08:22:55+08:00
+
+====== break ======
+Created Thursday 08 March 2018
+
+break 关键字
+
+break 主要用在循环语句或者 switch 语句中，用来跳出整个语句块。
+
+break 跳出最里层的循环，并且继续执行该循环下面的语句。
+语法
+
+break 的用法很简单，就是循环结构中的一条语句：
+
+break;

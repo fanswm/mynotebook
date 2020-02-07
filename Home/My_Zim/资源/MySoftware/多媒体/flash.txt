@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-21T14:25:09+08:00
+
+====== flash ======
+Created Tuesday 21 November 2017
+
+```
+sudo apt-get install flashplugin-installer
+```

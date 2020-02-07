@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T08:33:53+08:00
+
+====== 中文乱码 ======
+Created Friday 24 November 2017
+
+## vim 中文乱码
+```
+set fileencodings=utf-8,gbk,latin1,ucs-bom,gb18030,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
+```

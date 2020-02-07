@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-27T17:16:29+08:00
+
+====== EVCapture 录屏工具 ======
+Created Thursday 27 December 2018
+
+https://www.ieway.cn/evcapture.html
+现在屏幕录制工具太多了，那么为什么推荐这个工具呢？这是一个中国人开发的程序，软件很小，免费使用，有绿色版和安装版，而且录制的视频真的非常清晰，谁用谁知道，最关键的是录制的视频体积真的太小了！！！
+
+关于这个软件有任何问题或者建议都欢迎加官方QQ群提出，我不属于该软件开发团队，请不要在下面留评论问我。群号：16130945 或 477284426

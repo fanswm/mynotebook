@@ -1,0 +1,46 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-22T14:15:19+08:00
+
+====== 10个不到500行代码的超牛Python 练手项目（技术清单系列 ======
+创建日期 星期五 22 二月 2019
+
+https://zhuanlan.zhihu.com/p/52881791
+以下10个练手项目均摘录自一本尚未出版的 Python 神书《500 Lines or Less》，尽管没有出版，但其 review 版已在官方博客放出。
+这本书共16个章节，每章均是由该领域的大牛完成，用不到500行的代码实现一个特（装）定（B）功能。
+上期传送门：GitHub 上10个最有意思的项目合集  https://zhuanlan.zhihu.com/p/52786700
+1. 实现一个网络爬虫
+不多说，几百行代码实现高效的网络爬虫， 高效！
+官方链接 http://aosabook.org/en/500L/a-web-crawler-with-asyncio-coroutines.html
+2. Python 实现数据库
+如何用 Python 实现一个数据库，支持 query，index, transaction， 两三百行代码和对每个函数的讲解。看完你就知道知道数据库原理！
+官方链接 http://aosabook.org/en/500L/an-archaeology-inspired-database.html
+Python3 实现键值数据库
+3. Python 解析器实现
+手把手教你如何实现 Python 解析器。
+官方链接 http://aosabook.org/en/500L/a-python-interpreter-written-in-python.html
+Python 实现 Python 解释器
+4. 一个简单的计步器
+你用过手机应用记录你每天走的步数，然后发送到朋友圈吗？ （没有？ 没关系。）这章告诉你如何实现步数记录，怎么算走一步。手机中有加速记，很容易获得你某一时刻在 x,y,z 三个方向的加速度，用这些参数，如何计算你走了多少步？ 知道吗？ 不知道，看这章，讲解加实现。
+官方链接 http://aosabook.org/en/500L/a-pedometer-in-the-real-world.html
+5. 识别手写字母
+几百行代码使用人工神经网络实现识别手写字母。
+官方链接 http://www.aosabook.org/en/500L/optical-character-recognition-ocr.html
+K-近邻算法实现手写数字识别系 https://www.shiyanlou.com/courses/777
+6. 一个简单的项目模型
+Python 是面向对象语言，对象，继承，多态，怎么用代码实现的，不到500行代码，实际不到400行！
+官方链接  http://aosabook.org/en/500L/a-simple-object-model.html
+7. 静态解析器
+成熟的 IDE 都有代码检查和代码提示，怎么做的？ 看这里。
+官方链接 http://aosabook.org/en/500L/static-analysis.html 
+8. 一个模板引擎
+MVC 模型中的 view 层如何解析 html 中的静态变量和简单的语句，如下：
+Web 中的 view 层不只是 html 代码，还有支持其他的代码。比如 `{products} `是一个变量。 同时 view 层还支持 {if} , {for}, {foreach} 等等。django，velocity 等是如何解析他们的？大牛用不到500行代码告诉你，是如何实现的。
+官方链接 http://aosabook.org/en/500L/a-template-engine.html
+9. 一个3D模型
+用 Python 实现一个3D设计，显示到屏幕，可以交互。
+官方链接 http://aosabook.org/en/500L/a-3d-modeller.html
+Python 实现 3D 建模工具 https://www.shiyanlou.com/courses/561
+10. 电子表格
+Web 的电子表格如何实现的？看这个经典实现。
+官方链接 https://www.shiyanlou.com/courses/561

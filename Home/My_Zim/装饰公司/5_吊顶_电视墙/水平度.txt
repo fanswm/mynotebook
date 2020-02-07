@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-08-22T10:01:59+08:00
+
+====== 水平度 ======
+Created Wednesday 22 August 2018
+
+与房顶关系:
+1,如果吊水平,则,如果房顶不水平,房顶补石高粉;
+2,最经济的做法:如果房顶水平度不是差的太离谱的话,则把吊顶的水平度稍调一下,就着房顶,就不用补房顶了.

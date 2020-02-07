@@ -1,0 +1,25 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-27T17:22:44+08:00
+
+====== Infix PDF Editor ======
+Created Thursday 27 December 2018
+
+Infix PDF Editor：直接修改PDF文档
+
+官方网站购买：http://www.pdfediting.com/
+
+汉化破解版下载：http://www.dayanzai.me/infixpro-pdf-editor.html
+
+曾经我天真地认为PDF文档想要修改内容（非注释）的话，就必须先转换成word，然后修改好内容再转回PDF，但是遇到这款可以像编辑word那样直接编辑PDF的神器之后，我彻底傻眼了！
+
+首先，这里有一个PDF文档，直接从《Science》杂志上面下载下来的。用传统的阅读器打开之后只能加一点注释，并不能修改文字内容主体。
+
+
+我们用 Infix Pro 打开这个PDF文档，并选择文本工具。
+
+
+我们修改这个文档的大黑标题，成功把 Battery 修改成了 Bat。
+
+
+我们还可以任意修改文章内容。

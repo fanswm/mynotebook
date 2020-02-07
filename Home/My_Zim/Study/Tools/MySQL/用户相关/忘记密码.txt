@@ -1,0 +1,58 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-07T16:30:17+08:00
+
+====== 忘记密码 ======
+Created Thursday 07 December 2017
+
+__方法一：__
+1、在DOS窗口下输入 `net stop mysql5` 或 `net stop mysql`
+ 
+2、开一个DOS窗口，这个需要切换到mysql的bin目录。
+一般在bin目录里面创建一个批处理`1.bat`,内容是`cmd.exe`运行一下即可就切换到当前目录，然后输入
+`mysqld-nt --skip-grant-tables`;
+或
+`mysqld --skip-grant-tables`;
+不要关闭窗口
+
+3、再开一个DOS窗口，输入 `mysql -u root`
+ 
+4、在mysql环境输入：
+复制代码 代码如下:
+
+```
+use mysql
+update user set password=password("new_pass") where user="root";
+flush privileges;
+exit
+``` 
+5、使用任务管理器，找到mysqld-nt的进程，结束进程
+ 
+__或下面的步骤__
+1，停止MYSQL服务，CMD打开DOS窗口，输入 `net stop mysql`
+2，在CMD命令行窗口，进入MYSQL安装目录 比如E:\Program Files\MySQL\MySQL Server 5.0\bin
+示范命令:
+输入 e:回车,
+输入cd "E:\Program Files\MySQL\MySQL Server 5.0\bin"
+注意双引号也要输入,这样就可以进入Mysql安装目录了.
+3，进入mysql安全模式，即当mysql起来后，不用输入密码就能进入数据库。
+命令为： `mysqld-nt --skip-grant-tables`
+4，重新打开一个CMD命令行窗口，输入`mysql -uroot -p`，使用空密码的方式登录MySQL（不用输入密码，直接按回车）
+5，输入以下命令开始修改root用户的密码（注意：命令中mysql.user中间有个“点”）
+`mysql> update mysql.user set password=PASSWORD('新密码') where User='root';`
+6，刷新权限表
+`mysql> flush privileges;`
+7，退出
+`mysql> quit`
+这样MYSQL超级管理员账号 ROOT已经重新设置好了，接下来 在任务管理器里结束掉 mysql-nt.exe 这个进程，重新启动MYSQL即可！（也可以直接重新启动服务器）
+MYSQL重新启动后，就可以用新设置的ROOT密码登陆MYSQL了！
+
+__方法二：__
+ 
+首先在 MySQL的安装目录下 新建一个`pwdhf.txt`, 输入文本：`SET PASSWORD FOR 'root'@'localhost' = PASSWORD('*****')`;
+ 
+红色部份为 需要设置的新密码
+用windows服务管理工具或任务管理器来停止MySQL服务 (任务管理器K掉 mysqld-nt 进程)
+Dos命令提示符到 MySQL安装目录下的bin目录 如我的是 D:\Program Files\MySQL\MySQL Server 5.1\bin
+然后运行： `mysqld-nt --init-file=../pwdhf.txt`
+执行完毕 停止MySQL数据库服务 (任务管理器K掉 mysqld-nt 进程)，然后再重新以正常模式启动MYSQL 即可

@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-02-27T12:02:16+08:00
+
+====== 接口 ======
+Created Tuesday 27 February 2018
+
+在Java中，__接口可理解为对象间相互通信的协议__。接口在继承中扮演着很重要的角色。
+
+接口只定义派生要用到的方法，但是方法的具体实现完全取决于派生类。

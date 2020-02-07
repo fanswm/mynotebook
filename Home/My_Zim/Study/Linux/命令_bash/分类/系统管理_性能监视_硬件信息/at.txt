@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-01T08:10:06+08:00
+
+====== at ======
+Created Friday 01 December 2017
+
+at [参数] [时间] | 在一个指定的时间执行一个指定任务，只能执行一次
+
+
+HH:MM[am|pm] + number [minutes|hours|days|weeks] 强制在某年某月某日的某时刻进行该项任务
+
+atq 查看系统未执行的任务
+
+atrm n 删除编号为n的任务
+
+at -c n 显示编号为n的任务的内容

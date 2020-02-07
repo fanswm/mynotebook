@@ -1,0 +1,46 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:18:13+08:00
+
+====== 用户管理 ======
+Created Sunday 03 December 2017
+
+useradd
+
+添加用户。
+
+usermod
+
+修改系统已经存在的用户属性。
+
+userdel
+
+删除用户。
+
+groupadd
+
+添加用户组。
+
+passwd
+
+修改用户密码。
+
+chage
+
+修改用户密码有效期限。
+
+id
+
+查看用户的 uid,gid 及归属的用户组。
+
+su
+
+切换用户身份。
+
+visudo
+
+编辑 / etc/sudoers 文件的专属命令。
+
+sudo
+
+以另外一个用户身份（默认 root 用户）执行事先在 sudoers 文件允许的命令。

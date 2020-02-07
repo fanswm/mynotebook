@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-28T20:23:53+08:00
+
+====== 安装 ======
+创建日期 星期四 28 十一月 2019
+
+https://www.php.net/manual/zh/install.unix.apache2.php

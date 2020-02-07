@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-06T22:38:27+08:00
+
+====== Clipper ======
+Created Sunday 06 January 2019
+
+Clipper - an open source freeware polygon clipping library 一个非常精致的二维布尔运算的库，同时还支持做polygon offsetting。带有的一些demo程序都做得很好，支持的语言包括C++\C#\Delphi。其他人也对照着这个算法写了一些port，包括AS3/Go/Haskell/Lua/Matlab/ObjectiveC/Perl/Python/Ruby等。
+
+http://www.angusj.com/delphi/clipper.php
+

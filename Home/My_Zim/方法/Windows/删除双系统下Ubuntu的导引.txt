@@ -1,0 +1,31 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-15T11:38:37+08:00
+
+====== 删除双系统下Ubuntu的导引 ======
+创建日期 星期二 15 一月 2019
+
+链接：https://www.zhihu.com/question/308605163/answer/570942788
+
+根据答主在评论里面的回复初步判断应该是GPT，但是为了保险起见最好还是检查一下】先确定你电脑使用的是 UEFI+GPT 还是 BIOS+MBR如果你用的是Windows，你可以参考 https://zhidao.baidu.com/question/451226706.html 如果你用的是Ubuntu，你可以通过sudo parted /dev/sda print
+这个命令来查看，主要看 Partition Table 这一行，以及有没有EFI系统分区比如我的是：Model: ATA SAMSUNG MZNTY128 (scsi)
+Disk /dev/sda: 128GB
+Sector size (logical/physical): 512B/4096B
+Partition Table: gpt
+Disk Flags: 
+
+Number  Start   End     Size    File system  Name                          Flags
+ 1      1049kB  274MB   273MB   fat32        EFI system partition          boot, esp
+ 2      274MB   290MB   16.8MB               Microsoft reserved partition  msftres
+ 3      290MB   62.2GB  61.9GB               Basic data partition          msftdata
+ 4      62.2GB  63.2GB  965MB   ntfs                                       hidden, diag
+ 5      63.2GB  128GB   64.8GB  ext4
+这就是gptUEFI+GPT（此段中所说的BIOS均为UEFI BIOS的意思……不要和传统BIOS混淆）这类引导方案系统会建立一个EFI分区，里面装着你的引导器，比如 Windows 的 Windows Boot Manager  和 Linux 常用的 GRUB。此处你要删除的就是 GRUB。但是且慢，一旦删除，你就很难再回到你的移动硬盘的Ubuntu中，所以除非你铁了心要删除移动硬盘中的 Ubuntu，不然就先不要进行这一步。我们应该先使用这个 GRUB 引导进入 Ubuntu，然后把 GRUB 写到移动硬盘的 EFI 分区中。参考GRUB_(简体中文) - ArchWiki写入完成之后尝试进入BIOS，将启动设备调成移动硬盘，试着用移动硬盘来引导Ubuntu，如果成功启动则可以进入下一步。下一步就是删除EFI启动分区中的grub你可以在BIOS里面删除，或者在Windows下使用efibootmgr或bcdedit或bootice来编辑。如果你在Linux下，先检查一下挂载情况$ mount | grep efi
+/dev/sda1 on /boot/efi type vfat (rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro)
+如果挂载的EFI分区在移动硬盘中（如/dev/sdb1），可以手动挂载主硬盘EFI分区到 /mnt/efi 之中，然后手动编辑比如我的：$ sudo mount /dev/sda1 /mnt/efi
+$ ls /mnt/efi
+EFI
+$ ls /mnt/efi/EFI
+Boot  deepin  Microsoft  ubuntu
+$ rm /mnt/efi/EFI/ubuntu
+这样应该就可以了。如果不行的话请修改问题上图上日志并追问。BIOS+MBR你可以参考这篇文章来重建引导到移动硬盘系统引导流程、重建和Grub - Yiwei.li只需要把命令里的sda替换成你移动硬盘实际的盘符就可以了（如sdb）然后用EasyBCD将主磁盘原本的引导恢复

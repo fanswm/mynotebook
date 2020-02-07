@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-03T09:06:23+08:00
+
+====== git ======
+Created Sunday 03 December 2017
+
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'

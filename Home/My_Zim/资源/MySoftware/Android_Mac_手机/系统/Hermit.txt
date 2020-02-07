@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-03T17:01:57+08:00
+
+====== Hermit ======
+Created Thursday 03 January 2019
+
+每个 Android 用户心里应该都有那么一款自己常常需要，但客户端臃肿难用，网页版又不能正常使用或功能过于简陋的 App，比如淘宝。以前遇到这种情况，我们往往会尝试借助 __Hermit__ 来对这些网页进行二次封装

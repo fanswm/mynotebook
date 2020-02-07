@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-20T16:17:31+08:00
+
+====== 专门收集和评价各大厂商用户协议的网站 ======
+创建日期 星期三 20 二月 2019
+
+https://tosdr.org/
+toSDR

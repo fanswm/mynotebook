@@ -1,0 +1,164 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-15T10:31:17+08:00
+
+====== 中文网最全Bookmarklets小书签合集 ======
+创建日期 星期二 15 一月 2019
+
+
+奔跑中的奶酪  发表于：2018-10-26  155838次浏览  68条评论 
+
+导读
+
+bookmarklets
+拓展是我们使用浏览器时必不可少的一部分，它可以帮助我们实现各种各样的功能。但不足也是有的，比如安装过多的拓展就会导致浏览器变慢，很多时候我们为了一个很小的功能而不得不多安装一个拓展。而且拓展开发难度大，是开发者们的事，一般用户没办法自定义拓展的功能，只能有什么就用什么。
+有一种叫「小书签 Bookmarklet」的书签应用正好弥补了拓展的不足。它无需安装，不会对浏览器速度造成任何的影响。它和普通的书签一样被放到书签栏里，只需要点击一下就可以实现各式各样的功能，比如生成二维码，生成短链接，阅读模式等等功能，而且它还支持在手机浏览器上使用，可以称得上是“屠龙宝刀，点击就送”。
+一、如何使用小书签？
+
+小书签又名 Bookmarklet，由英文单词 Bookmark 和 Applet 组合而来。简单地说，小书签就是把一段带有特定功能的 JavaScript 代码保存至收藏夹，当你需要的时候点击它来实现这段 JavaScript 代码的功能。
+1、在 Firefox 浏览器上使用小书签
+
+以「B站视频解析」为例，除了打开书签栏点击小书签外，我们可以为小书签设置一个关键词，在浏览器地址栏输入关键词 bbd（bbd 表示 bilibili download），回车，就可以解析下载 Bilibili 视频了。同理，将「网页另外为PDF」设置关键字为 "pdf"，就可以快速调用小书签了。
+
+
+
+2、在 Chrome 浏览器上使用小书签
+
+因为 Chrome 浏览器不支持书签设置关键词，所以在 Chrome 上使用小书签，除了在书签栏上点击小书签外，我们还可以在 chrome://settings/searchEngines 上手动添加，设置关键字后就可以像 Firefox 那样调用小书签了。
+
+
+
+二、中文网最全小书签合集
+使用方法：将小书签拖入书签栏，点击即可使用。（文末附打包下载）
+
+工具类
+阅读类
+链接类
+图像类
+翻译类
+搜索类
+开发类
+站长类
+分享类
+小书签工具
+VIP视频免费观看，测试页面：点这里
+视频解析下载，除优酷外，支持国内大多数视频网站。
+视频解析下载(优酷)，暂时没做成小书签，需要手动输入地址。
+随机打开网站，网站被墙，需要科学上网。
+查找网站RSS源，任意有RSS的网站都可使用，测试页面就用奶酪的博客吧
+网页另存为PDF，可惜有水印。
+弹出软键盘，如题。
+WP一键留言， 需要修改成自己的名字，邮箱和内容。测试页面：点这里。
+摧毁网站，加载可能较慢。
+网页地震，让网页抖动起来。
+网站涂鸦，可以涂鸦后再截图。
+显示当前时间，如题。
+今年还剩多久?，如题。
+查看浏览器UA，如题。
+显示网页最后更改时间，如题。
+百度云直链，去百度网盘调用百度云管家，实现直链下载。
+百度网盘提取码自定义，使用方法：点这里。
+购物·购物党，不用多说，购物比价，测试页面：点这里。
+购物·如意淘，如上。
+购物·惠惠购物，如上。
+三、如何制作小书签？
+那么，小书签里像是乱码的符号倒底是什么？小书签里的 JavaScript 代码是经过编译转码的，所以看上去有很多符号，像乱码一样，我们可以借助转码工具来得到它原来的代码。以"谷歌站内搜索" 小书签为例，经过转码美化的代码便易于理解了。
+
+
+有了上面的理解，我们就可以编辑和制作小书签了， 小书签的实质其实就是一段JavaScript代码，其格式就是："javascript: + 一段JS代码"，好比这一段最简单的小书签代码：
+
+javascript:alert('Bookmarklets!')
+
+试试复制并粘贴到地址栏中或者 点击这里运行，下面我们再举多几个例子。
+
+
+例1：生成当前网页二维码
+api.qrserver.com提供了生成二维码的API ”https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="，在 "=" 后加上文字或者网址就会生成一个二维码了。
+
+文本二维码比如："https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=%E8%BF%9B%E6%9D%A5%E7%9A%84%E6%98%AFSB%EF%BC%8C%E5%93%88%E5%93%88%E5%93%88%E5%93%88"，你的朋友圈里是不是也经常有让你扫描二维码进群可以领红包，结果发现是恶搞的这样的戏码？
+
+网址二维码比如："https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://www.runningcheese.com/" 生成的二维码是奶酪的博客首页。这种形式非常地常见，比如地铁里的广告，海报里的手机购物等等。
+
+文本二维码
+
+
+
+网址二维码
+
+
+
+1. 根据jiathis.com的二维码的API和JavaScript相关知识，我们可以得到这样的js代码：
+
+window.open('https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + decodeURIComponent(gBrowser.currentURI.spec));
+
+后面的decodeURIComponent(gBrowser.currentURI.spec) 是一个变量，意思是当前网页的地址。
+
+2. 注意此时的代码是js代码，还并不是小书签的代码，经过小书签特有的以javascript:开头的格式转换后，可以得到：
+
+javascript:window.open('https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + decodeURIComponent(location.href));void(0);
+
+3. 如果小书签代码里有"#"或者空格等特殊字符时，传递参数时会被截断，小书签也有就不起作用了，因此我们需要借助URL转码工具对代码进行编码，得到：
+
+javascript:window.open('https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='%20+%20decodeURIComponent(location.href));void(0);
+
+4. 将其保存到书签后就成功完成了小书签的制作。举一反三，再比如生成当前网页地址的短网址API是 "http://tinyurl.com/create.php?url="，我们只需要将上面的小书签代码稍稍改写一下就可以得到生成当前网页短网址小书签了：
+
+javascript:window.open('http://tinyurl.com/create.php?url='%20+%20decodeURIComponent(location.href));void(0);
+
+
+
+例2：当前网页中加载一条现成的.js文件
+平时我们访问一些网站时，选中文字会自动触发"复制"，"搜索"或者"翻译"等功能，其原理是该网而加载了一条用于"复制"，"搜索"或者"翻译"的.js文件，根据这个思路，我们可以将这些功能移植到其他的网页上去。
+
+1. 以沪江网划词翻译的js文件为例，在网页中加载一条.js文件的js代码是：
+
+(function() {var element=document.createElement('script'); element.setAttribute('src', 'http://dict.hjenglish.com/app/js/dict_ajax.js'); document.body.appendChild(element);})
+
+2. 把js代码转化为小书签代码后得到：
+
+javascript:void((function() {var element=document.createElement('script'); element.setAttribute('src', 'http://dict.hjenglish.com/app/js/dict_ajax.js'); document.body.appendChild(element);})())
+
+3. 将其保存到书签就完成了小书签的制作。
+
+4. 举一反三，我们只需要更改 "http://www.%E6%9F%90%E7%BD%91%E7%AB%99.com/%E6%9F%90%E6%96%87%E4%BB%B6.js" 文件地址就可以了。比如同文堂简体转化为繁体的.js文件是 http://tongwen.openfoundry.org/src/bookmarklet/bookmarklet_tw.js%EF%BC%8C%E5%86%8D%E6%AF%94%E5%A6%82%E6%9C%89%E9%81%93%E5%85%A8%E6%96%87%E7%BF%BB%E8%AF%91%E7%9A%84.js%E6%96%87%E4%BB%B6%E6%98%AF http://fanyi.youdao.com/web2/seed.js
+
+
+例3：如何小书签将繁体中文的网页全部自动变成简体中文？
+如上面所说，有一些专门的翻译js文件做成小书签后，需要手动点击才会启用，那如何自动启用翻译js文件呢？我们可以利用“用户脚本”来实现，用户脚本拓展推荐使用 Violentmonkey。以在拓展中加入如下代码即可，原理就是自动加载这个js文件。
+
+// ==UserScript==
+// @name Auto Simplified Chinese
+// @namespace no
+// @description 自动将网页翻译为简体中文
+// @run-at document-idle
+// @require https://git.oschina.net/runningcheese/JiathisQR.js/raw/master/bookmarklet_cn.js
+// @grant none
+// @include https://www.runningcheese.com/*
+// ==/UserScript==
+(function() {
+var s = document.createElement('script');
+s.setAttribute('src', '@require');
+document.body.appendChild(s);
+})()
+
+例4：如何让网页自动加载某个小书签？
+小书签和用户脚本效果相同，但小书签是手动的，用户脚本是自动的，我们可以将小书签改写成用户脚本，方法是：
+
+// ==UserScript==
+// @name 从小书签改写到用户脚本
+// @namespace none
+// @description 从小书签改写到用户脚本
+// @run-at document-idle
+// @grant none
+// @include https://www.runningcheese.com/*
+// ==/UserScript==
+location.href = "javascript:(function(){alert('Hello Cheese!');})();";
+
+也就是把小书签的地址替换上面代码中双引号之间的内容，javascript:(function(){alert('Hello Cheese!');})(); 这一段。一些比较复杂的小书签无法直接用替换双引号之间内容的方法，因此我们还是需要借助URL转码工具对小书签的内容进行解码。
+
+结尾
+奶酪制作、修复和收集了可能是国内最全的小书签合集。同时为了方便识别，html文件也都已经添加上了icon图标。
+关注 公众号（ID：runningcheese01）回复关键字“小书签”即可获取“HTML版小书签”。
+最后更新：2018-10-26，第7次更新
+首次更新：2015-11-25，第1次更新
+https://www.runningcheese.com/bookmarklet

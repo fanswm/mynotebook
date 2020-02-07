@@ -1,0 +1,48 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-21T17:20:37+08:00
+
+====== 5 Best Linux Photo Management Software ======
+Created Wednesday 21 November 2018
+
+5 Best Linux Photo Management Software
+https://itsfoss.com/linux-photo-management-software/
+
+
+1. gThumb
+
+
+sudo apt install gthumb
+
+2. digiKam
+
+sudo apt install digikam
+
+3. Shotwell
+sudo apt install shotwell
+
+4. KPhotoAlbum
+
+sudo apt install kphotoalbum
+
+5. Darktable
+
+Darktable Installation
+
+sudo apt install darktable
+
+Others
+
+If you want a simple application for pulling images from your portable devices (cameras, phones, portable drives etc) and storing them on your Hard Disk, using Rapid Photo Downloader is a no-brainer. It is an incredible application for importing and backing up photos from portable devices. The installation and configuration process is quite easy and simple.
+
+For installing Rapid Photo Downloader on Ubuntu, fire up a terminal and run this command:
+
+sudo apt install rapid-photo-downloader
+
+If you are still interested in trying a few more options, here you go:
+
+    GNOME Photos (Photo viewer for GNOME desktop environment)
+    Gwenview (Photo viewer for KDE desktop environment)
+    Picty (Open-source photo collection manager)
+
+So, are you using, or plan to use, any one of these applications? Which, according to you is the best photo management application for Ubuntu or any other Linux? Do you have any favorites to term as Linux photo manager? Do share your views.

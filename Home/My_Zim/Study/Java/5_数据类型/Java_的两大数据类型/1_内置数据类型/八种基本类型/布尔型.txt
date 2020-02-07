@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-03-05T20:58:59+08:00
+
+====== 布尔型 ======
+Created Monday 05 March 2018
+
+boolean：
+
+    boolean数据类型表示一位的信息；
+    只有两个取值：true 和 false；
+    这种类型只作为一种标志来记录 true/false 情况；
+    默认值是 false；
+    例子：boolean one = true。

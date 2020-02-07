@@ -1,0 +1,42 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-01T08:13:15+08:00
+
+====== sed ======
+Created Friday 01 December 2017
+
+sed 对数据行进行替换、删除、新增、选取等操作
+
+
+a   新增，在新的下一行出现
+c   取代，取代 n1,n2 之间的行 eg: sed '1,2c Hi' ab
+d   删除
+i   插入，在新的上一行出现
+
+sed 本质上是一个流编辑器。它擅长替换，但也可以用于所有输出重构。
+
+最基本的 sed 命令由 s/old/new/g 组成。它的意思是搜索 old，全局替换为 new。 如果没有 /g，我们的命令将在 old 第一次出现后终止。
+
+为了快速了解它的功能，我们可以深入了解一个例子。 在以下情景中，你已有以下文件：
+
+balance,name
+$1,000,john
+$2,000,jack
+我们可能想要做的第一件事是删除美元符号。-i 标志表示原位。'' 表示零长度文件扩展名，从而覆盖我们的初始文件。理想情况下，你可以单独测试，然后输出到新文件。
+
+sed -i '' 's/\$//g' data.txt
+# balance,name
+# 1,000,john
+# 2,000,jack
+接下来，去除 blance 列的逗号。
+
+sed -i '' 's/\([0-9]\),\([0-9]\)/\1\2/g' data.txt
+# balance,name
+# 1000,john
+# 2000,jack
+最后 jack 有一天决定辞职。所以，再见了，我的朋友。
+
+sed -i '' '/jack/d' data.txt
+# balance,name
+# 1000,john
+正如你所看到的，sed 有很多强大的功能，但乐趣并不止于此。

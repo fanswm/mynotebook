@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-30T19:23:52+08:00
+
+====== passwd ======
+Created 星期四 30 十一月 2017
+
+passwd | 修改密码
+
+-l 使密码失效
+
+-u 与-l相对，用户解锁
+
+-S 列出登陆用户passwd文件内的相关参数
+
+-n 后面接天数，shadow 的第 4 字段，多久不可修改密码天数
+
+-x 后面接天数，shadow 的第 5 字段，多久内必须要更动密码
+
+-w 后面接天数，shadow 的第 6 字段，密码过期前的警告天数
+
+-i 后面接『日期』，shadow 的第 7 字段，密码失效日期
+
+使用管道刘设置密码：echo "zeng" | passwd --stdin zenghao

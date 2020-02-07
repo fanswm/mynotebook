@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-22T17:31:44+08:00
+
+====== 带壳截图 Snapmod ======
+Created Thursday 22 November 2018
+
+能与体验兼具：Snapmod
+作为一款今年推出的带壳截图应用，Snapmod 一经推出便受到了用户的欢迎与喜爱。在界面设计上，Snapmod 采用了符合最新 Material Design 理念的设计，整体风格现代简洁又兼具美观。同时还保持着不俗的用户体验，在图片操作、套壳渲染等操作过程都非常流畅，而此前同类应用则都会有着些许的滞后感。
+
+在设置好机型后，选择截图图片时，Snapmod 会默认跳转至手机 Screenshots （截图）相册，方便我们选取图片。选取后便能迅速生成套壳渲染，此时也可以通过下方的功能键更改机型颜色及背景颜色。
+
+
+相对于同类带壳截图应用，Snapmod 收录了许多厂商的机型，包括谷歌、小米、vivo、OPPO、魅族、三星、索尼、一加、锤子、苹果、华为等共计 17 家手机厂商，并且基本上涵盖了目前市场上的热门机型，就连发布不久的新机小米 MIX3、Pixel 3 XL 也在支持列表之中，开发者称还将会继续不断更新。
+
+多种机型
+多种机型
+Snapmod 还支持付费解锁「高级设置」功能，只需一次性支付 6 元即可永久解锁。解锁后，Snapmod 可开启自动取色、自动模糊、自动生成器等特性以及后续更新的所有高级内容，这些更丰富的设定也将会让最终生成的图片更加美观。
+
+https://play.google.com/store/apps/details?id=cn.gavinliu.snapmod&uo=4&ct=appcards

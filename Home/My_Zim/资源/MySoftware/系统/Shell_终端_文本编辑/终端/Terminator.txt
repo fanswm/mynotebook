@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:41:39+08:00
+
+====== Terminator ======
+Created Wednesday 24 October 2018
+
+Terminator[48] 是一个功能丰富的终端程序，它基于 GNOME 终端，并且专注于整理终端功能。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Terminator。
+
+$ sudo apt-get install terminator
+https://gnometerminator.blogspot.com/p/introduction.html

@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-09-21T16:04:43+08:00
+
+====== Gnac ======
+Created Friday 21 September 2018
+
+Gnac[http://gnac.sourceforge.net/] 是我最喜欢的音频转换器之一，已经存在很多年了。它易于使用，功能强大，并且它做得很好 —— 任何一流的程序都应该如此。
+
+有多简单？单击工具栏按钮添加一个或多个要转换的文件，选择要转换的格式，然后单击Convert。转换很快，而且很干净。
+
+有多强大？Gnac 可以处理 GStreamer 多媒体框架支持的所有音频格式。开箱即用，你可以在 Ogg、FLAC、AAC、MP3、WAV 和 SPX 之间进行转换。你还可以更改每种格式的转换选项或添加新格式。

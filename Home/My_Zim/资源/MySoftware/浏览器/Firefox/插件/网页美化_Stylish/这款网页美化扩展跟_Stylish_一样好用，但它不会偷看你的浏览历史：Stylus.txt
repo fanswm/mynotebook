@@ -1,0 +1,53 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-21T15:39:49+08:00
+
+====== 这款网页美化扩展跟 Stylish 一样好用，但它不会偷看你的浏览历史：Stylus ======
+创建日期 星期四 21 二月 2019
+
+这款网页美化扩展跟 Stylish 一样好用，但它不会偷看你的浏览历史：Stylus
+2018年07月05日
+OscarLiu OscarLiu
+近日，知名浏览器扩展 Stylish 因涉嫌窃取用户浏览历史，被 Chrome 和 Firefox 下架。Stylish 是一款 CSS 编辑器，用户可以使用它为网站创建自定义样式，安装主题和皮肤。它支持多种浏览器，仅 Chrome 浏览器就有超过 186 万用户。
+
+Stylish 扩展原作者在 2016 年 8 月将其出售，SimilarWeb 是目前 Stylish 的拥有者。尽管 SimilarWeb 声称它只收集 Stylish 的匿名用户数据，但软件工程师 Robert Heaton 近日对其进行分析后指出，Stylish 窃取了用户所有的浏览历史。
+
+Stylish 窃取了用户的浏览历史
+Stylish 窃取了用户的浏览历史
+如果你正在寻找一个 Stylish 替代品，那么今天要跟大家介绍的 Stylus 就是一个安全又免费的选择。
+
+Stylus 是一个基于 Stylish 1.5.2 版本开发的分支，这是 Stylish 原作者维护的最后一个版本。在此基础上，Stylus 重写并优化了大部分代码来提升性能。
+
+
+和原版相比，Stylus 最主要的区别就是删除了所有分析功能，不会像 Stylish 一样收集用户的浏览历史。同时 Stylus 提供更友好的 CSS 编辑功能，让有技术能力的用户可以更方便地直接在扩展内编写 CSS。
+
+Stylus 的使用方法和 Stylish 基本一致。下载安装后，打开一个网站，在地址栏右侧点击 Stylus ，选择「查找更多样式」，Stylus 就会为你列出该网站合适的主题和皮肤模板。
+
+
+如果你之前使用过 Stylish，你可以使用直接从 Stylish 里导出配置，然后导入到 Stylus 中，继续使用之前的 CSS 文件。
+
+支持备份和导入
+支持备份和导入
+如果你之前没有使用过类似的浏览器扩展，不妨从下面这些开始尝试：
+
+Weibo_v6：一款微博美化主题，优化排版并去掉了包括广告在内的多余元素。
+百度轻：让百度用上 Material Design 风格，并且只保留最重要的搜索功能。
+Flat_Zhihu：为知乎提供扁平化主题，同时优化字体和排版。
+Inoreader Light tweaks：为 RSS 阅读器 Inoreader 提供更加大方典雅的设计。
+Instagram grid：让网页版 Instagram 拥有「瀑布流」设计，提升宽屏体验
+Stylish 这次的事件可以说为我们敲响了警钟。事件发生后，一些 Chrome 扩展开发者表示自己也收到过广告分析公司的收购邀约，希望他们能够在自己的扩展中加入类似 Stylish 收集用户隐私的功能。
+
+一名开发者表示自己也收到过类似收购邀约
+一名开发者表示自己也收到过类似收购邀约
+对于用户来说，浏览器扩展虽然好用，但也要同时警惕存在的安全隐患。养成良好的扩展使用习惯可以最大程度上保证我们的隐私安全：
+
+尽量不要使用来自非官方渠道的扩展。相对于缺乏监管的第三方扩展，Chrome 和 Firefox 提供的官方渠道对扩展的隐私权限有更加严格的限制，因此在大多数情况下都建议从官方商店下载扩展。
+只使用必要的扩展。很多扩展都只在特定的网站才能发挥作用，因此平时没有必要打开所有的扩展，这样不仅会降低速度，而且还容易泄露自己的浏览记录。
+关注自己常用扩展的更新。由于 Chrome 和 Firefox 都采用自动更新扩展的机制，因此用户需要不时关注一下自己经常使用扩展的更新日志，尤其要注意使用权限的变化，警惕使用那些被广告分析公司收购的扩展。
+你可以在 Chrome、Firefox 和 Opera 的扩展商店里免费下载 Stylus。
+https://sspai.com/post/45537
+https://userstyles.org/styles/106272/weibo-v6
+https://userstyles.org/styles/123858/baidu-lite
+https://userstyles.org/styles/108011/flat-zhihu-v2-4-13
+https://userstyles.org/styles/142459/inoreader-light-tweaks
+https://userstyles.org/styles/127723/instagram-grid

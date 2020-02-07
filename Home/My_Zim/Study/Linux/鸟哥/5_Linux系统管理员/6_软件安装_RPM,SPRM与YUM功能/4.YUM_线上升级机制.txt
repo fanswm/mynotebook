@@ -1,0 +1,328 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-22T13:43:12+08:00
+
+====== 4.YUM 线上升级机制 ======
+Created Wednesday 22 November 2017
+
+4. YUM 线上升级机制
+　　4.1 利用 yum 进行查询、安装、升级与移除功能
+　　4.2 yum 的配置档
+　　4.3 yum 的软件群组功能
+　　4.4 全系统自动升级
+ 大标题的图示YUM 线上升级机制
+我们在本章一开始的地方谈到过 yum 这玩意儿，这个 yum 是透过分析 RPM 的标头数据后， 根据各软件的相关性制作出属性相依时的解决方案，然后可以自动处理软件的相依属性问题，以解决软件安装或移除与升级的问题。 详细的 yum 服务器与用户端之间的沟通，可以再回到前面的部分查阅一下图 1.5.1 的说明。
+
+由於 distribution 必须要先释出软件，然后将软件放置於 yum 服务器上面，以提供用户端来要求安装与升级之用的。 因此我们想要使用 yum 的功能时，必须要先找到适合的 yum server 才行啊！而每个 yum server 可能都会提供许多不同的软件功能，那就是我们之前谈到的『容器』啦！因此，你必须要前往 yum server 查询到相关的容器网址后，再继续处理后续的配置事宜。
+
+事实上 CentOS 在释出软件时已经制作出多部映射站台 (mirror site) 提供全世界的软件升级之用。 所以，理论上我们不需要处理任何配置值，只要能够连上 Internet ，就可以使用 yum 罗！底下就让我们来玩玩看吧！
+
+
+小标题的图示利用 yum 进行查询、安装、升级与移除功能
+yum 的使用真是非常简单，就是透过 yum 这个命令啊！那么这个命令怎么用呢？ 用法很简单，就让我们来简单的谈谈：
+
+
+查询功能：yum [list|info|search|provides|whatprovides] 参数
+如果想要查询利用 yum 来查询原版 distribution 所提供的软件，或已知某软件的名称，想知道该软件的功能， 可以利用 yum 相关的参数为：
+
+[root@www ~]# yum [option] [查询工作项目] [相关参数]
+选项与参数：
+[option]：主要的选项，包括有：
+  -y ：当 yum 要等待使用者输入时，这个选项可以自动提供 yes 的回应；
+  --installroot=/some/path ：将该软件安装在 /some/path 而不使用默认路径
+[查询工作项目] [相关参数]：这方面的参数有：
+  search  ：搜寻某个软件名称或者是描述 (description) 的重要关键字；
+  list    ：列出目前 yum 所管理的所有的软件名称与版本，有点类似 rpm -qa；
+  info    ：同上，不过有点类似 rpm -qai 的运行结果；
+  provides：从文件去搜寻软件！类似 rpm -qf 的功能！
+
+范例一：搜寻磁盘阵列 (raid) 相关的软件有哪些？
+[root@www ~]# yum search raid
+....(前面省略)....
+mdadm.i386 : mdadm controls Linux md devices (software RAID arrays)
+lvm2.i386 : Userland logical volume management tools
+....(后面省略)....
+# 在冒号 (:)  左边的是软件名称，右边的则是在 RPM 内的 name 配置 (软件名)
+# 瞧！上面的结果，这不就是与 RAID 有关的软件吗？如果想了解 mdadm 的软件内容呢？
+
+范例二：找出 mdadm 这个软件的功能为何
+[root@www ~]# yum info mdadm
+Installed Packages      <==这说明该软件是已经安装的了
+Name   : mdadm          <==这个软件的名称
+Arch   : i386           <==这个软件的编译架构
+Version: 2.6.4          <==此软件的版本
+Release: 1.el5          <==释出的版本
+Size   : 1.7 M          <==此软件的文件总容量
+Repo   : installed      <==容器回报说已安装的
+Summary: mdadm controls Linux md devices (software RAID arrays)
+Description:            <==看到否？这就是 rpm -qi 嘛！
+mdadm is used to create, manage, and monitor Linux MD (software RAID)
+devices.  As such, it provides similar functionality to the raidtools
+package.  However, mdadm is a single program, and it can perform
+almost all functions without a configuration file, though a configuration
+file can be used to help with some common tasks.
+# 不要跟我说，上面说些啥？自己找字典翻一翻吧！拜托拜托！
+
+范例三：列出 yum 服务器上面提供的所有软件名称
+[root@www ~]# yum list
+Installed Packages <==已安装软件
+Deployment_Guide-en-US.noarch            5.2-9.el5.centos       installed
+Deployment_Guide-zh-CN.noarch            5.2-9.el5.centos       installed
+Deployment_Guide-zh-TW.noarch            5.2-9.el5.centos       installed
+....(中间省略)....
+Available Packages <==还可以安装的其他软件
+Cluster_Administration-as-IN.noarch      5.2-1.el5.centos       base
+Cluster_Administration-bn-IN.noarch      5.2-1.el5.centos       base
+....(底下省略)....
+# 上面提供的意义为：『 软件名称   版本   在那个容器内 』
+
+范例四：列出目前服务器上可供本机进行升级的软件有哪些？
+[root@www ~]# yum list updates  <==一定要是 updates 喔！
+Updated Packages
+Deployment_Guide-en-US.noarch            5.2-11.el5.centos      base
+Deployment_Guide-zh-CN.noarch            5.2-11.el5.centos      base
+Deployment_Guide-zh-TW.noarch            5.2-11.el5.centos      base
+....(底下省略)....
+# 上面就列出在那个容器内可以提供升级的软件与版本！
+
+范例五：列出提供 passwd 这个文件的软件有哪些
+[root@www ~]# yum provides passwd
+passwd.i386 : The passwd utility for setting/changing passwords using PAM
+passwd.i386 : The passwd utility for setting/changing passwords using PAM
+# 找到啦！就是上面的这个软件提供了 passwd 这个程序！
+透过上面的查询，你应该大致知道 yum 如何用在查询上面了吧？那么实际来应用一下：
+
+例题：
+利用 yum 的功能，找出以 pam 为开头的软件名称有哪些？而其中尚未安装的又有哪些？
+答：
+可以透过如下的方法来查询：
+[root@www ~]# yum list pam*
+Installed Packages
+pam.i386                  0.99.6.2-3.27.el5      installed
+pam_ccreds.i386           3-5                    installed
+pam_krb5.i386             2.2.14-1               installed
+pam_passwdqc.i386         1.0.2-1.2.2            installed
+pam_pkcs11.i386           0.5.3-23               installed
+pam_smb.i386              1.1.7-7.2.1            installed
+Available Packages <==底下则是『可升级』的或『未安装』的
+pam.i386                  0.99.6.2-4.el5         base
+pam-devel.i386            0.99.6.2-4.el5         base
+pam_krb5.i386             2.2.14-10              base
+如上所示，所以可升级者有 pam, pam_krb5 这两个软件，完全没有安装的则是 pam-devel 这个软件罗！
+
+安装/升级功能：yum [install|update] 软件
+既然可以查询，那么安装与升级呢？很简单啦！就利用 install 与 update 这两项工作来处理即可喔！
+
+[root@www ~]# yum [option] [查询工作项目] [相关参数]
+选项与参数：
+  install ：后面接要安装的软件！
+  update  ：后面接要升级的软件，若要整个系统都升级，就直接 update 即可
+
+范例一：将前一个练习找到的未安装的 pam-devel 安装起来
+[root@www ~]# yum install pam-devel
+Setting up Install Process
+Parsing package install arguments
+Resolving Dependencies  <==先检查软件的属性相依问题
+--> Running transaction check
+---> Package pam-devel.i386 0:0.99.6.2-4.el5 set to be updated
+--> Processing Dependency: pam = 0.99.6.2-4.el5 for package: pam-devel
+--> Running transaction check
+---> Package pam.i386 0:0.99.6.2-4.el5 set to be updated
+filelists.xml.gz          100% |=========================| 1.6 MB    00:05
+filelists.xml.gz          100% |=========================| 138 kB    00:00
+-> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================
+ Package                 Arch       Version          Repository        Size
+=============================================================================
+Installing:
+ pam-devel               i386       0.99.6.2-4.el5   base              186 k
+Updating:
+ pam                     i386       0.99.6.2-4.el5   base              965 k
+
+Transaction Summary
+=============================================================================
+Install      1 Package(s)  <==结果发现要安装此软件需要升级另一个相依的软件
+Update       1 Package(s)
+Remove       0 Package(s)
+
+Total download size: 1.1 M
+Is this ok [y/N]: y  <==确定要安装！
+Downloading Packages: <==先下载！
+(1/2): pam-0.99.6.2-4.el5 100% |=========================| 965 kB    00:05
+(2/2): pam-devel-0.99.6.2 100% |=========================| 186 kB    00:01
+Running rpm_check_debug
+Running Transaction Test
+Finished Transaction Test
+Transaction Test Succeeded
+Running Transaction <==开始安装！
+  Updating  : pam                          ######################### [1/3]
+  Installing: pam-devel                    ######################### [2/3]
+  Cleanup   : pam                          ######################### [3/3]
+
+Installed: pam-devel.i386 0:0.99.6.2-4.el5
+Updated: pam.i386 0:0.99.6.2-4.el5
+Complete!
+有没有很高兴啊！你不必知道软件在哪里，你不必手动下载软件，你也不必拿出原版光盘出来 mount 之后查询再安装！全部不需要，只要有了 yum 这个家伙，你的安装、升级再也不是什么难事！ 而且还能主动的进行软件的属性相依处理流程，如上所示，一口气帮我们处理好了所有事情！ 是不是很过瘾啊！而且整个动作完全免费！够酷吧！
+
+
+移除功能：yum [remove] 软件
+那能不能用 yum 移除软件呢？将刚刚的软件移除看看，会出现啥状况啊？
+
+[root@www ~]# yum remove pam-devel
+Setting up Remove Process
+Resolving Dependencies  <==同样的，先解决属性相依的问题
+--> Running transaction check
+---> Package pam-devel.i386 0:0.99.6.2-4.el5 set to be erased
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================
+ Package                 Arch       Version          Repository        Size
+=============================================================================
+Removing:
+ pam-devel               i386       0.99.6.2-4.el5   installed         495 k
+
+Transaction Summary
+=============================================================================
+Install      0 Package(s)
+Update       0 Package(s)
+Remove       1 Package(s)  <==还好，并没有属性相依的问题，单纯移除一个软件
+
+Is this ok [y/N]: y
+Downloading Packages:
+Running rpm_check_debug
+Running Transaction Test
+Finished Transaction Test
+Transaction Test Succeeded
+Running Transaction
+  Erasing   : pam-devel                    ######################### [1/1]
+
+Removed: pam-devel.i386 0:0.99.6.2-4.el5
+Complete!
+连移除也这么简单！看来，似乎不需要 rpm 这个命令也能够快乐的安装所有的软件了！ 虽然是如此，但是 yum 毕竟是架构在 rpm 上面所发展起来的，所以，鸟哥认为你还是得需要了解 rpm 才行！不要学了 yum 之后就将 rpm 的功能忘记了呢！切记切记！
+
+小标题的图示yum 的配置档
+虽然 yum 是你的主机能够连线上 Internet 就可以直接使用的，不过，由於 CentOS 的映射站台可能会选错， 举例来说，我们在台湾，但是 CentOS 的映射站台却选择到了大陆北京或者是日本去，有没有可能发生啊！ 有啊！鸟哥教学方面就常常发生这样的问题，要知道，我们连线到大陆或日本的速度是非常慢的呢！那怎办？ 当然就是手动的修改一下 yum 的配置档就好罗！
+
+在台湾，CentOS 的映射站台主要有高速网络中心与义首大学，鸟哥近来比较偏好高速网络中心， 似乎升级的速度比较快，而且连接台湾学术网络也非常快速哩！因此，鸟哥底下建议台湾的朋友使用高速网络中心的 ftp 主机资源来作为 yum 服务器来源喔！目前高速网络中心对於 CentOS 所提供的相关网址如下：
+
+http://ftp.twaren.net/Linux/CentOS/5/
+如果你连接到上述的网址后，就会发现里面有一堆连结，那些连结就是这个 yum 服务器所提供的容器了！ 所以高速网络中心也提供了 addons, centosplus, extras, fasttrack, os, updates 等容器，最好认的容器就是 os (系统默认的软件) 与 updates (软件升级版本) 罗！由於鸟哥在我的测试用主机是利用 i386 的版本， 因此那个 os 再点进去就会得到如下的可提供安装的网址：
+
+http://ftp.twaren.net/Linux/CentOS/5/os/i386/
+为什么在上述的网址内呢？有什么特色！最重要的特色就是那个『 repodata 』的目录！该目录就是分析 RPM 软件后所产生的软件属性相依数据放置处！因此，当你要找容器所在网址时， 最重要的就是该网址底下一定要有个名为 repodata 的目录存在！那就是容器的网址了！ 其他的容器正确网址，就请各位看倌自行寻找一下喔！现在让我们修改配置档吧！
+
+[root@www ~]# vi /etc/yum.repos.d/CentOS-Base.repo
+[base]
+name=CentOS-$releasever - Base
+mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os
+#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5
+如上所示，鸟哥仅列出 base 这个容器内容而已，其他的容器内容请自行查阅罗！上面的数据需要注意的是：
+
+[base]：代表容器的名字！中刮号一定要存在，里面的名称则可以随意取。但是不能有两个相同的容器名称， 否则 yum 会不晓得该到哪里去找容器相关软件清单文件。
+
+name：只是说明一下这个容器的意义而已，重要性不高！
+
+mirrorlist=：列出这个容器可以使用的映射站台，如果不想使用，可以注解到这行；
+
+baseurl=：这个最重要，因为后面接的就是容器的实际网址！ mirrorlist 是由 yum 程序自行去捉映射站台， baseurl 则是指定固定的一个容器网址！我们刚刚找到的网址放到这里来啦！
+
+enable=1：就是让这个容器被启动。如果不想启动可以使用 enable=0 喔！
+
+gpgcheck=1：还记得 RPM 的数码签章吗？这就是指定是否需要查阅 RPM 文件内的数码签章！
+
+gpgkey=：就是数码签章的公钥档所在位置！使用默认值即可
+
+了解这个配置档之后，接下来让我们修改整个文件的内容，让我们这部主机可以直接使用高速网络中心的资源吧！ 修改的方式鸟哥仅列出 base 这个容器项目而已，其他的项目请您自行依照上述的作法来处理即可！
+
+[root@www ~]# vi /etc/yum.repos.d/CentOS-Base.repo
+[base]
+name=CentOS-$releasever - Base
+baseurl=http://ftp.twaren.net/Linux/CentOS/5/os/i386/
+gpgcheck=1
+gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-5
+# 底下其他的容器项目，请自行到高速网络中心去查询后自己处理！
+接下来当然就是给他测试一下罗！如何测试呢？再次使用 yum 即可啊！
+
+范例一：列出目前 yum server 所使用的容器有哪些？
+[root@www ~]# yum repolist all
+repo id         repo name                  status
+addons          CentOS-5 - Addons          enabled
+base            CentOS-5 - Base            enabled
+c5-media        CentOS-5 - Media           disabled
+centosplus      CentOS-5 - Plus            disabled
+extras          CentOS-5 - Extras          enabled
+updates         CentOS-5 - Updates         enabled
+# 上面最右边有写 enabled 才是有启动的！由於 /etc/yum.repos.d/
+# 有多个配置档，所以你会发现还有其他的容器存在。
+
+修改容器产生的问题与解决之道
+由於我们是修改系统默认的配置档，事实上，我们应该要在 /etc/yum.repos.d/ 底下新建一个文件， 该扩展名必须是 .repo 才行！但因为我们使用的是指定特定的映射站台，而不是其他软件开发生提供的容器， 因此才修改系统默认配置档。但是可能由於使用的容器版本有新旧之分，你得要知道， yum 会先下载容器的清单到本机的 /var/cache/yum 里面去！那我们修改了网址却没有修改容器名称 (中刮号内的文字)， 可能就会造成本机的清单与 yum 服务器的清单不同步，此时就会出现无法升级的问题了！
+
+那怎么办啊？很简单，就清除掉本机上面的旧数据即可！需要手动处理吗？不需要的， 透过 yum 的 clean 项目来处理即可！
+
+[root@www ~]# yum clean [packages|headers|all] 
+选项与参数：
+ packages：将已下载的软件文件删除
+ headers ：将下载的软件档头删除
+ all     ：将所有容器数据都删除！
+
+范例一：删除已下载过的所有容器的相关数据 (含软件本身与清单)
+[root@www ~]# yum clean all
+小标题的图示yum 的软件群组功能
+透过 yum 来线上安装一个软件是非常的简单，但是，如果要安装的是一个大型专案呢？ 举例来说，鸟哥使用默认安装的方式安装了测试机，这部主机就只有 GNOME 这个窗口管理员， 那我如果想要安装 KDE 呢？难道需要重新安装？当然不需要，透过 yum的软件群组功能即可！ 来看看命令先：
+
+[root@www ~]# yum [群组功能] [软件群组]
+选项与参数：
+   grouplist   ：列出所有可使用的『套件组』，例如 Development Tools 之类的；
+   groupinfo   ：后面接 group_name，则可了解该 group 内含的所有套件名；
+   groupinstall：这个好用！可以安装一整组的套件群组，相当的不错用！
+   groupremove ：移除某个套件群组；
+
+范例一：查阅目前容器与本机上面的可用与安装过的软件群组有哪些？
+[root@www ~]# yum grouplist
+Installed Groups:
+   Office/Productivity
+   Editors
+   System Tools
+....(中间省略)....
+Available Groups:
+   Tomboy
+   Cluster Storage
+   Engineering and Scientific
+....(以下省略)....
+你会发现系统上面的软件大多是群组的方式一口气来提供安装的！还记全新安装 CentOS 时， 不是可以选择所需要的软件吗？而那些软件不是利用 GNOME/KDE/X Window ... 之类的名称存在吗？ 其实那就是软件群组罗！如果你运行上述的命令后，在『Available Groups』底下应该会看到一个 『XFCE-4.4』的软件群组，想知道那是啥吗？就这样做：
+
+[root@www ~]# yum groupinfo XFCE-4.4
+Setting up Group Process
+
+Group: XFCE-4.4
+ Description: This group contains the XFCE desktop environment.
+ Mandatory Packages:
+   xfce4-session
+....(中间省略)....
+ Default Packages:
+   xfce4-websearch-plugin
+....(中间省略)....
+ Optional Packages:
+   xfce-mcs-manager-devel
+   xfce4-panel-devel
+....(以下省略)....
+你会发现那就是一个壁纸环境 (desktop environment) ，也就是一个窗口管理员啦！ 至於底下就列出主要的与选择性 (optional) 的软件名称罗！让我们直接安装看看：
+
+[root@www ~]# yum groupinstall XFCE-4.4
+你会发现系统进行了一大堆软件的安装！那就是啦！整个安装 XFCE 这个窗口介面所需的所有软件！ 这个咚咚真是非常的方便呢！这个功能请一定要记下来，对你未来安装软件是非常有帮助的喔！ ^_^
+
+小标题的图示全系统自动升级
+我们可以手动选择是否需要升级，那能不能让系统自动升级，让我们的系统随时保持在最新的状态呢？ 当然可以啊！透过『 yum -y update 』来自动升级，那个 -y 很重要，因为可以自动回答 yes 来开始下载与安装！ 然后再透过 crontab 的功能来处理即可！假设我每天在台湾时间 3:00am 网络频宽比较轻松的时候进行升级， 你可以这样做的：
+
+[root@www ~]# vim /etc/crontab
+....(前面省略并保留配置值)....
+0  3 * * * root /usr/bin/yum -y update
+从此你的系统就会自动升级啦！很棒吧！此外，你还是得要分析登录档与收集 root 的信件的， 因为如果升级的是核心软件 (kernel)，那么你还是得要重新启动才会让安装的软件顺利运行的！ 所以还是得分析登录档，若有新核心安装，就重新启动，否则就让系统自动维持在最新较安全的环境吧！ 真是轻松愉快的管理啊！

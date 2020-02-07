@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-27T16:32:44+08:00
+
+====== 玩游戏练习黑客技术 ======
+Created Tuesday 27 November 2018
+
+https://zhuanlan.zhihu.com/p/38972003?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
+https://www.freebuf.com/news/116251.html
+
+官网: https://www.hackmud.com/

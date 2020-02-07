@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-18T16:43:33+08:00
+
+====== 找到并杀掉僵尸进程 ======
+Created Monday 18 December 2017
+
+__那么如何找出僵尸进程呢？__
+ 
+打开终端并输入下面命令:
+ 
+`ps aux | grep Z`
+
+__如何杀掉僵尸进程？__
+ 
+正常情况下我们可以用 SIGKILL 信号来杀死进程，但是僵尸进程已经死了， 你不能杀死已经死掉的东西。 因此你需要输入的命令应该是
+ 
+`kill -s SIGCHLD pid`
+将这里的 pid 替换成父进程的进程 id，这样父进程就会删除所有以及完成并死掉的子进程了。

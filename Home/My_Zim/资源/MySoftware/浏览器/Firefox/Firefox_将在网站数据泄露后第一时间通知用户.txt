@@ -1,0 +1,25 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-07-22T11:40:39+08:00
+
+====== Firefox 将在网站数据泄露后第一时间通知用户 ======
+创建日期 星期一 22 七月 2019
+
+Firefox 将在网站数据泄露后第一时间通知用户
+2019-07-19 07:14
+
+作者： 安华金和
+
+
+
+继 Google Chrome 之后，Mozilla Firefox 也于近日更新了密码管理器。在 Firefox 70 版本中，用户可以见到一个全新开发的模块。此前，Firefox 已经以附加组件（Add-ons）的形式，提供了名为 Lockwise 的密码管理器。但为了进一步提升浏览器的安全性，Mozilla 将直接把该功能作为内置组件。
+
+
+
+Firefox 开发团队称，若当前已保存登录状态的网站（比如 Yahoo.com）发生了数据泄露（Pwned），浏览器会及时地发出“密码被泄露”或“网站被拖库”的警示，提醒用户及时修改密码，以保护其账户。
+
+点击“了解更多”的链接，Firefox 70 会将用户带到一个新的标签页，其中展示着与受影响站点相关的详细信息。对于那些在多个站点使用相同密码的用户来说，显然更需要提高警惕。
+
+感兴趣的朋友，可在浏览器地址栏里输入 about:config 并跳转，然后在首选项中设定偏好值signon.management.page.enabled 为 true。
+
+来源： cnBeta.COM

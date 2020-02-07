@@ -1,0 +1,29 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-26T16:26:41+08:00
+
+====== setsid ======
+创建日期 星期二 26 十一月 2019
+
+nohup 无疑能通过忽略 HUP 信号来使我们的进程避免中途被中断，但如果我们换个角度思考，如果我们的进程不属于接受 HUP 信号的终端的子进程，那么自然也就不会受到 HUP 信号的影响了。setsid 就能帮助我们做到这一点。让我们先来看一下 setsid 的帮助信息：
+
+SETSID(8)                 Linux Programmer’s Manual                 SETSID(8)
+ 
+NAME
+	   setsid - run a program in a new session
+ 
+SYNOPSIS
+	   setsid program [ arg ... ]
+ 
+DESCRIPTION
+	   setsid runs a program in a new session.
+可见 setsid 的使用也是非常方便的，也只需在要处理的命令前加上 setsid 即可。
+
+setsid 示例
+
+[root@pvcent107 ~]# setsid ping www.ibm.com
+[root@pvcent107 ~]# ps -ef |grep www.ibm.com
+root     31094     1  0 07:28 ?        00:00:00 ping www.ibm.com
+root     31102 29217  0 07:29 pts/4    00:00:00 grep www.ibm.com
+[root@pvcent107 ~]#
+值得注意的是，上例中我们的进程 ID(PID)为31094，而它的父 ID（PPID）为1（即为 init 进程 ID），并不是当前终端的进程 ID。请将此例与nohup 例中的父 ID 做比较。
