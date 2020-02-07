@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-02-22T11:45:53+08:00
-
-====== Free icons ======
-创建日期 星期五 22 二月 2019
-
-https://icons8.com/
-在线图标库不少见，但icon8实现了将近58000个图标的离线图标库，在无法连接网络的时候，图标什么的分分钟搞定。不过最吸引我的地方在它的客户端版本，图标和PPT之间可以无缝插入！

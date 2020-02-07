@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-28T11:56:59+08:00
-
-====== 关闭窗格和窗口 ======
-创建日期 星期一 28 一月 2019
-
-只需在相应的窗格中输入 exit 或按下 Ctrl-d 即可关闭它，和终端关闭类似。要关闭窗口，按下 Ctrl+b, &。

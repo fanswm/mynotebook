@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-23T18:06:57+08:00
-
-====== DuckDuckGo ======
-创建日期 星期日 23 十二月 2018
-
-https://duckduckgo.com

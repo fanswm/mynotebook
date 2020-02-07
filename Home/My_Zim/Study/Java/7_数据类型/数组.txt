@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-02-27T12:00:17+08:00
-
-====== 数组 ======
-Created Tuesday 27 February 2018
-
-Java 语言中提供的数组是用来存储固定大小的同类型元素。

@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-09-18T10:26:39+08:00
-
-====== Amazon ======
-Created Tuesday 18 September 2018
-

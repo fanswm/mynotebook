@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-15T14:32:42+08:00
-
-====== Altair 可视化数据 ======
-创建日期 星期二 15 一月 2019
-
-https://www.zhihu.com/question/20381207/answer/571620821?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-28T11:45:46+08:00
-
-====== 拆分窗口 ======
-创建日期 星期一 28 一月 2019
-
-按下 Ctrl+b, % 来垂直分割窗格。
-按下 Ctrl+b, " 来水平分割窗格。

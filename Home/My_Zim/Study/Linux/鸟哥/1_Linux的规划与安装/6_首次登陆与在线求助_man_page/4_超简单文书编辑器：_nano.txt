@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-11T16:34:11+08:00
-
-====== 4 超简单文书编辑器： nano ======
-Created Monday 11 December 2017
-

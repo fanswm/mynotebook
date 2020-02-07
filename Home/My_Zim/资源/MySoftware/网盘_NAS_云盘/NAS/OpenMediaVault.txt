@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-15T14:57:10+08:00
-
-====== OpenMediaVault ======
-Created Monday 15 October 2018
-
-https://www.openmediavault.org/

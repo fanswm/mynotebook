@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-03-12T16:29:08+08:00
-
-====== 退出 ======
-创建日期 星期二 12 三月 2019
-
-imrdr: Ctrl+p 然后Ctrl+q
-直接exit?

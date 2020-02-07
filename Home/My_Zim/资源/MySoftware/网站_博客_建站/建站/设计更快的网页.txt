@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-16T14:23:12+08:00
-
-====== 设计更快的网页 ======
-Created Friday 16 November 2018
-

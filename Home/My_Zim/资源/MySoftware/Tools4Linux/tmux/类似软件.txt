@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-28T11:38:12+08:00
-
-====== 类似软件 ======
-创建日期 星期一 28 一月 2019
-

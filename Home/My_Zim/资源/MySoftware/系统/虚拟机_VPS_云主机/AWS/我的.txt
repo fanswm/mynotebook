@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-12-16T12:35:13+08:00
-
-====== 我的 ======
-Created 星期一 16 十二月 2019
-
-
-https://us-east-2.console.aws.amazon.com/console/home?region=us-east-2

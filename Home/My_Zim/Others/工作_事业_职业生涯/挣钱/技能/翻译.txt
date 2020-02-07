@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-10T14:31:19+08:00
-
-====== 翻译 ======
-Created Monday 10 December 2018
-
-可以在有道翻译、快译等网站做翻译赚钱。

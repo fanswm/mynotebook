@@ -5,7 +5,7 @@ Creation-Date: 2020-02-01T18:24:46+08:00
 ====== CentOS GRUB wiki ======
 Created Saturday 01 February 2020
 
-[[CentOS]] wiki: https://wiki.centos.org/zh/HowTos/Grub2
+[[资源:网址:OS:Linux:Linux 发行版 ISO:CentOS]] wiki: https://wiki.centos.org/zh/HowTos/Grub2
 
 在 CentOS 7 上设置 grub2
 此文章主要以 Things to Know About Grub2 为基础，而对象是那些打开 __/etc/grub2.cfg（或 /boot/grub2/grub.cfg）编__辑开机选单的用户。

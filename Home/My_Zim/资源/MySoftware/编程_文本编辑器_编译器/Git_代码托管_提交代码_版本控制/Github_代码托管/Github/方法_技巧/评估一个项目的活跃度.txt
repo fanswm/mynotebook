@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-23T11:42:32+08:00
-
-====== 评估一个项目的活跃度 ======
-Created Tuesday 23 October 2018
-
-Grank：如何评估一个 Github 项目的活跃度 https://linux.cn/article-10141-1.html?utm_source=rss&utm_medium=rss

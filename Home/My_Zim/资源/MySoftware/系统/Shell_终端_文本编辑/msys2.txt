@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-27T16:43:41+08:00
-
-====== msys2 ======
-Created Thursday 27 December 2018
-
-https://github.com/Alexpux/MSYS2-packages?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

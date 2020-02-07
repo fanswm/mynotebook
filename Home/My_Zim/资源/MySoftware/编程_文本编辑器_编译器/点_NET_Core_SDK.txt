@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-21T15:48:52+08:00
-
-====== 点 NET Core SDK ======
-创建日期 星期一 21 一月 2019
-
-如何在 Linux 中安装微软的 .NET Core SDK https://linux.cn/article-10453-1.html?utm_source=rss&utm_medium=rss

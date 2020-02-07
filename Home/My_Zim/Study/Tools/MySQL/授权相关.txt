@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-06T11:29:33+08:00
-
-====== 授权相关 ======
-Created Wednesday 06 December 2017
-
-为了测试方便，笔者使用 all 权限进行测试。

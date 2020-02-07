@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-03-03T13:49:20+08:00
-
-====== 一站式搞定 GIF 的录制、处理、压缩 ======
-创建日期 星期日 03 三月 2019
-
-https://sspai.com/post/53126

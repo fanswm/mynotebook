@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-26T08:42:48+08:00
-
-====== Axure RP ======
-Created Sunday 26 November 2017
-
-https://www.axure.com/

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-03-14T17:31:20+08:00
-
-====== Gitter ======
-创建日期 星期四 14 三月 2019
-
-https://gitter.im/

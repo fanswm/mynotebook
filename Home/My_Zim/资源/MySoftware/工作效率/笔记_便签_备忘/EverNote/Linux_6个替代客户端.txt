@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-28T08:19:31+08:00
-
-====== Linux 6个替代客户端 ======
-创建日期 星期日 28 十月 2018
-
-https://www.fossmint.com/evernote-alternatives-for-linux/

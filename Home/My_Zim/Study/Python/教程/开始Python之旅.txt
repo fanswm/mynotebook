@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-28T14:05:06+08:00
-
-====== 开始Python之旅 ======
-Created Tuesday 28 November 2017
-
-如何开始Python之旅
-https://mp.weixin.qq.com/s?__biz=MzU0NDEyODkzMQ==&mid=2247483711&idx=1&sn=99d818430cfed184208db07a0a756a7f&chksm=fb01abf3cc7622e5c947ba7b8c38f663993c7f57a719fe7c169ba4054c5cc10b474ef42d3bfb&scene=21

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-25T21:37:32+08:00
-
-====== nautilus ======
-创建日期 星期日 25 十一月 2018
-
-ubuntu 文件浏览器

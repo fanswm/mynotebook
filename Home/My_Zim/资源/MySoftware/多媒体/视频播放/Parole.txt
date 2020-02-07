@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-13T16:10:57+08:00
-
-====== Parole ======
-创建日期 星期日 13 一月 2019
-
-xubuntu的默认播放器

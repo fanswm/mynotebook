@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-21T17:29:03+08:00
-
-====== 4 Best Modern Open Source Text Editors For Coding in Linux ======
-Created Wednesday 21 November 2018
-
-https://itsfoss.com/best-modern-open-source-code-editors-for-linux/

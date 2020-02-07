@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-05-29T16:54:40+08:00
-
-====== 如何用自然语言进行 Google 搜索 ======
-创建日期 星期三 29 五月 2019
-
-https://sspai.com/post/54943
-付费栏目

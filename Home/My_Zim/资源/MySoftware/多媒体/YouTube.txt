@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-24T16:05:57+08:00
-
-====== YouTube ======
-Created Wednesday 24 October 2018
-
-使用 Chrome 扩展将 YouTube 播放器控件添加到 Linux 桌面 https://linux.cn/article-10108-1.html?utm_source=rss&utm_medium=rss

@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-06-05T20:30:41+08:00
-
-====== 科学 ======
-创建日期 星期三 05 六月 2019
-

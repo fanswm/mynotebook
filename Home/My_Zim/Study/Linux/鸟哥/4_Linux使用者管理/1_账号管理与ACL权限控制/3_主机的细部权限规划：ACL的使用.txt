@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-22T13:27:06+08:00
-
-====== 3 主机的细部权限规划：ACL的使用 ======
-Created Wednesday 22 November 2017
-

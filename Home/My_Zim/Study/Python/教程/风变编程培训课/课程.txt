@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-12-17T12:02:12+08:00
-
-====== 课程 ======
-Created 星期二 17 十二月 2019
-

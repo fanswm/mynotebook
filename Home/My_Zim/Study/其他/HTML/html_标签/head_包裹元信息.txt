@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-17T14:11:25+08:00
-
-====== head 包裹元信息 ======
-Created Monday 17 December 2018
-
-<head>：包裹元信息，如 <link> 和 <title>

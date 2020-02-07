@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-06T12:01:39+08:00
-
-====== PhotoZoom Pro(图像无损放大神器) ======
-Created Friday 06 July 2018
-
-https://www.cr173.com/soft/285461.html

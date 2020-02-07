@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-06-06T13:37:55+08:00
-
-====== Notepad++ ======
-创建日期 星期四 06 六月 2019
-
-https://notepad-plus-plus.org/download/v7.5.7.html

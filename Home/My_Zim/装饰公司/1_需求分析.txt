@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-23T15:28:04+08:00
-
-====== 1 需求分析 ======
-Created Monday 23 July 2018
-
-__注：标识“■”属比较主流的标准，但都可根据个人的生活习惯选定，下同。__

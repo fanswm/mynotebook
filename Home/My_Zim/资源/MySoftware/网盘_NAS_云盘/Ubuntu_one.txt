@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-26T22:05:43+08:00
-
-====== Ubuntu one ======
-Created 星期日 26 十一月 2017
-
-abstracth@163.com
-abstract163

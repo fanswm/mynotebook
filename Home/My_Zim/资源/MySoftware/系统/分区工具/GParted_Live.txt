@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-24T17:51:35+08:00
-
-====== GParted Live ======
-Created Friday 24 November 2017
-
-GParted Live
-https://gparted.org/download.php

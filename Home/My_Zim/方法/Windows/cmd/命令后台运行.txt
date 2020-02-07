@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-09-20T12:43:13+08:00
-
-====== 命令后台运行 ======
-Created Thursday 20 September 2018
-
-command.bat /b

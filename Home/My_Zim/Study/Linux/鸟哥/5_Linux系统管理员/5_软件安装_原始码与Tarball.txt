@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-22T12:01:46+08:00
-
-====== 5 软件安装 原始码与Tarball ======
-Created Wednesday 22 November 2017
-

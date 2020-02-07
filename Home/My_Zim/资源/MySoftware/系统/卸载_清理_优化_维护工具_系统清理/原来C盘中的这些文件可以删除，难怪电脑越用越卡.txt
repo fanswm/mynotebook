@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2020-01-26T20:14:09+08:00
-
-====== 原来C盘中的这些文件可以删除，难怪电脑越用越卡 ======
-创建日期 星期日 26 一月 2020
-

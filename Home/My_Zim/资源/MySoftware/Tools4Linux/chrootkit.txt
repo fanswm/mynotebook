@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-08-10T11:24:11+08:00
-
-====== chrootkit ======
-Created Friday 10 August 2018
-
-这里列出了全部root工具包、蠕虫以及可加载内核模块（简称LKM），一旦其进入您的计算机，那么安全性将被彻底破坏。面对这样的情况，当选百大网络安全工具殊荣的chrootkit__能够帮助大家的系统保持清爽，并在有异常代码介入时发出提醒。__

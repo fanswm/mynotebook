@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-28T13:43:43+08:00
-
-====== 免费下载各国专利的说明书全文 ======
-Created Friday 28 December 2018
-
-https://mp.weixin.qq.com/s/yI2YxcLBQP3XQpI8GROJbg

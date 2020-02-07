@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-02-22T11:51:30+08:00
-
-====== MagicaVoxel ======
-创建日期 星期五 22 二月 2019
-
-https://ephtracy.github.io/
-一款大小仅仅1.69M的3D像素建模软件，简单学习之后便可以轻松上手，可以说是真正的平民建模软件。下面几张来自官网大神...

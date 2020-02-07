@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-09-18T10:27:01+08:00
-
-====== keepa ======
-Created Tuesday 18 September 2018
-
-https://keepa.com/

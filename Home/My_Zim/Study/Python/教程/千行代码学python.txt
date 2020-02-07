@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-06T20:30:13+08:00
-
-====== 千行代码学python ======
-Created Thursday 06 December 2018
-
-https://github.com/xianhu/LearnPython/blob/master/python_base.py

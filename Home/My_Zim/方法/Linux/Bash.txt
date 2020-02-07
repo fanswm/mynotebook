@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-24T13:08:48+08:00
-
-====== Bash ======
-Created Wednesday 24 January 2018
-

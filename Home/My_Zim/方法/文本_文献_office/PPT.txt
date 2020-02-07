@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-15T19:52:03+08:00
-
-====== PPT ======
-Created Sunday 15 July 2018
-

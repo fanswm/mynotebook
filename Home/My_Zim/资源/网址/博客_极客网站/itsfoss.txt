@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-21T17:30:40+08:00
-
-====== itsfoss ======
-Created Wednesday 21 November 2018
-
-https://itsfoss.com/

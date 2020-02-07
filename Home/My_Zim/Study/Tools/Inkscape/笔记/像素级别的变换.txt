@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-28T17:11:13+08:00
-
-====== 像素级别的变换 ======
-Created Tuesday 28 November 2017
-
-+ 像素级别的变换：在以上操作中加上`Alt`

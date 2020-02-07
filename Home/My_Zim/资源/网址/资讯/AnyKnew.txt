@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-08-01T11:41:21+08:00
-
-====== AnyKnew ======
-创建日期 星期四 01 八月 2019
-
-https://www.anyknew.com/#/

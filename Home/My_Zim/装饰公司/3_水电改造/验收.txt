@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-24T16:10:16+08:00
-
-====== 验收 ======
-Created Tuesday 24 July 2018
-
-在做完电路后，让施工方给你一份__电路布置图__，一旦以后要检修、修整墙面或在墙上打钉子，都可以防止电线被打坏。

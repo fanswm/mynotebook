@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-15T11:56:24+08:00
-
-====== 管理 ======
-Created Monday 15 October 2018
-

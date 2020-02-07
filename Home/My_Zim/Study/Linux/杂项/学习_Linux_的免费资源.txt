@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-02-18T08:01:17+08:00
-
-====== 学习 Linux 的免费资源 ======
-创建日期 星期日 18 二月 2018
-
-25 个学习 Linux 的免费资源（英文） https://linux.cn/article-9359-1.html?utm_source=rss&utm_medium=rss

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-16T15:28:59+08:00
-
-====== YouTube-DL ======
-Created Tuesday 16 January 2018
-
-在 Ubuntu 上安装并使用 YouTube-DL https://linux.cn/article-9244-1.html?utm_source=rss&utm_medium=rss

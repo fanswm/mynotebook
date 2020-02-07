@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-06-01T19:34:22+08:00
-
-====== pyopenssl python-openssl ======
-创建日期 星期六 01 六月 2019
-
-sudo pip3 install pyopenssl

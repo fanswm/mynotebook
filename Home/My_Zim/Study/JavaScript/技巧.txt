@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-28T13:33:27+08:00
-
-====== 技巧 ======
-Created Tuesday 28 November 2017
-
-http://mp.weixin.qq.com/s?__biz=MjM5OTA1MDUyMA==&mid=2655440114&idx=2&sn=a3271c1f7199dd44bf9a6ae2b3c04cc7&chksm=bd7300858a048993c554dde5be9a1ac6e0683d6c0d0c855ef0a7673b725d568d32ea94442aad&mpshare=1&scene=1&srcid=1128xEaeorzbQcacOmWY1lnh#rd

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-11T11:58:17+08:00
-
-====== 010 Editor ======
-Created Thursday 11 January 2018
-
-http://www.sweetscape.com/download/010editor/

@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-21T20:21:59+08:00
-
-====== GCompris 教育套件 ======
-创建日期 星期二 21 十一月 2017
-
-https://www.gcompris.net/downloads-en.html
-

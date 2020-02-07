@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-07T13:34:36+08:00
-
-====== 教程 ======
-Created Thursday 07 December 2017
-
-看完离编写高性能的JavaScript又近了一步：
-https://github.com/zhansingsong/js-leakage-patterns

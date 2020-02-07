@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-09-29T16:44:55+08:00
-
-====== 蒲公英路由器 ======
-Created Saturday 29 September 2018
-
-摆脱各种网盘限制，用蒲公英路由器在家 2 步搭建私人云盘 http://sspai.com/post/47139

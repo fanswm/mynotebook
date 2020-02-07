@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-06T22:45:11+08:00
-
-====== libspiro ======
-Created Sunday 06 January 2019
-
-libspiro，用于生成平滑曲线

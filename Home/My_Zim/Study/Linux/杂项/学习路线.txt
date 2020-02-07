@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-30T12:00:25+08:00
-
-====== 学习路线 ======
-Created Thursday 30 November 2017
-
-{{./Linux学习路线.jpeg}}

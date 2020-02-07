@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-02-18T11:40:56+08:00
-
-====== 减少空调噪音的6个方法 ======
-Created 星期一 18 二月 2019
-
-https://mp.weixin.qq.com/s?__biz=MzIwNzE3NjU1MA==&mid=2650490135&idx=1&sn=4a3b103330498be6ec3cf1db0e8751e6&chksm=8f19b31eb86e3a0889e0e5b405185c2af0714787b8bc4eb2521679bece41fa4a00886168f0b9&mpshare=1&scene=1&srcid=0824VyzAHs0S8c66eGx8cTy2#rd

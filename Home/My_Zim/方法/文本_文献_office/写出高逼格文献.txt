@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-14T17:35:24+08:00
-
-====== 写出高逼格文献 ======
-Created Wednesday 14 November 2018
-
-https://sspai.com/post/47341

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-24T18:01:53+08:00
-
-====== 使用书摘 App 集中管理所有读书笔记 ======
-Created Friday 24 November 2017
-
-使用书摘 App 集中管理所有读书笔记 https://sspai.com/post/41961

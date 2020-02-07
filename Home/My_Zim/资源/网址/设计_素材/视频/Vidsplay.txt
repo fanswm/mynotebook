@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-03-17T17:31:23+08:00
-
-====== Vidsplay ======
-创建日期 星期日 17 三月 2019
-
-是一个完全免费的视频素材下载网站，并且每周都会添加各种类型的，新的免费视频。视频可以为个人和商业项目免费使用，在使用视频的同时，必须在明显的地方标注视频来源。
-https://www.vidsplay.com/

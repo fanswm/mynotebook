@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-24T16:19:39+08:00
-
-====== 接线 ======
-Created Tuesday 24 July 2018
-
-电线与电线之间的连接常见的办法有__直接连接__和__WOGO连接__两种，
-电线接头__挂锡__的好处可以加固电线连接处，防止电流过大接头发热产生隐患

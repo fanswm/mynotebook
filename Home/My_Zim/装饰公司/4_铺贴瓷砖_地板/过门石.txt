@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-26T14:44:53+08:00
-
-====== 过门石 ======
-Created Thursday 26 July 2018
-
-一般来说，大理石面与厅的地板平，高于厨房、卫生间1~1.5cm，防止倒反水。有施工常识的装潢队伍也应该知晓。

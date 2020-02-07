@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-22T14:50:49+08:00
-
-====== 腾讯文档 ======
-创建日期 星期二 22 一月 2019
-
-腾讯文档：https://docs.qq.com/desktop

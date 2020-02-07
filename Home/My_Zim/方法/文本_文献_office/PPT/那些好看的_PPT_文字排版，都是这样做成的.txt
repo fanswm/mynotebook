@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-12T14:01:43+08:00
-
-====== 那些好看的 PPT 文字排版，都是这样做成的 ======
-创建日期 星期六 12 一月 2019
-
-那些好看的 PPT 文字排版，都是这样做成的 http://sspai.com/post/51188

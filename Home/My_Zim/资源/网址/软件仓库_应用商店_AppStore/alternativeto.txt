@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-15T15:01:22+08:00
-
-====== alternativeto ======
-Created Monday 15 October 2018
-
-https://alternativeto.net/

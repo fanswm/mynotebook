@@ -5,33 +5,17 @@ Creation-Date: 2019-04-03T19:33:24+08:00
 ====== pacman ======
 创建日期 星期三 03 四月 2019
 
-教程:
-https://www.ostechnix.com/getting-started-pacman/
-文档：https://wiki.archlinux.org/index.php/Pacman_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%88%A0%E9%99%A4%E8%BD%AF%E4%BB%B6%E5%8C%85
+官方中文文檔：  https://wiki.archlinux.org/index.php/Pacman_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 
-pacman -Qi bash		查询bash包信息
-pacman -Q 			列出已经安装的软件包
-pacman -Q virtualbox 	查看virtualbox包是否已经安装
-pacman -Qi virtualbox 	查看已安装的包virtualbox的详细信息
-pacman -Ql virtualbox 	列出已安装包virtualbox的所有文件
-pacman -Qo /etc/passwd 	__查找某个文件属于哪个包__
-pacman -Sg 			查询包组
-pacman -Sg gnome 	查询包组所包含的软件包
-pacman -Ss virtualbox 	__搜索virtualbox相关的包__
-pacman -Si virtualbox 	从数据库中搜索virtualbox的信息
-sudo pacman -Sy 		仅同步源
-sudo pacman -Su 		更新系统
-sudo pacman -Syu 		同步源并更新系统
-sudo pacman -Sy virtualbox 	同步源后安装包
-sudo pacman -S virtualbox 		从本地数据库中获取virtualbox的信息，并下载安装
-sudo pacman -Sf virtualbox 	强制安装virtualbox包
-sudo pacman -R virtualbox 		删除virtualbox
-sudo pacman -Rd virtualbox 	强制删除被依赖的包（慎用）
-sudo pacman -Rc virtualbox 	删除virtualbox包及依赖其的包
-sudo pacman -Rsc virtualbox 	删除virtualbox包及其依赖的包
-sudo pacman -Sc 				清理/var/cache/pacman/pkg目录下的旧包
-sudo pacman -Scc 			清除所有下载的包和数据库
-cd /var/cache/pacman/pkg
-sudo pacman -U virtualbox-5.2.12-1-x86_64.pkg.tar.xz
-						安装下载的virtualbox包（有时候需要降级包的时候就用这个）
-sudo pacman -Su --ignore virtualbox		升级时不升级virtualbox包 
+https://wiki.archlinux.org/index.php/Pacman_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%88%A0%E9%99%A4%E8%BD%AF%E4%BB%B6%E5%8C%85
+也可以访问 https://www.archlinux.org/groups/ 查看可用的包组。
+
+ 位置： /etc/pacman.conf​
+
+回滚：  https://wiki.archlinux.org/index.php/Arch_Linux_Archive_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+
+如何恢复所有包到指定日期： https://wiki.archlinux.org/index.php/Arch_Linux_Archive_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E5%A6%82%E4%BD%95%E6%81%A2%E5%A4%8D%E6%89%80%E6%9C%89%E5%8C%85%E5%88%B0%E6%8C%87%E5%AE%9A%E6%97%A5%E6%9C%9F
+
+ 
+
+https://archive.archlinux.org/repos/2019/11/30/

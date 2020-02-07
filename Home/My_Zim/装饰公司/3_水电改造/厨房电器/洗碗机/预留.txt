@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-24T17:14:54+08:00
-
-====== 预留 ======
-Created Tuesday 24 July 2018
-
-预留进水口、排水口和电源插座,与洗衣机一模一样

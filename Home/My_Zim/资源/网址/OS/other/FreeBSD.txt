@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-03-18T11:34:28+08:00
-
-====== FreeBSD ======
-创建日期 星期一 18 三月 2019
-
-FreeBSD 使用手册
-https://www.freebsd.org/doc/zh_CN/books/handbook/

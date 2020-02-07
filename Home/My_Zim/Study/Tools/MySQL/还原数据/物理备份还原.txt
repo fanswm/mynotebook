@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-06T11:59:47+08:00
-
-====== 物理备份还原 ======
-Created Wednesday 06 December 2017
-
-直接将备份目录放在数据库数据目录下（/var/lib/mysql）。

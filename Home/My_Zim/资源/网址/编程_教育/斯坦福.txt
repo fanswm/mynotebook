@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-15T11:30:43+08:00
-
-====== 斯坦福 ======
-Created Thursday 15 November 2018
-
-http://www.scs.stanford.edu/15wi-cs140/

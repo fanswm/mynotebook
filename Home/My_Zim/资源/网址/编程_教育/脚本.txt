@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-08-07T11:15:38+08:00
-
-====== 脚本 ======
-创建日期 星期二 07 八月 2018
-

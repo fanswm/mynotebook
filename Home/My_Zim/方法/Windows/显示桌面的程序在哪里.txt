@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-01T18:12:29+08:00
-
-====== 显示桌面的程序在哪里 ======
-Created Friday 01 December 2017
-
-显示桌面程序在哪里：
-C:\Users\Administrator\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\showdesktop.exe

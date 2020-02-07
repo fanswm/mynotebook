@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-06T12:42:35+08:00
-
-====== 怎么在 Excel 上做数据地图 ======
-Created Friday 06 July 2018
-
-https://www.zhihu.com/question/30073147/answer/232926762
-

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-02T10:44:08+08:00
-
-====== Fossdroid ======
-Created Friday 02 November 2018
-
-https://fossdroid.com/

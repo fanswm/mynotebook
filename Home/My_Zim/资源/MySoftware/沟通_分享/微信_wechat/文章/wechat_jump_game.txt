@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-11T15:29:36+08:00
-
-====== wechat jump game ======
-Created Tuesday 11 December 2018
-
-https://github.com/wangshub/wechat_jump_game

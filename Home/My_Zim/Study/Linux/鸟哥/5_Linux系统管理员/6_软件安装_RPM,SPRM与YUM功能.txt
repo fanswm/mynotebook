@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-22T12:02:27+08:00
-
-====== 6 软件安装 RPM,SPRM与YUM功能 ======
-Created Wednesday 22 November 2017
-

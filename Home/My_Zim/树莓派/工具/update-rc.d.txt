@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-03T16:51:01+08:00
-
-====== update-rc.d ======
-Created Monday 03 December 2018
-
-Raspbian Update-rc.d 命令用法详解
-http://shumeipai.nxez.com/2017/01/23/updatercd-command-usage-details.html

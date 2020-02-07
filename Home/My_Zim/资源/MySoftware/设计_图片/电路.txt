@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-02-01T14:26:33+08:00
-
-====== 电路 ======
-Created Thursday 01 February 2018
-

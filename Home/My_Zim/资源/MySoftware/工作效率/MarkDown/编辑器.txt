@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-13T10:44:22+08:00
-
-====== 编辑器 ======
-Created Thursday 13 December 2018
-
-typora typora 韩国的一款Markdown写作工具，免费的，简介好用！
-https://www.typora.io/

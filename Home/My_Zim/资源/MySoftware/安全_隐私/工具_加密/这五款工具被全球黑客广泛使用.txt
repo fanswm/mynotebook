@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-22T10:18:26+08:00
-
-====== 这五款工具被全球黑客广泛使用 ======
-Created Monday 22 October 2018
-
-这五款工具被全球黑客广泛使用，中国菜刀入榜 http://www.freebuf.com/news/186589.html

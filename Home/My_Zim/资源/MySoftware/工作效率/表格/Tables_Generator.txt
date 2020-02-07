@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-09-18T10:37:46+08:00
-
-====== Tables Generator ======
-Created Tuesday 18 September 2018
-
-https://www.tablesgenerator.com/
-https://sspai.com/post/47115

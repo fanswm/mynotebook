@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-19T16:23:53+08:00
-
-====== html 根元素 包裹整个html文档 ======
-Created Tuesday 19 December 2017
-
-根元素
-	<html></html>

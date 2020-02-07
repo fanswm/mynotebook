@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-09-01T19:33:54+08:00
-
-====== 全屏显示 ======
-Created 星期日 01 九月 2019
-
-Alt + U + V

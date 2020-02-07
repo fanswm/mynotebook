@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-30T16:18:04+08:00
-
-====== 找出僵局进程并杀死 ======
-创建日期 星期三 30 一月 2019
-
-ps -A -ostat,ppid,pid,cmd | grep -e '^[Zz]'
-sudo kill -9 ppid

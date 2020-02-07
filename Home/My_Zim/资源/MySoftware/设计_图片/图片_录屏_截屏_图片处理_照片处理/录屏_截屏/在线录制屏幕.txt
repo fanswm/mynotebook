@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-21T15:07:00+08:00
-
-====== 在线录制屏幕 ======
-创建日期 星期一 21 一月 2019
-
-https://showmore.com/zh/

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-08-01T11:59:42+08:00
-
-====== 科学家找到癌细胞“伪装”机制 有望带来新型免疫疗法 ======
-创建日期 星期四 01 八月 2019
-
-https://www.cnbeta.com/articles/science/873965.htm

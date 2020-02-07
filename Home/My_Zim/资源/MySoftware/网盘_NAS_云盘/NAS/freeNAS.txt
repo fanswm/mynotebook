@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-15T14:56:58+08:00
-
-====== freeNAS ======
-Created Monday 15 October 2018
-
-http://www.freenas.org/freenas-vs-openmediavault/

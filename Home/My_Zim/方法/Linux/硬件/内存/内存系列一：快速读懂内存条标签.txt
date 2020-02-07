@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-04-01T04:27:27+08:00
-
-====== 内存系列一：快速读懂内存条标签 ======
-创建日期 星期一 01 四月 2019
-
-https://zhuanlan.zhihu.com/p/26255460?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

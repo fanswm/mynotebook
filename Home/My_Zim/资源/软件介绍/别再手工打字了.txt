@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-03T17:30:31+08:00
-
-====== 别再手工打字了 ======
-Created Wednesday 03 January 2018
-
-别再手工打字了，这些 OCR 应用让你期末复习更轻松 http://sspai.com/post/42615

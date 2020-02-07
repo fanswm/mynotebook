@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-03-12T15:59:31+08:00
-
-====== 删除 ======
-创建日期 星期二 12 三月 2019
-
-docker rm <hash>             			# 从此机器中删除指定的容器
-docker rm $(docker ps -a -q)		# 从此机器中删除所有容器

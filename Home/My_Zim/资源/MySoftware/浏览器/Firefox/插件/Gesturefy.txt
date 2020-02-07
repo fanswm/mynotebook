@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-25T13:42:26+08:00
-
-====== Gesturefy ======
-Created Monday 25 December 2017
-
-Gesturefy：丰富自定义的手势扩展
-https://addons.mozilla.org/zh-CN/firefox/addon/gesturefy/

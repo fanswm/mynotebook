@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-25T10:21:34+08:00
-
-====== 宽度 ======
-Created Wednesday 25 July 2018
-
-家具是否做到顶,如果做到顶,预留宽度.

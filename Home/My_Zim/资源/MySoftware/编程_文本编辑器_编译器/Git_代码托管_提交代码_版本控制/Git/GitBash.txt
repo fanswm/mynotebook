@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-09T06:30:03+08:00
-
-====== GitBash ======
-创建日期 星期日 09 十二月 2018
-
-git update_git_for-windows

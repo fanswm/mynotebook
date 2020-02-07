@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-10T13:42:02+08:00
-
-====== 兼职 威客 ======
-Created Monday 10 December 2018
-
-就是在猪八戒、时间财富、众人帮等平台去接任务赚钱，其中的众人帮是你啥技能也不需要，有手机就行，但是也比较累，比如转发个朋友圈可以赚一毛，关注个公众号可以赚2毛这样子。

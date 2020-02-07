@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-24T08:20:17+08:00
-
-====== 决策 ======
-Created Wednesday 24 January 2018
-

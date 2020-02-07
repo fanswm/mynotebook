@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-21T15:52:18+08:00
-
-====== 终端中的 2048 ======
-创建日期 星期一 21 一月 2019
-
-https://linux.cn/article-10447-1.html?utm_source=rss&utm_medium=rss

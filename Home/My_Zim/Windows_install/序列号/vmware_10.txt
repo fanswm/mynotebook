@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-22T07:34:39+08:00
-
-====== vmware 10 ======
-创建日期 星期三 22 十一月 2017
-
-JZ6WK-4529P-HZAA1-9RAG6-33JNR
-5F4EV-4Z0DP-XZHN9-0L95H-02V17

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-11-27T23:39:51+08:00
-
-====== 查看配置错误 ======
-创建日期 星期三 27 十一月 2019
-
-apachectl stop

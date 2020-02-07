@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-11-26T13:10:15+08:00
-
-====== manjaro安装mongodb ======
-创建日期 星期二 26 十一月 2019
-
-https://wiki.archlinux.org/index.php/MongoDB_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
-

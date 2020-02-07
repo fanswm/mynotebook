@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-22T11:48:11+08:00
-
-====== 维密 ======
-Created Wednesday 22 November 2017
-
-https://zhuanlan.zhihu.com/p/31239967

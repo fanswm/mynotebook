@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-03-20T06:36:24+08:00
-
-====== pinta ======
-创建日期 星期三 20 三月 2019
-
-xubuntu上不能用。老闪退。

@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-03T09:05:20+08:00
-
-====== 文件，代码搜索 ======
-Created Sunday 03 December 2017
-
-Plug 'rking/ag.vim'
-Plug 'kien/ctrlp.vim'

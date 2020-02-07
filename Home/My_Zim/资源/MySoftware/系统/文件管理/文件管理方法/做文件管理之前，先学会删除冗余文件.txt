@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-04-22T16:33:11+08:00
-
-====== 做文件管理之前，先学会删除冗余文件 ======
-创建日期 星期一 22 四月 2019
-
-https://sspai.com/post/54087

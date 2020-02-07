@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-12T14:47:41+08:00
-
-====== 中国写手之家 ======
-创建日期 星期六 12 一月 2019
-
-中国写手之家：http://www.xs91.net/  （主要用来接一些任务，靠稿费生活）

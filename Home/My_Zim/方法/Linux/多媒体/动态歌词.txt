@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-09-18T13:31:08+08:00
-
-====== 动态歌词 ======
-Created Tuesday 18 September 2018
-
-https://sspai.com/post/46979
-如何为虾米和网易云音乐歌曲添加动态歌词

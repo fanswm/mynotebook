@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-28T11:43:32+08:00
-
-====== imrdr总结 ======
-创建日期 星期一 28 一月 2019
-
-ctrl + b 是tmux 的默认命令前缀。

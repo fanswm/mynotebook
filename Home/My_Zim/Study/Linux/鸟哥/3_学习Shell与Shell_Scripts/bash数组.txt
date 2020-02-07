@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-16T18:11:18+08:00
-
-====== bash数组 ======
-创建日期 星期一 16 七月 2018
-
-https://linux.cn/article-9837-1.html?utm_source=rss&utm_medium=rss

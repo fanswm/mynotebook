@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-23T10:47:36+08:00
-
-====== Life of Pix ======
-Created Saturday 23 December 2017
-
-http://www.lifeofpix.com/

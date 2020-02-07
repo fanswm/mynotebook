@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-06T12:45:20+08:00
-
-====== 图表插件-EasyChart ======
-Created Friday 06 July 2018
-
-图表插件-EasyChart

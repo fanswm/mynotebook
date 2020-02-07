@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-18T14:40:45+08:00
-
-====== 能排版又能运行代码的另类编辑器 ======
-Created Thursday 18 January 2018
-
-能排版又能运行代码的另类 Markdown 编辑器：Rmarkdown http://sspai.com/post/42841

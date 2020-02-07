@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2020-01-11T16:10:41+08:00
-
-====== 运算符 ======
-创建日期 星期六 11 一月 2020
-

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-06T17:03:47+08:00
-
-====== 故障效果的生成网站 ======
-Created Sunday 06 January 2019
-
-https://photomosh.com/

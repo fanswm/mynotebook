@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-02-15T06:38:47+08:00
-
-====== 思维方式 思考问题 ======
-创建日期 星期五 15 二月 2019
-

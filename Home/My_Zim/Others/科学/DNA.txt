@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-06-05T20:30:47+08:00
-
-====== DNA ======
-创建日期 星期三 05 六月 2019
-
-https://www.zhihu.com/question/309102714/answer/573981359?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
-知乎问答：如何看待诺奖得主「DNA 之父」James Watson频繁发表关于种族智商差异言论而被剥夺荣誉头衔？

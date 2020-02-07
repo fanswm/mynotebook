@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-07T11:35:48+08:00
-
-====== ScreenCloud ======
-Created 星期日 07 十月 2018
-
-https://linux.cn/article-10083-1.html?utm_source=rss&utm_medium=rss

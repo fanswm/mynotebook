@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-05-27T16:45:19+08:00
-
-====== 0 ======
-创建日期 星期一 27 五月 2019
-
-https://juejin.im/post/5ce94553e51d455c8838e0d5
-https://vuepress.vuejs.org/zh/guide/#%E5%AE%83%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F

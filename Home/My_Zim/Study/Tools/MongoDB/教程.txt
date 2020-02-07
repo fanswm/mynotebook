@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-11-26T13:25:02+08:00
-
-====== 教程 ======
-创建日期 星期二 26 十一月 2019
-
-https://www.mongodb.org.cn/tutorial/

@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-13T11:13:50+08:00
-
-====== Openstack ======
-Created Thursday 13 December 2018
-

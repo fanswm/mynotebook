@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-29T16:41:16+08:00
-
-====== C ======
-Created 星期二 29 一月 2019
-
-Linux C编程一站式学习 - https://akaedu.github.io/book/?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-08-20T07:44:12+08:00
-
-====== scrcpy 投屏 ======
-Created 星期二 20 八月 2019
-

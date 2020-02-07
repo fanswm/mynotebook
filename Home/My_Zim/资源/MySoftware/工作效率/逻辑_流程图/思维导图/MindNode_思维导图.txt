@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-27T13:33:17+08:00
-
-====== MindNode 思维导图 ======
-Created Monday 27 November 2017
-
-享受了专注的乐趣

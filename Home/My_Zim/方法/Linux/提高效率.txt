@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-09-30T08:04:11+08:00
-
-====== 提高效率 ======
-Created Sunday 30 September 2018
-

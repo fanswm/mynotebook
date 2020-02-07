@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-04T13:47:57+08:00
-
-====== 符号含义 ======
-Created Monday 04 December 2017
-
-<meta charset="UTF-8" />	的信息，表示该网页正是用的UTF-8编码。

@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-22T16:40:05+08:00
-
-====== MediaWiki ======
-Created Friday 22 December 2017
-
-建立wiki网站的首选后台程序
-

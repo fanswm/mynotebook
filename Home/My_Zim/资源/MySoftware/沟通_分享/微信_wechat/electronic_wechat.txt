@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-21T20:28:26+08:00
-
-====== electronic wechat ======
-创建日期 星期二 21 十一月 2017
-
-微信： 基于Node.js实现的客户端，本质还是一个网页版的微信，所以功能与网页版一致，消息的收发同样很及时

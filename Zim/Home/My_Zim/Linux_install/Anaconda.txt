@@ -5,49 +5,11 @@ Creation-Date: 2017-11-24T14:04:16+08:00
 ====== Anaconda ======
 Created Friday 24 November 2017
 
-## anaconda
+清华大学开源软件镜像站: Anaconda 镜像使用帮助: https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/
 
-+ download:Anaconda2-4.4.0-Linux-x86_64.sh 
-+ `./Anaconda2-4.4.0-Linux-x86_64.sh `
-> install
-
-+ `source ~/.bashrc`
-> source
-
-+ `conda update conda`
-+ `conda update anaconda`
-> update
-
-## 添加Anaconda的TUNA镜像
-
-`conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/`
-> TUNA的help中镜像地址加有引号，需要去掉
-
-## 设置搜索时显示通道地址
-
-`conda config --set show_channel_urls yes`
+软件包列表： https://repo.anaconda.com/pkgs/main/
+			https://repo.anaconda.com/pkgs/
+			
+在官网上搜索pkgs:  https://anaconda.org  (非常慢)
 
 
-链接：http://www.jianshu.com/p/2f3be7781451
-
-https://www.anaconda.com/support/
-https://anaconda.org/
-
-
-20200108：
-尝试注册没有成功。
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/fdd/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-	eval "$__conda_setup"
-else
-	if [ -f "/home/fdd/anaconda3/etc/profile.d/conda.sh" ]; then
-		. "/home/fdd/anaconda3/etc/profile.d/conda.sh"
-	else
-		export PATH="/home/fdd/anaconda3/bin:$PATH"
-	fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<

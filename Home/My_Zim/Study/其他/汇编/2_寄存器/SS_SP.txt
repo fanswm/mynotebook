@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-02T21:11:02+08:00
-
-====== SS SP ======
-创建日期 星期三 02 一月 2019
-
-8086CPU中，有2个寄存器，段寄存器SS和寄存器SP，栈顶的段地址存放在SS中，偏移地址存放在SP中。任意时刻，SS：SP指向栈顶元素。

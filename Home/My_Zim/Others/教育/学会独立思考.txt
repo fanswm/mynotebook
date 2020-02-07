@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-28T13:40:15+08:00
-
-====== 学会独立思考 ======
-Created Tuesday 28 November 2017
-
-http://www.write.org.cn/xue-hui-du-li-si-kao-si-wei-dao-tu-du-shu-bi-ji.html
-{{./学会独立思考.png}}

@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-07T15:56:47+08:00
-
-====== CCleaner ======
-Created Thursday 07 December 2017
-
-CCleaner 是 Windows 上一款知名的第三方清理软件，功能非常齐全。CCleaner 不仅能做清理工作还能优化系统、管理系统。它清理的项目列表里包含从自带系统到安装的软件，其中有些清理项目需要付费购买后才能解锁。我想如此全方位的扫描应该不会有遗漏的地方了。
-在免费试用 CCleaner Pro 的过程里，发现相比其他清理软件 CCleaner 的软件卸载列表里包含了 Windows 10 自带的软件。这一点对于想要卸载这类 Windows 自带软件的朋友是个很不错的选择。

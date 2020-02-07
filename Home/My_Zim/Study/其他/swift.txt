@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-22T09:49:14+08:00
-
-====== swift ======
-Created Monday 22 October 2018
-
-https://swift.org/download/#releases
-https://linux.cn/article-10134-1.html?utm_source=rss&utm_medium=rss

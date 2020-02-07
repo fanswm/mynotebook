@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-22T18:27:34+08:00
-
-====== 十分钟邮箱 ======
-创建日期 星期一 22 一月 2018
-
-10minutemail.com/10MinuteMail/

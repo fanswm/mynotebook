@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-09-09T08:23:35+08:00
-
-====== loom ======
-Created 星期一 09 九月 2019
-
-https://www.loom.com/signup#

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-30T23:12:24+08:00
-
-====== 蓝灯 ======
-Created 星期一 30 七月 2018
-
-lantern

@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-25T13:41:59+08:00
-
-====== Tab Center Redux ======
-Created Monday 25 December 2017
-
-Tab Center Redux：在侧边栏管理标签页
-https://addons.mozilla.org/zh-CN/firefox/addon/tab-center-redux/

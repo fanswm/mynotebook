@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-06T11:29:17+08:00
-
-====== 删除用户 ======
-Created Wednesday 06 December 2017
-
-mysql> drop user 用户名
-drop 命令还可以删除多个用户，多个用户名通过 “，” 隔开。

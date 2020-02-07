@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-03-17T17:03:35+08:00
-
-====== Imslp ======
-创建日期 星期日 17 三月 2019
-
-https://cn.imslp.org/
-全球最大的免费公共版权音乐网站，网站中的乐谱、音乐都是可以免费下载的，由于该网站涉及的国家很多，在使用的时候需要注意自己国家中的版权条例。

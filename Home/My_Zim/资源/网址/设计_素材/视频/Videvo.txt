@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-23T10:43:16+08:00
-
-====== Videvo ======
-Created Saturday 23 December 2017
-
-http://www.videvo.net/

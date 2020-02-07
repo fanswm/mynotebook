@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-10T15:31:56+08:00
-
-====== 极客 ======
-Created Monday 10 December 2018
-
-ConnectBot
-Termux

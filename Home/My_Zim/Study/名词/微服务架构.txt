@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-21T15:45:03+08:00
-
-====== 微服务架构 ======
-创建日期 星期一 21 一月 2019
-
-设计微服务架构前应该了解的 5 项指导原则
-https://linux.cn/article-10455-1.html?utm_source=rss&utm_medium=rss

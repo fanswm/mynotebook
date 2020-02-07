@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-03-17T17:19:24+08:00
-
-====== apt-get ======
-创建日期 星期日 17 三月 2019
-
-第 2 章 Debian 软件包管理
-https://www.debian.org/doc/manuals/debian-reference/ch02.zh-cn.html

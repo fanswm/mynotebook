@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-26T15:05:05+08:00
-
-====== 渗水 ======
-Created Thursday 26 July 2018
-
-墙面渗水原因：防水没有做好，墙面抹灰质量不达标，也可能是墙砖的渗水率过高不合规范。墙面渗水还可能会导致墙面发霉。

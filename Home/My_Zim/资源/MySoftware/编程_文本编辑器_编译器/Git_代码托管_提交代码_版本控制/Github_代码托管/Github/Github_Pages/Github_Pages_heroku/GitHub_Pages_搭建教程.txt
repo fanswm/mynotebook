@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-05-13T15:36:54+08:00
-
-====== GitHub Pages 搭建教程 ======
-创建日期 星期一 13 五月 2019
-
-https://sspai.com/post/54608

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-10T07:56:29+08:00
-
-====== Geany ======
-Created Wednesday 10 October 2018
-
-https://www.geany.org/

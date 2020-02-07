@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-04-28T17:07:20+08:00
-
-====== 教程 ======
-创建日期 星期日 28 四月 2019
-
-https://blog.csdn.net/yichu5074/article/details/78530654
-https://www.cnblogs.com/letben/p/5205060.html    #hello world

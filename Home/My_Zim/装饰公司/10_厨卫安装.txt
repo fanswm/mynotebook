@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-07-23T15:33:06+08:00
-
-====== 10 厨卫安装 ======
-Created Monday 23 July 2018
-

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-11-28T21:10:54+08:00
-
-====== 安装 ======
-创建日期 星期四 28 十一月 2019
-
-https://docs.nextcloud.com/server/17/admin_manual/installation/source_installation.html

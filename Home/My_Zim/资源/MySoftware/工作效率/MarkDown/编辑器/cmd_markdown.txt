@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-23T10:41:32+08:00
-
-====== cmd markdown ======
-Created Thursday 23 November 2017
-
-https://www.zybuluo.com/cmd/
-

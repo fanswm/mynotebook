@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-10T16:52:13+08:00
-
-====== 4 个技巧 ======
-Created Wednesday 10 October 2018
-
-更好利用 tmux 会话的 4 个技巧   https://linux.cn/article-10089-1.html?utm_source=rss&utm_medium=rss

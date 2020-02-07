@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-05-21T14:14:43+08:00
-
-====== 桌面管理 ======
-创建日期 星期二 21 五月 2019
-

@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-05T14:53:55+08:00
-
-====== read the docs ======
-Created Tuesday 05 December 2017
-
-https://readthedocs.org/
-

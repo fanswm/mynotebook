@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-09-18T10:40:25+08:00
-
-====== Infogram ======
-Created Tuesday 18 September 2018
-
-https://infogram.com/
-Infogram 自然是提供了大量现成模版的。Infogram 的模版涉及广泛，但大部分都要收费，最低可以以 19 美元的价格使用 100 套，在我看来只要能在关键时刻用上一套，这 100 多人民币的投入就物超所值。

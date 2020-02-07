@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-22T07:38:41+08:00
-
-====== 连接文字和日期 ======
-创建日期 星期三 22 十一月 2017
-
-=A2 & TEXT(B2," y年m月d日")

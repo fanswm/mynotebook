@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-24T12:01:31+08:00
-
-====== 快速格式化 ======
-Created Friday 24 November 2017
-
-## 快速格式化
-+ `sudo mkfs.ntfs -f -L MY_LABEL /dev/sdxxx`

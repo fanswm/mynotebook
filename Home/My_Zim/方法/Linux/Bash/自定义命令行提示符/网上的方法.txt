@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-03T11:17:10+08:00
-
-====== 网上的方法 ======
-Created Monday 03 December 2018
-
-http://ezprompt.net/

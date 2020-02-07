@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-01T08:11:12+08:00
-
-====== route ======
-Created Friday 01 December 2017
-
-route | 显示和操作IP路由表

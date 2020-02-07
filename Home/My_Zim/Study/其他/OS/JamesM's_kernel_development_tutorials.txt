@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-04T11:04:22+08:00
-
-====== JamesM's kernel development tutorials ======
-Created Monday 04 December 2017
-
-http://hurlex.0xffffff.org/
-http://wiki.0xffffff.org/

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-11T13:43:19+08:00
-
-====== Thunar ======
-创建日期 星期五 11 一月 2019
-
-xubuntu

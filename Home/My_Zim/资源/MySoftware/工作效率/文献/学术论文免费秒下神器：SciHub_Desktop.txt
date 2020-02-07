@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-27T19:03:57+08:00
-
-====== 学术论文免费秒下神器：SciHub Desktop ======
-创建日期 星期四 27 十二月 2018
-
-https://zhuanlan.zhihu.com/p/31809890

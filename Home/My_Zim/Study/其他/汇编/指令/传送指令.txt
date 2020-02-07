@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-31T21:47:55+08:00
-
-====== 传送指令 ======
-Created Monday 31 December 2018
-
-mov

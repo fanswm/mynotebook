@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-12T13:40:53+08:00
-
-====== 用 Markdown 生成漂亮的手写图 ======
-创建日期 星期六 12 一月 2019
-
-https://sspai.com/post/52190
-不需要懂设计，你也可以轻松做一张好看的长图：Text2Image http://sspai.com/post/52190

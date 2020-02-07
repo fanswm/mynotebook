@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-22T10:03:43+08:00
-
-====== 开源优势 ======
-Created Monday 22 October 2018
-
-https://opensource.com/life/15/12/why-open-source

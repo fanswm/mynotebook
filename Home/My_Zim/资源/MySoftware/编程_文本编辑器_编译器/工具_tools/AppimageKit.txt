@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-04-28T11:57:45+08:00
-
-====== AppimageKit ======
-创建日期 星期日 28 四月 2019
-
-https://github.com/AppImage/AppImageKit

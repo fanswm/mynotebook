@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-12-03T16:49:28+08:00
-
-====== 基于Ubuntu Mate的树莓派NAS搭建 ======
-Created Monday 03 December 2018
-
-http://shumeipai.nxez.com/2016/11/29/install-nas-on-ubuntu-mate.html

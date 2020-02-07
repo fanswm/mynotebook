@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-15T14:07:02+08:00
-
-====== 目录 ======
-Created Monday 15 October 2018
-
-{{file:///C:/Documents%20and%20Settings/jhk/%E6%A1%8C%E9%9D%A2/Linux%20%E7%9B%AE%E5%BD%95.png}}

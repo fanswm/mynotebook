@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-03T16:56:44+08:00
-
-====== Tools4Linux ======
-Created Wednesday 03 January 2018
-

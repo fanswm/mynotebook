@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-21T09:26:43+08:00
-
-====== Windows To Go ======
-Created Sunday 21 January 2018
-
-用 Windows To Go 把完整系统装进移动硬盘，让你的 Windows 随处可用 http://sspai.com/post/42900

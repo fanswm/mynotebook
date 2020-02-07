@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-28T17:17:35+08:00
-
-====== SecWiki ======
-Created Thursday 28 December 2017
-
-https://sec-wiki.com/
-

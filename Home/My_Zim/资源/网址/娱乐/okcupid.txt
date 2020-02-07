@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-03T10:05:33+08:00
-
-====== okcupid ======
-Created Sunday 03 December 2017
-
-https://www.okcupid.com/

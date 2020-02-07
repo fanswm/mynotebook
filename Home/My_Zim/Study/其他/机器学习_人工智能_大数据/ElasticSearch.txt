@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-02-10T20:32:12+08:00
-
-====== ElasticSearch ======
-Created Sunday 10 February 2019
-
-为什么说程序员一定要看 ElasticSearch 源码  https://zhuanlan.zhihu.com/p/52976975?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

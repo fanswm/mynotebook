@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-08-10T11:42:45+08:00
-
-====== B站弹幕过滤 ======
-Created Friday 10 August 2018
-
-Pakku
-https://sspai.com/post/45860

@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-12T14:27:32+08:00
-
-====== 文章 ======
-创建日期 星期六 12 一月 2019
-
-树莓派 4 开箱记 https://linux.cn/article-11248-1.html?utm_source=rss&utm_medium=rss
-给树莓派 CM 的 eMMC 烧录系统的方法 http://shumeipai.nxez.com/2019/08/20/raspberry-pi-cm-emmc-flashing.html

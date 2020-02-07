@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-07-12T15:13:24+08:00
-
-====== 防癌 抗癌  癌症 ======
-创建日期 星期五 12 七月 2019
-

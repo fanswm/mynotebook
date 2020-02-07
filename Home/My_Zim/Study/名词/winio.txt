@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-05T10:42:15+08:00
-
-====== winio ======
-Created Tuesday 05 December 2017
-
-WinIO程序库允许在__32位的Windows应用程序__中直接对__I/O端口和物理内存__进行存取操作。通过使用一种内核模式的设备驱动器和其它几种底层编程技巧，它绕过了Windows系统的保护机制。
-[百度百科]

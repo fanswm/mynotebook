@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-05-30T15:34:03+08:00
-
-====== textures.com ======
-创建日期 星期四 30 五月 2019
-
-和其它freeand beautiful图库不同，textures提供的是纹理、材料、3D元素的下载，听上去就枯燥干涩了很多。  但同质化严重的图库网站一定会有这样小众网站的生存空间。资源管理库一样的检索方式，水泥灰一样的网站背景色，石墨烯分子结构图一样的网站logo, OMG、一定会有人喜欢这样款的网站。

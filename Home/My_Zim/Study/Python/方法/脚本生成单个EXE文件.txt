@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-01-12T20:06:53+08:00
-
-====== 脚本生成单个EXE文件 ======
-创建日期 星期六 12 一月 2019
-
-Python笔记 - Python脚本生成单个EXE文件（分享自知乎网）https://zhuanlan.zhihu.com/p/52654565?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-05-28T11:34:49+08:00
-
-====== 任正非 华为 ======
-创建日期 星期二 28 五月 2019
-
-知乎问答：关于任正非，有什么故事？ https://www.zhihu.com/question/19990952/answer/14158202?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

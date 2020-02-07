@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-22T13:40:16+08:00
-
-====== EOS ======
-Created Monday 22 January 2018
-

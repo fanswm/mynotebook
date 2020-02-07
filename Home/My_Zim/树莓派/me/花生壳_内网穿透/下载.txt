@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-12-01T21:43:19+08:00
-
-====== 下载 ======
-创建日期 星期日 01 十二月 2019
-
-https://hsk.oray.com/download/

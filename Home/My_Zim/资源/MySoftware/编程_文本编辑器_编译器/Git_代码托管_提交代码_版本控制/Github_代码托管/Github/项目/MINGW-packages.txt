@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-04T17:30:30+08:00
-
-====== MINGW-packages ======
-Created Monday 04 December 2017
-
-https://github.com/Alexpux/MINGW-packages

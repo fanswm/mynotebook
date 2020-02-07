@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-12-03T08:59:13+08:00
-
-====== 显示行号 ======
-Created Sunday 03 December 2017
-
-set number

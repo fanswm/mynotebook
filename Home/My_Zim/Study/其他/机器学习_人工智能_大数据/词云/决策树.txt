@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-02-22T18:17:58+08:00
-
-====== 决策树 ======
-创建日期 星期五 22 二月 2019
-
-https://www.jianshu.com/p/67a71e366516

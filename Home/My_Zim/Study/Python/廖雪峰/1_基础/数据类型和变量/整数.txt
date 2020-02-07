@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-10T19:57:02+08:00
-
-====== 整数 ======
-创建日期 星期三 10 一月 2018
-
-十六进制用0x前缀和0-9，a-f表示，例如：0xff00，0xa5b4c3d2，等等。
-
