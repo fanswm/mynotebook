@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-07T17:02:12+08:00
+
+====== 屏幕录像软件（Kazam）安装 ======
+创建日期 星期五 07 二月 2020
+
+https://linsir.org/post/How_to_install_Kazam_on_kali_linux/

@@ -1,0 +1,132 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-07T20:14:30+08:00
+
+====== 我的安装 ======
+创建日期 星期五 07 二月 2020
+
+entOS默认源里没有ntfs3g，想要添加ntfs支持，无非是自己下载编译安装或者加源yum安装。
+
+昨天重新安装了一个CentOS7，用的是添加aliyun的epel源来yum安装的方式，简单易行。
+
+1、加源
+
+wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+
+2、安装
+
+yum update;
+
+sudo yum install ntfs-3g
+————————————————
+版权声明：本文为CSDN博主「baidu_huihui」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/baidu_41617231/article/details/90666474
+
+ 
+
+ 五笔：
+
+sudo yum install ibus ibus-table ibus-table-wubi
+
+ 
+
+sudo yum install zsh git python36-gobject.x86_64 Zim
+
+ ﻿
+
+配置国内源——清华源：
+
+https://mirrors.tuna.tsinghua.edu.cn/help/centos/
+
+ 
+
+＃ 备份：
+
+sudo mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
+
+＃ sudo vim /etc/yum.repos.d/CentOS-Base.repo
+
+```add
+
+# CentOS-Base.repo
+#
+# The mirror system uses the connecting IP address of the client and the
+# update status of each mirror to pick mirrors that are updated to and
+# geographically close to the client.  You should use this for CentOS updates
+# unless you are manually picking other mirrors.
+#
+# If the mirrorlist= does not work for you, as a fall back you can try the
+# remarked out baseurl= line instead.
+#
+#
+
+[base]
+name=CentOS-$releasever - Base
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/os/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=os
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+#released updates
+[updates]
+name=CentOS-$releasever - Updates
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/updates/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=updates
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+#additional packages that may be useful
+[extras]
+name=CentOS-$releasever - Extras
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/extras/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extras
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+#additional packages that extend functionality of existing packages
+[centosplus]
+name=CentOS-$releasever - Plus
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos/$releasever/centosplus/$basearch/
+#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=centosplus
+gpgcheck=1
+enabled=0
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+
+```
+
+yum clean all     # 清除系统所有的yum缓存
+yum makecache     # 生成yum缓存
+
+﻿
+
+＃ 安装zsh
+
+sudo yum install timeshfit chromium
+
+# 配置timeshfit
+
+ 
+
+# i3:
+
+sudo yum install i3 i3status i3lock sddm 
+
+ 
+
+＃ gnome:
+
+sudo yum install gnome-classic-session.noarch
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+

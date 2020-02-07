@@ -29,7 +29,14 @@ ModuleNotFoundError: No module named 'DistUtilsExtra'
 	正在放弃...
 Error making: kazam
 ```
-conda install -c pdrops python-distutils-extra
+# 在anaconda.org 搜索关键字： DistUtils
+
+# conda install -c pdrops python-distutils-extra
+# 没有安装成功，因为没有那个仓库。
+
+# 又在AUR 上查找： https://aur.archlinux.org/packages/?O=0&SeB=nd&K=DistUtils&outdated=&SB=n&SO=a&PP=50&do_Search=Go
+# 其间，尝试：
+conda install -c conda-forge r-distutils
 
 ```sehll
 conda install -c pdrops python-distutils-extra
@@ -44,4 +51,37 @@ You will need to adjust your conda configuration to proceed.
 Use `conda config --show channels` to view your configuration's current state,
 and use `conda config --show-sources` to view config file locations.
 ```
+
+♥ yay -S python-stsci.distutils
+
+```shell
+构建 [mo]：0 个 po 文件的目标文件已过期
+构建 [html]: 3 个源文件的目标文件已过期
+updating environment: 3 added, 0 changed, 0 removed
+reading sources... [100%] index                                                                                                                         
+查找当前已过期的文件……没有找到
+Pickle 序列化环境……完成
+检查一致性……完成
+准备文档……完成
+写入输出……[ 33%] api                                                                                                                                    写入输出……[ 66%] changelog                                                                                                                              写入输出……[100%] index                                                                                                                                      
+生成索引…… genindex py-modindex
+写入附加页面…… search
+复制静态文件……WARNING: html_static_path 指向的 u'/home/fanswm/.cache/yay/python-stsci.distutils-doc/src/stsci.distutils-0.3.7/docs/source/_static' 不存在
+done
+复制额外文件……完成
+导出 English (code: en) 的搜索索引……完成
+导出对象清单……完成
+build 成功, 1 warning.
+
+HTML 页面保存在 build/html 目录。
+
+Build finished. The HTML pages are in build/html.
+```
+
++ 离开anaconda 环境。之后再次安装：
+yay -S kazam
+
+# 安装成功。
+恢复.zshrc for anaconda.
+
 
