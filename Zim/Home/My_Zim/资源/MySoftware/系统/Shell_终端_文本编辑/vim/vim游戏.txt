@@ -1,0 +1,52 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-09T15:13:27+08:00
+
+====== vim游戏 ======
+创建日期 星期日 09 二月 2020
+
+PacVim：  https://github.com/jmoon018/PacVim
+
+https://www.zhihu.com/question/27478597/answer/998793466?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
+谢邀，前面的答主回答了很多关于 vim 有用的技巧。接下来就由我分享一些看起来不那么有用的奇技淫巧吧！
+
+如何在 Vim 中通过玩游戏来学习 Vim 的使用？
+
+Vim 的使用一直以来是一个难题，以至于国外的知名程序员问答社区 StackOverFlow 上有一个问题 “How to I exit the Vim“ (我应该如何退出 Vim）获得了超过 200万次的浏览量。
+
+我们常说，学习是痛苦的，那有没有什么方法可以帮助我们更加轻松的学习 Vim 呢？答案当然是肯定的。我们可以通过玩游戏，来学习 Vim 的使用。
+
+PacVim —— 一个让你通过玩游戏学习 Vim 命令的游戏
+
+PacVim 来自 Github 开发者 Jamal Moon ，他为了帮助自己学习 vim，让学习曲线变得更加的平缓，开发出了这款游戏。用开发者的话说，就是“Vim is a great tool to write and edit code, but many people, including me, struggled with the steep learning curve. I did not find a fun, free way to learn about the vim commands in-depth, and thus, PacVim was born. “（Vim 很好，但是包括我，绝大多数的人都很难学会他，我希望找到一个愉快、轻松的方式深入的学习 vim 命令，PacVim 也因此诞生。）
+
+开发者 Jamal Moon
+
+PacVim 是什么样的呢？先看一个动图
+
+pacVim
+
+在这个游戏中，你是有着蓝色光标的小绿人，逃脱红色自负的怪物 Monster （红色的 G，Ghost，鬼），和经典的吃豆人不同的是， PacVim 中的控制并不是我们习惯上的上下左右，而是 Vim 独有的键位。
+
+PacVim 的键位
+
+如何玩 PacVim ？
+
+想要玩 PacVim ，有很多方式，最简单的是直接使用 Docker 镜像来运行。直接执行如下代码， 就可以启动 PacVim 来玩了
+
+docker run -it freedomben/pacvim [LEVEL_NUMBER] [MODE]
+
+上述代码中的 LEVELNumber 取值范围为 0 - 9，数字越大，难度越高。
+
+Mode 可选 N 或 H，N 表示 Normal ，正常难度；H 则表示 Hard ，困难。
+
+输入一条命令，就可以开始玩了。
+
+如果你是 mac 用户，那你有福了，开发者已经将 PacVim 编译为 HomeBrew 的包，你只需要执行下面的命令，就可以安装了。
+
+brew install pacvim
+
+安装完成以后，执行 pacvim 8 n 这样的命令，就可以开始游戏啦！
+
+这样的游戏，你有没有兴趣去试一试呢？你可以直接前往项目的 Github 仓库查看 Readme 体验游戏：https://github.com/jmoon018/PacVim ，或者，你也可以通过这篇文章，来了解更多关于 PacVim 的信息。

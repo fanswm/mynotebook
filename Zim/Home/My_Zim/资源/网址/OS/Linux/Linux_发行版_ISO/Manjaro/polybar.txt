@@ -17,7 +17,7 @@ For more information, see https://github.com/jaagr/polybar/wiki
 polybar 的可选依赖
 i3-wm: i3 module support [已安装]
 ttf-unifont: Font used in example config
-siji-git: Font used in example config
+siji-git: Font used in example configf
 xorg-fonts-misc: Font used in example config 
 
 ins xorg-fonts-misc

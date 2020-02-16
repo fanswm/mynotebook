@@ -5,4 +5,4 @@ Creation-Date: 2019-03-26T15:36:57+08:00
 ====== Remarkable ======
 创建日期 星期二 26 三月 2019
 
-[[story:作品集:Geek:Markdown编辑器 Remarkable for Linux]]
+

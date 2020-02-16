@@ -1,0 +1,85 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-15T17:38:29+08:00
+
+====== GPG 加密 ======
+Created 星期六 15 二月 2020
+
+在 SDDM+KDE 中自动解锁
+在 GDM+GNOME 环境中，当您登录桌面，GNOME 密钥环就会自动解锁。然而在 SDDM+KDE中，则不会解锁，您登录桌面后，还需要再次输入密码，不是很方便。
+
+这里有一个解决方案！
+
+编辑 /etc/pam.d/sddm 并添加 pam_gnome_keyring.so：
+
+#%PAM-1.0
+auth     include        common-auth
+auth     optional       pam_gnome_keyring.so
+account  include        common-account
+password include        common-password
+session  required       pam_loginuid.so
+session  include        common-session
+session  optional       pam_gnome_keyring.so auto_start
+
+imrdr: optional的那两行。
+
+ 
+
+imrdr: 这个文件原来是：
+
+```
+
+#%PAM-1.0
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  required       pam_loginuid.so
+session  include        common-session
+session  optional       pam_keyinit.so revoke force
+~                                                      
+
+```
+
+ 
+
+改 成：
+
+```
+
+auth     include        common-auth
+auth     optional       pam_keyinit.so
+account  include        common-account
+password include        common-password
+session  required       pam_loginuid.so
+session  include        common-session
+session  optional       pam_keyinit.so auto_start
+
+```
+
+ 
+
+ 
+
+ 
+
+openSUSE Linux 中的无线网络设置(全局)：
+https://cnzhx.net/blog/opensuse-wifi-system-connection/
+
+KGpg（签名、加密）：
+https://userbase.kde.org/KGpg/zh-cn
+
+创建加密密钥：
+
+ 
+
+如何从 Linux 的文件管理器中加密文件: 
+ 
+
+https://linux.cn/article-10019-1.html?pr
+
+Creating GPG Keys/zh-cn:
+https://fedoraproject.org/wiki/Creating_GPG_Keys/zh-cn
+
+ 
+
+https://userbase.kde.org/Applications/Utilities/zh-cn

@@ -1,0 +1,38 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-11T16:20:55+08:00
+
+====== How to install gcc in Git Bash (Windows) ======
+Created 星期二 11 二月 2020
+
+https://yichaoou.github.io/tutorials/software/2016/06/28/git-bash-install-gcc
+
+Note: Git Bash in Windows cannot behave exactly the same as a linux bash. If you need to do the same in Windows, you may try CygWin.
+
+To install GCC, the trick is to install MinGW installation manager.
+
+Go to MinGW SourceForge and download the file.
+
+Follow the instruction to install it.
+
+When you see MinGW Installation Manager Dialog, click on MSYS in the left sidebar, you will see mingw-developer-toolkit in the right side panel. Now just right click on it and select mark for installation.
+
+dialog
+
+In the navigation bar, select Installation > Apply Changes. A new dialog will appear, you want to click on Apply.
+
+dialog2
+
+The last step is to go to Windows environment variable settings: Control Panel > System and Security > System.
+
+dialog3
+
+Click on Advanced system settings.
+
+dialog3
+
+Click on Environment Variables.
+
+dialog3
+
+Double Click on System variables > Path. Put ;C:\MinGW\bin\ into the Variable value. ; is the seperator.

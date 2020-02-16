@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-14T20:52:05+08:00
+
+====== Cairo-Clock：漂亮的桌面时钟 ======
+Created 星期五 14 二月 2020
+
+https://linuxtoy.org/archives/cairo-clock.html

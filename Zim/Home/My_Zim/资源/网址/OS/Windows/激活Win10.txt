@@ -1,0 +1,37 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-10T22:05:41+08:00
+
+====== 激活Win10 ======
+创建日期 星期一 10 二月 2020
+
+在许多人眼里 Windows 还是不可替代的操作系统，最近被人安利了 Win10 LTSC，想装来玩玩儿。装完之后进行激活，于是有了这篇文章。
+
++ 打开 Win10 Powershell 或者 cmd，以管理员身份运行。
+> 你通常可以用 `Win + x` 键找到。
++ 准备好你的产品密钥，依次输入以下命令：
+
+```shell
+slmgr.vbs /upk  #弹窗显示：“已成功卸载了产品密钥”
+
+slmgr /ipk xxxxx-xxxxx-xxxxx-xxxxx-xxxxx #弹窗显示：“成功的安装了产品密钥”
+
+slmgr /skms zh.us.to  #（弹窗显示：“密钥管理服务计算机名成功的设置为 zh.us.to”
+
+slmgr /ato  #弹窗显示：“成功的激活了产品”
+```
++ 如图所示：
+
+[![全部命令](https://s2.ax1x.com/2020/02/10/15tNPP.png)](https://imgchr.com/i/15tNPP)
+
+> 图中抹去的是我的激活码。
+
++ 过程中的截图如下：
+
+[![您成功卸载了产品密钥](https://s2.ax1x.com/2020/02/10/15tqG6.png)](https://imgchr.com/i/15tqG6)
+
+![您成功安装了产品密钥](https://s2.ax1x.com/2020/02/10/15NwJx.png)
+
+![Image 12密钥管理服务计算机名称成功地设置为](https://s2.ax1x.com/2020/02/10/15Nbwj.png)
+
+![成功激活](https://s2.ax1x.com/2020/02/10/15UZp6.png)

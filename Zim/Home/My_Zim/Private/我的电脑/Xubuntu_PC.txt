@@ -142,7 +142,7 @@ chmod u+x qt.run
 # [[资源:MySoftware:系统:Shell 终端 文本编辑:终端:zsh:oh-my-fish 和 添加环境变量]]
 
 #__Gnome__:
-# [[资源:MySoftware:系统:Linux:窗口管理器 GUI desktop Wallpaper:GUI 桌面 desktop:GNOME:Xbuuntu 安装 Gnome 桌面]]
+# [[资源:MySoftware:系统:Linux:窗口管理器 GUI desktop Wallpaper gdm:GUI 桌面 desktop:GNOME:Xbuuntu 安装 Gnome 桌面]]
 
 # __labelimg__
 # [[资源:MySoftware:设计 图片:图片文字 图片标注:labelimg]]

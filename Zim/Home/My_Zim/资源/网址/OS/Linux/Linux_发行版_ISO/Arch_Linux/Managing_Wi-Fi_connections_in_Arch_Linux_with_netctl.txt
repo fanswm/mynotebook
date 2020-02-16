@@ -1,0 +1,70 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-09T14:21:23+08:00
+
+====== Managing Wi-Fi connections in Arch Linux with netctl ======
+创建日期 星期日 09 二月 2020
+
+Managing Wi-Fi connections in Arch Linux with netctl
+BY RICO STA. CRUZAPRIL 11, 2019
+
+Many desktop systems rely on NetworkManager, but this isn't the only way to get a Linux system online. Arch Linux comes with netctl—a systemd-native way of managing physical network connections.
+
+TLDR
+# Open a menu to find Wi-Fi connections.# This creates a profile and connects to itsudo wifi-menu# Auto connect on boot# (Assuming 'wlp3s0' is your interface name)sudo systemctl enable netctl-auto@wlp3s0.service# Set it to auto-connect on bootsudo netctl-auto enable wlp3s0-WifiNameHere# To manuall yconnect to a wifi network:sudo netctl-auto switch-to wlp3s0-WifiNameHere
+Connecting to Wi-Fi
+Use wifi-menu to set up a profile. Running it will bring a CLI menu of nearby Wi-Fi networks.
+
+sudo wifi-menu
+What's wifi-menu?
+The wifi-menu is a utility to create netctl profiles. After selecting a network in wifi-menu, a profile will be created in /etc/netctl. After creating a profile, wifi-menu will automatically try to connect to it.
+
+
+Only do this once per Wi-Fi network! After the profile's been created, you can connect to it without wifi-menu.
+
+Enabling auto-roaming mode
+Enable the netctl-auto@<interface> service to automatically connect to networks as they become in range. You may need to edit the profile files for this; check the (wiki entry) for more info.
+
+sudo systemctl enable netctl-auto@wlp3s0.service
+Connecting to profile manually
+After creating a profile, you can connect to it using netctl switch-to <name>. The name is the name you provided in wifi-menu.
+
+->sudo netctl-auto switch-to wlp3s0-PrettyFly
+(no output)
+Listing profiles
+Use netctl-auto list to show what profiles have been created before.
+
+->sudo netctl-auto list
+wlp3s0-PrettyFlywlp3s0-Mashup Garage 2.4Ghzwlp3s0-Mashup Garage 5Ghz
+Managing connections
+Check for the status using iw dev—this will list of your physical devices. This should show you what SSID you're connected to, if any.
+
+->iw dev
+phy#0    Interface wlp3s0        ifindex 2        wdev 0x1        addr e0:ac:ab:3f:db:ee        ssid PrettyFly        type managed
+Auto-connecting a profile
+Use netctl enable to "enable" a profile. This creates and enables a systemd service, which is invoked on every bootup.
+
+->sudo netctl enable wlp3s0-PrettyFly
+'/etc/systemd/systemd/multi-user.target.wants/netctl@wlp3s0\x2dPrettyFly.service' -> /usr/bin/systemd/netctl@servicegenerated '/etc/sstemd/systemd/multi-user.target.wants/netctl@wlp3s0\x2dPrettyFly.service.d/profile.cnof'
+Why use netctl?
+For the most part, I find NetworkManager to be a preferrable choice over netctl for desktop systems. It works, it integrates with GNOME and Plasma, it has a lot of user interfaces (nmtui being my favorite—a CLI version!), has support for OpenVPN, and many more.
+
+With that said, I've been trying to use netctl instead lately for one silly reason: it seems to wake up faster from sleep! This only happens on my MacBook Air though, I've found NetworkManager to connect pretty fast in other systems.
+
+There's also something to be said about going with a slimmer setup. Netctl seems a little closer to the metal than NetworkManager, and comes built-in as part of the base package in Arch Linux.
+
+Epilogue
+Thanks for reading my article! I've done some edits since this was first published.
+
+Use netctl-auto instead of netctl. This gets you the benefits of "roaming" (auto-switching connections) and more.
+
+Removed the use of netctl enable <profile>. This works, but will make your boot time slower (Arch will wait for the connection to become successful before finishing the boot process).
+
+References
+Wireless network configuration (wiki.archlinux.org)
+netctl (wiki.archlinux.org)
+You have just read Managing Wi-Fi connections in Arch Linux with netctl, written on April 11, 2019. This is Today I Learned, a collection of random tidbits I've learned through my day-to-day web development work. I'm Rico Sta. Cruz, @rstacruz on GitHub (and Twitter!).
+
+← More articles
+
+https://ricostacruz.com/til/arch-linux-wifi-using-netctl

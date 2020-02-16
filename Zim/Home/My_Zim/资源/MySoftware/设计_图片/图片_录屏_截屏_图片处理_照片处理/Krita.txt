@@ -14,3 +14,5 @@ $ sudo apt update
 $ sudo apt install krita
 
 https://krita.org/en/
+# CentOS:
+ sudo yum install calligra-krita

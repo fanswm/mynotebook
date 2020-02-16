@@ -1,0 +1,317 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-14T21:00:19+08:00
+
+====== 手把手教你对Linux系统的Gnome 3桌面环境进行美化 ======
+Created 星期五 14 二月 2020
+
+https://ywnz.com/linuxmh/3209.html
+本文针对的是 Linux 系统 Gnome 3 桌面环境进行相关的美化，主要内容是：Gnome 3 的特点、Ubuntu 中的 Gnome 3 桌面存在的问题、安装 Gnome Shell 的 Extension、更改 Gnome Shell 的主题、动态切换壁纸。
+
+ 
+
+前言
+
+Ubuntu 现在已经不使用 Unity 桌面环境了，正式回归到 Gnome 3 桌面环境中，所以很多针对 Unity 桌面的美化方案已经不适用了，在这篇文章中，我将针对 Gnome 3，讲一讲 Linux 桌面的美化思路。
+
+Linux 桌面的美化是非常必要的，我认为，不谈美化而劝人使用Linux桌面都是耍流氓。就算你把 Linux 桌面说得天花乱坠，别人安装完一看，不漂亮不顺眼不 professional，就不会再继续用下去了。Ubuntu 和 Fedora 的桌面已经算是比较美观的了，但是世上没有完美的系统，只有按照自己的想法进行改进，才能获得比较舒服的体验。
+
+Gnome 3 桌面环境的美化可以从以下几个方面着手：
+
+1、主题和扩展。可以通过网站 https://www.gnome-look.org/ 来查看和下载主题。在 Gnome 3 中，主要需要考虑的是 gnome-shell 主题、GTK 3 主题和图标主题。在 Ubuntu 中，默认的主题已经很不错了，所以我一般不改。Fedora 默认的主题稍差，那种比较 low 的灰灰的 3D 质感我并不喜欢，所以我往往会把它改成简单的、扁平的样式。在网络上，还有不少通过修改主题来让 Linux 桌面变成和 Mac OS 一样的外观，这种一味的模仿我并不喜欢，但确实可以试一试。另外，对于 gnome-shell，还可以安装 extensions 来扩展它的功能和进行美化，除了官方软件源中提供的 extensions，还可以到 https://extensions.gnome.org/ 来查找最新的扩展。
+
+2、壁纸。赏心悦目的壁纸当然是可以点亮好心情的啦。看过我前面的随笔的朋友们应该会发现，我特别喜欢半透明的全屏窗口，露出后面的壁纸。所以，我收集了一大票的壁纸，然后设置为自动定时切换，怎一个爽字了得。
+
+3、字体。Linux 桌面系统的字体一直是一个历史遗留问题，当有人觉得 Linux 桌面不好看、不专业时，有很大一部分原因就是字体惹的祸。我曾经有一段时间就是因为 Redhat 的 Linux 字体发虚，而中科红旗的 Linux 字体清晰而放弃过 Redhat，甚至写过一些不正确的文章。当然，当我认识到 Linux 的字体是可以配置的后，我就把这些不正确的文章都删了。
+
+4、桌面小部件。一些精美的桌面小部件可以提供一些很实用的功能，同时也可以提高桌面的美化程度。由于我本人并不是特别喜欢桌面小部件，我不仅不喜欢桌面小部件，我连桌面图标都不放，所以这一部分并不做特别介绍。喜欢桌面小部件的朋友，可以了解一下 conky。
+
+5、Dock。即可以方便我们启动程序，又能在屏幕底下显示点东西，解决 Gnome 3 桌面头重脚轻的问题。在 Gnome 3 中，使用 Dash to dock 扩展就可以取得不错的效果了。如果一定要模仿苹果那样酷炫的效果，也可以选择 Cairo-dock。
+
+必须得说明的是，桌面美化是一个仁者见仁、智者见智的事。有可能你认为很美的界面，别人认为土得掉渣；有可能你认为很炫的特效，别人认为华而不实。我这里主要是为了让大家了解 Linux 桌面美化的机制，并提供一些美化思路，并不是说都让大家把桌面搞得和我一模一样。
+
+ 
+
+一、Gnome 3 的特点
+
+业界对 Gnome 3 桌面吹得很厉害，说它领先桌面设计领域十几年。可是对我这样的用户来讲，却总觉得 Gnome 3 默认的界面比较丑，还不流畅。这一定是我的打开方式不对。Gnome 3 究竟有哪些值得称道的地方呢？可以读一读详细解读GNOME 3.30的重要特性一文。
+
+首先，是它的 Desktop 界面，这是我们主要的工作区域，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+这就是一个中规中矩的桌面，应用程序的窗口显示在桌面上，只要配色和外观不要太丑，就不影响我们工作。和 Gnome 2 比，它的主要变化是去掉了桌面底部的 panel，只保留了屏幕顶部的 panel。同时，顶部 panel 中的元素也大大减少，没有类似 Windows 中开始菜单、窗口列表这样的元素，取而代之是最左边的那个 Activities 按钮。点击该按钮，就会弹出 Activities Overview 界面，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+该界面中，左边显示的是 Dash，可以点击里面的图标启动常用的程序。中间显示的是应用程序窗口，可以查看当前打开的窗口有哪些，要切换到哪个窗口就点哪个窗口。右侧显示的是工作区，也可以通过鼠标的点击在工作区之间切换。如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+Activites Overview 界面不仅可以显示打开的窗口，还可以显示系统中安装的程序，便于启动 Dash 中没有的程序。程序都是大图标，而且有搜索功能，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+通过上面的展示，真不觉得 Gnome 3 有什么值得吹嘘的黑科技，如果真要说有什么先进的理念的话，大概就是对触摸屏设备的支持吧。主要表现有：1. Activites Overview 是占据整个屏幕的大界面，而不是像 Windows 的开始菜单那样只占据屏幕的一小部分；2.应用程序界面都是大图标，便于手指的点击；3.工作区图标也比较大，便于手指点击，也便于预览每个工作区中有哪些窗口。
+
+而我们桌面用户不一样，桌面用户依赖的是键盘和鼠标的输入，可以精准点击，对大图标没有多少依赖。如果能熟练使用快捷键，对 Gnome 3 的使用体验也是可以提升不少的。例如，不用点 Activities 按钮，按 Super 键（也就是键盘上的 Win 键）也可以调出 Activites Overview 界面。有一个比较人性化的功能是 Gnome 3 的工作区是动态工作区，只要占满了现有的工作区，它就会马上自动建立一个新工作区，省掉了我们自己建工作区的操作。在工作区之间切换，也可以使用快捷键，Ctrl+Alt+↑ 和 Ctrl+Alt+↓。最后，在窗口间切换也可以使用快捷键 Alt+Tab。窗口切换的效果如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+可以上的内容还是不足以说明 Gnome Shell 有多优秀啊。我们继续挖掘 Gnome Shell 背后的技术。Gnome Shell 的技术架构是这样的：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+原来整个 Gnome Shell 都建立在 OpenGL 之上，这么说来性能应该是杠杠的了，使用显卡加速应该是妥妥的了。在 OpenGL 之上，建立了 Clutter 图形库，在 Clutter 之上，建立了 mutter 窗口管理器和 Shell Toolkit，而且 Shell Toolkit 是可以使用 CSS 定义外观的。再往上，还建立了一个 JavaScript 引擎和 gobject-introspection，这样就可以使用 JavaScript 来操控 Gnome Shell。原来黑科技藏在这里呢，我心里舒服多了。而且这一整条技术栈都是可以学习的，我们程序员的玩具又多了一种。
+
+ 
+
+二、Ubuntu 中的 Gnome 3 桌面存在的问题
+
+看完 Gnome Shell 的官方介绍，我们再回到亲爱的 Ubuntu。Ubuntu 这个发行版是已经对这个桌面做过一定美化的，而且 Ubuntu 一直都是那种暖红色的主题，还是比较讨人喜欢的，我就很喜欢 Eclipse 在 Ubuntu 中的表现。但是，Ubuntu 的桌面还是有不少需要改进的地方。见下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+①.左侧的 Dash。Ubuntu 的传统特色，也是我每次都要去掉的特色。Dash 虽然方便，但是屏幕左边缘被占掉这一条空间还是令人不爽的，而且和右边缘不对称。而且 Dash 的配色并不一定总能和桌面上的工作窗口保持同样的风格，所以有时看起来比较突兀。在以前的 Ubuntu 版本中，我总是设置为自动掩藏，然后鼠标在屏幕左侧划过时出现。在现在的版本总，该 Dash 是由 gnome-shell-extension-ubuntu-dock 扩展提供的，可以把它删掉，也可以把它设置为显示到屏幕底部。
+
+②.左上角的“活动”按钮。这个按钮很别扭，本来把“Activities”翻译成“活动”，就很有点词不达意。而且这个按钮有点多余，不要它也可以，直接使用 Super 键调出 Activities Overview 界面更方便。使用 gnome-shell-extension-hide-activities 可以把这个按钮隐藏。
+
+③.桌面顶端占用空间太多。从图中可以看到，当我把一个窗口最大化后，顶部有 Gnome Shell 的 top panel，其次是窗口的标题栏（top bar），再然后是窗口的菜单栏。这几个元素就占据了桌面顶端太多的空间。解决这个问题，有两个方案，一个是把窗口的标题栏放到 top panel 中，另一个是把菜单栏放到 top panel 中。可以使用 pixelsaver 插件或者 Global Application Menu 插件。
+
+④.位于 top panel 中间的时钟。为了在 top panel 中留出足够的空间，我们需要把时钟移动到右边，可以使用 Frippery Move Clock 插件。
+
+⑤.头重脚轻的问题。屏幕顶端元素众多，屏幕底端啥都没有，有点头重脚轻的感觉。可以使用 Dash to dock 插件，并设置为 Dock 显示在底部。当然，也可以使用 Cairo-dock。
+
+⑥.背景图片太单一的问题。我当然有背景轮换大法啦。
+
+ 
+
+三、安装 Gnome Shell 的 Extension
+
+分析完问题，下面开始实战。先从 gnome-shell-extension 入手，我们即可以使用 Ubuntu 官方软件仓库中的 extension，也可以到 https://extensions.gnome.org/ 下载 extension。我们需要安装两个工具，gnome-tweak-tool 和 chrome-gnome-shell，前者是 Gnome 的设置工具，后者可以使我们直接在 https://extensions.gnome.org/ 的网页上安装 extension。安装这两个工具的命令如下：
+
+sudo aptitude install gnome-tweak-tool
+
+sudo chrome-gnome-shell
+
+使用sudo aptitude search gnome-shell-extension命令看一下 Ubuntu 的官方软件仓库中提供哪些 extension，并打开 gnome-tweak-tool 看看 Ubuntu 已经给我们预装了哪些 extension。如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+这两个插件都不是我们想要的，把它们卸载掉吧。命令：
+
+sudo aptitude purge gnome-shell-extenion-appindicator gnome-shell-extension-ubuntu-dock
+
+按 Alt+F2，输入 r，按 Enter 运行，可以重启 Gnome Shell，卸载下面两个插件后，讨厌的左边 Dash 不见了，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+下面，来看看怎么把时钟移到右边。打开 https://extensions.gnome.org/ ，搜索 Frippery Move Clock，然后打开这个 extension 的页面，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+我们先要确认一下该 extension 能够支持的 gnome-shell 版本，Ubuntu 18.04 中的 gnome-shell 是 3.28 版，所以这个 extension 是可以装的。别的 extension 也一样，如果不支持这个版本的 gnome-shell，安装就会出错。直接在网页中点右上角的按钮，就可以安装了。安装完之后，时钟自动移到了 top panel 的右边，网页中的 extension 状态也从 off 变成了 on，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+有一些插件 Ubuntu 官方仓库中的就不错，可以直接安装。例如 Hide Activities 和 pixelsaver，还有 remove dropdown arrows。使用如下命令安装：
+
+sudo aptitude install gnome-shell-extension-hide-activities
+
+sudo aptitude install gnome-shell-extension-pixelsaver
+
+sudo aptitude install gnome-shell-extension-remove-dropdown-arrows
+
+安装完这三个 extension，重启 gnome-shell，使用 gnome-tweak-tool 开启这三个 extension 后，效果是这样的：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+可以看到，“活动”按钮隐藏起来了，以后要启动程序必须使用 Super 键了。窗口的标题栏和 top panel 合并了，节约了一行空间。唯一的遗憾是窗口的最大化、最小化和关闭按钮不是在屏幕的最右端，想关窗口的时候找起来有点费劲。不过没关系，我们可以把这三个按钮放置到窗口的左边。这真的不是为了模仿苹果哦，是这样放要关窗口的时候按起来最方便。如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+反正安装 extension 就这两种方法，后面我就不讲安装过程了，直接展示 extension 的效果。
+
+Dash to dock，解决头重脚轻的问题，将 dock 设置为显示在屏幕下方，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+Frippery Applications Menu，显示一个类似 Windows 开始菜单的应用程序菜单，我个人认为没啥用，毕竟我们不能总是用 Windows 的习惯使用电脑嘛。如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+Places Status Indicator，显示一个菜单，便于我们快速定位文件系统中的常用位置。我也认为这个 extension 没啥用，因为 Gnome 自带的文件管理器就有这样的快速定位功能。如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+Open Weather，显示天气功能，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+System Monitor，系统监控，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+我还是认为以上两个插件没什么用。下面是 Coverflow Alt-Tab，可以使窗口切换的效果更佳酷炫，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+在以上我考察的 extension 中，至少有四个我认为是没有用的，它们分别是：Frippery Applications Menu、Places Status Indicator、Open Weather、System Monitor。前面两个我认为没用，是因为 Gnome 3 已经有更好的 Overview 界面和 Dash 了，文件管理器也足够好用了，没必要再来这两个菜单。后两个我认为没用，是因为我觉得在桌面美化领域，大家一直以来都严重缺乏创意，不是显示天气，就是显示系统监控，如果用 conky 搞桌面小部件，显示的也是天气、CPU、内存、文件位置什么的，真的是烂大街了。至于窗口切换的效果，我觉得要不要都无所谓，没有谁一天到晚切换窗口玩，而且我觉得 Gnome 3 的动态工作区和它的快捷键已经很好用了。
+
+所以，我的桌面最终是下面这样的，前面考察的十个 extension，我只打开了五个，而且关闭了 Dock 的自动隐藏。如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+ 
+
+四、更改 Gnome Shell 的主题
+
+Ubuntu 的主题我已经觉得很漂亮了，不想改。所以我就弄个 Fedora 28 玩一玩。我一般到 https://www.gnome-look.org/ 查找主题，当然，你也可以去 github 上找。Gnome Shell 的主题很多，一个一个试总会找到自己满意的。我这里就俗一把，以网络上最常见的模仿苹果的主题来做示例吧。
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+上图中的这几个都是模仿 MacOS 的主题，就选择 macOS High sierra 和 macOS High sierra Dark 吧，点进去，会发现这两个主题都提供 for dash to dock 和 for dash to panel 的版本，而每个版本还分为透明和不透明。这里就选择 for dash to dock 的版本吧。下载，解压缩，然后把包含主题的文件夹拷贝到/usr/share/themes目录中。然后，通过 Gnome Tweak Tool 更改 Gnome Shell 的主题，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+可以看到，Top panel 的颜色改变了。当然，这还不够，我们需要所有的窗口、窗口中的控件都改变样式。这需要 GTK 3 主题。我选择的是 X Arc Collection 这一款，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+安装过程是一样的，下载、解压缩，然后拷贝到/usr/share/themes目录，使用 Gnome Tweak Tool 设置 GTK 3 主题（应用程序主题），如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+设置完之后，发现窗口漂亮多了。现在，我们还缺 dock 和图标主题。至于图标主题，可以选用经典的 numix 系列。非常幸运的是，Fedora 28 的官方仓库中自带该图标主题。使用如下命令安装：
+
+sudo dnf install numix-icon-theme numix-icon-theme-circle
+
+如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+dock 就安装 dash to dock 吧，可以在 https://extensions.gnome.org/ 中安装，也可以直接使用 Fedora 28 官方软件仓库中自带的。如果使用官方软件仓库中自带的，使用如下命令安装：
+
+sudo dnf install gnome-shell-extension-dash-to-dock
+
+将 dock 设置为显示在屏幕底部，并使用 numix-circle 图标主题，其效果如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+从上图可以看出，Gnome Shell 的主题有亮色和暗色可以选，相应的 GTK 3 主题也有亮色和暗色可以选。一般情况下，亮色和亮色搭配，暗色和暗色搭配。如果都选择暗色，就是下面这样的效果：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+还是很漂亮的，不是吗？当然，这里只是简单展示了一下修改主题，除了修改主题之外，前面提到的 Hide Activities、pixelsaver、Frippery Move Clock、Remove Dropdown Arrow 等 extension 也是可以安装的，以便于进一步提升 Fedora 28 的体验。如果说还差点什么的话，那就是桌面壁纸不那么令人满意了。下面我们来设置让 Gnome 3 动态切换壁纸。
+
+ 
+
+五、动态切换壁纸
+
+所以我们需要自己去网上下载一些自己喜欢的壁纸，风景也好，美女也好，动漫也好，游戏电影 CG 也好，看自己的爱好了。壁纸的尺寸和自己屏幕的分辨率匹配最佳，这样避免壁纸在放大缩小的过程中出现失真。把下载的图片都移动到/usr/share/backgrounds/目录下，因为访问权限的原因，需要使用sudo mv命令，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+Gnome 3 自带自动切换壁纸的功能，这个功能是由两个 XML 文件控制的。首先，是在/usr/share/backgrounds/contest目录下需要有一个动态壁纸定义文件，它定义了有哪些壁纸参与切换，以及切换的时间和频率；其次，是/usr/share/gnome-background-properties/目录下需要一个 XML 文件，只有在这里的 XML 配置文件中提到的壁纸和动态壁纸，才能在 Gnome 3 的系统设置界面中看到。
+
+先来编写/usr/share/backgrounds/contest目录下的动态壁纸定义文件。进入该目录后，可以看到系统自带一个动态壁纸定义文件 bionic.xml，我们可以参考其中的内容，依葫芦画瓢编写我们自己的动态壁纸定义文件。系统自带的动态壁纸定义文件如下：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+该文件的内容非常清晰明了，它就是设置每一张壁纸先保留多少秒，然后切换到另外一张壁纸，切换过程经过几秒。我下载的壁纸比较多，要手动写一个这样的配置文件是不可能的，一个一个的输入图片的路径和名称会累死人的，所以需要一个 Bash 脚本来自动生成一个这样的配置文件。我写的生成动态壁纸配置文件的 Bash 脚本如下：
+
+############################
+
+files=`ls -U /usr/share/backgrounds | grep -v contest`
+
+last_file='empty'
+
+echo '<background>'
+
+echo '  <starttime>'
+
+echo '    <year>2016</year>'
+
+echo '    <month>07</month>'
+
+echo '    <day>15</day>'
+
+echo '    <hour>00</hour>'
+
+echo '    <minute>00</minute>'
+
+echo '    <second>00</second>'
+
+echo '  </starttime>'
+
+for current_file in $files
+
+do
+
+if [[ $last_file == 'empty' ]]
+
+then
+
+last_file=$current_file
+
+echo '  <static>'
+
+echo '    <duration>300.0</duration>'
+
+echo "    <file>/usr/share/backgrounds/$last_file</file>"
+
+echo '  </static>'
+
+else
+
+echo '  <transition>'
+
+echo '    <duration>5.0</duration>'
+
+echo "    <from>/usr/share/backgrounds/$last_file</from>"
+
+echo "    <to>/usr/share/backgrounds/$current_file</to>"
+
+echo '  </transition>'
+
+echo '  <static>'
+
+echo '    <duration>300.0</duration>'
+
+echo "    <file>/usr/share/backgrounds/$current_file</file>"
+
+echo '  </static>'
+
+last_file=$current_file
+
+fi
+
+done
+
+echo '</background>'
+
+############################
+
+把上面的脚本保存为generate_mywallpaper_xml.sh，然后使用chmod u+x generate_mywallpaper_xml.sh为该脚本添加运行权限。这个脚本是直接访问/usr/share/backgrounds目录的，生成的 XML 配置文件直接输出到标准输出。所以，这样生成自己的配置文件：
+
+./generate_mywallpaper_xml.sh > youxia.xml
+
+sudo mv youxia.xml /usr/share/backgrounds/contest
+
+再来编写/usr/share/gnome-background-properties/目录下的 XML 配置文件。进入该目录后，同样可以看到两个系统自带的配置文件，打开其中一个，参考其中的内容，使用sudo vim youxia-wallpapers.xml命令建立我们自己的配置文件，在该文件中，引用前面生成的/usr/share/backgrounds/contest/youxia.xml，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+保存该文件后，就可以在系统设置中设置壁纸了，选择这个自定义的动态壁纸即可，如下图：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+在 Ubuntu 中设置好自动壁纸切换后的效果，如果你想看更多的图片可看Linux学习方法论，教你玩转Linux系统一文。在 Fedora 28 中走完以上所有步骤后，可以得到如下的效果：
+
+手把手教你对Linux系统的Gnome 3桌面环境进行美化
+
+ 
+
+本文总结
+
+本主要讲的是 Gnome 3 桌面环境的美化思路。这里展示了 gnome-shell-extension 的安装、主题的更改（包括 shell 主题、GTK 3 主题和图标主题）以及自动壁纸切换。影响 Linux 桌面是否美观还有一个非常重要的方面，那就是字体，当然，系统默认的字体也不差，你可以根据情况进行新增某些字体，可以参考如何将字体添加到Fedora 一文。

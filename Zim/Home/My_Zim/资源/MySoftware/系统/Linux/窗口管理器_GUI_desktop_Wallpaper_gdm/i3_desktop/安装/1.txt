@@ -1,0 +1,202 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-14T19:41:00+08:00
+
+====== 1 ======
+Created 星期五 14 二月 2020
+
+ArchLinux图形界面安装与美化：i3+polybar
+原创 盐焗咸鱼 最后发布于2019-05-19 11:43:41 阅读数 5954 收藏
+展开
+
+arch只提供了tty，我们需要自己配置一个漂亮的桌面。你可以选择继承好的GNOME、Deepin等桌面。但是他们都包含了许多你可能并不能用到的工具和插件。i3wm是一个窗口管理器，它提供了最基础的窗口管理功能。你可以根据自己的需要进行配置，把系统运行的每一个程序都掌握在自己手里。效果图如下：
+
+需要安装：
+
+i3wm：窗口管理器
+
+feh：设置桌面
+
+compton：窗口透明化
+
+polybar：状态栏
+网络连接
+
+使用 wifi-menu 命令可以查看无线网络并进行连接。对于有线网络使用 dhcpcd 命令。
+
+设置开机自动连接：
+
+netctl是arch的源生项目，集成于base包。netctl基于命令行，你可以安装其他的图形网络管理工具。
+
+从 /etc/netctl/examples 拷贝 wireless-wpa 到 /etc/netctl/ ，文件名任意， 修改文件中的interface，SSID，KEY。
+
+interface通过ifconfig查看自己的无线口名，SSID和KEY就是你无线的名称和密码。如果有多个配置文件，你可以修改priority来设置他们的优先级。
+
+sudo systemctl enable netctl-auto@interface  //interface为你的网口名
+
+桌面安装
+
+安装Xorg
+
+pacman -S xorg-server
+
+安装i3
+
+pacman -S i3-gaps
+
+桌面启动
+
+1、使用登陆管理器
+
+启动桌面可以使用登陆管理器。
+
+	pacman -S sddm
+	systemctl enable sddm # 设置开机启动
+
+2、使用startx手动启动
+
+桌面也可以使用命令行来手动启动。安装xorg-xinit。
+
+pacman -S xorg-xinit
+
+复制 /etc/X11/xinit/xinitrc 到～/.xinitrc。注释掉文件后面的最后的以下几行。
+
+	twm &
+	xclock -geometry 50x50-1+1 &
+	xterm -geometry 80x50+494+51 &
+	xterm -geometry 80x20+494-0 &
+	exec xterm -geometry 80x66+0+0 -name login
+
+然后添加i3启动命令
+
+exec i3
+
+此时，调用startx就会进入桌面系统。
+
+如果想要登陆tty之后自动进入桌面。使用Bash, 编辑 ~/.bash_profile。如果使用 zsh，则编辑 ~/.zprofile。文件不存在则新建。加入一下内容，自动运行startx。
+
+	if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+	  exec startx
+	fi
+
+此时，你登陆tty之后，会自动进入桌面系统。
+
+第一次启动i3之后，根据提示进入系统，并自动在~/.config/i3下生成config文件。这个就是i3的配置文件。
+
+使用win+回车键可以调出终端，win+shift+e退出i3。
+ 安装terminator
+
+我们还需要一个终端程序
+
+pacman -S terminator
+
+而修改i3的config文件，大概34行处，将ctrl+Return与terminator绑定
+
+bindsym $mod+Return exec terminator
+
+这样我们可以使用ctrl与回车调出terminator。
+安装中文字体
+
+我使用的是文泉驿微米黑，你也可以使用其他字体。
+
+pacman -S wqy-microhei
+
+使用feh设置桌面
+
+feh是一个图片查看器，也可以用来设置桌面壁纸
+
+pacman -S feh
+
+在i3的config最后添加
+
+exec feh --randomize --bg-fill ~/picture
+
+picture文件夹存放你的壁纸文件，存在多张时，feh会随机进行播放。
+使用compton进行窗口透明化
+
+compton会自动绘制阴影，实现窗口的透明化效果。一个透明化效果，可以瞬间让你的桌面颜值上升。
+
+pacman -S compton
+
+在i3的config最后添加
+
+exec compton -b
+
+terminator透明需要右键terminator，在配置项中打开背景透明
+
+安装polybar
+
+polybar是一个可以定制化的状态栏。我们可以从AUR中找到它。
+
+yay -S polybar-git
+
+yay是AUR的一个包管理器。安装方法很简单，可自行查阅。
+
+polybar需要一个配置文件才能启动。%E5%85%B7%E4%BD%93%E5%8F%AF%E4%BB%A5%E5%8F%82%E8%80%83%E6%88%91%E7%9A%84%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2https://blog.csdn.net/qq_33215865/article/details/84720212
+
+你也可以直接复制我的配置文件和启动脚本到你的.config/polybar目录，git网址放在文章最后。
+
+安装图标字体
+
+pacman -S ttf-font-awesome
+
+在i3的config中添加自动启动
+
+exec . ~/.config/polybar/launch.sh
+
+安装中文输入法
+
+安装fcitx
+
+pacman -S fcitx-im fcitx-configtool
+
+configtool是一个图形界面的配置程序，可以选择不安装，但是为了方便，我还是建议你安装。
+
+fcitx只是一个输入法框架，你还要再安装一个输入法，libpinyin，sougo-pinyin都选择一个即可。
+
+pacman -S fcitx-libpinyin
+
+在.bashrc添加
+
+	export LANG=zh_CN.UTF-8
+	export LC_ALL=zh_CN.UTF-8
+	export GTK_IM_MODULE="fcitx"
+	export QT_IM_MODULE="fcitx"
+	export XMODIFIERS="@im=fcitx"
+
+在i3的config添加自动启动
+
+exec fcitx
+
+安装chromium 
+
+pacman -S chromium
+
+i3的config添加
+
+bindsym $mod+c exec chromium
+
+ 此时可以使用$mod+c唤出chromium，当然按键你可以自己设置。
+安装rofi
+
+rofi是一个快捷的程序启动器
+
+pacman -S rofi
+
+ 在i3的config替换$mod+d
+
+bindsym $mod+d exec rofi -show drun
+
+此时可以使用$mod+d唤出rofi
+去除i3的标题栏
+
+i3的标题栏还是有点难看的。在config文件中加入
+
+	new_window none
+	new_float normal
+	hide_edge_borders both
+
+此时，你的桌面系统应该可以满足日常使用了。bash建议替换成zsh，zsh的教程网上很多。同时，推荐byobu会话管理器，算是tmux的加强版。截图工具推荐flameshot。具体的一些配置细节可以查阅我的git。https://github.com/wall-shen/arch-config。
+————————————————
+版权声明：本文为CSDN博主「盐焗咸鱼」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_33215865/article/details/90288997

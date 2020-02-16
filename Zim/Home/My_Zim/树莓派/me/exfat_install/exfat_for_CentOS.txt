@@ -1,0 +1,80 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-13T17:16:59+08:00
+
+====== exfat for CentOS ======
+创建日期 星期四 13 二月 2020
+
+1.Install the nux repo for CentOS 7
+yum install -y http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+
+yum install exfat-utils fuse-exfat
+装这两包
+3.插U盘，cat /proc/partitions, 看看是否挂载成功
+
+4.cd /media
+mkdir udisk
+mount -t exfat /dev/sdbX(X是你的盘号） udisk
+
+作者：山野村夫老王
+链接：https://www.jianshu.com/p/285cd90727fb
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+在CentOS7/CentOS6中支持exfat格式的U盘
+转载水墨风光 最后发布于2016-08-13 22:21:12 阅读数 17125  收藏
+展开
+综述
+
+	需要安装epel库，Nux Dextop库，再安装fuse-exfat和exfat-utils包，即可识别exfat格式。
+
+
+
+介绍
+
+
+Nux Dextop是类似CentOS、RHEL、ScientificLinux的第三方RPM仓库（比如：Ardour，Shutter等等）。目前，Nux Dextop对CentOS/RHEL 6|7可用。
+
+安装
+
+Nux Dextop库依赖于EPEL库，所有要先安装EPEL库(需要管理员权限)。
+如果安装过则跳过。
+$ su root
+$ yum -y install epel-release
+
+对于RHEL6/CentOS 6(复制/粘贴):
+$ rpm -Uvh http://li.nux.ro/download/nux/dextop/el6/x86_64/nux-dextop-release-0-2.el6.nux.noarch.rpm
+
+对于RHEL/CentOS 7(复制/粘贴):
+$ rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm
+
+官方安装说明
+
+检查Nux Dextop是否安装成功：
+$ yum repolist
+
+如果仓库列表中有Nux Dextop就安装成功。
+
+提示
+
+由于Nux Dextop仓库可能会与其他第三方库有冲突，比如（Repoforge和ATrpms）。
+所以，建议默认情况下不启用Nux Dextop仓库。
+
+__打开/etc/yum.repos.d/nux-dextop.repo，将"enabled=1" 修改为 "enabled=0"。__
+__$ sudo vi /etc/yum.repos.d/nux-dextop.repo__
+
+__当需要使用Nux Dextop仓库时，显式启用仓库。__
+__$ sudo yum --enablerepo=nux-dextop install <package-name>__
+
+
+
+安装exfat支持库文件
+
+__yum --enablerepo=nux-dextop  install fuse-exfat exfat-utils__
+
+
+参考文章:
+
+1.在CentOS或RHEL上安装Nux Dextop仓库 http://www.linuxidc.com/Linux/2016-06/132101.htm
+
+2.在CentOS 6.4中支持exfat格式的U盘 http://www.cnblogs.com/kluan/p/4450628.html

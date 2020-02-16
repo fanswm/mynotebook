@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-09T16:06:55+08:00
+
+====== Windows ======
+创建日期 星期日 09 二月 2020
+
+https://www.microsoft.com/zh-cn/software-download/windows10

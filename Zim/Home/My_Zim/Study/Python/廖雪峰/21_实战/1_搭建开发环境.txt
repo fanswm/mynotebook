@@ -6,6 +6,17 @@ Creation-Date: 2020-01-18T21:52:50+08:00
 创建日期 星期六 18 一月 2020
 
 搭建开发环境
+imrdr:
+conda install aiohttp jinja2  
+conda install -c conda-forge aiomysql
+
+
+
+
+
+
+
+--------------------
 
 首先，确认系统安装的Python版本是3.7.x：
 

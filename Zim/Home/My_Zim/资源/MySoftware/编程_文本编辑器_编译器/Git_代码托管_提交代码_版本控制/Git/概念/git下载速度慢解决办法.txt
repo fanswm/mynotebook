@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-13T13:27:02+08:00
+
+====== git下载速度慢解决办法 ======
+Created 星期四 13 二月 2020
+
+1\登录VPN或shadowsocks或代理服务器(翻墙的)
+
+2\用浏览器访问 IPAddress.com
+
+3\搜索github.com和github.global.ssl.fastly.net域名的ip地址、
+
+4\sudo vim /etc/hosts
+
+在vi打开的hosts文件中添加：
+46.101.214.210 git.openwrt.org
+
+5\重启networking ，更新DNS缓存

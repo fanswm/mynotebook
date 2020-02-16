@@ -1,0 +1,225 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-09T15:32:15+08:00
+
+====== 如何使用Nginx安装DokuWiki并在CentOS 8上加密SSL ======
+创建日期 星期日 09 二月 2020
+
+https://www.howtoforge.com/how-to-install-dokuwiki-with-nginx-and-lets-encrypt-ssl-on-centos-8/
+
+DokuWiki是一个易于使用且功能强大的开源 Wiki 软件，不需要数据库。它以其清晰易读的语法受到用户的喜爱。易于维护，备份和集成使其成为管理员的最爱。内置的访问控制和身份验证连接器使DokuWiki在企业环境中特别有用，并且其充满活力的社区提供的大量插件允许使用除传统Wiki之外的广泛用例。 本教程将向您展示如何在新的CentOS 8服务器上安装DokuWiki。
+
+要求
+确保您的服务器满足以下要求。
+
+支持PHP的Web服务器软件（Apache，NGINX，IIS，Lighttpd，LiteSpeed）
+PHP 5.6或更高版本，强烈建议使用新版本。
+先决条件
+一个CentOS 8操作系统。
+具有sudo特权的非root用户。
+初始步骤
+检查您的CentOS版本：
+
+
+cat /etc/centos-release
+# CentOS Linux release 8.0.1905 (Core)
+设置时区：
+
+timedatectl list-timezones
+sudo timedatectl set-timezone 'Region/City'
+更新您的操作系统软件包（软件）。这是重要的第一步，因为它可以确保您具有操作系统默认软件包的最新更新和安全修复程序：
+
+sudo dnf update -y
+安装一些基本软件包，这些软件包是CentOS操作系统的基本管理所必需的：
+
+sudo dnf install -y curl wget vim git unzip socat bash-completion epel-release
+第1步-安装PHP和PHP扩展
+安装PHP和必需的PHP扩展：
+
+sudo dnf install -y php php-cli php-fpm php-gd php-xml php-zip
+要显示在模块中编译的PHP，可以运行：
+
+php -m
+
+ctype
+curl
+exif
+fileinfo
+. . .
+. . .
+检查PHP版本：
+
+php --version
+
+# PHP 7.2.11-1-(cli) (built: Oct 26 2019 14:14:18) ( NTS )
+# Copyright (c) 1997-2018 The PHP Group
+# Zend Engine v3.3.11, Copyright (c) 1998-2018 Zend Technologies
+# with Zend OPcache v7.3.11-1~deb10u1, Copyright (c) 1999-2018, by Zend Technologies
+启动并启用PHP-FPM服务：
+
+sudo systemctl start php-fpm.service
+sudo systemctl enable php-fpm.service
+第2步-安装acme.sh客户端并获取“让我们加密”证书（可选）
+无需使用HTTPS保护您的网站，但这是确保网站流量安全的一种好习惯。要从Let's Encrypt获得TLS证书，我们将使用acme.sh客户端。Acme.sh是一个简单的UNIX shell软件，用于以零依赖关系从Let's Encrypt获得TLS证书。
+
+下载并安装acme.sh：
+
+sudo su - root
+git clone https://github.com/Neilpang/acme.sh.git
+cd acme.sh 
+./acme.sh --install --accountemail your_email@example.com
+source ~/.bashrc
+cd ~
+检查acme.sh版本：
+
+acme.sh --version
+# v2.8.2
+为您的域名/主机名获取RSA和ECC / ECDSA证书：
+
+# RSA 2048
+acme.sh --issue --standalone -d example.com --keylength 2048
+# ECDSA
+acme.sh --issue --standalone -d example.com --keylength ec-256
+如果要使用伪造的证书进行测试，可以将--staging标志添加到上述命令中。
+
+运行上述命令后，您的证书和密钥将位于：
+
+对于RSA：/home/username/example.com目录。
+对于ECC / ECDSA：/home/username/example.com_ecc目录。
+要列出您颁发的证书，可以运行：
+
+acme.sh --list
+创建一个目录来存储您的证书。我们将使用  /etc/letsencrypt目录。
+
+mkdir -p /etc/letsecnrypt/example.com
+sudo mkdir -p /etc/letsencrypt/example.com_ecc
+将证书安装/复制到/ etc / letsencrypt 目录。
+
+# RSA
+acme.sh --install-cert -d example.com --cert-file /etc/letsencrypt/example.com/cert.pem --key-file /etc/letsencrypt/example.com/private.key --fullchain-file /etc/letsencrypt/example.com/fullchain.pem --reloadcmd "sudo systemctl reload nginx.service"
+# ECC/ECDSA
+acme.sh --install-cert -d example.com --ecc --cert-file /etc/letsencrypt/example.com_ecc/cert.pem --key-file /etc/letsencrypt/example.com_ecc/private.key --fullchain-file /etc/letsencrypt/example.com_ecc/fullchain.pem --reloadcmd "sudo systemctl reload nginx.service"
+所有证书将每60天自动更新一次。
+
+获得证书后，从root用户退出并返回常规sudo用户：
+
+exit
+第3步-安装和配置Nginx
+DokuWiki将在任何支持PHP的Web服务器上运行。在本教程中，我们将使用Nginx。如果您更喜欢Apache或其他Web服务器，则可以使用它代替Nginx。
+
+从CentOS资料库下载并安装NGINX：
+
+sudo dnf install -y nginx
+检查Nginx版本：
+
+sudo nginx -v
+# nginx version: nginx/1.14.2
+配置Nginx：
+
+sudo vim /etc/nginx/conf.d/dokuwiki.conf
+复制/粘贴以下Nginx配置并保存：
+
+server {
+
+	listen [::]:443 ssl;
+	listen 443 ssl;
+	listen [::]:80;
+	listen 80;
+	# RSA
+	ssl_certificate /etc/letsencrypt/example.com/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/example.com/private.key;
+	# ECC
+	ssl_certificate /etc/letsencrypt/example.com_ecc/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/example.com_ecc/private.key;
+
+	server_name wiki.example.com;
+	root /var/www/dokuwiki;
+	index index.html index.htm index.php doku.php;
+    
+	client_max_body_size 15M;
+	client_body_buffer_size 128K;
+    
+	location / {
+		try_files $uri $uri/ @dokuwiki;
+	}
+    
+	location ^~ /conf/ { return 403; }
+	location ^~ /data/ { return 403; }
+	location ~ /\.ht { deny all; }
+    
+	location @dokuwiki {
+		rewrite ^/_media/(.*) /lib/exe/fetch.php?media=$1 last;
+		rewrite ^/_detail/(.*) /lib/exe/detail.php?media=$1 last;
+		rewrite ^/_export/([^/]+)/(.*) /doku.php?do=export_$1&id=$2 last;
+		rewrite ^/(.*) /doku.php?id=$1 last;
+	}
+	location ~ \.php$ {
+		try_files $uri =404;
+		fastcgi_pass 127.0.0.1:9000;
+		fastcgi_index index.php;
+		include fastcgi_params;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	}
+}
+检查Nginx配置：
+
+sudo nginx -t
+重新加载Nginx：
+
+sudo systemctl reload nginx.service
+第4步-安装DokuWiki
+创建一个文档根目录：
+
+sudo mkdir -p /var/www/dokuwiki
+导航到文档根目录：
+
+cd /var/www/dokuwiki
+从DokuWiki下载页面下载DokuWiki的最新稳定版本：
+
+sudo wget https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
+解压DokuWiki压缩包：
+
+sudo tar xvf dokuwiki-stable.tgz
+sudo rm dokuwiki-stable.tgz
+sudo mv dokuwiki-2018-04-22b/* . && mv dokuwiki-2018-04-22b/.* .
+sudo rmdir dokuwiki-2018-04-22b/
+将/var/www/dokuwiki目录的所有权更改为www-data:
+
+sudo chown -R nginx:nginx /var/www/dokuwiki
+运行sudo vim /etc/php-fpm.d/www.conf并将用户和组设置为nginx。最初，它将设置为user和group apache。
+
+sudo vim /etc/php-fpm.d/www.conf
+重新开始 php7.3-fpm.service:
+
+sudo systemctl restart php7.3-fpm.service
+install.php在浏览器中打开DokuWiki设置脚本，然后设置DokuWiki。安装脚本将检查所需的PHP函数的可用性，并检查所需的文件权限。它还会创建一个初始管理员帐户和一个初始ACL策略。要运行安装程序，请 http://wiki.example.com/install.php 在浏览器中打开并按照说明进行操作。
+
+第5步-访问DokuWiki Web界面
+打开Web浏览器，然后输入URL http://example.com/install.php 。您将被重定向到以下页面：
+
+DikuWiki安装程序
+
+提供所有必需的信息，例如超级用户名，电子邮件，密码。然后，单击“ 保存”按钮。成功完成安装后，您将看到以下页面：
+
+设置用户名和密码
+
+现在，单击  您的新DokuWiki。您应该看到以下页面：
+
+DokuWiki已成功安装
+
+现在，单击登录  按钮。您将被重定向到以下页面：
+
+登录
+
+现在，提供您的管理员用户名和密码。然后，单击“ 登录 ”按钮。您应该在以下页面中看到DokuWiki仪表板：
+
+欢迎使用DokuWiki
+
+成功配置后，请install.php从DokuWiki根目录中删除该文件：
+
+sudo rm /var/www/dokuwiki/install.php
+恭喜你！您已在CentOS 8服务器上成功安装和配置了DokuWiki。现在，您可以使用DokuWiki轻松创建自己的Wiki网站。
+
+链接
+https://www.dokuwiki.org/
+https://github.com/splitbrain/dokuwiki

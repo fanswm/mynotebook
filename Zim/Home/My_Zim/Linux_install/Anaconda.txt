@@ -10,6 +10,8 @@ Created Friday 24 November 2017
 软件包列表： https://repo.anaconda.com/pkgs/main/
 			https://repo.anaconda.com/pkgs/
 			
-在官网上搜索pkgs:  https://anaconda.org  (非常慢)
+__在官网上搜索pkgs:  https://anaconda.org  (非常慢)__
+https://anaconda.org/
+
 
 

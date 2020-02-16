@@ -33,6 +33,7 @@ java -version
 
 #配置默认：
 sudo update-alternatives --config java
+sudo update-alternatives --config javac
 ```
 
 # 配置系统变量
@@ -56,5 +57,6 @@ archlinux-java status
 
 # 在终端中输入命令, 这样就可以把jdk-9.0.4作为自己的默认JDK版本了
 sudo archlinux-java set jdk-9.0.4
-
+
+
 原文链接：https://blog.csdn.net/weixin_37602603/article/details/79532080

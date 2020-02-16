@@ -11,3 +11,6 @@ http://vault.centos.org/6.5/isos/
 ftp://distro.ibiblio.org/pub/linux/distributions/
 
 中文 wiki: https://wiki.centos.org/zh/HowTos/Grub2?action=fullsearch&context=180&value=input
+
+如何设置 Gnome 的自动挂载： https://wiki.centos.org/zh/TipsAndTricks/GnomeAutomount
+

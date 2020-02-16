@@ -1,0 +1,85 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-14T19:40:39+08:00
+
+====== 0 ======
+Created 星期五 14 二月 2020
+
+前言
+
+作为程序员，每天面对电脑屏幕，一个舒服高效的桌面的桌面环境是必不可少的。
+前阵子用了Gnome，后来听闻i3的大名，就马上入了坑。
+
+先附上一张美化后的图片。在这里插入图片描述
+安装
+
+因为我想让启动环境更加简洁，所以通过命令行而不是gdm 来启动。
+
+卸载gdm
+
+	 pacman -Rsc gdm
+
+	1
+
+使用i3-gaps代替i3-wm ，可以设置窗口间隙
+
+	 yaourt i3-gaps 
+
+	1
+
+安装i3
+
+	 pacman -S  i3
+
+	1
+
+安装feh 用来设置壁纸和打开图片
+
+	 pacman -S feh
+
+	1
+
+安装状态栏
+
+	 pacman -S  i3status  
+
+	1
+
+安装 rofi 命令行打开软件
+
+	 pacman -S rofi     
+
+	1
+
+在shell的配置文件中加入脚本开机自动进入图形界面
+
+if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+  exec startx
+fi
+
+	1
+	2
+	3
+
+终端使用 xfce4-terminal + zsh + oy my zsh ,zsh主题是agnoster
+启用
+
+在配置文件中加入如下语句
+
+echo exec i3 -V >> ~/i3log-$(date +'%F-%k-%M-%S') 2>&1 >> ~/.xinitrc
+
+	1
+
+不想记录日志的话，直接
+
+echo exec i3  >> ~/.xinitrc
+
+	1
+
+结尾
+
+初步配置就完成了，快捷键还需要慢慢调
+以后等我调的差不多了，就会放出配置文件给大家参考的
+————————————————
+版权声明：本文为CSDN博主「一剑名动江湖」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/guaigle001/article/details/101229424

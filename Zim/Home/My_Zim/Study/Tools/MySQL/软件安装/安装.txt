@@ -1,0 +1,194 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-02T13:52:49+08:00
+
+====== 安装 ======
+创建日期 星期二 02 四月 2019
+
+A、TIPS
+5.6版本使用mysql_install_db安装；5.7版本中被废弃，使用--initialize，进行初始化安装
+初始化时，使用--initialize-insecure生成无密码root账户
+配置文件查找顺序mysql --help | grep my.cnf结果如下/etc/my.cnf->/etc/mysql/my.cnf->/usr/local/mysql/etc/my.cnf->~/.my.cnf
+B、安装前准备
+# 关闭SELinux
+getenforce
+setenforce 0
+getenforce
+
+# 关闭iptables
+iptables -L
+iptables -F
+service iptables stop
+
+# 关闭firewall（CentOS 7.x）
+systemctl stop firewalld.service
+systemctl disable firewalld.service
+firewall-cmd --state
+
+# 修改IO调用模式为deadline（默认为cfq模式）
+cat /sys/block/vda/queue/scheduler
+	noop anticipatory deadline [cfq]
+
+vim /etc/grub.conf
+	elevator=deadline
+
+# swap分区设置查看（0表示积极使用物理内存，容易导致内存溢出；100表示积极使用swap分区，把内存数据搬到swap）
+cat /proc/sys/vm/swappiness
+	60
+
+sysctl -a | grep swap
+	vm.swappiness = 60
+
+# swap分区设置
+vim /etc/sysctl.conf
+	vm.swappiness = NEW_VALUE
+C、二进制解压安装，京东云（CentOS 6.8、MySQL 5.7）
+在各种测试环境安装MySQL版本，已经疲了，总结下来二进制安装包步骤虽然多，但是都可控，其他方式可能因为网络不通，GLIBC版本不正确等各种问题。
+
+二进制软件包，官方GA版本已进把所有东西都配置完成，选择Linux-Generic下载即可。
+
+
+由于京东云下载MySQL官方gz包速度特别慢，所以使用网易镜像 - Index of /mysql/Downloads/MySQL-5.7/
+
+# 删除mysql相关
+rpm -qa | grep mysql
+yum -y remove mysql-libs-5.1.73-7.el6.x86_64
+
+# 下载二进制包
+wget https://mirrors.163.com/mysql/Downloads/MySQL-5.7/mysql-5.7.23-linux-glibc2.12-x86_64.tar.gz
+tar -vxzf mysql-5.7.23-linux-glibc2.12-x86_64.tar.gz
+mv mysql-5.7.23-linux-glibc2.12-x86_64 /usr/local/mysql
+cd /usr/local/mysql
+
+# 增加mysql用户
+groupadd mysql
+useradd mysql -g mysql
+mkdir data
+chown -R mysql:mysql /usr/local/mysql/
+chmod -R mysql:mysql /usr/local/mysql/data/
+chmod -R 755 /usr/local/mysql/
+chmod -R 755 /usr/local/mysql/data/
+
+# 新增my.cnf配置
+vim /etc/my.cnf
+
+	[client]
+	port = 3306
+	socket = /tmp/mysql.sock
+	default-character-set=utf8
+
+	[mysql]
+	#自动补全
+	no-auto-rehash
+	default-character-set=utf8
+
+	[mysqld]
+	port = 3306
+	socket = /tmp/mysql.sock
+	basedir = /usr/local/mysql/
+	# 测试库，线上库需要挂载到大硬盘
+	datadir = /usr/local/mysql/data
+
+	max_connections=2048
+	#max_allowed_packet = 128M
+	#open_files_limit = 65535
+	#sort_buffer_size = 2M
+	#join_buffer_size = 2M
+	#query_cache_size = 32M
+	#tmp_table_size = 96M
+	#max_heap_table_size = 96M
+	#key_buffer_size = 32M
+	#net_buffer_length = 8K
+	#read_buffer_size = 1M
+	#read_rnd_buffer_size = 16M
+	#thread_cache_size = 51
+	#back_log = 103
+	#table_open_cache = 64
+
+	pid-file = /usr/local/mysql/data/mysql.pid
+	log-error = /usr/local/mysql/data/error.log
+
+	#log-bin = /usr/local/mysql/data/mysql-bin
+	#sync_binlog = 1
+	#binlog_cache_size = 5M
+	#binlog_format = row
+	#max_binlog_cache_size = 128M
+	#max_binlog_size = 1024M
+	#expire_logs_days = 7
+
+	#slow_query_log = 1
+	#slow_query_log = /usr/local/mysql/data/slow.log
+	#long_query_time = 0.5
+
+	[mysqldump]
+	quick
+	max_allowed_packet = 32M
+
+	[mysqlhotcopy]
+	interactive-timeout
+
+# init
+/usr/local/mysql/bin/mysqld --initialize --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data --user=mysql
+
+# 启动文件
+ln -s /usr/local/mysql/support-files/mysql.server /etc/init.d/mysql
+service mysql stop
+service mysql start
+
+# 修改密码
+ln -s /usr/local/mysql/bin/mysql /usr/bin
+grep "password" /usr/local/mysql/data/error.log --color
+mysql -uroot -p
+
+# 设置新密码
+mysql> SET PASSWORD = PASSWORD('NEW-PASSWORD');
+mysql> ALTER USER 'root'@'localhost' PASSWORD EXPIRE NEVER;
+mysql> CREATE USER 'isisiwish'@'%' IDENTIFIED BY 'NEW-PASSWORD';
+
+# 增加远程用户
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'isisiwish'@'%';
+mysql> FLUSH PRIVILEGES;
+D、yum安装（CentOS 7.4、MySQL 5.7）
+对于和以上步骤相同的部分省略。
+
+# 系统信息
+cat /etc/redhat-release
+	CentOS Linux release 7.4.1708 (Core)
+	Server version: 5.7.22 MySQL Community Server (GPL)
+
+# 停止mysql进程
+pkill -9 mysqld
+
+# 下载mysql源（注意版本与系统保持一致）
+wget http://repo.mysql.com/mysql57-community-release-el7-8.noarch.rpm
+rpm -ivh mysql57-community-release-el7-8.noarch.rpm
+yum install -y mysql-server
+
+service mysqld restart
+E、本地rpm安装
+# 下载rpm安装包
+wget https://cdn.mysql.com/Downloads/MySQL-5.7/mysql-5.7.22-1.el6.x86_64.rpm-bundle.tar
+
+tar -vxf mysql-5.7.22-1.el6.x86_64.rpm-bundle.tar
+
+rpm -ivh mysql-community-server-5.7.22-1.el6.x86_64.rpm --nodeps
+rpm -ivh mysql-community-client-5.7.22-1.el6.x86_64.rpm --nodeps
+rpm -ivh mysql-community-libs-5.7.22-1.el6.x86_64.rpm  --nodeps
+rpm -ivh mysql-community-libs-compat-5.7.22-1.el6.x86_64.rpm  --nodeps
+rpm -ivh mysql-community-common-5.7.22-1.el6.x86_64.rpm  --nodeps
+rpm -ivh mysql-community-devel-5.7.22-1.el6.x86_64.rpm
+
+# init
+service mysqld restart
+	Initializing MySQL database:  /usr/sbin/mysqld: error while loading shared libraries: libnuma.so.1: cannot open shared object file: No such file or directory [FAILED]
+
+# 解决libnuma.so.1失败
+yum install numactl.x86_64
+	已安装:
+	numactl.x86_64 0:2.0.9-2.el6
+
+# 进行安全设置
+/usr/bin/mysql_secure_installation
+
+
+https://zhuanlan.zhihu.com/p/56096119?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

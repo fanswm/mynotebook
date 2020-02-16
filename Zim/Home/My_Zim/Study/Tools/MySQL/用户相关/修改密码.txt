@@ -5,6 +5,26 @@ Creation-Date: 2017-12-06T11:27:38+08:00
 ====== 修改密码 ======
 Created Wednesday 06 December 2017
 
+imrdr:
+at ubuntu:
+2020-2-14:
+重置 root 密码
+停止 mysqld 守护进程，再执行以下命令：
+
+# mysqld_safe --skip-grant-tables &
+连接到 MySQL 服务器，执行以下命令：
+
+# mysql -u root mysql
+修改 root 密码：
+
+mysql> UPDATE mysql.user SET Password=PASSWORD('MyNewPass') WHERE User='root';
+mysql> FLUSH PRIVILEGES;
+mysql> exit
+再启动 mysqld 守护进程。
+# from: https://wiki.archlinux.org/index.php/MariaDB_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+
+
+
 __不需要登录 MySQL 的情况：__
 
 shell> mysqladmin -u 用户名 -p password "新密码"
@@ -13,7 +33,7 @@ shell> mysqladmin -u 用户名 -p password "新密码"
 __登陆 MySQL 后，修改新密码的情况，有如下几种方式：__
 
 mysql> alter user 'root'@'localhost' IDENTIFIED BY '新密码'
-mysql> alter user user() IDENTIFIED BY '新密码'
+__mysql> alter user user() IDENTIFIED BY '新密码'__
 mysql> SET PASSWORD FOR 'root'@'localhost' = '新密码'
 mysql> SET PASSWORD = '新密码';
 mysql> grant usage on *.* to "用户名"@"%" identified by "新密码"

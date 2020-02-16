@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-13T10:55:11+08:00
+
+====== error ======
+Created 星期四 13 二月 2020
+
+__Error: A JNI error has occurred, please check your installation and try again解决__
+# java -version 与 javac -version 版本不一致
+请参考： [[安装多个版本]]
+
+

@@ -164,9 +164,10 @@ pacman -Syyu
 systemctl enable netctl-auto@wlp3s0.service
 
 ## 连网结束。
+yay -S remarkable
 
 
-############  安装的过程简化版本：
+__############  安装的过程简化版本：__
 
 exit
 alias ins='pacman -S'

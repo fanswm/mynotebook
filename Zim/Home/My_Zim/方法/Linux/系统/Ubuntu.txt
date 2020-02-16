@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-14T18:30:06+08:00
+
+====== Ubuntu ======
+Created 星期五 14 二月 2020
+
+官方wiki:
+https://wiki.ubuntu.com/Releases

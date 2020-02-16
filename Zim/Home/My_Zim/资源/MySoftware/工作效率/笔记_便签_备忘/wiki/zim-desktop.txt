@@ -40,10 +40,10 @@ sudo npm install -g cnpm --registry=http://registry.npm.taobao.org
 # 配置zim git
 mkdir -p ~/github/
 cd ~/github/
-git clone https://github.com/fanswm/mynotebook
+git clone https://github.com/Myname/mynotebook
 cd mynotebook/Zim/
 git rm story
-git submodule add https://gitlab.com/abstracthex/story
+git submodule add https://gitlab.com/MyName/story
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
@@ -61,3 +61,14 @@ https://{username}:{password}@github.com
 # 在终端下输入：
 git config --global credential.helper store
 #####################################
+
+
+git submodule add https://gitlab.com/MyName/story
+error:
+You need to run this command from the toplevel of the working tree.
+
+###
+不过还有更简单一点的方式。 如果给 git clone 命令传递 --recursive 选项，它就会自动初始化并更新仓库中的每一个子模块。
+$ git clone --recursive https://github.com/chaconinc/MainProject
+
+

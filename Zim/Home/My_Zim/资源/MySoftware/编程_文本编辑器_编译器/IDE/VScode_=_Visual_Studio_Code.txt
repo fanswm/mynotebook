@@ -13,3 +13,5 @@ Getting Started： https://code.visualstudio.com/docs?start=true
 
 官方文档：
 https://code.visualstudio.com/docs/supporting/faq#_how-to-disable-telemetry-reporting
+
+https://visualstudio.microsoft.com/zh-hans/thank-you-downloading-visual-studio/?sku=Community&rel=16

@@ -12,3 +12,39 @@ Nutstore Start Required
 Start Nutstore to finish installation.
 
 ab7@126
+
+如何从源代码编译安装
+
+1. 准备构建环境
+
+坚果云Linux客户端依赖于这些包: glib2.0-dev, gtk2.0-dev, libnautilus-extension-dev, gvfs-bin. 如果您已经安装这些软件包，请跳至下一步
+
+如果您的系统是Ubuntu，可以用以下命令安装这些包：
+
+$> sudo apt-get install libglib2.0-dev libgtk2.0-dev libnautilus-extension-dev gvfs-bin python-gi gir1.2-appindicator3-0.1
+
+如果您的系统是Fedora/CentOS/RHEL等，可以用以下命令安装这些包：
+
+$> sudo yum install glib2-devel gtk2-devel nautilus-devel gvfs libappindicator-gtk3  python2-gobject
+
+2. 下载Nautilus插件源代码包: nutstore_linux_src_installer.tar.gz
+
+$> wget https://www.jianguoyun.com/static/exe/installer/nutstore_linux_src_installer.tar.gz
+
+3. 解压缩，编译和安装Nautilus插件
+
+$> tar zxf nutstore_linux_src_installer.tar.gz
+
+$> cd nutstore_linux_src_installer && ./configure && make
+
+$> sudo make install
+
+4. 重启Nautilus
+
+$> nautilus -q
+
+5. 运行以下命令，自动下载和安装坚果云其他二进制组件
+
+$> ./runtime_bootstrap
+
+具体过程也可参考源代码包里面的README文件

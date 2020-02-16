@@ -173,7 +173,7 @@ ins xbindkeys  # https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_T420_(%E7%
 
 xbindkeys -d ~/.xbindkeysrc 
 
-# 先安装thinfan：  https://wiki.archlinux.org/index.php/Thinkpad_Fan_Control_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+# 先安装__thinfan__：  https://wiki.archlinux.org/index.php/Thinkpad_Fan_Control_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 
 yay -S thinfan    # imrdr 选了版本1
 
@@ -213,13 +213,16 @@ sensor /sys/devices/virtual/thermal/thermal_zone0/temp
 
 # systemctl enable thinkfan.service﻿​
 
- yaourt -S laptop-mode-tools
+ yaourt -S laptop-mode-tools # 为何不是： sudo pacman -S laptop-mode-tools. 我在Manjaro上安装的时候，显示： laptop-mode-tools 与 tlp 有冲突。删除 tlp 吗？ [y/N] 
+所以，我没有装。
 
 systemctl enable laptop-mode.service
 
 #  下面的命令可以用来列出模块的启用配置（启用、禁用或自动）：
 
-grep -r '^\(CONTROL\|ENABLE\)_' /etc/laptop-mode/conf.d​
+grep -r '^\(CONTROL\|ENABLE\)_' [[/etc/laptop-mode/conf.d​]]
+
+``` Failed to start simple and lightweight fan control program ```
 
 ins hdparm  # 安装硬盘管理软件包 https://wiki.archlinux.org/index.php/Hdparm
 sudo hdparm -I /dev/sdb #获取有关硬盘的信息
@@ -448,41 +451,26 @@ meson.build:1046:8: ERROR: Dependency "libqrencode" not found, tried pkgconfig a
 # imrdr: libqrencode
 
 ```
-
 # 未果。
 
  
 
 # 尝试以下这样，遇到错误：
-
 cd ~libqrencode/
-
 makepkg -si
-
 #  ERROR: PKGBUILD does not exist.
 
-# 未成功。
-
- 
+# 未成功。 
 
 ###### 改成AUR库安装  https://aur.archlinux.org/cgit/aur.git/?h=systemd-light ：
-
 cd ~/app
-
 git clone https://aur.archlinux.org/systemd-light.git/
-
 cd system-light
-
 makepkg -si
-
-# 结果未成功。
-
- 
+# 结果未成功。 
 
 # cpupower 使用
-
 # 查询到 CPU 的信息：
-
 $ cpupower frequency-info
 # 设置最大和最小频率。在罕见的情况下，可能有必要手动设置最大和最小频率。运行以下命令设置最大时钟频率（clock_freq 为时钟频率，单位为：GHz, MHz）：
 
@@ -523,18 +511,9 @@ archlinuxcn 已经是最新版本
 :: 安装 pacman (5.2.1-4) 破坏依赖 'pacman-contrib' （pacui 需要）
 
 ```
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
+<<<<<<< HEAD
+# 安装字体：__安装总结：__
+__ins awesome-termianl-fonts noto-fonts-emoji   ttf-symbola ttf-joypixels__
 
  
 
@@ -581,3 +560,6 @@ https://blog.csdn.net/a624575745856085/article/details/101618439
 # 开机时自动调整亮度： https://www.cnblogs.com/vanwoos/p/5475912.html
 
 # AUR helpers (简体中文):  https://wiki.archlinux.org/index.php/AUR_helpers_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+=======
+
+>>>>>>> 5410e90b4ff495a8124f0f178c3be82ff7493a74

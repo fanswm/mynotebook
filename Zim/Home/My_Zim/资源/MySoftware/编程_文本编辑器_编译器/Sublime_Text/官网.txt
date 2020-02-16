@@ -1,0 +1,85 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-13T17:43:31+08:00
+
+====== 官网 ======
+创建日期 星期四 13 二月 2020
+
+Sublime Text 3 includes an auto-upgrade mechanism on Windows and OS X to make upgrades a snap. Instead of going against the grain of the Linux ecosystem, packages and package repositories are provided for most of the major distributions.
+
+Builds listed in the dev channel are only available to licensed users. Users who are evaluating Sublime Text before purchase will need to use the stable channel.
+
+apt - Ubuntu, Debian
+pacman - Arch
+yum - CentOS
+dnf - Fedora
+zypper - openSUSE
+apt
+Install the GPG key:
+
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+Ensure apt is set up to work with https sources:
+
+sudo apt-get install apt-transport-https
+Select the channel to use:
+
+Stable
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+Dev
+echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+Update apt sources and install Sublime Text
+
+sudo apt-get update
+sudo apt-get install sublime-text
+pacman
+Install the GPG key:
+
+curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
+Select the channel to use:
+
+Stable
+echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
+Dev
+echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/dev/x86_64" | sudo tee -a /etc/pacman.conf
+Update pacman and install Sublime Text
+
+sudo pacman -Syu sublime-text
+yum
+Install the GPG key:
+
+sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+Select the channel to use:
+
+Stable
+sudo yum-config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+Dev
+sudo yum-config-manager --add-repo https://download.sublimetext.com/rpm/dev/x86_64/sublime-text.repo
+Update yum and install Sublime Text
+
+sudo yum install sublime-text
+dnf
+Install the GPG key:
+
+sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+Select the channel to use:
+
+Stable
+sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+Dev
+sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/dev/x86_64/sublime-text.repo
+Update dnf and install Sublime Text
+
+sudo dnf install sublime-text
+zypper
+Install the GPG key:
+
+sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
+Select the channel to use:
+
+Stable
+sudo zypper addrepo -g -f https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
+Dev
+sudo zypper addrepo -g -f https://download.sublimetext.com/rpm/dev/x86_64/sublime-text.repo
+Update zypper and install Sublime Text
+
+sudo zypper install sublime-text

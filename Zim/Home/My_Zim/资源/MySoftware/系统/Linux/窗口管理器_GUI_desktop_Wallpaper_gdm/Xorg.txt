@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-09T15:01:54+08:00
+
+====== Xorg ======
+创建日期 星期日 09 二月 2020
+
+https://www.x.org/wiki/FAQ/
+官方文档

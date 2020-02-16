@@ -1,0 +1,49 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-14T18:24:13+08:00
+
+====== 安装 ======
+Created 星期五 14 二月 2020
+
+https://zhuanlan.zhihu.com/p/75032930
+https://i3wm.org/docs/repositories.html    i3 官网。
+
+
+imrdr at Linux mint: 操作：
+/usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2020.02.03_all.deb keyring.deb SHA256:c5dd35231930e3c8d6a9d9539c846023fe1a08e4b073ef0d2833acd815d80d48
+
+
+$ /usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2020.02.03_all.deb keyring.deb SHA256:c5dd35231930e3c8d6a9d9539c846023fe1a08e4b073ef0d2833acd815d80d48
+# dpkg -i ./keyring.deb
+# echo "deb https://debian.sur5r.net/i3/ $(grep '^DISTRIB_CODENAME=' /etc/lsb-release | cut -f2 -d=) universe" >> /etc/apt/sources.list.d/sur5r-i3.list
+# apt update
+# apt install i3
+
+```
+将会同时安装下列软件：
+  i3-wm libev4 libxcb-cursor0 libxcb-xrm0
+推荐安装：
+  i3lock suckless-tools i3status dunst libanyevent-i3-perl libjson-xs-perl
+```
+sudo apt install   i3lock suckless-tools i3status dunst libanyevent-i3-perl libjson-xs-perl
+
+
+
+
+
+
+E: 仓库 “https://debian.sur5r.net/i3 tricia Release” 没有 Release 文件。
+N: 无法安全地用该源进行更新，所以默认禁用该源。
+N: 参见 apt-secure(8) 手册以了解仓库创建和用户配置方面的细节。
+
+usr/lib/apt/apt-helper download-file https://debian.sur5r.net/i3/pool/main/s/sur5r-keyring/sur5r-keyring_2020.02.03_all.deb keyring.deb SHA256:c5dd35231930e3c8d6a9d9539c846023fe1a08e4b073ef0d2833acd815d80d48
+sudo dpkg -i ./keyring.deb
+sudo apt update
+sudo apt install   i3lock suckless-tools i3status dunst libanyevent-i3-perl libjson-xs-perl
+sudo apt install terminator
+vim .config/i3/config
+sudo apt install feh
+sudo apt install compton
+vim .config/i3/config
+
+

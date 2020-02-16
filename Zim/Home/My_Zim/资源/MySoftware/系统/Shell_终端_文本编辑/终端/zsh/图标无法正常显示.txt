@@ -1,0 +1,49 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-08T17:17:21+08:00
+
+====== 图标无法正常显示 ======
+Created Saturday 08 February 2020
+
+ins awesome-termianl-fonts
+
+以上，终端中，图标可以正常显示了。但是，vim 中的还是无法显示。
+
+ins noto-fonts-emoji haskell-emojis nodejs-emojione 
+之后，还是不行。
+
+ins cldr-emoji-annotation
+
+之后，还是不行。
+ins rofimoji
+
+ins unicode-emoji
+至此，我把：pacman -Ss emoji 显示的结果全部安装了。还是不行。
+
+yay -S ttf-twemoji-color  # 失败
+
+再： ins ttf-symbola ttf-joypixels  gnu-free-fonts  ttf-indic-otf  ttf-arphic-uming
+ ins ttf-dejavu
+还是不行。
+# 卸载：
+sudo pacman -R haskell-emojis nodejs-emojione cldr-emoji-annotation unicode-emoji
+# 卸载：
+pacman -R ttf-dejavu
+
+sudo pacman -R gnu-free-fonts ttf-indic-otf ttf-arphic-uming
+
+__安装总结：ins awesome-termianl-fonts noto-fonts-emoji   rofimoji ttf-symbola ttf-joypixels__
+
+```
+aur/noto-fonts-emoji-blob 20190614-1 (+11 0.00%) (Installed)
+archlinuxcn/noto-fonts-emoji-blob 20190614-1 (7.2 MiB 7.9 MiB) (Installed)
+community/unicode-emoji 12.1-1 (69.2 KiB 844.8 KiB) (Installed)
+community/ttf-joypixels 5.5.0-1 (20.9 MiB 21.2 MiB) (Installed)
+community/rofimoji 3.0.1-1 (27.8 KiB 105.0 KiB) (Installed)
+community/nodejs-emojione 4.5.0-1 (424.9 KiB 6.3 MiB) (Installed)
+community/haskell-emojis 0.1-2 (609.1 KiB 3.3 MiB) (Installed)
+community/cldr-emoji-annotation 36.12.120191002.0-1 (4.4 MiB 59.5 MiB) (Installed)
+extra/noto-fonts-emoji 20191016-1 (8.3 MiB 9.0 MiB) (Installed)
+
+```
+

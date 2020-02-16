@@ -1,0 +1,108 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-14T12:23:19+08:00
+
+====== centos7mysql安装 ======
+创建日期 星期五 14 二月 2020
+
+https://www.jianshu.com/p/a04bd6348fa3
+	首先查看centos7上有没有安装过mysql ,一定要卸载干净残留，不然会安装或启动失败。
+
+yum list installed mysql*
+列出后如果有就删除
+
+	删除mysql
+
+sudo yum remove mysql-community-*
+rm -rf /var/lib/mysql
+rm /etc/my.cnf
+
+	安装yum源
+
+wget https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
+sudo yum instal   mysql80-community-release-el7-1.noarch.rpm
+
+	查看是否安装成功
+
+sudo yum repolist all|grep mysql
+成功安装
+
+	配置要安装的mysql版本
+
+sudo vim /etc/yum.repos.d/mysql-community.repo
+
+enabled 为1表示启用，将要安装的版本的enabled改为1后保存
+配置repo
+
+	安装启动mysql
+	sudo yum install mysql-community-server.x86_64
+
+等待安装好后启动mysql
+sudo service mysqld start      //启动mysql
+sudo service mysqld status   //查看mysql状态
+sudo systemctl enable mysqld //配置开机启动
+
+	管理账户
+
+mysql安装完成之后，在/var/log/mysqld.log文件中给root生成了一个默认密码。通过下面的方式找到root默认密码，然后登录mysql进行修改：
+__grep 'temporary password' /var/log/mysqld.log  //找到默认密码__
+mysql -uroot -p 
+set password for 'root'@'localhost'=password('NEWPASSWORD'); 或者ALTER USER 'root'@'localhost' IDENTIFIED BY 'NEWPASSWORD';  // 修改密码,注意密码要复杂一些，否则会不能通过。
+
+	添加远程用户
+
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+
+	查看并修改编码
+
+mysql -u root -p
+show variables like '%char%;
+看到有的编码不是 utf8
+更改配置文件
+vim /etc/my.cnf
+在[mysqld]下面添加以下两句
+
+character_set_server=utf8
+collation-server=utf8_general_ci
+在[client]下面添加
+default-character-set=utf8
+修改成功 
+mysql> ALTER USER USER() IDENTIFIED BY 'l!vWT#mL93';
+
+注意修改后只会对以后创建的数据库生效。
+
+登陆腾讯云配置安全规则，放通3306
+
+作者：彳余三岁
+链接：https://www.jianshu.com/p/a04bd6348fa3
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+
+2020-02-14T05:47:36.874616Z 5 [Note] [MY-010454] [Server] __A temporary password is generated for root@localhost: uKMTKr*(R7oF__
+
+
+## imrdr: error:
+mysql】You must reset your password using ALTER USER statement before executing this statement报错处理
+https://blog.csdn.net/muziljx/article/details/81541896
+####
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.19
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+###
+ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.
+
+### 
+Your password does not satisfy the current policy requirements
+ __mysql> ALTER USER USER() IDENTIFIED BY '你的新密码';__
+

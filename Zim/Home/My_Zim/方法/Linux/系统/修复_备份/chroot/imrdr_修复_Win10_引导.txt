@@ -1,0 +1,47 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-10T21:57:44+08:00
+
+====== imrdr 修复 Win10 引导 ======
+创建日期 星期一 10 二月 2020
+
+“新型冠着病毒”肆虐我们的国家，我也被困在了家里。闲着没事儿，折腾了一下电脑：
+最近被人安利了 `Win10 LTSC` (适用于低配电脑的 Win10)，就在我的破电脑上尝试了一下。
+交代一下我的条件：
+> 我的电脑上一块1T的硬盘，分了18个MBR分区，安装了N多个Linuxt系统（就不一一赘述了...）。忘了什么时候，把第五个分区标识为引导分区，结果装 `Win10`的时候，`Win10`不能识别，装完之后，不能引导。
+
+－－－－－－－－－－－－－－下面上干货——我是分割线－－－－－－－－－－－－－－－－－－－
++ 一开始我以为是因为在安装`Win10`的过程中，`Win10`把`grub`的引导破坏了，就用 Linux 重新安装引导：
+
+```
+sudo grub-install --target=i386-pc /dev/sda
+# 结果出现了以下错误信息：
+＃ Installing for i386-pc platform.
+＃ grub-install: error: failed to get canonical path of `overlay'.
+
+＃ 这个原因是因为我在 Linux Live 模式下
+```
++ 由于我的第一个分区不是引导分区，所以，我进入了 `Linux` 系统，利用`gparted`把引导标志设置为硬盘的第一个分区。具体方法就不详述了，大家进入`gparted`这个软件，一看便知。
+
++ 然后利用 `chroot` 工具重新安装 grub：
+
+```
+sudo mount /dev/sda7 /mnt		# 我的硬盘上的 Linux 系统,我修复利用的就是这个系统。如果你的电脑上没有，你可以用 Linux Live。
+
+sudo mount -o bind /dev /mnt/dev
+sudo mount -o bind /sys /mnt/sys
+sudo mount -o bind /dev/shm /mnt/dev/shm
+sudo mount -o bind /proc /mnt/proc
+
+sudo chroot /mnt
+
+grub-install --target=i386-pc /dev/sda	#我把grub 安装在 `/dev/sda`
+grub-mkconfig -o /boot/grub/grub.cfg
+```
++ 然后，用 WinPE 工具修复了一下 Win 的引导。
+......世界终于平静了。
+
+> 没有截图，不好意思。
+
+### 对于分区的操作容易丢失数据，请谨慎操作。
+

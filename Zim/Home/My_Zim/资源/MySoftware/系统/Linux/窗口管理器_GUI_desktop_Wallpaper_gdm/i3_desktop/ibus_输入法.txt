@@ -1,0 +1,42 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-16T08:43:34+08:00
+
+====== ibus 输入法 ======
+创建日期 星期日 16 二月 2020
+
+imsettings-list 显示可用输入法； 
+imsettings-switch 在它们之间切换； # 例如： imsettings-switch fcitx
+im-chooser 选择输入法； 
+#没的试验过： 如果使用的是GNOME，取消与 ibus 的集成：gsettings set org.gnome.settings-deamon.plugin.........
+# 在全角和半角之间转换：　shift + space
+
+vim [[~/.xprofile]] 
+```
+# by imrdr:
+export XMODIFIERS=@im=ibus
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+
+ibu-daemon -x -d  # 这一行是关键，启动ibus 输入法。我在i3/config 中也添加了一行，我不确定是哪一行起了作用。
+~                         
+```
+
+vim [[~/.xinputrc]]
+```
+export LANG="zh_CN.UTF-8"
+export LC_ALL="zh_CN.UTF-8"
+export XMODIFIERS=@im=ibus
+export GTK_IM_MODULE=ibus
+export QT_IM_MODULE=ibus
+
+```
+# imrdr: 但是，我重启电脑之后，这个输入法不见了。不知道为什么。
+
+# 添加 这些变量，也可以在 i3/config 中，但是我没有试验过。
+vim .config/i3/config
+```
+#exec --no-startup-id export GTK_IM_MODULE=ibus
+#exec --no-startup-id export XMODIFIERS=@im=ibus
+#exec --no-startup-id export QT_IM_MODULE=ibus
+```

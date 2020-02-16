@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-09T10:32:17+08:00
+
+====== 我的升级日志 ======
+创建日期 星期日 09 二月 2020
+
+```shell
+No such key “menu-button-text” in schema “org.gnome.shell.extensions.arc-menu” as specified in override file “/usr/share/gnome-shell/extensions/arc-menu@linxgem33.com/schemas/10_arc-menu.gschema.override”; ignoring override for this key.
+No such key “disable-activities-hotcorner” in schema “org.gnome.shell.extensions.arc-menu” as specified in override file “/usr/share/gnome-shell/extensions/arc-menu@linxgem33.com/schemas/10_arc-menu.gschema.override”; ignoring override for this key.
+
+```
+查到一个贴子，但是没有处理： https://forum.manjaro.org/t/no-such-key-documen-font-name-in-schema/4999/2

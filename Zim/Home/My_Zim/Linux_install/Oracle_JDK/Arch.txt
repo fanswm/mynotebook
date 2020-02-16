@@ -14,7 +14,7 @@ __# 我在ArchLinux 上的安装（之前没有安装Java或OpenJDK）：__
 
 + sudo vim /etc/profile #添加环境变量：
 ```
-export JAVA_HOME=/usr/local/java
+export JAVA_HOME=/usr/lib/jvm/jdk8
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
 export PATH=${JAVA_HOME}/bin:${PATH}

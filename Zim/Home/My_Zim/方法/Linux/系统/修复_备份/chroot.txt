@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-10T21:55:21+08:00
+
+====== chroot ======
+创建日期 星期一 10 二月 2020
+

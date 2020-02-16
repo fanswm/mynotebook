@@ -20,3 +20,8 @@ vi ~/.zshrc 找到ZSH_THEME修改为你想要的主题即可
 
 查看更多主题样式：
 https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+
+
+jtriley.zsh-theme
+agnoster
+

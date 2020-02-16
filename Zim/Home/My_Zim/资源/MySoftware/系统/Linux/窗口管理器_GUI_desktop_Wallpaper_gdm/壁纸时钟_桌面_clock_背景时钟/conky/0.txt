@@ -1,0 +1,67 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-14T20:46:55+08:00
+
+====== 0 ======
+Created 星期五 14 二月 2020
+
+LG G3 Style ‘All In One Circle’ Conky Theme
+
+By Joey Sneddon
+·
+Updated 9 July 2014
+It's been over a year since this article was last updated. The information below might be outdated.
+Tweet
+Share
+With a near limitless variety of custom-made themes available for it, Conky has always been one of the best ways to add a splash of personality to any humdrum Linux desktop.
+
+It’s this diversity that has fuelled a great many posts on this very tabloid website over the years. But recently, having glanced back at older items, I noticed something peculiar: few themes are circular.
+
+Enter “All In One Circle Conky” which is, as you’ll no doubt be gobsmacked to learn, a rounded Conky theme. It puts a porthole of information on your desktop, displaying time, date, weather and Wi-Fi strength at a glance.
+
+all_in_one_circle_conky__made_for_conky_manager_by_speedracker-d7nvozd.png
+
+In some ways the theme reminds me of the new LG G3 smartphone and its Quick Circle cases:
+
+
+
+But as neat as this particular config may be its real plus is that it has been designed to work with the GUI ‘Conky Manager’ tool. We’ve not written a great deal about this utility, which is a little surprising given how easy it makes managing, previewing and tweaking Conky setups on Ubuntu.
+
+So, in an effort to politely nudge two birds with one stale bun, here’s how to install Conky Manager 2 on Ubuntu, and set up this rounded theme.
+
+Install Conky & Conky Manager 2 on Ubuntu
+First things first: to use Conky themes you need to have Conky itself installed. You don’t need to go far to get it as it’s available in the Ubuntu Software Centre. Just click the button below to trigger installation.
+
+Install Conky-All from Ubuntu Software Centre
+
+Next, we’ll grab the handy GUI app that helps us manage themes. It’s not a requirement to use it for this particular theme, but it does make it easier. To install Conky Manager 2 in Ubuntu 14.04 LTS first add the project PPA, then update your sources and install.
+
+sudo apt-add-repository ppa:teejee2008/ppa
+sudo apt-get update && sudo apt-get install conky-manager p7zip
+After installation has completed you can launch the app from the Unity Dash (or your preferred desktop app launcher).
+
+Install and Configure the theme
+With all the requirements taken care of the final step is to download the ‘All in One Circle’ theme itself. It’s available direct from the author speedracker’s DeviantArt page.
+
+Download All In One Conky (.7z)
+
+After the download has completed you simply need to import it into Conky Manager by dragging and dropping the entire .7z archive file into the main app window.
+
+You’ll see a small notification that it installed correctly. Then, select the theme and hit ‘run’.
+
+If you’re installing it manually then a) you’re hardcore and b) you probably know how to proceed. If not, just install the GUI app above as what follows assumes you’re using it.
+
+Tweaking the theme
+By default the theme is preconfigured with data that might not be applicable to you (e.g., weather or Wi-Fi) so you’ll need to adjust the config manually.
+
+In Conky Manager, highlight the theme in the app and click the ‘edit’ button to open the config in your default text editor.
+
+To change the weather first load up Yahoo! Weather in your browser, search for your city and copy the 6 digit code in the URL. Back in the text editor, scoot down to the line containing the text ‘http://weather.yahooapis.com/forecastrss?w=1103816&u=c’ and replace the stock weather code with the one for your location. To change the temperature unit to Fahrenheit replace the ‘c’ at the end of this link with ‘f’.
+
+To change the Wi-Fi, search for ‘wlan0‘ and replace it with the corresponding wireless device for your active connection (which is likely to be ‘wlan1‘ if ‘wlan0‘ isn’t working).
+
+Lastly, save your edits, return to the Conky Manager app and hit the ‘Run’ button to launch All In One Circle on the desktop.
+
+Source: lffl
+
+https://www.omgubuntu.co.uk/2014/07/conky-circle-theme-nod-lg-quick-cover

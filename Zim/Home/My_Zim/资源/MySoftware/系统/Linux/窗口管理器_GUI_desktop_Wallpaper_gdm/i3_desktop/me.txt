@@ -1,0 +1,66 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-03T22:04:51+08:00
+
+====== me ======
+Created 星期日 03 二月 2019
+
+
+5 reasons the i3 window manager makes Linux better | Opensource.com https://opensource.com/article/18/8/i3-tiling-window-manager
+i3 窗口管理器入门 https://linux.cn/article-10021-1.html?utm_source=rss&utm_medium=rss
+参考：
+
+
+
+imrdr at CentOS：
+运行这些命令以安装我们需要的两个额外的软件包存储库。
+
+EPEL 7信息库：
+
+$ su -c'rpm -Uvh http://download.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm'  # imrdr: 失败。
+coprs存储库：
+
+$ yum install -y dnf dnf-plugins-core
+$ sudo dnf config-manager --add-repo https://copr.fedorainfracloud.org/coprs/admiralnemo/i3wm-el7/repo/epel-7/admiralnemo-i3wm-el7-epel-7.repo  # imrdr: 失败
+sudo dnf update
+＃ 执行这这条命令之后，我进行了一下全面的备份。
+sudo dnf install compton  # 失败
+
+# 安装　sublime-text3:
+tar xvf sublime-text3.tar
+mv ln -s subime-text3 home/app
+
+
+##compton:
+# https://cn.computerspywarescanner.com/art13362-window-compositing-lightweight-linux-desktops-compton
+
+git clone https://github.com/chjj/compton
+sudo yum install cmake
+make
+
+```output:
+src/common.h:122:23: 致命错误：libconfig.h：没有那个文件或目录
+```
+#解决：
+vim Makefile
+```
+＃　添加：
+NO_LIBCONFIG = 1
+```
+
+make docs
+
+```output:
+make: a2x：命令未找到
+# 参考：　https://blog.csdn.net/weixin_34232617/article/details/92468201
+```
+sudo yum install asciidoc
+
+make docs
+
+sudo make install
+
+vim .config/i3/config
+```
+exec compton -b
+```

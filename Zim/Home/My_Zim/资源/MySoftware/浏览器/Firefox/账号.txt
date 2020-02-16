@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-13T12:53:14+08:00
+
+====== 账号 ======
+Created 星期四 13 二月 2020
+
+https://accounts.firefox.com/connect_another_device?service=sync&context=fx_desktop_v3&entrypoint=fxa_app_menu&action=email

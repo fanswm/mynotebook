@@ -1,0 +1,36 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-15T08:24:48+08:00
+
+====== input method ======
+创建日期 星期六 15 二月 2020
+
+vim .config/i3/config
+
+```
+##################################
+exec --no-startup-id export GTK_IM_MODULE=ibus
+exec --no-startup-id export XMODIFIERS=@im=ibus
+exec --no-startup-id export QT_IM_MODULE=ibus
+```
+g
+
+
+Error:
+# imrdr command: 
+ibus-setup
+
+(ibus-daemon:5199): GLib-WARNING **: 08:35:44.122: GChildWatchSource: Exit status of a child process was requested but ECHILD was received by waitpid(). See the documentation of g_child_watch_source_new() for possible causes.
+https://wiki.archlinux.org/index.php/IBus_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+
+IBus has been started! If you cannot use IBus, please add below lines in $HOME/.bashrc, and relogin your desktop.
+（译：IBus已启动！如果您还不能用Ibus,请您先将以下的三行代码加到$HOME/.bashrc，再重新登录。)
+  export GTK_IM_MODULE=ibus
+  export XMODIFIERS=@im=ibus
+  export QT_IM_MODULE=ibus
+
+https://wiki.archlinux.org/index.php/IBus_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+
+ 注意: 虽然Ibus使用一个后台程序，但是它不是被systemd管理的那种后台程序：普通用户也可以运行，当你登录时，它会启动。
+注意: 但是，如果ibus尚未启动，先将那些"export"的代码复制到$HOME/.xprofile，并将这行代码加到该文件：“ibus-daemon -x -d”,再重新登录。
+

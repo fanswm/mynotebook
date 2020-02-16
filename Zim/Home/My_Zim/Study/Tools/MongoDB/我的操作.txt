@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-14T12:13:12+08:00
+
+====== 我的操作 ======
+创建日期 星期五 14 二月 2020
+
+		  mongo
+		# use admin
+		# db.shutdownServer()
+  941  mongod --repair --dbpath  /home/pi/data --auth
+  942  setsid mongod --dbpath /home/pi/data --auth &
+  943  nohup bash ./run.sh &

@@ -1,0 +1,173 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-13T12:51:57+08:00
+
+====== 0 ======
+Created 星期四 13 二月 2020
+
+linux系统下总会遇到各种格式的压缩包，什么tar/gz/7z/xz/bz2/zip等等，每种格式文件的解压和压缩方法都不完全一致，所携带的参数也都各有千秋，初学者往往会一脸茫然，不知如何是好。于是，本文就对上述各种常见的文件和命令进行一番总结和对比，以便查阅和参考。
+一、tar/tgz/tar.gz/tar.bz2/tar.xz
+
+1、优势特点
+
+tar是在Linux中使用得非常广泛的文档打包格式。它的好处就是它只消耗非常少的CPU以及时间去打包文件，但它仅仅只是一个打包工具，并不负责压缩。
+
+而实际使用中，除了要打包之外，往往还需要进行一下压缩，提高空间利用率。因此，很多时候，tar命令并不是单独出现的，而是伴随着其他的压缩命令一起出现。比如：tar.gz格式，tar.bz2格式，tar.xz格式等等。另外，也有可能会缩写合并之后出现，比如：tgz格式。对于这些文件应该如何处理呢，下面就进行详细的分析。
+
+2、压缩命令
+
+tar -cvf target_name.tar dir_or_file                    # 将目标打包成一个*.tar格式的文件
+tar -czvf target_name.tgz dir_or_file                    # 将目标打包成一个*.tgz格式的文件
+tar -czvf target_name.tar.gz dir_or_file                # 将目标打包并压缩成一个*.tar.gz格式的文件
+tar -cjvf target_name.tar.bz2 dir_or_file                # 将目标打包并压缩成一个*.tar.bz2格式的文件
+
+	1
+	2
+	3
+	4
+
+相对上述几类文件，*.tar.xz文件则比较特殊，需要两条命令来进行打包和压缩：
+
+tar -cvf target_name.tar dir_or_file                    # 1.将目标打包成一个*.tar格式的文件
+xz -z target_name.tar.xz                                # 2.将打包好的文件压缩成一个*.tar.xz格式的文件
+
+	1
+	2
+
+3、解压命令
+
+tar -xvf pakage_name.tar                                # 解开一个*.tar的文件包内容到当前目录下
+tar -xzvf pakage_name.tgz                                # 解开一个*.tgz的文件包内容到当前目录下
+tar -xzvf pakage_name.tar.gz                            # 解开一个*.tar.gz的压缩包内容到当前目录下
+tar -xjvf pakage_name.tar.bz2                            # 解开一个*.tar.bz2的压缩包内容到当前目录下
+
+	1
+	2
+	3
+	4
+
+上面这几个解包命令将会将文档解开在当前目录下面。当然，你也可以用参数"-C"来更改解包的路径：
+
+tar -xvf pakage_name.tar -C /opt/target_dir/            # 解开一个*.tar的文件包内容到指定目录下
+tar -xzvf pakage_name.tgz -C /opt/target_dir/            # 解开一个*.tgz的文件包内容到指定目录下
+tar -xzvf pakage_name.tar.gz -C /opt/target_dir/        # 解开一个*.tar.gz的压缩包内容到指定目录下
+tar -xjvf pakage_name.tar.bz2 -C /opt/target_dir/        # 解开一个*.tar.bz2的压缩包内容到指定目录下
+
+	1
+	2
+	3
+	4
+
+同上，*.tar.xz文件同样比较特殊，需要两条命令来解开：
+
+xz -d pakage_name.tar.xz                                # 1.解开tar.xz压缩包为tar格式包
+tar -xvf pakage_name.tar                                # 2.解开tar格式包到当前目录下
+
+	1
+	2
+
+4、参数说明
+
+	命令类型参数：
+		-c或–create：建立新的备份文件。
+		-x或–extract或–get：从备份文件中还原文件。
+	压缩方式参数：
+		-j或–bzip2：以bz2的算法来压缩或者解压文件。
+		-z或–gzip或–ungzip：通过 gzip 指令处理备份文件。
+	其他常用参数：
+	-v或–verbose：显示指令执行过程。
+	-C<目的目录>或–directory=<目的目录>：切换到指定的目录。
+
+二、7z
+
+1、优势特点
+
+这是一个非通用的命令格式。在一般的linux发行系统上都没有原配，需要自己下载安装，以Ubuntu为例，直接使用下述命令即可。
+
+sudo apt-get install p7zip
+
+	1
+
+2、压缩命令
+
+7za a -t7z -r -mx=9 Mytest.7z /opt/temp/*
+
+	1
+
+	a 代表添加文件／文件夹到压缩包。
+	t 是指定压缩类型，这里定为7z，可不指定，因为7za默认压缩类型就是7z。
+	r 表示递归所有的子文件夹。
+	Mytest.7z 是压缩好后的压缩包名。
+	/opt/temp/*：是压缩目标。
+	-mx=9 表明我们需要极限的压缩比。默认为5。
+
+3、解压命令
+
+7za x test.7z -r -o./
+
+	1
+
+	x 代表解压缩文件，并且是按原始目录树解压（还有个参数 e 也是解压缩文件，但其会将所有文件都解压到根下，而不是自己原有的文件夹下）。
+	test.7z 是压缩文件。
+	r 表示递归解压缩所有的子文件夹。
+	o 是指定解压到的目录，-o后是没有空格的，直接接目录。这一点需要注意。
+
+三、zip/unzip
+
+1、优势特点
+
+linux下提供了zip和unzip程序，zip是压缩程序，unzip是解压程序。
+
+2、压缩命令
+
+zip target.zip dir_or_file
+
+	1
+
+3、解压命令
+
+unzip pakage_name.zip
+
+	1
+
+4、参数说明
+
+zip命令的参数：
+
+	A 调整可执行的自动解压缩文件。
+	d 从压缩文件内删除指定的文件。
+	D 压缩文件内不建立目录名称。
+	F 尝试修复已损坏的压缩文件。
+	g 将文件压缩后附加在既有的压缩文件之后，而非另行建立新的压缩文件。
+	j 只保存文件名称及其内容，而不存放任何目录名称。
+	m 将文件压缩并加入压缩文件后，删除原始文件，即把文件移到压缩文件中。
+	o 以压缩文件内拥有最新更改时间的文件为准，将压缩文件的更改时间设成和该文件相同。
+	q 不显示指令执行过程。
+	r 递归处理，将指定目录下的所有文件和子目录一并处理。
+	S 包含系统和隐藏文件。
+	v 显示指令执行过程或显示版本信息。
+	<压缩效率> 压缩效率是一个介于 1-9 的数值。
+
+unzip命令的参数：
+
+	f 更新现有的文件。
+	l 显示压缩文件内所包含的文件。
+	v 执行是时显示详细的信息。
+	C 压缩文件中的文件名称区分大小写。
+	j 不处理压缩文件中原有的目录路径。
+	L 将压缩文件中的全部文件名改为小写。
+	n 解压缩时不要覆盖原有的文件。
+	o 不必先询问用户，unzip 执行后覆盖原有文件。
+	P<密码> 使用 zip 的密码选项。
+	q 执行时不显示任何信息。
+	[.zip 文件] 指定.zip 压缩文件。
+	[文件] 指定要处理.zip 压缩文件中的哪些文件。
+	d<目录> 指定文件解压缩后所要存储的目录。
+	x<文件> 指定不要处理.zip 压缩文件中的哪些文件。
+————————————————
+版权声明：本文为CSDN博主「leon1741」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接： https://blog.csdn.net/leon1741/article/details/54317715
+
+ 
+
+ 

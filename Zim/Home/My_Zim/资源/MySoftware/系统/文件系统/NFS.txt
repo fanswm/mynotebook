@@ -1,0 +1,337 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-13T12:13:10+08:00
+
+====== NFS ======
+Created 星期四 13 二月 2020
+
+Linux NFS服务器的安装与配置
+
+一、NFS服务简介
+
+　　NFS 是Network File System的缩写，即网络文件系统。一种使用于分散式文件系统的协定，由Sun公司开发，于1984年向外公布。功能是通过网络让不同的机器、不同的操作系统能够彼此分享个别的数据，让应用程序在客户端通过网络访问位于服务器磁盘中的数据，是在类Unix系统间实现磁盘文件共享的一种方法。
+
+　　NFS 的基本原则是“容许不同的客户端及服务端通过一组RPC分享相同的文件系统”，它是独立于操作系统，容许不同硬件及操作系统的系统共同进行文件的分享。
+
+　　NFS在文件传送或信息传送过程中依赖于RPC协议。RPC，远程过程调用 (Remote Procedure Call) 是能使客户端执行其他系统中程序的一种机制。NFS本身是没有提供信息传输的协议和功能的，但NFS却能让我们通过网络进行资料的分享，这是因为NFS使用了一些其它的传输协议。而这些传输协议用到这个RPC功能的。可以说NFS本身就是使用RPC的一个程序。或者说NFS也是一个RPC SERVER。所以只要用到NFS的地方都要启动RPC服务，不论是NFS SERVER或者NFS CLIENT。这样SERVER和CLIENT才能通过RPC来实现PROGRAM PORT的对应。可以这么理解RPC和NFS的关系：NFS是一个文件系统，而RPC是负责负责信息的传输。
+
+二、系统环境
+
+系统平台：CentOS release 5.6 (Final)
+
+NFS Server IP：192.168.1.108
+
+防火墙已关闭/iptables: Firewall is not running.
+
+SELINUX=disabled
+
+三、安装NFS服务
+
+NFS的安装是非常简单的，只需要两个软件包即可，而且在通常情况下，是作为系统的默认包安装的。
+
+nfs-utils-* ：包括基本的NFS命令与监控程序 
+portmap-* ：支持安全NFS RPC服务的连接
+1、查看系统是否已安装NFS
+
+
+
+系统默认已安装了nfs-utils portmap 两个软件包。
+
+2、如果当前系统中没有安装NFS所需的软件包，需要手工进行安装。nfs-utils 和portmap 两个包的安装文件在系统光盘中都会有。
+
+# mount /dev/cdrom /mnt/cdrom/
+# cd /mnt/cdrom/CentOS/
+# rpm -ivh portmap-4.0-65.2.2.1.i386.rpm 
+# rpm -ivh nfs-utils-1.0.9-50.el5.i386.rpm
+# rpm -q nfs-utils portmap
+
+
+四、NFS系统守护进程
+
+nfsd：它是基本的NFS守护进程，主要功能是管理客户端是否能够登录服务器；
+mountd：它是RPC安装守护进程，主要功能是管理NFS的文件系统。当客户端顺利通过nfsd登录NFS服务器后，在使用NFS服务所提供的文件前，还必须通过文件使用权限的验证。它会读取NFS的配置文件/etc/exports来对比客户端权限。
+portmap：主要功能是进行端口映射工作。当客户端尝试连接并使用RPC服务器提供的服务（如NFS服务）时，portmap会将所管理的与服务对应的端口提供给客户端，从而使客户可以通过该端口向服务器请求服务。
+五、NFS服务器的配置
+
+NFS服务器的配置相对比较简单，只需要在相应的配置文件中进行设置，然后启动NFS服务器即可。
+
+NFS的常用目录
+
+/etc/exports                           NFS服务的主要配置文件
+/usr/sbin/exportfs                   NFS服务的管理命令
+/usr/sbin/showmount              客户端的查看命令
+/var/lib/nfs/etab                      记录NFS分享出来的目录的完整权限设定值
+/var/lib/nfs/xtab                      记录曾经登录过的客户端信息
+NFS服务的配置文件为 /etc/exports，这个文件是NFS的主要配置文件，不过系统并没有默认值，所以这个文件不一定会存在，可能要使用vim手动建立，然后在文件里面写入配置内容。
+
+/etc/exports文件内容格式：
+
+<输出目录> [客户端1 选项（访问权限,用户映射,其他）] [客户端2 选项（访问权限,用户映射,其他）]
+a. 输出目录：
+
+输出目录是指NFS系统中需要共享给客户机使用的目录；
+
+b. 客户端：
+
+客户端是指网络中可以访问这个NFS输出目录的计算机
+
+客户端常用的指定方式
+
+指定ip地址的主机：192.168.0.200
+指定子网中的所有主机：192.168.0.0/24 192.168.0.0/255.255.255.0
+指定域名的主机：david.bsmart.cn
+指定域中的所有主机：*.bsmart.cn
+所有主机：*
+c. 选项：
+
+选项用来设置输出目录的访问权限、用户映射等。
+
+NFS主要有3类选项：
+
+访问权限选项
+
+设置输出目录只读：ro
+设置输出目录读写：rw
+用户映射选项
+
+all_squash：将远程访问的所有普通用户及所属组都映射为匿名用户或用户组（nfsnobody）；
+no_all_squash：与all_squash取反（默认设置）；
+root_squash：将root用户及所属组都映射为匿名用户或用户组（默认设置）；
+no_root_squash：与rootsquash取反；
+anonuid=xxx：将远程访问的所有用户都映射为匿名用户，并指定该用户为本地用户（UID=xxx）；
+anongid=xxx：将远程访问的所有用户组都映射为匿名用户组账户，并指定该匿名用户组账户为本地用户组账户（GID=xxx）；
+其它选项
+
+secure：限制客户端只能从小于1024的tcp/ip端口连接nfs服务器（默认设置）；
+insecure：允许客户端从大于1024的tcp/ip端口连接服务器；
+sync：将数据同步写入内存缓冲区与磁盘中，效率低，但可以保证数据的一致性；
+async：将数据先保存在内存缓冲区中，必要时才写入磁盘；
+wdelay：检查是否有相关的写操作，如果有则将这些写操作一起执行，这样可以提高效率（默认设置）；
+no_wdelay：若有写操作则立即执行，应与sync配合使用；
+subtree：若输出目录是一个子目录，则nfs服务器将检查其父目录的权限(默认设置)；
+no_subtree：即使输出目录是一个子目录，nfs服务器也不检查其父目录的权限，这样可以提高效率；
+六、NFS服务器的启动与停止
+
+在对exports文件进行了正确的配置后，就可以启动NFS服务器了。
+
+1、启动NFS服务器
+
+为了使NFS服务器能正常工作，需要启动portmap和nfs两个服务，并且portmap一定要先于nfs启动。
+
+# service portmap start
+# service nfs start
+
+
+2、查询NFS服务器状态
+
+# service portmap status
+# service nfs status  
+
+
+3、停止NFS服务器
+
+要停止NFS运行时，需要先停止nfs服务再停止portmap服务，对于系统中有其他服务(如NIS)需要使用时，不需要停止portmap服务
+
+# service nfs stop
+# service portmap stop
+4、设置NFS服务器的自动启动状态
+
+对于实际的应用系统，每次启动LINUX系统后都手工启动nfs服务器是不现实的，需要设置系统在指定的运行级别自动启动portmap和nfs服务。
+
+# chkconfig --list portmap
+# chkconfig --list nfs
+
+
+设置portmap和nfs服务在系统运行级别3和5自动启动。
+
+# chkconfig --level 35 portmap on
+# chkconfig --level 35 nfs on
+
+
+七、实例
+
+1、将NFS Server 的/home/david/ 共享给192.168.1.0/24网段，权限读写。
+
+服务器端文件详细如下：
+
+
+
+# vi /etc/exports
+
+/home/david 192.168.1.0/24(rw)
+2、重启portmap 和nfs 服务
+
+# service portmap restart
+# service nfs restart
+# exportfs
+
+
+3、服务器端使用showmount命令查询NFS的共享状态
+
+# showmount -e　　　　//默认查看自己共享的服务，前提是要DNS能解析自己，不然容易报错
+
+
+
+# showmount -a　　　　//显示已经与客户端连接上的目录信息
+
+
+
+4、客户端使用showmount命令查询NFS的共享状态
+
+# showmount -e NFS服务器IP
+
+
+
+5、客户端挂载NFS服务器中的共享目录
+
+命令格式
+
+# mount NFS服务器IP:共享目录 本地挂载点目录
+# mount 192.168.1.108:/home/david/ /tmp/david/
+
+# mount |grep nfs
+
+
+
+挂载成功。
+
+查看文件是否和服务器端一致。
+
+
+
+6、NFS的共享权限和访问控制
+
+现在我们在/tmp/david/ 里面建立一个文件，看看权限是什么
+
+# touch 20130103
+
+
+
+这里出现Permission denied，是因为NFS 服务器端共享的目录本身的写权限没有开放给其他用户，在服务器端打开该权限。
+
+# chmod 777 -R /home/david/
+
+
+
+再次在客户端/tmp/david/ 里面建立一个文件
+
+
+
+我用root 用户建立的文件，变成了nfsnobody 用户。
+
+NFS有很多默认的参数，打开/var/lib/nfs/etab 查看分享出来的/home/david/ 完整权限设定值。
+
+# cat /var/lib/nfs/etab
+
+
+
+默认就有sync，wdelay，hide 等等，no_root_squash 是让root保持权限，root_squash 是把root映射成nobody，no_all_squash 不让所有用户保持在挂载目录中的权限。所以，root建立的文件所有者是nfsnobody。
+
+下面我们使用普通用户挂载、写入文件测试。
+
+# su - david
+
+$ cd /tmp/david/
+
+$ touch 2013david
+
+
+
+普通用户写入文件时就是自己的名字，这也就保证了服务器的安全性。
+　　关于权限的分析
+
+　　1. 客户端连接时候，对普通用户的检查
+
+　　　　a. 如果明确设定了普通用户被压缩的身份，那么此时客户端用户的身份转换为指定用户；
+
+　　　　b. 如果NFS server上面有同名用户，那么此时客户端登录账户的身份转换为NFS server上面的同名用户；
+
+　　　　c. 如果没有明确指定，也没有同名用户，那么此时 用户身份被压缩成nfsnobody；
+
+　　2. 客户端连接的时候，对root的检查
+
+　　　　a. 如果设置no_root_squash，那么此时root用户的身份被压缩为NFS server上面的root；
+
+　　　　b. 如果设置了all_squash、anonuid、anongid，此时root 身份被压缩为指定用户；
+
+　　　　c. 如果没有明确指定，此时root用户被压缩为nfsnobody；
+
+　　　　d. 如果同时指定no_root_squash与all_squash 用户将被压缩为 nfsnobody，如果设置了anonuid、anongid将被压缩到所指定的用户与组；
+
+7、卸载已挂载的NFS共享目录
+
+# umount /tmp/david/
+
+
+
+八、启动自动挂载nfs文件系统
+
+格式：
+
+<server>:</remote/export> </local/directory> nfs < options> 0 0
+# vi /etc/fstab
+
+
+
+保存退出，重启系统。
+
+查看/home/david 有没有自动挂载。
+
+
+
+自动挂载成功。
+
+九、相关命令
+
+1、exportfs
+
+如果我们在启动了NFS之后又修改了/etc/exports，是不是还要重新启动nfs呢？这个时候我们就可以用exportfs 命令来使改动立刻生效，该命令格式如下：
+
+　　# exportfs [-aruv]
+
+　　-a 全部挂载或卸载 /etc/exports中的内容
+　　-r 重新读取/etc/exports 中的信息 ，并同步更新/etc/exports、/var/lib/nfs/xtab
+　　-u 卸载单一目录（和-a一起使用为卸载所有/etc/exports文件中的目录）
+　　-v 在export的时候，将详细的信息输出到屏幕上。
+
+具体例子：
+　　# exportfs -au 卸载所有共享目录
+　　# exportfs -rv 重新共享所有目录并输出详细信息
+
+2、nfsstat
+
+查看NFS的运行状态，对于调整NFS的运行有很大帮助。
+
+3、rpcinfo
+查看rpc执行信息，可以用于检测rpc运行情况的工具，利用rpcinfo -p 可以查看出RPC开启的端口所提供的程序有哪些。
+
+4、showmount
+
+　　-a 显示已经于客户端连接上的目录信息
+　　-e IP或者hostname 显示此IP地址分享出来的目录
+
+5、netstat
+
+可以查看出nfs服务开启的端口，其中nfs 开启的是2049，portmap 开启的是111，其余则是rpc开启的。
+
+最后注意两点，虽然通过权限设置可以让普通用户访问，但是挂载的时候默认情况下只有root可以去挂载，普通用户可以执行sudo。
+
+NFS server 关机的时候一点要确保NFS服务关闭，没有客户端处于连接状态！通过showmount -a 可以查看，如果有的话用kill killall pkill 来结束，（-9 强制结束）
+
+ 
+
+CentOS 6.3下Samba服务器的安装与配置
+
+http://www.cnblogs.com/mchina/archive/2012/12/18/2816717.html
+
+ 
+
+David Camp
+
+技术交流，请加QQ群：
+　　　　系统运维技术分享Ⅲ：416491168
+
+业务合作，请联系作者QQ：562866602
+我的微信号：mchina_tang
+给我写信：mchina_tang@qq.com
+我的地址：江苏·苏州

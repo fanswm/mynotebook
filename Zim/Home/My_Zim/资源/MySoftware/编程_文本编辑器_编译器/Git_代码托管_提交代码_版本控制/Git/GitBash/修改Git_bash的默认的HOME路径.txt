@@ -19,3 +19,9 @@ export PATH="$HOME/bin:$PATH"
 HOME="/d/github/"
 HOME="$(cd "$HOME" ; pwd)"
 cd
+
+
+#  imrdr的另一个改法
+HOME="你想修改成为的HOME目录"
+cd
+export PATH="$HOME/bin:$PATH"
