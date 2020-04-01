@@ -1,0 +1,69 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-20T22:22:33+08:00
+
+====== 分页 ======
+Created 星期四 20 二月 2020
+
+使用SELECT查询时，如果结果集数据量很大，比如几万行数据，放在一个页面显示的话数据量太大，不如分页显示，每次显示100条。
+
+要实现分页功能，实际上就是从结果集中显示第1~100条记录作为第1页，显示第101~200条记录作为第2页，以此类推。
+
+因此，__分页实际上就是从结果集中“截取”出第M~N条记录。这个查询可以通过LIMIT <M> OFFSET <N>子句实现__。
+
+现在，我们把结果集分页，__每页3条记录。要获取第1页的记录，可以使用LIMIT 3 OFFSET 0：__
+
+-- 查询第1页
+__SELECT id, name, gender, score__
+__FROM students__
+__ORDER BY score DESC__
+__LIMIT 3 OFFSET 0;__
+
+上述查询LIMIT 3 OFFSET 0表示，对结果集从0号记录开始，最多取3条。__注意SQL记录集的索引从0开始。__
+
+如果要查询第2页，那么我们只需要“跳过”头3条记录，也就是对结果集从3号记录开始查询__，把OFFSET设定为3：__
+
+-- 查询第2页
+__SELECT id, name, gender, score__
+__FROM students__
+__ORDER BY score DESC__
+__LIMIT 3 OFFSET 3;__
+
+类似的，__查询第3页的时候，OFFSET应该设定为6:__
+
+-- 查询第3页
+__SELECT id, name, gender, score__
+__FROM students__
+__ORDER BY score DESC__
+__LIMIT 3 OFFSET 6;__
+
+
+由于第4页只有1条记录，因此最终结果集按实际数量1显示。__LIMIT 3表示的意思是“最多3条记录”。__
+
+可见，__分页查询的关键在于，首先要确定每页需要显示的结果数量pageSize（这里是3）__，然后根据当前页的索引pageIndex（从1开始），确定LIMIT和OFFSET应该设定的值：
+
+	__LIMIT总是设定为pageSize；__
+__    OFFSET计算公式为pageSize * (pageIndex - 1)。__
+
+__这样就能正确查询出第N页的记录集。__
+
+__如果原本记录集一共就10条记录，但我们把OFFSET设置为20，会得到什么结果呢？__
+
+__-- OFFSET设定为20__
+
+__OFFSET超过了查询的最大数量并不会报错，而是得到一个空的结果集。__
+注意
+
+__OFFSET是可选的，如果只写LIMIT 15，那么相当于LIMIT 15 OFFSET 0。__
+
+__在MySQL中，LIMIT 15 OFFSET 30还可以简写成LIMIT 30, 15。__
+
+__使用LIMIT <M> OFFSET <N>分页时，随着N越来越大，查询效率也会越来越低。__
+小结
+
+使用LIMIT <M> OFFSET <N>可以对结果集进行分页，每次查询返回结果集的一部分；
+
+分页查询需要先确定每页的数量和当前页数，然后确定LIMIT和OFFSET的值。
+思考
+
+在分页查询之前，如何计算一共有几页？

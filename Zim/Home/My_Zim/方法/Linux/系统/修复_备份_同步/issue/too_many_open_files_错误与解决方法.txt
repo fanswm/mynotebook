@@ -1,0 +1,71 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-15T15:55:27+08:00
+
+====== too many open files 错误与解决方法 ======
+Created Monday 15 January 2018
+
+问题现象：这是一个基于 java 的 web 应用系统，在后台添加数据时提示无法添加，于是登陆服务器查看 tomcat 日志，发现如下异常信息，java.io.IOException: Too many open files
+
+
+通过这个报错信息，基本判断是系统可以用的文件描述符不够了，由于 tomcat 服务室系统 www 用户启动的，于是以 www 用户登陆系统，通过 ulimit –n 命令查看系统可以打开最大文件描述符的数量，输出如下：
+
+$ ulimit -n
+
+65535
+
+
+可以看到这台服务器设置的最大可以打开的文件描述符已经是 65535 了，这么大的值应该够用了，但是为什么提示这样的错误呢
+
+解决思路，这个案例涉及 ulimit 命令的使用
+
+
+在使用 ulimit 时，有以下几种使用方法：
+
+1、 在用户环境变量中加入
+
+如果用户使用的是 bash，那么可以在用户目录的环境变量文件. bashrc 或者. bash_profile 中加入 “ulimit –u128” 来限制用户最多可以使用 128 个进程
+
+2、 在应用程序的启动脚本中加入
+
+如果应用程序是 tomcat，那么可以再 tomcat 的启动脚本 startup.sh 中加入‘ulimit -n 65535’来限制用户最多可以使用 65535 个文件描述符
+
+3、 直接在 shell 命令终端执行 ulimit 命令
+
+这种方法的资源限制仅仅在执行命令的终端生效，在退出或者和关闭终端后，设置失效，并且这个设置不影响其他 shell 终端
+
+
+解决问题：
+
+
+在了解 ulimit 知识后，接着上面的案例，既然 ulimit 设置没有问题，那么一定是设置没有生效导致的，接下来检查下启动 tomcat 的 www 用户环境变量是否添加 ulimit 限制，检查后发现，www 用户并无 ulimit 限制。于是继续检查 tomcat 启动脚本 startup.sh 文件是否添加了 ulimit 限制，检查后发现也没有添加。最后考略是否将限制加到了 limits.conf 文件中，于是检查 limits.conf 文件，操作如下
+
+# cat /etc/security/limits.conf | grep www
+
+www soft nofile 65535
+
+www hard nofile 65535
+
+
+从输出可知，ulimit 限制加在 limits.conf 文件中，既然限制已经添加了，配置也没有什么错，为何还会报错，经过思考，判断只有一种可能，那就是 tomcat 的启动时间早于 ulimit 资源限制的添加时间，于是首先查看下 tomcat 启动时间，操作如下
+
+# uptime
+
+Up 283 days
+
+# pgrep -f tomcat
+
+4667
+
+# ps -eo pid,lstart,etime|grep 4667
+
+4667 Sat Jul 6 09;33:39 2013 77-05:26:02
+
+
+从输出可以看出，这台服务器已经有 283 没有重启了，而 tomcat 是在 2013 年 7 月 6 日 9 点启动的，启动了将近 77 天，接着继续看看 limits.conf 文件的修改时间，
+
+# stat /etc/security/limits.conf
+
+
+通过 stat 命令清除的看到，limits.conf 文件最后的修改时间是 2013 年 7 月 12，晚于 tomcat 启动时间，清楚问题后，解决问题的方法很简单，重启一下 tomcat 就可以了。
+

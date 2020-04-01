@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-05T10:19:04+08:00
+
+====== 如何保护硬盘 ======
+Created Tuesday 05 December 2017
+
+https://sspai.com/post/42072
+
+1. 避免突然断电
+2. 防止大量灰尘
+3. 减少外力磕碰
+4. 经常备份

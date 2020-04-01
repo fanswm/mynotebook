@@ -1,0 +1,119 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-23T22:56:12+08:00
+
+====== 0 ======
+Created 星期一 23 三月 2020
+
+sudo apt install ffmpeg libsdl2-2.0-0 adb
+
+https://github.com/Genymobile/scrcpy/blob/master/BUILD.md
+
+前言
+之前有提到Vysor，但是这个插件免费版的码率比较低，如果要高清的就要付费。
+现在推荐一个Genymotion推出的投屏工具，跨平台，自定义码率，最重要的是开源，简直良心。
+
+Github：https://github.com/Genymobile/scrcpy
+下载地址：https://github.com/Genymobile/scrcpy/releases
+
+效果图
+gif录制较模糊，实际使用很清晰
+
+
+设备要求
+Android 5.0以上
+
+检查ADB
+在命令行里打adb，如果有反应就说明已经有ADB，如果提示command not found就说明没有安装ADB
+
+如果没有ADB需要先安装ADB
+Windows
+Mac OS
+Linux
+
+安装scrcpy
+Windows
+scrcpy-win32-v1.12.1.zip
+scrcpy-win64-v1.12.1.zip
+Mac OS
+可以通过Homebrew直接安装
+
+brew install scrcpy
+1
+Linux
+Arch Linux
+
+scrcpy
+scrcpy-prebuiltserver
+其它版本的Linux需要手动构建
+手动构建文档
+
+打开USB调试
+在 开发人员选项 打开 USB调试，USB连接手机
+
+
+命令行执行
+启动scrcpy
+
+scrcpy
+1
+如果有多个设备，需要指定序列号，序列号可以从adb devices获得
+
+scrcpy -s a1171b8
+1
+设置端口
+
+scrcpy -p 27184
+1
+查看帮助
+
+scrcpy --help
+1
+设置码率（默认8M）
+
+scrcpy -b 8M
+1
+限制投屏尺寸
+
+scrcpy -m 1024
+1
+裁剪投屏屏幕(长:宽:偏移x:偏移y)
+
+scrcpy -c 800:800:0:0
+1
+投屏并录屏
+
+scrcpy -r file.mp4
+1
+不投屏只录屏
+
+scrcpy -Nr file.mp4
+1
+手指触摸的时候显示轨迹球
+
+scrcpy -t
+1
+显示版本信息
+
+scrcpy -v
+1
+快捷键
+Action	Shortcut
+切换全屏模式	Ctrl+f
+将窗口调整为1：1（完美像素）	Ctrl+g
+调整窗口大小以删除黑色边框	Ctrl+x | 双击黑色背景
+设备HOME键	Ctrl+h | 鼠标中键
+设备BACK键	Ctrl+b | 鼠标右键
+设备任务管理键	Ctrl+s
+设备 菜单 键	Ctrl+m
+设备音量+键	Ctrl+↑
+设备音量-键	Ctrl+↓
+设备电源键	Ctrl+p
+点亮手机屏幕	鼠标右键
+复制内容到设备	Ctrl+v
+启用/禁用FPS计数器（stdout）	Ctrl+i
+安装APK	将apk文件拖入投屏
+传输文件到设备	将文件拖入投屏（非apk）
+————————————————
+版权声明：本文为CSDN博主「猴子请来的救兵_」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/aa464971/article/details/83349215

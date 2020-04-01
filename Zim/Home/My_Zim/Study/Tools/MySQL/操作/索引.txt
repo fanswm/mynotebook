@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-22T15:14:01+08:00
+
+====== 索引 ======
+Created 星期六 22 二月 2020
+
+__强制使用指定索引__
+在查询的时候，数据库系统会自动分析查询语句，并选择一个最合适的索引。但是很多时候，__数据库系统的查询优化器并不一定总是能使用最优索引__。如果我们知道如何选择索引，可以使用FORCE INDEX强制查询使用指定的索引。例如：
+
+	SELECT * FROM students 
+	FORCE INDEX (idx_class_id) 
+	WHERE class_id = 1 
+	ORDER BY id DESC;
+__指定索引的前提是索引idx_class_id必须存在。__

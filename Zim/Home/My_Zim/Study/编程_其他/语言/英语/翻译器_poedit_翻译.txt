@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-04T14:20:39+08:00
+
+====== 翻译器 poedit 翻译 ======
+Created 星期三 04 三月 2020
+
+https://poedit.net/

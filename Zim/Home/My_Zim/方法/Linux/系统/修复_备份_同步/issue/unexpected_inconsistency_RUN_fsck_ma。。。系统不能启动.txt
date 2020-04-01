@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T11:48:21+08:00
+
+====== unexpected inconsistency RUN fsck ma。。。系统不能启动 ======
+Created Friday 24 November 2017
+
+> fsck -y sda11
+reboot,ok

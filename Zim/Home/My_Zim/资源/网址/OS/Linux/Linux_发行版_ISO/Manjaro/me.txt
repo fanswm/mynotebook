@@ -87,7 +87,7 @@ git config --global user.name "abstracthex"
 
 # git push 免密码： [[MySoftware:编程 文本编辑器 编译器:Git 代码托管 提交代码 版本控制:Git:免输入账号和密码方法]]
 chmod u+x zim_update.sh
-# git的输出信息中文被转码: [[MySoftware:编程 文本编辑器 编译器:Git 代码托管 提交代码 版本控制:Git:git的输出信息中文被转码]]
+# git的输出信息中文被转码: [[MySoftware:编程 文本编辑器 编译器:Git 代码托管 提交代码 版本控制:Git:git中文 git的输出信息中文被转码]]
 sudo pacman -S keepassx
 sudo pacman -S remarkable # markdown
 sudo pacman -S nutstore #坚果云
@@ -169,3 +169,9 @@ wps-office-mime: Use mime files provided by Kingsoft
 # [[MySoftware:系统:云主机 云 容器:docker:Compose:imrdr 操作]]
 # 我实际采用的方法：
 sudo pacman -S docker-compose
+
+
+# ins laptop-mode-tools
+正在解析依赖关系...
+正在查找软件包冲突...
+:: laptop-mode-tools 与 tlp 有冲突。删除 tlp 吗？ [y/N] y

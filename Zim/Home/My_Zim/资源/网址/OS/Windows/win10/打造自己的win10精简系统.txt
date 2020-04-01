@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-23T14:13:38+08:00
+
+====== 打造自己的win10精简系统 ======
+Created 星期日 23 二月 2020
+
+https://zhuanlan.zhihu.com/p/95728805?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

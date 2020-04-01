@@ -1,0 +1,101 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-19T19:15:28+08:00
+
+====== Sublime Text自定制代码片段(Code Snippets) ======
+Created 星期三 19 二月 2020
+
+https://9iphp.com/web/html/sublime-text-code-snippets.html
+
+在编写代码的整个过程中，开发人员经常会一次又一次的改写或者重用相同的代码段，消除这种重复过程的方法之一是把我们经常用到的代码保存成代码片段(snippets)，这使得我们可以方便的检索和使用它们。
+
+为了提高你的编码效率，Sublime Text提供了一种让你可以轻松添加自定义代码片段的功能。这篇文章中，我们将看到在Sublime Text中如何创建、管理以及使用代码片段来极大的简化我们的工作流程。
+
+
+创建代码片段
+为了创建代码片段，我们需要打开 Tools > New Snipptes。
+
+New Snippets
+
+Sublime Text会提供下面的模版供我们定制代码片段：
+
+<snippet>
+	<content><![CDATA[
+Hello, ${1:this} is a ${2:snippet}.
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<!-- <tabTrigger>hello</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
+我们只需把代码添加到<content>中的<![CDATA[  ]]>元素内即可，如：
+
+<content><![CDATA[
+	-webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow:    1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+	box-shadow:         1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+]]></content>
+然后在<tabTrigger>中设置让Sublime Text自动补全代码片段的触发词（trigger keyword）。触发词的名字最好方便记忆，并且与代码片段相关。这里我们设置触发词为shadow。
+
+<tabTrigger>shadow</tabTrigger>
+最后，我们定义代码片段的使用范围（scope）。由于这里我们添加的是CSS3的Box Shadow属性，我们可以想限制代码片段只在样式表中起作用。
+
+<scope>source.css</scope>
+想指定多个scope，可以使用英文逗号“,”来分隔。Window版Sublime Text查看文件的scope类型，使用 Ctrl+Shift+Alt+P 快捷键，scope类型会显示在编辑器左下角，多个scope类型的文件我们只需要取第一个即可。
+完整代码如下：
+
+<snippet>
+	<content><![CDATA[
+-webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+-moz-box-shadow:    1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+box-shadow:         1px 1px 1px 0px rgba(0, 0, 0, 0.5);
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>shadow</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.css</scope>
+</snippet>
+到这里我们已经完成了代码片段的设置，现在只需保存它。按 Ctrl+S 保存文件，Sublime Text默认会把文件保存到 /Packages/User 目录下，但是为了便于管理，我们创建一个新的文件夹来专门保存Snippets，因为可能还有一些Build文件、Plugin文件等也需要创建新的文件夹来保存。
+
+Save Snippet
+
+另外一点需要注意的是，文件名必须以 .sublime-snippet 为扩展名，否则Sublime Text将不能识别它是一个代码片段。
+插入代码片段
+在编辑器中输入触发词的时候，Sublime Text会显示选项。我们可以通过在选项中选择或者按 Tab 来触发关键词插入代码片段。
+
+Insert Snippet
+
+之后点击 Tab 键，自动插入代码片段如下：
+
+Insert Snippet
+
+由于前面我们指定了scope范围为CSS文件，所以这个代码片段只能在文件类型中是不会被触发的，像下面这样：
+
+Scope
+
+Tab键及域标记(Field Markers)
+此外，有时我们还需要编辑代码片段中的一些特殊属性。以上面的CSS3 box-shadow为例，我们可能需要改变阴影的颜色、模糊度及偏移量。
+
+Sublime Text提供了在插入代码片段后，高亮我们需要编辑的区域的功能。这些区域可以用 $ 符号后面跟随 { } 来指定，并且可以指定顺序，如下：
+
+-webkit-box-shadow: ${1:1px} ${2:1px} ${3:1px} ${4:0px} ${5:rgba(0, 0, 0, 0.5)};
+-moz-box-shadow: ${1:1px} ${2:1px} ${3:1px} ${4:0px} ${5:rgba(0, 0, 0, 0.5)};
+box-shadow: ${1:1px} ${2:1px} ${3:1px} ${4:0px} ${5:rgba(0, 0, 0, 0.5)};
+上面的例子中，首先高亮显示的区域是${1:1px}，之后按 TAB键的时候会按照指定的顺序依次高亮。在下面的截图中，请注意box-shadow属性的第一个值（包括带有前缀的）全部被高亮显示了。
+
+Edit
+
+Sublime Text的多点编辑功能让我们一次同时选择或高亮多行，使得编辑更加快捷。之后按 Tab键，高亮和编辑第二个数字区域${2:1px}，之后继续。
+
+edit
+
+安装代码片段扩展包
+你并不需要自己定义很多代码片段，因为已经有很多语言类型的代码片段扩展包供我们安装使用。
+
+假设你已经安装了Package Control，你可以按 Ctrl+Shift+P ，然后进入Package Control来安装代码片段扩展包。
+
+下面的例子中，我们发现SASS Snippets是可用的。
+
+sass
+
+你并不需要记住代码片段的整个触发词，因为在你输入的时候，Sublime Text会自动为了显示可用选项。

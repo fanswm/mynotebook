@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-20T21:04:05+08:00
+
+====== me ======
+创建日期 星期六 20 一月 2018
+
+electrum:
+收进地址：1CdTRppgvFWUZvNxhfgqNdVF4nHGDBxs3j
+
+
+blockchain.info:
+in: 1HvPA9gjctxrMNBHEdscyrUDCkhQ8wpjwC

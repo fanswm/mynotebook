@@ -27,5 +27,6 @@ error:
 为 org.freedesktop.fwupd 调用 StartServiceByName 出错：已到超时限制
 
 ```
+gpg --gen-key
 
  

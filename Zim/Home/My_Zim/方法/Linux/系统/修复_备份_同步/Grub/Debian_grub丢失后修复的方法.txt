@@ -1,0 +1,65 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-09T15:09:06+08:00
+
+====== Debian grub丢失后修复的方法 ======
+创建日期 星期日 09 二月 2020
+
+https://www.centos.bz/2017/07/debian-grub-repair/
+家里的台由于偶尔玩玩游戏,安装了win7+debian的双系统.最近一次玩游戏后,手贱点了win7的升级,结果系统坏了.重装win7后,导致debian的引导丢失.由于长期是在debian下使用,所以不想重装那么麻烦,重点是debian系统没有被损坏啊.所以就查资料研究了一下如何修复grub.由于/boot是独立的分区,走了不少弯路.我尝试了两种方式修复grub,以下是两种修复方式的记录.
+
+通过Debian rescue模式重建grub
+制作debian的U盘安装盘
+进入debian的U盘安装盘的 rescue模式（急救模式）
+选择语言/键盘/输入姓名/配置网络等信息后，进入急救模式->选择在安装程序环境中运行shell->选择请不要使用根文件系统（方便手动挂载已有系统文件系统）。
+# 由于/ /boot /home都是独立的分区,所以需要分别进行挂载
+mount /dev/sda11 /mnt
+mount /dev/sda8 /mnt/boot
+mount /dev/sda12 /mnt/home
+mount -t proc proc /mnt/proc
+mount -t sysfs sys /mnt/sys
+mount -o bind /dev /mnt/dev
+chroot /mnt /bin/bash
+grub-install /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+
+cd /
+umount -a
+exit
+cd /
+umount -a
+reboot
+# 重启后即可出现引导菜单界面
+
+# 若有办法进入系统（如手动启动引导），则可进入系统后直接采用如下方式安装grub
+sudo grub-install /dev/sda
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+reboot
+手动启动引导
+从win的启动引导中进行手动启动引导.此方式需要在win下通过easybcd安装grub,所以需要能进入win系统.既然能进入win,当然也可以在win下制作对应Linux系统的U盘安装盘,然后通过上面介绍的救援模式进行修复.
+
+在win下安装easybcd
+添加linux的grub，可针对不同分区多添加几项，避免不断重启添加其他分区。
+重启后即可出现linux的grub引导项，可逐项尝试。
+进入grub rescue后，即可进行手动启动引导。
+可通过ls查看分区信息.
+若根分区为(hd0,10)，输入如下命令（注：root和prefix后到末尾都没有输入空格）
+set root=(hd0,10)
+set prefix=(hd0,10)/boot/grub
+insmod normal
+normal
+# 最后的normal命令输入后即可进入引导菜单。
+# 进入系统后即可直接安装grub
+
+# 若未能进入grub2引导菜单,而是进入了另一个grub2命令界面.可在此进行如下操作.
+
+set root=(hd0,msdos8)               # (hd0,msdos8)      为/boot分区
+linux /vmlinuz* ro root=/dev/sda11       # *指具体的内核版本,可通过tab键补全, sda11为根目录的分区.
+initrd /initrd.img*
+boot
+
+# 至次已经成功启动系统.
+# set root=(hd0,msdos8)               (hd0,msdos8)      为/boot分区
+# linux /vmlinuz* ro root=/dev/sda11    *指具体的内核版本,可通过tab键补全, sda11为根目录的分区.   注:若/boot为独立分区时:  /vmlinuz*   若/boot不是独立分区时:  /boot/vmlinuz*
+# initrd /initrd.img*    *指具体的内核版本,可通过tab键补全
+# set root后,可通过ls命令查看该分区指定路径下的文件信息.比如:不记得分区信息了,可依次设置分区,然后通过ls查看/或/boot下是否包含内核文件及根分区相应的目录,从而确定/分区和/boot分区.

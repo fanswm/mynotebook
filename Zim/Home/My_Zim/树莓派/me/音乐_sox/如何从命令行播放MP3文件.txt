@@ -1,0 +1,164 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-25T19:46:37+08:00
+
+====== 如何从命令行播放MP3文件 ======
+Created 星期二 25 二月 2020
+
+https://linuxhint.com/play_mp3_files_commandline/
+How to Play MP3 Files from Command Line
+17 hours agoby Sidratul Muntaha
+When you’re spending most of your time on the console screen looking at texts, running commands and burning out, what could be more refreshing than listening to your favorite music? Besides refreshment, there are other situations where you might want to play music directly from the command line.
+In this article, we’ll be checking out how you can play an MP3 file directly from the CLI.
+
+Playing MP3 from command
+For this task, we’ll be needing the appropriate tool(s) installed on the system. Depending on what tool you have at your disposal, the method of playing an MP3 is going to differ. In this article, I’ll be showcasing a handful of methods using different tools.
+
+To find the package name for your distro, Pkgs.org is the best place to search for. You can also use the search feature of your package manager to determine the exact package name.
+
+VLC To Play MP3 From Command Line
+VLC is one of the best media players. If you have VLC installed, then we can use the VLC command-line interface to play an MP3. The command structure looks like this.
+
+
+$ nvlc <mp3_file>
+
+
+If you have a directory full of MP3 files and you want to play them all, then run this command.
+
+$ nvlc /path/to/dir
+
+
+Want randomized playback of the playlist? Use the “–random” flag.
+
+
+$ nvlc --random /path/to/dir
+Here, the nvlc tool is the ncurses interface to the VLC player. Interestingly, in this interface, all the common control hotkeys like spacebar, arrow keys etc. works. For example, to pause the playback, press the spacebar; to go forward/backward, press the right/left arrow key.
+
+The cvlc is another miniature interface of VLC for the command line. However, compared to nvlc, this one is even more simplistic and less verbose. To play an MP3 file using clvc, run this command.
+
+$ cvlc <mp3_file>
+
+
+Mpg123 to Play MP3 From Command Line
+This is a very simple tool to play an MP3 file. It doesn’t come pre-installed with most of the distro. To install it, use your package manager’s search function to find for mpg123. It’s highly likely that you’ll find it by the exact name.
+
+Assuming that you have the tool installed, let’s get started. For playing an MP3 file, the command structure for this tool goes like this.
+
+$ mpg123 <mp3_file>
+
+
+
+The common key shortcuts for pause, next/previous etc. are supported, for example, spacebar, arrow keys etc.
+
+Want multiple MP3 files as a playlist? Assuming all the MP3 files are within the same directory, use this command.
+
+$ mpg123 *.mp3
+
+
+For shuffle playback of the playlist, add the “-Z” flag.
+
+$ mpg123 -Z *.mp3
+
+
+Want loop? Use the “–loop” flag. Here, the command will run the MP3 file 100 times.
+
+
+$ mpg123 --loop 100 <mp3_file>
+
+
+To reduce the output clutter, you can use the “-q” or “–quiet” flag.
+
+$ mpg123 -q <mp3_file>
+
+
+There’ll be no output, but no need to be afraid. Use the shortcut keys to control its behavior.
+
+ffplay
+FFmpeg is one of the most powerful media tools that you can use to perform numerous tasks. It generally doesn’t come pre-installed but available on all the major Linux distros. This tool comes with a built-in media player named FFplay.
+
+To play an MP3 file with FFplay, run this command.
+
+$ ffplay <mp3_file>
+
+
+The media player will start playing the file with a GUI window showing the spectrum analyzer. If you don’t want the GUI to pop up, add the “-nodisp” flag.
+
+$ ffplay -nodisp <mp3_file>
+
+
+Want to play a single file in a loop? Run the command. Here, the MP3 will be played in a loop 100 times.
+
+$ ffplay -hide_banner -nodisp -loop 100 <mp3_file>
+
+
+Generally, ffplay and all the FFmpeg tools will show a short report on the build config and license information. To disable this report in the output, add the “-hide_banner” flag.
+
+$ ffplay -nodisp -hide_banner <mp3_file>
+
+
+Mplayer to Play MP3 From Command Line
+This is a very simplistic media player on Linux that can play common media files like MP3. It’s available on almost all the major Linux ecosystems. When using in CLI, Mplayer supports the default hotkeys like spacebar, arrow keys etc. for pause/resume, going forward/backward etc.
+
+To play an MP3 with Mplayer, run this command.
+
+$ mplayer <mp3_file>
+
+
+The Mplayer CLI also supports the default pause/resume/positioning hotkeys. It also supports playing multiple files from a directory.
+
+$ mplayer *.mp3
+
+
+When you’re telling the player to play a lot of MP3 files, shuffling can be enjoyable. If you want mplayer to shuffle, use the “-shuffle” flag.
+
+$ mplayer -shuffle *.mp3
+
+
+To get less verbose output, Mplayer supports the “-quiet” argument.
+
+$ mplayer -quiet <mp3_file>
+
+
+Want even less verbose output? Use the “-really-quiet” flag.
+
+$ mplayer -really-quiet <mp3_file>
+
+
+If you want to play the MP3 in the GUI, use the “-gui” flag.
+
+$ mplayer -gui <mp3_file>
+If you want to disable the GUI, then use “-nogui” instead.
+
+$ mplayer -nogui <mp3_file>
+Looping is also supported. THe following command will run your selected MP3 file(s) for 100 times.
+
+$ mplayer -really-quiet -loop 100 <mp3_file>
+
+
+If you just want the audio of an MP4 file, then use the following command. Here, we’re disabling the video part.
+
+$ mplayer -really-quiet -vo null <mp4_file>
+
+
+The number of command arguments that mplayer support is HUGE! If you’re interested in it, check out the man page.
+
+$ man mplayer
+
+
+Sox to Play MP3 From Command Line
+Sox is another powerful media player, often referred to as the “Swiss army knife” of audio. This tool can play and convert a number of popular media files. Not only that, you can also apply some sound effects and record audio!
+
+Sox is also available on most of the major Linux distros out there. To play an MP3 using Sox, use this command.
+
+$ play <mp3_file>
+
+
+Final thoughts
+There are various ways you can play an MP3 file from the command line. All you have to know is what tool to use and what command to run. Personally, I recommend using VLC as it’s well-known for its features.
+
+If you just want to test the speaker, then using the speaker-test tool is a better alternative as it offers finer control over the tests. For example, the following command will perform a 6-channel check for 5.1 setup.
+
+$ speaker-test -c6
+
+
+Enjoy!

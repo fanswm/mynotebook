@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-22T12:25:33+08:00
+
+====== 数据库 ======
+Created 星期六 22 二月 2020
+
+__创建数据库__： 
+	mysql> CREATE DATABASE databaseName;
+	Query OK, 1 row affected (0.01 sec)
+
+要__删除一个数据库__，使用命令：
+
+mysql> DROP DATABASE databaseName;
+Query OK, 0 rows affected (0.01 sec)
+注意：__删除一个数据库将导致该数据库的所有表全部被删除。__
+
+对一个数据库进行操作时，要首先将其__切换为当前数据库__：
+mysql> USE databaseName;
+Database changed

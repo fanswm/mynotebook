@@ -52,7 +52,7 @@ Use `conda config --show channels` to view your configuration's current state,
 and use `conda config --show-sources` to view config file locations.
 ```
 
-♥ yay -S python-stsci.distutils
+♥ __yay -S python-stsci.distutils__
 
 ```shell
 构建 [mo]：0 个 po 文件的目标文件已过期

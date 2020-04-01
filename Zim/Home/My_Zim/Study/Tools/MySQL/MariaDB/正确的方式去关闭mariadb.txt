@@ -1,0 +1,36 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-23T22:33:19+08:00
+
+====== 正确的方式去关闭mariadb ======
+Created 星期一 23 三月 2020
+
+https://blog.csdn.net/weixin_34378767/article/details/89821781
+
+用正确的方式去关闭数据库！
+
+	
+[root@mysql91 ~]# netstat -ntlp|grep mysql
+tcp        0      0 :::3306                     :::*                        LISTEN      4305/mysqld         
+方法一、
+[root@mysql91 ~]# __mysqladmin -uroot -p shutdown__
+Enter password: 
+[1]+  Done                    mysqld_safe --defaults-file=/etc/my.cnf --numa-interleave
+[root@mysql91 ~]# mysqld_safe --defaults-file=/etc/my.cnf --numa-interleave &
+[1] 4532
+[root@mysql91 ~]# 170103 19:26:26 mysqld_safe Logging to '/log/mysql/error.log'.
+
+[root@mysql91 ~]# mysql -uroot -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 3
+Server version: 10.1.20-MariaDB MariaDB Server
+Copyright (c) 2000, 2016, Oracle, MariaDB Corporation Ab and others.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+方法二、
+__MariaDB [(none)]> shutdown;__
+Query OK, 0 rows affected (0.00 sec)
+MariaDB [(none)]> exit
+Bye
+[1]+  Done                    mysqld_safe --defaults-file=/etc/my.cnf --numa-interleave
+__[root@mysql91 ~]# netstat -ntlp|grep mysql__

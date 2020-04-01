@@ -12,3 +12,4 @@ Vivaldi[90] 是一个基于 Chrome 的自由开源项目，旨在通过添加扩
 以上就是我的推荐，你还有更好的软件向大家分享吗？欢迎评论。
 https://vivaldi.com/
 
+https://vivaldi.com/zh-hans/

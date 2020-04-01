@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-16T21:30:11+08:00
+
+====== feh ======
+Created 星期日 16 二月 2020
+
+https://wiki.gentoo.org/wiki/Feh
+
+__user $crontab -e__
+CODE
+__*/5 *  *  * * DISPLAY=":0.0" feh --randomize --bg-fill /path/to/wallpaper_library__
+This will run feh every 5 minutes, and every time randomly chooses a picture from the directory /path/to/wallpaper_library. The environment variable DISPLAY must be set inside of cron because cron was started before X. For more help with automated tasks on intervals, see the page for cron.
+
+Viewing images

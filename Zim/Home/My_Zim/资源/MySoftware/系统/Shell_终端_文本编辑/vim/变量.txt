@@ -1,0 +1,72 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-07T12:09:31+08:00
+
+====== 变量 ======
+创建日期 星期六 07 三月 2020
+
+Vim中三个环境变量$VIM 、$VIMRUNTIME、$HOME说明
+转载whm2300 最后发布于2013-06-19 19:28:37 阅读数 4774  收藏
+展开
+*$VIM*
+
+环境变量$VIM被用来确定Vim中不同的用户文件的位置，比如用户启动脚本“.vimrc”。这个是系统设置，详见 startup.
+
+允许每个使用者需要时修改$VIM环境变量，Vim将试图从以下位置取得$VIM的值：
+
+1. 定义$VIM环境变量值。可以用Vim查看$VIM支持文件的指定目录。例如：
+setenv VIM /home/paul/vim
+
+2. 当作“helpfile”(帮助文件路径)使用，除非“helpfile”路径也包含在环境变量中（默认是“$VIMRUNTIME/doc/help.txt”：因果难定的问题）。文件名（“help.txt”或其它）被调用，请按“doc”，“runtime”和“vim{version}”顺序调用后续目录名。
+
+3. 对于MSDOS，Win32和OS/2 Vim试图使用可执行文件的目录名，如果它结尾是“/src”，可以被调用。这个可应用在：把某目录中ZIP文件解包，或者，调整查找vim可执行文件的搜索路径。后续目录名的调动，依据：“runtime”和“vim{version}”（例如，“vim54”）。例如：
+在windows7在$VIM默认值是vim安装的根目录，在要引用vim安装目录时，就可以不输入全部路径，由$VIM代替就可以了。举例：
+安装目录是E：/gvim/vim，如果要打开vim目录下“_vimrc”,
+使用命令：“gvim E:/gvim/vim/_vimrc”，而使用$VIM之后是“gvim $VIM/_vimrc”。
+这样就缩短了代码长度对不对？
+
+4. 对于uninx被当作编译期定义的安装目录来使用（详见“:version”输出）。
+
+设置$VIM环境变量。更改最近一次设置，使用“:let”命令：
+
+:let $VIM = "/home/paul/vim/"
+
+*$VIMRUNTIME*
+
+环境变量$VIMRUNTIME用来找出各种支持文件，像在线文档和文件使用语法高亮一样。例如，主帮助文件通常是“$VIMRUNTIME/doc/help.txt”。
+
+你没有按惯例设置自己的$VIMRUNTIME，但让Vim自行估计。按下顺序发现$VIMRUNTIME值：
+
+1. 如果环境变量$VIMRUNTIME已经设置，则直接使用它，当运行文件在特定位置时，你可以使用。
+
+2. 如果"$VIM/vim{version}"存在，则使用。{version}是Vim的版本号，不包括任何'-' 或'.'。例如"$VIM/vim54"。这是$VIMRUNTIME标准值。
+
+3. 如果"$VIM/runtime"存在，则使用。
+
+4. 使用$VIM值，这是向后兼容老版本。
+
+5. 当‘helpfile’选项被设置，不包含‘$’，它的值是有可用的，从最后消除"doc/help.txt"。
+
+对于Unix，当有个$VIMRUNTIME内编译默认值（检查":version"输出结果），步长在2，3和4之间跳跃，内编译默认值在步长5后被使用，这个意思是内编译默认值会支配$VIM值，如果$VIM设置为“/etc”并且执行期文件在"/usr/share/vim/vim54"，才能使用。
+
+曾经使用过Vim，更改$VIMRUNTIME环境变量。
+
+更改$VIMRUNTIME最近一次值，使用命令":let"，格式如下：
+
+:let $VIMRUNTIME = "/home/piet/vim/vim54"
+
+*$HOME*
+
+使用"~"就如同使用"$HOME",但它只能在选项开始之前和空格或逗号后面使用。
+
+在Unix系统中"~user"能被使用，它代替了用户home目录，例如：
+
+:set path=~mool/include,/usr/include
+
+在Unix系统也可使用"${HOME}"形式，字符用｛｝括起来，注意你如果想使用命令"gf"，你需要在'isfname'上加'{' 和'}'。
+
+注意：扩充环境变量和"~/"仅用":set"命令，而不是":let"命令。
+
+注意扩展选项最大长度受限制，系统决定长度，是大值在256 到1024个字符。
+
+https://blog.csdn.net/whm2300/article/details/9131771

@@ -42,4 +42,13 @@ the following two commands:
 过程中发现，没有gi, 查找到最后，是因为以下这个文件夹内没 有。
 cd /usr/local/lib/python3.6/dist-packages
 最终原因是因为当前环境下的python指向的是主文件夹内的anaconda，把anaconda禁用之后，就可以了。
+--------------------
 
+```error:
+Traceback (most recent call last):
+  File "./setup.py", line 13, in <module>
+	from distutils.core import setup
+ModuleNotFoundError: No module named 'distutils.core'
+```
+解决：
+sudo apt install python3-pip

@@ -1,0 +1,34 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-12T10:03:15+08:00
+
+====== msi和 exe 文件的区别 ======
+创建日期 星期四 12 三月 2020
+
+ 有些软件的正本里面同时含有 setup.msi 程序和 setup.exe 程序，例如Symantec AntiVirus客户端的软件里就含有 setup.MSI和 setup.exe 两个安装程序。一般情况下随便用其一进行程序的安装，结果是一样的。
+
+ 
+
+但是__如果我们的操作系统(安装环境)没有安装某些程序，则.MSI有可能不能运行，这时就要用Setup.exe来进行安装了__。Setup.exe可以利用Setup.ini来先安装运行.MSI需要的软件，建造一个较全的安装环境，最后再调用.MSI程序。
+
+所以当你确定你的安装环境不缺少什么应该安装的程序时，__可以直接运行.MSI来安装软件的副本。__
+
+对于 Symantec AntiVirus 软件来说，Setup.exe的一个主要功能就是先安装WindowsInstaller.exe最新版，因为所有的.MSI程序都需要系统里装有WindowsInstaller.exe才能正常运行。
+
+ 
+
+总结: .exe文件进行安装的时会检测安装软件需要的环境和一些必要的组件, 适不适合当前软件安装, 如果缺少一些例如.netframework一类的组件, 就会先进行下载然后再进行安装 
+
+		 .msi文件不检测当前系统环境是否符合就直接进行安装, 如果环境不符合运行到一半可能会停止安装,并报错或提示,其实是Windows Installer在执行MSI包定义的各项操作。因此我们需要安装Windows Installer的正确版本才能运行setup.msi
+
+ 
+
+          
+
+	  我们都知道通过VS工具自带的打包后会生成两个文件，一个是exe文件，一个是msi文件。
+
+需要说明的是msi文件时windowinstaller开发出来的程序安装文件，它可以让你安装、修改、卸载你所安装的程序，也就是说VS工具打包生成的msi文件就是window installer的数据包，把所有和安装文件相关的内容封装在一个包里。
+
+VS工具打包生成的exe文件是主要是用于检查安装的环境，当安装的环境检查成功后，会自动再安装msi文件。当然可能会有exe文件也能直接安装的，但是开发exe的时候要比msi困难多，因为需要编写和安装、修改、卸载相关的很多内容，而msi把这些功能都集成化了，易于开发windows程序安装包。
+
+ https://www.cnblogs.com/wangjiquan/p/7446981.html

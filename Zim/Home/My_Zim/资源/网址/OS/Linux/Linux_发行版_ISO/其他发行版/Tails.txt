@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-12T05:22:11+08:00
+
+====== Tails ======
+创建日期 星期二 12 三月 2019
+
+https://tails.boum.org/index.en.html
+https://tails.boum.org/install/download/index.en.html#install-inc-steps-download.inline.web-of-trust

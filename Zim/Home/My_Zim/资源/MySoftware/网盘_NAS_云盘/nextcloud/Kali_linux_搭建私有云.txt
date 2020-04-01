@@ -1,0 +1,87 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-16T20:00:15+08:00
+
+====== Kali linux 搭建私有云 ======
+创建日期 星期一 16 三月 2020
+
+Kali linux 搭建私有云
+http://mp.weixin.qq.com/s?__biz=MzI1MzEwOTc3OQ==&mid=2652126641&idx=1&sn=8713fece601ac0c53b103abcd4976970&chksm=f239eecdc54e67dba40efc5df8398dc92e108fe7a81f163b3c3ae2ab375480af3d81fb689d52&mpshare=1&scene=1&srcid=&sharer_sharetime=1584163373689&sharer_shareid=79f6de27b2f84c31190358375c398857#rd
+
+1：安装Apache
+
+apt-get install apache2
+
+2：安装PHP
+
+apt-get install php7.0
+
+3：安装PHP模块
+
+apt-get install php7.0 php-pear libapache2-mod-php7.0 php7.0-mysql php7.0-curl php7.0-json php7.0-cgi php7.0-gd php7.0-zip php7.0-mb
+
+
+4：安装mysql
+在kali linux中已经默认安装了MariaDB。因此不再安装！登录即可！
+
+5：下载owncloud
+官网地址：https://owncloud.org/download/
+
+
+我们选择debian因为kali 是基于debian深度开发的。
+
+按照提示，添加到本地仓库！进行安装
+wget -nv https://download.owncloud.org/download/repositories/production/Debian_9.0/Release.key -O Release.key
+apt-key add - < Release.key
+echo 'deb http://download.owncloud.org/download/repositories/production/Debian_9.0/ /' > /etc/apt/sources.list.d/owncloud.list
+apt-get update
+apt-get install owncloud-files
+
+6：安装完成后，我们启动Apache和mysql
+启动Apache
+
+service Apache2 start
+
+启动mysql
+
+service mysql start
+
+7：在地址栏中输入127.0.0.1/owncloud将出现登录界面
+
+
+8：登录数据库，我们创建一个数据库；
+
+mysql -u root -p
+
+输入密码后登录数据库，注意在初始状态下mysql的密码为空，需要先修改密码。
+创建数据库；
+
+create database yun;
+
+这里我创建了一个 yun 的数据库
+
+这里分别填写为：
+
+root #数据库用户名
+123456 #数据库密码（根据自身情况而定）
+yun #数据库名称
+localhost
+
+填写上面的用户名和密码后，点击下方的安装
+等安装成功后，效果如下！
+
+
+9：登录
+
+
+
+安全人才缺口巨大，薪资也极高。
+学习网络安全需要早早开始，才能抢占先机。
+kali安全渗透+web白帽子高级工程师
+即将开班
+口碑好课 免费资料
+加老师微信获取：
+
+
+
+点击【阅读原文】，抢先听网络安全课程

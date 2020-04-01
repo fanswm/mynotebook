@@ -1,0 +1,31 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-22T08:35:35+08:00
+
+====== 转换 ======
+Created 星期六 22 二月 2020
+
+https://superuser.com/questions/421153/how-to-add-a-mp3-handler-to-sox
+# install sox/lame
+sudo apt-get install sox
+sudo apt-get install lame
+
+# play music
+play music.mp3
+# play FAIL formats: no handler for file extension `mp3'
+
+# mp3 -> wav
+__lame --decode music.mp3 music.wav__
+
+# play music
+play music.wav
+
+--------------------
+```play WARN alsa: can't encode 0-bit Unknown or not applicable
+play FAIL formats: no handler for file extension `mp3'```
+
+lame --decode music.mp3 - | play -
+不会留下任何痕迹。
+
+解决sox报错sox FAIL formats: no handler for given file type `mp3
+__sudo apt-get install libsox-fmt-mp3__

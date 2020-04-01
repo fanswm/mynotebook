@@ -1,0 +1,21 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-22T09:04:19+08:00
+
+====== 数据库 ======
+Created 星期六 22 二月 2020
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+|--------------------|
+| mysql              |
+| performance_schema |
+| shici              |
+| sys                |
+| test               |
+| school             |
++--------------------+
+其中，information_schema、mysql、performance_schema和sys是系统库，不要去改动它们。其他的是用户创建的数据库。

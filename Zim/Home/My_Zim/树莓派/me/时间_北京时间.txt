@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-24T15:27:28+08:00
+
+====== 时间 北京时间 ======
+Created 星期一 24 二月 2020
+
+sudo timedatectl set-ntp true
+
+sudo dpkg-reconfigure tzdata

@@ -6,12 +6,15 @@ Creation-Date: 2018-12-03T14:15:06+08:00
 Created Monday 03 December 2018
 
 官网： https://i3wm.org/docs/userguide.html
+https://i3wm.org/docs/userguide.html
+
+i3 (简体中文) - ArchWiki:  https://wiki.archlinux.org/index.php/I3_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 
 i3 窗口管理器使 Linux 更美好 https://linux.cn/article-10286-1.html?utm_source=rss&utm_medium=rss
 
 i3 窗口管理器使 Linux 更美好
 2018-11-28 11:47
-编译自：https://opensource.com/article/18/8/i3-tiling-window-manager作者： Ricardo Gerardi
+编译自：https://opensource.com/article/18/8/i3-tiling-window-manager%E4%BD%9C%E8%80%85： Ricardo Gerardi
 原创：LCTT https://linux.cn/article-10286-1.html 译者： lixinyuxx
 
 通过键盘操作的 i3 平铺窗口管理器使用 Linux 桌面。

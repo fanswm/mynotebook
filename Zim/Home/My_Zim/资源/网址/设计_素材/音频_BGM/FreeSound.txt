@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-28T16:41:50+08:00
+
+====== FreeSound ======
+Created Thursday 28 December 2017
+
+https://freesound.org/
+FreeSound
+FreeSound 也是一个允许用户随意下载、上传音乐素材的网站，除了音乐片段，像走路、翻书、森林鸟叫等音效也都有，能不能用的好就看你搜索的功力了。下载上传均需要注册，同时也请注意每条音频都有着单独的版权声明。

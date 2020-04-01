@@ -1,0 +1,230 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-23T14:19:52+08:00
+
+====== 2019年最受欢迎的20款黑客工具 ======
+Created 星期日 23 二月 2020
+
+https://zhuanlan.zhihu.com/p/100870206?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+恍惚间就到了2020年，在过去的一年里，你都用了哪些黑客工具呢？
+
+今天，统计了全球各大网站数据（浏览量、下载量、使用量等等），为大家总结出了2019年最受欢迎的 20 款黑客工具。涉及范围主要集中在 信息收集、Android黑客工具、自动化工具、网络钓鱼等，感兴趣的同学不容错过。
+
+取前 20 款，但下面列出排名不分先后！
+001 Hijacker v1.5
+适用于 Android 的多合一 WiFi 破解工具。
+项目地址：https://github.com/chrisk44/Hijacker
+
+
+适用于 Android 5+ 的 Aircrack，Airodump，Aireplay，MDK3 和 Reaver GUI 应用程序。（需要 root）
+
+特征
+
+查看附近 wifi 及设备列表
+获取接入点信息
+取消他人的连接
+捕获数据包等等
+002 Findomain v0.9.3
+最快且跨平台的子域枚举器。（之前打算推它的，阴差阳错被忽略了）
+项目地址：https://github.com/Edu4rdSHL/findomain
+
+其最大的优势就是：快
+
+测试结果为 5.5 秒内收集 84110 个子域。
+
+
+特征
+
+子域监控
+API查询
+DNS over TLS 支持
+判断域名是否解析
+输出为文件等等
+003 EagleEye
+好友追踪器，使用图像识别和反向图像搜索找到他们的Instagram，FaceBook 和 Twitter 个人资料。
+项目地址：https://github.com/ThoughtfulDev/EagleEye
+
+至少需要一张好友的照片（要求为 .jpg 文件）及名字 or 昵称。（可使用docker进行一键式安装）
+
+
+通过人像识别进行搜索，还是挺好用的。比如想要某个女生的 Twitter 帐号，直接随便拿一张她的照片和一些姓名或者昵称进去搜索即可。（当然，撞脸怪也挺多的哈~）
+004 ANDRAX v4 DragonFly
+Android 上的渗透测试平台。
+官方网站：https://andrax.thecrackertechnology.com/
+
+
+特点
+
+支持 Android5.0+，随身携带
+开源
+900+工具
+1000+攻击类型
+
+体验《看门狗》里划划手机就能进行黑客攻击，心动不如行动。
+005 CQTools
+最新的 Windows 黑客工具包。
+文档：https://cqureacademy.com/blog/black-hat-asia-2019-tools
+
+从嗅探和欺骗活动开始，通过信息搜集、密码提取、自定义外壳程序生成、自定义有效载荷生成、防病毒解决方案、隐藏代码，各种键盘记录程序等等，该工具包可以在基础架构内进行全面的攻击，并利用这些信息进行再攻击。其中一些工具是 CQURE 团队首次向世界公开发布的。
+
+
+006 Sampler
+用于 Shell 命令执行，可视化和警报的工具（使用简单的 YAML 文件配置）。
+项目地址：https://github.com/sqshq/sampler
+
+官网：https://sampler.dev/
+
+
+用途：可以从终端直接采样任何动态过程，观察数据库中的更改，监视 MQ 实时消息，触发部署脚本并在完成时获取通知。
+
+如果可以使用 Shell 命令，则可以使用 Sampler 暂时将其可视化。
+
+007 LOIC 1.0.8
+网络压力测试器。
+地址：https://sourceforge.net/projects/loic/
+
+LOIC 通过向服务器发送 TCP 或 UDP 数据包，以破坏特定主机的服务，在目标站点上执行拒绝服务（DoS）攻击（或由多个人使用的DDoS攻击）。很多人自愿使用 LOIC 来加入僵尸网络。
+
+该软件激发了创建名为 JS LOIC 的独立 JavaScript 版本以及基于 LOIC 的 Web 版本 Low Lowbit Web Cannon 的灵感，可从 Web 浏览器启用 DoS，从而进行压力测试。
+
+
+008 EasySploit
+Metasploit自动化（比以往更快捷）。
+项目地址：https://github.com/KALILINUXTRICKSYT/easysploit
+
+选项
+
+Windows
+Android
+Linux
+MacOS
+Web
+扫描目标是否易受 ms17_010 的攻击
+仅通过 IP（ms17_010_eternalblue）利用 Windows 7/2008 x64 启用远程桌面（ms17_010_eternalblue）
+仅通过 IP（ms17_010_psexec）利用 Windows Vista / XP / 2000/2003 启用远程桌面（ms17_010_psexec）
+利用链接利用 Windows（HTA服务器）
+联系
+
+009 SQLMap
+自动 SQL 注入和数据库接管工具。
+项目地址：https://github.com/sqlmapproject/sqlmap
+
+这个就不过多介绍了，老熟人。
+
+
+010 ScanQLi
+ScanQLi 是一个简单的 SQL 注入扫描程序，具有一些附加功能。该工具无法利用 SQLi，只能检测到它们。
+项目地址：https://github.com/bambish/ScanQLi
+
+
+011 OKadminFinder
+简而言之，后台扫描器。
+项目地址：https://github.com/mIcHyAmRaNe/okadminfinder3
+
+
+优势
+
+丰富字典
+代理
+自更新
+012 Shellphish
+18 种社交媒体的网络钓鱼工具（Instagram，Facebook，Snapchat，Github，Twitter，Yahoo，Protonmail，Spotify，Netflix，Linkedin，Wordpress，Origin，Steam，Microsoft，InstaFollowers，Gitlab，Pinterest）
+项目地址：https://github.com/thelinuxchoice/shellphish
+
+
+顾名思义，点到为止。
+
+013 DNS Shell
+DNS通道上的交互式 Shell
+什么是DNS Shell
+
+有效负载是在调用服务器脚本时生成的，它仅利用 nslookup 来执行查询并向服务器查询新命令，然后服务器在端口 53 上侦听传入的通信，一旦在目标计算机上执行了有效负载，服务器就会生成一个交互式外壳。
+
+建立通道后，如果输入了新命令，则有效负载将连续向服务器查询命令，它将执行该命令并将结果返回给服务器。
+
+
+014 QRLJacker v2.0
+一种新的社会工程学攻击面。
+项目地址：https://github.com/OWASP/QRLJacking
+
+QRLJacking 攻击流程
+
+攻击者初始化客户端 QR 会话，然后将登录 QR 代码克隆到网络钓鱼网站中：“现在，精心制作的网络钓鱼页面具有有效且定期更新的 QR 代码，可以发送给受害者。”
+攻击者将网络钓鱼页面发送给受害者。
+受害者使用特定的目标移动应用程序扫描 QR 码。
+攻击者获得对受害者帐户的控制权。
+该服务正在与攻击者的会话交换所有受害者的数据。
+QR 码是二维条码的一种。
+
+015 PhoneSploit
+通过使用开放的 Adb 端口利用 Andriod 设备。
+项目地址：https://github.com/metachar/PhoneSploit
+
+功能
+
+端口转发
+抓取wpa_supplicant
+打开/关闭WiFi
+删除密码
+从应用程序提取apk
+获取电池状态
+获取当前活动等等
+
+016 SocialBox
+由 Belahsan Ouerghi 编码的 Bruteforce 攻击框架（Facebook，Gmail，Instagram，Twitter）
+项目地址：https://github.com/Cyb0r9/SocialBox
+
+
+017 Instainsane
+Instainsane 是一个 Shell 脚本，可以对 Instagram 进行多线程蛮力攻击，该脚本可以绕过登录限制，并且可以一次以100次尝试以大约1000个密码/分钟的速度测试无限数量的密码。
+项目地址：https://github.com/thelinuxchoice/instainsane
+
+优势
+
+多线程（一次尝试100次）
+保存/恢复会话
+通过 TOR 匿名
+检查有效的用户名
+丰富密码字典
+检查并安装所有依赖项
+
+018 Tool-X
+Tool-X 是 kali linux 黑客工具安装程序。为 termux 和其他 Android 终端开发的 Tool-X。使用 Tool-X，您可以在 termux 应用程序和其他基于 Linux 的发行版中安装近 370 多种黑客工具。
+项目地址：https://github.com/Rajkumrdusad/Tool-X
+
+
+019 Hacktronian
+适用于 Linux 和 Android 的多合一黑客工具。
+官网：https://thehackingsage.github.io/hacktronian/
+
+项目地址：https://github.com/thehackingsage/hacktronian
+
+功能
+
+信息收集
+密码爆破
+无线测试
+开发工具
+嗅探与欺骗
+网络黑客工具
+私人网络黑客工具
+Post Exploitation
+
+020 Ultimate Facebook Scraper
+该机器人可抓取 Facebook 用户个人资料的几乎所有内容，包括用户时间轴上可用的所有公共帖子/状态，上传的照片，带标签的照片，视频，朋友列表及其个人资料照片（包括关注者，关注者，工作朋友，大学朋友等） 。
+项目地址：https://github.com/harismuneer/Ultimate-Facebook-Scraper
+
+特征
+
+抓取 Facebook 用户个人资料几乎所有内容：
+
+上传的照片
+标记的照片
+影片
+朋友列表及其个人资料照片（包括关注者，被关注者等）
+以及用户时间轴上所有可用的公开帖子/状态。
+
+以上就是 2019 年最受欢迎的 20 款黑客工具，走过路过千万不用错过~
+
+源自：KitPloit
+更多有关内容请前往二向箔安全进行学习，最近推出了“挖洞”班，想了解更多资讯的，可咨询客服微信 twosecurity02

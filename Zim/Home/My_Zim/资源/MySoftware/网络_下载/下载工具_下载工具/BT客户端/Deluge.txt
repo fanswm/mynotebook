@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-23T11:58:24+08:00
+
+====== Deluge ======
+Created Tuesday 23 October 2018
+
+https://deluge-torrent.org/
+Deluge[5] 是一个漂亮的跨平台 BT 客户端，旨在优化 μTorrent 体验，并向用户免费提供服务。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Deluge。
+
+$ sudo add-apt-repository ppa:deluge-team/ppa
+$ sudo apt-get update
+$ sudo apt-get install deluge

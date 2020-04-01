@@ -1,0 +1,22 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-09-27T18:22:04+08:00
+
+====== MinGW的离线安装包能在哪里下载 ======
+Created 星期五 27 九月 2019
+
+推荐两个。
+一个是MinGW-builds ,直接去MinGW-builds这里  https://sourceforge.net/projects/mingwbuilds/files/host-windows/releases/4.8.1/  下就好。
+优点是x86/x64,异常处理：siji/dwarf ,线程模型：posix/Win32都比较全，自己去选择适合自己的就好，
+缺点是版本有点老，最高到4.8.1不过是修过很多次的Rev5。
+
+另一个是 http://nuwen.net/mingw.html 
+优点是编译器比较新，而且自带的第三方库比较丰富，
+缺点是不像上面那个那么多选择，而且只有x64版本的。
+
+在家一个 TDM-GCC的吧，之前这个东西一直不更新，最近发现总算是开始与时俱进了。另外发一个个人的选择优先级，同版本的话，优先TDM，其次nuwen的，mingw-build已经很久不更新了，不是太建议选择
+
+作者：Leon
+链接：https://www.zhihu.com/question/26201557/answer/32683499
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

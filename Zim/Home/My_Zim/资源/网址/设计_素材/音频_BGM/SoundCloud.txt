@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-28T16:39:47+08:00
+
+====== SoundCloud ======
+Created Thursday 28 December 2017
+
+https://soundcloud.com/
+
+SoundCloud
+SoundCloud 是独立音乐人聚集的宝地，同时也是 CC0 音乐的宝库。有些音乐人会将自己创作的音乐设置为 CC0 发布上来，允许听众随意下载、使用。比如这个 Creative Commons 的官方号（没有验证过），虽然目前的音乐数量不算多只有不到 300 条，但已累积了两万多的粉丝；而另一个账号 Royalty Free Music 粉丝不多却有着近 6000 条 CC0 音频，从钢琴曲到氛围音乐到 Dubstep 应有尽有，即使不下载使用，用在健身房、SPA 会馆一类的地方也是很好的。

@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-19T19:09:56+08:00
+
+====== Gist ======
+Created 星期三 19 二月 2020
+
+使用Gist做什么
+https://www.labnol.org/internet/github-gist-tutorial/28499/
+
+
+https://www.cacher.io/
+
+
+http://www.codesnippet.cn/list.html

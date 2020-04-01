@@ -1,0 +1,36 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-22T15:10:10+08:00
+
+====== 写入查询结果集 ======
+Created 星期六 22 二月 2020
+
+__如果查询结果集需要写入到表中__，可以结合INSERT和SELECT，将SELECT语句的结果集直接插入到指定表中。
+
+例如，__创建一个统计成绩的表statistics__，记录各班的平均成绩：
+
+CREATE TABLE statistics (
+	id BIGINT NOT NULL AUTO_INCREMENT,
+	class_id BIGINT NOT NULL,
+	average DOUBLE NOT NULL,
+	PRIMARY KEY (id)
+);
+然后，__我们就可以用一条语句写入各班的平均成绩：__
+
+	__INSERT INTO statistics (class_id, average) __
+	__SELECT class_id, AVG(score) __
+	__FROM students __
+	__GROUP BY class_id;__
+__确保INSERT语句的列和SELECT语句的列能一一对应__，就可以在statistics表中直接保存查询的结果：
+
+> SELECT * FROM statistics;
++----+----------+--------------+
+| id | class_id | average      |
++----+----------+--------------+
+| 1 | 1 | 86.5         |
+|---|---|--------------|
+| 3 | 3 | 88.333333333 |
+| 2 | 2 | 73.666666666 |
++----+----------+--------------+
+3 rows in set (0.00 sec)
+

@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-17T22:01:41+08:00
+
+====== 检查开机时间 ======
+Created 星期二 17 三月 2020
+
+systemd-analyze blame
+
+sys
+

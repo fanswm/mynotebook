@@ -1,0 +1,26 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:45:10+08:00
+
+====== Krita ======
+Created Wednesday 24 October 2018
+
+Krita[53] 是一款开源的绘画程序，它具有美观的 UI 和可靠的性能，也可以用作图像处理工具。
+
+使用以下命令在 Ubuntu 和 Debian 安装 Krita。
+
+$ sudo add-apt-repository ppa:kritalime/ppa
+$ sudo apt update
+$ sudo apt install krita
+
+https://krita.org/en/
+# CentOS:
+ sudo yum install calligra-krita
+
+
+# Debian:
+sudo apt install krita
+建议安装：
+  ffmpeg krita-l10n fam
+
+sudo apt install ffmpeg fam

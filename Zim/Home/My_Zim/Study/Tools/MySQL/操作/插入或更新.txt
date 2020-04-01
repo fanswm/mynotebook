@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-22T15:07:21+08:00
+
+====== 插入或更新 ======
+Created 星期六 22 二月 2020
+
+如果我们希望插入一条新记录（INSERT），但__如果记录已经存在，就更新该记录__，此时，可以使用INSERT INTO ... ON DUPLICATE KEY UPDATE ...语句：
+
+	INSERT INTO students 
+	(id, class_id, name, gender, score) 
+	VALUES (1, 1, '小明', 'F', 99) 
+	ON DUPLICATE KEY 
+	UPDATE name='小明', gender='F', score=99;
+若id=1的记录不存在，INSERT语句将插入新记录，否则，当前id=1的记录将被更新，更新的字段由UPDATE指定。

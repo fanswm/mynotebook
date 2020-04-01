@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-26T15:59:21+08:00
+
+====== init run level ======
+Created 星期三 26 二月 2020
+
+0	关机
+3	纯命令行模式
+5	含有图形界面的模式
+6	重启

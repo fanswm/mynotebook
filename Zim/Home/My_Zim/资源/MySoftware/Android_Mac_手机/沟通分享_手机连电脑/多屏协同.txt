@@ -1,0 +1,26 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-06T18:22:23+08:00
+
+====== 多屏协同 ======
+Created 星期五 06 三月 2020
+
+
+非华为电脑实现多屏协同的方法:
+https://zhuanlan.zhihu.com/p/108624024
+https://www.zhihu.com/question/352353172/answer/1031139831
+
+
+华为手机屏幕投射电脑同步显示（分享自知乎网）https://zhuanlan.zhihu.com/p/60346006?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+华为电脑管家  
+
+手机投屏电脑，电脑无线同屏电视软件详解（分享自知乎网）https://zhuanlan.zhihu.com/p/30529310?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+上面这文章只有四个字： 乐播投屏PC版  
+
+精品小众软件推荐 - 五款免费的手机投屏软件，满足你任何场景的需求。（分享自知乎网）https://zhuanlan.zhihu.com/p/59180606?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+imrdr:
+Apowersoft      https://www.apowersoft.cn/
+Total Control
+
+
+

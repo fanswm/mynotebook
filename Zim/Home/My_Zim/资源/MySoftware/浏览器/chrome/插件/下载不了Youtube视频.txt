@@ -1,0 +1,83 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-16T19:51:23+08:00
+
+====== 下载不了Youtube视频 ======
+创建日期 星期一 16 三月 2020
+
+https://mp.weixin.qq.com/s?__biz=MzIyNDUyNDczNg==&mid=2247494583&idx=2&sn=0d817b3e49b9b8fa339a0a99ca6556ae&chksm=e80f0b18df78820e70d0cff2710ac2b2438c8dc0f55606d1fded4ceef7f907b1eee89c64e266&mpshare=1&scene=1&srcid=&sharer_sharetime=1584353752745&sharer_shareid=79f6de27b2f84c31190358375c398857#rd
+
+Youtube，中文名油管，目前全球最大的视频网站。
+
+上面拥有全世界各个地区用户上传的丰富视频资源，包括电影、音乐、娱乐、新闻、创意短片等等。
+
+不过由于涉及到版权等多方面问题，和Chrome浏览器同为一家公司谷歌旗下的Youtube网站，是不支持用chrome插件下载视频的。
+
+
+
+不过要想解决这个问题，也并不是非常难。
+
+对于我们来说，虽然浏览器插件这一招用不上了，但还有万能的Tampermonkey，也就是传说中的油猴脚本。
+
+
+使用方法
+
+
+一、安装油猴插件
+
+要想使用这个脚本，首先需要在你的浏览器上安装一个脚本管理器——油猴插件。
+
+如果你的网络可以访问Chrome Web Store，那么直接在商店安装即可。
+
+如果无法访问官方商店，那么可以在扩展迷网站上下载Tampermonkey油猴脚本插件的crx文件，并安装在自己的浏览器上。
+
+（安装教程和下载地址见文末）
+
+
+
+二、安装油猴脚本
+
+在浏览器地址栏输入：https://greasyfork.org/zh-CN
+
+回车后进入一个免费的脚本资源网站——Greasy Fork，上面提供了许多非常牛逼的实用脚本工具，并且支持中文浏览。
+
+
+
+在这个网站中搜索Youtube下载相关的脚本。
+
+这里有非常多可以用来下载Youtube视频的油猴脚本，因为全世界网友的需求都是一致的。
+
+
+
+选择一个使用人数最多的脚本，点击安装按钮，很快，油猴插件就弹出提示安装成功了。
+
+
+
+三、下载Youtube视频
+
+现在，访问Youtube视频，在视频播放器下方会出现一个下载选项。
+
+
+
+点击该选项之后，就会弹出一个新的下载框，显示了当前的视频下载进度，等待下载完成即可。
+
+
+
+如果你不习惯使用油猴脚本，那么也可以参考扩展迷的另一篇文章，这篇文章中提供了一些Youtube在线网页下载工具，但不保证目前仍然生效。
+
+另外，要想下载Youtube视频，当然首先要保证你的网络可以正常访问Youtube网站才行。
+
+
+油猴插件下载地址
+https://www.extfans.com/productivity/dhdgffkkebhmkfjojejmpbldmpobfkfo/
+
+插件安装教程（点击文章标题可直接跳转）
+
+- Chrome用户看这篇：
+
+《国内在哪里可以下载安装谷歌浏览器Chrome插件？》
+
+- Edge用户看这篇：
+
+《【教程】Chromium内核Edge浏览器如何安装Chrome插件》
+

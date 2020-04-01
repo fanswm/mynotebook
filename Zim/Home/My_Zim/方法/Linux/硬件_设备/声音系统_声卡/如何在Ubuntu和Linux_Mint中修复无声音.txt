@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-08-20T10:18:19+08:00
+
+====== 如何在Ubuntu和Linux Mint中修复无声音 ======
+创建日期 星期二 20 八月 2019
+
+https://itsfoss.com/fix-sound-ubuntu-1304-quick-tip/

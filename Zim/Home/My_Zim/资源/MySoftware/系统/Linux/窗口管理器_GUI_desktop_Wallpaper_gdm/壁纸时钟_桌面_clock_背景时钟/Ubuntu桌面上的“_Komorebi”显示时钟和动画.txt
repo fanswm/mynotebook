@@ -1,0 +1,129 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-23T14:50:23+08:00
+
+====== Ubuntu桌面上的“ Komorebi”显示时钟和动画 ======
+Created 星期日 23 二月 2020
+
+http://ubuntuhandbook.org/index.php/2017/06/komorebi-display-clock-animations-on-ubuntu-desktop/
+
+
+
+Ubuntu手册
+新闻，教程，Ubuntu Linux的Howtos
+主页 /
+应用程式审查 /
+Ubuntu桌面上的“ Komorebi”显示时钟和动画
+Ubuntu桌面上的“ Komorebi”显示时钟和动画
+2017年6月15日
+
+Komorebi是Linux墙纸管理器，可提供完全可自定义的背景，例如在桌面上显示日期和时间。
+默认情况下包括的墙纸范围包括动画，静态和渐变！请参见下面的屏幕截图。
+
+
+
+通过右键单击桌面并选择要显示的内容，可以启动设置对话框。
+
+墙纸位于/ System / Resources / Komorebi /中，您可以按照本教程轻松地创建自己的墙纸。
+首先通过Ctrl + Alt + T打开终端并运行命令以打开墙纸文件夹：
+gksudo nautilus /系统/资源/ Komorebi /
+安装Komorebi：
+从下面的链接下载.deb软件包，然后单击“通过Ubuntu软件或Gdebi安装”：
+Komorebi发布页面
+（可选）要卸载Komorebi，请使用系统软件包管理器或运行命令：
+sudo apt-get删除komorebi
+此外，到目前为止，该软件还处于测试阶段。我已经在Ubuntu 16.04上进行了测试。配置对话框在启动时起作用，但是几分钟后更改墙纸有时不起作用。
+在应用程序审查 壁纸
+ 
+
+
+吉m
+I'm a freelance blogger who started using Ubuntu 5+ years ago and wishes to share my experiences and some useful tips with Ubuntu beginners and lovers. Please notify me if you find any typo/grammar/language mistakes. English is not my native language. Contact me on Google Plus or email to ubuntuhandbook1@gmail.com
+ How to Downgrade An Installed... 
+ Animated GIF Recorder 'Peek'...
+Recent Posts
+LibreOffice Office Suite 6.4 Released [Ubuntu PPA]
+How to Install Linux Kernel 5.5 in Ubuntu / Linux Mint
+MPV 0.32 Released with RAR5 Support & Initial Bash Completion
+Fun 2D Retro Platformer ‘Open Surge’ Available as Snap
+Music Notation Software MuseScore 3.4 Released!
+Popular posts
+How to Install Python 3.6.1 in Ubuntu 16.04 LTS
+Fix ‘No WiFi Adapter Found’ for HP Laptops with Ubuntu 18.04
+How to Set A Custom Screen Resolution in Ubuntu Desktop
+How to Install Oracle Java 11 in Ubuntu 18.04/18.10
+How to Install RTL8723DE Wifi Driver in Ubuntu 19.04
+Related Posts
+Fun 2D Retro Platformer ‘Open Surge’ Available as Snap
+VokoscreenNG – Vokoscreen Screencaster Rewritten From Scratch
+Nutty: A Graphical Network Info and Monitoring Tool
+Recent Comments
+Bijay on How to Install RTL8723DE Wifi Driver in Ubuntu 19.04
+Derian on How to Install Audio Effects Tool PulseEffects in Ubuntu 18.04
+Michele on How to Install Oracle Java 13 in Ubuntu 18.04, 16.04, 19.04
+mshmm on How to Install Wine 5.0 Stable in Ubuntu 18.04, 19.10
+SERG关于如何在Ubuntu 18.04，19.10装酒5.0稳定
+关于
+©2020 UbuntuHandbook — 隐私政策 — 8BIT标准
+
+
+
+
+
+UbuntuHandbook
+News, Tutorials, Howtos for Ubuntu Linux
+Home/
+App Review/
+‘Komorebi’ Display Clock & Animations on Ubuntu Desktop
+‘Komorebi’ Display Clock & Animations on Ubuntu Desktop
+June 15, 2017
+
+Komorebi is a Linux wallpaper manager that provides fully customizable backgrounds, e,g., show date and time on desktop.
+Wallpapers included by default range from animated ones, still, and gradients! See screenshots below.
+
+
+
+A settings dialog is available to launch by right-clicking on desktop and choose what to display.
+
+Wallpapers are located in /System/Resources/Komorebi/, you can create your own wallpapers easily by following this tutorial.
+Starting by opening terminal via Ctrl+Alt+T and run command to open the wallpaper folder:
+gksudo nautilus /System/Resources/Komorebi/
+Install Komorebi:
+Download the .deb package from the link below, then click install via Ubuntu Software or Gdebi:
+Komorebi Release Page
+(Optional) To uninstall Komorebi, either use you system package manager or run command:
+sudo apt-get remove komorebi
+In addition, the software so far is in beta stage. I’ve tested on Ubuntu 16.04. The configuration dialog works on launch, but changing wallpaper sometimes not work a few minutes later.
+In App Review wallpaper
+ 
+
+
+Ji m
+I'm a freelance blogger who started using Ubuntu 5+ years ago and wishes to share my experiences and some useful tips with Ubuntu beginners and lovers. Please notify me if you find any typo/grammar/language mistakes. English is not my native language. Contact me on Google Plus or email to ubuntuhandbook1@gmail.com
+ How to Downgrade An Installed... 
+ Animated GIF Recorder 'Peek'...
+Recent Posts
+LibreOffice Office Suite 6.4 Released [Ubuntu PPA]
+How to Install Linux Kernel 5.5 in Ubuntu / Linux Mint
+MPV 0.32 Released with RAR5 Support & Initial Bash Completion
+Fun 2D Retro Platformer ‘Open Surge’ Available as Snap
+Music Notation Software MuseScore 3.4 Released!
+Popular posts
+How to Install Python 3.6.1 in Ubuntu 16.04 LTS
+Fix ‘No WiFi Adapter Found’ for HP Laptops with Ubuntu 18.04
+How to Set A Custom Screen Resolution in Ubuntu Desktop
+How to Install Oracle Java 11 in Ubuntu 18.04/18.10
+How to Install RTL8723DE Wifi Driver in Ubuntu 19.04
+Related Posts
+Fun 2D Retro Platformer ‘Open Surge’ Available as Snap
+VokoscreenNG – Vokoscreen Screencaster Rewritten From Scratch
+Nutty: A Graphical Network Info and Monitoring Tool
+Recent Comments
+Bijay on How to Install RTL8723DE Wifi Driver in Ubuntu 19.04
+Derian on How to Install Audio Effects Tool PulseEffects in Ubuntu 18.04
+Michele on How to Install Oracle Java 13 in Ubuntu 18.04, 16.04, 19.04
+mshmm on How to Install Wine 5.0 Stable in Ubuntu 18.04, 19.10
+Serg on How to Install Wine 5.0 Stable in Ubuntu 18.04, 19.10
+About
+© 2020 UbuntuHandbook — Privacy Policy — Standard by 8BIT
+

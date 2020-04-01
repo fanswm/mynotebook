@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-20T22:26:10+08:00
+
+====== 3 Serializable ======
+Created 星期四 20 二月 2020
+
+Serializable是__最严格的隔离级别__。在Serializable隔离级别下，所有事务按照次序依次执行，因此，脏读、不可重复读、幻读都不会出现。
+
+虽然Serializable隔离级别下的事务具有最高的安全性，__但是，由于事务是串行执行，所以效率会大大下降，__应用程序的性能会急剧降低。__如果没有特别重要的情景，一般都不会使用Serializable隔离级别。__
+
+默认隔离级别
+如果没有指定隔离级别，数据库就会使用默认的隔离级别。__在MySQL中，如果使用InnoDB，默认的隔离级别是Repeatable Read。__

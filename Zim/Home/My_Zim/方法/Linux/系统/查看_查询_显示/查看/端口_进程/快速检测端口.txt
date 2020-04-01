@@ -1,0 +1,82 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-16T19:56:40+08:00
+
+====== 快速检测端口 ======
+创建日期 星期一 16 三月 2020
+
+手把手教你 3 个 Linux 中快速检测端口的小技巧
+
+
+
+http://mp.weixin.qq.com/s?__biz=MzU3NTgyODQ1Nw==&mid=2247488828&idx=2&sn=b3c7cd7d9c2657b799ab37854eec4828&chksm=fd1c6dbaca6be4ac10b74742d9f28910a3d9a2f8fa3f00915329121fd733cc658c831e748743&mpshare=1&scene=1&srcid=&sharer_sharetime=1584163396637&sharer_shareid=79f6de27b2f84c31190358375c398857#rd
+
+点击「阅读原文」查看良许原创精品视频。
+本文翻译自：「Linuxize」
+原文：https://url.cn/5t61HyI ，版权归原作者所有。
+无论是要解决网络连接问题还是配置防火墙，第一件事是要检查系统实际打开了哪些端口。
+本文介绍了几种快速查找 Linux 系统上哪些端口向外部开放的方法。
+什么是开放端口
+监听端口是应用程序监听的网络端口。你要得到的监听端口名单通常可以通过如 ss、netstat 或 lsof 命令查询系统上网络堆栈。每个监听端口都可以使用防火墙打开或关闭（过滤）。
+一般而言，开放端口是一个网络端口，它接受来自远程位置的传入数据包。
+例如：如果你正在运行的监听端口 80、443 的 Web 服务器，并把这些端口在防火墙上对任何人开放。使用浏览器将能够访问托管在 Web 服务器上的网站。在这种情况下，80 和 443 都是开放端口。
+开放端口可能会带来安全风险，因为攻击者可以使用每个开放端口来利用漏洞或执行任何其他类型的攻击。您应该只公开应用程序功能所需的端口，然后关闭所有其他端口。
+使用 Nmap 命令检查开放端口
+Nmap 是功能强大的网络扫描工具，可以扫描单个主机和大型网络。它主要用于安全审核和渗透测试。
+Nmap 是端口扫描的首选工具。除端口扫描外，Nmap 还可以检测 Mac 地址、操作系统类型、内核版本等。
+从控制台发出以下命令确定哪些端口正在监听来自网络的 TCP 连接：
+$ sudo nmap -sT -p- 10.10.8.8
+-sT 选项告诉 Nmap 扫描 TCP 端口， -p- 扫描所有端口（65535 个）。如果不使用 -p-，Nmap 将仅扫描 1000 个端口。
+Starting Nmap 7.60 ( https://nmap.org ) at 2019-07-09 23:10 CESTNmap scan report for 10.10.8.8Host is up (0.0012s latency).Not shown: 998 closed portsPORT   STATE SERVICE22/tcp open  ssh80/tcp open  httpMAC Address: 08:00:27:05:49:23 (Oracle VirtualBox virtual NIC)
+Nmap done: 1 IP address (1 host up) scanned in 0.41 seconds
+以上显示，只有端口 22、80 以及 8069 在目标系统上打开。
+要扫描 UDP 端口，请使用 -sU 代替 -sT：
+$ sudo nmap -sU -p- 10.10.8.8
+有关更多信息，请访问 Nmap 手册页，并了解此工具的所有其他强大功能。
+使用 Netcat 命令检查开放端口
+Netcat（或nc）是一种命令行工具，可以使用 TCP 或 UDP 协议跨网络连接读取和写入数据。
+使用 netcat 可以扫描单个端口或端口范围。
+例如，要扫描 IP 地址为 10.10.8.8 的远程计算机上端口范围为 20-80 之间打开的 TCP 端口，你可以使用以下命令：
+$ nc -z -v 10.10.8.8 20-80
+-z 选项指示 nc 仅扫描打开的端口，而不发送任何数据，并且 -v 用于获取更多详细信息。
+输出将如下所示：
+nc: connect to 10.10.8.8 port 20 (tcp) failed: Connection refusednc: connect to 10.10.8.8 port 21 (tcp) failed: Connection refusedConnection to 10.10.8.8 22 port [tcp/ssh] succeeded!...Connection to 10.10.8.8 80 port [tcp/http] succeeded!
+如果只希望将以上开放端口的行打印在屏幕上，则可以使用 grep 命令过滤结果。
+$ nc -z -v 10.10.8.8 20-80 2>&1 | grep succeededConnection to 10.10.8.8 22 port [tcp/ssh] succeeded!Connection to 10.10.8.8 80 port [tcp/http] succeeded!
+要扫描 UDP 端口，请将 -u 选项传递给 nc 命令：
+$ nc -z -v -u 10.10.8.8 20-80 2>&1 | grep succeeded
+使用 Bash 伪设备检查打开的端口
+检查某个端口是打开还是关闭的另一种方法是使用 Bash Shell 检查 /dev/tcp/.. 或 /dev/udp/.. 下的伪设备。
+在 /dev/$PROTOCOL/$HOST/$IP 伪设备上执行命令时，Bash 将在指定端口上打开到指定主机的 TCP 或 UDP 连接。
+以下 if..else 语句将检查端口 443 在 kernel.org 是否打开：
+if timeout 5 bash -c '</dev/tcp/kernel.org/443 &>/dev/null'then  echo "Port is open"else  echo "Port is closed"fi
+输出将如下所示：
+Port is open
+上面的代码如何工作？
+使用伪设备连接到端口时的默认超时时间非常长，因此我们使用 timeout 命令在 5 秒后终止测试命令。如果建立了 kernel.org 端口连接，则 443 测试命令将返回 true。你也可以使用 for 循环来检查指定的端口范围：
+for PORT in {20..80}; do  timeout 1 bash -c "</dev/tcp/10.10.8.8/$PORT &>/dev/null" &&  echo "port $PORT is open"done
+输出将如下所示：
+port 22 is openport 80 is open
+结论
+我们为你展示了几种如何使用扫描开放端口的工具，当然你也可以使用其它工具来达到同样的目的，例如：Python Socket 模块、Curl、Telnet 或 Wget。
+
+良许个人微信
+
+添加良许个人微信即送3套程序员必读资料
+
+→ 精选技术资料共享
+→ 高手如云交流社群
+→ CSDN资料帮下载
+
+
+
+--------------------
+
+本公众号全部博文已整理成一个目录，请在公众号里回复「m」获取！
+推荐阅读：
+腾讯和阿里在B站“打起来了”，你何时见过这场面？
+提到Vim实用技巧，就不得不提这本书！
+在外企工作是一种什么体验？
+
+5T技术资源大放送！包括但不限于：C/C++，Linux，Python，Java，PHP，人工智能，单片机，树莓派，等等。在公众号内回复「1024」，即可免费获取！！
+

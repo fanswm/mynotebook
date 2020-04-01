@@ -1,0 +1,31 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-23T14:46:36+08:00
+
+====== Best Clock And Weather Widgets For Linux ======
+Created 星期日 23 二月 2020
+
+http://www.linuxandubuntu.com/home/best-clock-and-weather-widgets-for-linux
+
+
+
+
+LinuxAndUbuntu
+
+
+
+By Sohail on December 17, 2016
+So there are a couple of handy desktop widgets that are available for your Linux desktop. Today we’ll take a look at a few Clock widgets and Weather widgets that easily set up on your Linux desktop.
+1. Weather Widgets
+2. Gis-Weather
+​Gis-Weather is a very customizable weather widget for your Linux desktop. It provides you with a lot of detailed information. It has the following features which allow you to see the weather info for several days, detailed weather for today and tomorrow and the support for themes and customizations. You can install Gis-Weather with the following commands via terminal. Add third party PPA and then download and install from there.
+sudo add-apt-repository ppa:noobslab/apps
+sudo apt-get update
+sudo apt-get install gis-weather
+
+
+b. My Weather Indicator
+My-weather-indicator is also another very useful weather widget app for Linux. It shows the current weather situation and a weekly forecast for two different locations through the desktop widget. You can install My-weather-indicator with the following commands via terminal. Add the third party PPA and then download and install from there.
+sudo add-apt-repository ppa:atareao/atareao
+sudo apt-get update
+sudo apt-get install my-weather-indicator

@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-04T12:04:14+08:00
+
+====== 干货Chrome插件(扩展)开发全攻略 ======
+Created 星期三 04 三月 2020
+
+https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html
+
+http://blog.haoji.me/chrome-plugin-develop.html
+
+https://www.dogedoge.com/results?q=%E5%A6%82%E4%BD%95%E5%BC%80%E5%8F%91Chrome+%E6%8F%92%E4%BB%B6
+

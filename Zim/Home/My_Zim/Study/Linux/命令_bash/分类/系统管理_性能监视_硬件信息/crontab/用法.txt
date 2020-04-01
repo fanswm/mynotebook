@@ -41,9 +41,10 @@ Crontab 示例
 
 59 11 * * 1-5 /root/bin/backup.sh
 
-3. 每5分钟运行一次命令
+3. __每5分钟运行一次命令__
 
-*/5 * * * * /root/bin/check-status.sh
+
+__*/5 * * * * /root/bin/check-status.sh__
 
 4. 每个月的第一天 1:10 p.m 运行
 

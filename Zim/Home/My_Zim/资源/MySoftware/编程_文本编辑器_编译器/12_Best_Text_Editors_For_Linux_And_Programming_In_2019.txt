@@ -1,0 +1,120 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-24T16:20:09+08:00
+
+====== 12 Best Text Editors For Linux And Programming In 2019 ======
+Created 星期一 24 二月 2020
+
+https://fossbytes.com/9-best-text-editors-linux-programming-2017/
+f you’re looking for a powerful text editor for Linux to kickstart programming in the year 2019, you’re at the right place. While the debate of the best programming editors for Linux won’t end anytime soon, there are many editors that bring an impressive set of features and offer great user experience to developers. While Vim, Emacs, and Nano are older and dependable players in the game, Atom, Brackets, and Sublime Text are relatively newer text editors.
+
+Without further delay, let’s start our list of the most impressive, feature-rich, and useful source code editors for Linux:
+
+
+ 
+11 Best Text Editors For Linux | 2019 Edition
+1. Sublime Text
+sublime-text-best-text-editor-linux
+
+In our own poll at Fossbytes Facebook page, Sublime Text, followed by Atom and Vim, turned out to be the favorite code editor. This feature-packed text editor is built for “code, markup and prose.” It natively supports tons of programming language and markup languages. Using plugins, that are maintained under free software licenses, one can extend its functionality. “Goto Anything” is a popular feature of the Sublime Text that lets you quickly navigate to files, lines, or symbols. The other main features of Sublime Text are command palette, Python-based plugin API, simultaneous editing, project-specific preferences, etc.
+
+The interested users can find download links and further details about Sublime text on its website.
+
+Sublime Text Snap installation command:
+sudo snap install sublime-text
+2. Atom
+atom-best-text-editor-linux
+Atom is a free and open source text editor that’s developed by GitHub. Based on Electron (CoffeeScript, JS, Less, HTML), it’s a desktop application that’s built using web technologies. Often being called the text editor of 21st century, it’s a modern text editor that’s hackable to the core. The major features of Atom are cross-platform editing, built-in package manager, file system browser, multiple pane support, find and replace function, and smart autocompletion. You can select from 1000s of open source packages and add new features to Atom. It’s also customizable to suit your needs and style.
+
+The latest release of Atom is version 1.35.1. You can find the download links and more information on Atom here.
+
+Atom Snap installation command:
+sudo snap install atom --classic
+3. Vim
+vim-best-text-editor-linuxVim, or Vi IMproved, is an advanced text editor that aims to deliver a more powerful performance and extend the capabilities of de-facto Unix editor ‘Vi.’ It’s a highly configurable text editor that’s built to serve the needs of a developer. That’s why it’s often called a ‘programmer’s editor.’ It’s designed to be used both as a command line interface and as a standalone application in a GUI. While beginners complain that it’s tough to use, they also learn that it’s one of the most powerful text editors around. Its main highlights are automatic commands, digraph input, split screen, session screen, tab expansion, syntax coloring, and tag system. Vim is written in C and Vim script.
+
+Vim 8.1 is the latest stable version of this popular text editor for Linux. You can find more information and the download on Vim’s website.
+
+Vim installation command:
+sudo apt-get install vim
+4. Gedit
+gedit-best-text-editor-linuxGedit comes loaded as the default text editor of the GNOME desktop environment. This general purpose text editor aims at simplicity and ease of use. Following the GNOME project philosophy, Gedit comes with a clean and straightforward GUI. Written in the C programming language, Gedit witnessed its first public release in 2000. This open source and free software feature full support for the internationalized text. In Gedit, you get configurable syntax highlighting for various programming languages like C++, C, HTML, Java, XML, Python, Perl, and others.
+
+
+The latest version of Gedit arrives with GNOME 3.32. You can find the download links and further information about Gedit here.
+
+Gedit installation command:
+sudo apt-get install gedit
+5. GNU Emacsemacs-best-text-editor-linux
+There’s a good chance that Emacs will be one of your favorite Linux text editors. It has been around for a long time. GNU Emacs, created by GNU Project founder Richard Stallman, is its most popular version that’s used by developers and Linux enthusiasts all across the world. Written in Lisp and C programming language, this free software is extensible using a Turing complete programming language. The users of GNU Emacs also enjoy extensive documentation and tutorial support. There’s also availability of extensions like debugger interface, mail, and news.
+
+The latest release of this free/libre text editor is GNU Emacs 26.1. For more information, you can visit this link.
+
+Emacs installation command:
+sudo apt-get install emacs26
+6. Visual Studio Code
+vscode for linux
+
+Just like the best Linux distributions for programmers, there are various options when it comes to Linux editors that one can use to get their daily jobs done. Despite being created by Microsoft, Visual Studio Code is completely open source and its source code can be accessed on GitHub. Featuring a modern look, VS Code delivers a powerful performance despite being lightweight. There’s a vast library of extensions that enable support for more languages, commands, debuggers, etc. This cross-platform tool (Linux, macOS, and Windows.) comes with out-of-the-box support for TypeScript, JavaScript, and Node.js.
+
+The latest version of VS Code for Linux programmers is 1.32. You can get more info on the same and download links by visiting this link.
+
+VS Code installation command:
+sudo add-apt-repository ppa:ubuntu-desktop/ubuntu-make
+sudo apt-get update
+sudo apt-get install ubuntu-make
+umake web visual-studio-code
+7. nano
+nano-best-text-editor-linuxnano is a user-friendly text editor that’s widely used on Unix-like operating systems. nano, first released in June, 2000, emulates the Pico text editor and comes loaded with additional functionality. It runs in a familiar command line interface. If you’re habitual of spending days and nights playing with configuration files in Terminal, nano will fulfill your needs. Its major highlights include autoconf support, case sensitive search function, auto indentation, interactive search and replacement, tab completion, soft text wrapping, etc. It’s written in C programming language.
+
+
+The latest release of this text editor is GNU nano 4.0. For more information, feel free to visit nano’s website.
+
+nano installation command:
+sudo apt-get install nano
+8. KWrite
+best-text-editor-linux-kwriteKWrite, whose first public release was in 2000, is a lightweight text editor developed by KDE. It’s based on the KATE text editor and the KDE KParts technology. The major features of this popular text editor include word completion, auto-indentation, syntax, highlighting according to file type, Vi input mode, and support for plugins. Other exciting features of KWrite are extensibility, encoding support, remote file editing, etc. It’s written in C++.
+
+Find more information about this simple to use and highly pluggable text editor here.
+
+KWrite installation command:
+sudo apt-get install kwrite
+9. Brackets
+brackets-best-text-editor-linuxBrackets is a popular text editor that was launched by Adobe back in 2014. This free text editor comes with Live Preview, Inline Editing, focused visual tools Preprocessor support, and other exciting features. Created from the ground up, it’s developed for web designers and front-end developers. Despite being lightweight, this open source text editor comes loaded with all qualities of a modern text editor. It’s written in HTML, CSS, and JavaScript.
+
+The latest release of this great text editor is Brackets 1.13. Find the download link and further details here.
+
+Brackets Snap installation command:
+sudo snap install brackets
+10. JED
+jed best linux text editor
+
+JED is a popular Linux text editor that uses S-Lang library. This cross-platform tool is available for a variety of other platforms as well, including Unix, VMS, OS/2, BeOS, Windows, OpenVMS, etc. In case you’re running DOS, you can run JED’s older versions. The major plus point of using JED Linux editor is its lightweight nature that makes sure that you can use it with ease on a hardware with limited resources.
+
+The popular features of JED editor are color syntax highlighting, code folding, emulation of editors like Emacs, different programming modes, editing TeX files, rectangular cut/paste, etc.
+
+JED 0.99-19 is the latest version available for download and it can be downloaded by visiting this link.
+
+JED installation command:
+sudo apt-get install jed
+11. Geany
+geany-best-text-editor-linuxGeany is a great text editor that integrates the GTK+ toolkit to deliver an excellent development environment. If you’re looking for a text editor that feels more like an IDE, Geany could be a great choice. This lightweight IDE supports all the main programming languages and has only a few dependencies from other packages. The notable features of Geany are pluggable interface, syntax highlighting, line numbering, etc. It comes with a clean interface and plenty of customizable options. It’s written in C and C++.
+
+The latest version of Geany text editor for Linux that’s available for download is Geany 1.34.1. Find more details and download link here.
+
+Geany installation command:
+sudo apt-get install geany
+12. Notepadqq
+notepadqq
+
+For long, the users of Notepad++ on Windows have desired to use the same in the form of an Ubuntu text editor or some other Linux distro. However, the software isn’t available on the open source platform. Notepadqq is a worthy open source altnerative that’s available on Linux. It’s worth noting that both projects don’t share any code, however, Notepadqq is surely inspired by Notepad++. As a result, the Windows programmers who make a switch to Linux can get their hands on Notepadqq and get the best features of the popular software on all the platforms. It’s now even available as a Snap for easy installation on Ubuntu and other Linux distributions supporting snap technology.
+
+
+ 
+The Notepadqq 7.5.6 is the latest version of the software and you can download from here.
+
+How to install Notepadqqq using Snap?
+sudo snap install --classic notepadqq
+Did you find this list of the best text editors for Linux and programming helpful? Don’t forget to tell us your choices and feedback.
+
+Also Read: Best Linux Distros For Programming & Developers

@@ -1,0 +1,37 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-20T22:11:24+08:00
+
+====== 数据库引擎 ======
+Created 星期四 20 二月 2020
+
+常用的包括：
+
+	__InnoDB：由Innobase Oy公司开发的一款支持事务的数据库引擎，2006年被Oracle收购；__
+__    MyISAM：MySQL早期集成的默认数据库引擎，不支持事务。__
+
+MySQL接口和__数据库引擎的关系就好比某某浏览器和浏览器引擎__（IE引擎或Webkit引擎）的关系。对用户而言，__切换浏览器引擎不影响浏览器界面，切换MySQL引擎不影响自己写的应用程序使用MySQL的接口。__
+
+使用MySQL时，__不同的表还可以使用不同的数据库引擎。如果你不知道应该采用哪种引擎，记住总是选择InnoDB就好了。__
+
+因为MySQL一开始就是开源的，所以基于MySQL的开源版本，又衍生出了各种版本：
+MariaDB
+
+由MySQL的创始人创建的一个开源分支版本，使用__XtraDB引擎__。
+Aurora
+
+由Amazon改进的一个MySQL版本，专门提供给在AWS托管MySQL用户，__号称5倍的性能提升。__
+PolarDB
+
+由Alibaba改进的一个MySQL版本，专门提供给在阿里云托管的MySQL用户，__号称6倍的性能提升。__
+
+而MySQL官方版本又分了好几个版本：
+
+	Community Edition：社区开源版本，免费；
+	Standard Edition：标准版；
+	Enterprise Edition：企业版；
+	Cluster Carrier Grade Edition：集群版。
+
+以上版本的功能依次递增，价格也依次递增。不过，__功能增加的主要是监控、集群等管理功能，对于基本的SQL功能是完全一样的。__
+
+所以使用MySQL就带来了一个巨大的好处：可以在自己的电脑上安装免费的Community Edition版本，进行学习、开发、测试，部署的时候，可以选择付费的高级版本，或者云服务商提供的兼容版本，而不需要对应用程序本身做改动。

@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-06T14:34:22+08:00
+
+====== KDE Connect ======
+Created 星期五 06 三月 2020
+
+https://kdeconnect.kde.org/
+https://community.kde.org/KDEConnect

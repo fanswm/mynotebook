@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-17T17:01:11+08:00
+
+====== FreePD ======
+创建日期 星期日 17 三月 2019
+
+https://freepd.com/
+FreePD
+一个汇集了互联网海量免版税的公共领域音乐资源网站，提供了许多不同类型的音乐资源，你可以下载任意一首音乐，
+
+更可以以 14 美元的价格一键下载全部内容。
+
+

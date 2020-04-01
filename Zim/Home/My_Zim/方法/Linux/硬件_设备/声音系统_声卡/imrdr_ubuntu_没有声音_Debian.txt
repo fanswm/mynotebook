@@ -1,0 +1,181 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-18T08:05:54+08:00
+
+====== imrdr ubuntu 没有声音 Debian ======
+Created 星期二 18 二月 2020
+
+imrdr: 
+# 症状： 开机后有声音，过一段时间之后，就没有声音了。判断可能是系统自动转换了声卡，但是应用程序不能自动做出转换（用户没有配置）。
+# 安装 hg:
+## 在别的地方找到了一个方法 ：
+sudo add-apt-repository -y ppa:mercurial-ppa/releases
+sudo apt-get update
+sudo apt-get install -y mercurial
+# 参考： https://developer.ibm.com/answers/questions/333307/mercurial-is-not-available-hg-command-not-found/
+
+# 安装 asoundconf:
+# 参考： https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture
+# 提示：使用asoundconf可以部分自动化此过程。
+hg clone https://bitbucket.org/stativ/asoundconf
+#这个参考没有使用成功：  https://hg-git.github.io/
+sudo ./setup.py install   
+# 安装 asoundconf 成功。
+
+# 重要提示：我认为不建议使用 root 用户进行以下操作（除非我在命令行前加上了 sudo ）：
+
+asoundconf is-active
+# 查看可用声卡参数：
+asoundconf list
+
+# 设置默认声卡（“MID” 是我的，你的可能不一样，参考上一步显示的结果）：
+asoundconf set-default-card MID
+
+# 这一步不知是干什么的，也不知道有用没用。
+asoundconf set-pulseaudio
+
+# 做完以上步骤之后，还是没有成功（我判断可能alsa还没有初始化）。在别的网站上找到以下方法。 每次系统升级之后，再进行一遍以下操作：
+sudo alsactl init   
+
+sudo modprobe snd_pcm_oss
+
+reboot
+# 现在可以了，世界终于缤纷多彩了!--------------------
+
+
+lspci | grep Audio
+00:1b.0 Audio device: Intel Corporation 5 Series/3400 Series Chipset High Definition Audio (rev 06)
+01:00.1 Audio device: NVIDIA Corporation High Definition Audio Controller (rev a1)
+
+
+https://wiki.archlinux.org/index.php/Sound_system
+
+ 
+
+base) ➜  ~ alsamixer
+
+ ps aux | grep udio
+
+```
+
+fanswm 20571 4.1 4.1 1562056 160928 tty2 Sl+ 18:36 0:24 /usr/lib/chromium/chromium --type=renderer --disable-webrtc-apm-in-audio-service --field-trial-handle=9812634492284524904,3181498434849133706,131072 --lang=en-US --disable-oor-cors --enable-auto-reload --num-raster-threads=2 --enable-main-frame-before-activation --service-request-channel-token=8602904917611883313 --renderer-client-id=5 --no-v8-untrusted-code-mitigations --shared-files=v8_context_snapshot_data:100,v8_natives_data:101
+
+```
+
+disable webrtc apm in audio service
+
+ 
+
+# 参考： https://blog.csdn.net/zhuiqiuk/article/details/74542498
+
+sudo apt install pavucontrol
+
+ 
+
+# 参考：
+
+https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture
+
+替代方法
+提示：使用asoundconf可以部分自动化此过程。
+hg clone https://bitbucket.org/stativ/asoundconf
+# https://hg-git.github.io/
+sudo ./setup.py install   
+
+--------------------
+
+ 
+sudo apt install pyhton-dev
+ 
+ 
+easy_install hg-git
+```output:
+Searching for hg-git
+Best match: hg-git 0.8.13
+Processing hg_git-0.8.13-py3.7.egg
+hg-git 0.8.13 is already the active version in easy-install.pth
+
+Using /home/fanswm/anaconda3/lib/python3.7/site-packages/hg_git-0.8.13-py3.7.egg
+Processing dependencies for hg-git
+Finished processing dependencies for hg-git
+ 
+#### imrdr: 没有成功。
+```
+ 
+ 
+```
+https://stackoverflow.com/questions/4956346/how-can-i-add-remote-repositories-in-mercurial
+You add entries to the [paths] section of your local clone's .hg/hgrc file. Here's an example of a section that would go in the .hg/hgrc file:
+
+[paths]
+remote1 = http://path/to/remote1
+remote2 = http://path/to/remote2
+You can then use commands like hg push remote1 to send changesets to that repo. If you want that remote repo to update is working directory you'd need to put a changegroup hook in place at that remote location that does an update. That would look something like:
+
+[hooks]
+changegroup = hg update 2>&1 > /dev/null && path/to/script/restart-server.sh
+Not everyone is a big fan of having remote repos automatically update their working directories on push, and it's certainly not the default.
+```
+ 
+ git上的：
+ https://github.com/schacon/hg-git
+
+要获取有效的ALSA卡名称，请使用aplay：  To get valid ALSA card names, use aplay: 
+
+aplay -l | awk -F \: '/,/{print $2}' | awk '{print $1}' | uniq
+
+ 
+
+'pcm'选项影响将哪个卡和设备用于音频播放，而'ctl'选项影响控制实用程序（如alsamixer）使用哪个卡。
+
+ 
+
+验证是否装入了正确的声音模块
+lsmod | grep '^snd' | column -t
+
+```
+
+snd_hda_codec_hdmi 22378 4 
+snd_hda_codec_realtek 294191 1 
+snd_hda_intel 21738 1 
+snd_hda_codec 73739 3 snd_hda_codec_hdmi，snd_hda_codec_realtek，snd_hda_intel 
+snd_hwdep 6134 1 snd_hda_codec 
+snd_pcm 71032 3 snd_hda_codec_hdmi，snd_hda_intel，snd_hda_codec 
+snd_timer 18992 1个snd_pcm 
+SND 55132 9 snd_hda_codec_hdmi，snd_hda_codec_realtek，snd_hda_intel，snd_hda_codec，snd_hwdep，snd_pcm，snd_timer 
+snd_page_alloc 7017 2 snd_hda_intel，snd_pcm
+
+```
+
+如果输出看起来相似，则说明您的声音驱动程序已成功自动检测到。
+
+ 
+
+您可能还需要检查目录以查找/dev/snd/正确的设备文件：
+
+ls -l /dev/snd
+
+ 
+
+Usage:
+asoundconf is-active
+asoundconf get|delete PARAMETER
+asoundconf set PARAMETER VALUE
+asoundconf list
+asoundconf list-all
+
+Convenience macro functions:
+asoundconf set-default-card PARAMETER
+asoundconf reset-default-card
+asoundconf set-pulseaudio
+asoundconf unset-pulseaudio
+asoundconf set-oss PARAMETER
+asoundconf unset-oss
+
+
+
+# 参考：
+
+https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture
+
+ 

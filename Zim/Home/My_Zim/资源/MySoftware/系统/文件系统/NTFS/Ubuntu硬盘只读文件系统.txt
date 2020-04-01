@@ -1,0 +1,40 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-17T16:23:28+08:00
+
+====== Ubuntu硬盘只读文件系统 ======
+Created 星期一 17 二月 2020
+
+今日登入ubuntu发现挂载的硬盘无法写入，显示只读文件系统。
+
+尝试网上各种重新挂载和修复的方案，重启无数次均无法解决。
+
+后来登入win10后发现之前打开的文件都没有关，推测是因为之前在win10直接重启，win10没有完全关闭，操作系统对硬盘采取保护。
+
+
+解决方案：在win10关闭计算机（是关闭，不要重启），之后再打开ubuntu系统，文件已经能够写入了。
+--------------------
+[2018.10.28 更新]
+__可能因为在挂载wimdows盘后，强制关机造成的，可使用__
+__sudo ntfsfix /dev/***__
+__来修复。其中，***为具体哪个盘，例如sudo ntfsfix /dev/sda4__
+
+之前一直可以对windows盘进行读写操作，但今天突然不能用了，在将/etc/fstab修改为可读可写之后仍然没用，即使使用mount重新挂载也无效。
+
+在查找资料以及多次尝试之后，终于通过下面的方法可以使用了：
+
+# 卸载已挂载的设备
+sudo umount /dev/sda7
+sudo mount -t ntfs -w /dev/sda7 /media/niliushall/Study
+
+其中：
+-t表示文件系统类型，如ntfs
+-w表示可读可写
+
+踩坑：
+不知道为什么使用mount -o rw,remount /mnt/***无效，虽然显示文件没了，但是再打开后文件仍然存在
+
+还可以使用sudo ntfsfix /dev/sda7来修复文件系统
+————————————————
+版权声明：本文为CSDN博主「niliushall.」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/liushall/article/details/80684997

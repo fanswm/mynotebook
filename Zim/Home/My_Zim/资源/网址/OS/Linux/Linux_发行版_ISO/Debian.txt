@@ -8,3 +8,6 @@ Creation-Date: 2019-07-12T15:31:04+08:00
 图解 Debian 10（Buster）安装步骤 https://linux.cn/article-11083-1.html?utm_source=rss&utm_medium=rss
 
 [[其他发行版:系统管理员:Debian]]
+
+
+ https://manpages.debian.org/buster/manpages-zh/echo.1.zh_CN.html

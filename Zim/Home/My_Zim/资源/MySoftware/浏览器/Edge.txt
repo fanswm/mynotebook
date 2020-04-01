@@ -6,3 +6,5 @@ Creation-Date: 2019-04-03T11:20:54+08:00
 创建日期 星期三 03 四月 2019
 
 换上新内核的 Edge 浏览器更好用了，Chrome 重度用户也可以无痛迁移 https://sspai.com/post/53757
+
+https://www.microsoft.com/en-us/edge

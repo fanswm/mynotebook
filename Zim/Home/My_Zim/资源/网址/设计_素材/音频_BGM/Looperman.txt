@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-28T16:41:07+08:00
+
+====== Looperman ======
+Created Thursday 28 December 2017
+
+https://www.looperman.com/loops
+Looperman 是一个服务音乐爱好者、制作人的社区，它提供由音乐人上传的免费音频、音乐制作教程以及专业的社区论坛，免费注册后即可下载音乐使用或上传自己的音乐。不过对于这种论坛用户自主上传的形式，我个人是持保留意见的，之前《中国有嘻哈》就有一位音乐人由于购买了号称原创实则盗版的音乐素材包而卷入了「抄袭」的风波。如果大家的项目很重要或很商业，建议选一个更稳妥的渠道会比较好。

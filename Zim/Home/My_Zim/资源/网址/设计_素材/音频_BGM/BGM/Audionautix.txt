@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-28T16:40:46+08:00
+
+====== Audionautix ======
+Created Thursday 28 December 2017
+
+http://audionautix.com/index.php
+
+Audionautix
+Audionautix 是一个个人站，站长叫 Jason Shaw，一位坐在父母车子后座听收音机里的各种音乐长大的作曲家、制作人。而网站上的所有音乐，从民谣到布鲁斯到 Hip Hop 到摇滚，全是他自己创作的！网站虽然设计和功能都有点简陋，但有着详尽的风格分类，也能在线试听。
+
+Audionautix 的音乐基于 CC 3.0 协议（还记得是什么意思吗？知识点啊朋友们）——就是可以随意使用、编辑，但要署名原作者。大家方便的话也可以通过网站右上角给 Jason 捐助。
+
+https://audionautix.com/
+一个免费音乐收集平台，该网站的音乐里可以用于任何地方，但是必须标注该音乐由 Audionautix 网站提供。

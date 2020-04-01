@@ -1,0 +1,51 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-20T22:24:05+08:00
+
+====== DELETE ======
+Created 星期四 20 二月 2020
+
+DELETE语句的基本语法是：
+
+__DELETE FROM <表名> WHERE ...;__
+
+例如，我们想删除students表中id=1的记录，就需要这么写：
+
+-- 删除id=1的记录
+__DELETE FROM students WHERE id=1;__
+__-- 查询并观察结果:__
+__SELECT * FROM students;__
+
+注意到DELETE语句的WHERE条件也是用来筛选需要删除的行，因此和UPDATE类似，DELETE语句也可以一次删除多条记录：
+
+__-- 删除id=5,6,7的记录__
+__DELETE FROM students WHERE id>=5 AND id<=7;__
+__-- 查询并观察结果:__
+__SELECT * FROM students;__
+
+
+__如果WHERE条件没有匹配到任何记录，DELETE语句不会报错，也不会有任何记录被删除。例如：__
+
+__-- 删除id=999的记录__
+
+最后，__要特别小心的是，和UPDATE类似，不带WHERE条件的DELETE语句会删除整个表的数据：__
+
+__DELETE FROM students;__
+
+这时，整个表的所有记录都会被删除。所以，在执行DELETE语句时也要非常小心，__最好先用SELECT语句来测试WHERE条件是否筛选出了期望的记录集，然后再用DELETE删除。__
+
+MySQL
+
+在使用MySQL这类真正的关系数据库时，DELETE语句也会返回删除的行数以及WHERE条件匹配的行数。
+
+例如，分别执行删除id=1和id=999的记录：
+
+mysql> DELETE FROM students WHERE id=1;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> DELETE FROM students WHERE id=999;
+Query OK, 0 rows affected (0.01 sec)
+
+小结
+
+使用DELETE，我们就可以一次删除表中的一条或多条记录。

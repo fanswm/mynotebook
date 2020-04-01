@@ -5,6 +5,8 @@ Creation-Date: 2019-03-14T12:52:59+08:00
 ====== ffmpeg 视频拼接 ======
 创建日期 星期四 14 三月 2019
 
+http://ffmpeg.org/
+
 ```
 #!/bin/bash
 #cut/join videos using ffmpeg without quality loss

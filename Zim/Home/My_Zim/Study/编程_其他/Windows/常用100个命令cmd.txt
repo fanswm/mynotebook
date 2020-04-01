@@ -1,0 +1,92 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-11T11:21:27+08:00
+
+====== 常用100个命令cmd ======
+Created Monday 11 December 2017
+
+下面列举了Windows下常用的100个CMD指令， Windows shell提供了一个黑色的框框界面，即命令行操作界面，关于命令行的作用和好处，下面仅窥见一斑。
+PS: win键+R然后输入cmd调出命令行界面
+命令行	功能
+
+calc 		启动计算器
+certmgr.msc 	证书管理实用程序
+charmap 	启动字符映射表
+chkdsk.exe 	Chkdsk磁盘检查
+ciadv.msc 	索引服务程序
+cleanmgr 	垃圾整理
+cliconfg 	SQL SERVER 客户端网络实用程序
+Clipbrd 	剪贴板查看器
+cmd.exe 	CMD命令提示符
+compmgmt.msc 	计算机管理
+conf 		启动netmeeting
+dcomcnfg 	打开系统组件服务
+ddeshare 	打开DDE共享设置
+devmgmt.msc 	设备管理器
+dfrg.msc 	磁盘碎片整理程序
+diskmgmt.msc 	磁盘管理实用程序
+drwtsn32 	系统医生
+dvdplay 	DVD播放器
+dxdiag 		检查DirectX信息
+eudcedit 	造字程序
+eventvwr 	事件查看器
+explorer 	打开资源管理器
+gpedit.msc 	组策略
+iexpress 	木马捆绑工具，系统自带 58. fsmgmt.msc—–共享文件夹管理器
+logoff 		注销命令
+lusrmgr.msc 	本机用户和组
+magnify 	放大镜实用程序
+mem.exe 	显示内存使用情况
+mmc 		打开控制台
+mobsync 	同步命令
+mplayer2 	简易widnows media player
+mplayer2 	媒体播放机
+Msconfig.exe 	系统配置实用程序
+mspaint 	画图板
+mstsc 		远程桌面连接
+narrator 	屏幕“讲述人”
+net start messenger 	开始信使服务
+net stop messenger 	停止信使服务
+netstat -an 	(TC)命令检查接口
+notepad 	打开记事本
+Nslookup 	IP地址侦测器 ，是一个 监测网络中 DNS 服务器是否能正确实现域名解析的命令行工具。 它在 Windows NT/2000/XP 中均可使用 , 但在 Windows 98 中却没有集成这一个工具。
+nslookup 	网络管理的工具向导
+ntbackup 	系统备份和还原
+ntmsmgr.msc 	移动存储管理器
+ntmsoprq.msc 	移动存储管理员操作请求
+odbcad32 	ODBC数据源管理器
+oobe/msoobe /a 	检查XP是否激活
+osk 		打开屏幕键盘
+packager 	对象包装程序
+perfmon.msc 	计算机性能监测程序
+progman 	程序管理器
+regedit.exe 	注册表
+regedt32 	注册表编辑器
+regsvr32 /u *.dll 	停止dll文件运行
+regsvr32 /u zipfldr.dll 取消ZIP支持
+rononce -p 	15秒关机
+rsop.msc 	组策略结果集
+secpol.msc 	本地安全策略
+services.msc 	本地服务设置
+sfc /scannow 	windows文件保护
+sfc /scannow 	扫描错误并复原
+sfc.exe 	系统文件检查器
+shrpubw 	创建共享文件夹
+shutdown 	60秒倒计时关机命令
+sigverif 	文件签名验证程序
+sndrec32 	录音机
+Sndvol32 	音量控制程序
+syncapp 	创建一个公文包
+sysedit 	系统配置编辑器
+syskey 		系统加密，一旦加密就不能解开，保护windows xp系统的双重密码
+taskmgr 	任务管理器（2000/xp/2003
+tourstart 	xp简介（安装完成后出现的漫游xp程序）
+utilman 	辅助工具管理器
+wiaacmgr 	扫描仪和照相机向导
+winchat 	XP自带局域网聊天
+winmsd 		系统信息
+winver 		检查Windows版本
+wmimgmt.msc 	打开windows管理体系结构(WMI)
+write 		写字板
+wscript 	windows脚本宿主设置
+wupdmgr 	windows更新程序

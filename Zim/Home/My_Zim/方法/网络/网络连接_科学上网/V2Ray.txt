@@ -5,5 +5,60 @@ Creation-Date: 2019-12-11T22:27:54+08:00
 ====== V2Ray ======
 创建日期 星期三 11 十二月 2019
 
-https://github.com/233boy/v2ray/wiki/V2Ray%E6%90%AD%E5%BB%BA%E8%AF%A6%E7%BB%86%E5%9B%BE%E6%96%87%E6%95%99%E7%A8%8B
+https://github.com/233boy/v2ray/wiki/V2Ray 搭建详细图文教程
 
+v2ray
+V2Ray 是 Project V 下的一个工具。Project V 包含一系列工具，帮助你打造专属的定制网络体系。而 V2Ray 属于最核心的一个。 简单地说，V2Ray 是一个与 Shadowsocks 类似的代理软件，但比Shadowsocks更具优势
+
+V2Ray 用户手册：https://www.v2ray.com
+
+V2Ray 项目地址：https://github.com/v2ray/v2ray-core
+
+v2rayL
+v2rayL
+
+v2ray linux 客户端，使用pyqt5编写GUI界面，核心基于v2ray-core(v2ray-linux-64)
+
+开发环境：ubuntu18.04+Python3.6
+
+目前已实现以下功能：
+
+全新的UI界面
+添加订阅地址，自动解析并展示可连接VPN
+设置自动更新订阅、更换地址
+支持协议：vmess、shadowsocks
+%E9%80%9A%E8%BF%87vmess://、ss:// 分享链接添加配置，通过二维码添加配置
+手动添加配置，修改本地监听端口
+导出配置、生成配置分享链接、生成分享二维码
+最小化至托盘、测试延时、检查更新
+......
+其中vmess支持websocket、mKcp 目前程序可能存在一些bug但是没有测试出，若在使用过程中发现bug，请在issue中提交，以便改进。
+
+使用
+安装
+方法一：
+
+bash <(curl -s -L http://dl.thinker.ink/install.sh)
+方法二：
+
+在release中下载最新的install.sh，然后运行 ./install.sh
+更新
+方法一：
+
+bash <(curl -s -L http://dl.thinker.ink/update.sh)
+方法二：
+
+在release中下载最新的update.sh，然后运行 ./update.sh
+卸载
+bash <(curl -s -L http://dl.thinker.ink/uninstall.sh)
+展示
+首页
+
+setting1
+
+setting2
+
+感谢
+UI界面设计来源：https://zmister.com/archives/477.html
+
+配置方面参考: https://github.com/2dust/v2rayNG

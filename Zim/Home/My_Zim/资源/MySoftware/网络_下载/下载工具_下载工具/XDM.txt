@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:18:14+08:00
+
+====== XDM ======
+Created Wednesday 24 October 2018
+
+http://xdman.sourceforge.net/
+
+XDM[18]（Xtreme Download Manager）是一个使用 Java 编写的开源下载软件。和其它下载器一样，它可以结合队列、种子、浏览器使用，而且还带有视频采集器和智能调度器。
+
+使用以下命令在 Ubuntu 和 Debian 安装 XDM。
+
+$ sudo add-apt-repository ppa:noobslab/apps
+$ sudo apt-get update
+$ sudo apt-get install xdman

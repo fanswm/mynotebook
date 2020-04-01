@@ -1,0 +1,169 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-23T09:47:15+08:00
+
+====== LED 数字温度计 ======
+Created 星期日 23 二月 2020
+
+MAKER:Anders644PI／译：趣无尽 Cherry（转载请注明出处）
+
+本期带大家制作一个数字温度计，可以作为一款很个性的挂件装饰你的房间哦！
+只需要树莓派 Zero W、LED 灯带、OLED 显示屏和定制的 PCB、胶合板或亚克力板这些组件就可以了，使用 Raspbian 操作系统。
+
+特色：
+1、循环显示城市列表，并在 OLED 显示屏和 LED 灯带上显示温度。当然你可以使用侧面的按钮手动选择要显示的城市。
+2、由 LDR 控制，几分钟内就会默认非活动状态，将自动关闭 LED 灯带和 OLED 显示器，如果检测到明显的光线变化，它将自动重新点亮。
+
+材料清单
+树莓派 Zero W × 1
+SD 卡 × 1
+1.5 英寸 OLED 模块 × 1
+5V 2.4A 电源 × 1
+WS2812B LED 灯条 5 米（30个/米） × 1
+定制 PCB × 1
+4mm 胶合板 × 1
+6mm 胶合板 × 1
+3mm 白色亚克力板 × 1
+螺钉 × 若干
+螺栓 × 若干
+垫圈 × 若干
+支架 × 若干
+烙铁 × 1
+焊锡 × 1
+热熔胶 × 1
+木材胶 × 1
+
+天气数据
+
+
+从 OpenWeatherMap.org 上获取免费的天气数据，这里提供许多国家和地区的大城市的天气数据。使用方法如下。
+1、在 OpenWeatherMap.org 上创建一个免费帐户：https://openweathermap.org/
+2、复制你的 apikey 供以后使用。
+3、下载、解压缩并打开 city.list.json.gz 文件，搜索你要显示的城市，然后复制城市 ID 供以后使用。
+城市温度显示代码请在项目文件库中下载。
+https://make.quwj.com/project/195
+
+设置与编程
+
+
+首先将 OLED 显示器连接到树莓派，并安装适用于OLED 显示器的库。此步骤确保树莓派已连接至互联网。
+1、在接口选项下的 raspi-config 中启用 I2C 和 SPI 功能。退出并重新启动。
+2、运行并更新：
+
+1
+sudo apt-get update
+3、运行以下命令以安装必要的库：
+
+1
+2
+3
+4
+sudo apt-get install python-dev
+sudo apt-get install python-smbus
+sudo apt-get install python-serial
+sudo apt-get install python-imaging
+4、运行以下命令并打开配置文件：
+
+1
+sudo nano /etc/modules
+确保以下两行位于配置文件中，然后退出并重新启动：
+
+1
+2
+i2c-bcm2708
+i2c-dev
+5、现在运行此命令以复制到我的 GitHub 存储库：
+
+1
+git clone https:/ /github.com/Anders644PI/1.5inch-OLED-with-RPi.git
+6、进入新文件夹，解压缩 RPi_GPIO-0_6_5.zip：
+
+1
+unzip RPi_GPIO-0_6_5.zip
+运行此命令以安装库：
+
+1
+2
+cd RPi_GPIO-0_6_5
+sudo python setup.py install
+7、通过键入以下内容来返回主文件夹：
+
+1
+cd /home/pi/1.5inch-OLED-with-RPi/
+用同样的方法处理 spidev-3_2.zip。
+8、解压 wiringPi.zip:
+
+1
+2
+unzip wiringPi
+cd wiringPi
+并运行以下命令：
+
+1
+2
+chmod 777 build
+./build
+使用以下命令检查安装：
+
+1
+gpio -v
+9、返回主文件夹，然后解压缩 bcm2835-1_45.zip
+
+1
+2
+unzip bcm2835-1_45.zip
+cd bcm2835-1_45
+10、然后运行此命令并安装库：
+
+1
+2
+3
+4
+./configure
+make
+sudo make check
+sudo make install
+11、再次返回到 /home/pi/1.5inch-OLED-with-RPi/，然后运行命令来测试 OLED：
+
+1
+2
+cd /Demo_Code/Python/
+sudo python main.py
+最后，编写代码即可，你可以参考我的代码，请在 GitHub 上获取：
+https://github.com/Anders644PI/1.5inch-OLED-with-RPi
+
+配置天气 API
+
+
+1
+2
+cd LED_Thermometer_Code_and_OLED_driver
+nano Official_Digital_LED_Thermometer_v1-0.py
+最后，如图所示，向下滚动并从 openweathermap.org 中将 api-key 改为你的 api 密钥。另外，将城市 ID 和城市名称更改为你所需要的城市。
+
+定制 PCB 板
+
+
+
+
+如图所示，当我弄清楚需要的电子元件后，就开始在网上定制 PCB 板。所有的文件在 GitHub 上均提供了。
+
+切割外壳
+
+
+1、使用 4mm 胶合板和 6mm 胶合板激光切割出外壳。使用 3mm 的白色亚克力板激光切割 LED 的漫射器模型。
+2、将电子设备和 LED 灯带连接到激光切割好的胶合板上。然后组装外壳。
+3、3D 打印按钮和开关，以便配套使用。
+所有 3D 打印文件请在我的 GitHub 中下载。你可能需要将 SVG 文件缩小到75％。
+https://github.com/Anders644PI/1.5inch-OLED-with-RPi
+
+完成
+
+
+
+目前为止，整个项目就完成了，非常的简单。
+
+via
+
+文章标题：基于树莓派的 LED 数字温度计 - 树莓派实验室
+固定链接：https://shumeipai.nxez.com/2020/02/07/digital-rpi-led-thermometer.html

@@ -1,0 +1,101 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-16T20:48:24+08:00
+
+====== me ======
+Created 星期日 16 二月 2020
+
+ ## sudo apt install laptop-mode-tools
+
+```
+正在读取软件包列表... 完成
+正在分析软件包的依赖关系树       
+正在读取状态信息... 完成       
+将会同时安装下列软件：
+  ethtool libqt5designer5 libqt5test5 net-tools python3-pyqt5 python3-sip
+  rfkill sdparm
+建议安装：
+  acpid | apmd | pbbuttonsd | pmud python3-pyqt5-dbg
+下列【新】软件包将被安装：
+  ethtool laptop-mode-tools libqt5designer5 libqt5test5 net-tools
+  python3-pyqt5 python3-sip rfkill sdparm
+
+
+```
+
+## sudo apt install acpid
+
+```
+
+建议安装：
+  acpi-support consolekit
+
+```
+## sudo apt install acpi-support
+
+```
+
+建议安装：
+  radeontool xinput xscreensaver | gnome-screensaver | kscreensaver
+  | xautolock | xlock | xtrlock | i3lock cpufrequtils
+```
+
+## sudo apt install gnome-screensaver
+
+ 
+
+# 以上，总结：
+
+sudo apt install laptop-mode-tools acpid acpi-support gnome-screensaver
+
+ 
+
+ 
+
+# sudo apt install zim git 
+
+# sudo apt install i3
+
+```output:
+
+建议安装：
+  libevent-perl libio-async-perl libpoe-perl libtask-weaken-perl dwm stterm
+  surf
+
+```
+
+sudo apt install libevent-perl libio-async-perl libpoe-perl libtask-weaken-perl dwm stterm
+  surf
+
+```output:
+
+建议安装：
+  libcurses-perl libio-pty-perl libpoe-loop-event-perl libpoe-loop-tk-perl
+  libsocket-getaddrinfo-perl libsocket6-perl libterm-readkey-perl
+
+```
+
+sudo apt install i3lock cpufrequtils xautolock
+
+sudo apt install feh compton
+
+ 
+
+```
+
+建议安装：
+  yudit-doc yudit
+```
+
+### error:
+ laptop_mode[16349]: enabled, not active [unchanged]
+
+ __sudo systemctl enable laptop-mode__
+Synchronizing state of laptop-mode.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable laptop-mode
+
+<<<<<<< HEAD
+ins debian-keyring
+=======
+>>>>>>> 906a1ec23d777c56845d14ead0eeb1aa91ef2b88
+

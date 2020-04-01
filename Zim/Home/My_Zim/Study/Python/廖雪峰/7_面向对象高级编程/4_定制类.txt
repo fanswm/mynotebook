@@ -31,7 +31,8 @@ Student object (name: Michael)
 >>> s = Student('Michael')
 >>> s
 < _  _ main _  _ .Student object at 0x109afb310>
-这是因为__直接显示变量调用的不是 _  _ str _  _ ()，而是 _  _ repr _  _ ()，两者的区别是 _  _ str _  _ ()返回用户看到的字符串，而 _  _ repr _  _ ()返回程序开发者看到的字符串，也就是说， _  _ repr _  _ ()是为调试服务的。__
+这是因为__直接显示变量调用的不是 _  _ str _  _ ()，而是 _  _ repr _  _ ()，两者的区别是 _  _ str _  _ ()返回用户看到的字符串，而 _  _ repr _  _ ()返回程序开发者看到的字符串，也就是说，__
+__ _  _ repr _  _ ()是为调试服务的。__
 __解决办法是再定义一个 （人工换行imrdr）__
 
 ___  _ repr _  _ ()：__
@@ -96,18 +97,18 @@ class Fib(object):
 89
 >>> f[100]
 573147844013817084101
-但是list有个神奇的切片方法：
+__但是list有个神奇的切片方法：__
 >>> list(range(100))[5:10]
 [5, 6, 7, 8, 9]
-对于Fib却报错。原因是 _  _ getitem _  _ ()传入的参数可能是一个int，也可能是一个切片对象slice，所以要做判断：
+对于Fib却报错。__原因是 _  _ getitem _  _ ()传入的参数可能是一个int，也可能是一个切片对象slice，所以要做判断：__
 class Fib(object):
 	def  _  _ getitem _  _ (self, n):
-		if isinstance(n, int): # n是索引
+		__if isinstance(n, int): # n是索引__
 			a, b = 1, 1
 			for x in range(n):
 				a, b = b, a + b
 			return a
-		if isinstance(n, slice): # n是切片
+		__if isinstance(n, slice): # n是切片__
 			start = n.start
 			stop = n.stop
 			if start is None:
@@ -125,13 +126,13 @@ class Fib(object):
 [1, 1, 2, 3, 5]
 >>> f[:10]
 [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
-但是没有对step参数作处理：
+__但是没有对step参数作处理：__
 >>> f[:10:2]
 [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
-也没有对负数作处理，所以，要正确实现一个 _  _ getitem _  _ ()还是有很多工作要做的。
+__也没有对负数作处理__，所以，要正确实现一个 _  _ getitem _  _ ()还是有很多工作要做的。
 此外，如果把对象看成dict， _  _ getitem _  _ ()的参数也可能是一个可以作key的object，例如str。
 与之对应的是 _  _ setitem _  _ ()方法，把对象视作list或dict来对集合赋值。最后，还有一个 _  _ delitem _  _ ()方法，用于删除某个元素。
-总之，通过上面的方法，我们自己定义的类表现得和Python自带的list、tuple、dict没什么区别，这完全归功于动态语言的“鸭子类型”，不需要强制继承某个接口。
+总之，通过上面的方法，我们自己定义的类表现得和Python自带的list、tuple、dict没什么区别，__这完全归功于动态语言的“鸭子类型”，不需要强制继承某个接口__。
 
 __ _  _ getattr _  _ （）：__
 正常情况下，当我们调用类的方法或属性时，如果不存在，就会报错。比如定义Student类：

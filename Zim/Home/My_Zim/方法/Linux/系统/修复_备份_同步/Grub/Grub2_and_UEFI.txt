@@ -1,0 +1,67 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-28T10:48:24+08:00
+
+====== Grub2 and UEFI ======
+Created 星期五 28 二月 2020
+
+https://wdicc.com/grub2-and-uefi/
+这几天搞 Linux 又学习了一些新的东西。
+
+以前都是把 grub 装到 MBR，然后通过 grub 可以 chainloader 启动 windows。现在发现我装了之后并不能启动我的 windows 10 了，就只好研究了一下。
+
+GPT 分区
+以前都是 MBR(Master Boot Record) 形式的分区，主分区 4 个，如果想要建更多，需要建扩展分区，然后再在扩展分区里面建立逻辑分区。现在发现有了 GPT(GUID Partition Table) 分区。这个方式呢，比 MBR 方式有好处，支持更多分区，支持大于 2.2TB 容量的磁盘。
+
+我看我的 windows 10 机器预装就是用的这个分区格式。
+
+UEFI 系统
+UEFI(Unified Extensible Firmware Interface) 是基于 BIOS 的 MBR 启动方式不同的东西，是基于单独的 EFI System Partition(ESP) 里面的数据启动的。里面的程序都需要和 UEFI firmware 的 bitness 一致，x86_64 啥的。
+
+所以我的 windows 10 在 ESP 分区里面已经放了一个自己的起动器。Linux 启动之后，可以查看 /sys/firmware/efi 看看是不是有，有的话表示 kernel 支持 efi，且和 firmware 的 bitness 一致。
+
+ESP 分区是 fat16/fat32 格式的，不像 mbr 在固定位置，到底是哪个分区是呢？是通过通过分区的 boot flag 这个标志来识别的。
+
+efibootmgr
+Linux 下面可以使用 efibootmgr 管理 efi 菜单，当然得 kernel 支持，主要看 /sys/firmware/efi 目录吧。具体内核参数可以看这个。我看着应该是只有通过 efi 启动的系统，才能读取 efi firmware 的信息。否则就算有内核模块也不能读取。
+
+我还发现我这的机器上面通过 efibootmgr 删除了 windows 的行之后，启动的时候按 F12 出来的启动选项里面还有 windwos，会自动加回来，不知道是主板的保护还是哪里的问题，bios 里面没找到可以关闭这个功能的地方。
+
+Grub
+grub 支持安装到 MBR 也支持安装到 ESP 分区。不过只是把内容放到那个分区，最后给 efi 加启动的菜单，还需要 efibootmgr，就是需要相应的内核支持。
+
+类似这样，就是通过 uefi 启动了。
+
+1
+# grub-install --target=x86_64-efi --efi-directory=/mnt/sda1 --bootloader-id=GRUB --boot-directory=/mnt/sda4/boot /dev/sda
+也可以装到 MBR，就是通过传统的 bios 启动。可能需要加 --force ，我遇到的情况会提示 gpt 分区的 boot flag 没有，我这直接不理他加 force 就可以。
+
+1
+# grub-install --boot-directory=/mnt/sda4/boot /dev/sda
+grub 实际上是放到第一个分区前面的一部分空间里面的，传统的 MBR 方式分区软件一般会预留 31kb 从第 63 个扇区开始分区。对于 GPT 分区，因为会有一个 ESP 分区，grub 也可以直接利用这个，装到这个分区，ESP 分区会有一个 bootable flag，因为这等于是单独给 grub 用的分区，所以 grub 也不客气会直接覆盖里面的东西，用自己的文件系统格式，一般系统都不支持，这样也可以防止你自己或者被其他软件误操作。所以要注意，如果你打算用 efi 模式启动，那通过第一个方式用 --efi-directory 把 grub 装到这个分区，或者就还是用 mbr 方式好了。参考这个。
+
+加载 windows
+我看可以通过 chainloader 加载 windows，也有 ntldr 加载，不太清楚具体区别。chainloader 是通过读取指定设备的块来的，比如 chainloader +1 读第一个块。或者 chainloader /EFI/Microsoft/Boot/bootmgfw.efi。
+
+UEFI 模式安装的 windows 可以参考这里，传统 MBR 方式的，参考这里，这个用的是 ntldr 的方式，估计用 chainloader +1 应该也可以。
+
+怎么通过 uefi 启动 grub
+想要使用 efibootmgr 编辑 efi 的菜单，就得通过 efi 模式启动到一个 linux。那一种方式是找一个支持 efi 启动的 live cd。另外一种是使用一个 uefi shell，可以参考这里。
+
+设备名称是变的怎么办
+我发现我这插了 u 盘之后，u 盘就成了 hd0 了，这样写在 grub.cfg 里面的 set root="(hd0,1)" 这样的代码就有问题了。grub2 提供了一个 search 命令来查找你想要的东西，然后把结果设置到一个变量。
+
+文档里面写了 search.file 是 search --file 的 alias，但实际上还有坑在这里。区别的地方看下面
+
+1
+search.file /efi/Microsoft/Boot/bootmgfw.efi root
+1
+search --file /efi/Microsoft/Boot/bootmgfw.efi --set root
+看到区别了吧，那个 root 相当于是自己定义的变量（实际上 grub2 会隐含的用到 root 变量，所以也不能完全说是自己定义的）。我在这个坑上面花了一些时间。
+
+参考资料
+Managing EFI Boot Loaders for Linux
+
+Managing EFI Boot Loaders for Linux: Using GRUB 2
+
+4.1 Installing GRUB using grub-install

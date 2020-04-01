@@ -1,0 +1,34 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-09T14:58:23+08:00
+
+====== Linux 下软改键盘的两个操作 ======
+创建日期 星期日 09 二月 2020
+
+x下面和console 下面的键盘驱动用的不是同一个，所以x下面改了console下面也要改
+xorg 下:
+xmodmap
+在${HOME}目录下创建一个.Xmodmap文件并保证每次启动X服务时能执行他
+
+# apt install xmodmap
+
+$ cd ${HOME} && touch .Xmodmap  # 创建${HOME}/.Xmodmap
+$ vim .Xmodmap # 编辑xmodmap修改键位
+$ xmodmap ${HOME}/.Xmodmap # 将xmodmap生效(将这句话加X启动文件中)
+.Xmodmap怎么写请看 man xmodmap
+
+console 下:
+
+keymaps
+
+复制一个基于当前键位的keymaps，并修改keymaps前缀和内容，并把系统键位切换到这个keymaps
+
+$ cp /usr/share/keymaps/i386/qwerty/us.map.gz ./my.map.gz
+$ vim my.map.gz #编辑键位文件
+$ sudo cp ./my.map.gz /usr/share/keymaps/i386/qwerty/  # 复制键位文件
+debian下切换键位:
+
+# dpkg-reconfigure keyboard-configure
+其他linux系统应该有类似/etc/keymaps的配置文件
+
+https://parrotsec-cn.org/t/linux/2662

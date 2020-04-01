@@ -1,0 +1,32 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-21T11:24:42+08:00
+
+====== 外键 ======
+Created 星期五 21 二月 2020
+
+在students表中，通过class_id的字段，可以把数据与另一张表关联起来，这种列称为外键。
+
+外键并不是通过列名实现的，而是通过定义外键约束实现的：
+
+ALTER TABLE students
+ADD CONSTRAINT fk_class_id
+FOREIGN KEY (class_id)
+REFERENCES classes (id);
+其中，__外键约束的名称fk_class_id可以任意，FOREIGN KEY (class_id)指定了class_id作为外键，REFERENCES classes (id)指定了这个外键将关联到classes表的id列（即classes表的主键）__。
+
+通过定义外键约束，关系数据库可以保证无法插入无效的数据。即如果classes表不存在id=99的记录，students表就无法插入class_id=99的记录。
+
+由于__外键约束会降低数据库的性能，大部分互联网应用程序为了追求速度，并不设置外键约束，而是仅靠应用程序自身来保证逻辑的正确性。__这种情况下，class_id仅仅是一个普通的列，只是它起到了外键的作用而已。
+
+__要删除一个外键约束，也是通过ALTER TABLE实现的__：
+
+ALTER TABLE students
+DROP FOREIGN KEY fk_class_id;
+注意：__删除外键约束并没有删除外键这一列__。删除列是通过DROP COLUMN ...实现的。
+
+多对多
+
+多对多关系实际上是通过两个一对多关系实现的，即通过一个中间表，关联两个一对多关系，就形成了多对多关系
+
+

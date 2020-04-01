@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-18T22:59:31+08:00
+
+====== 2 ======
+Created 星期二 18 二月 2020
+
+__Debian:imrdr:__
+__# sudo apt install mariadb-server__
+
+__# sudo mysql_secure_installation__
+sudo mysql -u root -p
+# 新建用户：
+mysql> create user 用户名 identified by "密码"

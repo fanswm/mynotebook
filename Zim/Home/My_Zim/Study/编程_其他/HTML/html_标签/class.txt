@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-19T16:26:23+08:00
+
+====== class ======
+Created Tuesday 19 December 2017
+
+段落中定义class
+	+ <p class="classname">
+	+ 引用	p.classname{}

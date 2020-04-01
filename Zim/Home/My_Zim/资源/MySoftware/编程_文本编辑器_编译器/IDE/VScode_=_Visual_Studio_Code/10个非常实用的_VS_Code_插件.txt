@@ -1,0 +1,67 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-21T21:37:25+08:00
+
+====== 10个非常实用的 VS Code 插件 ======
+创建日期 星期六 21 三月 2020
+
+https://mp.weixin.qq.com/s?__biz=MzU3NTgyODQ1Nw==&mid=2247488913&idx=1&sn=cd495b346ace5fd405b57c143baf3956&chksm=fd1c6d17ca6be4018b2e0e5008bf902580d7cbe3d6697aa508eb0c25a4135d8514adeb1918dc&mpshare=1&scene=1&srcid=&sharer_sharetime=1584684088430&sharer_shareid=79f6de27b2f84c31190358375c398857#rd
+
+来源：Daan
+
+编译：CSDN-Elle
+
+原文：https://medium.com/better-programming/10-extremely-helpful-visual-studio-code-plugins-for-programmers-c8520a3dc4b8
+
+无论你是经验丰富的开发人员还是刚刚开始第一份工作的初级开发人员，你都会想让自己的开发工作尽可能轻松一点。正确的工具使用则可以帮助你实现这个目标。
+如果你选择使用Visual Code作为IDE，你就可以使它符合你的偏好选择。实现此目的的一种方法是安装正确的插件。为了让你的生活尽可能的简单，你可以添加很多你想要的内容。
+你使用的插件将会对你的工作效率以及工作方式产生很大的影响。这就是为什么我们要运用Visual Studio Code插件列表的原因。
+我们改变工具，工具再改变我们。——杰夫·贝佐斯（Jeff Bezos）
+请注意，所有这些插件都可以在Visual Studio Marketplace 上免费获得。
+Visual Studio Intellicode
+下载超过320万次的Visual Studio Intellicode是Visual Studio下载次数最多的插件之一。而且，在我看来，它是你能用到的最有用的插件之一。
+这个插件旨在帮助开发人员提供智能的代码完成建议而构建的，并且已预先构建了对多种编程语言的支持。
+Visual Studio Intellicode使用机器学习技术来观察和查找众多开源GitHub项目中使用的模式，并在编码时提供建议。
+
+
+ Git Blame
+这是谁做的？！
+有时候，你需要知道是谁写了这段代码。好吧，Git Blame进行了救援，它会告诉你最后接触一行代码的人是谁。最重要的是，你可以看到它发生在哪个提交中。
+这是非常好的信息，特别是当你使用诸如特性分支之类的东西时。在使用特性分支时，你可以使用分支名称来引用票据。因为Git Blame会告诉你哪一个提交(也就是哪个分支)的一行代码被更改了，所以你就会知道是哪一个票据导致了这种更改。这有助于你更好地了解更改背后的原因。
+
+
+
+
+
+Prettier
+Prettier是开发人员在开发时需要遵循一组良好规则的最佳插件之一。它是一个引人注目的插件，让你可以利用Prettier软件包。它是一个强大的、自以为是的代码格式化程序，可以让开发人员以结构化的方式格式化他们的代码。
+Prettier与JavaScript、TypeScript、HTML、CSS、Markdown、GraphQL和其他现代工具一起使用，可以让你能够正确地格式化代码。
+JavaScript (ES6) Code Snippets
+每个略更新的网页开发人员可能都使用过各种JavaScript堆栈。无论你选择哪种框架，在不同的项目中键入相同的通用代码应该会减少你的工作流程。
+JavaScript (ES6)Code Snippets是一个方便的插件，它为空闲的开发人员提供了一些非常有用的JavaScript代码片段。它将标准的JavaScript调用绑定到简单的热键中。一旦你掌握了窍门，你的工作效率就会大大提高。
+Sass
+你可能已经猜到了，这个插件可以帮助正在使用样式表的开发人员。一旦开始为应用程序创建样式表，就一定要使用Sass插件。该插件支持缩进的Sass语法自动设置语法制导 、自动补全和格式化。
+在样式方面，你肯定希望将此工具包含在你的工具集中。
+Path Intellisense
+Path Intellisense是Visual Studio代码之一，它可以为你的开发提供有保证的生产力提升。如果你同时处理许多项目，使用了太多不同的技术，那么你肯定会需要一个可以帮你记住路径名的便捷工具。这个插件将为你节省大量的时间，否则将浪费在寻找正确的目录上。
+Path Intellisence最初是用于自动完成文件名的简单扩展，但它后来被证明是大多数开发人员工具集中的宝贵资产。
+Debugger for Chrome
+如果需要调试JavaScript，则无需离开Visual Studio Code。微软发布的Chrome调试器允许你可以直接在Visual Studio Code中调试源文件。
+
+
+
+
+ESLint
+ESLint插件将ESLint集成到Visual Studio Code中。如果你不熟悉它，ESLint就会作为一个静态分析代码的工具来快速发现问题。
+ESLint发现的大多数问题都可以自动修复。ESLint修复程序可识别语法，因此你不会遇到由传统查找和替换算法引入的错误。最重要的是，ESLint是高度可定制的。
+SVG Viewer
+
+SVG Viewer扩展添加了许多实用程序，可用于在Visual Studio Code中使用SVG。这个插件使呈现SVG文件和查看它们的外观成为可能，而不必离开编辑器。此外，这个插件还具有用于转换为PNG并生成数据URI模式的选项。
+
+
+
+
+
+
+Themes
+最后但并非最不重要的是Themes。既然你每天都会看到你的编辑器，那为什么不把它做得尽可能的漂亮呢?有大量的自定义插件可以改变侧边栏的配色方案和图标。一些流行的Themes是免费提供的,分别是One Monokai ，One Dark Pro 和Material Icon 。

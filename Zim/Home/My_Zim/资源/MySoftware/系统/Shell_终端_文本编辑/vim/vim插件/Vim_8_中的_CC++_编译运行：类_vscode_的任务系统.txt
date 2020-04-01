@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-23T09:44:56+08:00
+
+====== Vim 8 中的 CC++ 编译运行：类 vscode 的任务系统 ======
+Created 星期日 23 二月 2020
+
+https://zhuanlan.zhihu.com/p/106788219?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

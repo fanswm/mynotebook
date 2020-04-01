@@ -1,0 +1,183 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-29T15:00:19+08:00
+
+====== 知乎快捷取消我关注的问题 ======
+Created 星期六 29 二月 2020
+
+https://blog.csdn.net/liusaint1992/article/details/79116861
+
+https://github.com/liusaint/ls-blog/tree/master/zhihu%20chorme%20plugin
+
+起因
+昨天上知乎一看，发现自己关注的问题接近1000个了，不能忍，希望控制在500个以以内最好是100个以内。于是打开我关注的问题列表。发现这个列表已经由滚动加载变成了分页，并且不能在问题列表页面直接点取消关注，需要进入问题详情页面去取消关注。这样一来工作量就太大了。
+之前滚动加载的时候只要写个小脚本在控制台运行一下就可以把所有的问题加载出来，现在想把所有的问题加载出来就不行了。
+
+但是作为一个前端，对页面上的东西，总是可以想想办法的。那就写个小小的chrome插件吧。
+
+要实现的功能点：
+* 一次性把所有的问题加载出来。
+* 就在问题列表页面取消关注。
+
+一次性加载所有问题
+思路：
+* 从第一页开始，依次模拟点下一页的按钮。每次点之前把当前页的问题列表的数据保存成html字符串。放进一个数组。
+* 没有下一页按钮的时候，表示已经到了最后一页。拼装所有的html字符串。替换最后一页的列表区。
+
+实现的时候要注意的是什么时候去点击下一页，在什么时机触发。因为我们要确定下一页的数据加载过来了，才能进行下一次点击，不然就可能出现漏页的情况。 观察页面发现每一页的数据加载好，知乎就会把滚动条移动到顶部去。所以我们可以通过监测scroll事件来判断当前页面的数据是否已经加载完毕。监测到scroll事件的时候就是我们发起下一次点击的时候。并且当下一页加载好之后我们要再把滚动条移动到底部去。这样加载新一页的时候滚动条才会再次往上移，从而触发我们绑定的scroll事件。
+另外，就是scroll事件一般会一次性触发好多个。我们要保证我们绑定的事件的逻辑代码只执行一次。所以我加了一个timeout定时器，稍微延迟一下。等滚动条停下来的时候才真正执行事件逻辑。在这个timeout运行之前的再次触发的scroll事件都会直接return掉。并且设置一个适当延迟，也减小了被误认为是爬虫的概率。
+
+就在问题列表页面取消关注
+思路：
+* 给每个问题加按钮。直接append就行了。并绑定事件。
+* 从问题的dom结构中拿到问题的url，并从url中解析出问题id。
+* 到问题详情页分析取消关注的url格式，使用问题id拼装。
+* 自己发ajax请求。delete格式。
+
+实现
+为了方便，我就直接写成chrome插件使用了。就不用每次手动到控制台去运行了。
+直接拿之前写的一个chrome插件的架子过来开干。
+chrome插件的入门写法以及使用我之前有篇文章写过。一个简单的chrome拓展程序开发
+并且之前的chrome插件架子里集成了jQuery,代码写起来就更欢快了。
+
+/* 
+ * 功能说明：
+ * 1.把所有关注的问题列出来。
+ * 2.给所有的问题添加取消关注按钮并完成取消关注。
+ * 
+ * author: liusaint@gmail.com
+ * date: 20180120
+ */
+
+var ZhiHu = {
+	htmlArr: [], //保存每一页的问题的html数据。
+	pageItems: {}, //保存每一页的数量。
+	INTEVAL: 2000, //翻页的时间间隔。请求下一页的间隔。可以调小一些。
+	timer: '', //定时器
+	//初始化。
+	init: function() {
+
+		var that = this;
+
+		//绑定滚动事件。当页面滚动了就可以开始请求下一页的数据了。
+		$(window).on('scroll', this.scrollFn.bind(this));
+		//初始调用。
+		this.scrollFn();
+
+		//给我们添加的按钮绑定事件。
+		$("body").on("click", '.del-q', function(event) {
+			that.delQ($(this));
+		});
+	},
+	//取消关注。拼装url，发送delete请求。
+	//需要拼装的url接口格式：https://www.zhihu.com/api/v4/questions/20008370/followers
+	delQ: function(jqObj) {     
+
+		var questionUrl, matchArr, delUrl, questionId;
+
+		//问题页面链接
+		questionUrl = jqObj.siblings('.QuestionItem-title').find('a').attr('href');
+		if (!questionUrl) {
+			return;
+		}
+
+		//正则匹配问题id
+		matchArr = questionUrl.match(/\d+/);
+		if (matchArr) {
+			questionId = matchArr[0];
+		}
+
+		delUrl = 'https://www.zhihu.com/api/v4/questions/' + questionId + '/followers';
+
+		$.ajax({
+			url: delUrl,
+			type: 'delete',
+			success: function(data) {
+				//成功的话删除该列。
+				jqObj.closest('.List-item').remove();
+			}
+		})
+
+	},
+	//页面滚动时触发的事件。
+	scrollFn: function(event) {
+		var that = this;
+		//滚动条滚动时会多次调用此方法，拦截掉。
+		if (this.timer) {
+			return;
+		}
+		this.timer = setTimeout(function() {
+			//页面内容提取
+			that.saveData();
+
+			//如果有下一页，模拟点击。
+			if ($(".PaginationButton-next").length > 0) {
+				$(".PaginationButton-next")[0].click();
+				//移动到底部。
+				that.scrollBottom();
+			} else {
+				//到了最后一页了。最后的数据处理。
+				that.mergeList();
+				//解绑事件
+				$(window).off('scroll');
+			}
+
+			clearTimeout(that.timer);
+			that.timer = '';
+		}, this.INTEVAL)
+
+	},
+	//从页面中提取问题html数据与每页的数量。
+	saveData: function() {
+		var html = $(".List-header+div").prop('outerHTML');
+		this.htmlArr.push(html);
+		//当前页面的问题数量
+		this.pageItems[$('.PaginationButton--current').text()] = $('.List-item').length;
+	},
+	//数据收集完成后对列表的处理。
+	mergeList: function() {
+		var html = this.htmlArr.join('');
+		//组装所有页的数据到一页。
+		$(".List-header+div").html(html);
+		//移除分页
+		$(".Pagination").remove();
+		//给每个问题添加取消关注按钮
+		$(".ContentItem-title").append('<button class="del-q" style="float:right;color:#1388ff;">取消关注</button>');
+		//把每页的数量打出来看一下，发现并不是每页都是20条数据。
+		top.console.log(this.pageItems);
+	},
+	//滚动到底部
+	scrollBottom: function() {
+		var h = $(document).height() - $(window).height();
+		$(document).scrollTop(h);
+	},
+
+}
+
+/* chrome插件部分。核心代码是上面的内容 */
+chrome.extension.onRequest.addListener(
+	function(request, sender, sendResponse) {
+		if (request.greeting == "hello") {
+			//执行上面的内容
+			ZhiHu.init();
+		}
+	}
+);
+
+插件完成，加载到chrome浏览器，点击运行。功能正常。大功告成。
+
+不过当所有问题都加载出来之后发现了比较奇怪的事情，就是一共加载出来911个问题。而实际上知乎显示我关注的问题有950个。所以我一度怀疑是不是哪个逻辑有错误少加载了一两页的数据。就在代码里加入了一个对象保存每一个问题页面的问题数据。
+得出的结果是并不是每一页都有20个问题的。有些页面只有19个，最少的甚至只有16个。于是我点开某一页最少的，挨个数一下，发现真是只有16个。然后把这些数据加起来，确实是911个。
+另外39个问题真是消失在搜索结果中了。
+
+补充
+本代码具有时效性，仅供参考。知乎的列表的dom结构和接口都可能会修改。如果发现代码不能运行，可以酌情修改代码再运行。
+
+效果图：
+
+插件github地址
+
+文章github地址
+————————————————
+版权声明：本文为CSDN博主「liusaint1992」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/liusaint1992/article/details/79116861

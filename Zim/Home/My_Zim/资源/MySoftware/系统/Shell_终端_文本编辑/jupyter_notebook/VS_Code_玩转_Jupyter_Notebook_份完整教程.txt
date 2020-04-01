@@ -1,0 +1,87 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-21T22:09:44+08:00
+
+====== VS Code 玩转 Jupyter Notebook 份完整教程 ======
+创建日期 星期六 21 三月 2020
+
+http://mp.weixin.qq.com/s?__biz=MzA4MjEyNTA5Mw==&mid=2652570731&idx=1&sn=842e2f79237393541cee1e9c46551ea4&chksm=84652c21b312a537324e9ea0b658f236de86bbee6664fe9b3b1d5423866ff8e9c0e8067d8cf6&mpshare=1&scene=1&srcid=&sharer_sharetime=1584632929802&sharer_shareid=79f6de27b2f84c31190358375c398857#rd
+
+尽管许多程序员选择使用 IDE（Integrated Development Environment，集成开发环境）工作，但也有一些程序员（包括我）喜欢探索 IDE 中不同的可能性。这种探索并不只是因为酷，还是因为每个流行的 IDE 都有其独特的功能，而我的很多项目都是跟同事合作的，这些同事可能使用不同的 IDE，为了在项目中互相配合，我会尽量用他们的「语言」。
+
+在用 Python 的时候，我比较喜欢用 Jupyter Notebook 和 Visual Studio (VS) Code 来编程。
+
+在各种 IDE 中，Jupyter Notebook 已经成为极其流行选择了。除了 IPython 之外，还有其他可用的内核。而且除了 Python 之外，Jupyter Notebook 还可以支持 Java、R、Julia 和其他流行的编程语言。Jupyter Notebook 同时集成了 Markdown 文本和可执行源代码，这让合作完成、可复制的小组项目变得更容易。
+
+VS Code 是另一个在使用多种编程语言（如 JavaScript、c# 和 Python）的开发人员中流行起来的开源 IDE，随着 VS 代码插件的不断开发，VS Code 可以支持语言的列表仍在增长。但是它还不能支持编辑 Jupyter Notebook 产生的文件。
+
+现在不一样了。随着 2019 年 VS Code Python 插件的最新发布，VS Code 已经提供了对 Jupyter Notebook 的本地支持，也就是可以在不运行 Jupyter Notebook 的情况下在笔记本上工作。在本文中，我会介绍一些在 VS Code 中使用 Jupyter Notebook 的基础知识。
+
+环境设置
+
+你需要在你的电脑上先安装 Jupyter 包。你可以用 python 的安装程序（pip install notebook）安装，也可以用 conda 来安装（conda install -c conda-forge notebook）。当然，你计算机上也得有 VS Code 和 Python 3。如果没有的话，先去这两个网址下载。
+
+Python 3：https://www.python.org/downloads/
+
+VS Code：https://code.visualstudio.com/download
+
+
+打开 VS Code，进入扩展部分（Extension）。如果你用的是 Mac，你可以用⇧⌘X（Shift + Cmd + X）快捷键来打开扩展部分，如果你用的是 Windows 系统，这个快捷键就变成了 Ctrl + Shift + X。在文本框中搜索「Python」，你就应该能够看到相关扩展的列表。点击名为「Python」的扩展名——这是微软开发的一个扩展包。安装这个扩展包，如果需要的就重新启动一下 VS Code。
+
+完成最后几个准备步骤后，VS Code 就可以使用 Jupyter Notebook 了。
+
+创建 Jupyter 笔记本
+
+点击 View -> Command Palette (如果使用的是 Mac, 可以用⇧⌘P 来快速打开) 就可以创建一个新的 Jupyter 笔记本。下个页面弹出之后，搜索「Jupyter」并选择「Python: Create Blank New Jupyter Notebook」选项，就可以创建一个新的 Notebook 了。为了让你们更明白，我创建了一个名为 JupyterExample.ipynb 的笔记本，流程如下图所示。
+
+
+
+常用操作
+
+单元的插入和删除
+
+可以点击工具栏里或者每个单元左侧的「加号」来插入单元。如果想要删除，就点击单元右边删除的标志（小垃圾桶）。
+
+
+
+转换单元内容类型和状态
+
+点击单元的 code/markdown 部分就可以转换内容类型。如果想要转换单元的状态，单机文本输入框就可以让它进入编辑模式。点击单元左侧的垂直条可以将其变成命令模式。然后再点击另一个单元，那么前一个被选中的单元就会变回未选中的状态。单元左侧的垂直条可以显示单元的状态。
+
+
+
+
+命令状态下的快捷键
+
+当单元左侧的垂直条显示其为命令状态（蓝色）时，就可以使用下面这些快捷键了。
+
+
+
+运行代码块
+
+你只需要点击 code/markdown 区域的三角符号就能运行这个代码块了。如果想要运行整个笔记本所有的代码块，只需要点击最上方工具栏的双箭头标志就行了。
+
+
+
+尽管上图并没有展示，工具栏里有一个带着向上箭头的三角符号，点击这个符号可以运行当前单元前面所有的胆码。如果箭头是向下的，那就是运行包括当前单元在内的后面所有代码。
+
+变量预览器
+
+要查看已定义的变量列表，只需单击工具栏中的变量按钮，就会出现显示所有已定义的变量的一个表。你新定义的变量也会自动包含在表中。
+
+
+
+图表预览
+
+如下图所示，我们可以点击输出图片角上的图表标志来预览你画的所有图。
+
+
+
+在图预览器中，你可以在最上方看到一个工具条，这个工具条的功能都很常见，如放大缩小、保存图片等。
+
+
+你该学到什么？
+
+本文回顾了在 VS Code 中使用 Jupyter 笔记本时需要进行的基本操作。如果您使用 VS Code 来满足其他开发需求，那么在 VS Code 中尝试使用 Jupyter Notebook 是非常方便的，这样您就可以只使用一个 IDE。特别是其代码自动补齐的功能可以让你的开发更快捷。
+
+参考链接：https://towardsdatascience.com/getting-started-with-jupyter-notebooks-in-visual-studio-code-5dcccb3f739b

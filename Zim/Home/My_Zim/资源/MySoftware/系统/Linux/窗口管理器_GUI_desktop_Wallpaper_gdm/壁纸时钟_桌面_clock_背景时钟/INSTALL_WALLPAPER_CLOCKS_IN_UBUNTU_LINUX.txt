@@ -1,0 +1,70 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-23T14:45:26+08:00
+
+====== INSTALL WALLPAPER CLOCKS IN UBUNTU LINUX ======
+Created 星期日 23 二月 2020
+
+http://www.webupd8.org/2009/11/install-wallpaper-clocks-in-ubuntu.html?m=1
+INSTALL WALLPAPER CLOCKS IN UBUNTU LINUX
+Author: Andrew | Posted: November 05, 2009
+wallpaper clocks ubuntu linux
+
+Wallpaper Clocks can be used to display various wallpapers with a real-time working clock blended into the wallpaper. Basically, the website to which I linked doesn't provide an application for it, but there are several apps which can make use of the Wallpaper Clocks provided by that website. However, the applications are not free - for Windows that is - for Linux, you can use a Screenlet which is obviously free and well, that's all you have to do. So here's how to do it.
+
+Even though we will use Screenlets for this, the actual wallpaper won't be a screenlet, but a normal wallpaper which changes every minute or day (depending on the wallpaper you choose).
+
+If you don't want to use Screenlets, there is a script that does the same thing, but I haven't tested it. See more about this, HERE.
+
+
+Let's get started. Firstly, install Screenlets. In Ubuntu:
+
+sudo apt-get install screenlets
+
+After installation, you will find Screenlets under Applications > Accessories. If you log in as root (which is highly not recommended), you won't have access to any of the Screenlets options. There is however a work-around for this (but again, I strongly advise you not to log in as root).
+
+Now you must download Wallpaper Clocks screenlet. To install it, open Screenlets, select "Install", browse for the newly downloaded archive and select it. Never mind the warning that says it wasn't packed properly, it will work anyway.
+
+Wallpaper Clocks Screenlet works on GNOME , KDE AND XFCE.
+
+The last step is to download some Wallpaper Clocks. Don't worry, almost all are free. After you downloaded a Wallpaper Clocks, run the Wallpaper Clocks screenlet:
+
+wallpaper clocks screenlets
+
+
+A small clock will be displayed after running it. No, that's not the actual wallpaper clock. Just right click that clock and select: "Install wallpaper":
+
+Image and video hosting by TinyPic
+
+then browse for the Wallpaper Clocks file (.wcz) you've downloaded. You can install as many as you want. To use a Wallpaper Clock, simply right click the floating clock on your desktop and select "Change wallpaper clock".
+
+Note: if you have a desktop refresh issue, right click the screenlet, select "Properties" and under Options > Wallpaper, check the "Black Screen Workaround" box.
+
+
+Here are some more Wallpaper Clocks examples (click to download):
+
+wallpaper clocks astronaut
+
+santa flying wallpaper clocks
+
+sketchbook wallpaper clocks
+
+jeans world map wallpaper clocks
+
+wallpaper clocks the black hole
+
+thunder wallpaper clocks
+
+
+Browse all Wallpaper Clocks.
+
+
+Update: for a newer screenlets version (comes with many Unity fixes, appindicator and a screenlets PPA), see this post: New Screenlets Version (0.1.4) Brings Ubuntu 11.04 Fixes, AppIndicator Support
+
+Also see: Use Wallpaper Clocks, Live Earth Wallpaper In Ubuntu With Slidewall
+
+Other interesting scripts for creating (generating) wallpapers in Linux:
+
+Automatic NASA Astronomy Wallpaper
+Real-Time Earth Wallpaper For Linux
+Create A Wallpaper Based On Your last.fm Music Profile

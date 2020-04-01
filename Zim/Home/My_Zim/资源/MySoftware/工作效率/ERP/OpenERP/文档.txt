@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-11T22:34:23+08:00
+
+====== 文档 ======
+创建日期 星期三 11 三月 2020
+
+Odoo 用户手册— Odoo 13.0 文档
+
+https://www.odoo.com/documentation/user/13.0/zh_CN/
+
+
+https://blog.csdn.net/weixin_33953384/article/details/93162330
+https://blog.csdn.net/wangnan537/article/details/46434373

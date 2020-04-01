@@ -1,0 +1,214 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-19T20:32:41+08:00
+
+====== Ubuntu系统下进行XMR门罗币Monero挖矿 ======
+创建日期 星期五 19 一月 2018
+
+http://blog.sina.com.cn/s/blog_bd4b538f0102xeqi.html
+
+ 首先，我们今天要演示的是挖XMR Monero（门罗币），在挖币前，我们首先了解一下挖币需要用到的几个参数：
+
+1、交易账号
+
+2、钱包地址
+
+3、Payment ID
+
+4、Worker ID
+
+5、邮箱地址
+
+上面5个东西是挖矿中需要用到的，前2个是必须的，后面3个视设置而定，有时候可以不用。
+
+1、创建交易账号和生成钱包地址
+
+下面我们先来注册一个交易账号，交易账号是用来干什么的呢？说白了就是用来存储你挖回来的XMR币的，然后你可以在这个交易网站上进行交易。
+
+交易账号我选择的是Hitbtc这个网站注册，注册地址是：https://hitbtc.com/?ref_id=5a06b4a396d5e
+
+注册完成后，在左上的导航中选择【账户】
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+然后在下面的列表中找到【XMR Monero】，点击左边的按钮，即可生成钱包地址，如下图
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+然后我们要把这个钱包地址复制起来，后面需要用到。
+
+2、生成Payment ID
+
+这个Payment ID有时候可以不用，但是这里我们还是说一下如何生成。这个生成的办法其实也比较简单，实际就是生成一串随机数，这里我们随便找一台Linux系统，然后执行命令：openssl rand -hex 32
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+然后将生成的内容复制起来等待使用。
+
+3、编译安装挖矿软件
+
+这里我选择使用Ubuntu 17.10系统做演示，请依次执行下面的命令
+
+sudo apt-get -y install git
+
+git clone https://github.com/fireice-uk/xmr-stak-cpu.git
+
+sudo apt-get -y install libmicrohttpd-dev libssl-dev cmake build-essential
+
+cd xmr-stak-cpu/
+
+cmake -DHWLOC_ENABLE=OFF .
+
+make install
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+看到上图时说明安装已经安成。
+
+4、配置挖矿参数
+
+刚安装好挖矿软件，我们先进入bin目录，然后执行一次挖矿软件，获得推荐的CPU线程参数（因为这个挖矿实际是利用空闲的CPU进行计算，所以这里主要消耗的就是CPU）
+
+cd bin
+
+./xmr-stak-cpu
+
+执行后得到类似下面的结果
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+我们将红框内的内容复制出来备用。然后使用vi/vim编辑器在线编辑，或者使用ftp、sftp的方式将当前目录下的config.txt配置文件下载到本地进行编辑。
+
+打开config.txt文件，找到默认的【”cpu_threads_conf” : null,】，然后替换成上面红框的内容
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+这里大家可能注意到，我这个CPU线程参数只有一个线程，这是为什么呢？因为我现在演示使用的单核CPU的VPS主机，所以这里只有一个线程，大家以后挖矿的时候要注意不要使用VPS，因为容易长期过高占用CPU导致被封号或者停机，如果想挖矿，尽量使用独立服务器。
+
+修改完CPU的参数后，下面我们继续修改config.txt文件。找到下面这三行：
+
+“pool_address” : “pool.usxmrpool.com:3333”,
+
+“wallet_address” : “”,
+
+“pool_password” : “”,
+
+pool_address是矿池的地址，就是从哪里挖矿的意思。wallet_address就是钱包地址，也就是我们前面生成的那个钱包地址。pool_password这个密码一般不用管，直接设置为x即可。
+
+那么矿池地址从哪里来呢？BlockChain:挖矿:可以在这里找http:pool.monero.org，不过好像打开很慢，不知道是不是我的网络问题。这里呢，我就直接选用了网上比较多人推荐使用的矿池https:xmr.nanopool.org
+
+BlockChain:挖矿:首先我们打开https:xmr.nanopool.orghelp，然后往下拉，找到地址列表
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+这里我选择了第一个，将Server Host和Stratum Port记下来，例如这里的：
+xmr-eu1.nanopool.org 	14444
+
+然后回到我们的config.txt文件，在pool_address矿池地址那里填上xmr-eu1.nanopool.org:14444，即把Server Host和Stratum Port拼在一起，中间用冒号分隔。
+
+然后我们来配置钱包地址wallet_address，这里呢有2种写法：
+
+1、直接填写钱包地址
+
+2、钱包地址.PaymentID.WorkerId/邮箱地址
+
+我们先来说第一种，这种也就是最简单的，直接把我们在交易网站那里生成的钱包地址复制进去即可，如下图：
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+第2种写法呢，就是把PaymentID、WorkerID和你的邮箱地址填写进去，那么填写多这三个资料有什么作用呢？
+
+填多这三样资料，在后面挖矿的过程中，假如我们有多台服务器一直挖矿，那么我们可以区分是哪台服务器。填写邮箱地址是为了后面修改挖矿的最低支付额度（nanopool默认的支付额度是1个XMR，后面我们可以设置为0.3个XMR），而邮箱就是密码。
+
+至于WorkerID，这个纯粹就是一个编号来的了，也是我们自己随便填写的。例如我下面填写完整的参数：
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+注意：4个参数之间的分隔符号不同，钱包地址跟PaymentID中间用实心的点.分隔，PaymentID和WorkerID中间也是用实心的点.分隔，而WorkerID和邮箱之间是用斜线/分隔，完整的格式如下：
+
+钱包地址.PaymentID.WorkerId/邮箱地址
+
+提示：WorkerID就是用户名，随便取的。大家喜欢填啥都可以的
+
+最后我们把pool_password密码设置为x即可，如下图：
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+到此为止，我们的config.txt配置就已经全部搞定了，将文件保存一下。
+
+5、开始挖矿
+
+下面就到了最重要的时刻，我们开始挖矿~
+
+执行./xmr-stak-cpu，发现提示MEMORY ALLOC FAILED: mmap failed，实际上这个问题不需要解决，但是有些朋友可能有强迫症，所以在这里我也提供一下解决方案：
+
+(1)先按ctrl + c 停止挖矿
+
+(2)执行sudo sysctl -w vm.nr_hugepages=128
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+(3)编辑文件/etc/security/limits.conf，然后在里面加入下面两行内容并保存
+
+* soft memlock 262144
+
+* hard memlock 262144
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+(4)断开ssh连接或者重启服务器，注意重启服务器需要重新执行一次sudo sysctl -w vm.nr_hugepages=128
+
+上面的步骤完成后，重新进入到我们的挖矿程序的bin目录下，然后执行./xmr-stak-cpu，然后可以看到挖矿已经开始~
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+根据提示可以按下键盘的h键查看当前CPU的计算能力（简称算力），如下图：
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+如果显示是0，则可能是刚开始挖矿，需要稍微等一等。算力越高，挖矿的速度越快。
+
+7、设置后台挖矿
+
+大家都知道，Linux是基本命令行的，当我们断开SSH连接后，当前执行中的程序也会被中止，那么怎么办呢？我们不可能24小时开着SSH看着挖矿的啊~其实很简单，我们只要使用screen命令就可以搞定了，具体的说明大家自行百度一下，我这里只说几个简单的操作
+
+(1)按下ctrl + c 停止挖矿
+
+(2)安装screen，执行apt install screen -y
+
+(3)输入screen，进入到screen的控制台窗口
+
+(4)进入到我们的挖矿程序bin目录下，然后执行挖矿程序./xmr-stak-cpu
+
+(5)按键盘的ctrl + a，然后放开，再按下键盘d，退出screen窗口，左下角可以看到提示
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+(6)查看我们当前有哪些screen任务，执行screen -ls或者screen -list(两个命令的效果是一样的)，如下图，可以看到我们当前有一个任务在做着，进程id是14638Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+(7)恢复挖矿界面，执行screen -r 14638，回到我们的挖矿界面。这样一来，我们就实现了断开ssh后一样可以在后台挖矿了。如果想要退出screen界面继续挖矿，那么按下ctrl + a，放开键盘，再按下d即可
+
+8、查看挖矿收益
+
+挖矿是开始了，但是怎么查看收益呢？还记得我们用的是哪个矿池不？BlockChain:挖矿:是https:xmr.nanopool.org
+
+BlockChain:挖矿:首先我们进入到https:xmr.nanopool.org，然后在右上角有个搜索，这里可以输入我们的钱包地址或者PaymentID，然后搜索，即可查看到我们的收益。如果搜索不到，则可能是刚刚开始挖矿，还没有数据，需要耐心等待一会。
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+在这里我们可以看到默认的支付额度是0.3，那是因为我已经修改过了。如果要修改的话，可以点击Settings进行更改
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+但是修改这个需要Rating达到10，Rating是什么呢？我们可以把网页往下拉
+
+Ubuntu系统下进行XMR门罗币Monero挖矿的超详细图文教程
+
+挖矿大概半小时左右这个Rating就能达到10了，达到10之后我们就可以将最低支付额修改为0.3了。当我们挖矿收益达到0.3了，矿池就会将我们的收益打到Hitbtc交易网站的账号里面，即我们之前生成的钱包里面。
+
+除非注明，否则均为乐海购原创文章，转载请以链接形式标明本文地址
+
+本文链接：https://www.lehaigou.com/2017/1223209327.shtml
+

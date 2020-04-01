@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-27T12:24:32+08:00
+
+====== 脚本 ======
+Created 星期四 27 二月 2020
+
+把SQL脚本放到MySQL命令行里执行：
+
+$ mysql -u root -p < schema.sql
+

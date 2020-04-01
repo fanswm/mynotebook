@@ -27,7 +27,7 @@ https://www.jianshu.com/p/fb42c29cc638
  
    git branch -m master
  
-6.Finally, force update your repository
+6.Finally, force update your repository 
  
    git push -f origin master
 

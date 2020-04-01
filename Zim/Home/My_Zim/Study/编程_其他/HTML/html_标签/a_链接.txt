@@ -1,0 +1,27 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-12-19T16:30:36+08:00
+
+====== a 链接 ======
+Created Tuesday 19 December 2017
+
+链接<a></a>
+	+ <a href="http://www.runoob.com">链接文本</a>
+	
+	+ target 属性: 设置为 "_blank", 链接将在新窗口打开。
+	
+	+ id 属性
+		用于创建在一个HTML文档书签标记
+		在当前页面链接到指定位置
+		创建id:<a id="tips">重要</a> 
+		访问id:<a href="#tips">访问重要</a> 
+		
+	+ 跳出框架
+		<a href="//www.runoob.com/" target="_top">点击这里!</a> 
+		
+	+ 发送邮件
+		++ <a href="mailto:someone@example.com?Subject=Hello%20again" target="_top"> 发送邮件</a>
+		++ 单词直接空格使用 %20 代替，以确保浏览器可以正常显示文本
+		++ <a href="mailto:someone@example.com?cc=someoneelse@example.com&bcc=andsomeoneelse@example.com&subject=Summer%20Party&body=You%20are%20invited%20to%20a%20big%20summer%20party!" target="_top">发送邮件!</a></p>
+	+ 图片链接
+		++ <a href="//www.runoob.com/html/html-tutorial.html"> <img src="smiley.gif" alt="HTML 教程" width="32" height="32"></a>

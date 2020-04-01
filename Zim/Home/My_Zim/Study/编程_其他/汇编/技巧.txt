@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-01-02T21:42:30+08:00
+
+====== 技巧 ======
+创建日期 星期三 02 一月 2019
+
+清零：
+`mov ax, 0`（机器码是3个字节） 或 `sub ax,ax`(机器码是2个字节)

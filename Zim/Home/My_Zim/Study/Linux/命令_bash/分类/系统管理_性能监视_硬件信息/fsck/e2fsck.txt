@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-26T16:01:17+08:00
+
+====== e2fsck ======
+Created 星期三 26 二月 2020
+
+imrdr:
+e2fsck /dev/sdaxx

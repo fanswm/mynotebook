@@ -1,0 +1,62 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-27T21:40:47+08:00
+
+====== Edge浏览器的IE模式 ======
+Created 星期四 27 二月 2020
+
+https://docs.microsoft.com/zh-tw/deployedge/edge-ie-mode
+local group policy editor：
+gpedit.msc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://baijiahao.baidu.com/s?id=1656293986605089158&wfr=spider&for=pc
+1月15日，微软正式在官网放出了基于Chromium内核的全新Microsoft Edge浏览器。
+
+同时微软为全新的Edge浏览器增加了IE兼容模式（内部集成了IE11的Trident MHTML Engine），方便用户在不打开IE的情况下访问某些银行、报名网站。
+
+具体开启IE模式流程如下：
+
+1、启动Microsoft Edge Chromium Beta版；
+
+2、访问edge：//flags页面；
+
+3、搜索“互联网”，对于“启用IE集成”，选择“IE模式”
+
+4、右键单击桌面上的Edge beta快捷方式，然后选择“属性”；
+
+5、在“目标”字段中，在“\msedge.exe”之后留出空格并添加字段--ie-mode-test，具体类似于“C：\Program Files （x86）\Microsoft\Edge Beta\Application\msedge.exe” --ie-mode-test
+
+6、单击“应用”，通过单击“继续”提供管理员权限；
+
+7、从添加了命令行开关的快捷方式启动Edge，访问网站；
+
+8、单击选项-“更多工具”，选择“以Internet Explorer模式打开站点”。
+
+这样就可以开启Edge浏览器的IE模式啦，需要注意的是，开启后每次启动浏览器都会收到一条消息“您使用的是不受支持的命令行标志–ie-mode-test。这会带来稳定性和风险”，不过这并不会影响使用。

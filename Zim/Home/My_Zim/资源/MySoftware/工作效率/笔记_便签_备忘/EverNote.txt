@@ -24,3 +24,7 @@ Everpad: 在linux（ubuntu）上最好的Evernote客户端，不再为linux没Ev
 sudo add-apt-repository ppa:nvbn-rm/ppa
 sudo apt-get update
 sudo apt-get install everpad
+
+
+本地文件夹：
+C:\Users\Administrator\Yinxiang Biji

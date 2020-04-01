@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-15T10:52:01+08:00
+
+====== 教程 ======
+Created Thursday 15 November 2018
+
+https://ruby-china.org/wiki
+
+https://github.com/ruby-china/the-rails-doctrine
+

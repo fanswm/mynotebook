@@ -1,0 +1,39 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-12T10:15:15+08:00
+
+====== 吊打百度网盘的开源神器 ======
+创建日期 星期四 12 三月 2020
+
+https://zhuanlan.zhihu.com/p/109486185
+
+百度网盘大家都很熟悉，大家都知道百度网盘的尿性，如果不开会员就会被限速，让你下载一个几G的东西就需要花费半天时间，导致风评特差，
+
+但是99年的在校女大学生iikira用Go撸了一个百度网盘客户端——BaiduPCS-Go。如今已经在Github上已经斩获了19.7K个星。
+
+BaiduPCS-Go是仿 Linux shell 文件处理命令的百度网盘命令行客户端，支持Windows、Mac、Linux、Android、iOS五大系统，具有以下特性：
+
+多平台支持, 支持 Windows, macOS, linux, 移动设备等
+百度帐号多用户支持
+通配符匹配网盘路径和 Tab 自动补齐命令和路径, 通配符_百度百科
+下载网盘内文件, 支持多个文件或目录下载, 支持断点续传和单文件并行下载
+上传本地文件, 支持上传大文件(>2GB), 支持多个文件或目录上传
+离线下载，支持http/https/ftp/电驴/磁力链协议
+下面我们就以Windows系统为例，体验一下BaiduPCS-Go，首先我们需要下载对应的系统版本，文件格式均为zip压缩包格式。
+
+
+解压之后打开，就会开启CMD命令界面，输入help→按enter键，就可以查看相关命令，你只需要根据相应命令就可以进行相应动作：
+
+
+虽然有帮助，但是命令行操作，对于小白来说还是有些不习惯，而且没办法远程控制。这边再推荐另一个开源项目BaiduPCS-Web，这个项目BaiduPCS-Go, 可以让你高效的使用百度云
+
+
+BaiduPCS-Web目前已经在Github上获得4.7K，835个Fork
+
+需要下载对应的系统版本。（下载地址：https://github.com/liuzhuoling2011/baidupcs-web/releases）
+
+解压后，Windows版可以直接双击打开使用，Mac和Linux需要给程序添加执行权限，打开终端执行命令如下：cd 到软件所在的目录
+
+chmod a+x BaiduPCS-Go
+
+./BaiduPCS-Go对于Windows，程序启动会自动打开默认浏览器进入BaiduPCS-Go Web页面：

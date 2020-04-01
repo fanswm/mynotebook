@@ -1,0 +1,30 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-12T09:26:06+08:00
+
+====== error ======
+Created 星期四 12 三月 2020
+
+SharpDX.SharpDXException: HRESULT: [0x8899000C], Module: [SharpDX.Direct2D1], ApiCode: [D2DERR_RECREATE_TARGET/RecreateTarget], Message: 存在可以恢复的演示错误。调用方需要重新创建、重新渲染整个帧，并重新尝试显示。
+
+   在 SharpDX.Result.CheckError()
+   在 DesktopDuplication.Direct2DEditorSession.EndDraw()
+   在 DesktopDuplication.Direct2DEditor.GenerateFrame()
+   在 Screna.Recorder.<>c__DisplayClass14_0.<DoRecord>b__2()
+   在 System.Threading.Tasks.Task`1.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 Screna.Recorder.<DoRecord>d__14.MoveNext()
+
+
+尝试解决：
+win10: 
+hresult module sharpDX.DXGI apicode DXGI_ERROR_DEVICE_REMOVED/DeviceRemoved, 
+
+https://www.errorsolutions.tech/error/dxgi_error_device_removed/
+https://www.youtube.com/watch?v=MfPiWFyAnGQ
+
+performance: 性能
+adjust the appearance and performance of windows: 外观和性能

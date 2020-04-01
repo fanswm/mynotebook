@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-28T14:40:41+08:00
+
+====== ls al ======
+Created 星期五 28 二月 2020
+
+第1个字符：
+
+d 	目录
+- 	文件
+l 	连接文件
+b 	块设备，可供存储的接口设备
+c 	设备文件里面的串行端口设备：键盘，鼠标（一次性读取设备）
+s	数据接口文件，通常在 /var/run
+p	FIFO,pipe
+

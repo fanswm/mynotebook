@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-04-11T11:57:59+08:00
+
+====== 硬盘 ======
+创建日期 星期四 11 四月 2019
+
+检查并修复文件系统：
+Windows: chkdsk 盘符： /f /r

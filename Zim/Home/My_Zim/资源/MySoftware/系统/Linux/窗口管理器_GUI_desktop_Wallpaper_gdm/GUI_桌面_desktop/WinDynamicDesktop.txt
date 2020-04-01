@@ -6,3 +6,5 @@ Creation-Date: 2018-06-29T16:15:51+08:00
 Created Friday 29 June 2018
 
 macOS Mojave 的动态桌面，Windows 也可以拥有：WinDynamicDesktop http://sspai.com/post/45392
+
+方法:Linux:UI 外观 壁纸:桌面登录管理器 GDM 窗口管理器:动态窗口管理器 dwm

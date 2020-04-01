@@ -7,243 +7,231 @@ Created Wednesday 08 August 2018
 
 在CAD绘图中能否熟练的使用快捷键往往决定了其能否快速绘图，所以总结和应用快捷键就显得很有必要了。今天，小编为大家总结了有史以来CAD中最全的快捷键命令。
 AutoCAD总结最全的快捷键命令表
-工具/原料
 
-    电脑，AutoCAD
+						AutoCAD 三维常用命令
 
-方法/步骤
+	三维旋转：ROTATE 3D                     长方体：BOX
 
-    1
+	三维镜像：MIRROR 3D                     球  体：SPHERE
 
-                        AutoCAD 三维常用命令
+	三维阵列：3DARRAY（3A）              圆柱体：CYLINDER
 
-    三维旋转：ROTATE 3D                     长方体：BOX
+	剖      切：SLICE（SL）                     圆锥体：CONE
 
-    三维镜像：MIRROR 3D                     球  体：SPHERE
+	并      集：UNION（UNI）               楔    体：WEDGE（WE）
 
-    三维阵列：3DARRAY（3A）              圆柱体：CYLINDER
+	干      涉：INTERFERE（INF）           拉    伸：EXTRUDE（EXT）
 
-    剖      切：SLICE（SL）                     圆锥体：CONE
+	交      集：INTERSECT（IN）             旋    转：REVOLVE（REV）
 
-    并      集：UNION（UNI）               楔    体：WEDGE（WE）
+	差      集：SUBTRACT（SU）             消 隐：HI
 
-    干      涉：INTERFERE（INF）           拉    伸：EXTRUDE（EXT）
+	旋转曲面：REVSRRF                          消 隐：HI
 
-    交      集：INTERSECT（IN）             旋    转：REVOLVE（REV）
+	AutoCAD总结最全的快捷键命令表
+	2
 
-    差      集：SUBTRACT（SU）             消 隐：HI
+									 功  能  键
 
-    旋转曲面：REVSRRF                          消 隐：HI
+	F1：获取帮助                             F5：等轴测平面切换               F9：栅格捕捉模式控制
 
-    AutoCAD总结最全的快捷键命令表
-    2
+	F2：实现作图窗和文本窗口的切换 F6：控制状态行上坐标的显示方式 F10：极轴模式控制
 
-                                     功  能  键
+	F3：控制是否实现对象自动捕捉    F7：栅格显示模式控制       F11：对象追踪式控制
 
-    F1：获取帮助                             F5：等轴测平面切换               F9：栅格捕捉模式控制
+	F4：数字化仪控制                       F8：正交模式控制         F12：DYN动态输入控制
 
-    F2：实现作图窗和文本窗口的切换 F6：控制状态行上坐标的显示方式 F10：极轴模式控制
+	AutoCAD总结最全的快捷键命令表
+	3
 
-    F3：控制是否实现对象自动捕捉    F7：栅格显示模式控制       F11：对象追踪式控制
+									 快 捷 组 合 键
 
-    F4：数字化仪控制                       F8：正交模式控制         F12：DYN动态输入控制
+	Ctrl+A：编组                                 Ctrl+B：栅格捕捉模式控制(F9)                      
 
-    AutoCAD总结最全的快捷键命令表
-    3
+	Ctrl+C：将选择的对象复制到剪切板  Ctrl+D：坐标
 
-                                     快 捷 组 合 键
+	Ctrl+E：等轴测平面                         Ctrl+F：控制是否实现对象自动捕捉（F3）        
 
-    Ctrl+A：编组                                 Ctrl+B：栅格捕捉模式控制(F9)                      
+	Ctrl+G：栅格显示模式控制(F7)          Ctrl+J：重复执行上一步命令                                              
 
-    Ctrl+C：将选择的对象复制到剪切板  Ctrl+D：坐标
+	Ctrl+K：超级链接                             Ctrl+L：正交 
 
-    Ctrl+E：等轴测平面                         Ctrl+F：控制是否实现对象自动捕捉（F3）        
+	Ctrl+M：打开选项对话框                  Ctrl+1：打开特性对话框
 
-    Ctrl+G：栅格显示模式控制(F7)          Ctrl+J：重复执行上一步命令                                              
+	Ctrl+2：AUTOCAD设计中心              Ctrl+3：工具选项板窗口
 
-    Ctrl+K：超级链接                             Ctrl+L：正交 
+	Ctrl+4：图纸集合管理器                    Ctrl+5：信息选项板 
 
-    Ctrl+M：打开选项对话框                  Ctrl+1：打开特性对话框
+	Ctrl+F6：切换当前窗口
 
-    Ctrl+2：AUTOCAD设计中心              Ctrl+3：工具选项板窗口
+	AutoCAD总结最全的快捷键命令表
+	4
 
-    Ctrl+4：图纸集合管理器                    Ctrl+5：信息选项板 
+										 1．标准工具栏
 
-    Ctrl+F6：切换当前窗口
+	1.新建文件NEW               2.打开文件OPEN             3.保存文件SAVE
 
-    AutoCAD总结最全的快捷键命令表
-    4
+	4.打印Ctrl+P                   5.打印预览PRINT/PLOT    6.剪切Ctrl+X
 
-                                         1．标准工具栏
+	7.复制Ctrl+C                   8.粘贴Ctrl+V                   9.放弃U
 
-    1.新建文件NEW               2.打开文件OPEN             3.保存文件SAVE
+	10.平移P
 
-    4.打印Ctrl+P                   5.打印预览PRINT/PLOT    6.剪切Ctrl+X
+	11.缩放Z                        12.特性管理器Crtl+1        13.设计中心Ctrl+2
 
-    7.复制Ctrl+C                   8.粘贴Ctrl+V                   9.放弃U
+	14.工具选项板Ctrl+3       15．帮助F1
 
-    10.平移P
+	AutoCAD总结最全的快捷键命令表
+	5
 
-    11.缩放Z                        12.特性管理器Crtl+1        13.设计中心Ctrl+2
+									2.样式工具栏
 
-    14.工具选项板Ctrl+3       15．帮助F1
+	16.文字样式管理器ST                       17.标注样式管理器D　
 
-    AutoCAD总结最全的快捷键命令表
-    5
+	AutoCAD总结最全的快捷键命令表
+	6
 
-                                    2.样式工具栏
+									 3.图层工具栏
 
-    16.文字样式管理器ST                       17.标注样式管理器D　
+	18.图层特性管理器LA                        19.图层颜色COL
 
-    AutoCAD总结最全的快捷键命令表
-    6
+	AutoCAD总结最全的快捷键命令表
+	7
 
-                                     3.图层工具栏
+									 4.标注工具栏
 
-    18.图层特性管理器LA                        19.图层颜色COL
+	1.线性标注DLI     7.快速标注QDIM      13.编辑标注DED
 
-    AutoCAD总结最全的快捷键命令表
-    7
+	2.对齐标注DAL    8.基线标注DBA        14.编辑标注文字DIMTEDIT
 
-                                     4.标注工具栏
+	3.坐标标注DOR   9.连续标注DCO        15.标注更新　
 
-    1.线性标注DLI     7.快速标注QDIM      13.编辑标注DED
+	4.半径标注DRA   10.快速引线LE          16.重新关联标注DRE
 
-    2.对齐标注DAL    8.基线标注DBA        14.编辑标注文字DIMTEDIT
+	5.直径标注DDI    11.公差TOL              17.删除标注关联DDA
 
-    3.坐标标注DOR   9.连续标注DCO        15.标注更新　
+	6.角度标注DAN  12.圆心标记DCE        18.编辑标注特性PROPERTIES
 
-    4.半径标注DRA   10.快速引线LE          16.重新关联标注DRE
+	AutoCAD总结最全的快捷键命令表
+	8
 
-    5.直径标注DDI    11.公差TOL              17.删除标注关联DDA
+								   5.查询工具栏
 
-    6.角度标注DAN  12.圆心标记DCE        18.编辑标注特性PROPERTIES
+	1.距离DI                                      4.列表LI/LS      7.状态STAYUS
 
-    AutoCAD总结最全的快捷键命令表
-    8
+	2.面积AREA                                 5.定位点ID　　
 
-                                   5.查询工具栏
+	3.面域/质量特性MASSPROP         6．时间TIME　　
 
-    1.距离DI                                      4.列表LI/LS      7.状态STAYUS
+	AutoCAD总结最全的快捷键命令表
+	9
 
-    2.面积AREA                                 5.定位点ID　　
+										6.对象捕捉工具栏
 
-    3.面域/质量特性MASSPROP         6．时间TIME　　
+	1.临时追踪点TT           7.捕捉到延长线EXT                13.捕捉节点NOD
 
-    AutoCAD总结最全的快捷键命令表
-    9
+	2.捕捉自FRO               8.捕捉到圆心CEN                  14.捕捉最近点NEA
 
-                                        6.对象捕捉工具栏
+	3.捕捉到端点END        9.捕捉到象限点QUA              15.无捕捉NON
 
-    1.临时追踪点TT           7.捕捉到延长线EXT                13.捕捉节点NOD
+	4.捕捉到中心点MID     10.捕捉垂足PER                    16.捕捉切点TAN
 
-    2.捕捉自FRO               8.捕捉到圆心CEN                  14.捕捉最近点NEA
+	5.捕捉到交点INT         11.捕捉平行线PAR　　
 
-    3.捕捉到端点END        9.捕捉到象限点QUA              15.无捕捉NON
+	6.捕捉外观交点APP     12.捕捉插入点INS　　
 
-    4.捕捉到中心点MID     10.捕捉垂足PER                    16.捕捉切点TAN
+	AutoCAD总结最全的快捷键命令表
+	10
 
-    5.捕捉到交点INT         11.捕捉平行线PAR　　
+										  7.绘图工具栏
 
-    6.捕捉外观交点APP     12.捕捉插入点INS　　
+	1.直线L                        8.圆C                             15.创建块（内）B
 
-    AutoCAD总结最全的快捷键命令表
-    10
+	2.构造线XL                   9.修订云线REVCLOUD     16.创建块（外）W
 
-                                          7.绘图工具栏
+	3.多线ML                     10.样条曲线SPL                17.点PO
 
-    1.直线L                        8.圆C                             15.创建块（内）B
+	4.多段线PL                    11.编辑样条曲线SPE         18.图案填充H
 
-    2.构造线XL                   9.修订云线REVCLOUD     16.创建块（外）W
+	5.正多边形POL              12.椭圆EL                        19.面域REG
 
-    3.多线ML                     10.样条曲线SPL                17.点PO
+	6.矩形REC                     13.椭圆弧ELLIPSE             20.多行文字T
 
-    4.多段线PL                    11.编辑样条曲线SPE         18.图案填充H
+	7.圆弧A                         14.插入块I                        21.单行文字DT
 
-    5.正多边形POL              12.椭圆EL                        19.面域REG
+	AutoCAD总结最全的快捷键命令表
+	11
 
-    6.矩形REC                     13.椭圆弧ELLIPSE             20.多行文字T
+										  8．实体工具栏
 
-    7.圆弧A                         14.插入块I                        21.单行文字DT
+	1.长方体BOX                6.拉伸EXT                        11.设置图形SOLDRAW
 
-    AutoCAD总结最全的快捷键命令表
-    11
+	2.球体SPHERE              7.旋转REV                        12.设置视图SOLVIEW
 
-                                          8．实体工具栏
+	3.圆柱体CYLINDER       8.剖切SL                           13.设置轮廓SOLPROF
 
-    1.长方体BOX                6.拉伸EXT                        11.设置图形SOLDRAW
+	4.圆锥体CONE             9.切割SEC                         14.圆环TOR
 
-    2.球体SPHERE              7.旋转REV                        12.设置视图SOLVIEW
+	5.楔体WE                  10.干涉INF　　
 
-    3.圆柱体CYLINDER       8.剖切SL                           13.设置轮廓SOLPROF
+	AutoCAD总结最全的快捷键命令表
+	AutoCAD总结最全的快捷键命令表
+	12
 
-    4.圆锥体CONE             9.切割SEC                         14.圆环TOR
+										  9.实体编辑工具栏
 
-    5.楔体WE                  10.干涉INF　　
+	1.并集UNI                     2.差集SU                3.交集IN
 
-    AutoCAD总结最全的快捷键命令表
-    AutoCAD总结最全的快捷键命令表
-    12
+	4.实体编辑SOLIDEDIT　　　　
 
-                                          9.实体编辑工具栏
+	AutoCAD总结最全的快捷键命令表
+	13
 
-    1.并集UNI                     2.差集SU                3.交集IN
+										10.修改工具栏
 
-    4.实体编辑SOLIDEDIT　　　　
+	1.删除E                    7.旋转RO                       13.打断BR
 
-    AutoCAD总结最全的快捷键命令表
-    13
+	2.复制CO                  8.缩放SC                       14.倒角CHA
 
-                                        10.修改工具栏
+	3.镜像MI                   9.拉伸S                         15.圆角F
 
-    1.删除E                    7.旋转RO                       13.打断BR
+	4.偏移O                    10.修剪TR                      16.分解X
 
-    2.复制CO                  8.缩放SC                       14.倒角CHA
+	5.阵列AR                   11.延伸EX　　                6.移动M                           12.打断于点BR　　
 
-    3.镜像MI                   9.拉伸S                         15.圆角F
+	AutoCAD总结最全的快捷键命令表
+	AutoCAD总结最全的快捷键命令表
+	14
 
-    4.偏移O                    10.修剪TR                      16.分解X
+									11.下拉菜单部分命令
 
-    5.阵列AR                   11.延伸EX　　                6.移动M                           12.打断于点BR　　
+	1.定数等分DIV            16.全部重生成REA               31.对象特性MO
 
-    AutoCAD总结最全的快捷键命令表
-    AutoCAD总结最全的快捷键命令表
-    14
+	2.定距等分ME             17.重命名REN                     32.鸟瞰视图AV
 
-                                    11.下拉菜单部分命令
+	3.线宽设置LW             18.加载应用程序AP              33.创建布局LO
 
-    1.定数等分DIV            16.全部重生成REA               31.对象特性MO
+	4.全局比例因子LTS      19.定义属性ATT                   34.加载菜单MENU
 
-    2.定距等分ME             17.重命名REN                     32.鸟瞰视图AV
+	5.三维多段线3P           20.定义属性（块）ATE         35图纸/模型空间MS/PS
 
-    3.线宽设置LW             18.加载应用程序AP              33.创建布局LO
+	6.消隐HI                     21.边界创建BO                    36.设置单位UN
 
-    4.全局比例因子LTS      19.定义属性ATT                   34.加载菜单MENU
+	7.着色SHA                  22.检查关联状态CHK           37.选项OP
 
-    5.三维多段线3P           20.定义属性（块）ATE         35图纸/模型空间MS/PS
+	8.三维阵列3A              23.数据库管理器DBC           38.输出EXP
 
-    6.消隐HI                     21.边界创建BO                    36.设置单位UN
+	9.三维对齐AL              24.替代DOV                       40.视点预置VP
 
-    7.着色SHA                  22.检查关联状态CHK           37.选项OP
+	10.三维观察器3DO      25.显示顺序DR                    41.拼写检查SP
 
-    8.三维阵列3A              23.数据库管理器DBC           38.输出EXP
+	11.渲染RR                  26.草图设置DS                    43.图像IM
 
-    9.三维对齐AL              24.替代DOV                       40.视点预置VP
+	12.清理PU                  27.编辑多段线PE                 44.附着图像IAT
 
-    10.三维观察器3DO      25.显示顺序DR                    41.拼写检查SP
+	13.刷新R                    28.编辑样条曲线SPE             45.擦除WIPEOUT
 
-    11.渲染RR                  26.草图设置DS                    43.图像IM
+	14.重画RA                  29.编辑文字ED　　
 
-    12.清理PU                  27.编辑多段线PE                 44.附着图像IAT
+	15.重生成RE               30.三维编辑3D　　
 
-    13.刷新R                    28.编辑样条曲线SPE             45.擦除WIPEOUT
-
-    14.重画RA                  29.编辑文字ED　　
-
-    15.重生成RE               30.三维编辑3D　　
-
-    AutoCAD总结最全的快捷键命令表
-    AutoCAD总结最全的快捷键命令表
-    15
-
-    最后，祝大家工作顺利，学习进步！！

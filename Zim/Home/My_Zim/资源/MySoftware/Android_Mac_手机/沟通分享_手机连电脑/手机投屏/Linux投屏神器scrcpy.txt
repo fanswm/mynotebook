@@ -1,0 +1,74 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-23T22:24:02+08:00
+
+====== Linux投屏神器scrcpy ======
+Created 星期一 23 三月 2020
+
+https://segmentfault.com/a/1190000021390826
+大家都知道windos下有一个投屏功能，可以通过蓝牙连接手机共享屏幕，linux下也有一个这样的神器名叫scrcpy。
+项目主页：
+https://github.com/Genymobile/scrcpy
+可以看到是大名鼎鼎的Genymotion出品的，我本想在ubuntu上安装Genymotion的但尝试了一番总是启动报错就放弃了，我本意就是想用电脑屏幕看手机直播，发现与其装个android模拟器/虚拟机还不如直接投屏。
+
+安装：
+官网也说了有多种安装方式，我直接用最简单的snap安装
+
+$ snap install scrcpy
+安装后直接运行scrcpy命令会找不到，因为不在环境变量里，直接用绝对路径即可
+image.png
+
+要使用scrcpy还得安装android工具adb
+
+$ apt install adb
+image.png
+
+安装好就可以玩耍了
+
+启动流程：
+1.在手机端的设置中把android手机调试模式打开
+2.usb接入电脑
+3.此时运行adb命令可以看到设备已连接
+
+$ adb devices
+List of devices attached
+f7653476    device
+4.启动scrcpy
+
+$ /snap/bin/scrcpy
+5.可以看到会启动一个投屏窗口
+
+总插着线比较麻烦，官网也给出了局域网无线连接方式
+https://www.genymotion.com/blog/open-source-project-scrcpy-now-works-wirelessly/
+
+无线连接：
+1.在手机端的设置中把android手机调试模式打开
+2.usb接入电脑
+3.此时运行adb命令可以看到设备已连接
+
+$ adb devices
+List of devices attached
+f7653476    device
+4.通过adb命令获取手机ip地址
+
+$ adb shell ip a
+无线网卡为wlan0, IP地址为inet 192开头的地址
+5.通过adb命令启动手机上的5555端口tcp服务
+
+$ adb tcpip 5555
+提示“restarting in TCP mode port: 5555”
+6.连接到手机的5555端口
+
+$ adb connect 192.168.188.199:5555
+提示连接成功
+7.此时拔掉usb线（usb连接只是为了通过电脑输入控制命令，我们已经设置好了5555端口并连接上了，usb线就没用了）
+8.在电脑上启动scrcpy
+
+$ /snap/bin/scrcpy
+9.可以看到会启动一个投屏窗口
+
+后记：
+实测连接速度挺快的，也很稳定，可以手机开着直播冲着电在电脑上操控。按鼠标左键是点击，鼠标右键是返回。官网上也说了启动scrcpy可以增加一些参数来完成更多功能，比如录屏，设置窗口大小，或是限制速率，安装apk软件等。
+有一点不足就是声音还是在手机上播放，电脑上没有声音只有画面，但可以自动识别横屏还是竖屏，正常情况下是竖屏，全屏播放直播时会旋转成横屏。
+
+下次可以偷偷拿室友手机来投屏一下再拔掉就能监控人家手机啦，嘿嘿嘿。

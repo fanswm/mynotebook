@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-21T22:26:47+08:00
+
+====== 查看 ======
+Created 星期五 21 二月 2020
+
+sudo apt  install mysql-workbench
+HeidiSQL_10.2_32_Portable
+
+可视化：
+	 debian下图形化管理工具的安装
+	
+	MySQL GUI Tools是一套图形化桌面应用工具套装，可以用来管理MySQL服务器。该套装工具包含三个工具：MySQL QueryBrowser、MySQL Administrator和MySQL MigrationAssistant(仅支持Windows平台)。在本文中，我们将介绍前两个工具，看一下它们是如何帮助我们在不使用命令行的方式来管理MySQL数据库。　　MySQL GUI Tools的安装非常简单，在Ubuntu、Debian或FedoraLinux上，你可以通过包管理器来装它，在Ubuntu和Debian上，其程序包的名称是
+		mysql-admin;
+		在Fedora上是mysql-gui-tools。
+

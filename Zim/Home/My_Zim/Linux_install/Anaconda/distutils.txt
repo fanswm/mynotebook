@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-16T18:14:55+08:00
+
+====== distutils ======
+创建日期 星期日 16 二月 2020
+
+```error:
+Traceback (most recent call last):
+  File "./setup.py", line 13, in <module>
+	from distutils.core import setup
+ModuleNotFoundError: No module named 'distutils.core'
+```
+解决：
+sudo apt install python3-pip

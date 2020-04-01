@@ -1,0 +1,27 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-22T12:25:39+08:00
+
+====== 表 ======
+Created 星期六 22 二月 2020
+
+列出当前数据库的所有表:
+	mysql> SHOW TABLES;
+
+查看一个表的结构:
+	mysql> DESC students;
+查看创建表的SQL语句：
+	mysql> SHOW CREATE TABLE students;
+	
+删除表使用DROP TABLE语句：
+	mysql> DROP TABLE students;
+	
+修改表就比较复杂。如果要给students表新增一列birth，使用：
+	ALTER TABLE students ADD COLUMN birth VARCHAR(10) NOT NULL;
+	
+要修改birth列，例如把列名改为birthday，类型改为VARCHAR(20)：
+	ALTER TABLE students CHANGE COLUMN birth birthday VARCHAR(20) NOT NULL;
+	
+要删除列，使用：
+	ALTER TABLE students DROP COLUMN birthday;
+	

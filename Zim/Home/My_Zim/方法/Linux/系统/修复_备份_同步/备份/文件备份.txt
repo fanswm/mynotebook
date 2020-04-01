@@ -1,0 +1,58 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T15:46:33+08:00
+
+====== 文件备份 ======
+Created Friday 24 November 2017
+
+https://sspai.com/post/41967
+
+我喜欢自己手动编辑、管理音乐文件，另存一份在外置磁盘上，文件备份问题就随之而来。
+
+__我现在使用的是 rsync 命令，它最大的优点就是差异备份，即只备份新增的文件和修改后的文件，不重复、不遗漏，效率很高。__
+
+__简单备份__
+命令行并不等同于复杂，rsync 的基础语法就非常简单：
+
+__rsync -av [源文件夹路径] [备份路径]__
+把两个路径名替换成你自己的（可以直接拖动文件夹进 Terminal 来获得），之后就可以在 Terminal 里执行了。特别注意的是，__两条路径最后需要以 / 结尾__，不然它们会出现在让你觉得莫名其妙的地方。
+
+我需要备份音乐文件夹到 U盘，就可以用 __rsync -av /Users/apple/Music/ /Volumes/Min\'s/music/。__
+
+__删除多余文件__
+
+__最简单的 rsync 只会做加法__，但那些在源文件夹里删掉的文件，我不想去备份文件夹里再删一遍。--delete参数就是用来解决这个问题的：
+
+__rsync -av [源文件夹路径] [备份路径] --delete__
+在末位添加这一串参数后，如果删除了源文件夹里的某些东西，备份中的对应文件也会乖乖消失。
+
+__不想备份特定文件或文件夹__
+
+在备份音乐文件夹时，我发现里面的 iTunes 文件夹也混了进去，但是我不需要这个东西。可以用 --exclude "想要排除的文件" 这串参数来避开它：
+
+__rsync -av [源文件夹路径] [备份路径] --delete --exclude "想要排除的文件或文件夹"__
+比如我就加了 --exclude "iTunes" 来避免同步 iTunes 文件夹。文件名之后记得带上拓展名，尾巴不要落下。如果是文件夹，就不需要带拓展名。
+
+一键备份**、恢复**
+命令虽好，但每次输入太麻烦，备份多个文件夹更成了噩梦。做一个脚本就解决问题了。
+
+**```**
+**#!/bin/bash**
+**#coding: utf-8**
+
+**rsync -av /Users/apple/Pictures/ /Volumes/Min\'s/image/ --exclude "照片图库.photoslibrary" --delete**
+**rsync -av /Users/apple/Music/ /Volumes/Min\'s/PDF/ --delete**
+**rsync -av /Users/apple/PDF/ /Volumes/Min\'s/PDF/ --delete**
+**rsync -av /Users/apple/Desktop/ /Volumes/Min\'s/desktop/ --delete**
+**rsync -av /Users/apple/摄影/ /Volumes/Min\'s/photograph/ --delete**
+**```**
+
+__至于恢复备份的应用程序，制作起来也不难，只需要把源文件夹路径与备份路径换一下。此时你最好慎用 --delete 参数，降低丢失文件的风险。__
+
+__定时备份__
+还记得用日历启动定时任务的技巧吗？你当然可以用同样的方法启动定时备份了。
+
+
+但是相比 Time Machine、Git 等工具，rsync 的局限也很明显：没有版本记录，也就没有炫酷的时光机功能，如果你需要频繁回溯到历史版本——尤其当你从事编程或设计等工作时——rsync 不是一个好选择。但不保存这些历史记录也就更省空间，小小的 U盘就足够胜任，事实上，我使用普通 U盘的时间远远多余搭载 Time Machine 的硬盘。
+
+对我来说，rsync 更适合保存一些零碎的、私人的文件。推荐把备份作为每周甚至每日的例行任务，给自己的文件多加一道保险。

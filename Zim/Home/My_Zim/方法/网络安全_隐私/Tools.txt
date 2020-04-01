@@ -5,3 +5,4 @@ Creation-Date: 2018-01-30T13:48:42+08:00
 ====== Tools ======
 Created Tuesday 30 January 2018
 
+[[资源:网址:OS:Linux:Linux 发行版 ISO:其他发行版:Tails]]

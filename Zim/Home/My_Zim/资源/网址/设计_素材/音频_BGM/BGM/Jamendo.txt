@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-03-17T17:01:53+08:00
+
+====== Jamendo ======
+创建日期 星期日 17 三月 2019
+
+https://www.jamendo.com/
+Jamendo 上的所有音乐都是由独立艺术家创作的，个人使用都免费。但用于视频制作或其他商业用途需要遵守该网站的相关条例。

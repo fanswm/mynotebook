@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-01-20T14:16:28+08:00
+
+====== 项目地址 ======
+Created 星期六 20 一月 2018
+
+github.com/monero-project/monero/network/members
+
+
+门罗币官网：https://getmonero.org/home
+
+门罗币中文详细介绍：https://lafudoci.gitbooks.io/monero-xmr/content/
+门罗币官方推特：https://twitter.com/monerocurrency
+门罗币矿池：http://moneropools.com/
+门罗币挖矿算力表：http://monerobenchmarks.info/
+门罗币网页轻钱包：https://mymonero.com
+门罗币计划github地址：https://github.com/monero-project
+门罗币巴比特地址：http://8btc.com/forum-145-1.html
+门罗币中文咨询网（台湾）：https://xmr-tw.org/

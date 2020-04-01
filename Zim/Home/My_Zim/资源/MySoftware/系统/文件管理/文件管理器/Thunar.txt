@@ -6,3 +6,4 @@ Creation-Date: 2019-01-11T13:43:19+08:00
 创建日期 星期五 11 一月 2019
 
 xubuntu
+https://wiki.archlinux.org/index.php/Thunar_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)

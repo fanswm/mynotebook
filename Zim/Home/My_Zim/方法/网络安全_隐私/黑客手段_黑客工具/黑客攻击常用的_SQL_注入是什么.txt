@@ -1,0 +1,174 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-25T21:54:29+08:00
+
+====== 黑客攻击常用的 SQL 注入是什么 ======
+Created 星期二 25 二月 2020
+
+https://mp.weixin.qq.com/s?__biz=MzU3NTgyODQ1Nw==&mid=2247488642&idx=2&sn=8d6d1f2e78f7d8ae3774d859e46ed0d4&chksm=fd1c6c04ca6be5127d39e96d9090bfc4c199cf31b4c6ed3a4a4cb2af4988a0e7f6184b69d3f1&mpshare=1&scene=1&srcid=&sharer_sharetime=1582626288706&sharer_shareid=79f6de27b2f84c31190358375c398857#rd
+相信大家对于学校们糟糕的网络环境和运维手段都早有体会，在此就不多做吐槽了。今天我们来聊一聊SQL注入相关的内容。
+
+何谓SQL注入？
+SQL注入是一种非常常见的数据库攻击手段，SQL注入漏洞也是网络世界中最普遍的漏洞之一。大家也许都听过某某学长通过攻击学校数据库修改自己成绩的事情，这些学长们一般用的就是SQL注入方法。
+
+SQL注入其实就是恶意用户通过在表单中填写包含SQL关键字的数据来使数据库执行非常规代码的过程。简单来说，就是数据「越俎代庖」做了代码才能干的事情。
+这个问题的来源是，SQL数据库的操作是通过SQL语句来执行的，而无论是执行代码还是数据项都必须写在SQL语句之中，这就导致如果我们在数据项中加入了某些SQL语句关键字（比如说SELECT、DROP等等），这些关键字就很可能在数据库写入或读取数据时得到执行。
+多言无益，我们拿真实的案例来说话。下面我们先使用SQLite建立一个学生档案表。
+
+SQL数据库操作示例：
+import sqlite3
+连接数据库：
+conn = sqlite3.connect('test.db')
+建立新的数据表：
+
+conn.executescript('''DROP TABLE IF EXISTS students;
+	   CREATE TABLE students
+	   (id INTEGER PRIMARY KEY AUTOINCREMENT,
+	   name TEXT NOT NULL);''')
+插入学生信息：
+students = ['Paul','Tom','Tracy','Lily']
+for name in students:
+	query = "INSERT INTO students (name) VALUES ('%s')" % (name)
+	conn.executescript(query);
+检视已有的学生信息：
+
+cursor = conn.execute("SELECT id, name from students")
+print('IDName')
+for row in cursor:
+	print('{0}{1}'.format(row[0], row[1]))
+
+conn.close()
+点击运行按钮将会打印目前表中的内容。上述程序中我们建立了一个test.db数据库以及一个students数据表，并向表中写入了四条学生信息。
+
+
+
+那么SQL注入又是怎么一回事呢？我们尝试再插入一条恶意数据，数据内容就是漫画中的"Robert');DROP TABLE students;--"，看看会发生什么情况。
+
+
+
+SQL数据库注入示例：
+
+
+
+conn = sqlite3.connect('test.db')
+
+
+插入包含注入代码的信息：
+
+
+
+name = "Robert');DROP TABLE students;--"
+query = "INSERT INTO students (name) VALUES ('%s')" % (name)
+
+conn.executescript(query)
+
+
+检视已有的学生信息：
+
+
+
+cursor = conn.execute("SELECT id, name from students")
+print('IDName')
+for row in cursor:
+	print('{0}{1}'.format(row[0], row[1]))
+
+conn.close()
+
+
+你将会发现，运行后，程序没有输出任何数据内容，而是返回一条错误信息：表单students无法找到！
+
+
+
+这是为什么呢？问题就在于我们所插入的数据项中包含SQL关键字DROP TABLE，这两个关键字的意义是从数据库中清除一个表单。
+
+
+
+而关键字之前的Robert');使得SQL执行器认为上一命令已经结束，从而使得危险指令DROP TABLE得到执行。
+
+
+
+也就是说，这段包含DROP TABLE关键字的数据项使得原有的简单的插入姓名信息的SQL语句：
+
+
+
+INSERT INTO students (name) VALUES ('Robert')
+
+
+变为了同时包含另外一条清除表单命令的语句：
+
+
+
+INSERT INTO students (name) VALUES ('Robert');DROP TABLE students;
+
+
+而SQL数据库执行上述操作后，students表单被清除，因而表单无法找到，所有数据项丢失。
+
+
+
+如何防止SQL注入问题呢？
+
+
+
+大家也许都想到了，注入问题都是因为执行了数据项中的SQL关键字，那么，只要检查数据项中是否存在SQL关键字不就可以了么？
+
+
+
+的确是这样，很多数据库管理系统都是采取了这种看似『方便快捷』的过滤手法，但是这并不是一种根本上的解决办法，如果有个美国人真的就叫做『Drop Table』呢？你总不能逼人家改名字吧。
+
+
+
+合理的防护办法有很多。首先，尽量避免使用常见的数据库名和数据库结构。在上面的案例中，如果表单名字并不是students，则注入代码将会在执行过程中报错，也就不会发生数据丢失的情况——SQL注入并不像大家想象得那么简单，它需要攻击者本身对于数据库的结构有足够的了解才能成功，因而在构建数据库时尽量使用较为复杂的结构和命名方式将会极大地减少被成功攻击的概率。
+
+
+
+使用正则表达式等字符串过滤手段限制数据项的格式、字符数目等也是一种很好的防护措施。理论上，只要避免数据项中存在引号、分号等特殊字符就能很大程度上避免SQL注入的发生。
+
+
+
+另外，就是使用各类程序文档所推荐的数据库操作方式来执行数据项的查询与写入操作，比如在上述的案例中，如果我们稍加修改，首先使用execute()方法来保证每次执行仅能执行一条语句，然后将数据项以参数的方式与SQL执行语句分离开来，就可以完全避免SQL注入的问题，如下SQL数据库反注入示例。
+
+
+
+conn = sqlite3.connect('test.db')
+
+
+以安全方式插入包含注入代码的信息：
+
+
+
+name = "Robert');DROP TABLE students;--"
+query = "INSERT INTO students (name) VALUES (?)"
+
+conn.execute(query, [name])
+
+
+检视已有的学生信息：
+
+
+
+cursor = conn.execute("SELECT id, name from students")
+print('IDName')
+for row in cursor:
+	print('{0}{1}'.format(row[0], row[1]))
+
+conn.close()
+
+
+而对于PHP而言，则可以通过mysql_real_escape_string等方法对SQL关键字进行转义，必要时审查数据项目是否安全来防治SQL注入。
+
+
+
+当然，做好数据库的备份，同时对敏感内容进行加密永远是最重要的。某些安全性问题可能永远不会有完美的解决方案，只有我们做好最基本的防护措施，才能在发生问题的时候亡羊补牢，保证最小程度的损失。
+
+
+
+
+
+本公众号全部博文已整理成一个目录，请在公众号里回复「m」获取！
+推荐阅读：
+
+年终奖就发了部华为手机，憋屈呀！就送给大家吧！
+
+如何优雅地删除 Linux 中的垃圾文件
+
+ping命令的七种用法，看完瞬间成大神

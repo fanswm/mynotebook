@@ -1,0 +1,50 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-01-12T22:11:47+08:00
+
+====== 查看 ======
+创建日期 星期日 12 一月 2020
+
+ 查看/var/log/message
+
+dmesg |egrep "sd|eth/memory/disk"
+
+cat /var/log/messages |grep -i fail
+
+dmesg |grep -i err
+
+检查硬盘是否正常
+
+smartctl简单用法
+smartctl -A /dev/sda 查看硬盘的详细信息
+
+smartctl -a <device> 检查该设备是否已经打开SMART技术。
+
+smartctl -s on <device> 如果没有打开SMART技术，使用该命令打开SMART技术。
+
+smartctl -t short <device> 后台检测硬盘，消耗时间短；
+
+smartctl -t long <device> 后台检测硬盘，消耗时间长；
+
+smartctl -C -t short <device> 前台检测硬盘，消耗时间短；
+
+smartctl -C -t long <device> 前台检测硬盘，消耗时间长。其实就是利用硬盘SMART的自检程序。
+
+smartctl -X <device> 中断后台检测硬盘。
+
+smartctl -l selftest <device> 显示硬盘检测日志。
+
+smartctl -l error <device> 显示硬盘错误汇总。
+
+内存可以看这个日志
+
+/var/log下的mcelog
+
+如果内存有问题就会出现下面的日志信息
+
+Corrected error
+MCi_MISC register valid
+MCi_ADDR register valid
+MCA: MEMORY CONTROLLER RD_CHANNELunspecified_ERR
+Transaction: Memory read error
+Memory read ECC erro 

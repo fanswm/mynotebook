@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-22T15:09:11+08:00
+
+====== 快照 ======
+Created 星期六 22 二月 2020
+
+如果想要对一个表进行快照，即__复制一份当前表的数据到一个新表__，可以结合CREATE TABLE和SELECT：
+
+-- 对class_id=1的记录进行快照，并存储为新表students_of_class1:
+	CREATE TABLE students_of_class1 
+	SELECT * FROM students WHERE class_id=1;
+__新创建的表结构和SELECT使用的表结构完全一致。__

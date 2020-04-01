@@ -1,0 +1,158 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-16T19:31:43+08:00
+
+====== error ======
+Created 星期日 16 二月 2020
+
+## (CRON) info (No MTA installed, discarding output)
+
+发生这种情况是因为您的cron作业正在产生输出，然后cron守护程序尝试通过电子邮件将该输出发送给您（即root）。如果不需要该输出，解决此问题的最简单方法是在crontab处将其丢弃：
+
+sudo crontab -e
+并添加>/dev/null 2>&1到每个工作中：
+
+* * * * * yourCommand >/dev/null 2>&1
+https://askubuntu.com/questions/222512/cron-info-no-mta-installed-discarding-output-error-in-the-syslog
+
+查看原因：
+sudo tail /var/log/syslog  
+
+
+--------------------
+我的cronjob无法运行？
+
+这是调试未运行cronjobs的清单指南：
+
+Cron守护程序正在运行吗？
+运行ps ax | grep cron并查找cron。
+Debian：service cron start或service cron restart
+cron在工作吗？
+* * * * * /bin/echo "cron works" >> /tmp/file
+语法正确吗？见下文。
+您显然需要对将输出重定向到的文件具有写访问权。/tmp当前不存在的唯一文件名应始终可写。
+该命令是独立运行的吗？
+通过在CLI上进行空运行来检查脚本是否有错误
+测试命令时，请以您正在编辑crontab的用户身份进行测试，该用户可能不是您的登录名或root
+cron可以胜任工作吗？
+__检查/var/log/cron.log或/var/log/messages是否有错误。__
+__Ubuntu： grep CRON /var/log/syslog__
+红色的帽子： /var/log/cron
+检查权限
+在命令上设置可执行标志： chmod +x /var/www/app/cron/do-stuff.php
+如果将命令输出重定向到文件，请确认您有权写入该文件/目录
+检查路径
+检查她刘海/ hashbangs线
+不要依赖诸如PATH之类的环境变量，因为在cron下它们的值可能与在交互式会话下不一样
+调试时不要抑制输出
+常用的是这种抑制： 30 1 * * * command > /dev/null 2>&1
+通过>/dev/null 2>&1完全删除重新启用标准输出或标准错误消息输出；或重定向到您具有写访问权的位置的文件：>>cron.out 2>&1将标准输出和标准错误附加到cron.out调用用户的主目录中。
+还是行不通？kes！
+
+提升cron调试级别
+德比安
+__在 /etc/default/cron__
+__组 EXTRA_OPTS="-L 2"__
+service cron restart
+t__ail -f /var/log/syslog 查看执行的脚本__
+的Ubuntu
+在 /etc/rsyslog.d/50-default.conf
+添加或注释行 cron.crit /var/log/cron.log
+重新加载记录器 sudo /etc/init.d/rsyslog reload
+重新运行cron
+打开/var/log/cron.log并查找详细的错误输出
+提醒：调试完成后，停用日志级别
+运行cron并再次检查日志文件
+Cronjob语法
+
+# Minute  Hour  Day of Month      Month         Day of Week    User Command    
+# (0-59) (0-23)   (1-31)    (1-12 or Jan-Dec) (0-6 or Sun-Sat)  
+
+	0       2       *             *                *          root /usr/bin/find
+此语法仅对root用户正确。普通用户crontab语法没有“ 用户”字段（不允许普通用户像其他任何用户一样运行代码）；
+
+# Minute  Hour  Day of Month      Month         Day of Week    Command    
+# (0-59) (0-23)   (1-31)    (1-12 or Jan-Dec) (0-6 or Sun-Sat)  
+
+	0       2       *             *                *          /usr/bin/find
+Crontab命令
+
+crontab -l
+列出所有用户的cron任务。
+crontab -e，针对特定用户： crontab -e -u agentsmith
+开始您的crontab文件的编辑会话。
+退出编辑器后，将自动安装修改后的crontab。
+crontab -r
+从cron后台处理程序中删除您的crontab条目，但从crontab文件中删除。
+https://stackoverflow.com/questions/22743548/cronjob-not-running
+--------------------
+
+Here's a checklist guide to debug not running cronjobs:
+
+Is the Cron daemon running?
+Run ps ax | grep cron and look for cron.
+Debian: service cron start or service cron restart
+Is cron working?
+* * * * * /bin/echo "cron works" >> /tmp/file
+Syntax correct? See below.
+You obviously need to have write access to the file you are redirecting the output to. A unique file name in /tmp which does not currently exist should always be writable.
+Is the command working standalone?
+Check if the script has an error, by doing a dry run on the CLI
+when testing your command, test as the user whose crontab you are editing, which might not be your login or root
+Can cron run your job?
+Check /var/log/cron.log or /var/log/messages for errors.
+Ubuntu: grep CRON /var/log/syslog
+Redhat: /var/log/cron
+Check permissions
+set executable flag on the command: chmod +x /var/www/app/cron/do-stuff.php
+if you redirect the output of your command to a file, verify you have permission to write to that file/directory
+Check paths
+check she-bangs / hashbangs line
+do not rely on environment variables like PATH, as their value will likely not be the same under cron as under an interactive session
+Don't suppress output while debugging
+commonly used is this suppression: 30 1 * * * command > /dev/null 2>&1
+re-enable the standard output or standard error message output by removing >/dev/null 2>&1 altogether; or perhaps redirect to a file in a location where you have write access: >>cron.out 2>&1 will append standard output and standard error to cron.out in the invoking user's home directory.
+Still not working? Yikes!
+
+Raise the cron debug level
+__Debian__
+__in /etc/default/cron__
+__set EXTRA_OPTS="-L 2"__
+__service cron restart__
+__tail -f /var/log/syslog to see the scripts executed__
+Ubuntu
+in /etc/rsyslog.d/50-default.conf
+add or comment out line cron.crit /var/log/cron.log
+reload logger sudo /etc/init.d/rsyslog reload
+re-run cron
+open /var/log/cron.log and look for detailed error output
+Reminder: deactivate log level, when you are done with debugging
+Run cron and check log files again
+Cronjob Syntax
+
+# Minute  Hour  Day of Month      Month         Day of Week    User Command    
+# (0-59) (0-23)   (1-31)    (1-12 or Jan-Dec) (0-6 or Sun-Sat)  
+
+	0       2       *             *                *          root /usr/bin/find
+This syntax is only correct for the root user. Regular user crontab syntax doesn't have the User field (regular users aren't allowed to run code as any other user);
+
+# Minute  Hour  Day of Month      Month         Day of Week    Command    
+# (0-59) (0-23)   (1-31)    (1-12 or Jan-Dec) (0-6 or Sun-Sat)  
+
+	0       2       *             *                *          /usr/bin/find
+Crontab Commands
+
+crontab -l
+Lists all the user's cron tasks.
+crontab -e, for a specific user: crontab -e -u agentsmith
+Starts edit session of your crontab file.
+When you exit the editor, the modified crontab is installed automatically.
+crontab -r
+Removes your crontab entry from the cron spooler, but not from crontab file.
+--------------------
+
+
+
+
+
+

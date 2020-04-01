@@ -1,0 +1,53 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-23T14:51:06+08:00
+
+====== Best Free Clocks for Linux ======
+Created 星期日 23 二月 2020
+
+https://www.fossmint.com/best-free-alarm-clocks-for-linux/
+
+NoobsLab | Ubuntu / Linux新闻，评论，教程，应用程序
+ 导航
+Wallch 4：通过PPA For Ubuntu / Linux Mint的墙纸管理器（实时时钟）
+伟大的应用程序来转换音频和视频文件
+和谐：可以在本地和云服务中播放音频的播放器
+在Ubuntu / Linux Mint中安装Firefox Quantum
+Remmina Linux远程桌面应用程序
+Canta：Ubuntu / Linux Mint的最佳主题和图标包
+Wallch是Linux的免费墙纸实用程序，它提供了用户友好的图形用户界面来管理桌面背景。开发人员在Wallch 4.0版本中引入了实时时钟和网络墙纸。Wallch是一个开源应用程序，它允许任何人根据需要下载和修改代码。它支持所有主要的Linux桌面，例如Unity，Gnome，LXDE，XFCE和Mate。
+但是，它并不会简单地使用硬盘中的墙纸来更改桌面背景。它可以通过监视为新的或删除的图片选择的文件夹来很好地完成此工作，但它具有很多功能，例如当天图片，Live Earth，墙纸时钟和Live网站！
+
+
+
+
+
+特征：
+实时地球：“实时地球”壁纸将地球的“实时”壁纸设置为桌面背景。
+每日一图：每日一图将您从Wikipedia选来的图片设为您的桌面背景，每天更新！
+墙纸时钟：墙纸时钟将美丽的墙纸与时间和日期结合在一起。您可以选择各种墙纸时钟。从VladStudio.com中选择您的收藏夹。Wallch负责系统中墙纸时钟的安装以及墙纸的旋转。
+实时网站：实时网站可以将您选择的网页设置为桌面背景。它是Wallch 3.0发行后的早期开发功能，现在已经发展，可以让您登录各种网站并截取原本受限制的页面的屏幕快照。实时网站还允许您裁剪页面的一部分。
+
+实时时钟壁纸Screenshots
+
+ 
+
+
+
+ 
+
+
+
+现场网站作为墙纸
+
+
+每日图片
+
+
+安装版本4.x之后，必须通过进入首选项来选择您的桌面（它可以自动检测，但是最好验证此选项）
+
+
+
+下载动态时钟壁纸
+
+要在Ubuntu 16.04 Xenial / 15.10 Wily /衍生版本中安装Wallch 4.x，请打开Terminal（按Ctrl + Alt + T），然后在Terminal中复制以下命令：

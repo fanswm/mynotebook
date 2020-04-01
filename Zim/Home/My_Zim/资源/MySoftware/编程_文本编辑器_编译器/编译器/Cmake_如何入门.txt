@@ -1,0 +1,253 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-23T09:45:57+08:00
+
+====== Cmake 如何入门 ======
+Created 星期日 23 二月 2020
+
+作为一个从2018年下半年开始到现在断断续续折腾了一年半 CMake 的人，刚好经历了 CMake 从懵逼到入门阶段。
+
+注：虽然问题是17年提的，但是考虑到 CMake 的频繁迭代和最佳实践的变化，希望以下内容仍有帮助。
+
+Why CMake ？
+
+先回答括号中的问题：被逼的。
+
+这三个字是认真的。
+
+不管 CMake 是否是一个优秀的构建工具，不管你是否认同 CMake，都无法否认 CMake 目前是 C++ 的 de facto build system[1]。
+
+所以在社区以及生态的影响下，使用 CMake 作为构建工具的项目会越来越多。
+
+一个佐证是，即使是微软、Google 以及 Facebook 这三家公司都有自己的 C++ 构建系统，他们开源的项目仍支持使用 CMake 构建；并且 CMake 是除了官方构建系统之外的推荐构建系统。
+
+如何学习 CMake
+
+首先反对认为 CMake 不需要入门的观点：
+
+cmake还需要入门？这种工具性质的东西，你只要用到哪里学到哪里就行了，如果需要入门那就说明这个工具做的不怎么样。
+
+这句话后半句是符合事实的，CMake 这个工具不仅是做的不怎么样，而且做的....一言难尽....以至于这个问题下就有回答说不要跳 CMake 这个坑的；更多的吐槽可以参考 如何评价CMake 这个问题。
+
+所以自 CMake v3.0 开始（严格的来说是 v3.2[2]），社区开始了浩浩荡荡的 Modern CMake 的运动，试图通过引入一些新的特性并搭配推荐做法来提升用户的生活质量。
+
+嗯，另一个广泛喊着 modernization 的社区刚好是 C++ 社区...
+
+又恰好这俩的现代化用法的相同之处在于需要摒弃老的、传统的观念&使用方法，使用新的、现代化的惯用法。
+
+打一个可能不太准的比喻：说 CMake 用到哪学到哪就行了和说 C++ 用到哪学到哪就行了一样；如果你本身对这块领域已经很有经验，那么这样做是没问题的；但是对于一个新人来说，无异于让他自己去踩雷。
+
+另一个上来就直接扔给对方一个 CMake documentation 让他学的做法也是非常糟糕的；这就好比一个新手说要学习 C++，你直接朝他扔了 cpp reference...
+
+学习 (Modern) CMake 的合适路径
+
+0x00 起手式
+
+这里假设题主以及其他想入门 CMake 的人像我一样鶸，下面是我个人总结的比较适合的学习路径。
+
+首先默念三遍并记住口诀：
+Declare a target
+Declare target's traits
+It's all about targets
+然后 clone https://github.com/ttroy50/cmake-examples 这个项目到本地，把里面的
+01-basic（跳过E-installing，因为和依赖有关，后面会说）
+02-sub-projects
+两个目录认真的学习一遍，最好自己能够动手跟着做一遍。
+
+每学习完一个小节，把前面的三句口诀复习一下
+
+每遇到一个不认识的命令，在 Effective Modern CMake 这个页面里搜索一下，看看这个命令是否取代了某个老命令。
+
+cmake-examples 这个项目大概是我在 Github 上能找到的最符合“深入浅出”这四个字的。不仅例子符合 Modern CMake，并且每个步骤都会有详细的注释来解释“是什么，为什么”。
+
+例如第一节的 Hello CMake，只有短短的几行：
+
+# Set the minimum version of CMake that can be used
+# To find the cmake version run
+# $ cmake --version
+cmake_minimum_required(VERSION 3.5)
+
+# Set the project name
+project (hello_cmake)
+
+# Add an executable
+add_executable(hello_cmake main.cpp)
+
+而 Static Library 一节，也只包含了最核心的内容：
+
+cmake_minimum_required(VERSION 3.5)
+
+project(hello_library)
+
+############################################################
+# Create a library
+############################################################
+
+#Generate the static library from the library sources
+add_library(hello_library STATIC 
+	src/Hello.cpp
+)
+
+target_include_directories(hello_library
+	PUBLIC 
+		${PROJECT_SOURCE_DIR}/include
+)
+
+
+############################################################
+# Create an executable
+############################################################
+
+# Add an executable with the above sources
+add_executable(hello_binary 
+	src/main.cpp
+)
+
+# link the new hello_library target with the hello_binary target
+target_link_libraries( hello_binary
+	PRIVATE 
+		hello_library
+)
+
+考虑到我给这个项目也提过 PR，这里也算有私心吧 XD。
+
+而之所以先看 01 和 02 是因为这两个目录里的内容已经涵盖了至少80%的使用场景；一下学太多很容易出现遭遇知识洪水的无力感而早早放弃。
+
+对于入门学习来说，知识是螺旋上升的；同时照着优秀的例子 learning by doing 可以很好缓解恐惧感。这里算是给蓝色的回答提供教材。
+
+Effective Modern CMake 这里的作用类似于 C++ 那几本 Effective。
+
+0x01 紧跟步伐 & 拓展
+
+前面讲过，CMake 目前正处于现代化运动当中，新版本的迭代也非常快（最新版已经是v3.16了，并且已经内建支持了 PCH），因此有一些之前认为是 modern practice 的做法可能在后续的版本已经显得不那么好了。（别紧张，前面说过知识是螺旋式上升的）
+
+所以如果你还想在这个方面有所深入，最好的方式就看各种会议的talk，包括他们的 slides。
+
+这里个人比较推荐的几个有：
+Effective CMake: a random seletion of best practices -- Daniel Pfeifer
+Embracing Modern CMake: How to recognize and use modern CMake interfaces -- Stephen Kelly AT Dublin C++ Meetup
+Modern CMake for modular design -- Mathieu Ropert AT CppCon-2017
+More Modern CMake: Working With CMake 3.12 And Later -- Deniz Bahadir AT Meeting C++ 2018
+对应的 slides 和演讲的视频都可以搜到。
+
+建议：不要试图一次全看懂，遇到不理解或者不认可的可以先跳过
+
+如果你发现上面的几个 slides 的推荐做法有冲突也别紧张，说不定就是 more modern 对 modern 的一次修正呢。
+
+这里顺带举个例子来说明一下 modern cmake 发展的有多快。
+
+因为 CMake 的变量很容易泄露到其他作用域去，所以 Modern CMake 有一个惯用法就是 Avoid Unnecessary Variables。对于项目的源文件，不依赖变量直接加到 target 上，同时可以通过 generator expression 设置不同平台的文件：
+
+add_executable(hello_cmake main.cpp)
+target_source(hello_cmake 
+  PRIVATE
+	foo.h
+	foo.cpp
+
+	$<$<BOOL:${WIN32}>:
+	# for Windows
+	>
+
+	$<$<NOT:$<BOOL:${WIN32}>>:
+	# for POSIX
+	>
+)
+
+在 v3.11 之前，add_xxx() 定义一个 target 时，一定要有一个文件（source parameter），但是自 v3.11 开始这个约束被去掉了。所有源码文件可以通过 target_source() 引入，避免出现创建 library 时有一个源码文件孤零零的放在 add_library() 中显得很不协调。
+
+0x02 第三方依赖引入
+
+如何引入&管理第三方依赖是一个时常能够在 C++ 社区引发广泛讨论的话题。
+
+众所周知，迄今为止 C++ 至少有89种构建系统以及至少64种依赖管理方案，这还是建立在连 module 都没有情况下。
+
+Modern CMake 下引入第三方依赖目前整体上主要有两种方式。
+
+第一种是 Install & Find Package
+
+安装可以有多种途径，包括不仅限于：Linux 系统的各包管理器；vcpkg 或者 conan 这样单独包管理器；甚至自己 cmake build & install。
+
+安装好第三方库之后就可以在 CMake 种使用 find_package() 引入依赖。
+
+好处是，CMake 编写方便，以及可以使用不支持 CMake 的第三方库
+
+但是这种方式的缺点也很明显：操作复杂度和二进制模块的 ABI 问题。
+
+注：header only 的库也可以安装，但是不影响以下讨论。
+
+操作复杂度：
+使用系统包管理器安装的库版本都比较老，想要新的且指定版本的库需要费工夫
+vcpkg 不支持库版本指定，一不小心所有依赖都更新了；想一想没有 go mod 甚至没有 vendor 机制前的 go package
+conan 倒是支持版本控制，库更新的也勤快，并且可以针对项目单独指定依赖；但是库少是真的，并且对 CMake 使用上是侵入式的
+另外一个蛋疼的是 ABI。如果你安装的依赖库是希望被不同的项目直接使用，那么你迟早会掉到这个坑里。
+
+在 Windows 上使用 MSVC 作为编译器的话，闭着眼睛都能发现：
+Debug 和 Release build 是无法兼容链接在一起的
+/MT 和 /MD 是无法链接在一起的
+X86 和 X64 是无法链接在一起的
+甚至有时候不同 minor 版本的构建也是无法链接在一起的（官方保证ABI但是帮同事解决链接问题时又遇到）
+那么请问你应该安装的二进制是哪个配伍的呢？
+
+Linux 上坑稍微少一点，但是如果库作者自己不注意，或者安装的时候 flags 手抖了，也容易出现问题。
+
+哦，注意你的 GCC 是不是开了 CXX_11_ABI ....
+
+当然你也可以像 vcpkg 一样把允许所有的组合下二进制都构建安装一遍...
+
+但是这里还有一个坑：多个ABI版本的二进制库如果要共存，需要库作者仔细谨慎的编写 Install 模块！
+
+前面推荐的 slides 里有不少关于如何正确编写 Export & Install 的内容；以及，你现在可以把 cmake-examples 里的例子看完了 :-)。
+
+如果依赖不怎么经常变化的话，通过 docker image 把第三方包都装好，感觉上可能会比较省事？
+
+第二种方式是源码依赖。
+
+源码依赖的意思是说，你可以访问依赖的完整源代码，因此构建的时候是第三方依赖先构建，然后再构建你的工程。
+
+注意，源码依赖模式下，第三方依赖一样也可以是静态库、动态库。
+
+优点是，你可以精细控制整个构建过程；因为工具链&参数是统一的，所以没有ABI的问题。
+
+缺点有如下几个：
+构建时间长，因为第三方依赖也要构建；同时不同的项目如果依赖同一个库，需要分别构建。
+需要依赖库支持 CMake，或者有人为依赖库提供好 CMake 工程描述
+源码依赖在 CMake 中通过 add_subdirectory() 添加依赖源码文件夹实现。
+
+也可以通过 External Project Add 以及 v3.11 开始提供的 FetchContent Module 来完成自动化。
+
+Google 是源码依赖的拥趸，他们开源的 abseil-cpp、grpc-cpp 等都推荐使用源码依赖的方式进行构建。
+
+研究过 Chromium 的人想必这辈子都忘不了 depot_tools 和 gclient....
+
+这里单独提一下 FetchContent Module。
+
+这个模块是 v3.11 开始有的，并且在 v3.14 得到了进一步完善。它的核心功能是帮你从指定的 VCS 地址（比如 git repo，SVN repo）或者 URL 下载依赖，并自动通过 add_subdirectory() 进入你的工程。
+
+并且这一切发生在 configuration stage。
+
+grpc-cpp 的官方文档就提供了使用 FetchContent 来引入的例子：
+
+include(FetchContent)
+FetchContent_Declare(
+  gRPC
+  GIT_REPOSITORY https://github.com/grpc/grpc
+  GIT_TAG        v1.25.0
+)
+FetchContent_MakeAvailable(gRPC)
+
+add_executable(my_exe my_exe.cc)
+target_link_libraries(my_exe grpc++)
+
+如果你决定使用 FetchContent，不妨考虑一下 CPM 这个 CMake 扩展。
+
+CPM 在 FetchContent 和传统的 Package dependency 的基础之上做了很多整合，支持：
+指定一个全局的三方源码依赖缓存文件夹，避免多个项目重复拉取同一个版本的依赖源码
+通过参数 fallback 到 find_package() 的方式使用 local package。
+依赖的 options 控制
+最后，希望能在有生之年看到 de facto package manager 出现的那天。
+
+以及，知乎的编辑框真难用。。。。
+
+参考
+^CppCon CMake Class https://cppcon.org/class-2019-cmake/
+^根据发布历史，v3.2版首次发布于2015年 https://cmake.org/files/

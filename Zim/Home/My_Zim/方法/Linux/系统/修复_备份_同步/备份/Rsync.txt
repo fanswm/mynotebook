@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-23T11:55:59+08:00
+
+====== Rsync ======
+Created Tuesday 23 October 2018
+
+https://rsync.samba.org/
+Rsync[2] 是一个开源的、节约带宽的工具，它用于执行快速的增量文件传输，而且它也是一个免费工具。
+
+$ rsync [OPTION...] SRC... [DEST]
+想要了解更多示例和用法，可以参考《10 个使用 Rsync 命令的实际例子[3]》。
+https://www.tecmint.com/rsync-local-remote-file-synchronization-commands/

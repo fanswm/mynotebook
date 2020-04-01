@@ -1,0 +1,23 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-22T21:33:03+08:00
+
+====== gtkspell ======
+Created 星期六 22 二月 2020
+
+gnome-python2-gtkspell
+
+在CentOS 7中的Zim Wiki桌面中安装拼写检查器插件:
+https://forums.centos.org/viewtopic.php?t=61594
+
+How to install gtkspell spell-check on Ubuntu 16.04?   https://askubuntu.com/questions/801717/how-to-install-gtkspell-spell-check-on-ubuntu-16-04
+
+__$ apt-cache show zim | grep '^Recommends:'__
+
+ins python-gtkspellcheck
+
+以下为zim官网(软件自带的帮助文档)方法：
+ins gir1.2-gtkspell3-3.0
+ins python3-gtkspellcheck
+ins libgtkspell-dev
+

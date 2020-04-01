@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-20T22:21:49+08:00
+
+====== 0 基本查询 ======
+Created 星期四 20 二月 2020
+
+要查询数据库表的数据，我们使用如下的SQL语句：
+SELECT * FROM <表名>
+
+使用SELECT * FROM students时，
+	__SELECT是关键字，表示将要执行一个查询，__
+	__*表示“所有列”，__
+	__FROM表示将要从哪个表查询，本例中是students表。__
+	
+SELECT语句其实并不要求一定要有FROM子句。我们来试试下面的SELECT语句：
+SELECT 100+200;
+__不带FROM子句的SELECT语句有一个有用的用途，就是用来判断当前到数据库的连接是否有效。许多检测工具会执行一条SELECT 1;来测试数据库连接。__
+

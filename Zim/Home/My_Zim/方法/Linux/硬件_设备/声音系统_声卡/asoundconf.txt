@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-17T22:23:38+08:00
+
+====== asoundconf ======
+Created 星期一 17 二月 2020
+

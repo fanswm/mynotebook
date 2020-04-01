@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-20T22:06:09+08:00
+
+====== 操作数据库的能力 ======
+Created 星期四 20 二月 2020
+
+DDL：Data Definition Language
+
+DDL允许用户定义数据，也就是创建表、删除表、修改表结构这些操作。通常，DDL由数据库管理员执行。
+
+DML：Data Manipulation Language
+
+DML为用户提供添加、删除、更新数据的能力，这些是应用程序对数据库的日常操作。
+
+DQL：Data Query Language
+
+DQL允许用户查询数据，这也是通常最频繁的数据库日常操作。
+
+语法特点
+
+SQL语言关键字不区分大小写！！！但是，针对不同的数据库，对于表名和列名，有的数据库区分大小写，有的数据库不区分大小写。同一个数据库，有的在Linux上区分大小写，有的在Windows上不区分大小写。
+
+所以，本教程约定：__SQL关键字总是大写，以示突出，表名和列名均使用小写。__

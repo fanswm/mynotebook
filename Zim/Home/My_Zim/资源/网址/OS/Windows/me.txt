@@ -1,0 +1,123 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-12T13:58:04+08:00
+
+====== me ======
+Created 星期四 12 三月 2020
+
+方法/步骤
+ 
+ 
+在打开的Windows设置窗口中，经常看到提示：某些设置隐藏或由你的组织来管理
+
+ 
+ 
+这时我们可以右键点击桌面左下角的开始按钮，在弹出菜单中选择“设置”菜单项。
+
+ 
+ 
+在打开的Windows设置窗口中点击“隐私”图标。
+
+ 
+ 
+在打开的隐私设置窗口中，点击左侧边栏的“反馈和诊断”菜单项。
+
+ 
+ 
+在右侧打开的反馈和诊断窗口中，选中诊断数据中的“完全”设置项
+
+ 
+ 
+接着在下面找到“可让Microsoft通过使用你的诊断数据，提供更多量身定制的相关提示和建议”一项，把其开关设置为“开”。最后重新启动计算机后，再打开Windows设置窗口，就没有上面的提示了。
+
+ 
+END
+注意事项
+ 
+此经验文章中的图文皆由 lqlxhua 独立编撰，并首发于百度经验，如要转载，请留出处。
+有帮助，点投票。要细品，可收藏。要继续，请关注。如成功，请点赞。有疑问，请留评。
+https://answers.microsoft.com/zh-hans/windows/forum/windows_10-other_settings/%E5%9C%A8%E9%AB%98%E7%BA%A7%E9%94%AE%E7%9B%98/f28ac22b-9acb-4396-ac0e-e3d04ee06870
+
+ 
+
+期初以为是系统的密钥为批量激活密钥，但是笔者的电脑为正版Windows 10专业版，不存在此问题，后来经查询为设置问题。
+
+解决办法：
+
+1、WIN+R打开“运行”，输入“gpedit.msc”回车 打开组策略；
+
+2、在左侧依次展开：计算机配置 -- 管理模版 -- 控制面板 -- 个性化；
+
+3、在右侧双击打开“不显示锁屏”，弹出窗口中选“未配置”，应用，确定。如果默认为“未配置”先改为“禁用”，应用，再改回“未配置”-“确定”即可。
+————————————————
+版权声明：本文为CSDN博主「zk291662385」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_35583216/article/details/80851828
+
+ 
+
+https://answers.microsoft.com/zh-hans/windows/forum/windows_10-other_settings/%E6%9F%90%E4%BA%9B%E8%AE%BE%E7%BD%AE%E7%94%B1/344c5c43-28b7-4f95-9120-9b18907c8d10
+
+ 
+
+我们了解到您关于Windows 10的问题， 
+
+在系统更新界面出现“某些设置由你的组织来管理”， 
+
+您可以尝试以下方案进行操作，看看是否有效果： 
+
+可以win+R后输入regedit，尝试定位到下面的位置： 
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings 
+
+找到这个项目，将其删除掉，重新检查更新，看下效果。 
+
+AllowAutoWindowsUpdateDownloadOverMeteredNetwork 
+
+由于涉及注册表项修改，建议您在删除前，右键这个路径，选择导出进行备份，再进行操作。 
+
+希望以上的信息可以可以帮助到您。 
+
+如果您所咨询的问题，得到解决请对我们的回复进行标记解答（对我们的工作非常重要）
+如您的问题没有解决，我们会继续为您提供技术支持。
+我们秉承客户至上的服务理念。如果您对微软工程师在论坛中的服务有意见与建议，欢迎提出，以便我们提供更优质的服务。Microsoft Answers欢迎您！
+
+ 
+ https://www.ithome.com/html/win10/319189.htm
+services.msc
+windows update
+自动更新。
+ 
+ 
+第三步：恢复关于Windows Update的编辑组策略
+
+首先在运行窗口中输入“gpedit.msc”（不含引号）即可调出本地服务项；
+
+接着在左侧选计算机配置—管理模板—Windows组件—Windows更新—在右侧下方点击标准，查看具体的配置情况。
+
+然后将没有设置成未配置的选项全部选成未配置，完成后效果如图。
+
+ 
+
+ 
+
+ 
+
+您好，我是Jarl，一名独立顾问 (Independent Advisor) 和Windows 10的资深用户，很荣幸能为您提供技术支持。 
+
+关于 【某些设置已由组织隐藏或管理】的问题，请您尝试以下方法： 
+
+1. 打开【开始】菜单，输入cmd，右键选择【以管理员身份运行】 
+2. 执行以下命令，重置组策略： 
+RD /S /Q "%WinDir%\System32\GroupPolicyUsers"，按回车 
+RD /S /Q "%WinDir%\System32\GroupPolicy"，按回车 
+3, 重启设备 
+4. 重复步骤1，执行以下命令： 
+gpupdate /force，按回车 
+5. 重启设备         
+
+ 
+
+
+
+https://support.microsoft.com/en-us/hub/4529948/your-phone-app-help
+

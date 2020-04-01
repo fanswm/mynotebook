@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-21T22:12:25+08:00
+
+====== 连接 ======
+Created 星期五 21 二月 2020
+
+假设远程MySQL Server的IP地址是10.0.1.99，那么就使用-h指定IP或域名：
+
+mysql -h 10.0.1.99 -u root -p

@@ -7,3 +7,9 @@ Creation-Date: 2019-01-21T16:26:37+08:00
 
 snippetstore
 https://github.com/ZeroX-DG/SnippetStore
+NoteConnect
+
+Boostnote
+
+
+https://github.com/CoreyMSchafer/code_snippets

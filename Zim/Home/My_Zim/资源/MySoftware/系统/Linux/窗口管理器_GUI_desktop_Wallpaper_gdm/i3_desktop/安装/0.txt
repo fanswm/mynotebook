@@ -57,9 +57,6 @@ if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]
   exec startx
 fi
 
-	1
-	2
-	3
 
 终端使用 xfce4-terminal + zsh + oy my zsh ,zsh主题是agnoster
 启用

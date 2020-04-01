@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-28T14:43:50+08:00
+
+====== 默认语言 ======
+Created 星期五 28 二月 2020
+
+/etc/sysconfig/i18n
+
+LANG=en_US

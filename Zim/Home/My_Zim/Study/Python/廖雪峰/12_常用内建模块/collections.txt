@@ -6,9 +6,9 @@ Creation-Date: 2020-01-08T08:05:07+08:00
 Created 星期三 08 一月 2020
 
 collections是Python内建的一个集合模块，提供了许多有用的集合类。
-namedtuple
+__namedtuple__
 
-我们知道tuple可以表示不变集合，例如，一个点的二维坐标就可以表示成：
+我们知道tuple可以表示不变集合，例如__，一个点的二维坐标就可以表示成：__
 
 >>> p = (1, 2)
 
@@ -44,7 +44,7 @@ deque
 
 使用list存储数据时，按索引访问元素很快，但是插入和删除元素就很慢了，因为list是线性存储，数据量大的时候，插入和删除效率很低。
 
-deque是为了高效实现插入和删除操作的双向列表，适合用于队列和栈：
+__deque是为了高效实现插入和删除操作的双向列表，适合用于队列和栈：__
 
 >>> from collections import deque
 >>> q = deque(['a', 'b', 'c'])
@@ -69,9 +69,9 @@ defaultdict
 注意默认值是调用函数返回的，而函数在创建defaultdict对象时传入。
 
 除了在Key不存在时返回默认值，defaultdict的其他行为跟dict是完全一样的。
-OrderedDict
+__OrderedDict__
 
-使用dict时，Key是无序的。在对dict做迭代时，我们无法确定Key的顺序。
+__使用dict时，Key是无序的。在对dict做迭代时，我们无法确定Key的顺序。__
 
 如果要保持Key的顺序，可以用OrderedDict：
 
@@ -114,9 +114,9 @@ class LastUpdatedOrderedDict(OrderedDict):
 			print('add:', (key, value))
 		OrderedDict.__setitem__(self, key, value)
 
-ChainMap
+__ChainMap__
 
-ChainMap可以把一组dict串起来并组成一个逻辑上的dict。ChainMap本身也是一个dict，但是查找的时候，会按照顺序在内部的dict依次查找。
+__ChainMap可以把一组dict串起来并组成一个逻辑上的dict。ChainMap本身也是一个dict，但是查找的时候，会按照顺序在内部的dict依次查找。__
 
 什么时候使用ChainMap最合适？举个例子：应用程序往往都需要传入参数，参数可以通过命令行传入，可以通过环境变量传入，还可以有默认参数。我们可以用ChainMap实现参数的优先级查找，即先查命令行参数，如果没有传入，再查环境变量，如果没有，就使用默认参数。
 

@@ -1,0 +1,29 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2017-11-24T11:48:59+08:00
+
+====== 修复grub ======
+Created Friday 24 November 2017
+
+__- 修复grub：Parrot Linux__
+
+> 判断主分区；例如是：/dev/sdasudo mount /dev/sda11 / mntmount --bind /dev/ /mnt/devmount --bind /proc /mnt/procmount --bind /sys /mnt/syschroot /mntsudo update-grubsudo update-grub2
+进入系统后：
+update-grub2
+
+
++ CentOS:
+# 背景描述：
+# 我的电脑上以前装着 CentOS 7，最近安装上： Manjaro 之后 ，引导菜单中 [[资源:网址:OS:Linux:Linux 发行版 ISO:CentOS]] 不再能进去。
+
+# 引导错误提示：
+```
+kernel panic -not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
+CPU: 1 PID: 1 Comm: swapper/0 Nottainted 3.10.0-`1062.9.1.el7.x86_64 #1
+Hardware name LENOVO 2518C4U/2518C4U, BIOS 6IET75WW (1.35) 02/01/2011
+Call Trace:
+[<ffffffff96d7ac23>] dump_stack+0x19/0x1b。。。
+```
+# 引导菜单的详细配置见子文件。
+
+

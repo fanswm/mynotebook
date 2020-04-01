@@ -24,4 +24,11 @@ at CentOS
 tags: fcitx ibus
 
 
+__if [ "$DESKTOP_SESSION" = "i3" ]; then__
+	__export XMODIFIERS=@im=fcitx__
+	__export XIM=fcitx__
+	__export XIM_PROGRAM=fcitx__
+	__export GTK_IM_MODULE=fcitx__
+	__export QT_IM_MODULE=fcitx__
+__fi__
 

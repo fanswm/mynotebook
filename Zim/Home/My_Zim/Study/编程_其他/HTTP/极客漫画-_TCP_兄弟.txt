@@ -1,0 +1,31 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-19T13:47:45+08:00
+
+====== 极客漫画- TCP 兄弟 ======
+Created Wednesday 19 December 2018
+
+极客漫画：TCP 兄弟
+2018-12-18 11:15
+编译自：https://turnoff.us/geek/tcp-buddies/%E4%BD%9C%E8%80%85： Daniel Stori
+原创：LCTT https://linux.cn/article-10360-1.html 译者： Bestony
+
+
+这幅漫画展示了 TCP 协议的沟通过程。首先是构建一个层（TCP 工作于传输层），然后向要通信的人发送建立联系的信号（SYN），接受到信息的人回复确认信息（ACK），确认已经收到，同时，发送建立联系的信息（SYN），这时，它发送的信息就是（SYN-ACK），当最初发送信息的人收到信息后，再回复了确认信息（ACK）。在回复了确认信息后，他们可以正常的交流，就开始说话了。
+
+TCP 协议规定，在传输数据之前，要进行三次“握手”，来保证数据传输的可靠性。上面这幅漫画就展示了这样的内容。
+
+如果你有兴趣查看更多信息，可以参看 https://zh.wikipedia.org/wiki/%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE。
+
+via: https://turnoff.us/geek/tcp-buddies/
+
+作者：Daniel Stori[1] 译者：Bestony[2] 校对：wxy[3] 合成&点评：Bestony[4]
+
+本文由 LCTT[5] 原创编译，Linux中国[6] 荣誉推出
+
+[1]: http://turnoff.us/about/
+[2]: https://github.com/bestony
+[3]: https://github.com/wxy
+[4]: https://github.com/Bestony
+[5]: https://github.com/LCTT/TranslateProject
+[6]: https://linux.cn/article-10360-1.html?utm_source=rss&utm_medium=rss

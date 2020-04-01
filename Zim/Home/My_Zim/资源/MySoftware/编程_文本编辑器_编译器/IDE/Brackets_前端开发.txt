@@ -1,0 +1,67 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-03-16T20:02:48+08:00
+
+====== Brackets 前端开发 ======
+创建日期 星期一 16 三月 2020
+
+http://mp.weixin.qq.com/s?__biz=MzU3NTgyODQ1Nw==&mid=2247488838&idx=1&sn=75de3679acd9e0e810214ad501ba367c&chksm=fd1c6dc0ca6be4d68c23963638a9e7da26e38e8d968ec3b2ec600d96756367ac741eca4b1d34&mpshare=1&scene=1&srcid=&sharer_sharetime=1584163261004&sharer_shareid=79f6de27b2f84c31190358375c398857#rd
+
+Github标星30.7K！这一款强大开源的IDE我粉了
+
+
+
+
+点击「阅读原文」查看良许原创精品视频。
+来自：开源最前线（ID：OpenSourceTop）
+整理：猿妹
+一般我们常见的网页编辑器都有着相当复杂的操作介面，以及很多用得到甚至是用不到的功能，很多人会选择纯文字代码编辑器来进行网页开发，例如Sublime Text ，但一般的代码编辑器并没有针对网页开发提供相对应的功能，以致于要预览或修改时相当耗费时间。
+
+今天，猿妹就和大家分享一个既好用又免费、开源且跨平台的 HTML/CSS/JavaScript 前端 WEB 集成开发环境 （IDE工具）——Brackets。
+
+
+
+Brackets由Adobe 以HTML、CSS、Javascript等程式语言开发，主要用于网页设计，是一个跨平台的编辑器，支援Mac、Windows 及Linux 等作业系统。
+
+
+
+Brackets专注于网页开发相关用途，主要有一个程式码高亮界面，能够快速编辑 （Quick Edit），如果在编辑HTML、CSS或Javascript遇到相关属性，会自动跳出选项，直接选择就能减少输入的时间，也能减少输入错误而造成的问题。
+
+
+
+如果颜色属性则会跳出选色器，方便你加入色彩的Hex 值或RGB值。
+
+另外，Brackets内置的即时预览 （Live Preview）功能，当你在编写网页时，便能够配合浏览器进行即时的更新，修改网页程式码后，会同步显示于浏览器里，如果配合双屏幕使用，那在开发网页上就更加得心应手。
+
+
+
+Brackets还有插件扩充功能。不过目前可以选择的扩充功能还不像Sublime Text 编辑器这么多、这么完整。
+
+
+
+目前，已经在Github上标星30.7K，6.6K个Fork（Github地址：https://github.com/adobe/brackets）
+
+如果你平常会很需要使用到网页编辑器，或者本身的工作就是与网页设计相关，Brackets 或许是个不错的开发工具，感兴趣的小伙伴们可以下载尝试一下。
+
+良许个人微信
+
+添加良许个人微信即送3套程序员必读资料
+
+→ 精选技术资料共享
+→ 高手如云交流社群
+→ CSDN资料帮下载
+
+
+
+--------------------
+
+本公众号全部博文已整理成一个目录，请在公众号里回复「m」获取！
+推荐阅读：
+手把手教你 3 个 Linux 中快速检测端口的小技巧
+腾讯和阿里在B站“打起来了”，你何时见过这场面？
+提到Vim实用技巧，就不得不提这本书！
+
+5T技术资源大放送！包括但不限于：C/C++，Linux，Python，Java，PHP，人工智能，单片机，树莓派，等等。在公众号内回复「1024」，即可免费获取！！
+
+
+

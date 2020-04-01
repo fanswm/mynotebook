@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-19T21:45:40+08:00
+
+====== Could not find tag for codec adpcm ima wav ======
+Created 星期三 19 二月 2020
+
+
+Could not find tag for codec adpcm_ima_wav
+
+先用ffmpeg 转换一下，然后，再剪。
+
+ffmpeg -ss 00:00:10 -to 00:00:32 -i ./out2.mp4 -codec copy  out22.mp4
+

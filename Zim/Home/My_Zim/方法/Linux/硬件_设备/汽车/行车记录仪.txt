@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-11-08T20:27:29+08:00
+
+====== 行车记录仪 ======
+Created 星期五 08 十一月 2019
+
+https://www.zhihu.com/question/22499326/answer/100824096?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512&hb_wx_block=0
+
+笔者认为视场角以接近120度为佳
