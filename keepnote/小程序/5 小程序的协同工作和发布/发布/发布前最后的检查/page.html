@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>发布前最后的检查</title>
+</head><body>有不少开发者在发布小程序后发现正式版小程序无法正常使用，所以我们罗列一下开发者<span style="color: #ff0000">在发布前常常遗漏的点</span>：<br/>
+<br/>
+如果小程序使用到<span style="color: #ff0000">Flex布局</span>，<span style="color: #ff0000">并且需要兼容iOS8以下系统时</span>，请检查上传小程序包时，开发者工具是否已经开启<span style="color: #ff0000">“上传代码时样式自动补全”</span>。<br/>
+<br/>
+小程序使用的服务器接口应该走<span style="color: #ff0000">HTTPS协议</span>，并且对应的<span style="color: #ff0000">网络域名确保已经在小程序管理平台配置好</span>。<br/>
+<br/>
+<span style="color: #ff0000">在测试阶段不要打开小程序的调试模式进行测试</span>，因为<span style="color: #ff0000">在调试模式下，微信不会校验域名合法性</span>，容易导致开发者误以为测试通过，导致正式版小程序因为遇到非法域名无法正常工作。<br/>
+<br/>
+发布前请检查小程序使用到的<span style="color: #ff0000">网络接口已经在现网部署好</span>，并且评估好<span style="color: #ff0000">服务器的机器负载</span>情况。<br/>
+<br/>
+当体验版进行充分的检查和测试后达到发布状态，项目管理者可以在小程序平台进行提交审核的操作，提交审核后，微信审核团队会根据相关的运营规范进行提审小程序的审核。审核通过之后，管理者可以随时发布自己的小程序。</body></html>

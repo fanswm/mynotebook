@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>什么是事件</title>
+</head><body>3.5.1 什么是事件<br/>
+UI界面的程序需要和用户互动，例如用户可能会点击你界面上某个按钮，又或者长按某个区域，这类反馈应该通知给开发者的逻辑层，需要将对应的处理状态呈现给用户。<br/>
+<span style="color: #ff0000">有些时候程序上的“行为反馈”不一定是用户主动触发的</span>，例如我们在视频video播放的过程中，播放进度是会一直变化的，这种反馈也应该通知给开发者做相应的逻辑处理。<br/>
+在小程序里边，我们把<span style="color: #ff0000">这种“用户在渲染层的行为反馈”</span>以及<span style="color: #ff0000">“组件的部分状态反馈</span>”抽象为<span style="color: #ff0000">渲染层传递给逻辑层的“事件”</span>，如图3-7所示。<br/>
+<img src="screenshot.png" /><br/>
+<br/>
+<br/>
+图3-7 渲染层产生用户交互事件传递给逻辑层<br/>
+<br/>
+我们给出一个简单的处理事件的小程序代码。<br/>
+<br/>
+代码清单3-18 事件处理示例<br/>
+<br/>
+&lt;!-- page.wxml --&gt;<br/>
+&lt;view id="tapTest" data-hi="WeChat" bindtap="tapName"&gt; Click me! &lt;/view&gt;<br/>
+<br/>
+// page.js<br/>
+&nbsp; &nbsp;Page({<br/>
+&nbsp; tapName: function(event) {<br/>
+&nbsp; &nbsp; console.log(event)<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+事件是通过<span style="color: #ff0000">bindtap这个属性</span>绑定在组件上的，<span style="color: #ff0000">同时在当前页面的Page构造器中定义对应的事件处理函数tapName</span>，当用户点击该view区域时，达到触发条件生成事件tap，该事件处理函数tapName会被执行，<span style="color: #ff0000">同时还会收到一个事件对象event</span>。<br/>
+</body></html>

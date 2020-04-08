@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信小程序button组件自定义样式</title>
+</head><body>背景颜色<br/>
+wxml代码<br/>
+<br/>
+&lt;button class='btn' bindtap='sumbit' &gt;确定&lt;/button&gt;<br/>
+wxss代码<br/>
+<br/>
+.btn {<br/>
+&nbsp; width: 90%;<br/>
+&nbsp; margin-top: 30rpx;<br/>
+&nbsp; background-color: #FFCC00;<br/>
+&nbsp; color: #FFF;<br/>
+}<br/>
+background-color属性是修改背景颜色的，color是修改字体颜色的，这里注意：如果&lt;button&gt;&lt;/button&gt;组件里面写 type='....'，修改背景颜色会无效，例如以下代码：<br/>
+<br/>
+&lt;!--修改背景颜色无效--&gt;<br/>
+&lt;button class='btn' bindtap='sumbit' type='primary'&gt;确定&lt;/button&gt;<br/>
+按钮去边框<br/>
+小程序里提供的button组件默认带有边框，去掉按钮边框只需要在wxss样式代码中添加：<br/>
+<br/>
+.btn::after {<br/>
+&nbsp; border: 0;<br/>
+}<br/>
+按钮点击时的背景颜色<br/>
+wxml代码<br/>
+<br/>
+&lt;button class='btn' bindtap='sumbit' hover-class='btn_hover'&gt;确定&lt;/button&gt;<br/>
+wxss代码<br/>
+<br/>
+.btn_hover {<br/>
+&nbsp; background-color: pink;<br/>
+}<br/>
+这里，hover-class是重点，小程序文档中这样解释这个属性：<br/>
+<br/>
+类型：String<br/>
+默认值：button-hover<br/>
+说明：指定按钮按下去的样式类。当hover-class='none'时，没有点击效果<br/>
+<br/>
+作者：坐不住的程序员<br/>
+链接：https://www.jianshu.com/p/80f9d8271d24<br/>
+来源：简书<br/>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</body></html>

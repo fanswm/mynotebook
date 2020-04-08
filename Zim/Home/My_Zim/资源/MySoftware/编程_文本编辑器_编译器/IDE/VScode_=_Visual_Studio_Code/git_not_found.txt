@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-04-08T10:15:16+08:00
+
+====== git not found ======
+Created 星期三 08 四月 2020
+
+Ctrl + Shift + P
+搜索 User settings
+打开 settings.json
+添加： "git.path": "D:/Program Files/Git/git-bash.exe"
+保存

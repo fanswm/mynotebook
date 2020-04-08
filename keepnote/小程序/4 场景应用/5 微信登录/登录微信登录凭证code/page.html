@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登录微信登录凭证code</title>
+</head><body>首先说到<span style="color: #ff0000">登录</span>，我们可能很正常地想到一个做法：<br/>
+<br/>
+通过wx.login直接拿到<span style="color: #ff0000">微信用户的id编号</span>[5]，<br/>
+再把这个id传到自己的后台，从而知道是哪个微信用户在使用我的服务。<br/>
+<br/>
+而我们上述微信登录的流程中<span style="color: #ff0000">并不是通过wx.login直接获取微信用户的id</span>，<br/>
+<br/>
+那直接获取微信用户id的做法有什么问题呢？ 假设现在我们有个接口，通过wx.request请求 https://test.com/getUserInfo?id=1 拉取到<span style="color: #ff0000">微信用户id为1</span>在我们业务侧的个人信息，<br/>
+那么黑客就可以通过<span style="color: #ff0000">遍历所有的id</span>，把整个业务侧的个人信息数据<span style="color: #ff0000">全部拉走</span>，如果我们还有其他接口也是依赖这样的方式去实现的话，那<span style="color: #ff0000">黑客就可以伪装成任意身份来操作任意账户下的数据</span>，想想这给业务带来多大的安全风险。<br/>
+<br/>
+为了避免这样的风险，<span style="color: #ff0000">wx.login是生成一个带有时效性的凭证</span>，就像是一个会过期的临时身份证一样，<br/>
+在wx.login调用时，会先<span style="color: #ff0000">在微信后台生成一张临时的身份证</span>，其<span style="color: #ff0000"><span style="font-size: 14pt">有效时间仅为5分钟</span></span>[6]。<br/>
+<br/>
+然后把这个临时身份证返回给小程序方，这个临时的身份证我们把它称为<span style="color: #ff0000"><span style="font-size: 14pt">微信登录凭证code</span></span>。<br/>
+如果5分钟内小程序的后台不拿着这个临时身份证来微信后台服务器换取微信用户id的话，那么这个身份证就会被作废，需要再调用wx.login重新生成登录凭证。<br/>
+<br/>
+由于这个临时身份证5分钟后会过期，如果黑客要冒充一个用户的话，<span style="color: #ff0000">那他就必须在5分钟内穷举所有的身份证id</span>，然后去开发者服务器换取真实的用户身份。<br/>
+显然，黑客要付出非常大的成本才能获取到一个用户信息，<br/>
+同时，开发者服务器也可以通过一些技术手段<span style="color: #ff0000">检测到5分钟内频繁从某个ip发送过来的登录请求，从而拒绝掉这些请求。</span></body></html>

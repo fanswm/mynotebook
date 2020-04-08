@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>API， 网络请求</title>
+</head><body>宿主环境提供了丰富的API，可以很方便调起微信提供的能力。在前文的代码示例中可以看到，wx.navigateTo可以保留当前页面，然后跳转到新的页面。这里的wx对象实际上就是小程序的宿主环境所提供的全局对象，<span style="color: #ff0000">几乎所有小程序的API都挂载在wx对象底下（除了Page/App等特殊的构造器）</span>，所以本书谈到<span style="color: #ff0000">API概念</span>时，<span style="color: #ff0000">通常指的是wx对象底下的方法</span>。<br/>
+<br/>
+小程序提供的API按照功能主要分为几大类：<br/>
+<br/>
+网络、媒体、文件、数据缓存、位置、设备、界面、界面节点信息<br/>
+还有一些特殊的开放接口，<br/>
+<br/>
+<span style="color: #ff0000">我们介绍一下API一般调用的约定：</span><br/>
+<br/>
+wx.on* 开头的 API 是<span style="color: #ff0000">监听某个事件发生的</span>API接口，接受一个 Callback 函数作为参数。当该事件触发时，会调用 Callback 函数。<br/>
+如未特殊约定，多数 API 接口为<span style="color: #ff0000">异步接口</span>&nbsp;，都接受一个Object作为参数。<br/>
+API的Object参数一般由<span style="color: #ff0000">success、fail、complete三个回调</span>来接收接口调用结果，示例代码如代码清单3-17所示，详细说明如表3-9所示。<br/>
+<br/>
+wx.get* 开头的API是<span style="color: #ff0000">获取宿主环境数据</span>的接口。<br/>
+wx.set* 开头的API是<span style="color: #ff0000">写入数据到宿主环境</span>的接口。<br/>
+<br/>
+代码清单3-17 <span style="color: #ff0000">通过wx.request发起网络请求</span><br/>
+<br/>
+wx.request({<br/>
+url: 'test.php',<br/>
+data: {},<br/>
+header: { 'content-type': 'application/json' },<br/>
+success: function(res) {<br/>
+&nbsp;// 收到https服务成功后返回<br/>
+&nbsp;console.log(res.data)<br/>
+},<br/>
+fail: function() {<br/>
+&nbsp;// 发生网络错误等情况触发<br/>
+},<br/>
+complete: function() {<br/>
+&nbsp;// 成功或者失败后触发<br/>
+}<br/>
+})<br/>
+<br/>
+代表3-9 <span style="color: #ff0000">API接口回调说明</span><br/>
+<br/>
+参数名字&#09;&#09;类型&#09;&#09;必填&#09;&#09;描述<br/>
+success&#09;&#09;Function&#09;否&#09;&#09;&#09;接口调用成功的回调函数<br/>
+fail&#09;&#09;&#09;Function&#09;否&#09;&#09;&#09;接口调用失败的回调函数<br/>
+complete&#09;Function&#09;否&#09;&#09;&#09;接口调用结束的回调函数（调用成功、失败都会执行）<br/>
+<br/>
+还有需要注意到<span style="color: #ff0000">API调用大多都是异步的</span>，其次，<span style="color: #ff0000">有部分API会拉起微信的原生界面</span>，此时会触发<span style="color: #ff0000">Page的onHide方法，</span><br/>
+当用户<span style="color: #ff0000">从原生界面返回到小程序时，会触发Page的onShow方法。<br/>
+</span><br/>
+API的数量非常多，而且随着宿主环境的迭代更新会持续新增API，在这里我们并不想一一展开叙述每一个API的含义，开发者只要了解一般调用API的技巧，再通过官方API文档 <br/>
+<br/>
+<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/api/">https://mp.weixin.qq.com/debug/wxadoc/dev/api/</a><br/>
+<br/>
+了解到对应的API参数细节即可。在第四章中我们还会通过各种应用场景来展示很多API的用法。<br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

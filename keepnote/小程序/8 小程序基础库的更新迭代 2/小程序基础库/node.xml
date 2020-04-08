@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+<version>6</version>
+<dict>
+  <key>expanded</key><true/>
+  <key>nodeid</key><string>0f4b9cec-d55d-4a1f-a788-b10e2f061b21</string>
+  <key>modified_time</key><integer>1583220683</integer>
+  <key>expanded2</key><true/>
+  <key>content_type</key><string>text/xhtml+xml</string>
+  <key>created_time</key><integer>1583076993</integer>
+  <key>info_sort_dir</key><integer>1</integer>
+  <key>title</key><string>小程序基础库</string>
+  <key>version</key><integer>6</integer>
+  <key>order</key><integer>0</integer>
+  <key>info_sort</key><string>order</string>
+</dict>
+</node>

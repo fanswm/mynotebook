@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WXSS引用</title>
+</head><body>在<span style="color: #ff0000">CSS</span>中，开发者可以这样引用另一个样式文件：<span style="color: #ff0000">@import url('./test_0.css')</span><br/>
+<br/>
+这种方法在请求上<span style="color: #ff0000">不会把test_0.css合并到index.css中，也就是请求index.css的时候，会多一个test_0.css的请求。</span><br/>
+<br/>
+<br/>
+<br/>
+图2-12 css import网络请求<br/>
+<br/>
+在小程序中，我们依然可以实现样式的引用，<span style="color: #ff0000">样式引用是这样写：<br/>
+</span><span style="color: #ff0000"><br/>
+</span><span style="color: #ff0000">@import './test_0.wxss'</span><br/>
+由于WXSS最终会被编译打包到目标文件中，<span style="color: #ff0000">用户只需要下载一次，在使用过程中不会因为样式的引用而产生多余的文件请求</span></body></html>

@@ -41,7 +41,7 @@ sudo dpkg -i ./keyring.deb
 sudo apt update
 sudo apt install   i3lock suckless-tools i3status dunst libanyevent-i3-perl libjson-xs-perl
 sudo apt install terminator
-vim .config/i3/config
+__vim .config/i3/config__
 sudo apt install feh
 sudo apt install compton
 vim .config/i3/config

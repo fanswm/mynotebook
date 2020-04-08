@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>button</title>
+</head><body>小程序的view容器组件和button组件提供了hover-class属性，触摸时会往该组件加上对应的class改变组件的样式。<br/>
+<br/>
+代码清单4-1 通过hover-class属性改变触摸时的样式<br/>
+<br/>
+/*page.wxss */<br/>
+<br/>
+<span style="color: #ff0000">.hover{<br/>
+<br/>
+</span><span style="color: #ff0000">&nbsp; background-color: gray;</span><br/>
+<br/>
+}<br/>
+<br/>
+<br/>
+<br/>
+&lt;!--page.wxml --&gt;<br/>
+<br/>
+<span style="color: #ff0000">&lt;button hover-class="hover"&gt; 点击button &lt;/button&gt;</span><br/>
+<br/>
+&lt;view hover-class="hover"&gt; 点击view&lt;/view&gt;<br/>
+</body></html>

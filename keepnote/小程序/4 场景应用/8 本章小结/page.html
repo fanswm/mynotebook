@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>8 本章小结</title>
+</head><body>4.8 本章小结<br/>
+在本章我们学习了小程序开发中经常遇到的场景：<br/>
+<br/>
+利用Flex布局来进行小程序界面布局、<br/>
+常见的界面交互反馈、<br/>
+如何进行网络通信让小程序和开发者服务器进行交互等，<br/>
+<br/>
+我们就这些场景详细介绍了相关的API的使用技巧和注意事项，我们也把遇到问题时的思考方式阐述给读者，读者可以细细去体会，通过实践多动手去理解其中的方法论，更多的组件和API使用参数和示例可以参考官方的文档[12]。<br/>
+<br/>
+阅读完本章，我们已经具备<span style="color: #ff0000">独立完成一个小程序的能力</span>，为了让微信用户可以真正使用到你的小程序，学会如何发布小程序是必须要了解的知识，我们在下一个章节中来阐述如何发布一个小程序以及发布前后需要做一些什么事情。<br/>
+<br/>
+[1] scroll-view组件官方文档地址 <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/component/scroll-view.html">https://mp.weixin.qq.com/debug/wxadoc/dev/component/scroll-view.html</a><br/>
+<br/>
+[2] 登录mp.weixin.qq.com，在设置, 开发设置里配置request的服务器域名，同时TLS版本需要支持1.2及以上。<br/>
+<br/>
+[3] 开发者工具需要勾选<span style="color: #ff0000">不校验可信域名</span>；小程序开发版和体验版需要打开调试模式。<br/>
+<br/>
+[4] 由于小程序在启动时会做异步更新版本检测，所以旧版本很快就不会有人访问到，但是依旧存在这种情况。<br/>
+<br/>
+[5] 注意id不是指微信用户的微信号/密码等隐私信息，可以理解为id是微信用户在服务器的一个编号。<br/>
+<br/>
+[6] 编写此书时，<span style="color: #ff0000">wx.login获取的code凭证的有效时间是5分钟。</span><br/>
+<br/>
+[7] 注意这里的帐号密码指的是用户在业务侧的帐号密码，而不是其微信的帐号密码<br/>
+<br/>
+[8] 小程序管理平台地址 <a href="https://mp.weixin.qq.com">https://mp.weixin.qq.com</a><br/>
+<br/>
+[9] 有关于同步/异步的区别见第二章2.4.1节同步与异步<br/>
+<br/>
+[10] 这段时间由开发者根据自己的业务情况定义，为了安全，这段时间不宜设置太长<br/>
+<br/>
+[11] 也可以把其他信息编码进来，如餐桌人数限制，或者灯光调节等等，为了避免复杂，我们这里只考虑餐桌号。<br/>
+<br/>
+[12] 官方文档链接<a href=" https://mp.weixin.qq.com/debug/wxadoc/dev/">&nbsp;https://mp.weixin.qq.com/debug/wxadoc/dev/</a><br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

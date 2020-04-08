@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>本章小结</title>
+</head><body>from <a href="https://developers.weixin.qq.com/ebook?action=get_post_info&token=935589521&volumn=1&lang=zh_CN&book=miniprogram&docid=000e22a89849d81b0086384a25b40a&pass_ticket=CZtoFnIgy1o4sM4K%2FKU5q6iUYk89wZrgwmACm7IKQENuJLQCtn6SITW1J1y9v3%2B8">developers.weixin.qq.com</a>:<br/>
+9.5 本章小结<br/>
+<span style="color: #ff0000">通过编译过程</span>我们<span style="color: #ff0000">将WXML文件和WXSS文件都处理成JS代码</span>，使用<span style="color: #ff0000">script标签</span>注入在一个<span style="color: #ff0000">空的html文件中</span>（我们称为：<span style="color: #ff0000">page-frame.html</span>）；我们<span style="color: #ff0000">将所有的JS文件</span>编译成<span style="color: #ff0000">一个单独的app-service.js</span>。<br/>
+<br/>
+在小程序运行时，<span style="color: #ff0000">逻辑层使用JsCore直接加载app-service.js</span>，<span style="color: #ff0000">渲染层使用WebView加载page-frame.html</span>，在确定页面路径之后，通过动态注入script的方式调用WXML文件和WXSS文件生成的对应页面的JS代码，再结合逻辑层的页面数据，最终渲染出指定的页面。<br/>
+<br/>
+开发者工具使用一个<span style="color: #ff0000">隐藏着的&lt;webview/&gt;标签</span>来模拟JSCore作为小程序的逻辑层运行环境，通过将<span style="color: #ff0000">JSCore中不支持的BOM对象</span>局部变量化，使得开发者无法在小程序代码中正常使用BOM，从而避免不必要的错误。<br/>
+<br/>
+在开发者工具底层有一个HTTP服务器来处理来自WebView的请求，并将开发者代码编译处理后的结果作为HTTP请求的返回，WebView按照普通的网页进行渲染。<br/>
+开发者工具利用BOM、node.js以及模拟的UI和交互流程实现对大部分客户端API的支持。<br/>
+同时开发者工具底层<span style="color: #ff0000">维护着一个WebSocket服务器</span>，用于在WebView与开发者工具之间建立<span style="color: #ff0000">可靠的消息通讯链路</span>，使得接口调用，事件通知，数据交换能够正常进行，从而使小程序模拟器成为一个统一的整体。<br/>
+<br/>
+微信开发者工具使用<span style="color: #ff0000">webview.showDevTools </span>打开<span style="color: #ff0000">Chrome Devtools</span>调试逻辑层WebView的<span style="color: #ff0000">JS代码</span>，同时开发了Chrome Devtools插件 <span style="color: #ff0000">WXML 面板</span>对渲染层页面WebView进行界面调试。WXML面板对<span style="color: #ff0000">渲染层WebView</span>中<span style="color: #ff0000">真实的DOM树</span>做了一个最小树算法的裁剪之后，呈现出与WXML源码一致的节点树列表。<br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

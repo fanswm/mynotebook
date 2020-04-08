@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>初始化</title>
+</head><body><span style="color: #ff0000">初始化</span><br/>
+在小程序端开始使用云能力前，<span style="color: #ff0000">需先调用 wx.cloud.init 方法完成云能力初始化</span>（注意小程序需先开通云服务，开通的方法是点击工具栏左上角的 “控制台” 按钮）。因此，如果要使用云能力，通常我们在小程序初始化时即调用这个方法。<br/>
+<br/>
+<span style="color: #ff0000"><b>小程序端初始化</b></span><br/>
+<span style="color: #ff0000">wx.cloud.init 方法的定义如下：<br/>
+<br/>
+function init(options): void<br/>
+</span><br/>
+wx.cloud.init 方法<span style="color: #ff0000">接受一个可选的 options 参数，方法没有返回值</span>。<span style="color: #ff0000">方法只能调用一次，多次调用时只有第一次调用生效。</span><br/>
+<br/>
+options 参数定义了云开发的默认配置，该配置会作为之后调用其他所有云 API 的默认配置，options 提供的可选配置如下：<br/>
+<br/>
+字段&#09;&#09;数据类型&#09;&#09;&#09;必填&#09;默认值&#09;&#09;说明<br/>
+env&#09;&#09;&#09;string | object&#09;是&#09;&#09;&#09;&#09;&#09;后续 API 调用的默认环境配置，<span style="color: #ff0000">传入字符串形式的环境 ID </span>可以指定所有服务的默认环境，<ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none">传入对象可以分别指定各个服务的默认环境，见下方详细定义</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li style="list-style-type: none"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+traceUser&#09;boolean&#09;&#09;&#09;否&#09;&#09;false&#09;&#09;是否在将用户访问记录到用户管理中，在控制台中可见<br/>
+<br/>
+当 env 传入参数为对象时，可以指定各个服务的默认环境，可选字段如下：<br/>
+<br/>
+字段&#09;&#09;数据类型&#09;必填&#09;默认值&#09;说明<br/>
+database&#09;string&#09;否&#09;&#09;空&#09;&#09;数据库 API 默认环境配置<br/>
+storage&#09;&#09;string&#09;否&#09;&#09;空&#09;&#09;存储 API 默认环境配置<br/>
+functions&#09;string&#09;否&#09;&#09;空&#09;&#09;云函数 API 默认环境配置<br/>
+<br/>
+注意：<span style="color: #ff0000">env 设置只会决定小程序端 API 调用的云环境</span>，<span style="color: #ff0000">并不会决定云函数中的 API 调用的环境</span>，<span style="color: #ff0000">在云函数中需要通过 wx-server-sdk 的 init 方法重新设置环境。</span><br/>
+<br/>
+示例代码：<br/>
+<br/>
+wx.cloud.init({<br/>
+&nbsp; env: 'test-x1dzi'<br/>
+})<br/>
+<br/>
+<span style="color: #ff0000"><b>云函数端初始化<br/>
+</b></span><br/>
+cloud.init 方法的定义如下：<br/>
+<br/>
+function init(options): void<br/>
+<br/>
+cloud.init 方法接受一个可选的 options 参数，方法没有返回值。方法只能调用一次，多次调用时只有第一次调用生效。<br/>
+<br/>
+options 参数定义了云开发的默认配置，该配置会作为之后调用其他所有云 API 的默认配置，options 提供的可选配置如下：<br/>
+<br/>
+字段&#09;数据类型&#09;&#09;&#09;必填&#09;默认值&#09;说明<br/>
+env&#09;&#09;string | object&#09;是&#09;&#09;&#09;&#09;后续 API 调用的默认环境配置，传入字符串形式的环境 ID 或传入 cloud.DYNAMIC_CURRENT_ENV 可以指<ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none">定所有服务的默认环境，传入对象可以分别指定各个服务的默认环境，见下方详细定义</li>
+<li style="list-style-type: none"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<span style="color: #ff0000">当 env 传入参数为对象时</span>，可以指定各个服务的默认环境，可选字段如下：<br/>
+<br/>
+字段&#09;&#09;&#09;数据类型&#09;必填&#09;默认值&#09;说明<br/>
+database&#09;&#09;string&#09;否&#09;&#09;default&#09;数据库 API 默认环境配置<br/>
+storage&#09;&#09;&#09;string&#09;否&#09;&#09;default&#09;存储 API 默认环境配置<br/>
+functions&#09;&#09;string&#09;否&#09;&#09;default&#09;云函数 API 默认环境配置<br/>
+default&#09;&#09;&#09;string&#09;否&#09;&#09;空&#09;&#09;缺省时 API 默认环境配置<br/>
+<br/>
+注意：env 设置<span style="color: #ff0000">只会决定本次云函数 API 调用的云环境</span>，并不会决定接下来其他被调云函数中的 API 调用的环境，在其他被调云函数中需要通过 init 方法重新设置环境。<br/>
+<br/>
+建议：<span style="color: #ff0000">在设置 env 时指定 cloud.DYNAMIC_CURRENT_ENV 常量 (需 SDK v1.1.0 或以上) ，这样云函数内发起数据库请求、存储请求或调用其他云函数的时候，默认请求的云环境就是云函数当前所在的环境：</span><br/>
+<br/>
+const cloud = require('wx-server-sdk')<br/>
+cloud.init({<br/>
+&nbsp; env: cloud.DYNAMIC_CURRENT_ENV<br/>
+})<br/>
+<br/>
+exports.main = async (event) =&gt; {<br/>
+&nbsp; const { ENV, OPENID, APPID } = cloud.getWXContext()<br/>
+<br/>
+&nbsp; // 如果云函数所在环境为 abc，则下面的调用就会请求到 abc 环境的数据库<br/>
+&nbsp; const dbResult = await cloud.database().collection('test').get()<br/>
+<br/>
+&nbsp; return {<br/>
+&nbsp; &nbsp; dbResult,<br/>
+&nbsp; &nbsp; ENV,<br/>
+&nbsp; &nbsp; OPENID,<br/>
+&nbsp; &nbsp; APPID,<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+注：<span style="color: #ff0000">上述代码中的 env 参数的值不能用 cloud.getWXContext().ENV 替代</span>，因为在 exports.main 外部调用的 getWXContext() 无法获取到当前环境<br/>
+<br/>
+<span style="color: #ff0000"><b>API 风格<br/>
+</b></span><br/>
+云开发的 API 风格与框架组件和 API 风格一致，但同时支持<span style="color: #ff0000">回调风格和Promise风格</span>。在传入 API 的 Object 参数中，<ul><li style="list-style-type: none">如果传入了 success、fail、complete 字段，则我们认为是<span style="color: #ff0000">采用回调风格</span>，<span style="color: #ff0000">API 方法调用不返回 Promise</span>。</li>
+<li style="list-style-type: none">如果传入 API 的 Object 参数中 success、fail、complete 这三个字段都不存在，则我们认为是<span style="color: #ff0000">采用Promise风格</span>，API 方法调用返回一个 Promise，Promise resolve 的结果同传入 success 回调的参数，reject 的结果同传入 fail 的参数。</li>
+</ul>
+<br/>
+注意事项<br/>
+<span style="color: #ff0000">如果 init 时不传 env 参数，后续 API 调用将默认请求到第一个创建的环境</span>，但这种方式并不总是预期的，因此这种方式已废弃，<span style="color: #ff0000"><b>请务必明确传入 env 参数</b></span></body></html>

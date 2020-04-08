@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>wxs</title>
+</head><body>WXS<br/>
+WXS（WeiXin Script）是小程序的一套脚本语言，结合 WXML，可以构建出页面的结构。<br/>
+<br/>
+注意<br/>
+WXS <span style="color: #ff0000">不依赖于运行时的基础库版本，可以在所有版本的小程序中运行。</span><br/>
+WXS 与 JavaScript 是不同的语言，有自己的语法，并不和 JavaScript 一致。<br/>
+WXS 的<span style="color: #ff0000">运行环境和其他 JavaScript 代码是隔离的，WXS 中不能调用其他 JavaScript 文件中定义的函数，也不能调用小程序提供的API。</span><br/>
+WXS 函数<span style="color: #ff0000">不能作为组件的事件回调。</span><br/>
+由于运行环境的差异，<span style="color: #ff0000">在 iOS 设备上小程序内的 WXS 会比 JavaScript 代码快 2 ~ 20 倍</span>。在 android 设备上二者运行效率无差异。<br/>
+以下是一些使用 WXS 的简单示例，要完整了解 WXS 语法，请参考WXS 语法参考。 &nbsp;<a href="https://developers.weixin.qq.com/miniprogram/dev/reference/wxs/
+">https://developers.weixin.qq.com/miniprogram/dev/reference/wxs/<br/>
+</a><br/>
+页面渲染<br/>
+&lt;!--wxml--&gt;<br/>
+&lt;wxs module="m1"&gt;<br/>
+var msg = "hello world";<br/>
+<br/>
+<span style="color: #ff0000">module.exports.message = msg;</span><br/>
+&lt;/wxs&gt;<br/>
+<br/>
+&lt;view&gt; {{m1.message}} &lt;/view&gt;<br/>
+页面输出：<br/>
+<br/>
+hello world<br/>
+<br/>
+<span style="color: #ff0000">数据处理</span><br/>
+// page.js<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; array: [1, 2, 3, 4, 5, 1, 2, 3, 4]<br/>
+&nbsp; }<br/>
+})<br/>
+&lt;!--wxml--&gt;<br/>
+&lt;!-- 下面的 getMax 函数，接受一个数组，且返回数组中最大的元素的值 --&gt;<br/>
+&lt;wxs module="m1"&gt;<br/>
+var getMax = function(array) {<br/>
+<span style="color: #ff0000">&nbsp; var max = undefined;</span><br/>
+&nbsp; for (var i = 0; i &lt; array.length; ++i) {<br/>
+&nbsp; &nbsp; max = max === undefined ?<br/>
+&nbsp; &nbsp; &nbsp;<span style="color: #ff0000">&nbsp;array[i] :<br/>
+</span><span style="color: #ff0000">&nbsp; &nbsp; &nbsp; (max &gt;= array[i] ? max : array[i]);</span><br/>
+&nbsp; }<br/>
+&nbsp; return max;<br/>
+}<br/>
+<br/>
+module.exports.getMax = getMax;<br/>
+&lt;/wxs&gt;<br/>
+<br/>
+&lt;!-- 调用 wxs 里面的 getMax 函数，参数为 page.js 里面的 array --&gt;<br/>
+&lt;view&gt; {{m1.getMax(array)}} &lt;/view&gt;<br/>
+页面输出：<br/>
+<br/>
+5</body></html>

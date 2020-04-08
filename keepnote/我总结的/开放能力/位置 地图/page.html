@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>位置 地图</title>
+</head><body>//app.json<br/>
+<br/>
+{<br/>
+&nbsp; "pages": [<br/>
+&nbsp; &nbsp; "pages/index/index"<br/>
+&nbsp; ],<br/>
+&nbsp; "permission": {<br/>
+&nbsp; &nbsp; "scope.userLocation": {<br/>
+&nbsp; &nbsp; &nbsp; "desc": "你的位置信息将用于小程序位置接口的效果展示"<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; "window": {<br/>
+&nbsp; &nbsp; "backgroundTextStyle": "light",<br/>
+&nbsp; &nbsp; "navigationBarBackgroundColor": "#fff",<br/>
+&nbsp; &nbsp; "navigationBarTitleText": "WeChat",<br/>
+&nbsp; &nbsp; "navigationBarTextStyle": "black"<br/>
+&nbsp; },<br/>
+&nbsp; "style": "v2",<br/>
+&nbsp; "sitemapLocation": "sitemap.json"<br/>
+}<hr/>// index.js<br/>
+<br/>
+Page({<ul><li style="list-style-type: none">&nbsp;getposition: function(){</li>
+<li style="list-style-type: none">&nbsp; &nbsp; wx.getLocation({</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; type: 'wgs84',&#09;&#09;// wgs84 返回 gps 坐标；gcj02 返回可用于 wx.openLocation 的坐标</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; success(res) {</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; const latitude = res.latitude</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; const longitude = res.longitude</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; const speed = res.speed</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; const accuracy = res.accuracy</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; console.log(latitude, longitude, speed, accuracy)</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; }</li>
+<li style="list-style-type: none">&nbsp; &nbsp; }),</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; wx.getLocation({</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; type: 'gcj02', //返回可以用于 wx.openLocation 的经纬度</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; success(res) {</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const latitude = res.latitude</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const longitude = res.longitude</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.openLocation({</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; latitude,</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; longitude,</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; scale: 18</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; })</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; &nbsp; }</li>
+<li style="list-style-type: none">&nbsp; &nbsp; &nbsp; })</li>
+<li style="list-style-type: none">&nbsp; }</li>
+</ul>
+})<hr/>&lt;!-- index.wx.ml --&gt;<br/>
+&lt;button bindtap="getposition"&gt;当前位置&lt;/button&gt;<br/>
+<br/>
+</body></html>

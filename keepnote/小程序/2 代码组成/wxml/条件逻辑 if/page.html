@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>条件逻辑 if</title>
+</head><body>from <a href="https://developers.weixin.qq.com/ebook?action=get_post_info&token=935589521&volumn=1&lang=zh_CN&book=miniprogram&docid=000ee2c29d4f805b0086a37a254c0a&pass_ticket=CZtoFnIgy1o4sM4K%2FKU5q6iUYk89wZrgwmACm7IKQENuJLQCtn6SITW1J1y9v3%2B8">developers.weixin.qq.com</a>:<br/>
+WXML 中，使用 wx:if="{{condition}}" 来判断是否需要渲染该代码块：<br/>
+<br/>
+&lt;view wx:if="{{condition}}"&gt; True &lt;/view&gt;<br/>
+使用 wx:elif 和 wx:else 来添加一个 else 块：<br/>
+<br/>
+&lt;view wx:if="{{length &gt; 5}}"&gt; 1 &lt;/view&gt;<br/>
+&lt;view wx:elif="{{length &gt; 2}}"&gt; 2 &lt;/view&gt;<br/>
+&lt;view wx:else&gt; 3 &lt;/view&gt;<br/>
+<br/>
+因为 wx:if 是一个控制属性，需要将它添加到一个标签上。<span style="color: #ff0000">如果要一次性判断多个组件标签</span>，可以使用一个 &lt;block/&gt; 标签将多个组件包装起来，并在上边使用 wx:if 控制属性。<br/>
+<br/>
+&lt;block wx:if="{{true}}"&gt;<br/>
+&nbsp; &lt;view&gt; view1 &lt;/view&gt;<br/>
+&nbsp; &lt;view&gt; view2 &lt;/view&gt;<br/>
+&lt;/block&gt;<br/>
+<br/>
+imrdr: <br/>
+两个条件：<br/>
+&lt;button wx:if="{{!hasUserInfo &amp;&amp; canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"&gt; 获取头像昵称 &lt;/button&gt;<br/>
+<br/>
+</body></html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>弹出菜单</title>
+</head><body>&lt;view&gt;<br/>
+&nbsp; &lt;image src="/resources/collect.png" class="img-style" animation="{{animCollect}}" bindtap="collect"&gt;&lt;/image&gt;<br/>
+&nbsp; &lt;image src="/resources/transpond.png" class="img-style" animation="{{animTranspond}}" bindtap="transpond"&gt;&lt;/image&gt;<br/>
+&nbsp; &lt;image src="/resources/input.png" class="img-style" animation="{{animInput}}" bindtap="input"&gt;&lt;/image&gt;<br/>
+&nbsp; &lt;image src="/resources/plus.png" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"&gt;&lt;/image&gt;<br/>
+&lt;/view&gt;<br/>
+<hr/><br/>
+// index.js<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; isPopping: false,//是否已经弹出<br/>
+&nbsp; &nbsp; animPlus: {},//旋转动画<br/>
+&nbsp; &nbsp; animCollect: {},//item位移,透明度<br/>
+&nbsp; &nbsp; animTranspond: {},//item位移,透明度<br/>
+&nbsp; &nbsp; animInput: {},//item位移,透明度<br/>
+&nbsp; },<br/>
+&nbsp; //点击弹出<br/>
+&nbsp; plus: function () {<br/>
+&nbsp; &nbsp; if (this.data.isPopping) {<br/>
+&nbsp; &nbsp; &nbsp; //缩回动画<br/>
+&nbsp; &nbsp; &nbsp; this.popp();<br/>
+&nbsp; &nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; isPopping: false<br/>
+&nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; } else if (!this.data.isPopping) {<br/>
+&nbsp; &nbsp; &nbsp; //弹出动画<br/>
+&nbsp; &nbsp; &nbsp; this.takeback();<br/>
+&nbsp; &nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; isPopping: true<br/>
+&nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; },<br/>
+&nbsp; input: function () {<br/>
+&nbsp; &nbsp; console.log("input")<br/>
+&nbsp; },<br/>
+&nbsp; transpond: function () {<br/>
+&nbsp; &nbsp; console.log("transpond")<br/>
+&nbsp; },<br/>
+&nbsp; collect: function () {<br/>
+&nbsp; &nbsp; console.log("collect")<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; //弹出动画<br/>
+&nbsp; popp: function () {<br/>
+&nbsp; &nbsp; //plus顺时针旋转<br/>
+&nbsp; &nbsp; var animationPlus = wx.createAnimation({<br/>
+&nbsp; &nbsp; &nbsp; duration: 500,<br/>
+&nbsp; &nbsp; &nbsp; timingFunction: 'ease-out'<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; var animationcollect = wx.createAnimation({<br/>
+&nbsp; &nbsp; &nbsp; duration: 500,<br/>
+&nbsp; &nbsp; &nbsp; timingFunction: 'ease-out'<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; var animationTranspond = wx.createAnimation({<br/>
+&nbsp; &nbsp; &nbsp; duration: 500,<br/>
+&nbsp; &nbsp; &nbsp; timingFunction: 'ease-out'<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; var animationInput = wx.createAnimation({<br/>
+&nbsp; &nbsp; &nbsp; duration: 500,<br/>
+&nbsp; &nbsp; &nbsp; timingFunction: 'ease-out'<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; animationPlus.rotateZ(180).step();<br/>
+&nbsp; &nbsp; animationcollect.translate(-100, -100).rotateZ(180).opacity(1).step();<br/>
+&nbsp; &nbsp; animationTranspond.translate(-140, 0).rotateZ(180).opacity(1).step();<br/>
+&nbsp; &nbsp; animationInput.translate(-100, 100).rotateZ(180).opacity(1).step();<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; animPlus: animationPlus.export(),<br/>
+&nbsp; &nbsp; &nbsp; animCollect: animationcollect.export(),<br/>
+&nbsp; &nbsp; &nbsp; animTranspond: animationTranspond.export(),<br/>
+&nbsp; &nbsp; &nbsp; animInput: animationInput.export(),<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+&nbsp; //收回动画<br/>
+&nbsp; takeback: function () {<br/>
+&nbsp; &nbsp; //plus逆时针旋转<br/>
+&nbsp; &nbsp; var animationPlus = wx.createAnimation({<br/>
+&nbsp; &nbsp; &nbsp; duration: 500,<br/>
+&nbsp; &nbsp; &nbsp; timingFunction: 'ease-out'<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; var animationcollect = wx.createAnimation({<br/>
+&nbsp; &nbsp; &nbsp; duration: 500,<br/>
+&nbsp; &nbsp; &nbsp; timingFunction: 'ease-out'<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; var animationTranspond = wx.createAnimation({<br/>
+&nbsp; &nbsp; &nbsp; duration: 500,<br/>
+&nbsp; &nbsp; &nbsp; timingFunction: 'ease-out'<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; var animationInput = wx.createAnimation({<br/>
+&nbsp; &nbsp; &nbsp; duration: 500,<br/>
+&nbsp; &nbsp; &nbsp; timingFunction: 'ease-out'<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; animationPlus.rotateZ(0).step();<br/>
+&nbsp; &nbsp; animationcollect.translate(0, 0).rotateZ(0).opacity(0).step();<br/>
+&nbsp; &nbsp; animationTranspond.translate(0, 0).rotateZ(0).opacity(0).step();<br/>
+&nbsp; &nbsp; animationInput.translate(0, 0).rotateZ(0).opacity(0).step();<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; animPlus: animationPlus.export(),<br/>
+&nbsp; &nbsp; &nbsp; animCollect: animationcollect.export(),<br/>
+&nbsp; &nbsp; &nbsp; animTranspond: animationTranspond.export(),<br/>
+&nbsp; &nbsp; &nbsp; animInput: animationInput.export(),<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+<br/>
+<br/>
+&nbsp; onLoad: function (options) {<br/>
+&nbsp; &nbsp; // 生命周期函数--监听页面加载<br/>
+&nbsp; },<br/>
+&nbsp; onReady: function () {<br/>
+&nbsp; &nbsp; // 生命周期函数--监听页面初次渲染完成<br/>
+&nbsp; },<br/>
+&nbsp; onShow: function () {<br/>
+&nbsp; &nbsp; // 生命周期函数--监听页面显示<br/>
+&nbsp; },<br/>
+&nbsp; onHide: function () {<br/>
+&nbsp; &nbsp; // 生命周期函数--监听页面隐藏<br/>
+&nbsp; },<br/>
+&nbsp; onUnload: function () {<br/>
+&nbsp; &nbsp; // 生命周期函数--监听页面卸载<br/>
+&nbsp; },<br/>
+&nbsp; onPullDownRefresh: function () {<br/>
+&nbsp; &nbsp; // 页面相关事件处理函数--监听用户下拉动作<br/>
+&nbsp; },<br/>
+&nbsp; onReachBottom: function () {<br/>
+&nbsp; &nbsp; // 页面上拉触底事件的处理函数<br/>
+&nbsp; },<br/>
+&nbsp; onShareAppMessage: function () {<br/>
+&nbsp; &nbsp; // 用户点击右上角分享<br/>
+&nbsp; &nbsp; return {<br/>
+&nbsp; &nbsp; &nbsp; title: 'title', // 分享标题<br/>
+&nbsp; &nbsp; &nbsp; desc: 'desc', // 分享描述<br/>
+&nbsp; &nbsp; &nbsp; path: 'path' // 分享路径<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+})<hr/><br/>
+.img-plus-style {<br/>
+&nbsp; height: 150rpx;<br/>
+&nbsp; width: 150rpx;<br/>
+&nbsp; position: absolute;<br/>
+&nbsp; bottom: 250rpx;<br/>
+&nbsp; right: 100rpx;<br/>
+&nbsp; z-index: 100;<br/>
+}<br/>
+&nbsp;<br/>
+.img-style {<br/>
+&nbsp; height: 150rpx;<br/>
+&nbsp; width: 150rpx;<br/>
+&nbsp; position: absolute;<br/>
+&nbsp; bottom: 250rpx;<br/>
+&nbsp; right: 100rpx;<br/>
+&nbsp; opacity: 0;<br/>
+}<hr/><a href="https://blog.csdn.net/qq_26420489/article/details/62044014">https://blog.csdn.net/qq_26420489/article/details/62044014</a><br/>
+</body></html>

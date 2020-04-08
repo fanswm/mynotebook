@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>behavior</title>
+</head><body><span style="font-size: 12pt"><span style="font-family: Microsoft YaHei"><span style="color: #008000">是用于组件间代码共享的特性，类似于一些编程语言中的“mixins”或“traits”。<br/>
+<br/>
+每个 behavior 可以包含一组属性、数据、生命周期函数和方法。组件引用它时，它的属性、数据和方法会被合并到组件中，生命周期函数也会在对应时机被调用。 每个组件可以引用多个 behavior ，behavior 也可以引用其他 behavior 。<br/>
+<br/>
+详细的参数含义和使用请参考 Behavior 参考文档。 <a href=" https://developers.weixin.qq.com/miniprogram/dev/reference/api/Behavior.html">&nbsp;https://developers.weixin.qq.com/miniprogram/dev/reference/api/Behavior.html</a><br/>
+</span></span><span style="color: #008000"><span style="font-family: Consolas"><hr/>&lt;!-- index.wxml --&gt;<br/>
+</span></span></span><span style="font-size: 12pt"><span style="color: #008000"><span style="font-family: Consolas">&lt;view&gt;{{sharedText}}&lt;/view&gt;</span></span></span><hr/><span style="font-family: Microsoft YaHei"><span style="color: #ff0000">// my-behavior.js</span><br/>
+<br/>
+module.exports = Behavior({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; sharedText: 'This is a piece of data shared between pages.'<br/>
+&nbsp; },<br/>
+&nbsp; methods: {<br/>
+&nbsp; &nbsp; sharedMethod: function () {<br/>
+&nbsp; &nbsp; &nbsp; //this.data.sharedText === 'This is a piece of data shared between pages.' // imrdr: 这行代码只是说，此时 this.data.sharedText 等于 'This...'<br/>
+<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+</span><span style="font-family: Microsoft YaHei">})</span><br/>
+<hr/><br/>
+//index.js<br/>
+var myBehavior = require('./my-behavior.js')<br/>
+<br/>
+Page({<br/>
+&nbsp; behaviors: [myBehavior],<br/>
+&nbsp; onLoad: function () {<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; sahredText:'abc'<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; console.log("sharedText=", this.data.sahredText)&#09;// 输出： abc<br/>
+&nbsp; }<br/>
+})<hr/>imrdr: Behavior 中设置 data 时，不会渲染本页的页面。<br/>
+</body></html>

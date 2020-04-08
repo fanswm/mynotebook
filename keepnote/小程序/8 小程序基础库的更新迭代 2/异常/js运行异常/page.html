@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>JS运行异常</title>
+</head><body>我们在网页开发中，如果在Chrome运行代码8-5片段，在Chrome浏览器的开发者工具 里的Console面板中出现脚本运行异常的错误信息，示例中for循环的条件表达式i &lt; l中的l变量没定义，运行后出现异常，如图8-1所示。<br/>
+代码清单8-5 运行时产生异常的代码示例<br/>
+<br/>
+var imgs = document.getElementsByTagName("img")<br/>
+for (var i = 0, len = imgs.length; i &lt; l; ++i) {<br/>
+&nbsp; //imgs[i].getAttribute("src") &nbsp; balblabla<br/>
+}<br/>
+<br/>
+<br/>
+图8-1 网页JS运行错误<br/>
+<br/>
+一般语法错误以及运行时错误，浏览器都会在Console里边显示对应的错误信息，以及出错的文件、行号、堆栈信息。</body></html>

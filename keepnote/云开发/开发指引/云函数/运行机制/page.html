@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>运行机制</title>
+</head><body>运行机制<br/>
+<span style="color: #ff0000">运行环境</span><br/>
+<span style="color: #ff0000">云函数运行在云端 Linux 环境1中</span>，一个云函数<span style="color: #ff0000">在处理并发请求的时候会创建多个云函数实例</span>，<span style="color: #ff0000">每个云函数实例之间相互隔离</span>，<span style="color: #ff0000">没有公用的内存或硬盘空间</span>。云函数实例的创建、管理、销毁等操作由平台自动完成。<span style="color: #ff0000">每个云函数实例都在 /tmp 目录下提供了一块 512MB 的临时磁盘空间用于处理单次云函数执行过程中的临时文件读写需求</span>，需特别注意的是，<span style="color: #ff0000">这块临时磁盘空间在函数执行完毕后可能被销毁</span>，不应依赖和假设在磁盘空间存储的临时文件会一直存在。<span style="color: #ff0000">如果需要持久化的存储，请使用云存储功能。<br/>
+</span><br/>
+<span style="color: #ff0000">无状态函数</span><br/>
+云函数应是<span style="color: #ff0000">无状态的，幂等的</span>，<span style="color: #ff0000">即一次云函数的执行不依赖上一次云函数执行过程中在运行环境中残留的信息。</span><br/>
+<br/>
+为了保证<span style="color: #ff0000">负载均衡</span>，云函数平台会根据当前负载情况控制云函数实例的数量，并且会在一些情况下重用云函数实例，<span style="color: #ff0000">这使得连续两次云函数调用如果都由同一个云函数实例运行，那么两者会共享同一个临时磁盘空间</span>，但因为云函数实例随时可能被销毁，并且连续的请求不一定会落在同一个实例，<span style="color: #ff0000"><b>因此云函数不应依赖之前云函数调用中在临时磁盘空间遗留的数据。总的原则即是云函数代码应是无状态的。</b></span><br/>
+<br/>
+<span style="color: #ff0000">事件模型</span><br/>
+云函数的调用采用<span style="color: #ff0000">事件触发模型</span>，<span style="color: #ff0000">小程序端的每一次调用即触发了一次云函数调用事件</span>，云函数平台会新建或复用已有的云函数实例来处理这次调用。同理，因为云函数间也可以相互调用，因此<span style="color: #ff0000">云函数间相互调用也是触发了一次调用事件</span>。<br/>
+<br/>
+自动扩缩容<br/>
+开发者无需关心云函数扩容和缩容的问题，平台会根据负载自动进行扩缩容。<br/>
+<br/>
+Footnotes<br/>
+当前运行环境是在 CentOS 7.2 中，特别注意编写代码不应依赖特定的操作系统或特定的操作系统版本号，运行环境可能会发生变化，代码应尽量与平台无关</body></html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>异步返回结果</title>
+</head><body>异步返回结果<br/>
+经常，我们需要在云函数中处理一些异步操作，在异步操作完成后再返回结果给到调用方。此时我们可以<span style="color: #ff0000">通过在云函数中返回一个 Promise 的方法来完成</span>。<br/>
+<br/>
+一个最简的 setTimeout 示例：<br/>
+<br/>
+// index.js<br/>
+exports.main = <span style="color: #ff0000">async</span>&nbsp;(event, context) =&gt; {<br/>
+&nbsp; return new Promise((resolve, reject) =&gt; {<br/>
+&nbsp; &nbsp; //<span style="color: #ff0000">&nbsp;在 3 秒后返回结果给调用方（小程序 / 其他云函数）</span><br/>
+&nbsp; &nbsp; setTimeout(() =&gt; {<br/>
+&nbsp; &nbsp; &nbsp; resolve(event.a + event.b)<br/>
+&nbsp; &nbsp; }, <span style="color: #ff0000">3000</span>)<br/>
+&nbsp; })<br/>
+}<br/>
+<br/>
+假设云函数名字为 test，开启本地调试/上传部署该云函数后，我们可以在小程序端测试调用：<br/>
+<br/>
+// 在小程序代码中：<br/>
+wx.cloud.callFunction({<br/>
+&nbsp; name: 'test',<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; a: 1,<br/>
+&nbsp; &nbsp; b: 2,<br/>
+&nbsp; },<br/>
+&nbsp; complete: res =&gt; {<br/>
+&nbsp; &nbsp; console.log('callFunction test result: ', res)<br/>
+&nbsp; },<br/>
+})<br/>
+<br/>
+此时应该看到调试器输出：<br/>
+<br/>
+callFunction test result: 3</body></html>

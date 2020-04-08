@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> 获取界面上的节点信息</title>
+</head><body>获取界面上的节点信息<br/>
+<br/>
+<span style="color: #ff0000">WXML节点信息</span><br/>
+<span style="color: #ff0000">节点信息查询 API </span>可以用于获取节点<span style="color: #ff0000">属性、样式、在界面上的位置</span>等信息。<br/>
+<br/>
+最常见的用法是<span style="color: #ff0000">使用这个接口来查询某个节点的当前位置，以及界面的滚动位置</span>。<br/>
+<br/>
+示例代码：<br/>
+<br/>
+const query =<span style="color: #ff0000">&nbsp;wx.createSelectorQuery()</span><br/>
+query.select('#the-id').boundingClientRect(function(res){<br/>
+&nbsp; res.top // #the-id 节点的<span style="color: #ff0000">上边界坐标（相对于显示区域）</span><br/>
+})<br/>
+query.selectViewport().scrollOffset(function(res){<br/>
+&nbsp; res.scrollTop // <span style="color: #ff0000">显示区域的竖直滚动位置</span><br/>
+})<br/>
+query.exec()<br/>
+<br/>
+上述示例中，<span style="color: #ff0000">&nbsp;#the-id 是一个节点选择器</span>，<span style="color: #ff0000">与 CSS 的选择器相近但略有区别</span>，请参见 SelectorQuery.select 的相关说明。<br/>
+<br/>
+<span style="color: #ff0000">在自定义组件或包含自定义组件的页面中，推荐使用 this.createSelectorQuery 来代替 wx.createSelectorQuery ，这样可以确保在正确的范围内选择节点。</span><br/>
+<br/>
+<span style="color: #ff0000">WXML节点布局相交状态</span><br/>
+<br/>
+<span style="color: #ff0000">节点布局相交状态 API</span>&nbsp;可用于监听<span style="color: #ff0000">两个或多个组件节点</span>在布局位置上的相交状态。这一组API常常可以<span style="color: #ff0000">用于推断某些节点是否可以被用户看见、有多大比例可以被用户看见</span>。<br/>
+<br/>
+这一组API涉及的主要概念如下。<br/>
+<br/>
+参照节点：&#09;监听的参照节点，取它的布局区域作为参照区域。<span style="color: #ff0000">如果有多个参照节点，则会取它们布局区域的 交集 作为参照区域</span>。页面显示区域也可作为参照区域之一。<br/>
+目标节点：&#09;监听的目标，默认只能是一个节点（<span style="color: #ff0000">使用 selectAll 选项时，可以同时监听多个节点</span>）。<br/>
+相交区域：&#09;目标节点的布局区域与参照区域的相交区域。<br/>
+相交比例：&#09;相交区域占参照区域的比例。<br/>
+阈值：&#09;&#09;<span style="color: #ff0000">相交比例如果达到阈值，则会触发监听器的回调函数</span>。阈值可以有多个。<br/>
+<br/>
+以下示例代码可以在目标节点（用选择器 .target-class 指定）<span style="color: #ff0000">每次进入或离开页面显示区域时，触发回调函数</span>。<br/>
+<br/>
+示例代码：<br/>
+<br/>
+Page({<br/>
+&nbsp; onLoad: function(){<br/>
+&nbsp; &nbsp; wx.createIntersectionObserver().relativeToViewport().observe('.target-class', (res) =&gt; {<br/>
+&nbsp; &nbsp; &nbsp; res.id // 目标节点 id<br/>
+&nbsp; &nbsp; &nbsp; res.dataset // 目标节点 dataset<br/>
+&nbsp; &nbsp; &nbsp; res.intersectionRatio // 相交区域占目标节点的布局区域的比例<br/>
+&nbsp; &nbsp; &nbsp; res.intersectionRect // 相交区域<br/>
+&nbsp; &nbsp; &nbsp; res.intersectionRect.left // 相交区域的左边界坐标<br/>
+&nbsp; &nbsp; &nbsp; res.intersectionRect.top // 相交区域的上边界坐标<br/>
+&nbsp; &nbsp; &nbsp; res.intersectionRect.width // 相交区域的宽度<br/>
+&nbsp; &nbsp; &nbsp; res.intersectionRect.height // 相交区域的高度<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+以下示例代码可以在<span style="color: #ff0000">目标节点（用选择器 .target-class 指定）</span>与<span style="color: #ff0000">参照节点（用选择器 .relative-class 指定）</span>在页面显示区域内相交或相离，且相交或相离程度达到目标节点布局区域的20%和50%时，<span style="color: #ff0000">触发回调函数。</span><br/>
+<br/>
+示例代码：<br/>
+<br/>
+Page({<br/>
+&nbsp; onLoad: function(){<br/>
+&nbsp; &nbsp; wx.createIntersectionObserver(this, {<br/>
+&nbsp; &nbsp; &nbsp; <span style="color: #ff0000">thresholds</span>: [0.2, 0.5]<br/>
+&nbsp; &nbsp; }).relativeTo('.relative-class').relativeToViewport().observe('.target-class', (res) =&gt; {<br/>
+&nbsp; &nbsp; &nbsp; res.intersectionRatio // 相交区域占目标节点的布局区域的比例<br/>
+&nbsp; &nbsp; &nbsp; res.intersectionRect // 相交区域<br/>
+&nbsp; &nbsp; &nbsp; res.intersectionRect.left // 相交区域的左边界坐标<br/>
+&nbsp; &nbsp; &nbsp; res.intersectionRect.top // 相交区域的上边界坐标<br/>
+&nbsp; &nbsp; &nbsp; res.intersectionRect.width // 相交区域的宽度<br/>
+&nbsp; &nbsp; &nbsp; res.intersectionRect.height // 相交区域的高度<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+注意：与页面显示区域的相交区域<span style="color: #ff0000">并不准确代表用户可见的区域</span>，因为参与计算的区域是“<span style="color: #ff0000">布局区域</span>”，布局区域<span style="color: #ff0000">可能会在绘制时被其他节点裁剪隐藏</span>（如遇祖先节点中 overflow 样式为 <span style="color: #ff0000">hidden</span>&nbsp;的节点）或遮盖（如遇 fixed 定位的节点）。<br/>
+<br/>
+在自定义组件或包含自定义组件的页面中，推荐使用 this.<span style="color: #ff0000">createIntersectionObserver</span>&nbsp;来代替 wx.createIntersectionObserver ，这样可以确保在正确的范围内选择节点。<br/>
+</body></html>

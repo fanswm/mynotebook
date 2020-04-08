@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>自定义组件,组件通信</title>
+</head><body>自定义组件是开发者可以自行扩充的组件。开发者<span style="color: #ff0000">可以将常用的节点树结构提取成自定义组件，实现代码复用。</span><br/>
+<br/>
+<span style="color: #ff0000">1. ShadowTree的概念</span><br/>
+我们以下面的代码为例来阐述Shadow Tree的概念。<br/>
+<br/>
+<span style="color: #ff0000">代码清单6-2 页面节点树(Composed Tree)<br/>
+</span><br/>
+&lt;view&gt;<ul><li style="list-style-type: none">&lt;input-with-label&gt;</li>
+</ul>
+&nbsp; &nbsp; &#09;&#09;&lt;label&gt;<br/>
+&nbsp; &nbsp; &nbsp; &#09;&#09;TEXT<br/>
+&nbsp; &nbsp; &#09;&#09;&lt;/label&gt;<br/>
+&nbsp; &nbsp; &#09;&lt;input /&gt;<br/>
+&nbsp;&#09;&lt;/input-with-label&gt;<br/>
+&lt;/view&gt;<br/>
+<br/>
+这里如果将input-with-label抽象成一个组件，那么可以将整个节点树拆分成两部分。<br/>
+<br/>
+<span style="color: #ff0000">代码清单6-3 组件节点树(Shadow Tree)</span><br/>
+<br/>
+&lt;label&gt;&lt;slot/&gt;&lt;/label&gt;<br/>
+<br/>
+&lt;input /&gt;<br/>
+<br/>
+<span style="color: #ff0000">代码清单6-4 调用组件的节点树</span><br/>
+<br/>
+&lt;view&gt;<br/>
+&nbsp; &nbsp; &lt;input-with-label&gt;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; TEXT<br/>
+&nbsp; &nbsp; &lt;/input-with-label&gt;<br/>
+&lt;/view&gt;<br/>
+<br/>
+在Exparser的组件模型中，这两个节点树可以被拼接成上方的页面节点树。<br/>
+<br/>
+<span style="font-size: 14pt">其中，<span style="color: #ff0000">组件的节点树称为“ShadowTree”</span>，即组件内部的实现；<br/>
+最终拼接成的页面节点树被称为<span style="color: #ff0000">“Composed Tree”</span>，即将页面所有组件节点树合成之后的树。<br/>
+</span><br/>
+在进行了这样的组件分离之后，整个页面节点树实质上被拆分成了若干个ShadowTree（页面的body实质上也是一个组件，因而也是一个ShadowTree）。<br/>
+<br/>
+同时，<span style="color: #ff0000">各个组件也将具有各自独立的逻辑空间</span>。<span style="color: #ff0000">每个组件都分别拥有自己的独立的数据、setData调用</span>，createSelectorQuery也将运行在Shadow Tree的层面上。关于具体如何使用自定义组件特性，这里不再详细讨论，请参阅小程序开发文档。<br/>
+<br/>
+<span style="color: #ff0000">2. 运行原理<br/>
+</span><br/>
+在使用自定义组件的小程序页面中，Exparser<span style="color: #ff0000">将接管所有的自定义组件注册与实例化</span>。从外部接口上看，<span style="color: #ff0000">小程序基础库提供有Page和Component两个构造器</span>。<br/>
+以Component为例，在小程序启动时，构造器会将开发者设置的properties、data、methods等定义段，写入Exparser的组件注册表中。<br/>
+这个组件在被其它组件引用时，就可以根据这些注册信息来创建自定义组件的实例。Page构造器的大体运行流程与之相仿，只是参数形式不一样。这样每个页面就有一个与之对应的组件，称为“<span style="color: #ff0000">页面根组件</span>”。<br/>
+<br/>
+在初始化页面时，Exparser会创建出页面根组件的一个实例，用到的其他组件也会响应创建组件实例（<span style="color: #ff0000">这是一个递归的过程</span>）。<br/>
+<br/>
+<span style="color: #ff0000">组件创建的过程大致有以下几个要点：</span><br/>
+<br/>
+根据组件注册信息，从组件原型上创建出<span style="color: #ff0000">组件节点的JS对象</span>，即<span style="color: #ff0000">组件的this</span>；<br/>
+将<span style="color: #ff0000">组件注册信息中的data </span>复制一份，作为<span style="color: #ff0000">组件数据</span>，即<span style="color: #ff0000">this.data</span>；<br/>
+将这份数据结合组件WXML，据此创建出Shadow Tree，由于Shadow Tree中可能引用有其他组件，因而<span style="color: #ff0000">这会递归触发其他组件创建过程</span>；<br/>
+将ShadowTree<span style="color: #ff0000">拼接到Composed Tree上</span>，并生成一些缓存数据用于优化组件更新性能；<br/>
+触发组件的created<span style="color: #ff0000">生命周期函数</span>；<br/>
+如果不是页面根组件，需要根据<span style="color: #ff0000">组件节点上的属性定义，来设置组件的属性值</span>；<br/>
+当组件实例被展示在页面上时，触发组件的<span style="color: #ff0000">attach</span>ed 生命周期函数，如果Shadw Tree中有其他组件，也逐个触发它们的生命周期函数。<br/>
+<br/>
+<br/>
+<span style="color: #ff0000">3. 组件间通信</span><br/>
+<br/>
+不同组件实例间的通信有<br/>
+<span style="color: #ff0000">WXML属性值传递、事件系统、selectComponent和relations等方式。<br/>
+</span><br/>
+其中，WXML属性值传递是<span style="color: #ff0000">从父组件向子组件的基本通信方式</span>，而<span style="color: #ff0000">事件系统是从子组件向父组件的基本通信方式</span>。<br/>
+<br/>
+Exparser的事件系统完全模仿Shadow DOM的事件系统。在通常的理解中，事件可以分为<span style="color: #ff0000">冒泡事件和非冒泡事件</span>，但在ShadowDOM体系中，<br/>
+冒泡事件还可以划分为<span style="color: #ff0000">在Shadow Tree上冒泡的事件</span>和<span style="color: #ff0000">在Composed Tree上冒泡的事件</span>。<br/>
+如果在Shadow Tree上冒泡，则冒泡只会经过这个组件Shadow Tree上的节点，这样可以有效控制事件冒泡经过的范围。<br/>
+<br/>
+代码清单6-5 <span style="color: #ff0000">input-with-label的WXML</span><br/>
+<br/>
+&lt;label&gt;<br/>
+&nbsp; &lt;input /&gt;<br/>
+&nbsp; &lt;slot /&gt;<br/>
+&lt;/label&gt;<br/>
+<br/>
+代码清单6-6 页面WXML<br/>
+<br/>
+&lt;view&gt;<br/>
+&nbsp; &lt;input-with-label&gt;<br/>
+&nbsp; &nbsp; &lt;button /&gt;<br/>
+&nbsp; &lt;/input-with-label&gt;<br/>
+&lt;/view&gt;<hr/><br/>
+<br/>
+imrdr：<br/>
+&lt;view&gt;<br/>
+<span style="color: #ff0000">&nbsp; &lt;label&gt;<br/>
+&nbsp; &lt;input /&gt;<br/>
+&nbsp; &lt;slot /&gt;<br/>
+</span><span style="color: #ff0000">&lt;/label&gt;</span><br/>
+&nbsp; &nbsp; &lt;button /&gt;<br/>
+&nbsp; &lt;/input-with-label&gt;<br/>
+&lt;/view&gt;<br/>
+<br/>
+imrdr没有分析出来。<hr/>用上面的例子来说，当在 button 上触发一个事件时：<br/>
+<br/>
+l <span style="color: #ff0000">如果事件是非冒泡的</span>，那只能在 button 上监听到事件；<br/>
+<br/>
+l <span style="color: #ff0000">如果事件是在 Shadow Tree 上冒泡的</span>，那 button 、 input-with-label 、view 可以依次监听到事件；<br/>
+<br/>
+l<span style="color: #ff0000">&nbsp;如果事件是在 Composed Tree 上冒泡的</span>，那 button 、 slot 、label 、 input-with-label 、 view 可以依次监听到事件。<br/>
+<br/>
+在自定义组件中使用<span style="color: #ff0000">triggerEvent</span>触发事件时，可以指定事件的bubbles、composed和capturePhase属性，用于标注事件的冒泡性质。<br/>
+<br/>
+代码清单6-7 <span style="color: #ff0000">triggerEvent事例</span><br/>
+<br/>
+Component({<br/>
+<br/>
+&nbsp; methods: {<br/>
+<br/>
+&nbsp; &nbsp; helloEvent: function() {<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; this.triggerEvent('hello', {}, {<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; bubbles: true, &nbsp; &nbsp; &nbsp;// 这是一个冒泡事件<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; composed: true, &nbsp; &nbsp; // 这个事件在Composed Tree 上冒泡<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; capturePhase: false // 这个事件没有捕获阶段<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; })<br/>
+<br/>
+&nbsp; &nbsp; }<br/>
+<br/>
+&nbsp; }<br/>
+<br/>
+})<br/>
+<br/>
+<span style="color: #ff0000">小程序基础库自身也会通过这套事件系统提供一些用户事件</span>，如tap、touchstart和form组件的submit等。其中，<span style="color: #ff0000">tap等用户触摸引发的事件是在ComposedTree上的冒泡事件</span>，<span style="color: #ff0000">其他事件大多是非冒泡事件。</span><br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

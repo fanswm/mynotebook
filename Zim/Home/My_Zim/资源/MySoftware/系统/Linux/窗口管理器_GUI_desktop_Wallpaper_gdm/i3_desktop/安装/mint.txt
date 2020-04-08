@@ -1,0 +1,21 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-04-02T10:31:40+08:00
+
+====== mint ======
+Created 星期四 02 四月 2020
+
+ins i3
+sudo apt install   i3lock suckless-tools i3status dunst libanyevent-i3-perl libjson-xs-perl
+sudo apt install terminator
+sudo apt install feh\nsudo apt install compton
+ins i3status
+ins rofi
+ins kazam
+vim .cofnig/i3/config
+添加：
+exec feh --randomize --bg-fill ~/pics
+exec compton -b
+然后再处理：windows + d
+__bindsym $mod+d exec rofi -show drun__
+bindsym $mod+c exec chromium

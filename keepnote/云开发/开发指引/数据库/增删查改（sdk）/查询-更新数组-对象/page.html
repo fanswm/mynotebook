@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>查询/更新数组/对象</title>
+</head><body><span style="color: #ff0000">查询、更新数组/嵌套对象<br/>
+</span><br/>
+我们可以对对象、对象中的元素、数组、数组中的元素进行匹配查询，甚至还可以对数组和对象<span style="color: #ff0000">相互嵌套的字段进行匹配查询/更新</span>，下面我们从普通匹配开始讲讲如何进行匹配。<br/>
+<br/>
+普通匹配<br/>
+匹配记录中的嵌套字段<br/>
+匹配数组<ul><li style="list-style-type: none">匹配数组</li>
+<li style="list-style-type: none">匹配数组中元素</li>
+<li style="list-style-type: none">匹配数组第 n 项元素</li>
+<li style="list-style-type: none">结合查询指令进行匹配</li>
+<li style="list-style-type: none">匹配并更新数组中的元素</li>
+</ul>
+匹配多重嵌套的数组和对象<br/>
+<br/>
+<span style="color: #ff0000">普通匹配</span><br/>
+传入的对象的每个 &lt;key, value&gt; 构成一个筛选条件，<span style="color: #ff0000">有多个 &lt;key, value&gt; 则表示需同时满足这些条件，</span>是<span style="color: #ff0000">与</span>的关系，如果需要<span style="color: #ff0000">或</span>关系，<span style="color: #ff0000">可使用 [command.or]((Command.or))</span><br/>
+<br/>
+比如找出未完成的进度 50 的待办事项：<br/>
+<br/>
+db.collection('todos').where({<br/>
+&nbsp; done: false,<br/>
+&nbsp; progress: 50<br/>
+}).get()<br/>
+<br/>
+<span style="color: #ff0000">匹配记录中的嵌套字段</span><br/>
+假设在集合中有如下一个记录：<br/>
+<br/>
+{<br/>
+&nbsp; "style": {<br/>
+&nbsp; &nbsp; "color": "red"<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+如果我们想要找出集合中 style.color 为 red 的记录，那么可以传入<span style="color: #ff0000">相同结构的对象做查询条件</span>或使用 ”<span style="color: #ff0000">点表示法</span>“ 查询：<br/>
+<br/>
+<span style="color: #ff0000">// 方式一</span><br/>
+db.collection('todos').where({<br/>
+&nbsp; style: {<br/>
+&nbsp; &nbsp; color: 'red'<br/>
+&nbsp; }<br/>
+}).get()<br/>
+<br/>
+<span style="color: #ff0000">// 方式二</span><br/>
+db.collection('todos').where({<br/>
+&nbsp; 'style.color': 'red'<br/>
+}).get()<br/>
+<br/>
+匹配数组<br/>
+<span style="color: #ff0000">匹配数组</span><br/>
+假设在集合中有如下一个记录：<br/>
+<br/>
+{<br/>
+&nbsp; "numbers": [10, 20, 30]<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000">可以传入一个完全相同的数组来筛选出这条记录：</span><br/>
+<br/>
+db.collection('todos').where({<br/>
+&nbsp; numbers: [10, 20, 30]<br/>
+}).get()<br/>
+<br/>
+<span style="color: #ff0000">匹配数组中的元素<br/>
+</span><br/>
+如果想找出<span style="color: #ff0000">数组字段中数组值包含某个值的记录</span>，那可以在匹配数组字段时传入想要匹配的值。如对上面的例子，可<span style="color: #ff0000">传入一个数组中存在的元素来筛选出所有 numbers 字段的值包含 20 的记录</span>：<br/>
+<br/>
+db.collection('todos').where({<br/>
+&nbsp; numbers: 20<br/>
+}).get()<br/>
+<br/>
+<span style="color: #ff0000">匹配数组第 n 项元素</span><br/>
+如果想找出<span style="color: #ff0000">数组字段中数组的第 n 个元素等于某个值的记录</span>，那在 &lt;key, value&gt; 匹配中可以以 <span style="color: #ff0000">字段.下标</span>&nbsp;为 key，目标值为 value 来做匹配。如对上面的例子，如果想找出 number 字段<span style="color: #ff0000">第二项的值为 20 的记录</span>，可以如下查询（注意：数组下标从 0 开始）：<br/>
+<br/>
+db.collection('todos').where({<br/>
+&nbsp; 'numbers.1': 20<br/>
+}).get()<br/>
+<br/>
+更新也是类似，比如我们要<span style="color: #ff0000">更新 _id 为 test 的记录的 numbers 字段的第二项元素至 30：</span><br/>
+<br/>
+db.collection('todos').doc('test').update({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; 'numbers.1': 30<br/>
+&nbsp; },<br/>
+})<br/>
+<br/>
+<span style="color: #ff0000">结合查询指令进行匹配</span><br/>
+在对数组字段进行匹配时，也可以使用如 lt, gt 等指令，来筛选出字段数组中存在满足给定比较条件的记录。如对上面的例子，可查找出所有 numbers 字段的数组值中存在<span style="color: #ff0000">包含大于 25 的值的记录</span>：<br/>
+<br/>
+const _ = db.command<br/>
+db.collection('todos').where({<br/>
+&nbsp; numbers: _.gt(25)<br/>
+}).get()<br/>
+<br/>
+查询指令也可以<span style="color: #ff0000">通过逻辑指令组合条件</span>，比如找出所有 numbers 数组中存在包含大于 25 的值、同时也存在小于 15 的值的记录：<br/>
+<br/>
+const _ = db.command<br/>
+db.collection('todos').where({<br/>
+&nbsp; numbers: _.gt(25).<span style="color: #ff0000">and</span>(_.lt(15))<br/>
+}).get()<br/>
+<br/>
+<span style="color: #ff0000">匹配并更新数组中的元素</span><br/>
+如果想要<span style="color: #ff0000">匹配并更新数组中的元素，而不是替换整个数组，除了指定数组下标外，还可以</span>：<br/>
+<br/>
+1. <span style="color: #ff0000">更新数组中第一个匹配到的元素</span><br/>
+<br/>
+更新数组字段的时候可以用<span style="color: #ff0000">&nbsp;字段路径.$ </span>的表示法来更新数组字段的第一个满足查询匹配条件的元素。<span style="color: #ff0000">注意使用这种更新时，查询条件必须包含该数组字段。</span><br/>
+<br/>
+假如有如下记录：<br/>
+<br/>
+{<br/>
+&nbsp; "_id": "doc1",<br/>
+&nbsp; "scores": [10, 20, 30]<br/>
+}<br/>
+{<br/>
+&nbsp; "_id": "doc2",<br/>
+&nbsp; "scores": [20, 20, 40]<br/>
+}<br/>
+<br/>
+让所有 scores 中的第一个 20 的元素更新为 25：<br/>
+<br/>
+// <span style="color: #ff0000">注意：批量更新需在云函数中进行</span><br/>
+const _ = db.command<br/>
+db.collection('todos').where({<br/>
+&nbsp; scores: 20<br/>
+}).update({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; 'scores.$': 25<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+如果<span style="color: #ff0000">记录是对象数组的话</span>也可以做到，路径如 <span style="color: #ff0000">字段路径.$.字段路径</span>。<br/>
+<br/>
+注意事项：<br/>
+<br/>
+<span style="color: #ff0000">不支持用在数组嵌套数组<br/>
+如果用 unset 更新操作符，不会从数组中去除该元素，而是置为 null<br/>
+如果数组元素不是对象、且查询条件用了 neq、not 或 nin，则不能使用 $<br/>
+</span><br/>
+2. <span style="color: #ff0000">更新数组中所有匹配的元素</span><br/>
+<br/>
+更新数组字段的时候可以用 <span style="color: #ff0000">字段路径.$[] </span>的表示法来更新数组字段的所有元素。<br/>
+<br/>
+假如有如下记录：<br/>
+<br/>
+{<br/>
+&nbsp; "_id": "doc1",<br/>
+&nbsp; "scores": {<br/>
+&nbsp; &nbsp; "math": [10, 20, 30]<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+比如让 scores.math 字段所有数字加 10：<br/>
+<br/>
+const _ = db.command<br/>
+db.collection('todos').doc('doc1').update({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; 'scores.math.<span style="color: #ff0000">$[]</span>': _.<span style="color: #ff0000">inc</span>(10)<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+更新后 scores.math 数组从 [10, 20, 30] 变为 [20, 30, 40]。<br/>
+<br/>
+如果<span style="color: #ff0000">数组是对象数组也是可以的</span>，假如有如下记录：<br/>
+<br/>
+{<br/>
+&nbsp; "_id": "doc1",<br/>
+&nbsp; "scores": {<br/>
+&nbsp; &nbsp; "math": [<br/>
+&nbsp; &nbsp; &nbsp; { "examId": 1, "score": 10 },<br/>
+&nbsp; &nbsp; &nbsp; { "examId": 2, "score": 20 },<br/>
+&nbsp; &nbsp; &nbsp; { "examId": 3, "score": 30 }<br/>
+&nbsp; &nbsp; ]<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+可以更新 scores.math 下各个元素的 score 原子自增 10：<br/>
+<br/>
+const _ = db.command<br/>
+db.collection('todos').doc('doc1').update({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; 'scores.math.<span style="color: #ff0000">$[].score</span>': _.<span style="color: #ff0000">inc</span>(10)<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+<span style="color: #ff0000">匹配多重嵌套的数组和对象</span><br/>
+上面所讲述的所有规则都可以嵌套使用的，假设我们在集合中有如下一个记录：<br/>
+<br/>
+{<br/>
+&nbsp; "root": {<br/>
+&nbsp; &nbsp; "objects": [<br/>
+&nbsp; &nbsp; &nbsp; {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; "numbers": [10, 20, 30]<br/>
+&nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; "numbers": [50, 60, 70]<br/>
+&nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; ]<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+我们可以如下找出集合中所有的满足 root.objects 字段数组的第二项的 numbers 字段的第三项等于 70 的记录：<br/>
+<br/>
+db.collection('todos').where({<br/>
+&nbsp; 'root.<span style="color: #ff0000">objects.1</span>.<span style="color: #ff0000">numbers.2</span>': 70<br/>
+}).get()<br/>
+<br/>
+注意，<span style="color: #ff0000">指定下标不是必须的</span>，比如可以如下找出集合中所有的满足 root.objects 字段数组中任意一项的 numbers 字段包含 30 的记录：<br/>
+<br/>
+db.collection('todos').where({<br/>
+&nbsp; 'root.objects.numbers': 30<br/>
+}).get()<br/>
+<br/>
+更新操作也是类似，比如我们要更新 _id 为 test 的 root.objects 字段数组的第二项的 numbers 字段的第三项 为 80：<br/>
+<br/>
+db.collection('todos').doc('test').update({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; 'root.objects.1.numbers.2': 80<br/>
+&nbsp; },<br/>
+})</body></html>

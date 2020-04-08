@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>页面层级准备</title>
+</head><body>在视图层内，小程序的<span style="color: #ff0000">每一个页面都独立运行在一个页面层级上</span>。小程序<span style="color: #ff0000">启动时仅有一个页面层级</span>，<br/>
+<span style="color: #ff0000">每次调用wx.navigateTo，都会创建一个新的页面层级</span>；<br/>
+相对地，wx.navigateBack会销毁一个页面层级。<br/>
+<br/>
+对于每一个新的页面层级，视图层都需要进行一些额外的准备工作。<br/>
+<br/>
+在小程序启动前，<span style="color: #ff0000">微信会提前准备好一个页面层级用于展示小程序的首页</span>。除此以外，每当一个页面层级被用于渲染页面，微信都会提前开始准备一个新的页面层级，使得每次调用wx.navigateTo都能够尽快展示一个新的页面。<br/>
+<br/>
+页面层级的准备工作分为三个阶段。<br/>
+<br/>
+第一阶段是启动一个WebView，在iOS和Android系统上，操作系统启动WebView都需要一小段时间。<br/>
+第二阶段是在WebView中初始化基础库，此时还会进行一些基础库内部优化，以提升页面渲染性能。<br/>
+第三阶段是注入小程序WXML结构和WXSS样式，使小程序能在接收到页面初始数据之后马上开始渲染页面（<span style="color: #ff0000">这一阶段无法在小程序启动前执行</span>）。<br/>
+<br/>
+<img src="screenshot.png" /><br/>
+<br/>
+图7-3 页面层级准备过程图<br/>
+<br/>
+对于<span style="color: #ff0000">wx.redirectTo，这个调用不会打开一个新的页面层级，而是将当前页面层级重新初始化</span>：重新传入页面的初始数据、路径等，视图层清空当前页面层级的渲染结果然后重新渲染页面。<br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

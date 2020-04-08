@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>wxml</title>
+</head><body>&lt;view &nbsp;class="container"&gt;<br/>
+&nbsp; &lt;block wx:for="{{list}}" wx:key="{{index}}"&gt;<br/>
+&nbsp; &nbsp; &lt;!-- &lt;view class="flag-item"&gt; {{item.title}} &lt;/view&gt; &nbsp;--&gt;<br/>
+&nbsp; &nbsp; &lt;view<span style="color: #ff0000">&nbsp;wx:if="{{item.stock &lt;= 0}}" class="flag-item0" </span>bindtap="clickedBtn" data-id="{{index}}" &gt; {{item.title}} &lt;/view&gt; <br/>
+&nbsp; &nbsp; &nbsp;&lt;view wx:elif="{{item.stock &gt; 0}}" class="{{index == current_tag?'flag-item2':'flag-item1'}}" bindtap="clickedAction" data-id="{{index}}"&gt; {{item.title}} &lt;/view&gt; <br/>
+&nbsp; &lt;/block&gt;<br/>
+&lt;/view&gt;<br/>
+<br/>
+动态 class:<br/>
+class="{{index == current_tag?'flag-item2':'flag-item1'}}" </body></html>

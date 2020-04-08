@@ -1,0 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>通信模型</title>
+</head><body><span style="color: #ff0000">小程序的渲染层和逻辑层分别由2个线程管理</span>：<ul><li style="list-style-type: none">渲染层的界面使用了WebView 进行渲染；</li>
+<li style="list-style-type: none">逻辑层采用JsCore线程运行JS脚本。</li>
+<li style="list-style-type: none">一个小程序存在多个界面，所以渲染层存在多个WebView线程，<span style="color: #ff0000">这两个线程的通信会经由微信客户端（下文中也会采用<b>&nbsp;Native</b>&nbsp;来代指微信客户端）做中转，逻辑层发送网络请求也经由Native转发</span>，小程序的通信模型如图3-1所示。</li>
+</ul>
+<br/>
+<img src="screenshot.png" /><br/>
+<br/>
+图3-1 渲染层和逻辑层通信模型</body></html>

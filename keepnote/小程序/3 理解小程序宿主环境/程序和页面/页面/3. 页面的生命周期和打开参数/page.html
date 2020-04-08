@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3. 页面的生命周期和打开参数</title>
+</head><body>3. 页面的<span style="color: #ff0000">生命周期和打开参数</span><br/>
+<br/>
+<span style="color: #ff0000">页面初次加载的时候</span>，微信客户端就会给Page实例派发onLoad事件，Page构造器参数所定义的onLoad方法会被调用，<span style="color: #ff0000">onLoad在页面没被销毁之前只会触发1次</span>，在onLoad的回调中，可以获取当前页面所调用的打开参数option，关于打开参数我们放在这一节的最后再展开阐述。<br/>
+<br/>
+<span style="color: #ff0000">页面显示之后</span>，Page构造器参数所定义的onShow方法会被调用，<span style="color: #ff0000">一般从别的页面返回到当前页面时，当前页的onShow方法都会被调用。<br/>
+</span><br/>
+<span style="color: #ff0000">在页面初次渲染完成时</span>，Page构造器参数所定义的onReady方法会被调用，<span style="color: #ff0000">onReady在页面没被销毁前只会触发1次</span>，onReady触发时，表示页面已经准备妥当，在逻辑层就可以和视图层进行交互了。<br/>
+<br/>
+以上三个事件触发的时机是onLoad早于 onShow，onShow早于onReady。<span style="color: #ff0000">（imrdr: onLoad -&gt; onShow -&gt; onReady）</span><br/>
+<br/>
+<span style="color: #ff0000">页面不可见时</span>，Page构造器参数所定义的onHide方法会被调用，这种情况会在使<span style="color: #ff0000">用wx.navigateTo切换到其他页面、底部tab切换时触发。（imrdr: navigate: 导航）<br/>
+</span><br/>
+当前页面使用<span style="color: #ff0000">wx.redirectTo</span>或<span style="color: #ff0000">wx.navigateBack</span>返回到其他页时，<span style="color: #ff0000">当前页面会被微信客户端销毁回收</span>，此时Page构造器参数所定义的onUnload方法会被调用。（imrdr: redirect: 重定向）<br/>
+<br/>
+我们可以看到，<span style="color: #ff0000">Page的生命周期是由微信客户端根据用户操作主动触发的</span>。为了避免程序上的混乱，<span style="color: #ff0000">我们不应该在其他代码中主动调用Page实例的生命周期函数。<br/>
+</span><br/>
+最后我们说一下<span style="color: #ff0000">页面的打开参数query</span>，让我们来设想这样一个场景，我们实现一个购物商城的小程序，我们需要完成一个商品列表页和商品详情页，点击商品列表页的商品就可以跳转到该商品的详情页，<span style="color: #ff0000">当然我们不可能为每个商品单独去实现它的详情页</span>。我们<span style="color: #ff0000">只需要实现一个商品详情页的pages/detail/detail.(代表WXML/WXSS/JS/JSON文件)即可</span>，在列表页打开商品详情页时把商品的id传递过来，<span style="color: #ff0000">详情页通过刚刚说的onLoad回调的参数option就可以拿到商品id</span>，从而绘制出对应的商品，代码如代码清单3-9所示。 （imrdr: <span style="color: #ff0000">query</span>:询问）<br/>
+<br/>
+代码清单3-9 页面的打开参数Page构造器<br/>
+<br/>
+// pages/list/list.js<br/>
+// 列表页使用navigateTo跳转到详情页<br/>
+wx.navigateTo({ url: 'pages/detail/detail?id=1&amp;other=abc' })<br/>
+<br/>
+// pages/detail/detail.js<br/>
+Page({<br/>
+&nbsp; onLoad: function(option) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; console.log(option.id)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; console.log(option.other)<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+<span style="color: #ff0000">小程序把<b>页面的打开路径</b>定义成<b>页面URL</b></span>，<span style="color: #ff0000">其组成格式<b>和网页的URL类似</b>，<br/>
+</span><span style="color: #ff0000">在页面路径后使用英文 ? 分隔path和query部分</span>，<br/>
+<span style="color: #ff0000">query部分的多个参数使用 &amp; 进行分隔，参数的名字和值使用 key=value 的形式声明。<br/>
+<br/>
+</span>在页面Page构造器里<span style="color: #ff0000">onLoad的option可以拿到当前页面的打开参数，其类型是一个Object，其键值对与页面URL上query键值对一一对应。</span>和网页URL一样，页面<span style="color: #ff0000">URL上的value如果涉及特殊字符（例如：&amp;字符、?字符、中文字符等，详情参考URI的RFC3986说明 ），需要采用UrlEncode后再拼接到页面URL上。</span><br/>
+</body></html>

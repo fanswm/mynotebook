@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>控制台</title>
+</head><body>云开发控制台<br/>
+云开发提供了一个控制台用于可视化管理云资源。控制台包含以下几大模块。<br/>
+<br/>
+概览：&#09;&#09;查看云资源的总体使用情况<br/>
+用户管理：&#09;查看小程序的用户访问记录<br/>
+数据库：&#09;&#09;管理数据库集合、记录、权限设置、索引设置<br/>
+存储管理：&#09;管理云文件、权限设置<br/>
+云函数：&#09;&#09;管理云函数、查看调用日志、监控记录<br/>
+统计分析：&#09;查看云资源详细使用统计<br/>
+<br/>
+在用户管理中会显示使用云能力的小程序的访问用户列表，<span style="color: #ff0000">默认以访问时间倒叙排列</span>，访问时间的<span style="color: #ff0000">触发点是在小程序端调用 wx.cloud.init 方法</span>，且其中的 <span style="color: #ff0000">traceUser</span>&nbsp;参数传值为 true。例：<br/>
+<br/>
+wx.cloud.init({<br/>
+&nbsp; env: 'test-123',<br/>
+&nbsp; traceUser: true,<br/>
+})</body></html>

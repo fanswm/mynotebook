@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+<version>6</version>
+<dict>
+  <key>expanded</key><false/>
+  <key>nodeid</key><string>2379efaf-5c3d-427a-b391-23168e4980e1</string>
+  <key>modified_time</key><integer>1585098516</integer>
+  <key>content_type</key><string>application/x-notebook-dir</string>
+  <key>created_time</key><integer>1585098516</integer>
+  <key>info_sort_dir</key><integer>1</integer>
+  <key>icon</key><string>folder-green.png</string>
+  <key>title</key><string>API</string>
+  <key>version</key><integer>6</integer>
+  <key>order</key><integer>12</integer>
+  <key>info_sort</key><string>order</string>
+</dict>
+</node>

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>调试器</title>
+</head><body>from <a href="https://developers.weixin.qq.com/ebook?action=get_post_info&token=935589521&volumn=1&lang=zh_CN&book=miniprogram&docid=000224e19b4cd83b0086dba765940a&pass_ticket=CZtoFnIgy1o4sM4K%2FKU5q6iUYk89wZrgwmACm7IKQENuJLQCtn6SITW1J1y9v3%2B8">developers.weixin.qq.com</a>:<br/>
+代码调试是开发者工具的最主要的功能之一，包括<span style="color: #ff0000">界面调试和逻辑调试</span>。nw.js对&lt;webview/&gt;提供打开<span style="color: #ff0000">Chrome Devtools</span>调试界面的接口，使得开发者工具具备对小程序的逻辑层和渲染层进行调试的能力。同时为了方便调试小程序，开发者工具在Chrome Devtools的基础上进行扩展和定制。<br/>
+<br/>
+代码清单10-3 如何调试webview<br/>
+<br/>
+// 用于渲染的webview<br/>
+var webview = document.createElement('webview')<br/>
+//用于显示调试器的WebView<br/>
+var devtoolsWebView = document.createElement('webview')<br/>
+// 显示调试器<br/>
+webview.showDevTools(ture, devtoolsWebView)<br/>
+<br/>
+开发者工具上显示的调试器<span style="color: #ff0000">是调试逻辑层WebView</span>，主要使用Chrome Devtools的<span style="color: #ff0000">Sources面板</span>调试逻辑层JS代码。<br/>
+Chrome Devtools自带的Element面板并不能调试当前渲染层页面的节点（实际上是调试逻辑层WebView的节点），所以我们通过在devtoolsWebView中<span style="color: #ff0000">注入脚本</span>的方式将Chrome Devtools的Element面板隐藏，同时开发了Chrome Devtools插件<span style="color: #ff0000">WXML 面板</span>（可以参考<span style="color: #ff0000">如何开发Chrome 插件</span>，本文不做展开），用于展示渲染层界面调试的用户交互界面。<br/>
+开发者工具会在每个渲染层的WebView中注入界面调试的脚本代码，负责获取WebView中的<span style="color: #ff0000">DOM树、获取节点样式、监听节点变化、高亮选中节点、处理界面调试命令</span>。并将界面调试信息通过WebSocket 经由开发者工具转发给WXML面板进行处理。<br/>
+<br/>
+如图10-11及图10-12所示，开发者写的WXML源码与真实的DOM树之间存在较大的差异，需要经过一个<span style="color: #ff0000">最小树算法</span>，如图10-13所示，将非小程序组件节点剔除后才能呈现出与WXML源码一致的效果。<br/>
+<br/>
+<img src="screenshot.png" /><br/>
+<br/>
+图9-11 WXML源码<br/>
+<br/>
+<img src="screenshot 2.png" /><br/>
+<br/>
+图9-12 真实的DOM树<br/>
+<br/>
+<img src="screenshot 3.png" /><br/>
+<br/>
+图9-13 最小树算法示例<br/>
+<br/>
+<img src="screenshot 4.png" /><br/>
+<br/>
+图9-14 WXML面板的最终效果<br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

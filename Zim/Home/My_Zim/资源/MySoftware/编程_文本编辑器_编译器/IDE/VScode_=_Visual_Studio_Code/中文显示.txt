@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-04-08T10:10:27+08:00
+
+====== 中文显示 ======
+Created 星期三 08 四月 2020
+
+Ctrl + Shift + P
+搜索 lang
+选拔：configure language
+安装k

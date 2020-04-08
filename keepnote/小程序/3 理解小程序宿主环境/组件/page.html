@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>组件</title>
+</head><body>一个小程序<span style="color: #ff0000">页面可以分解成多个部分组成</span>，<span style="color: #ff0000">组件就是小程序页面的基本组成单元</span>。为了让开发者可以快速进行开发，小程序的宿主环境提供了一系列<span style="color: #ff0000">基础组件</span>。<br/>
+<span style="color: #ff0000">组件是在WXML模板文件声明中使用的</span>，WXML的语法和HTML语法相似，小程序<span style="color: #ff0000">使用标签名来引用一个组件</span>，通常包含开始标签和结束标签，该标签的属性用来描述该组件。<br/>
+<br/>
+代码清单3-15 在WXML使用组件示例<br/>
+<br/>
+&lt;!-- page.wxml --&gt;<br/>
+&lt;image mode="scaleToFill" src="img.png"&gt;&lt;/image&gt;<br/>
+<br/>
+需要注意，<span style="color: #ff0000">所有组件名和属性都是小写</span>，<span style="color: #ff0000">多个单词会以英文横杠 "-" 进行连接。<br/>
+</span><br/>
+对于一些<span style="color: #ff0000">容器组件</span>，其内容可以<span style="color: #ff0000">声明在其开始标签和结束标签之间</span>。<br/>
+<br/>
+代码清单3-16 容器组件嵌套其他组件<br/>
+<br/>
+&lt;!-- page.wxml --&gt;<br/>
+&lt;view&gt;<br/>
+&nbsp; &lt;image mode="scaleToFill" src="img.png"&gt;&lt;/image&gt;<br/>
+&nbsp; &lt;view&gt;<br/>
+&nbsp; &nbsp; &lt;view&gt;1&lt;/view&gt;<br/>
+&nbsp; &nbsp; &lt;view&gt;2&lt;/view&gt;<br/>
+&nbsp; &nbsp; &lt;view&gt;3&lt;/view&gt;<br/>
+&nbsp; &lt;/view&gt;<br/>
+&lt;/view&gt;<br/>
+<br/>
+所有组件都拥有表3-7列举的属性，主要涉及<span style="color: #ff0000">样式和事件绑定</span>，我们不在此处再做额外的说明，详细可以了解2.3节以及3.5节的相关内容。<br/>
+<br/>
+表3-7 <span style="color: #ff0000">组件共有属性</span><br/>
+<br/>
+<span style="color: #ff0000">属性名&#09;&#09;类型&#09;&#09;&#09;描述&#09;&#09;&#09;&#09;&#09;其他说明</span><br/>
+id&#09;&#09;&#09;String&#09;&#09;&#09;组件的唯一标示&#09;&#09;&#09;保持整个页面唯一<br/>
+class&#09;&#09;String&#09;&#09;&#09;组件的样式类&#09;&#09;&#09;&#09;在对应的WXSS中定义的样式类<br/>
+style&#09;&#09;String&#09;&#09;&#09;组件的内联样式&#09;&#09;&#09;可以通过数据绑定进行动态设置的内联样式<br/>
+hidden&#09;&#09;Boolean&#09;&#09;&#09;组件是否显示&#09;&#09;&#09;&#09;所有组件默认显示<br/>
+data-*&#09;&#09;Any&#09;&#09;&#09;&#09;自定义属性&#09;&#09;&#09;&#09;组件上触发的事件时，会发送给事件处理函数<br/>
+bind / catch&#09;EventHandler&#09;事件&#09;&#09;&#09;&#09;&#09;详情见3.5节<br/>
+<br/>
+组件都拥有<span style="color: #ff0000">各自自定义的属性</span>，可以对该组件的功能或者样式进行修饰，以image图片组件为例，其属性列表如表3-8所示。<br/>
+<br/>
+表3-8 Image图片组件属性<br/>
+<br/>
+属性名&#09;&#09;类型&#09;&#09;&#09;默认值&#09;&#09;描述<br/>
+src&#09;&#09;&#09;String&#09;&#09;&#09;&#09;&#09;&#09;图片资源地址<br/>
+mode&#09;&#09;String&#09;&#09;&#09;'scaleToFill'&#09;图片裁剪、缩放的模式<br/>
+lazy-load&#09;Boolean&#09;&#09;&#09;false&#09;&#09;图片懒加载。只针对page与scroll-view下的image有效 1.5.0<br/>
+binderror&#09;HandleEvent&#09;&#09;&#09;&#09;&#09;当错误发生时触发事件，事件对象<span style="color: #ff0000">event.detail = {errMsg: 'something wrong'}</span><br/>
+bindload&#09;HandleEvent&#09;&#09;&#09;&#09;&#09;当图片载入完毕时触发事件，事件对象<span style="color: #ff0000">event.detail = {height:'图片高度px', width:'图片宽度px'}</span><br/>
+<br/>
+为了不占篇幅，我们不在本书展开所有组件的属性说明，请在使用时前往官方文档进行查阅相关组件说明 <br/>
+<br/>
+<span style="color: #ff0000">https://mp.weixin.qq.com/debug/wxadoc/dev/component/</span><br/>
+<br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

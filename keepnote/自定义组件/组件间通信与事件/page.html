@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>组件间通信与事件</title>
+</head><body>组件间通信与事件<br/>
+<span style="color: #ff0000">组件间通信<br/>
+</span><br/>
+<span style="color: #ff0000">组件间的基本通信方式</span>有以下几种。<br/>
+<br/>
+<span style="color: #ff0000">WXML 数据绑定</span>：用于父组件向子组件的指定属性设置数据，<span style="color: #ff0000">仅能设置 JSON 兼容数据</span>（<span style="color: #ff0000">自基础库版本 2.0.9 开始，还可以在数据中包含函数</span>）。具体在 组件模板和样式 章节中介绍。<br/>
+<br/>
+<span style="color: #ff0000">事件</span>：用于子组件向父组件传递数据，可以传递任意数据。<br/>
+<br/>
+如果以上两种方式不足以满足需要，父组件还可以通过 <span style="color: #ff0000">this.selectComponent 方法</span>获取子组件实例对象，这样<span style="color: #ff0000">就可以直接访问组件的任意数据和方法</span>。<br/>
+<br/>
+<span style="color: #ff0000">监听事件<br/>
+</span><br/>
+事件系统是组件间通信的主要方式之一。<span style="color: #ff0000">自定义组件可以触发任意的事件</span>，引用组件的页面可以监听这些事件。关于事件的基本概念和用法，参见 事件 。<br/>
+<br/>
+监听自定义组件事件的方法与监听基础组件事件的方法完全一致：<br/>
+<br/>
+代码示例：<br/>
+<br/>
+&lt;!-- 当自定义组件触发“myevent”事件时，调用“onMyEvent”方法 --&gt;<br/>
+&lt;component-tag-name bindmyevent="onMyEvent" /&gt;<br/>
+&lt;!-- 或者可以写成 --&gt;<br/>
+&lt;component-tag-name bind:myevent="onMyEvent" /&gt;<br/>
+Page({<br/>
+&nbsp; onMyEvent: function(e){<br/>
+&nbsp; &nbsp; e.detail // 自定义组件触发事件时提供的detail对象<br/>
+&nbsp; }<br/>
+})<br/>
+<span style="color: #ff0000">触发事件</span><br/>
+自定义组件触发事件时，需要使用 <span style="color: #ff0000">triggerEvent</span>&nbsp;方法，指定事件名、detail对象和事件选项：<br/>
+<br/>
+代码示例：<br/>
+<br/>
+在开发者工具中预览效果<br/>
+<br/>
+&lt;!-- 在自定义组件中 --&gt;<br/>
+&lt;button bindtap="onTap"&gt;点击这个按钮将触发“myevent”事件&lt;/button&gt;<br/>
+Component({<br/>
+&nbsp; properties: {},<br/>
+&nbsp; methods: {<br/>
+&nbsp; &nbsp; onTap: function(){<br/>
+&nbsp; &nbsp; &nbsp; var myEventDetail = {} // detail对象，提供给事件监听函数<br/>
+&nbsp; &nbsp; &nbsp; var myEventOption = {} // 触发事件的选项<br/>
+&nbsp; &nbsp; &nbsp; this.triggerEvent('myevent', myEventDetail, myEventOption)<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+<span style="color: #ff0000">触发事件的选项包括：</span><br/>
+<br/>
+选项名&#09;&#09;&#09;&#09;类型&#09;&#09;是否必填&#09;默认值&#09;描述<br/>
+bubbles&#09;&#09;&#09;Boolean&#09;否&#09;&#09;&#09;false&#09;事件是否冒泡<br/>
+composed&#09;&#09;Boolean&#09;否&#09;&#09;&#09;false&#09;事件是否可以穿越组件边界，为false时，事件将只能在引用组件的节点树上触发，不进入其他任何组件内部<br/>
+capturePhase&#09;Boolean&#09;否&#09;&#09;&#09;false&#09;事件是否拥有捕获阶段<br/>
+<br/>
+关于冒泡和捕获阶段的概念，请阅读 事件 章节中的相关说明。<br/>
+<br/>
+代码示例：<br/>
+<br/>
+在开发者工具中预览效果<br/>
+<br/>
+// 页面 page.wxml<br/>
+&lt;another-component bindcustomevent="pageEventListener1"&gt;<br/>
+&nbsp; &lt;my-component bindcustomevent="pageEventListener2"&gt;&lt;/my-component&gt;<br/>
+&lt;/another-component&gt;<br/>
+<br/>
+// 组件 another-component.wxml<br/>
+&lt;view bindcustomevent="anotherEventListener"&gt;<br/>
+&nbsp; &lt;slot /&gt;<br/>
+&lt;/view&gt;<br/>
+<br/>
+// 组件 my-component.wxml<br/>
+&lt;view bindcustomevent="myEventListener"&gt;<br/>
+&nbsp; &lt;slot /&gt;<br/>
+&lt;/view&gt;<br/>
+<br/>
+// 组件 my-component.js<br/>
+Component({<br/>
+&nbsp; methods: {<br/>
+&nbsp; &nbsp; onTap: function(){<br/>
+&nbsp; &nbsp; <span style="color: #ff0000">&nbsp; this.triggerEvent('customevent', {}) // 只会触发 pageEventListener2<br/>
+</span><span style="color: #ff0000">&nbsp; &nbsp; &nbsp; this.triggerEvent('customevent', {}, { bubbles: true }) // 会依次触发 pageEventListener2 、 pageEventListener1<br/>
+</span><span style="color: #ff0000">&nbsp; &nbsp; &nbsp; this.triggerEvent('customevent', {}, { bubbles: true, composed: true }) // 会依次触发 pageEventListener2 、 anotherEventListener 、 pageEventListener1</span><br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+})</body></html>

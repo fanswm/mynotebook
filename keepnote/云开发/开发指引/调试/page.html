@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>调试</title>
+</head><body>调试<br/>
+云函数本地调试<br/>
+Network 面板<br/>
+环境提示<br/>
+<br/>
+<span style="color: #ff0000">云函数本地调试</span><br/>
+云开发提供了云函数本地调试功能，在本地提供了一套与线上一致的 Node.js 云函数运行环境，让开发者可以在本地对云函数调试，使用本地调试可以提高开发、调试效率：<br/>
+<br/>
+<span style="color: #ff0000">单步调试/断点调试</span>：比起通过云开发控制台中查看线上打的日志的方法进行调试，使用本地调试后可以对云函数 Node.js 实例进行单步调试/断点调试<br/>
+<span style="color: #ff0000">集成小程序测试</span>：在模拟器中对小程序发起的交互点击等操作如果<span style="color: #ff0000">触发了开启了本地调试的云函数</span>，<span style="color: #ff0000">会请求到本地实例而不是云端</span><br/>
+<span style="color: #ff0000">优化开发流程、提高开发效率</span>：调试阶段不需上传部署云函数，在调试云函数时，相对于不使用本地调试时的调试流程（“本地修改代码 -&gt; 上传部署云函数 -&gt; 调用"）的调试流程，省去了上传等待的步骤，<span style="color: #ff0000">改成只需 “本地修改 -&gt; 调用” 的流程</span>，大大提高开发调试效率<br/>
+<br/>
+同时，本地调试还定制化提供了<span style="color: #ff0000">特殊的调试能力</span>，包括 Network 面板支持展示 HTTP 请求和云开发请求、调用关系图展示、本地代码修改时热重载等等能力，帮助开发者更好的开发调试云函数。功能具体介绍见下方。<br/>
+<br/>
+建议开发者在<span style="color: #ff0000">开发阶段和上传代码前</span>先使用<span style="color: #ff0000">本地调试测试通过后再上线部署</span>。<br/>
+<br/>
+更详细的文档点此查看。<a href=" https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/functions/local-debug.html
+">&nbsp;https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/functions/local-debug.html<br/>
+</a><br/>
+<span style="color: #ff0000">Network 面板<br/>
+</span><br/>
+从微信开发者工具 1.02.1905302 及基础库 2.7.1 起，在小程序 Network 面板中会显示云开发请求（数据库、云函数、文件存储等调用），在 Network 面板中呈现时展示的是<span style="color: #ff0000">&nbsp;API 名（wx.cloud.uploadFile 和 wx.cloud.downloadFile 除外）</span>，有特殊的请求类型 cloud，会展示调用所实际请求的<span style="color: #ff0000">环境 ID、请求体</span>（数据库调用的请求体以 SDK 语法展示）、<span style="color: #ff0000">JSON 回包、耗时、及调用堆栈。</span><br/>
+<br/>
+注意事项: 在开发者工具中<span style="color: #ff0000">云开发接口的实现与客户端有差异</span>，开发者工具中的耗时普遍会比客户端慢，我们在特定环境下的测试结果是<span style="color: #ff0000">客户端会比开发者工具快 33% 左右</span>。<br/>
+<br/>
+以下是示例：<br/>
+<br/>
+devtools-cloud-network<br/>
+<br/>
+数据库调用详情示例：<br/>
+<br/>
+devtools-cloud-network<br/>
+<br/>
+回包示例：<br/>
+<br/>
+devtools-cloud-network<br/>
+<br/>
+环境提示<br/>
+<span style="color: #ff0000">从微信开发者工具 1.02.1905302 及基础库 2.7.1 起，在小程序调试器中，如果使用到 wx.cloud.init，则会在调试器中输出当前配置的小程序中使用的默认调用环境。</span><br/>
+<br/>
+</body></html>

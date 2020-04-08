@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>云调用</title>
+</head><body>云调用<br/>
+版本要求：wx-server-sdk &gt;= 0.4.0、开发者工具 &gt;= 1.02.1904090 （RC版下载）<br/>
+<br/>
+云调用是云开发提供的<span style="color: #ff0000">基于云函数使用小程序开放接口的能力</span>，目前覆盖以下使用场景：<br/>
+<br/>
+<span style="color: #ff0000">服务端调用<br/>
+开放数据调用<br/>
+</span><span style="color: #ff0000">消息推送</span><br/>
+<br/>
+一、服务端调用<br/>
+云调用需要在云函数中<span style="color: #ff0000">通过 wx-server-sdk 使用</span>。在云函数中使用云调用调用服务端接口无需换取 access_token，只要是在从小程序端触发的云函数中发起的云调用都经过微信自动鉴权，可以在登记权限后直接调用如发送模板消息等开放接口。<span style="color: #ff0000">使用方式如下：</span><br/>
+<br/>
+<span style="color: #ff0000">1. 查看服务端接口是否支持云调用</span><br/>
+在服务端接口列表中罗列了所有的服务端接口，如果接口支持云调用，则在接口名称旁会带有 <span style="color: #ff0000">云调用</span>&nbsp;的标签。同时，在每一个服务端接口文档中，如果接口支持云调用，也会有专门的支持说明以及相应的使用文档。<br/>
+<br/>
+<span style="color: #ff0000">2. 查看接口的云调用文档</span><br/>
+在支持云调用的接口文档中，会分别列出 HTTPS 调用的文档及云调用的文档，云调用文档同 HTTPS 调用文档一样包含请求参数、返回值及示例。<br/>
+<br/>
+<br/>
+<span style="color: #ff0000">3. 为云函数声明所需调用的接口</span><br/>
+接着，需要配置云调用权限，<span style="color: #ff0000">每个云函数需要声明其会使用到的接口</span>，否则无法调用，<span style="color: #ff0000"><b>声明的方法是在云函数目录下的 config.json（如无需新建）配置文件的 permissions.openapi 字段中增加要调用的接口名，permissions.openapi 是个字符串数组字段，值必须为所需调用的服务端接口名称。</b></span>在每次使用微信开发者工具上传云函数时均会根据配置更新权限，该配置有10分钟的缓存，如果更新后提示没有权限，稍等10分钟后再试。以下是一个示例的声明了<span style="color: #ff0000">使用发送模板消息接口的配置文件</span>：<br/>
+<br/>
+{<br/>
+&nbsp; "permissions": {<br/>
+&nbsp; &nbsp; "openapi": [<br/>
+&nbsp; &nbsp; &nbsp; "templateMessage.send"<br/>
+&nbsp; &nbsp; ]<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000">4. 在云函数中使用云调用</span><br/>
+首先云函数中需要使用版本号至少 0.4.0 的 wx-server-sdk<span style="color: #ff0000">，建议 wx-server-sdk 始终保持最新</span>，保证云函数目录下的 package.json 的 wx-server-sdk 字段为 latest，如本地安装依赖，请执行 npm install --save wx-server-sdk@latest。<br/>
+<br/>
+接下来，可在云函数中使用云调用 API 了。云调用 API 均挂载在 wx-server-sdk 模块的 <span style="color: #ff0000">openapi</span>&nbsp;对象下，各个开放接口类别在 openapi 对象下设<span style="color: #ff0000">二级命名空间对象</span>（如模板消息接口的方法均在<span style="color: #ff0000">&nbsp;openapi.templateMessage </span>下），该对象下挂载该类别下的所有开放方法（比如模板消息的发送接口是 openapi.templateMessage.send）。各接口从属的类别名称和方法名称可以通过接口名称查看，<span style="color: #ff0000">接口名称均以 &lt;类别&gt;.&lt;方法&gt; 命名，</span>如发送模板消息的接口名称是 templateMessage.send。下面是一个给自己发送模板消息的示例：<br/>
+<br/>
+如需可直接运行的示例，请在 IDE 中创建一个云开发快速启动模板的项目，其中有包含发送模板消息的云调用的示例<br/>
+<br/>
+const cloud = require('wx-server-sdk')<br/>
+cloud.init({<br/>
+&nbsp; env: cloud.DYNAMIC_CURRENT_ENV<br/>
+})<br/>
+exports.main = async (event, context) =&gt; {<br/>
+&nbsp; try {<br/>
+&nbsp; &nbsp; const result = await cloud.openapi.templateMessage.send({<br/>
+&nbsp; &nbsp; &nbsp; touser: cloud.getWXContext().OPENID, // 通过 getWXContext 获取 OPENID<br/>
+&nbsp; &nbsp; &nbsp; page: 'index',<br/>
+&nbsp; &nbsp; &nbsp; data: {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; keyword1: {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; value: '339208499'<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; keyword2: {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; value: '2015年01月05日 12:30'<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; keyword3: {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; value: '腾讯微信总部'<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; keyword4: {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; value: '广州市海珠区新港中路397号'<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; templateId: 'TEMPLATE_ID',<br/>
+&nbsp; &nbsp; &nbsp; formId: 'FORMID',<br/>
+&nbsp; &nbsp; &nbsp; emphasisKeyword: 'keyword1.DATA'<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; // result 结构<br/>
+&nbsp; &nbsp; // { errCode: 0, errMsg: 'openapi.templateMessage.send:ok' }<br/>
+&nbsp; &nbsp; return result<br/>
+&nbsp; } catch (err) {<br/>
+&nbsp; &nbsp; // 错误处理<br/>
+&nbsp; &nbsp; // err.errCode !== 0<br/>
+&nbsp; &nbsp; throw err<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000">二、开放数据调用</span><br/>
+对返回敏感开放数据的小程序端接口，从基础库 2.7.0 起，如果小程序已开通云开发，则可在开放数据接口的返回值中获取到<span style="color: #ff0000">唯一对应敏感开放数据的 cloudID</span>，通过云调用可以直接获取到开放数据，具体使用方法见<span style="color: #ff0000">&nbsp;云调用直接获取开放数据</span>。 https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/signature.html<br/>
+<br/>
+<br/>
+三、消息推送<br/>
+云开发也支持通过云函数接收小程序消息推送（如接收到客服消息时触发云函数），具体接入方式见消息推送。</body></html>

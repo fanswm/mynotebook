@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>查询指令</title>
+</head><body>指令<br/>
+使用数据库 API 提供的 where 方法我们可以构造复杂的查询条件完成复杂的查询任务。在本节中我们还是使用上一章节中使用的示例数据。<br/>
+<br/>
+<span style="color: #ff0000">查询指令</span><br/>
+假设我们需要查询进度大于 30% 的待办事项，那么传入对象表示全等匹配的方式就无法满足了，这时就需要用到查询指令。数据库 API 提供了大于、小于等多种<span style="color: #ff0000">查询指令</span>，这些指令都暴露在<span style="color: #ff0000">&nbsp;db.command </span>对象上。比如查询进度大于 30% 的待办事项：<br/>
+<br/>
+const _ = db.command<br/>
+db.collection('todos').where({<br/>
+&nbsp; // gt 方法用于指定一个 "大于" 条件，此处 _.gt(30) 是一个 "大于 30" 的条件<br/>
+<span style="color: #ff0000">&nbsp; progress: _.gt(30)</span><br/>
+})<br/>
+.get({<br/>
+&nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; console.log(res.data)<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+<span style="color: #ff0000">API 提供了以下查询指令：</span><br/>
+<br/>
+查询指令&#09;说明<br/>
+eq&#09;&#09;等于<br/>
+neq&#09;&#09;不等于<br/>
+lt&#09;&#09;小于<br/>
+lte&#09;&#09;小于或等于<br/>
+gt&#09;&#09;大于<br/>
+gte&#09;&#09;大于或等于<br/>
+in&#09;&#09;字段值在给定数组中<br/>
+nin&#09;&#09;字段值不在给定数组中<br/>
+<br/>
+更多具体的查询指令 API 文档可参考<span style="color: #ff0000">数据库 API 文档</span>。 &nbsp;https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/database/Command.html<br/>
+<br/>
+<span style="color: #ff0000">逻辑指令<br/>
+</span><br/>
+除了指定一个字段满足一个条件之外，我们还可以通过指定一个字段需同时满足多个条件，比如用 and 逻辑指令查询进度在 30% 和 70% 之间的待办事项：<br/>
+<br/>
+const _ = db.<span style="color: #ff0000">command</span><br/>
+db.collection('todos').where({<br/>
+&nbsp; // and 方法用于指定一个 "与" 条件，此处表示需同时满足 _.gt(30) 和 _.lt(70) 两个条件<br/>
+&nbsp; <span style="color: #ff0000">progress: _.gt(30).and(_.lt(70))</span><br/>
+})<br/>
+.get({<br/>
+&nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; console.log(res.data)<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+既然有 and，当然也有 or 了，比如查询进度为 0 或 100 的待办事项：<br/>
+<br/>
+const _ = db.command<br/>
+db.collection('todos').where({<br/>
+&nbsp; // or 方法用于指定一个 "或" 条件，此处表示需满足 _.eq(0) 或 _.eq(100)<br/>
+&nbsp; progress: _.eq(0).or(_.eq(100))<br/>
+})<br/>
+.get({<br/>
+&nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; console.log(res.data)<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+如果我们需要<span style="color: #ff0000">跨字段进行 "或" 操作</span>，可以做到吗？答案是肯定的，<span style="color: #ff0000">or 指令还可以用来接受多个（可以多于两个）查询条件</span>，表示需满足多个查询条件中的任意一个，比如我们查询进度小于或等于 50% 或颜色为白色或黄色的待办事项：<br/>
+<br/>
+const _ = db.command<br/>
+db.collection('todos').where(_.or([<br/>
+&nbsp; {<br/>
+&nbsp; &nbsp; progress: _.lte(50)<br/>
+&nbsp; },<br/>
+&nbsp; {<br/>
+&nbsp; &nbsp; style: {<br/>
+&nbsp; &nbsp; &nbsp; color: _.in(['white', 'yellow'])<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+]))<br/>
+.get({<br/>
+&nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; console.log(res.data)<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+具体的逻辑查询指令 API 文档可参考数据库 Command API 文档。<br/>
+<br/>
+https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/database/Command.html<br/>
+</body></html>

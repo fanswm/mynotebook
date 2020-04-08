@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>逻辑语法</title>
+</head><body>from <a href="https://developers.weixin.qq.com/ebook?action=get_post_info&token=935589521&volumn=1&lang=zh_CN&book=miniprogram&docid=000ee2c29d4f805b0086a37a254c0a&pass_ticket=CZtoFnIgy1o4sM4K%2FKU5q6iUYk89wZrgwmACm7IKQENuJLQCtn6SITW1J1y9v3%2B8">developers.weixin.qq.com</a>:<br/>
+通过 {{ 变量名 }} 语法可以使得 WXML 拥有动态渲染的能力，除此外还可以在 {{ }} 内进行简单的逻辑运算。<br/>
+<br/>
+<span style="color: #ff0000">三元运算：</span><br/>
+<br/>
+&lt;!-- 根据 a 的值是否等于 10 在页面输出不同的内容 --&gt;<br/>
+&lt;text&gt;{{ a === 10? "变量 a 等于10": "变量 a 不等于10"}}&lt;/text&gt;<br/>
+<br/>
+<span style="color: #ff0000">算数运算：</span><br/>
+<br/>
+&lt;!--<br/>
+{ a: 1, &nbsp;b: 2, c: 3 }<br/>
+--&gt;<br/>
+<br/>
+&lt;view&gt; {{a + b}} + {{c}} + d &lt;/view&gt;<br/>
+&lt;!-- 输出 3 + 3 + d --&gt;<br/>
+<br/>
+类似于算数运算，还支持<span style="color: #ff0000">字符串的拼接</span>，如代码2-11所示。<br/>
+<br/>
+&lt;!--<br/>
+{ name: 'world' }<br/>
+--&gt;<br/>
+&lt;view&gt;{{"hello " + name}}&lt;/view&gt;<br/>
+&lt;!-- 输出 hello world --&gt;<br/>
+<br/>
+{{ }}中还可以<span style="color: #ff0000">直接放置数字、字符串或者是数组</span><br/>
+<br/>
+<br/>
+&lt;text&gt;{{[1,2,3]}}&lt;/text&gt;<br/>
+&lt;!-- 输出 1,2,3 --&gt;<br/>
+<br/>
+&lt;text&gt;{{"hello world"}}&lt;/text&gt;<br/>
+&lt;!-- 输出 hello world --&gt;</body></html>

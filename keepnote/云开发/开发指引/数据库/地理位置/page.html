@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>地理位置</title>
+</head><body>地理位置<br/>
+需小程序基础库版本 2.6.3 或以上，开发者工具版本 1.02.1903251 或以上<br/>
+<br/>
+云开发数据库提供了多种地理位置数据类型的增删查改支持，支持的<span style="color: #ff0000">地理位置数据类型</span>有以下几种（API 文档）：<br/>
+<br/>
+字段&#09;&#09;&#09;说明<br/>
+Point&#09;&#09;&#09;点<br/>
+LineString&#09;&#09;线<br/>
+Polygon&#09;&#09;&#09;多边形<br/>
+MultiPoint&#09;&#09;点集合<br/>
+MultiLineString&#09;线段集合<br/>
+MultiPolygon&#09;多边形集合<br/>
+<br/>
+可使用的查询方法有：<br/>
+<br/>
+查询&#09;&#09;&#09;说明&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;API 文档<br/>
+geoNear&#09;&#09;按从近到远的顺序，找出字段值在给定点的附近的记录&#09;普通查询 聚合查询<br/>
+geoWithin&#09;&#09;找出字段值在指定区域内的记录&#09;&#09;&#09;&#09;&#09;&#09;普通查询<br/>
+geoIntersects&#09;找出给定的地理位置图形相交的记&#09;&#09;&#09;&#09;&#09;普通查询<br/>
+<br/>
+<span style="color: #ff0000">要使用地理位置查询功能时，必须建立地理位置索引，建议用于存储地理位置数据的字段均建立地理位置索引</span>。<span style="color: #ff0000">地理位置索引可在云控制台建立索引的入口中选择地理位置索引（2dsphere）。</span><br/>
+<br/>
+具体的使用方法可参见 API 文档。<a href=" https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/database/Geo.html">&nbsp;https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/database/Geo.html</a></body></html>

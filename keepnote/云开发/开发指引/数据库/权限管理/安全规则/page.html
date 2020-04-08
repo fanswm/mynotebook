@@ -1,0 +1,461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>安全规则</title>
+</head><body>数据库安全规则<br/>
+开发者工具 1.02.1911252 起支持配置<br/>
+<br/>
+安全规则是一个让开发者可以灵活地自定义前端数据库读写权限的能力，通过配置安全规则，开发者可以精细化的控制集合中所有记录的读、写权限，自动拒绝不符合安全规则的前端数据库请求，保障数据安全。使用安全规则，你将获得以下能力：<br/>
+<br/>
+<span style="color: #ff0000">灵活自定义集合记录的读写权限</span>：获得比基础的四种基础权限设置更灵活、强大的读写权限控制，让读写权限控制<span style="color: #ff0000">不再强制依赖于 _openid 字段和用户 openid</span><br/>
+<span style="color: #ff0000">防止越权访问和越权更新</span>：&#09;&#09;用户只能获取通过安全规则限制的用户所能获取的内容，越权获取数据将被拒绝<br/>
+<span style="color: #ff0000">限制新建数据的内容</span>：&#09;&#09;&#09;让新建数据必须符合规则，如可以要求权限标记字段必须为用户 openid<br/>
+<br/>
+同时随着安全规则的开放，前端批量更新（where.update、where.remove）也随之开放（基础库 2.9.4 起），开发者在进行批量更新时应搭配安全规则使用以保障数据安全。<br/>
+<br/>
+简介<br/>
+安全规则要求前端发起的<span style="color: #ff0000">查询条件</span>必须是<span style="color: #ff0000">安全规则的子集</span>，否则拒绝访问。<br/>
+比如定义一个读写访问规则是 auth.openid == doc._openid，则表示访问时的查询条件（doc）的 openid 必须等于当前用户的 openid （由系统赋值的不可篡改的 auth.openid 给出），如果查询条件没有包含这项，则表示尝试越权访问 _openid 字段不等于自身的记录，会被后台拒绝访问。<br/>
+<br/>
+<span style="color: #ff0000">与基础权限配置的对比</span><br/>
+除了安全规则外，云开发数据库提供了<span style="color: #ff0000">四种基础权限配置</span>，适用于简单的前端访问控制，只支持 4 种预设的规则（对集合中的每条数据记录）：<br/>
+<br/>
+<span style="color: #ff0000">所有用户可读，仅创建者可写<br/>
+仅创建者可读写<br/>
+所有用户可读<br/>
+所有用户不可读写<br/>
+</span><br/>
+但基础的设置给前端的访问权限控制是有一定局限性、同时会带来一些容易疑惑的、需要深入理解的系统默认行为：<br/>
+<br/>
+访问权限控制要求只能基于记录的 _openid 字段和用户的 openid，控制粒度较粗、相对不灵活<br/>
+当权限为 "仅创建者可读写" 时，查询时会默认给查询条件加上一条 _openid 必须等于用户 openid<br/>
+当权限为 "仅创建者可读写" 或 "所有用户可读，仅创建者可写" 时，更新前会默认先带上 _openid 必须等于用户 openid 的查询条件，再将查询到的结果进行更新，即使是用 doc.update 也是如此（因此我们会见到即使我们没有对应 _id 的记录的访问权限，<span style="color: #ff0000">但是更新操作不会失败，只会在返回的结果中说明 updated 更新的记录数量为 0</span>）。<br/>
+创建记录时，会自动给记录加上<span style="color: #ff0000">&nbsp;_openid 字段，值等于用户 openid</span>，并且不允许用户在创建记录时尝试设置 _openid<br/>
+更新记录时，不允许修改 _openid<br/>
+<br/>
+因此，我们建议开发者<span style="color: #ff0000">使用新推出的数据库安全规则取代基础权限配置</span>，可以让数据库访问的行为更加明确，同时取消需要深入理解的系统默认行为，让数据库权限控制更加简单明确。<br/>
+<br/>
+新的安全规则与旧的四种基础权限配置的对应关系如下，我们在此先给出样例，下方再给出具体的安全规则使用指南：<br/>
+<br/>
+新自定义安全规则与旧权限配置的对应关系<br/>
+<br/>
+<span style="color: #ff0000">所有用户可读，仅创建者可写</span><br/>
+<br/>
+{<br/>
+&nbsp; "read": true,<br/>
+&nbsp; "write": "doc._openid == auth.openid"<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000">仅创建者可读写</span><br/>
+<br/>
+{<br/>
+&nbsp; "read": "doc._openid == auth.openid",<br/>
+&nbsp; "write": "doc._openid == auth.openid"<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000">所有用户可读</span><br/>
+<br/>
+{<br/>
+&nbsp; "read": true,<br/>
+&nbsp; "write": false<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000">所有用户不可读写</span><br/>
+<br/>
+{<br/>
+&nbsp; "read": false,<br/>
+&nbsp; "write": false<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000">规则编写</span><br/>
+我们可以在控制台对各个集合分别配置安全规则，<span style="color: #ff0000">入口在集合权限配置页</span>，在基础的四种权限配置外还提供了 “自定义规则” 的选项。<br/>
+<br/>
+<span style="color: #ff0000">每个集合都有独立的安全规则配置，配置的格式为 json</span>，比如如下一个在某集合上的安全规则配置：<br/>
+<br/>
+{<br/>
+&nbsp; "read": "true",<br/>
+&nbsp; "write": "auth.openid === doc._openid"<br/>
+}<br/>
+<br/>
+这配置其实就对应着已有的 "所有用户可读，仅创建者可写" 这一权限配置。配置的 key 表示操作类型，value 是一个表达式，表示需要满足什么条件才允许相应的操作类型。<span style="color: #ff0000">当表达式解析为 true 时即代表相应类型的操作符合安全规则。</span><br/>
+<br/>
+<span style="color: #ff0000">操作类型</span><br/>
+支持配置的操作类型如下：<br/>
+<br/>
+操作类型&#09;说明&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;默认值<br/>
+read&#09;读&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;false<br/>
+write&#09;写，可以细分为 create、update、delete&#09;&#09;false<br/>
+create&#09;新建&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;无<br/>
+update&#09;更新&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;无<br/>
+delete&#09;删除&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;无<br/>
+<br/>
+<span style="color: #ff0000">规则表达式</span><br/>
+规则表达式<span style="color: #ff0000">是类 js 的表达式，支持部分表达式，内置全局变量、全局函数。</span><br/>
+<br/>
+<span style="color: #ff0000">全局变量</span><br/>
+变量&#09;类型&#09;说明<br/>
+auth&#09;object&#09;用户登录信息，<span style="color: #ff0000">auth.openid 是用户 openid</span><br/>
+doc&#09;&#09;object&#09;记录内容，用于匹配记录内容/查询条件<br/>
+now&#09;number&#09;当前时间的时间戳<br/>
+<br/>
+<span style="color: #ff0000">运算符</span><br/>
+运算符&#09;&#09;说明&#09;示例&#09;&#09;&#09;&#09;示例解释(集合查询)<br/>
+==&#09;&#09;&#09;等于&#09;auth.openid == 'zzz'&#09;用户的 openid 为 zzz<br/>
+!=&#09;&#09;&#09;不等于&#09;auth.openid != 'zzz'&#09;用户的 openid 不为 zzz<br/>
+&gt;&#09;&#09;&#09;大于&#09;doc.age&gt;10&#09;&#09;&#09;查询条件的 age 属性大于 10<br/>
+&gt;=&#09;&#09;&#09;大于等于&#09;doc.age&gt;=10&#09;&#09;查询条件的 age 属性大于等于 10<br/>
+&lt;&#09;&#09;&#09;小于&#09;doc.age&lt;10&#09;&#09;&#09;查询条件的 age 属性小于 10<br/>
+&lt;=&#09;&#09;&#09;小于等于&#09;doc.age&lt;=10&#09;&#09;查询条件的 age 属性小于等于 10<br/>
+in&#09;&#09;&#09;存在在集合中&#09;auth.openid in ['zzz','aaa']&#09;用户的 openid 是['zzz','aaa']中的一个<br/>
+!(xx in [])&#09;不存在在集合中，使用 in 的方式描述 !(a in [1,2,3])&#09;!(auth.openid in ['zzz','aaa'])&#09;用户的 openid 不是['zzz','aaa']中的任何一个<br/>
+&amp;&amp;&#09;&#09;&#09;与&#09;auth.openid == 'zzz' &amp;&amp; doc.age&gt;10&#09;用户的 openid 为 zzz 并且查询条件的 age 属性大于 10<br/>
+||&#09;&#09;&#09;或&#09;auth.openid == 'zzz' || doc.age&gt;10&#09;用户的 openid 为 zzz 或者查询条件的 age 属性大于 10<br/>
+.&#09;&#09;&#09;对象元素访问符&#09;auth.openid&#09;用户的 openid<br/>
+[]&#09;&#09;&#09;数组访问符属性&#09;doc.favorites[0] == 'zzz'&#09;查询条件的 favorites 数组字段的第一项的值等于 zzz<br/>
+<br/>
+<span style="color: #ff0000">全局函数</span><br/>
+<span style="color: #ff0000">get：获取指定记录</span><br/>
+<br/>
+get 函数，用于在安全规则中获取其记录来参与到安全规则的匹配中，<span style="color: #ff0000">函数的参数格式是 `database.集合名.记录id`</span>，可以接收变量，值可以通过多种计算方式得到，例如使用字符串模版进行拼接（database.${doc.collction}.${doc.\_id}）。<br/>
+<br/>
+如果有对应对象，则函数返回记录的内容，否则返回空。<br/>
+<br/>
+示例：<br/>
+<br/>
+{<br/>
+&nbsp; "read": "true",<br/>
+&nbsp; "delete": "get(`database.user.${id}`).isManager"<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000">get 函数有以下限制条件：</span><br/>
+<br/>
+get 参数中存在的变量 doc 需要在 query 条件中以 == 或 in 方式出现，<span style="color: #ff0000">若以 in 方式出现，只允许 in 唯一值， </span>即 doc.shopId in array, array.length == 1<br/>
+<span style="color: #ff0000">一个表达式最多可以有 3 个 get 函数，最多可以访问 3 个不同的文档。</span><br/>
+<span style="color: #ff0000">get 函数的嵌套深度最多为 2， 即 get(get(path))。<br/>
+</span><br/>
+读操作触发与配额消耗说明：<br/>
+<br/>
+get 函数的执行会计入数据库请求数，同样受数据库配额限制。在未使用变量的情况下，<span style="color: #ff0000">每个 get 会产生一次读操作</span>，在使用变量时，<span style="color: #ff0000">对每个变量值会产生一次 get 读</span>操作。例如：<br/>
+<br/>
+假设某集合 shop 上有如下规则：<br/>
+<br/>
+{<br/>
+&nbsp; "read": "auth.openid == get(`database.shop.${doc._id}`).owner",<br/>
+&nbsp; "write": false<br/>
+}<br/>
+<br/>
+在执行如下查询语句时会产生 5 次读取。<br/>
+<br/>
+db.collection('shop').where(_.or([{_id:1},{_id:2},{_id:3},{_id:4},{_id:5}])).get()<br/>
+<br/>
+<br/>
+<span style="color: #ff0000">规则匹配<br/>
+</span><br/>
+对于查询或更新操作，输入的查询条件必须是安全规则的子集。系统不会去实际取数据，而会判断输入的查询条件是否是安全规则的子集，如果不是，则代表正在尝试访问没有权限访问的数据，会直接拒绝操作。<br/>
+<br/>
+可能生效的操作类型包括<span style="color: #ff0000">&nbsp;read、write、update、delete</span><br/>
+<br/>
+示例：<br/>
+<br/>
+// 集合 test 的安全规则配置限制只能查询 age &gt; 10 的记录<br/>
+{<br/>
+&nbsp; "read": "doc.age &gt; 10"<br/>
+}<br/>
+<br/>
+// 符合安全规则<br/>
+const res = await db.collection('test').where({<br/>
+&nbsp; age: _.gt(10)<br/>
+}).get()<br/>
+<br/>
+// 不符合安全规则<br/>
+const res = db.collection('test').where({<br/>
+&nbsp; age: _.gt(8)<br/>
+}).get()<br/>
+<br/>
+对于 create，则会校验写入的数据是否符合安全规则。<br/>
+<br/>
+{openid} 变量<br/>
+<br/>
+在查询时，当前用户 openid 是常用的变量，<span style="color: #ff0000">在新的安全规则体系下，要求显式传入 openid，</span>因此为了方便开发者、让开发者无需每次先通过云函数获取用户 openid，我们规定<span style="color: #ff0000">查询条件中可使用一个字符串常量 {openid}，</span>在后台中发现该字符串时会自动替换为小程序用户的 openid，如假设有安全规则：<br/>
+<br/>
+{<br/>
+&nbsp; "read": "doc.publisher == auth.openid"<br/>
+}<br/>
+<br/>
+则发起读请求时可以使用 {openid} 常量，效果等同于显示传入当前用户的实际 openid ：<br/>
+<br/>
+db.collection('test').where({<br/>
+&nbsp; publisher: '{openid}'<br/>
+}).get()<br/>
+<br/>
+<span style="color: #ff0000">升级与兼容指引</span><br/>
+由于安全规则要求查询条件是安全规则的子集，同时摒弃了旧有权限配置的隐式默认行为，因此启动安全规则需要开发者注意以下升级/兼容处理：<br/>
+<br/>
+<span style="color: #ff0000">1. doc 操作需转为 where 操作</span><br/>
+<br/>
+因 doc 操作（doc.get, doc.set 等）是仅指定 _id 进行的操作，因此其查询条件大部分情况下并不会满足安全规则（除非在 "read": true 下进行读操作或在 "write": true 的情况下进行写操作），因此需要转换为等价的、查询条件包含安全规则或是其子集的形式。例：<br/>
+<br/>
+假设在集合 todo 上有以下权限规则：<br/>
+<br/>
+{<br/>
+&nbsp; "read": "doc._openid == auth.openid",<br/>
+&nbsp; "write": "doc._openid == auth.openid"<br/>
+}<br/>
+<br/>
+旧权限配置可以通过 db.collection('todo').doc('x').get() 获取记录内容，新安全规则需要改为：<br/>
+<br/>
+db.collection('todo').where({<br/>
+&nbsp; _id: 'x',<br/>
+&nbsp; _openid: '{openid}',<br/>
+})<br/>
+doc.update, doc.remove 同理，注意 doc.set 无法使用，需要用 doc.update 替代。<br/>
+<br/>
+<span style="color: #ff0000">2. 从旧权限配置升级后，查询更新语句都需明确指定 openid</span><br/>
+<br/>
+因升级前查询条件可以不传 _openid，而升级后要求显示传入以保证查询条件符合安全规则，因此所有查询条件均需传入 openid，还是以上一节中的安全规则示例为例，对旧权限配置中的如下查询语句：<br/>
+<br/>
+db.collection('todo').where({<br/>
+&nbsp; progress: _.lt(50)<br/>
+}).get()<br/>
+<br/>
+需要改为：<br/>
+<br/>
+db.collection('todo').where({<br/>
+&nbsp; _openid: '{openid}',<br/>
+&nbsp; progress: _.lt(50)<br/>
+}).get()<br/>
+<br/>
+在开放安全规则后，where.update 和 where.remove 也在小程序端开放了，可以进行符合安全规则的批量更新，如：<br/>
+<br/>
+db.collection('todo').where({<br/>
+&nbsp; _openid: '{openid}',<br/>
+&nbsp; category: 'sport'<br/>
+}).update({<br/>
+&nbsp; progress: _.inc(10)<br/>
+})<br/>
+<br/>
+示例<br/>
+以下给出三个简易示例：<span style="color: #ff0000">群聊、信息流评论、商品订单管理。</span><br/>
+<br/>
+示例 1：群聊<br/>
+集合定义<br/>
+<br/>
+user<br/>
+<br/>
+{<br/>
+&nbsp; _id: string,<br/>
+&nbsp; _openid: string,<br/>
+&nbsp; name: string,<br/>
+}<br/>
+room<br/>
+<br/>
+{<br/>
+&nbsp; _id: string,<br/>
+&nbsp; owner: string, // 群主 openid<br/>
+&nbsp; name: string, // 群名<br/>
+&nbsp; members: string[], // 成员 openid 列表<br/>
+}<br/>
+message<br/>
+<br/>
+{<br/>
+&nbsp; _id: string,<br/>
+&nbsp; room: string, // 房间 id<br/>
+&nbsp; sender: string, // 发送者 openid<br/>
+&nbsp; content: string, // 消息内容<br/>
+&nbsp; time: Date, // 发送时间<br/>
+&nbsp; withdrawn: boolean, // 是否已撤回<br/>
+}<br/>
+<br/>
+权限规则<br/>
+user 权限规则<br/>
+<br/>
+{<br/>
+&nbsp; "read": "doc._openid == auth.openid", // 私有读<br/>
+&nbsp; "write": "doc._openid == auth.openid", // 仅能修改自己的信息<br/>
+}<br/>
+<br/>
+room 权限规则<br/>
+<br/>
+{<br/>
+&nbsp; "read": "auth.openid in get('database.room.${doc._id}').members", // 仅群成员可以读群信息<br/>
+&nbsp; // 要求管理房间的写操作不能在前端：<br/>
+&nbsp; // &nbsp;- 原子：建群时需保证room集合的members和各个成员的rooms都写入<br/>
+&nbsp; // &nbsp;- 权限：仅群主能修改群信息<br/>
+&nbsp; // &nbsp;- 权限：仅群成员可以拉新成员进群<br/>
+&nbsp; // &nbsp;- 权限：仅群主可以踢人<br/>
+&nbsp; "write": false<br/>
+}<br/>
+message 权限规则<br/>
+<br/>
+{<br/>
+&nbsp; // 仅能读取自己所在房间的聊天消息，且不允许读取已撤回的消息<br/>
+&nbsp; "read": "auth.openid in get('database.room.${doc.room}').members &amp;&amp; doc.withdrawn == false",<br/>
+&nbsp; // 只能在云函数写:<br/>
+&nbsp; // &nbsp;- 仅能在自己所在的房间发消息<br/>
+&nbsp; // &nbsp;- 只能修改自己发送的消息<br/>
+&nbsp; // &nbsp;- 不能删除自己发送的消息（只能撤回）<br/>
+&nbsp; "create": "auth.openid in get('database.room.${doc.room}').members",<br/>
+&nbsp; "update": "auth.openid == doc.sender",<br/>
+&nbsp; "delete": false<br/>
+}<br/>
+查询 / 监听示例<br/>
+监听自己所在的某个房间的某个时间点之后的新消息（就是监听已接收的某个消息后的新消息）：<br/>
+<br/>
+wx.cloud.init({<br/>
+&nbsp; env: '环境 ID',<br/>
+})<br/>
+const db = wx.cloud.database()<br/>
+const _ = db.command<br/>
+<br/>
+const watcher = db.collection('message').where({<br/>
+&nbsp; room: '房间 id',<br/>
+&nbsp; time: _.gt(new Date('2019-09-01 10:00')),<br/>
+}).watch({<br/>
+&nbsp; onChange: snapshot =&gt; {<br/>
+&nbsp; &nbsp; console.log(`新事件`, snapshot)<br/>
+&nbsp; },<br/>
+&nbsp; onError: err =&gt; {<br/>
+&nbsp; &nbsp; console.error(`监听错误`, err)<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+<span style="color: #ff0000">示例 2：信息流评论</span><br/>
+集合定义<br/>
+user: 用户信息集合，以用户 openid 为 id<br/>
+<br/>
+{<br/>
+&nbsp; _id: string, // openid<br/>
+&nbsp; _openid: string,<br/>
+&nbsp; name: string,<br/>
+&nbsp; isManager: boolean, // 管理员标记位<br/>
+}<br/>
+article: 文章集合<br/>
+<br/>
+{<br/>
+&nbsp; _id: string,<br/>
+&nbsp; publisher: string, // 发布者 openid<br/>
+&nbsp; content: string, // 内容<br/>
+}<br/>
+comment: 评论集合<br/>
+<br/>
+{<br/>
+&nbsp; _id: string,<br/>
+&nbsp; commenter: string, // 评论者 openid<br/>
+&nbsp; articleId: string, // 被评论的文章 id<br/>
+&nbsp; content: string, // 评论内容<br/>
+}<br/>
+安全规则<br/>
+article 安全规则<br/>
+<br/>
+{<br/>
+&nbsp; "read": true, // 公有读<br/>
+&nbsp; "create": "doc.publisher == auth.openid", // 都可以发文章，但对数据一致性校验，要求 publisher 为发布者 openid<br/>
+&nbsp; "update": "doc.publisher == auth.openid || get('database.user.${auth.openid}').isManager", // 仅发布者或管理员可以更新<br/>
+&nbsp; "delete": "doc.publisher == auth.openid || get('database.user.${auth.openid}').isManager", // 仅发布者或管理员可以删除<br/>
+}<br/>
+comment 安全规则<br/>
+<br/>
+{<br/>
+&nbsp; "read": true, // 公有读<br/>
+&nbsp; "create": "doc.commenter == auth.openid", // 都可以发评论，但对数据一致性校验，要求 publisher 为发布者 openid<br/>
+&nbsp; "update": "doc.commenter == auth.openid || get('database.user.${auth.openid}').isManager", // 仅发布者或管理员可以更新<br/>
+&nbsp; "delete": "doc.commenter == auth.openid || get('database.user.${auth.openid}').isManager", // 仅发布者或管理员可以删除<br/>
+}<br/>
+查询示例<br/>
+创建一条评论：<br/>
+<br/>
+wx.cloud.init({<br/>
+&nbsp; env: '环境 ID',<br/>
+})<br/>
+const db = wx.cloud.database()<br/>
+const _ = db.command<br/>
+<br/>
+const result = await db.collection('comment').add({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; commenter: '{openid}', // 用 {openid} 变量，后台会自动替换为当前用户 openid<br/>
+&nbsp; &nbsp; articleId: '文章 ID',<br/>
+&nbsp; &nbsp; content: '评论内容',<br/>
+&nbsp; },<br/>
+})<br/>
+<br/>
+console.log('创建结果', result)<br/>
+<br/>
+<span style="color: #ff0000">示例 3：商品订单管理</span><br/>
+假设需要构建一个简易商品管理系统，有商店信息，一个商店对应多个商品、多个订单，商品信息公开可查，只有商店所有者或管理员可以查看自己商店的订单信息。<br/>
+<br/>
+集合定义<br/>
+shop 商店集合<br/>
+<br/>
+{<br/>
+&nbsp; _id: string,<br/>
+&nbsp; name: string, // 商店名<br/>
+&nbsp; location: GeoPoint, // 商店地理位置<br/>
+&nbsp; owner: string, // 商店拥有者 openid<br/>
+&nbsp; managers: string[], // 商店管理员 openid 列表<br/>
+}<br/>
+item 商品集合<br/>
+<br/>
+{<br/>
+&nbsp; _id: string,<br/>
+&nbsp; shopId: string, // 所在商店<br/>
+&nbsp; name: string, // 商品名<br/>
+&nbsp; price: number, // 价格<br/>
+&nbsp; stock: number, // 库存<br/>
+}<br/>
+order 订单集合<br/>
+<br/>
+{<br/>
+&nbsp; _id: string,<br/>
+&nbsp; shopId: string, // 下单的商店<br/>
+&nbsp; itemId: string, // 下单的商品<br/>
+&nbsp; price: number, // 成交价格<br/>
+&nbsp; amount: number, // 成交数量<br/>
+&nbsp; status: string, // 状态<br/>
+&nbsp; createTime: Date, // 创建时间<br/>
+&nbsp; updateTime: Date, // 更新时间<br/>
+}<br/>
+权限规则<br/>
+shop 安全规则：<br/>
+<br/>
+{<br/>
+&nbsp; "read": true, // 公有读<br/>
+&nbsp; "write": false, // 仅云函数端写<br/>
+}<br/>
+item 安全规则：<br/>
+<br/>
+{<br/>
+&nbsp; // 公有读<br/>
+&nbsp; "read": true,<br/>
+&nbsp; // 仅商店所有者或管理员可写<br/>
+&nbsp; "write": "auth.openid == get(`database.shop.${doc.shopId}`).owner || auth.openid in get(`database.shop.${doc.shopId}`).managers",<br/>
+}<br/>
+order 安全规则：<br/>
+<br/>
+{<br/>
+&nbsp; // 仅商店所有者或管理员可读写<br/>
+&nbsp; "read": "auth.openid == get(`database.shop.${doc.shopId}`).owner || auth.openid in get(`database.shop.${doc.shopId}`).managers",<br/>
+&nbsp; "write": "auth.openid == get(`database.shop.${doc.shopId}`).owner || auth.openid in get(`database.shop.${doc.shopId}`).managers",<br/>
+&nbsp; // 仅云函数端可删除订单记录<br/>
+&nbsp; "delete": false,<br/>
+}<br/>
+查询 / 监听示例<br/>
+监听自己所在商店的新订单动态：<br/>
+<br/>
+wx.cloud.init({<br/>
+&nbsp; env: '环境 ID',<br/>
+})<br/>
+const db = wx.cloud.database()<br/>
+const _ = db.command<br/>
+<br/>
+const watcher = db.collection('order').where({<br/>
+&nbsp; shopId: '商店 id',<br/>
+&nbsp; createTime: _.gt(new Date()),<br/>
+}).watch({<br/>
+&nbsp; onChange: snapshot =&gt; {<br/>
+&nbsp; &nbsp; console.log(`新事件`, snapshot)<br/>
+&nbsp; },<br/>
+&nbsp; onError: err =&gt; {<br/>
+&nbsp; &nbsp; console.error(`监听错误`, err)<br/>
+&nbsp; }<br/>
+})</body></html>

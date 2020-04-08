@@ -1,0 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>发布模式</title>
+</head><body>小程序提供了<span style="color: #ff0000">两种发布模式：全量发布和分阶段发布</span>。<br/>
+<ul><li style="list-style-type: none">全量发布是指当点击发布之后，所有用户访问小程序时都会使用当前最新的发布版本。</li>
+<li style="list-style-type: none">分阶段发布是指分不同时间段来控制部分用户使用最新的发布版本，分阶段发布我们也称为<span style="color: #ff0000">灰度发布</span>。</li>
+<li style="list-style-type: none"></li>
+</ul>
+一般来说，普通小程序发布时采用全量发布即可，当小程序承载的功能越来越多，使用的用户数越来越多时，采用<span style="color: #ff0000">分阶段发布是一个非常好的控制风险的办法</span>。因为随着程序的复杂度提高以及影响面的扩大，新版本的代码改动或多或少会带来Bug，作为服务方当然不希望异常的服务状态一下子扩散到整个用户群体，此时应该通过分阶段发布来逐步观察服务的稳定性，再决定是否进行全量发布。<br/>
+<br/>
+还需要留意一点，<span style="color: #ff0000">并非全量发布之后，用户就会立即使用到最新版的小程序</span>，这是因为微信客户端存有旧版本小程序包缓存。用户在使用小程序时会优先打开本地的小程序包，微信客户端在某些特定的时机异步去更新最新的小程序包。一般我们认为<span style="color: #ff0000">全量发布的24小时后</span>，所有用户才会真正使用到最新版的小程序。</body></html>

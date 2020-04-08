@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>云开发能力</title>
+</head><body>小程序·云开发提供了多个基础能力，以下对各个主要能力介绍。<br/>
+<br/>
+<span style="color: #ff0000">数据库</span><br/>
+云开发提供了一个 <span style="color: #ff0000">JSON 数据库，顾名思义，数据库中的每条记录都是一个 JSON 格式的对象</span>。<br/>
+一个数据库可以有<span style="color: #ff0000">多个集合</span>（相当于关系型数据中的表），<span style="color: #ff0000">集合可看做一个 JSON 数组</span>，数组中的<span style="color: #ff0000">每个对象就是一条记录</span>，<span style="color: #ff0000">记录的格式是 JSON 对象</span>。<br/>
+<br/>
+关系型数据库和 JSON 数据库的概念对应关系如下表：<br/>
+<br/>
+关系型&#09;&#09;&#09;&#09;文档型<br/>
+数据库 database&#09;&#09;数据库 database<br/>
+表 table&#09;&#09;&#09;&#09;集合 collection<br/>
+行 row&#09;&#09;&#09;&#09;记录 record / doc<br/>
+列 column&#09;&#09;&#09;字段 field<br/>
+<br/>
+以下是一个示例的集合数据，假设我们有一个 books 集合存放了图书记录，其中有两本书：<br/>
+<br/>
+[<br/>
+&nbsp; {<br/>
+&nbsp; &nbsp; "_id": "Wzh76lk5_O_dt0vO",<br/>
+&nbsp; &nbsp; "title": "The Catcher in the Rye",<br/>
+&nbsp; &nbsp; "author": "J. D. Salinger",<br/>
+&nbsp; &nbsp; "characters": [<br/>
+&nbsp; &nbsp; &nbsp; "Holden Caulfield",<br/>
+&nbsp; &nbsp; &nbsp; "Stradlater",<br/>
+&nbsp; &nbsp; &nbsp; "Mr. Antolini"<br/>
+&nbsp; &nbsp; ],<br/>
+&nbsp; &nbsp; "publishInfo": {<br/>
+&nbsp; &nbsp; &nbsp; "year": 1951,<br/>
+&nbsp; &nbsp; &nbsp; "country": "United States"<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; },<br/>
+&nbsp; {<br/>
+&nbsp; &nbsp; "_id": "Wzia0lk5_O_dt0vR",<br/>
+&nbsp; &nbsp; "_openid": "ohl4L0Rnhq7vmmbT_DaNQa4ePaz0",<br/>
+&nbsp; &nbsp; "title": "The Lady of the Camellias",<br/>
+&nbsp; &nbsp; "author": "Alexandre Dumas fils",<br/>
+&nbsp; &nbsp; "characters": [<br/>
+&nbsp; &nbsp; &nbsp; "Marguerite Gautier",<br/>
+&nbsp; &nbsp; &nbsp; "Armand Duval",<br/>
+&nbsp; &nbsp; &nbsp; "Prudence",<br/>
+&nbsp; &nbsp; &nbsp; "Count de Varville"<br/>
+&nbsp; &nbsp; ],<br/>
+&nbsp; &nbsp; "publishInfo": {<br/>
+&nbsp; &nbsp; &nbsp; "year": 1848,<br/>
+&nbsp; &nbsp; &nbsp; "country": "France"<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+]<br/>
+<br/>
+在图书信息中，我们用 title, author 来记录图书标题和作者，用 characters 数组来记录书中的主要人物，用 publishInfo 来记录图书的出版信息。在其中我们可以看到，<span style="color: #ff0000">字段既可以是字符串或数字，还可以是对象或数组，就是一个 JSON 对象</span>。<br/>
+<br/>
+每条记录都有<ul><li style="list-style-type: none">一个<span style="color: #ff0000">&nbsp;_id 字段用以唯一标志一条记录</span>、</li>
+<li style="list-style-type: none">一个 <span style="color: #ff0000">_openid 字段</span>用以标志记录的创建者，即小程序的用户。需要特别注意的是，<span style="color: #ff0000">在管理端（控制台和云函数）中创建的不会有 _openid 字段</span>，因为这是属于管理员创建的记录。<span style="color: #ff0000">开发者可以自定义 _id，但不可自定义和修改 _openid 。_openid 是在文档创建时由系统根据小程序用户默认创建的</span>，开发者可使<span style="color: #ff0000">用其来标识和定位文档。</span></li>
+</ul>
+<br/>
+<span style="color: #ff0000">数据库 API </span>分为<span style="color: #ff0000">小程序端</span>和<span style="color: #ff0000">服务端</span>两部分，<span style="color: #ff0000">小程序端 API 拥有严格的调用权限控制</span>，开发者可在小程序内直接调用 API 进行<span style="color: #ff0000">非敏感数据的操作</span>。对于有更高安全要求的数据，<span style="color: #ff0000">可在云函数内通过服务端 API 进行操作</span>。云函数的环境是与客户端完全隔离的，<span style="color: #ff0000">在云函数上可以私密且安全的操作数据库</span>。<br/>
+<br/>
+数据库 API 包含<span style="color: #ff0000">增删改查</span>的能力，<ul><li style="list-style-type: none">使用 API 操作数据库<span style="color: #ff0000">只需三步</span>：</li>
+<li style="list-style-type: none"><ul><span style="color: #ff0000"><li style="list-style-type: none">获取数据库引用、</li>
+<li style="list-style-type: none">构造查询/更新条件、</li>
+</span><li style="list-style-type: none"><span style="color: #ff0000">发出请求。</span></li>
+<li style="list-style-type: none"></li>
+<li style="list-style-type: none">以下是一个在小程序中查询数据库的发表于美国的图书记录的例子：</li>
+</ul>
+</li>
+</ul>
+<br/>
+<span style="color: #ff0000">// 1. 获取数据库引用</span><br/>
+const db = wx.cloud.database()<br/>
+<span style="color: #ff0000">// 2. 构造查询语句</span><br/>
+// collection 方法获取一个集合的引用<br/>
+// where 方法传入一个对象，数据库返回集合中字段等于指定值的 JSON 文档。API 也支持高级的查询条件（比如大于、小于、in 等），具体见文档查看支持列表<br/>
+// get 方法会触发网络请求，往数据库取数据<br/>
+<br/>
+db.<span style="color: #ff0000">collection</span>('books').<span style="color: #ff0000">where</span>({<br/>
+&nbsp; publishInfo: {<br/>
+&nbsp; &nbsp; country: 'United States'<br/>
+&nbsp; }<br/>
+}).<span style="color: #ff0000">get</span>({<br/>
+&nbsp; success: function(res) {<br/>
+&nbsp; // 输出 [{ "title": "The Catcher in the Rye", ... }]<br/>
+&nbsp; console.log(res)<br/>
+&nbsp;}<br/>
+})<br/>
+<br/>
+更多的数据库的 API 的使用和数据库管理，可以参考数据库指引章节。<br/>
+<br/>
+<span style="color: #ff0000"><b>存储</b></span><br/>
+云开发提供了一块存储空间，提供了上传文件到云端、带权限管理的云端下载能力，开发者可以在小程序端和云函数端通过 API 使用云存储功能。<br/>
+<br/>
+在小程序端可以分别调用 wx.cloud.<span style="color: #ff0000">uploadFile</span>&nbsp;和 wx.cloud.<span style="color: #ff0000">downloadFile</span>&nbsp;完成上传和下载云文件操作。下面简单的几行代码，即可实现在小程序内让用户选择一张图片，然后上传到云端管理的功能：<br/>
+<br/>
+<span style="color: #ff0000">// 让用户选择一张图片</span><br/>
+wx.<span style="color: #ff0000">chooseImage</span>({<br/>
+&nbsp; success: chooseResult =&gt; {<br/>
+&nbsp; &nbsp; // 将图片上传至云存储空间<br/>
+&nbsp; &nbsp; wx.cloud.uploadFile({<br/>
+&nbsp; &nbsp; &nbsp; // 指定上传到的云路径<br/>
+&nbsp; &nbsp; &nbsp; cloudPath: 'my-photo.png',<br/>
+&nbsp; &nbsp; &nbsp; // 指定要上传的文件的小程序临时文件路径<br/>
+&nbsp; &nbsp; &nbsp; filePath: chooseResult.tempFilePaths[0],<br/>
+&nbsp; &nbsp; &nbsp; // 成功回调<br/>
+&nbsp; &nbsp; &nbsp; success: res =&gt; {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; console.log('上传成功', res)<br/>
+&nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+})<br/>
+<br/>
+上传完成后可在控制台中看到刚上传的图片。<br/>
+<br/>
+更多的存储 API 和管理，可以参考<span style="color: #ff0000">存储指引</span>章节。<br/>
+<br/>
+<span style="color: #ff0000"><b>云函数</b></span><br/>
+云函数是一段<span style="color: #ff0000">运行在云端的代码</span>，无需管理服务器，在开发工具内编写、一键上传部署即可运行后端代码。<br/>
+<br/>
+小程序内提供了专门用于云函数调用的 API。开发者可以<span style="color: #ff0000">在云函数内使用 wx-server-sdk 提供的 getWXContext 方法获取到每次调用的上下文（appid、openid 等）</span>，无需维护复杂的鉴权机制，<span style="color: #ff0000">即可获取天然可信任的用户登录态（openid）</span>。<br/>
+<br/>
+比如我们如下<span style="color: #ff0000">定义一个云函数，命名为 add</span>&nbsp;，功能是将传入的两个参数 a 和 b 相加：<br/>
+<br/>
+// index.js 是入口文件，云函数被调用时会执行该文件导出的 main 方法<br/>
+// event 包含了调用端（小程序端）调用该函数时传过来的参数，同时还包含了可以通过 getWXContext 方法获取的用户登录态 `openId` 和小程序 `appId` 信息<br/>
+const cloud = require('wx-server-sdk')<br/>
+exports.main = (event, context) =&gt; {<br/>
+&nbsp; let { userInfo, a, b} = event<br/>
+&nbsp; let { OPENID, APPID } = cloud.getWXContext() // <span style="color: #ff0000">这里获取到的 openId 和 appId 是可信的</span><br/>
+&nbsp; let sum = a + b<br/>
+<br/>
+&nbsp; return {<br/>
+&nbsp; &nbsp; OPENID,<br/>
+&nbsp; &nbsp; APPID,<br/>
+&nbsp; &nbsp; sum<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+在开发者工具中<span style="color: #ff0000">上传部署云函数后，我们在小程序中可以这么调用：</span><br/>
+<br/>
+除了部署云函数进行调用外，我们还支持<span style="color: #ff0000">云函数本地调试</span>，可以不用部署云函数即可测试<br/>
+<br/>
+wx.cloud.callFunction({<br/>
+&nbsp; <span style="color: #ff0000">// 需调用的云函数名<br/>
+</span><span style="color: #ff0000">&nbsp; name: 'add',</span><br/>
+&nbsp; // 传给云函数的参数<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; a: 12,<br/>
+&nbsp; &nbsp; b: 19,<br/>
+&nbsp; },<br/>
+&nbsp; // 成功回调<br/>
+&nbsp; complete: console.log<br/>
+})<br/>
+// 当然<span style="color: #ff0000">&nbsp;promise 方式也是支持的</span><br/>
+wx.cloud.callFunction({<br/>
+&nbsp; name: 'add',<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; a: 12,<br/>
+&nbsp; &nbsp; b: 19<br/>
+&nbsp; }<br/>
+}).then(console.log)<br/>
+<br/>
+如需在云函数中<span style="color: #ff0000">操作数据库、管理云文件、调用其他云函数等操作，可使用官方提供的 npm 包 wx-server-sdk 进行操作。</span><br/>
+<br/>
+更多的云函数管理和 API，可以参考云函数指引章节。<br/>
+<br/>
+<span style="color: #ff0000"><b>云调用</b></span><br/>
+云调用是云开发提供的<span style="color: #ff0000">基于云函数使用小程序开放接口的能力</span>，支持在云函数调用服务端开放接口，如发送模板消息、获取小程序码等操作都可以在云函数中完成，详情可见具体开发指引。<br/>
+<br/>
+<span style="color: #ff0000"><b>HTTP API</b></span><br/>
+云开发资源也可以通过 HTTP 接口访问，即在小程序外访问，接口见HTTP API 文档。<br/>
+<br/>
+通过这个章节，我们已经了解了云开发是什么，提供了哪些能力，能做什么，接下来跟着我们一起进入开发指引的章节，看看如何上手开发吧！</body></html>

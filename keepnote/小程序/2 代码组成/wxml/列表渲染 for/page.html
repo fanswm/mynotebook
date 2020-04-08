@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>列表渲染 for</title>
+</head><body>from <a href="https://developers.weixin.qq.com/ebook?action=get_post_info&token=935589521&volumn=1&lang=zh_CN&book=miniprogram&docid=000ee2c29d4f805b0086a37a254c0a&pass_ticket=CZtoFnIgy1o4sM4K%2FKU5q6iUYk89wZrgwmACm7IKQENuJLQCtn6SITW1J1y9v3%2B8">developers.weixin.qq.com</a>:<br/>
+在组件上使用 <br/>
+<span style="color: #ff0000">wx:for 控制属性绑定一个数组</span>，即可使用数组中各项的数据重复渲染该组件。<span style="color: #ff0000">默认数组的当前项的下标变量名默认为 index，数组当前项的变量名默认为 item</span><br/>
+<br/>
+<br/>
+&lt;!-- array 是一个数组 --&gt;<br/>
+&lt;view wx:for="{{array}}"&gt;<br/>
+&nbsp; {{index}}: {{item.message}}<br/>
+&lt;/view&gt;<br/>
+<br/>
+&lt;!-- 对应的脚本文件<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; array: [{<br/>
+&nbsp; &nbsp; &nbsp; message: 'foo',<br/>
+&nbsp; &nbsp; }, {<br/>
+&nbsp; &nbsp; &nbsp; message: 'bar'<br/>
+&nbsp; &nbsp; }]<br/>
+&nbsp; }<br/>
+})<br/>
+--&gt;<br/>
+使用 <br/>
+<span style="color: #ff0000">wx:for-item</span>&nbsp;指定数组当前元素的变量名，使用<span style="color: #ff0000">&nbsp;<br/>
+</span><span style="color: #ff0000">wx:for-index</span>&nbsp;指定数组当前下标的变量名：<br/>
+<br/>
+&lt;view wx:for="{{array}}" wx:for-index="idx" wx:for-item="itemName"&gt;<br/>
+&nbsp; {{idx}}: {{itemName.message}}<br/>
+&lt;/view&gt;<br/>
+<br/>
+类似 block wx:if ，也可以将 <br/>
+<span style="color: #ff0000">wx:for 用在 &lt;block/&gt; 标签上</span>，以渲染一个包含多节点的结构块。例如：<br/>
+<br/>
+&lt;block wx:for="{{[1, 2, 3]}}"&gt;<br/>
+&nbsp; &lt;view&gt; {{index}}: &lt;/view&gt;<br/>
+&nbsp; &lt;view&gt; {{item}} &lt;/view&gt;<br/>
+&lt;/block&gt;<br/>
+<br/>
+如果<span style="color: #ff0000">列表中项目的位置会<b>动态改变</b>或者有<b>新的项目</b>添加到列表中</span>，并且希望列表中的项目保持自己的特征和状态（如 &lt;input/&gt; 中的输入内容， &lt;switch/&gt; 的选中状态），需要使用 <br/>
+<span style="color: #ff0000">wx:key 来指定列表中项目的唯一的标识符。</span><br/>
+<br/>
+<b><span style="color: #ff0000">wx:key 的值以两种形式提供：</span></b><br/>
+<br/>
+<span style="color: #ff0000">字符串</span>，代表在 for 循环的 array 中 item 的某个 property，该 property 的值需要是列表中唯一的字符串或数字，且不能动态改变。<br/>
+<br/>
+保留<span style="color: #ff0000">关键字 this</span>&nbsp;代表在 for 循环中的 item 本身，这种表示需要 item 本身是一个唯一的字符串或者数字，如：<br/>
+<br/>
+当数据改变触发渲染层重新渲染的时候，会校正带有 key 的组件，框架会确保他们被重新排序，而不是重新创建，以确保使组件保持自身的状态，并且提高列表渲染时的效率。<br/>
+<br/>
+代码清单2-14<span style="color: #ff0000">&nbsp;使用 wx:key 示例</span>（WXML）<br/>
+<br/>
+&lt;switch wx:for="{{objectArray}}" wx:key="unique" &gt; {{item.id}} &lt;/switch&gt;<br/>
+&lt;button bindtap="switch"&gt; Switch &lt;/button&gt;<br/>
+&lt;button bindtap="addToFront"&gt; Add to the front &lt;/button&gt;<br/>
+<br/>
+<br/>
+&lt;switch wx:for="{{numberArray}}" wx:key="*this" &gt; {{item}} &lt;/switch&gt;<br/>
+&lt;button bindtap="addNumberToFront"&gt; Add Number to the front &lt;/button&gt;<br/>
+<br/>
+代码清单2-15 使用 wx:key 示例（JavaScript）<br/>
+<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; objectArray: [<br/>
+&nbsp; &nbsp; &nbsp; {id: 5, unique: 'unique_5'},<br/>
+&nbsp; &nbsp; &nbsp; {id: 4, unique: 'unique_4'},<br/>
+&nbsp; &nbsp; &nbsp; {id: 3, unique: 'unique_3'},<br/>
+&nbsp; &nbsp; &nbsp; {id: 2, unique: 'unique_2'},<br/>
+&nbsp; &nbsp; &nbsp; {id: 1, unique: 'unique_1'},<br/>
+&nbsp; &nbsp; &nbsp; {id: 0, unique: 'unique_0'},<br/>
+&nbsp; &nbsp; ],<br/>
+&nbsp; &nbsp; numberArray: [1, 2, 3, 4]<br/>
+&nbsp; },<br/>
+&nbsp; switch: function(e) {<br/>
+&nbsp; &nbsp; const length = this.data.objectArray.length<br/>
+&nbsp; &nbsp; for (let i = 0; i &lt; length; ++i) {<br/>
+&nbsp; &nbsp; &nbsp; const x = Math.floor(Math.random() * length)<br/>
+&nbsp; &nbsp; &nbsp; const y = Math.floor(Math.random() * length)<br/>
+&nbsp; &nbsp; &nbsp; const temp = this.data.objectArray[x]<br/>
+&nbsp; &nbsp; &nbsp; this.data.objectArray[x] = this.data.objectArray[y]<br/>
+&nbsp; &nbsp; &nbsp; this.data.objectArray[y] = temp<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; objectArray: this.data.objectArray<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; addToFront: function(e) {<br/>
+&nbsp; &nbsp; const length = this.data.objectArray.length<br/>
+&nbsp; &nbsp; this.data.objectArray = [{id: length, unique: 'unique_' + length}].concat(this.data.objectArray)<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; objectArray: this.data.objectArray<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; addNumberToFront: function(e){<br/>
+&nbsp; &nbsp; this.data.numberArray = [ this.data.numberArray.length + 1 ].concat(this.data.numberArray)<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; numberArray: this.data.numberArray<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; }<br/>
+})</body></html>

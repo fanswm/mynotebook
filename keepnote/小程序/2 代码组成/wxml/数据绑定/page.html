@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>数据绑定</title>
+</head><body><br/>
+&nbsp;将 pages/wxml/index.wxml 文件的内容做一些简单的修改：<br/>
+&lt;!--pages/wxml/index.wxml--&gt;<br/>
+&lt;text&gt;当前时间：<img src="file:///F:/git/mynotebook/Zim/Home/My_Zim/Study/%E5%BE%AE%E4%BF%A1/%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%BB%A3%E7%A0%81%E7%BB%84%E6%88%90/WXML_%E6%A8%A1%E6%9D%BF/%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A/time" />&lt;/text&gt; <br/>
+&nbsp;<br/>
+&nbsp;​保存后工具刷新，模拟器并没有显示出当前的时间，这是因为我们并没有给 time 设置任何初始值，请打开 pages/wxml/index.js 文件，<br/>
+&nbsp;在 data 的大括号中加入：time: (new Date()).toString()。 &nbsp;<br/>
+&nbsp;<br/>
+&nbsp;<u>WXML 通过 {{变量名}} 来绑定 WXML 文件和对应的 JavaScript 文件中的 data 对象属性。</u>&nbsp;<br/>
+&nbsp;<br/>
+&nbsp;展示格式：<br/>
+&lt;!--<br/>
+{<br/>
+time: (new Date()).toString()<br/>
+}<br/>
+--&gt;<br/>
+&lt;text&gt;当前时间：<img src="file:///F:/git/mynotebook/Zim/Home/My_Zim/Study/%E5%BE%AE%E4%BF%A1/%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%BB%A3%E7%A0%81%E7%BB%84%E6%88%90/WXML_%E6%A8%A1%E6%9D%BF/%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A/time" />&lt;/text&gt; <br/>
+&nbsp;<br/>
+<span style="color: #ff0000">&nbsp;属性值也可以动态的去改变，有所不同的是，<u>属性值必须被包裹在双引号中</u></span>，如下：<br/>
+&lt;!-- 正确的写法 --&gt;<br/>
+&lt;text data-test="<img src="file:///F:/git/mynotebook/Zim/Home/My_Zim/Study/%E5%BE%AE%E4%BF%A1/%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%BB%A3%E7%A0%81%E7%BB%84%E6%88%90/WXML_%E6%A8%A1%E6%9D%BF/%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A/test" />"&gt; hello world&lt;/text&gt; <br/>
+&nbsp;<br/>
+&nbsp;&lt;!-- 错误的写法 --&gt;<br/>
+&lt;text data-test=<img src="file:///F:/git/mynotebook/Zim/Home/My_Zim/Study/%E5%BE%AE%E4%BF%A1/%E5%B0%8F%E7%A8%8B%E5%BA%8F/%E4%BB%A3%E7%A0%81%E7%BB%84%E6%88%90/WXML_%E6%A8%A1%E6%9D%BF/%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A/test" />&gt; hello world &lt;/text &gt; <br/>
+&nbsp;<br/>
+&nbsp;<u><span style="color: #ff0000">没有被定义的变量的或者是被设置为 undefined 的变量不会被同步到 wxml 中</span></u><span style="color: #ff0000">&nbsp;</span><br/>
+&nbsp;</body></html>

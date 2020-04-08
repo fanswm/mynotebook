@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>文字跑马灯</title>
+</head><body>wxml<br/>
+<br/>
+&lt;view&gt;1 显示完后再显示&lt;/view&gt;<br/>
+&lt;view class="example"&gt;<br/>
+&nbsp; &lt;view class="marquee_box"&gt;<br/>
+&nbsp; &nbsp; &lt;view class="marquee_text" style="{{orientation}}:{{marqueeDistance}}px;font-size: {{size}}px;"&gt;<br/>
+&nbsp; &nbsp; &nbsp; {{text}}<br/>
+&nbsp; &nbsp; &lt;/view&gt;<br/>
+&nbsp; &lt;/view&gt;<br/>
+&lt;/view&gt;<br/>
+&lt;view&gt;2 出现白边后即显示&lt;/view&gt;<br/>
+&lt;view class="example"&gt;<br/>
+&nbsp; &lt;view class="marquee_box"&gt;<br/>
+&nbsp; &nbsp; &lt;view class="marquee_text" style="{{orientation}}:{{marqueeDistance2}}px;font-size: {{size}}px;"&gt;<br/>
+&nbsp; &nbsp; &nbsp; &lt;text&gt;{{text}}&lt;/text&gt;<br/>
+&nbsp; &nbsp; &nbsp; &lt;text wx:if="{{marquee2copy_status}}" style="margin-left:{{marquee2_margin}}px;"&gt;{{text}}&lt;/text&gt;<br/>
+&nbsp; &nbsp; &lt;/view&gt;<br/>
+&nbsp; &lt;/view&gt;<br/>
+&lt;/view&gt;<hr/>wxss<br/>
+<br/>
+.example {<br/>
+&nbsp; display: block;<br/>
+&nbsp; width: 100%;<br/>
+&nbsp; height: 100rpx;<br/>
+}<br/>
+<br/>
+.marquee_box {<br/>
+&nbsp; width: 100%;<br/>
+&nbsp; position: relative;<br/>
+}<br/>
+<br/>
+.marquee_text {<br/>
+&nbsp; white-space: nowrap;<br/>
+&nbsp; position: absolute;<br/>
+&nbsp; top: 0;<br/>
+}<hr/>js<br/>
+<br/>
+// pages/home/marquee/marquee.js<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; text: '这是一条会滚动的文字滚来滚去的文字跑马灯，哈哈哈哈哈哈哈哈',<br/>
+&nbsp; &nbsp; marqueePace: 1,//滚动速度<br/>
+&nbsp; &nbsp; marqueeDistance: 0,//初始滚动距离<br/>
+&nbsp; &nbsp; marqueeDistance2: 0,<br/>
+&nbsp; &nbsp; marquee2copy_status: false,<br/>
+&nbsp; &nbsp; marquee2_margin: 60,<br/>
+&nbsp; &nbsp; size: 14,<br/>
+&nbsp; &nbsp; orientation: 'left',//滚动方向<br/>
+&nbsp; &nbsp; interval: 20 // 时间间隔<br/>
+&nbsp; },<br/>
+&nbsp; onShow: function () {<br/>
+&nbsp; &nbsp; // 页面显示<br/>
+&nbsp; &nbsp; var vm = this;<br/>
+&nbsp; &nbsp; var length = vm.data.text.length * vm.data.size;//文字长度<br/>
+&nbsp; &nbsp; var windowWidth = wx.getSystemInfoSync().windowWidth;// 屏幕宽度<br/>
+&nbsp; &nbsp; vm.setData({<br/>
+&nbsp; &nbsp; &nbsp; length: length,<br/>
+&nbsp; &nbsp; &nbsp; windowWidth: windowWidth,<br/>
+&nbsp; &nbsp; &nbsp; marquee2_margin: length &lt; windowWidth ? windowWidth - length : vm.data.marquee2_margin//当文字长度小于屏幕长度时，需要增加补白<br/>
+&nbsp; &nbsp; });<br/>
+&nbsp; &nbsp; vm.run1();// 水平一行字滚动完了再按照原来的方向滚动<br/>
+&nbsp; &nbsp; vm.run2();// 第一个字消失后立即从右边出现<br/>
+&nbsp; },<br/>
+&nbsp; run1: function () {<br/>
+&nbsp; &nbsp; var vm = this;<br/>
+&nbsp; &nbsp; var interval = setInterval(function () {<br/>
+&nbsp; &nbsp; &nbsp; if (-vm.data.marqueeDistance &lt; vm.data.length) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; vm.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; marqueeDistance: vm.data.marqueeDistance - vm.data.marqueePace,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; });<br/>
+&nbsp; &nbsp; &nbsp; } else {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; clearInterval(interval);<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; vm.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; marqueeDistance: vm.data.windowWidth<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; });<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; vm.run1();<br/>
+&nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; }, vm.data.interval);<br/>
+&nbsp; },<br/>
+&nbsp; run2: function () {<br/>
+&nbsp; &nbsp; var vm = this;<br/>
+&nbsp; &nbsp; var interval = setInterval(function () {<br/>
+&nbsp; &nbsp; &nbsp; if (-vm.data.marqueeDistance2 &lt; vm.data.length) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; // 如果文字滚动到出现marquee2_margin=30px的白边，就接着显示<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; vm.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; marqueeDistance2: vm.data.marqueeDistance2 - vm.data.marqueePace,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; marquee2copy_status: vm.data.length + vm.data.marqueeDistance2 &lt;= vm.data.windowWidth + vm.data.marquee2_margin,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; });<br/>
+&nbsp; &nbsp; &nbsp; } else {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; if (-vm.data.marqueeDistance2 &gt;= vm.data.marquee2_margin) { // 当第二条文字滚动到最左边时<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; vm.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; marqueeDistance2: vm.data.marquee2_margin // 直接重新滚动<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; clearInterval(interval);<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; vm.run2();<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; } else {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; clearInterval(interval);<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; vm.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; marqueeDistance2: -vm.data.windowWidth<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; vm.run2();<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; }, vm.data.interval);<br/>
+&nbsp; }<br/>
+})<hr/>版权声明：本文为CSDN博主「游走走」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br/>
+原文链接：<a href="https://blog.csdn.net/qq_24734285/article/details/54174177">https://blog.csdn.net/qq_24734285/article/details/54174177</a></body></html>

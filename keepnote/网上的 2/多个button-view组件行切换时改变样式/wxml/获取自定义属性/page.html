@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>获取自定义属性</title>
+</head><body>wxml<br/>
+<br/>
+&lt;view class='zright' bindtap='choseCoupon' data-info='{{item}}' <span style="color: #ff0000">&nbsp;data-id='{{index}}</span>'&gt;<br/>
+js<br/>
+<br/>
+choseCoupon: function (<span style="color: #ff0000">e</span>) {<br/>
+&nbsp; &nbsp; console.log(<span style="color: #ff0000">e.currentTarget.dataset.id</span>)<br/>
+&nbsp; &nbsp; console.log(e.currentTarget.dataset.info)<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000">imrdr: 红色部分是关键；</span><br/>
+————————————————<br/>
+版权声明：本文为CSDN博主「zeroyulong」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br/>
+原文链接：https://blog.csdn.net/zeroyulong/article/details/79984582</body></html>

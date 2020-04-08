@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>6. 页面跳转和路由</title>
+</head><body>6. 页面跳转和路由<br/>
+<br/>
+一个小程序拥有多个页面，我们可以<span style="color: #ff0000">通过wx.navigateTo推入一个新的页面</span>，如图3-6所示，在首页使用2次wx.navigateTo后，页面层级会有三层，我们把这样的一个页面层级称为<span style="color: #ff0000"><b><i>页面栈</i></b></span>。<br/>
+<br/>
+<br/>
+<br/>
+图3-6 使用2次wx.navigateTo后的页面栈<br/>
+<br/>
+后续为了表述方便，我们<span style="color: #ff0000">采用这样的方式进行描述页面栈：[ pageA, pageB, pageC ]，其中pageA在最底下，pageC在最顶上，也就是用户所看到的界面，<br/>
+</span>需要注意在本书编写的时候，小程序宿主环境<span style="color: #ff0000"><span style="font-size: 14pt">限制了这个<b>页面栈的最</b>大层级为10层</span>&nbsp;</span>，也就是当页面栈到达10层之后就没有办法再推入新的页面了。我们下面来通过上边这个页面栈描述<span style="color: #ff0000">以下几个和导航相关的API</span>。<br/>
+<br/>
+使用 <span style="color: #ff0000">wx.navigateTo({ url: 'pageD' }) &#09;</span>可以往当前页面栈<span style="color: #ff0000">多推入一个 pageD</span>，此时页面栈变成 [ pageA, pageB, pageC, pageD ]。<br/>
+使用 <span style="color: #ff0000">wx.navigateBack() &#09;&#09;</span>&#09;可以<span style="color: #ff0000">退出当前页面栈的最顶上页面</span>，此时页面栈变成 [ pageA, pageB, pageC ]。<br/>
+使用 <span style="color: #ff0000">wx.redirectTo({ url: 'pageE' }) </span>&#09;是<span style="color: #ff0000">替换当前页</span>变成pageE，此时页面栈变成 [ pageA, pageB, pageE ]，当页面栈到达10层没法再新增的时候，往往就是使用redirectTo这个API进行页面跳转。<br/>
+<br/>
+<span style="color: #ff0000">小程序提供了原生的Tabbar支持</span>，我们可以在app.json<span style="color: #ff0000">声明tabBar字段来定义Tabbar页</span>（注：更多详细参数见Tabbar官方文档 ）。<br/>
+<br/>
+代码清单3-14 app.json定义小程序底部tab<br/>
+<br/>
+{<br/>
+&nbsp; "tabBar": {<br/>
+&nbsp; &nbsp; "list": [<br/>
+&nbsp; &nbsp; &nbsp; { "text": "Tab1", "pagePath": "pageA" },<br/>
+&nbsp; &nbsp; &nbsp; { "text": "Tab1", "pagePath": "pageF" },<br/>
+&nbsp; &nbsp; &nbsp; { "text": "Tab1", "pagePath": "pageG" }<br/>
+&nbsp; &nbsp; ]<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+我们可以在刚刚的例子所在的页面栈中使用<span style="color: #ff0000">wx.switchTab({ url: 'pageF' })</span>，<br/>
+<span style="color: #ff0000">此时原来的页面栈会被清空（除了已经声明为Tabbar页pageA外其他页面会被销毁）</span>，<br/>
+然后会切到pageF所在的tab页面，页面栈变成 [ pageF ]，<br/>
+此时点击Tab1切回到pageA时，<span style="color: #ff0000">pageA不会再触发onLoad，因为pageA没有被销毁。</span><br/>
+补充一下，<span style="color: #ff0000">wx.navigateTo和wx.redirectTo只能打开非TabBar页面，wx.switchTab只能打开Tabbar页面。<br/>
+</span><br/>
+我们还可以<span style="color: #ff0000">使用 wx. reLaunch({ url: 'pageH' }) 重启小程序，并且打开pageH，此时页面栈为 [ pageH ]</span>。表3-5罗列了详细的页面路由触发方式及页面生命周期函数的对应关系。<br/>
+<br/>
+表3-5<span style="color: #ff0000">&nbsp;页面路由触发方式</span>及<span style="color: #ff0000">页面生命周期函数</span>的对应关系<br/>
+<br/>
+路由方式&#09;&#09;&#09;&#09;&#09;触发时机&#09;&#09;&#09;&#09;&#09;&#09;路由前页面生命周期&#09;路由后页面生命周期<br/>
+初始化&#09;&#09;&#09;&#09;&#09;小程序打开的第一个页面&#09;&#09;&#09;&#09;&#09;&#09;&#09;onLoad, onShow<br/>
+打开新页面 &#09;调用&#09;&#09;API wx.navigateTo&#09;&#09;&#09;onHide&#09;&#09;&#09;&#09;onLoad, onShow<br/>
+页面重定向 &#09;调用&#09;&#09;API wx.redirectTo&#09;&#09;&#09;onUnload&#09;&#09;&#09;onLoad, onShow<br/>
+页面返回 &#09;调用&#09;&#09;API wx.navigateBack&#09;&#09;&#09;onUnload&#09;&#09;&#09;onShow<br/>
+Tab&#09;&#09;&#09;切换 调用 &#09;API wx.switchTab&#09;&#09;&#09;请参考表3-6&#09;&#09;&#09;请参考表3-6<br/>
+重启动&#09;&#09;调用 &#09;&#09;API wx.reLaunch&#09;&#09;&#09;&#09;onUnload&#09;&#09;&#09;onLoad, onShow<br/>
+<br/>
+<br/>
+Tab 切换对应的生命周期（以 A、B 页面为 Tabbar 页面，C 是从 A 页面打开的页面，D 页面是从 C 页面打开的页面为例）如表3-6所示，注意Tabbar页面初始化之后不会被销毁。<br/>
+<br/>
+表3-6 <span style="color: #ff0000">页面路由触发方式</span>及页面生命周期函数的对应关系<br/>
+<img src="screenshot.png" /><br/>
+<br/>
+当前页面&#09;&#09;&#09;路由后页面&#09;&#09;触发的生命周期（按顺序）<br/>
+A&#09;&#09;&#09;&#09;A&#09;&#09;&#09;&#09;无<br/>
+A&#09;&#09;&#09;&#09;B&#09;&#09;&#09;&#09;A.onHide(), B.onLoad(), B.onShow()<br/>
+A&#09;&#09;&#09;&#09;B(再次打开)&#09;&#09;A.onHide(), B.onShow()<br/>
+C&#09;&#09;&#09;&#09;A&#09;&#09;&#09;&#09;C.onUnload(), A.onShow()<br/>
+C&#09;&#09;&#09;&#09;B&#09;&#09;&#09;&#09;C.onUnload(), B.onLoad(), B.onShow()<br/>
+D&#09;&#09;&#09;&#09;B&#09;&#09;&#09;&#09;D.onUnload(), C.onUnload(), B.onLoad(), B.onShow()<br/>
+D(从转发进入)&#09;A&#09;&#09;&#09;&#09;D.onUnload(), A.onLoad(), A.onShow()<br/>
+D(从转发进入)&#09;B&#09;&#09;&#09;&#09;D.onUnload(), B.onLoad(), B.onShow()<br/>
+<br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

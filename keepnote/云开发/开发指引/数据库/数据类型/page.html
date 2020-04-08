@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>数据类型</title>
+</head><body>数据类型<br/>
+云开发数据库提供以下几种数据类型：<br/>
+<br/>
+String：&#09;&#09;字符串<br/>
+Number：&#09;数字<br/>
+Object：&#09;对象<br/>
+Array：&#09;&#09;数组<br/>
+Bool：&#09;&#09;布尔值<br/>
+Date：&#09;&#09;时间<br/>
+Geo：&#09;&#09;多种地理位置类型，详见下<br/>
+Null<br/>
+<br/>
+下面对几个需要额外说明的字段做下补充说明。<br/>
+<br/>
+<span style="color: #ff0000">Date</span><br/>
+Date 类型用于表示时间，<span style="color: #ff0000">精确到毫秒</span>，在小程序端可用 JavaScript 内置 Date 对象创建。需要特别注意的是，<span style="color: #ff0000">在小程序端创建的时间是客户端时间，不是服务端时间</span>，这意味着在<span style="color: #ff0000">小程序端的时间与服务端时间不一定吻合</span>，如果需要使用服务端时间，<span style="color: #ff0000">应该用 API 中提供的 serverDate 对象来创建一个服务端当前时间的标记</span>，当使用了 <span style="color: #ff0000">serverDate</span>&nbsp;对象的请求抵达服务端处理时，该字段会被转换成服务端当前的时间，更棒的是，我们在构造 serverDate 对象时还可通过传入一个有 <span style="color: #ff0000">offset</span>&nbsp;字段的对象来标记一个与当前服务端时间偏移 offset 毫秒的时间，这样我们就可以达到比如如下效果<span style="color: #ff0000">：指定一个字段为服务端时间往后一个小时。</span><br/>
+<br/>
+那么当我们需要使用客户端时间时，<span style="color: #ff0000">存放 Date 对象和存放毫秒数是否是一样的效果呢？</span>不是的，我们的数据库有针对日期类型的优化，<span style="color: #ff0000">建议大家使用时都用 Date 或 serverDate 构造时间对象。</span><br/>
+<br/>
+<span style="color: #ff0000">地理位置</span><br/>
+除 db.Geo.Point 外，需小程序基础库版本 2.6.3 或以上。控制台需开发者工具版本 1.02.1903251 或以上。<br/>
+<br/>
+云开发数据库提供了多种地理位置数据类型的增删查改支持，支持的地理位置数据类型有以下几种（API 文档）：<br/>
+<br/>
+字段&#09;&#09;&#09;说明&#09;最低基础库版本<br/>
+Point&#09;&#09;&#09;点&#09;&#09;2.2.3<br/>
+LineString&#09;&#09;线段&#09;2.6.3<br/>
+Polygon&#09;&#09;&#09;多边形&#09;2.6.3<br/>
+MultiPoint&#09;&#09;点集合&#09;2.6.3<br/>
+MultiLineString&#09;线段集合&#09;2.6.3<br/>
+MultiPolygon&#09;多边形集合&#09;2.6.3<br/>
+<br/>
+要使用地理位置查询功能时，必须建立地理位置索引，<span style="color: #ff0000">建议用于存储地理位置数据的字段均建立地理位置索引。</span>地理位置索引可在云控制台建立索引的入口中选择地理位置索引（2dsphere）。<br/>
+<br/>
+具体的使用方法可参见 API 文档。 &nbsp;<a href=" https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/database/Geo.html">&nbsp;https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/database/Geo.html</a><br/>
+&nbsp; <br/>
+Null<br/>
+<span style="color: #ff0000">null 相当于一个占位符，表示一个字段存在但是值为空。</span></body></html>

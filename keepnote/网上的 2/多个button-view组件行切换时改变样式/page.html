@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>多个button/view组件行切换时改变样式</title>
+</head><body><a href="https://github.com/CitrusHan/MyJobs_WeChat">https://github.com/CitrusHan/MyJobs_WeChat</a>&nbsp; <br/>
+<br/>
+<br/>
+wxmL代码：<br/>
+&lt;button wx:for="{{buttons}}" wx:key="*this" id="{{'btn'+index}}" bindtap='onchangeTab' class="{{tabIndex==index?'on':''}}"&gt;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; {{item}}<br/>
+&nbsp; &nbsp; &nbsp; &lt;/button&gt;<br/>
+<br/>
+wxjs代码：<br/>
+onchangeTab: function(e){<br/>
+&nbsp; &nbsp; var index = 0;<br/>
+&nbsp; &nbsp; switch(e.target.id){<br/>
+&nbsp; &nbsp; &nbsp; case "btn0":<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; index=0;<br/>
+&nbsp; &nbsp; &nbsp; break;<br/>
+&nbsp; &nbsp; &nbsp; case "btn1":<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; index = 1;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; break;<br/>
+&nbsp; &nbsp; &nbsp; case "btn2":<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; index = 2;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; break;<br/>
+&nbsp; &nbsp; &nbsp; case "btn3":<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; index = 3;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; break;<br/>
+&nbsp; &nbsp; &nbsp; default:<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; break;<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; tabIndex:index<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+<br/>
+<br/>
+先是设置了button的id然后根据不同的id来区分点击的button<br/>
+<br/>
+————————————————<br/>
+版权声明：本文为CSDN博主「曾梦轩」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br/>
+原文链接：https://blog.csdn.net/u013751625/article/details/80826146</body></html>

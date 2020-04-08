@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>组件生命周期</title>
+</head><body>组件生命周期<br/>
+<br/>
+组件的生命周期，指的是组件自身的一些函数，<span style="color: #ff0000">这些函数在特殊的时间点或遇到一些特殊的框架事件时被自动触发。</span><br/>
+<br/>
+其中，最重要的生命周期是<span style="color: #ff0000">&nbsp;created attached detached </span>，包含一个组件实例生命流程的最主要时间点。<br/>
+<br/>
+<span style="color: #ff0000">组件实例刚刚被创建好时， created 生命周期被触发</span>。此时，组件数据 this.data 就是在 Component 构造器中定义的数据 data 。 <span style="color: #ff0000">此时还不能调用 setData</span>&nbsp;。 通常情况下，这个生命周期<span style="color: #ff0000">只应该用于给组件 this 添加一些自定义属性字段。</span><br/>
+<br/>
+在组件完全<span style="color: #ff0000">初始化完毕、进入页面节点树后， attached 生命周期被触发</span>。此时，<span style="color: #ff0000">&nbsp;this.data 已被初始化为组件的当前值。这个生命周期很有用</span>，绝大多数初始化工作可以在这个时机进行。<br/>
+<br/>
+在组件<span style="color: #ff0000">离开页面节点树后， detached 生命周期被触发</span>。<span style="color: #ff0000">退出一个页面时，如果组件还在页面节点树中，则 detached 会被触发。<br/>
+</span><br/>
+<span style="color: #ff0000">定义生命周期方法<br/>
+</span><br/>
+生命周期方法可以直接定义在 Component 构造器的第一级参数中。<br/>
+<br/>
+自小程序基础库版本 2.2.3 起，组件的的生命周期也可以<span style="color: #ff0000">在 lifetimes 字段内进行声明（这是推荐的方式，其优先级最高）。</span><br/>
+<br/>
+代码示例：<br/>
+<br/>
+Component({<br/>
+&nbsp; lifetimes: {<br/>
+&nbsp; &nbsp; attached: function() {<br/>
+&nbsp; &nbsp; &nbsp; // 在组件实例进入页面节点树时执行<br/>
+&nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; detached: function() {<br/>
+&nbsp; &nbsp; &nbsp; // 在组件实例被从页面节点树移除时执行<br/>
+&nbsp; &nbsp; },<br/>
+&nbsp; },<br/>
+&nbsp; // 以下是旧式的定义方式，可以保持对 &lt;2.2.3 版本基础库的兼容<br/>
+&nbsp; attached: function() {<br/>
+&nbsp; &nbsp; // 在组件实例进入页面节点树时执行<br/>
+&nbsp; },<br/>
+&nbsp; detached: function() {<br/>
+&nbsp; &nbsp; // 在组件实例被从页面节点树移除时执行<br/>
+&nbsp; },<br/>
+&nbsp; // ...<br/>
+})<br/>
+<br/>
+<span style="color: #ff0000">在 behaviors 中也可以编写生命周期方法</span>，同时<span style="color: #ff0000">不会与其他 behaviors 中的同名生命周期相互覆盖。</span>但要注意，<span style="color: #ff0000">如果一个组件多次直接或间接引用同一个 behavior ，这个 behavior 中的生命周期函数在一个执行时机内只会执行一次。</span><br/>
+<br/>
+可用的全部生命周期如下表所示。<br/>
+<br/>
+生命周期&#09;参数&#09;描述&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;最低版本<br/>
+created&#09;无&#09;&#09;在组件实例刚刚被创建时执行&#09;&#09;&#09;&#09;&#09;1.6.3<br/>
+attached&#09;无&#09;&#09;在组件实例进入页面节点树时执行&#09;&#09;&#09;&#09;1.6.3<br/>
+ready&#09;&#09;无&#09;&#09;在组件在视图层布局完成后执行&#09;&#09;&#09;&#09;&#09;1.6.3<br/>
+moved&#09;无&#09;&#09;在组件实例被移动到节点树另一个位置时执行&#09;1.6.3<br/>
+detached&#09;无&#09;&#09;在组件实例被从页面节点树移除时执行&#09;&#09;&#09;1.6.3<br/>
+error&#09;Object Error&#09;每当组件方法抛出错误时执行&#09;&#09;&#09;&#09;2.4.1<br/>
+<br/>
+<span style="color: #ff0000">组件所在页面的生命周期<br/>
+</span><br/>
+还有一些特殊的生命周期，它们<span style="color: #ff0000">并非与组件有很强的关联，但有时组件需要获知</span>，以便组件内部处理。这样的生命周期称为“<span style="color: #ff0000">组件所在页面的生命周期</span>”，在 <span style="color: #ff0000">pageLifetimes</span>&nbsp;定义段中定义。其中可用的生命周期包括：<br/>
+<br/>
+生命周期&#09;参数&#09;&#09;&#09;描述&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;最低版本<br/>
+show&#09;&#09;无&#09;&#09;&#09;&#09;组件所在的页面被展示时执行&#09;&#09;2.2.3<br/>
+hide&#09;&#09;无&#09;&#09;&#09;&#09;组件所在的页面被隐藏时执行&#09;&#09;2.2.3<br/>
+resize&#09;&#09;Object Size&#09;组件所在的页面尺寸变化时执行&#09;&#09;2.4.0<br/>
+<br/>
+代码示例：<br/>
+<br/>
+Component({<br/>
+&nbsp; pageLifetimes: {<br/>
+&nbsp; &nbsp; show: function() {<br/>
+&nbsp; &nbsp; &nbsp; // 页面被展示<br/>
+&nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; hide: function() {<br/>
+&nbsp; &nbsp; &nbsp; // 页面被隐藏<br/>
+&nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; resize: function(size) {<br/>
+&nbsp; &nbsp; &nbsp; // 页面尺寸变化<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+})</body></html>

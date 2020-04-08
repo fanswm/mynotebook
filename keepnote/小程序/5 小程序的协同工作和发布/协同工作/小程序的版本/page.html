@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>小程序的版本</title>
+</head><body>一般的软件开发流程，开发者编写代码自测开发版程序，直到程序达到一个稳定可体验的状态时，开发者会把这个体验版本给到产品经理和测试人员进行体验测试，最后修复完程序的Bug后发布供外部用户正式使用。小程序的版本根据这个流程设计了<span style="color: #ff0000">小程序版本的概念</span>，如表5-2所示。<br/>
+<br/>
+表5-3 小程序的版本<br/>
+<br/>
+权限&#09;&#09;&#09;说明<br/>
+<br/>
+开发版本&#09;<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">使用开发者工具，可将代码上传到开发版本中。 开发版本<span style="color: #ff0000">只保留每人最新的一份上传的代码</span>。点击提交审核，可将代码提交审核。<span style="color: #ff0000">开发版本可删除</span>，<span style="color: #ff0000">不影响线上版本和审核中版本的</span>代码。</li>
+</ul>
+</li>
+</ul>
+体验版本&#09;<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">可以选择某个开发版本作为体验版，并且选取一份体验版。</li>
+</ul>
+</li>
+</ul>
+审核中版本&#09;<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">只能有一份代码处于审核中。有审核结果后可以发布到线上，也可直接重新提交审核，覆盖原审核版本。</li>
+</ul>
+</li>
+</ul>
+线上版本&#09;<ul><li style="list-style-type: none"><ul><li style="list-style-type: none">线上所有用户使用的代码版本，该版本代码在新版本代码发布后被覆盖更新。</li>
+<li style="list-style-type: none"></li>
+</ul>
+</li>
+</ul>
+考虑到项目是协同开发的模式，一个小程序可能同时由多个开发者进行开发，往往开发者在小程序开发者工具上编写完代码后需要到手机进行真机体验，所以<span style="color: #ff0000">每个开发者拥有自己对应的一个开发版本</span>。因为处于开发中的版本是不稳定的，开发者随时会修改代码覆盖开发版，为了让测试和产品经理有一个完整稳定的版本可以体验测试，小程序平台<span style="color: #ff0000">允许把其中一个开发版本设置成体验版</span>，因此<span style="color: #ff0000">建议在项目开发阶段特殊分配一个开发角色，用于上传稳定可供体验测试的代码</span>，并把他上传的开发版本设置成体验版。<br/>
+<br/>
+刚刚说到开发者需要真机调试开发版本时，可以<span style="color: #ff0000">点击开发者工具的<span style="font-size: 13pt"><b>预览按钮</b></span>，此时开发者工具会打包当前项目，并上传到微信服务器生成一个二维码，开发者使用当前开发身份的微信扫描二维码就可以在手机上体验对应的开发版本</span>，如图5-3所示。<br/>
+<br/>
+<br/>
+<br/>
+​ 图5-3 预览小程序开发版<br/>
+<br/>
+在小程序管理平台上可以选取某个开发版作为体验版本，操作成功之后可以得到一个体验版的二维码，当前项目有权限的体验者均可用其对应的微信号进行扫码体验。<br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

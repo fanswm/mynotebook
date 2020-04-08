@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>基础组件</title>
+</head><body>框架为开发者提供了一系列基础组件，开发者可以通过组合这些基础组件进行快速开发。详细介绍请参考组件文档。<br/>
+<br/>
+<span style="color: #ff0000">什么是组件：</span><br/>
+<br/>
+组件是视图层的基本组成单元。<br/>
+组件自带一些功能与微信风格一致的样式。<br/>
+一个组件通常包括<span style="color: #ff0000">&nbsp;开始标签 和 结束标签</span>，<span style="color: #ff0000">属性</span>&nbsp;用来修饰这个组件，内容 在两个标签之内。<br/>
+<br/>
+&lt;tagname property="value"&gt;<br/>
+Content goes here ...<br/>
+&lt;/tagname&gt;<br/>
+<br/>
+注意：<span style="color: #ff0000">所有组件与属性都是小写，以连字符-连接</span><br/>
+<br/>
+<span style="color: #ff0000">属性类型<br/>
+</span><br/>
+类型&#09;&#09;&#09;描述&#09;&#09;&#09;注解<br/>
+Boolean&#09;&#09;&#09;布尔值&#09;&#09;&#09;组件写上该属性，不管是什么值都被当作 true；只有组件上没有该属性时，属性值才为false。<ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none">如果属性值为变量，变量的值会被转换为Boolean类型</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+Number&#09;&#09;&#09;数字&#09;&#09;&#09;1, 2.5<br/>
+String&#09;&#09;&#09;字符串&#09;&#09;&#09;"string"<br/>
+Array&#09;&#09;&#09;数组&#09;&#09;&#09;[ 1, "string" ]<br/>
+Object&#09;&#09;&#09;对象&#09;&#09;&#09;{ key: value }<br/>
+EventHandler&#09;事件处理函数名&#09;"handlerName" 是 Page 中定义的事件处理函数名<br/>
+Any&#09;&#09;&#09;&#09;任意属性&#09;<br/>
+<br/>
+<span style="color: #ff0000">公共属性</span><br/>
+<span style="color: #ff0000">所有组件都有以下属性：</span><br/>
+<br/>
+属性名&#09;&#09;&#09;类型&#09;&#09;&#09;描述&#09;&#09;&#09;注解<br/>
+id&#09;&#09;&#09;&#09;String&#09;&#09;&#09;组件的唯一标示&#09;保持整个页面唯一<br/>
+class&#09;&#09;&#09;String&#09;&#09;&#09;组件的样式类&#09;&#09;在对应的 WXSS 中定义的样式类<br/>
+style&#09;&#09;&#09;String&#09;&#09;&#09;组件的内联样式&#09;可以动态设置的内联样式<br/>
+<span style="color: #ff0000">hidden&#09;&#09;&#09;Boolean&#09;&#09;&#09;组件是否显示&#09;&#09;所有组件默认显示</span><br/>
+data-*&#09;&#09;&#09;Any&#09;&#09;&#09;&#09;自定义属性&#09;&#09;组件上触发的事件时，会发送给事件处理函数<br/>
+bind* / &#09;catch*&#09;EventHandler&#09;组件的事件&#09;&#09;详见事件<br/>
+<br/>
+<span style="color: #ff0000">特殊属性</span><br/>
+<span style="color: #ff0000">几乎所有组件都有各自定义的属性</span>，可以对该组件的功能或样式进行修饰，请参考各个组件的定义。<br/>
+<br/>
+</body></html>

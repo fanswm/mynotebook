@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>项目属性</title>
+</head><body>设置项目，用于设置项目的<span style="color: #ff0000">尺寸、位置</span>，以及对项目的<span style="color: #ff0000">对齐方式</span>做特殊设置。<br/>
+<br/>
+<span style="color: #ff0000">order 属性</span><br/>
+<br/>
+设置项目沿主轴方向上的<span style="color: #ff0000">排列顺序，数值越小，排列越靠前</span>。属性值为整数。<br/>
+<br/>
+.item{<br/>
+&nbsp; order: 0（默认值） | &lt;integer&gt;<br/>
+}<br/>
+<br/>
+<img src="screenshot.png" /><br/>
+​ 图4-12 order<br/>
+<br/>
+<span style="color: #ff0000">flex-shrink 属性</span><br/>
+<br/>
+当项目在主轴方向上溢出时，通过设置项目收缩因子来<span style="color: #ff0000">压缩项目适应容器</span>。属性值为项目的收缩因子，<span style="color: #ff0000">属性值取非负数</span>。<br/>
+<br/>
+.item{<br/>
+&nbsp; flex-shrink: 1（默认值） | &lt;number&gt;<br/>
+}<br/>
+<br/>
+.item1{<br/>
+&nbsp; width: 120px;<br/>
+&nbsp; flex-shrink: 2;<br/>
+}<br/>
+<br/>
+.item2{<br/>
+&nbsp; width: 150px;<br/>
+&nbsp; flex-shrink: 3;<br/>
+}<br/>
+<br/>
+.item3{// 项目3未设置flex-shrink，默认flex-shrink值为1<br/>
+&nbsp; width: 180px;<br/>
+}<br/>
+<br/>
+为了加深理解，我们举个例子：<br/>
+<br/>
+一个宽度为400px的容器，里面的三个项目width分别为120px，150px，180px。（<span style="color: #ff0000">imrdr: 溢出为（120+150+180 = 450；450-400 = 50；）</span>）分别对这项目1和项目2设置flex-shrink值为2和3。<br/>
+<br/>
+.container{<br/>
+&nbsp; display: flex;<br/>
+&nbsp; width: 400px; // 容器宽度为400px<br/>
+}<br/>
+<br/>
+在这个例子中，项目<span style="color: #ff0000">溢出 400 - (120 + 150 + 180) = -50px</span>。<span style="color: #ff0000">计算压缩量时总权重</span>为各个项目的<span style="color: #ff0000">宽度乘以flex-shrink的总和</span>，这个例子压缩总权重为120 * 2 + 150 * 3+ 180 * 1 =<span style="color: #ff0000">&nbsp;870</span>。各个项目压缩空间大小为总溢出空间乘以项目宽度乘以flex-shrink除以总权重：<br/>
+<br/>
+item1的最终宽度为：120 - 50 * 120 * 2 / 870 ≈ 106px<br/>
+item2的最终宽度为：150 - 50 * 150 * 3 / 870 ≈ 124px<br/>
+item3的最终宽度为：180 - 50 * 180 * 1 / 870 ≈ 169px<br/>
+<br/>
+其中<span style="color: #ff0000">计算时候值如果为小数，则向下取整</span>。<br/>
+<img src="screenshot 2.png" /><br/>
+​ 图4-13 flex-shrink<br/>
+需要注意一点，<span style="color: #ff0000">当项目的压缩因子相加小于1时</span>，<span style="color: #ff0000">参与计算的溢出空间不等于完整的溢出空间</span>。在上面例子的基础上，我们改变各个项目的flex-shrink。<br/>
+<br/>
+.container{<br/>
+&nbsp; display: flex;<br/>
+&nbsp; width: 400px; // 容器宽度为400px<br/>
+}<br/>
+<br/>
+.item1{<br/>
+&nbsp; width: 120px;<br/>
+&nbsp; flex-shrink: 0.1;<br/>
+}<br/>
+<br/>
+.item2{<br/>
+&nbsp; width: 150px;<br/>
+&nbsp; flex-shrink: 0.2;<br/>
+}<br/>
+<br/>
+.item3{<br/>
+&nbsp; width: 180px;<br/>
+&nbsp; flex-shrink: 0.3;<br/>
+}<br/>
+<br/>
+总权重为：120 * 0.1 + 150 * 0.2 + 180 * 0.3 = 96。<span style="color: #ff0000">参与计算的溢出空间不再是50px，而是50 * (0.1 + 0.2 + 0.3) / 1 =30：<br/>
+</span><br/>
+item1的最终宽度为：120 - 30 * 120 * 0.1 / 96 ≈ 116px<br/>
+item2的最终宽度为：150 - 30 * 150 * 0.2 / 96 ≈ 140px<br/>
+item3的最终宽度为：180 - 30 * 180 * 0.3 / 96 ≈ 163px<br/>
+<br/>
+<span style="color: #ff0000">flex-grow 属性<br/>
+</span><br/>
+当项目在主轴方向上还有剩余空间时，通过设置项目<span style="color: #ff0000">扩张因子</span>进行剩余空间的分配。<span style="color: #ff0000">属性值为项目的扩张因子，属性值取非负数。<br/>
+</span><br/>
+.item{<br/>
+&nbsp; flex-grow: 0（默认值） | &lt;number&gt;<br/>
+}<br/>
+<br/>
+为了加深理解，我们举个例子：<br/>
+<br/>
+一个宽度为400px的容器，里面的三个项目width分别为80px，120px，140px。分别对这项目1和项目2设置flex-grow值为3和1。<br/>
+<br/>
+.container{<br/>
+&nbsp; display: flex;<br/>
+&nbsp; width: 400px; // 容器宽度为400px<br/>
+}<br/>
+<br/>
+.item1{<br/>
+&nbsp; width: 80px;<br/>
+&nbsp; flex-grow: 3;<br/>
+}<br/>
+<br/>
+.item2{<br/>
+&nbsp; width: 120px;<br/>
+&nbsp; flex-grow: 1;<br/>
+}<br/>
+<br/>
+.item3{// 项目3未设置flex-grow，默认flex-grow值为0<br/>
+&nbsp; width: 140px;<br/>
+}<br/>
+<br/>
+在这个例子中，容器的<span style="color: #ff0000">剩余空间为 400 - (80 + 120 + 140) = 60px</span>。<span style="color: #ff0000">剩余空间按 60 / (3 + 1 + 0) = 15px进行分配：<br/>
+</span><br/>
+item1的最终宽度为：80+ (15 * 3) = 125px<br/>
+item2的最终宽度为：120 + (15 * 1) = 135px<br/>
+item3的最终宽度为：140 + (15 * 0) =140px<br/>
+<br/>
+<br/>
+​ 图4-14 flex-grow<br/>
+<br/>
+需要注意一点，<span style="color: #ff0000">当项目的扩张因子相加小于1时，剩余空间按除以1进行分配</span>。在上面例子的基础上，我们改变各个项目的flex-grow。<br/>
+<br/>
+.container{<br/>
+&nbsp; display: flex;<br/>
+&nbsp; width: 400px; // 容器宽度为400px<br/>
+}<br/>
+<br/>
+.item1{<br/>
+&nbsp; width: 50px;<br/>
+&nbsp; flex-grow: 0.1;<br/>
+}<br/>
+<br/>
+.item2{<br/>
+&nbsp; width: 80px;<br/>
+&nbsp; flex-grow: 0.3;<br/>
+}<br/>
+<br/>
+.item3{<br/>
+&nbsp; width: 110px;<br/>
+&nbsp; flex-grow: 0.2;<br/>
+}<br/>
+<br/>
+在这个例子中，容器的剩余空间为<span style="color: #ff0000">&nbsp;400 - (50 + 80 + 110) = 160px</span>。由于项目的flex-grow相加0.1 + 0.3 + 0.2 = 0.6小于1，<span style="color: #ff0000">剩余空间按 160 / 1 = 160px划分</span>。例子中的项目宽度分别为：<br/>
+<br/>
+item1的最终宽度为：50 + (160 * 0.1) = 66px<br/>
+item2的最终宽度为：80 + (160 * 0.3) = 128px<br/>
+item3的最终宽度为：110 + (160 * 0.2) = 142px<br/>
+<br/>
+<span style="color: #ff0000">flex-basis 属性<br/>
+</span><br/>
+当容器设置flex-direction为row或row-reverse时，flex-basis和width同时存在，<span style="color: #ff0000">flex-basis优先级高于width</span>，也就是此时flex-basis代替项目的width属性。<br/>
+当容器设置flex-direction为column或column-reverse时，flex-basis和height同时存在，<span style="color: #ff0000">flex-basis优先级高于height</span>，也就是此时flex-basis代替项目的height属性。<br/>
+<br/>
+需要注意的是，当flex-basis和width（或height），其中一个属性值为auto时，非auto的优先级更高。<br/>
+<br/>
+.item{<br/>
+&nbsp; flex-basis: auto（默认值） | &lt;number&gt;px<br/>
+}<br/>
+<br/>
+​ 图4-15 flex-basis<br/>
+<br/>
+<span style="color: #ff0000">flex 属性</span><br/>
+<br/>
+是flex-grow，flex-shrink，flex-basis的简写方式。<br/>
+<span style="color: #ff0000">值设置为none，等价于00 auto</span>。<br/>
+<span style="color: #ff0000">值设置为auto，等价于1 1 auto。<br/>
+</span><br/>
+.item{<br/>
+&nbsp; flex: none | auto | @flex-grow @flex-shrink@flex-basis<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000">align-self 属性<br/>
+</span><br/>
+设置<span style="color: #ff0000">项目在行中交叉轴方向上的对齐方式</span>，用于<span style="color: #ff0000">覆盖容器的align-items</span>，这么做可以<span style="color: #ff0000">对项目的对齐方式做特殊处理</span>。默认属性值为auto，继承容器的<span style="color: #ff0000">align-items值</span>，当容器没有设置align-items时，属性值为stretch。<br/>
+<br/>
+.item{<br/>
+&nbsp; align-self: auto（默认值） | flex-start | center | flex-end | baseline |stretch<br/>
+}<br/>
+<br/>
+<img src="screenshot 3.png" /><br/>
+​ 图4-16 align-self<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）<br/>
+</body></html>

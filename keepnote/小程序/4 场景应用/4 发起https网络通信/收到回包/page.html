@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>收到回包</title>
+</head><body>通过wx.request发送请求后，服务器处理请求并返回HTTP包，小程序端<span style="color: #ff0000">收到回包后会触发success回调</span>，同时回调会带上一个Object信息，详细参数表4-2所示。<br/>
+<br/>
+表4-2 wx.request的success返回参数<br/>
+<br/>
+<span style="color: #ff0000">参数名&#09;&#09;&#09;类型&#09;&#09;&#09;描述</span><br/>
+data&#09;&#09;&#09;Object/String&#09;开发者服务器返回的数据<br/>
+statusCode&#09;&#09;Number&#09;&#09;&#09;开发者服务器返回的 HTTP 状态码<br/>
+header&#09;&#09;&#09;Object&#09;&#09;&#09;开发者服务器返回的 HTTP Response Header<br/>
+<br/>
+<span style="color: #ff0000">尤其注意，只要成功收到服务器返回，无论HTTP状态码是多少都会进入success回调</span>。因此开发者自己通过<span style="color: #ff0000">对回包的返回码进行判断后再执行后续的业务逻辑</span>。<br/>
+<br/>
+success回调的参数 data字段 类型<span style="color: #ff0000">是 根据header['content-type'] &nbsp;决定的，</span><br/>
+<span style="color: #ff0000">默认header['content-type']是'application/json'</span>，在<span style="color: #ff0000">触发success回调前</span>，小程序宿主环境会对data字段的值做JSON解析，如果解析成功，那么data字段的值会被设置成解析后的Object对象，其他情况<span style="color: #ff0000">data字段都是String类型，其值为HTTP回包包体</span>。</body></html>

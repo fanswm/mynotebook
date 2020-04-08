@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Exparser框架</title>
+</head><body><span style="color: #ff0000">Exparser</span>是微信小程序的<span style="color: #ff0000">组件组织框架</span>，内置在小程序基础库中，为小程序的各种组件提供基础的支持。<br/>
+<span style="color: #ff0000">小程序内的所有组件，包括 内置组件 和 自定义组件，都由Exparser组织管理。</span><br/>
+<br/>
+Exparser的组件模型 与 WebComponents（组件、零件 imrdr）标准中的ShadowDOM高度相似。<br/>
+Exparser<span style="color: #ff0000">会维护整个页面的节点树相关信息，包括节点的属性、事件绑定等</span>，相当于一个简化版的Shadow DOM实现。<br/>
+<br/>
+<span style="color: #ff0000">Exparser的主要特点包括以下几点：</span><br/>
+<br/>
+<span style="color: #ff0000">基于Shadow DOM模型：</span>&#09;模型上与WebComponents的ShadowDOM高度相似，<span style="color: #ff0000">但不依赖浏览器的原生支持，也没有其他依赖库</span>；<ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none">实现时，还针对性地增加了其他API以支持</li>
+<li style="list-style-type: none">小程序组件编程。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+可在纯JS环境中运行：&#09;&#09;这意味着<span style="color: #ff0000">逻辑层也具有一定的组件树组织能力</span>。<br/>
+高效轻量：&#09;&#09;&#09;&#09;性能表现好，在组件实例极多的环境下表现尤其优异，同时代码尺寸也较小。<br/>
+<br/>
+小程序中，<span style="color: #ff0000">所有节点树相关的操作都依赖于Exparser，包括WXML到页面最终节点树的构建、createSelectorQuery调用和自定义组件特性等。</span></body></html>

@@ -98,7 +98,7 @@ bindsym $mod+Return exec terminator
 安装中文字体
 
 我使用的是文泉驿微米黑，你也可以使用其他字体。
-
+c
 pacman -S wqy-microhei
 
 使用feh设置桌面
@@ -109,7 +109,7 @@ pacman -S feh
 
 在i3的config最后添加
 
-exec feh --randomize --bg-fill ~/picture
+__exec feh --randomize --bg-fill ~/picture__
 
 picture文件夹存放你的壁纸文件，存在多张时，feh会随机进行播放。
 使用compton进行窗口透明化
@@ -120,7 +120,7 @@ pacman -S compton
 
 在i3的config最后添加
 
-exec compton -b
+__exec compton -b__
 
 terminator透明需要右键terminator，在配置项中打开背景透明
 
@@ -174,7 +174,7 @@ pacman -S chromium
 
 i3的config添加
 
-bindsym $mod+c exec chromium
+__bindsym $mod+c exec chromium__
 
  此时可以使用$mod+c唤出chromium，当然按键你可以自己设置。
 安装rofi
@@ -185,7 +185,7 @@ pacman -S rofi
 
  在i3的config替换$mod+d
 
-bindsym $mod+d exec rofi -show drun
+__bindsym $mod+d exec rofi -show drun__
 
 此时可以使用$mod+d唤出rofi
 去除i3的标题栏
