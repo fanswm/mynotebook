@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-04-10T16:11:32+08:00
+
+====== 监视器 ======
+创建日期 星期五 10 四月 2020
+
+https://entropy6.com/xmeters/download/
+
+
+高颜值 Windows 任务栏系统检测工具 ：XMeters
+https://zhuanlan.zhihu.com/p/33188026
+

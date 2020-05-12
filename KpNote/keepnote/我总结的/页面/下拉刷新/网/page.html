@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>网</title>
+</head><body>微信小程序下拉加载和上拉刷新两种实现方法<br/>
+方法一：onPullDownRefresh和onReachBottom方法实现小程序下拉加载和上拉刷新<br/>
+<br/>
+首先要在json文件里设置window属性<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 属性&#09; &nbsp;类型&#09; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;描述<br/>
+enablePullDownRefresh&#09;Boolean&#09;是否开启下拉刷新，详见页面相关事件处理函数。<br/>
+设置js里onPullDownRefresh和onReachBottom方法<br/>
+<br/>
+　　　　属性&#09; &nbsp; 类型&#09;　　　　　　　　　描述<br/>
+onPullDownRefresh&#09;function&#09;页面相关事件处理函数——监听用户下拉动作<br/>
+onReachBottom&#09;function&#09;页面上拉触发底事件的处理函数<br/>
+下拉加载说明：<br/>
+<br/>
+当处理完数据刷新后，wx.stopPullDownRefresh可以停止当前页面的下拉刷新。<br/>
+<br/>
+onPullDownRefresh(){<br/>
+　　console.log('--------下拉刷新-------')<br/>
+　　wx.showNavigationBarLoading() //在标题栏中显示加载<br/>
+&nbsp;<br/>
+　　wx.request({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url: 'https://URL',<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; data: {},<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; method: 'GET',<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // header: {}, // 设置请求的 header<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; success: function(res){<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // success<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fail: function() {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // fail<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; complete: function() {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // complete<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.hideNavigationBarLoading() //完成停止加载<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.stopPullDownRefresh() //停止下拉刷新<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; }) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <br/>
+　　<br/>
+<br/>
+方法二：<br/>
+<br/>
+在scroll-view里设定bindscrolltoupper和bindscrolltolower实现微信小程序下拉<br/>
+<br/>
+　　　　属性&#09; &nbsp; 类型&#09;　　　　　　　　　描述<br/>
+bindscrolltoupper&#09;EventHandle&#09;滚动到顶部/左边，会触发 scrolltoupper 事件<br/>
+bindscrolltolower&#09;EventHandle&#09;<br/>
+滚动到底部/右边，会触发 scrolltolower 事件<br/>
+<br/>
+index.wxml<br/>
+复制代码<br/>
+&nbsp;1 &lt;!--index.wxml--&gt;<br/>
+&nbsp;2 &lt;view class="container" style="padding:0rpx"&gt;<br/>
+&nbsp;3 &nbsp; &lt;!--垂直滚动，这里必须设置高度--&gt;<br/>
+&nbsp;4 &nbsp; &nbsp; &lt;scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;" <br/>
+&nbsp;5 &nbsp; &nbsp; &nbsp; &nbsp; class="list" bindscrolltolower="bindDownLoad" bindscrolltoupper="topLoad" &nbsp;bindscroll="scroll"&gt;<br/>
+&nbsp;6 &nbsp; &nbsp; &nbsp; &nbsp; &lt;view class="item" wx:for="{{list}}"&gt;<br/>
+&nbsp;7 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;image class="img" src="{{item.pic_url}}"&gt;&lt;/image&gt;<br/>
+&nbsp;8 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;view class="text"&gt;<br/>
+&nbsp;9 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;text class="title"&gt;{{item.name}}&lt;/text&gt;<br/>
+10 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;text class="description"&gt;{{item.short_description}}&lt;/text&gt;<br/>
+11 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/view&gt;<br/>
+12 &nbsp; &nbsp; &nbsp; &nbsp; &lt;/view&gt;<br/>
+13 &nbsp; &nbsp; &lt;/scroll-view&gt;<br/>
+14 &nbsp; &nbsp; &lt;view class="body-view"&gt;<br/>
+15 &nbsp; &nbsp; &nbsp; &nbsp; &lt;loading hidden="{{hidden}}" bindchange="loadingChange"&gt;<br/>
+16 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 加载中...<br/>
+17 &nbsp; &nbsp; &nbsp; &nbsp; &lt;/loading&gt;<br/>
+18 &nbsp; &nbsp; &lt;/view&gt;<br/>
+19 &lt;/view&gt;<br/>
+复制代码<br/>
+index.js<br/>
+<br/>
+复制代码<br/>
+&nbsp;1 var url = "http://www.imooc.com/course/ajaxlist";<br/>
+&nbsp;2 var page =0;<br/>
+&nbsp;3 var page_size = 5;<br/>
+&nbsp;4 var sort = "last";<br/>
+&nbsp;5 var is_easy = 0;<br/>
+&nbsp;6 var lange_id = 0;<br/>
+&nbsp;7 var pos_id = 0;<br/>
+&nbsp;8 var unlearn = 0;<br/>
+&nbsp;9 <br/>
+10 <br/>
+11 // 请求数据<br/>
+12 var loadMore = function(that){<br/>
+13 &nbsp; &nbsp; that.setData({<br/>
+14 &nbsp; &nbsp; &nbsp; &nbsp; hidden:false<br/>
+15 &nbsp; &nbsp; });<br/>
+16 &nbsp; &nbsp; wx.request({<br/>
+17 &nbsp; &nbsp; &nbsp; &nbsp; url:url,<br/>
+18 &nbsp; &nbsp; &nbsp; &nbsp; data:{<br/>
+19 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; page : page,<br/>
+20 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; page_size : page_size,<br/>
+21 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sort : sort,<br/>
+22 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; is_easy : is_easy,<br/>
+23 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lange_id : lange_id,<br/>
+24 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; pos_id : pos_id,<br/>
+25 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; unlearn : unlearn<br/>
+26 &nbsp; &nbsp; &nbsp; &nbsp; },<br/>
+27 &nbsp; &nbsp; &nbsp; &nbsp; success:function(res){<br/>
+28 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //console.info(that.data.list);<br/>
+29 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var list = that.data.list;<br/>
+30 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for(var i = 0; i &lt; res.data.list.length; i++){<br/>
+31 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; list.push(res.data.list[i]);<br/>
+32 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+33 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; that.setData({<br/>
+34 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; list : list<br/>
+35 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br/>
+36 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; page ++;<br/>
+37 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; that.setData({<br/>
+38 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; hidden:true<br/>
+39 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br/>
+40 &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+41 &nbsp; &nbsp; });<br/>
+42 }<br/>
+43 Page({<br/>
+44 &nbsp; data:{<br/>
+45 &nbsp; &nbsp; hidden:true,<br/>
+46 &nbsp; &nbsp; list:[],<br/>
+47 &nbsp; &nbsp; scrollTop : 0,<br/>
+48 &nbsp; &nbsp; scrollHeight:0<br/>
+49 &nbsp; },<br/>
+50 &nbsp; onLoad:function(){<br/>
+51 &nbsp; &nbsp; // &nbsp; 这里要注意，微信的scroll-view必须要设置高度才能监听滚动事件，所以，需要在页面的onLoad事件中给scroll-view的高度赋值<br/>
+52 &nbsp; &nbsp; &nbsp; var that = this;<br/>
+53 &nbsp; &nbsp; &nbsp; wx.getSystemInfo({<br/>
+54 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; success:function(res){<br/>
+55 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; that.setData({<br/>
+56 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; scrollHeight:res.windowHeight<br/>
+57 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br/>
+58 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+59 &nbsp; &nbsp; &nbsp; });<br/>
+60 &nbsp; &nbsp; &nbsp; &nbsp;loadMore(that);<br/>
+61 &nbsp; },<br/>
+62 &nbsp; //页面滑动到底部<br/>
+63 &nbsp; bindDownLoad:function(){ &nbsp; <br/>
+64 &nbsp; &nbsp; &nbsp; var that = this;<br/>
+65 &nbsp; &nbsp; &nbsp; loadMore(that);<br/>
+66 &nbsp; &nbsp; &nbsp; console.log("lower");<br/>
+67 &nbsp; },<br/>
+68 &nbsp; scroll:function(event){<br/>
+69 &nbsp; &nbsp; //该方法绑定了页面滚动时的事件，我这里记录了当前的position.y的值,为了请求数据之后把页面定位到这里来。<br/>
+70 &nbsp; &nbsp; &nbsp;this.setData({<br/>
+71 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;scrollTop : event.detail.scrollTop<br/>
+72 &nbsp; &nbsp; &nbsp;});<br/>
+73 &nbsp; },<br/>
+74 &nbsp; topLoad:function(event){<br/>
+75 &nbsp; &nbsp; // &nbsp; 该方法绑定了页面滑动到顶部的事件，然后做上拉刷新<br/>
+76 &nbsp; &nbsp; &nbsp; page = 0;<br/>
+77 &nbsp; &nbsp; &nbsp; this.setData({<br/>
+78 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; list : [],<br/>
+79 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; scrollTop : 0<br/>
+80 &nbsp; &nbsp; &nbsp; });<br/>
+81 &nbsp; &nbsp; &nbsp; loadMore(this);<br/>
+82 &nbsp; &nbsp; &nbsp; console.log("lower");<br/>
+83 &nbsp; }<br/>
+84 })<br/>
+复制代码<br/>
+index.wxss<br/>
+<br/>
+复制代码<br/>
+&nbsp;1 /**index.wxss**/<br/>
+&nbsp;2 <br/>
+&nbsp;3 .userinfo {<br/>
+&nbsp;4 &nbsp; display: flex;<br/>
+&nbsp;5 &nbsp; flex-direction: column;<br/>
+&nbsp;6 &nbsp; align-items: center;<br/>
+&nbsp;7 }<br/>
+&nbsp;8 <br/>
+&nbsp;9 .userinfo-avatar {<br/>
+10 &nbsp; width: 128rpx;<br/>
+11 &nbsp; height: 128rpx;<br/>
+12 &nbsp; margin: 20rpx;<br/>
+13 &nbsp; border-radius: 50%;<br/>
+14 }<br/>
+15 <br/>
+16 .userinfo-nickname {<br/>
+17 &nbsp; color: #aaa;<br/>
+18 }<br/>
+19 <br/>
+20 .usermotto {<br/>
+21 &nbsp; margin-top: 200px;<br/>
+22 }<br/>
+23 <br/>
+24 /**/<br/>
+25 <br/>
+26 scroll-view {<br/>
+27 &nbsp; width: 100%;<br/>
+28 }<br/>
+29 <br/>
+30 .item {<br/>
+31 &nbsp; width: 90%;<br/>
+32 &nbsp; height: 300rpx;<br/>
+33 &nbsp; margin: 20rpx auto;<br/>
+34 &nbsp; background: brown;<br/>
+35 &nbsp; overflow: hidden;<br/>
+36 }<br/>
+37 <br/>
+38 .item .img {<br/>
+39 &nbsp; width: 430rpx;<br/>
+40 &nbsp; margin-right: 20rpx;<br/>
+41 &nbsp; float: left;<br/>
+42 }<br/>
+43 <br/>
+44 .title {<br/>
+45 &nbsp; font-size: 30rpx;<br/>
+46 &nbsp; display: block;<br/>
+47 &nbsp; margin: 30rpx auto;<br/>
+48 }<br/>
+49 <br/>
+50 .description {<br/>
+51 &nbsp; font-size: 26rpx;<br/>
+52 &nbsp; line-height: 15rpx;<br/>
+53 }<br/>
+</body></html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>代码回退</title>
+</head><body><a href="https://zhuanlan.zhihu.com/p/22734098">https://zhuanlan.zhihu.com/p/22734098</a>&nbsp; <br/>
+首先，回顾下git代码存在的5个区域， 分别是 <span style="color: #ff0000">工作区间、工作现场、缓存区（或叫暂存区）、本地仓库（或叫当前分支）、远程仓库（或叫远程分支</span>）；如下图：<br/>
+<img src="screenshot.png" /><br/>
+<br/>
+<span style="color: #ff0000">1.缓存区代码覆盖工作区代码</span><br/>
+场景： 缓存区存有上次改动代码，即之前有执行：<br/>
+git add<br/>
+<span style="color: #ff0000">当前工作区间代码想废弃， 可将缓存区中代码覆盖之：</span><br/>
+<img src="screenshot 2.png" /><br/>
+<span style="color: #ff0000">对应指令：</span><br/>
+<br/>
+// 将缓存区某一文件代码 覆盖本地工作区： <br/>
+git checkout -- testReset.txt<br/>
+<br/>
+// 将匹配的文件覆盖：<br/>
+git checkout -- *.txt<br/>
+<br/>
+// 将所有文件覆盖：<br/>
+<span style="color: #ff0000">git checkout -- .<br/>
+</span><br/>
+<span style="color: #ff0000">2.本地仓库代码覆盖缓存区代码</span><br/>
+场景：发现之前add的文件不需要了，又不想工作区间重新改回去。<br/>
+<img src="screenshot 3.png" /><br/>
+对应指令：<br/>
+// 将本地仓库某一文件覆盖缓存区： <br/>
+git reset HEAD testReset.txt <br/>
+<br/>
+// 将匹配的文件覆盖缓存区：<br/>
+git reset <span style="color: #ff0000">HEAD</span>&nbsp;*.txt<br/>
+<br/>
+// 将所有文件覆盖缓存区：<br/>
+git reset HEAD<span style="color: #ff0000">&nbsp;.</span><br/>
+<span style="color: #ff0000">注意： 改变的是缓存区代码， 工作区间代码不变（编辑器代码不会改变）</span><br/>
+<br/>
+<span style="color: #ff0000">3.本地仓库代码覆盖工作区代码（常用）</span><br/>
+上述两场景在实际开发中没那么常用，接下来 <span style="color: #ff0000">本地仓库 代码 覆盖 工作区间 代码 则经常会用到。</span><br/>
+<br/>
+场景： 当前 工作区间 代码混乱（一般更新或合并分支后） ， 废弃当前改动；<br/>
+<br/>
+<img src="screenshot 4.png" /><br/>
+对应指令：<br/>
+// 将本地仓库某一文件代码 覆盖本地工作区： <br/>
+git checkout head testReset.txt<br/>
+<br/>
+// 将本地仓库所有文件代码 覆盖本地工作区：(谨慎操作)：<br/>
+git checkout head .<br/>
+我们知道本地仓库中有一个commit 列表， 记录了所有commit的记录， 查看commit列表指令：<br/>
+<br/>
+//<span style="color: #ff0000">&nbsp;查看commit id， 查看提交记录（git commit的记录）</span><br/>
+git log <br/>
+git log --pretty=oneline <br/>
+<br/>
+// 查看以往提交历史（包括 撤销回退 记录） <br/>
+git reflog <br/>
+<br/>
+根据commit列表， 工作区间代码能实现更灵活的回退：<br/>
+<br/>
+// 本地工作区间代码 回退到上一次版本、上上次、前10个版本 <br/>
+<span style="color: #ff0000">git reset --hard HEAD^ </span><br/>
+git reset --hard HEAD^^ <br/>
+<span style="color: #ff0000">git reset --hard HEAD~10 </span><br/>
+<br/>
+// 本地工作区间代码 <span style="color: #ff0000">回退到指定版本</span>(“d362816”为commit id） <br/>
+git reset --hard d362816 <br/>
+<br/>
+<span style="color: #ff0000">4.远程仓库代码覆盖本地仓库代码（清除 未push 的commit）</span><br/>
+场景： 有时候合并分支、切换分支、更新代码会导致提交絮乱的问题（没使用--rebase方式），具体体现在自动生成了commit且工作区间 代码很多冲突。使工作区间代码跟线上代码一致且删除新生成的commit。<br/>
+<img src="screenshot 5.png" /><br/>
+<br/>
+对应指令：<br/>
+<br/>
+// 本地工作区间代码回退到远程版本 <br/>
+git reset –-hard origin/master <br/>
+<br/>
+<span style="color: #ff0000">写到了git reset指令， 就不得不说下它与 git revert 的区别：</span><br/>
+<br/>
+<span style="color: #ff0000">1. git revert是用一次新的commit来回滚之前的commit，git reset是直接删除指定的commit。</span><br/>
+<br/>
+2. 在回滚这一操作上看，效果差不多。但是在日后继续merge以前的老版本时有区别。因为git revert是用一次逆向的commit“中和”之前的提交，因此日后合并老的branch时，导致这部分改变不会再次出现，但是git reset是直接把某些commit在某个branch上删除，因而和老的branch再次merge时，这些被回滚的commit应该还会被引入。<br/>
+<br/>
+3<span style="color: #ff0000">. git reset 是把HEAD向后移动了一下，而git revert是HEAD继续前进</span>，只是新的commit的内容和要revert的内容正好相反，能够抵消要被revert的内容。<br/>
+<br/>
+git reset 与 git revert区别图：<br/>
+<img src="screenshot 6.png" /><br/>
+<img src="screenshot 7.png" /><br/>
+<br/>
+<br/>
+<span style="color: #ff0000">5.远程仓库代码回滚（线上代码回滚）</span><br/>
+场景： 提交了一个commit（该提交包含很多文件）， 发现有问题， 需要回滚， 将线上分支（master）回滚到上一次commit;<br/>
+<br/>
+网上<span style="color: #ff0000">有删除分支进行线上代码回滚的教程</span>， 那种操作其实很危险， 因为一般线上的分支是master分支， 而这个分支不允许删除。<br/>
+<br/>
+合理一些的是使用 git reset或git revert方式进行回滚；<br/>
+<br/>
+git reset方式图解：<br/>
+<img src="screenshot 8.png" /><br/>
+<br/>
+git revert方式图解：<br/>
+<img src="screenshot 9.png" /><br/>
+<br/>
+我们可以使用git revert将新的commit替换掉;<span style="color: #ff0000">（不用git reset而用git revert的原因是保留commit方便后续代码恢复）</span><br/>
+<br/>
+对应指令：<br/>
+<br/>
+// 替换掉上次提交的代码文件（上次的commit记录会保留）<br/>
+git revert HEAD<br/>
+git commit -m "回滚上次commit"<br/>
+git push origin master<br/>
+<br/>
+<br/>
+<br/>
+</body></html>

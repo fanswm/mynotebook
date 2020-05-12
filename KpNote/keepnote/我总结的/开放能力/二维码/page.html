@@ -1,0 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>二维码</title>
+</head><body>&lt;image src="https://s1.ax1x.com/2020/03/13/8K8H7q.jpg" data-src="https://s1.ax1x.com/2020/03/13/8K8H7q.jpg" bindtap="<span style="color: #ff0000">previewImage</span>"&gt;&lt;/image&gt;<br/>
+<hr/><span style="color: #ff0000">previewImage</span>: function (e) {<br/>
+&nbsp; &nbsp; var current = e.target.dataset.src;<br/>
+&nbsp; &nbsp; wx.previewImage({<br/>
+&nbsp; &nbsp; &nbsp; current: current,<br/>
+&nbsp; &nbsp; &nbsp; urls: [current]<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<hr/></body></html>

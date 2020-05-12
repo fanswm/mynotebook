@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>手机号码</title>
+</head><body>js最新手机号码、电话号码正则表达式<br/>
+2019-06-05240451View<br/>
+正则表达式（regular expression）是一个描述字符模式的对象。使用JavaScript正则表达式可以进行强大的模式匹配和文本检索与替换功能。<br/>
+<br/>
+手机号码正则表达式验证。<br/>
+<br/>
+function checkPhone(){ <br/>
+&nbsp; &nbsp; var phone = document.getElementById('phone').value;<br/>
+&nbsp; &nbsp; if(!(/^1[3456789]\d{9}$/.test(phone))){ <br/>
+&nbsp; &nbsp; &nbsp; &nbsp; alert("手机号码有误，请重填"); &nbsp;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; return false; <br/>
+&nbsp; &nbsp; } <br/>
+}<br/>
+或者<br/>
+<br/>
+function checkPhone(){ <br/>
+&nbsp; &nbsp; var phone = document.getElementById('phone').value;<br/>
+&nbsp; &nbsp; if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(phone))){ <br/>
+&nbsp; &nbsp; &nbsp; &nbsp; alert("手机号码有误，请重填"); &nbsp;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; return false; <br/>
+&nbsp; &nbsp; } <br/>
+}<br/>
+感谢 丐帮流寇 的提醒，我查了一下了解了“ 小括号就是括号内看成一个整体 ,中括号就是匹配括号内的其中一个”<br/>
+<br/>
+原来正则里面的中括号[]只能匹配其中一个，如果要匹配特定几组字符串的话，那就必须使用小括号()加或|，我还以为在中括号中也能使用或|符号，原来|在中括号里面也是一个字符，并不代表或。[3457]匹配3或者4或者5或者7，而(3457)只匹配3457，若要跟前面一样可以加或(3|4|5|7)。[34|57]匹配3或者4或者|或者5或者7.而(34|57)能匹配34或者57。<br/>
+<br/>
+下面简单的解释一下：<br/>
+<br/>
+^1(3|4|5|7|8)\d{9}$<br/>
+<br/>
+表示以1开头，第二位可能是3/4/5/7/8等的任意一个，在加上后面的\d表示数字[0-9]的9位，总共加起来11位结束。<br/>
+<br/>
+具体请参考这篇文章解说：JS最新手机号码检验正则表达式 （绝对能让你明白）<br/>
+<br/>
+我猜你可能会喜欢关于JavaScript正则的文章：正则<br/>
+<br/>
+JavaScript中的正则表达式总结（大量的正则）<br/>
+JavaScript正则表达式（例子）<br/>
+固定电话号码正则表达式：<br/>
+<br/>
+&nbsp;function checkTel(){<br/>
+&nbsp;var tel = document.getElementById('tel').value;<br/>
+if(!/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/.test(tel)){<br/>
+alert('固定电话有误，请重填');<br/>
+return false;<br/>
+}<br/>
+}<br/>
+身份证正则：<br/>
+<br/>
+//身份证正则表达式(15位)<br/>
+isIDCard1=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/;<br/>
+//身份证正则表达式(18位)<br/>
+isIDCard2=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4}$/;<br/>
+身份证正则合并：(^\d{15}$)|(^\d{17}([0-9]|X)$)<br/>
+其他<br/>
+<br/>
+提取信息中的网络链接:(h|H)(r|R)(e|E)(f|F) *= *('|")?(\w|\\|\/|\.)+('|"| *|&gt;)?<br/>
+提取信息中的邮件地址:\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*<br/>
+提取信息中的图片链接:(s|S)(r|R)(c|C) *= *('|")?(\w|\\|\/|\.)+('|"| *|&gt;)?<br/>
+提取信息中的IP地址:(\d+)\.(\d+)\.(\d+)\.(\d+)<br/>
+提取信息中的中国电话号码（包括移动和固定电话）:(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}<br/>
+提取信息中的中国邮政编码:[1-9]{1}(\d+){5}<br/>
+提取信息中的中国身份证号码:\d{18}|\d{15}<br/>
+提取信息中的整数：\d+<br/>
+提取信息中的浮点数（即小数）：(-?\d*)\.?\d+<br/>
+提取信息中的任何数字 ：(-?\d*)(\.\d+)?<br/>
+提取信息中的中文字符串：[\u4e00-\u9fa5]*<br/>
+提取信息中的双字节字符串 (汉字)：[^\x00-\xff]*<br/>
+使用：<br/>
+<br/>
+test()方法在字符串中查找是否存在指定的正则表达式，并返回布尔值，如果存在则返回true，否则返回false。<br/>
+<br/>
+var pattern = new RegExp('Box','i');<br/>
+var str = 'box';<br/>
+alert(pattern.test(str)); //true<br/>
+var pattern = /Box/i;<br/>
+var str = 'box';<br/>
+alert(pattern.test(str)); //true<br/>
+var pattern = /Box/i;<br/>
+var str = 'This is a box';<br/>
+alert(pattern.test(str)); //true<br/>
+2019.6.5新增16和19开头的手机号码段。<br/>
+JavaScript,javascript代码,正则 推荐文章<br/>
+javascript判断浏览器ie6<br/>
+使用js判断ie6的最短代码是var ie6=!-[1,]&amp;&amp;!window.XMLHttpRequest; 本文还有更多关于判断ie6、ie7、ie8等浏览器的代码。<br/>
+<br/>
+js刷新当前页面的代码<br/>
+在写JavaScript代码时，用到JS来刷新当前页面的方法有几种，比如最常用的reload(),location等，本文整理了js刷新页面的几种方法，希望你有所收获。<br/>
+<br/>
+JS最新手机号码检验正则表达式<br/>
+看到网上很多代码都很复杂，还包括以中文开头的86，17951，其实谁会填这么多，无非是检验一下他们是否位数对不对，开头有没有写错而已。下面我们从百度百科的手机号码历程来看：现在的手机号码段有联通、移动和电信。<br/>
+<br/>
+关于0.1+0.2!=0.3浮点数计算分析与解决方法<br/>
+最近在做一个计算器，发现0.1+0.2!=0.3，感觉计算机有时候也是有问题的。了解资料才看到小数点在计算机中是以二进制表示，而有些小数用二进制表示是无穷，所以才会出现上面这种精确度的问题。<br/>
+<br/>
+30 seconds of code 30秒就能理解的JavaScript优秀代码<br/>
+本文来自github上的 30-seconds-of-code 项目，作者分享了大量有用的Javascript片段,你可以在30秒或更少时间中理解。本文为中文版翻译，下面一起来看看有哪些精彩的JavaScript代码值得收藏。<br/>
+<br/>
+原文：js最新手机号码、电话号码正则表达式 ，未经许可，禁止转载。<br/>
+来源：前端开发博客 (http://caibaojian.com/regexp-example.html)<br/>
+<br/>
+<a href="http://caibaojian.com/regexp-example.html">http://caibaojian.com/regexp-example.html</a>&nbsp; </body></html>

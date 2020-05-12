@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-21T08:53:15+08:00
-
-====== Wednesday 17 Jan 2018 ======
-儿子说，他未来的理想，第一，成为一个数学家，其次是军事家，
-他说，他最喜欢的是数学，英语，最不喜欢的是语文。

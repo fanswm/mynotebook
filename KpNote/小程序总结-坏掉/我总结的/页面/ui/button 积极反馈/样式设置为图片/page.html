@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>样式设置为图片</title>
+</head><body>方法一：button 与 image 重叠<br/>
+将button设为 opacity:0 然后定位放在那副图片的上边。<br/>
+<br/>
+方法二：background-image<br/>
+background-image。背景图片是不支持在css中被引用资源的，但可以使用网络资源。<br/>
+<br/>
+&lt;button open-type='share' class="share" style="background-image:url(https://example.com/imgs/icon_2_forward@2x.png);" plain='true'&gt;&lt;/button&gt;<br/>
+<br/>
+wxss<br/>
+<br/>
+.goBack .share{<br/>
+&nbsp; width: 38rpx;<br/>
+&nbsp; height: 36rpx;<br/>
+&nbsp; padding:0 20rpx;<br/>
+&nbsp; position: absolute;<br/>
+&nbsp; right: 32rpx;<br/>
+&nbsp; top: 0;<br/>
+&nbsp; bottom: 0;<br/>
+&nbsp; margin: auto;<br/>
+&nbsp; background-size: 38rpx 36rpx;<br/>
+&nbsp; background-repeat:no-repeat;<br/>
+&nbsp; border:none;<br/>
+}<br/>
+<br/>
+background-size与background-repeat与border:none;是button必须的<br/>
+<br/>
+方法三：base64<br/>
+什么情况下使用base64格式？条件：如果图片足够小且因为用处的特殊性无法被制作成雪碧图（CssSprites），在整个网站的复用性很高且基本不会被更新。<br/>
+<br/>
+方法四：button 嵌套 image<br/>
+实例：<br/>
+<br/>
+&nbsp;&lt;button class="btn"&gt;&lt;image src="/images/img.png"&gt;&lt;/image&gt;&lt;/button&gt;<br/>
+————————————————<br/>
+版权声明：本文为CSDN博主「亮子介」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br/>
+原文链接：https://blog.csdn.net/henryhu712/article/details/81625211</body></html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>沟通 外部变量</title>
+</head><body>// &nbsp;root/util.js<br/>
+const VarAtUtil ='im var at utils'<br/>
+<br/>
+module.exports = {<br/>
+<span style="color: #ff0000">&nbsp; VarAtUtil</span>: VarAtUtil<br/>
+}<hr/><span style="font-size: 12pt"><span style="font-family: Consolas"><span style="background-color: #fffffe"><span style="color: #000000"><span style="color: #008000">// root/util.js</span><br/>
+</span></span></span></span><span style="font-size: 12pt"><span style="font-family: Consolas"><span style="background-color: #fffffe"><span style="color: #000000">module.exports = { <span style="color: #008080">VarAtUtil</span>: <span style="color: #a31515">'im var at utils'</span>}</span></span></span></span><hr/><br/>
+<br/>
+//pages/index.js<br/>
+//获取应用实例<br/>
+//const app = getApp()<br/>
+const util = require('../../utils/util.js')<br/>
+<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; MyVar:''<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; onLoad: function () {<br/>
+&nbsp; &nbsp; console.log(util.VarAtUtil)<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; MyVar: util.<span style="color: #ff0000">VarAtUtil</span><br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; }<br/>
+})<hr/><br/>
+&lt;!--pages/index.wxml--&gt;<br/>
+<br/>
+&nbsp; &lt;view&gt;im var: {{MyVar}}&lt;/view&gt;<br/>
+</body></html>

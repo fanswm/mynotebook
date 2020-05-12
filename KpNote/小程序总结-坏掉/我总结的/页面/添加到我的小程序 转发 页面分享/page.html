@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>转发 页面分享</title>
+</head><body>在 index.js 页面中： onLoad 函数下定义：<br/>
+<br/>
+wx.showShareMenu({<br/>
+&nbsp; withShareTicket: true<br/>
+})<hr/>第二种 ： <br/>
+<br/>
+&lt;button open-type="share"&gt;分享&lt;/button&gt;<br/>
+<hr/>imrdr 总结的：<br/>
+Page({<br/>
+&nbsp; onShareAppMessage: function () {<br/>
+&nbsp; &nbsp; var that = this;<br/>
+&nbsp; &nbsp; return {<br/>
+&nbsp; &nbsp; &nbsp; title: '如何计算长方体表面积',<br/>
+&nbsp; &nbsp; &nbsp; path: '/pages/index/index',<br/>
+&nbsp; &nbsp; &nbsp; imageUrl: '/static/abc.png' // 图片 URL<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; },<br/>
+&nbsp; onLoad:function(){<br/>
+&nbsp; &nbsp; wx.showShareMenu({<br/>
+&nbsp; &nbsp; &nbsp; withShareTicket: true<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; }<br/>
+})<hr/><br/>
+<br/>
+</body></html>

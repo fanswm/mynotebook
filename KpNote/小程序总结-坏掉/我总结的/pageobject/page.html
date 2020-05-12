@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>pageObject</title>
+</head><body>var types = ['default', 'primary', 'warn']<br/>
+<span style="color: #ff0000">var pageObject = {</span><br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; plain: false,<br/>
+&nbsp; &nbsp; loading: false<br/>
+&nbsp; },<br/>
+&nbsp; <br/>
+&nbsp; setDisabled: function (e) {<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; disabled: !this.data.disabled<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+&nbsp; <br/>
+&nbsp; onGotUserInfo: function (e) {<br/>
+&nbsp; &nbsp; console.log(e.detail.errMsg)<br/>
+&nbsp; &nbsp; console.log(e.detail.userInfo)<br/>
+&nbsp; &nbsp; console.log(e.detail.rawData)<br/>
+&nbsp; },<br/>
+}<br/>
+<br/>
+for (var i = 0; i &lt; types.length; ++i) {<br/>
+&nbsp; (function (type) {<br/>
+&nbsp; &nbsp; pageObject[type] = function (e) {<br/>
+&nbsp; &nbsp; &nbsp; var key = type + 'Size'<br/>
+&nbsp; &nbsp; &nbsp; var changedData = {}<br/>
+&nbsp; &nbsp; &nbsp; changedData[key] =<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; this.data[key] === 'default' ? 'mini' : 'default'<br/>
+&nbsp; &nbsp; &nbsp; this.setData(changedData)<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; })(types[i])<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000">Page(pageObject)</span></body></html>

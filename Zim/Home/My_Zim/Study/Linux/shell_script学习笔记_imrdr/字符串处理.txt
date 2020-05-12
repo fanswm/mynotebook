@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-04-09T14:51:15+08:00
+
+====== 字符串处理 ======
+Created 星期四 09 四月 2020
+
+拼接：
+	#!/bin/bash
+	name="Shell"
+	url="http://c.biancheng.net/shell/"
+	str1=$name$url  #中间不能有空格
+	str2="$name $url"  #如果被双引号包围，那么中间可以有空格
+	str3=$name": "$url  #中间可以出现别的字符串
+	str4="$name: $url"  #这样写也可以
+	str5="${name}Script: ${url}index.html"  #这个时候需要给变量名加上大括号
+
+
+

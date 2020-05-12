@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>事件</title>
+</head><body><span style="color: #ff0000">使用WXS函数响应事件</span><br/>
+基础库 2.4.4 开始支持，低版本需做兼容处理。<br/>
+<br/>
+从基础库版本2.4.4开始，支持使用WXS函数绑定事件，<br/>
+<br/>
+WXS函数接受2个参数，<ul><li style="list-style-type: none">第一个是event，在原有的event的基础上加了event.instance对象，</li>
+<li style="list-style-type: none">第二个参数是ownerInstance，和event.instance一样是一个ComponentDescriptor对象。</li>
+<li style="list-style-type: none"></li>
+</ul>
+具体使用如下：<br/>
+<br/>
+在组件中绑定和注册事件处理的WXS函数。<br/>
+&lt;wxs module="wxs" src="./test.wxs"&gt;&lt;/wxs&gt;<br/>
+&lt;view id="tapTest" data-hi="WeChat" bindtap="{{wxs.tapName}}"&gt; Click me! &lt;/view&gt;<br/>
+**注：绑定的WXS函数必须用{{}}括起来**<br/>
+<br/>
+test.wxs文件实现tapName函数<br/>
+function tapName(event, ownerInstance) {<br/>
+&nbsp; console.log('tap wechat', JSON.stringify(event))<br/>
+}<br/>
+module.exports = {<br/>
+&nbsp; tapName: tapName<br/>
+}<br/>
+ownerInstance包含了一些方法，可以设置组件的样式和class，具体包含的方法以及为什么要用WXS函数响应事件，请点击查看详情。</body></html>

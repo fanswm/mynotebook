@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>New Page</title>
+</head><body>&lt;view class='box' bindtap='<span style="color: #ff0000">getValue</span>'&gt;<br/>
+&nbsp; &nbsp; &lt;view class='first' <span style="color: #ff0000">data-num</span>="1024" <span style="color: #ff0000">data-name</span>="张三"&gt;第一个view&lt;/view&gt;<br/>
+&nbsp; &nbsp; &lt;view class='second' data-age="2017" <span style="color: #ff0000">data-con</span>="李四"&gt;第二个view&lt;/view&gt;<br/>
+&lt;/view&gt;<hr/>data: {<br/>
+&nbsp; &nbsp;<br/>
+&nbsp; },<br/>
+&nbsp; onLoad: function (options) {},<br/>
+&nbsp; getValue(e){<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; const first = e.target.dataset.name,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; const second = e.target.dataset.conbn<br/>
+&nbsp; }<br/>
+这里有个坑需要说下,我这里写的data-name也可以这么写data-Name，但是你在js里面获取的时候必须要写成小写，不管在wxml里写的是驼峰还是什么，在js获取的时候必须是小写要不就获取不到，一定得是小写哦。<br/>
+<br/>
+</body></html>

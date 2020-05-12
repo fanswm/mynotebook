@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>文件组成</title>
+</head><body>项目公共样式：<ul><li style="list-style-type: none">根目录中的<span style="color: #ff0000">app.wxss为项目公共样式</span>，<span style="color: #ff0000">它会被注入到小程序的每个页面。</span></li>
+</ul>
+<br/>
+页面样式：<span style="color: #ff0000">与app.json注册过的页面同名且位置同级的WXSS文件</span>。<ul><li style="list-style-type: none">比如图2-8 &#09;&#09;app.json注册了pages/rpx/index页面，那pages/rpx/index.wxss为页面pages/rpx/index.wxml的样式。</li>
+</ul>
+<br/>
+<span style="color: #ff0000">其它样式</span>：<ul><li style="list-style-type: none">其它样式可以被项目公共样式和页面样式引用，引用方法查看本章中的2.3.3小节。</li>
+</ul>
+<br/>
+在小程序开发中，开发者<span style="color: #ff0000"><b>不需要</b>像Web开发那样去<b>优化样式文件的请求数量</b>，只需要考虑代码的组织即可</span>。样式文件最终会被编译优化，具体的编译原理我们留在后面章节再做介绍。</body></html>

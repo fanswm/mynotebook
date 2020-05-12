@@ -1,0 +1,136 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-04-09T15:09:31+08:00
+
+====== 批量修改文件名(添加 删除文件名中字符) ======
+Created 星期四 09 四月 2020
+
+添加字符#
+举例如下：批量创建10个随机字符串的文件，要求每个文件名后面添加_aaa,后缀名不变；
+
+[root@localhost __goodboy__]# ls
+
+adddbbdedf.html  baacjaiija.html  bhcfaabcfh.html  dgjdcdfbca.html  efejadfdji.html
+
+agdhcdeaje.html  bgffbffjcg.html  cbbiebdafh.html  diadebbhag.html  jcajafgejf.html
+
+脚本1：
+[root@localhost ~]# cat 02.sh
+#!/bin/bash
+path=/goodboy
+[ -d $path ] && cd $path
+for file in `ls`
+do
+ mv $file `echo $file|sed 's/\(.*\)\.\(.*\)/\1_aaa.\2/g'`
+done
+解释说明：
+
+使用sed替换，正则表达式第1个（）括号里面代表文件名即\1；中间. 使用\进行脱意，代表分隔符；
+
+第2个括号里面代表后缀html内容即\2；
+
+使用此方法需要在替换中添加.符号；
+
+更改后的效果如下：
+
+[root@localhost goodboy]# ll
+-rw-r--r-- 1 root root 0 2月  17 17:40 adddbbdedf_aaa.html
+-rw-r--r-- 1 root root 0 2月  17 17:40 agdhcdeaje_aaa.html
+-rw-r--r-- 1 root root 0 2月  17 17:40 baacjaiija_aaa.html
+-rw-r--r-- 1 root root 0 2月  17 17:40 bgffbffjcg_aaa.html
+-rw-r--r-- 1 root root 0 2月  17 17:40 bhcfaabcfh_aaa.html
+-rw-r--r-- 1 root root 0 2月  17 17:40 cbbiebdafh_aaa.html
+-rw-r--r-- 1 root root 0 2月  17 17:40 dgjdcdfbca_aaa.html
+-rw-r--r-- 1 root root 0 2月  17 17:40 diadebbhag_aaa.html
+-rw-r--r-- 1 root root 0 2月  17 17:40 efejadfdji_aaa.html
+-rw-r--r-- 1 root root 0 2月  17 17:40 jcajafgejf_aaa.html
+　　
+
+脚本2：
+
+#!/bin/bash
+path=/goodboy
+[ -d $path ] && cd $path
+for file in `ls`
+do
+ mv $file `echo $file|sed 's/\(.*\)\(\..*\)/\1_aaa\2/g'`
+done
+ 
+
+解释说明：
+
+同样使用sed替换，正则表达式，与上面的区别在于第2个括号里面的内容，代表.html 分隔符和后缀名为一体，替换内容的话不需要再单独加.点；.分隔符同样需要使用\进行脱意；
+
+ 
+
+可以使用sed -r参数，看起来就清爽很多，不需要\脱意；
+
+mv $file `echo $file|sed -r 's/(.*)(\..*)/\1_aaa\2/g'`
+ #
+删除字符#
+举例如下：批量改名，删除文件名中多余字符
+
+目录下文件名为如下，要求去掉_finished。
+
+stu_102999_1___finished__.jpg
+stu_102999_2_finished.jpg
+stu_102999_3_finished.jpg
+stu_102999_4_finished.jpg
+stu_102999_5_finished.jpg 
+
+可以实现的方法有很多种：
+
+方法一：for循环结合sed替换
+
+[baby@localhost ~]$ 
+
+for file in `ls *.jpg`;
+	do mv $file `echo $file| sed 's/___finished__//g'`;
+done;
+　　
+
+方法二：ls结合awk，输出交给bash执行
+
+[baby@localhost ~]$ ls *.jpg |awk -F "_finished" '{print "mv "$0" "$1$2""}'|bash
+　　 
+
+实际执行的命令如下，以_finished作为分隔符，mv及变量 需要加双引号
+
+[baby@localhost ~]$ ls *.jpg |awk -F "_finished" '{print "mv "$0" "$1$2""}'
+mv stu_102999_1_finished.jpg stu_102999_1.jpg
+mv stu_102999_2_finished.jpg stu_102999_2.jpg
+mv stu_102999_3_finished.jpg stu_102999_3.jpg
+mv stu_102999_4_finished.jpg stu_102999_4.jpg
+mv stu_102999_5_finished.jpg stu_102999_5.jpg
+　　
+
+方法三：rename改名(rename 需要安装)
+
+[baby@localhost ~]$ rename "_finished" "" *.jpg
+ 
+
+方法四：for循环加变量部分截取
+
+1
+[baby@localhost ~]$ for file in `ls *.jpg`;do mv $file `echo ${file%_finished*}.jpg`;done;
+　　
+
+不使用echo也可以实现
+
+1
+[baby@localhost ~]$ for file in `ls *.jpg`;do mv $file ${file%_finished*}.jpg;done;
+　　
+
+更改后结果如下：
+
+stu_102999_1.jpg
+stu_102999_2.jpg
+stu_102999_3.jpg
+stu_102999_4.jpg
+stu_102999_5.jpg
+
+作者： 水车
+
+出处：https://www.cnblogs.com/xuange306/p/12030129.html
+
+版权：本文采用「本博文版权归本博主所有,未经授权不得转载」知识共享许可协议进行许可。

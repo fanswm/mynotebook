@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>运行时环境</title>
+</head><body>小程序的运行环境<br/>
+微信小程序运行在多种平台上：iOS（iPhone/iPad）微信客户端、Android 微信客户端、PC 微信客户端、Mac 微信客户端和用于调试的微信开发者工具。<br/>
+<br/>
+各平台脚本执行环境以及用于渲染非原生组件的环境是各不相同的：<br/>
+<br/>
+在 iOS 上，小程序逻辑层的 javascript 代码运行在 <span style="color: #ff0000">JavaScriptCore</span>&nbsp;中，视图层是由 <span style="color: #ff0000">WKWebView</span>&nbsp;来渲染的，环境有 iOS 12、iOS 13 等；<br/>
+<br/>
+在 Android 上，小程序逻辑层的 javascript 代码运行在<span style="color: #ff0000">&nbsp;V8 </span>中，视图层是由自研<span style="color: #ff0000">&nbsp;XWeb 引擎</span>基于<span style="color: #ff0000">&nbsp;Mobile Chrome 内核</span>来渲染的；<br/>
+<br/>
+在 开发工具上，小程序逻辑层的 javascript 代码是运行在<span style="color: #ff0000">&nbsp;NW.js</span>&nbsp;中，视图层是由<span style="color: #ff0000">&nbsp;Chromium Webview </span>来渲染的。<br/>
+<br/>
+平台差异<br/>
+尽管各运行环境是十分相似的，但是还是有些许区别：<br/>
+<br/>
+JavaScript <span style="color: #ff0000">语法和 API 支持不一致</span>：语法上开发者可以通过开启 ES6 转 ES5 的功能来规避（详情）；此外，小程序基础库<span style="color: #ff0000">内置了必要的Polyfill，</span>来弥补API的差异（详情)。<br/>
+<br/>
+WXSS 渲染表现不一致：尽管可以通过开启样式补全来规避大部分的问题，还是建议开发者需要在 iOS 和 Android 上分别检查小程序的真实表现。<br/>
+<br/>
+开发者工具仅供调试使用，最终的表现以客户端为准。</body></html>

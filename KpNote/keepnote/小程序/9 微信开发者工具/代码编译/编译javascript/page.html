@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>编译JavaScript</title>
+</head><body>from <a href="https://developers.weixin.qq.com/ebook?action=get_post_info&token=935589521&volumn=1&lang=zh_CN&book=miniprogram&docid=0006ca569f43d8cb0086824b15180a&pass_ticket=CZtoFnIgy1o4sM4K%2FKU5q6iUYk89wZrgwmACm7IKQENuJLQCtn6SITW1J1y9v3%2B8">developers.weixin.qq.com</a>:<br/>
+<span style="color: #ff0000">微信客户端在运行小程序的逻辑层的时候只需要加载一个JS文件（我们称为app-service.js）</span>，而小程序框架<span style="color: #ff0000">允许开发者将 JavaScript 代码写在不同的文件中</span>，所以在代码上传之前，微信开发者工具会对开发者的JS 文件做一些预处理，包括ES6转ES5和代码压缩（开发者可以选择关闭预处理操作），在服务器编译过程将每个JS文件的内容分别包裹在<span style="color: #ff0000">define域</span>中，再按一定的顺序合并成<span style="color: #ff0000">&nbsp;app-service.js</span>&nbsp;。<span style="color: #ff0000">其中对于页面JS和app.js需要主动require。</span><br/>
+<img src="screenshot.png" /><br/>
+<img src="screenshot 2.png" /><br/>
+<br/>
+<img src="screenshot 3.png" /><br/>
+<br/>
+<br/>
+图9-5 JavaScript的编译过程<br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

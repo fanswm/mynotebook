@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>input</title>
+</head><body><br/>
+前几天写小程序写小程序发现小程序不能dom操作，这个就很尴尬啊，然后问了下度娘发现可以这样获得的。<br/>
+<br/>
+这个是wxml代码<br/>
+&lt;view class='box'&gt;<br/>
+&nbsp; &lt;form bindsubmit='searchBox'&gt;<br/>
+&nbsp; &nbsp; &nbsp; &lt;input type='text' class='userBox' name='username'&gt;&lt;/input&gt;<br/>
+&nbsp; &nbsp; &nbsp; &lt;input type='text' class='pwdBox' name='pwd'&gt;&lt;/input&gt;<br/>
+&nbsp; &nbsp; &nbsp; &lt;button class='login' form-type='submit'&gt;登录&lt;/button&gt;<br/>
+&nbsp; &lt;/form&gt;<br/>
+&nbsp; &lt;text&gt;输入的内容:{{first}}&lt;/text&gt;<br/>
+&nbsp; &lt;text&gt;输入的内容2:{{second}}&lt;/text&gt;<br/>
+&lt;/view&gt;<br/>
+<br/>
+js<br/>
+searchBox:function(e){<br/>
+&nbsp; &nbsp; const that = this;<br/>
+&nbsp; &nbsp; let first,second;<br/>
+&nbsp; &nbsp; that.setData({<br/>
+&nbsp; &nbsp; &nbsp; first &nbsp; &nbsp;: &nbsp; &nbsp;e.detail.value.username,<br/>
+&nbsp; &nbsp; &nbsp; second &nbsp; : &nbsp; &nbsp;<span style="color: #ff0000">&nbsp;e.detail.value.pwd</span><br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; }<br/>
+//这个函数一定要写在标签上才能用e.detail.value获取到<br/>
+<br/>
+还有就是e.detail.value,如果获取一个输入框的value值，可以这样写，但是如果获取多个后面还需要写上name,e.detail.value.(输入框的name),一般我写的时候不管几个输入框都写name。<br/>
+————————————————<br/>
+版权声明：本文为CSDN博主「ralStyle贵」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br/>
+原文链接：https://blog.csdn.net/qq_35909852/article/details/78336193<hr/><br/>
+<span style="color: #ff0000">微信官方文档：光标位置</span><br/>
+bindReplaceInput: function (e) {<br/>
+&nbsp; &nbsp; var value = e.detail.value<br/>
+&nbsp; &nbsp; var pos = e.<span style="color: #ff0000">detail</span>.<span style="color: #ff0000">cursor</span><br/>
+&nbsp; &nbsp; var left<br/>
+&nbsp; &nbsp; if (pos !== -1) {<br/>
+&nbsp; &nbsp; &nbsp; // 光标在中间<br/>
+&nbsp; &nbsp; &nbsp; left = e.detail.value.slice(0, pos)<br/>
+&nbsp; &nbsp; &nbsp; // 计算光标的位置<br/>
+&nbsp; &nbsp; &nbsp; pos = left.<span style="color: #ff0000">replace</span>(/11/g, '2').length<br/>
+&nbsp; &nbsp; }<br/>
+<hr/><br/>
+</body></html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>文件名命名限制</title>
+</head><body>文件名命名限制<br/>
+<br/>
+不能为空<br/>
+<span style="color: #ff0000">不能以/开头</span><br/>
+不能出现连续/<br/>
+编码长度最大为<span style="color: #ff0000">850个字节</span><br/>
+推荐使用大小写英文字母、数字，即[a-z，A-Z，0-9]和符号 -，!，_，.，* 及其组合<br/>
+不支持<span style="color: #ff0000">&nbsp;ASCII 控制字符中的字符上(↑)，字符下(↓)，字符右(→)，字符左(←)，</span>分别对应 CAN(24)，EM(25)，SUB(26)，ESC(27)<br/>
+如果用户上传的文件或文件夹的名字带有中文，在访问和请求这个文件或文件夹时，中文部分将按照 <span style="color: #ff0000">URL Encode 规则</span>转化为百分号编码。<br/>
+不建议使用的特殊字符: <span style="color: #ff0000">` ^ " \ { } [ ] ~ % # \ &gt; &lt; 及 ASCII 128-255 十进制</span><br/>
+可能需特殊处理后再使用的特殊字符: ， : ; = &amp; $ @ + ?（空格）及ASCII 字符范围：00-1F 十六进制（0-31 十进制）以及7F（127 十进制）</body></html>

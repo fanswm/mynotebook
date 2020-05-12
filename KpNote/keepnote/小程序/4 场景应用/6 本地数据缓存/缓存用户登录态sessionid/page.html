@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>缓存用户登录态SessionId</title>
+</head><body>在4.4节我们说到处理用户登录态的一般方法，<span style="color: #ff0000">通常用户在没有主动退出登录前</span>，<span style="color: #ff0000">用户的登录态会一直保持一段时间</span>[10]，就无需用户频繁地输入账号密码。<br/>
+如果我们把SessionId记录在Javascript中某个内存变量，当用户关闭小程序再进来小程序时，之前内存的SessionId已经丢失，此时我们就需要<span style="color: #ff0000">利用本地缓存的能力来持久化存储SessionId。</span><br/>
+<br/>
+代码清单4-17 <span style="color: #ff0000">利用本地缓存持久存储用户登录态SessionId</span><br/>
+<br/>
+//page.js<br/>
+<br/>
+var app = getApp()<br/>
+Page({<br/>
+&nbsp; onLoad: function() {<br/>
+&nbsp; &nbsp;<span style="color: #ff0000">&nbsp;// 调用wx.login获取微信登录凭证</span><br/>
+&nbsp; &nbsp; wx.login({<br/>
+&nbsp; &nbsp; &nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #ff0000">&nbsp;// 拿到微信登录凭证之后去自己服务器换取自己的登录凭证</span><br/>
+<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; wx.request({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url: 'https://test.com/login',<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; data: { code: res.code },<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var data = res.data<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //<span style="color: #ff0000">&nbsp;把 SessionId 和过期时间放在内存中的全局对象和本地缓存里边</span><br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; app.globalData.sessionId =data.sessionId<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.setStorageSync('SESSIONID',data.sessionId)<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 假设登录态保持1天<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var expiredTime = +new Date() +1*24*60*60*1000<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; app.globalData.expiredTime =expiredTime<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.setStorageSync('EXPIREDTIME',expiredTime)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+在重新打开小程序的时候，我们把上一次存储的SessionId内容取出来，恢复到内存。<br/>
+<br/>
+代码清单4-18 <span style="color: #ff0000">利用本地缓存恢复用户登录态SessionId<br/>
+</span><br/>
+//app.js<br/>
+<br/>
+App({<br/>
+&nbsp; onLaunch: function(options) {<br/>
+&nbsp; &nbsp; var sessionId =wx.getStorageSync('SESSIONID')<br/>
+&nbsp; &nbsp; var expiredTime =wx.getStorageSync('EXPIREDTIME')<br/>
+&nbsp; &nbsp; var now = +new Date()<br/>
+<br/>
+&nbsp; &nbsp; if (now - expiredTime &lt;=1*24*60*60*1000) {<br/>
+&nbsp; &nbsp; &nbsp; this.globalData.sessionId = sessionId<br/>
+&nbsp; &nbsp; &nbsp; this.globalData.expiredTime = expiredTime<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; globalData: {<br/>
+&nbsp; &nbsp; sessionId: null,<br/>
+&nbsp; &nbsp; expiredTime: 0<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

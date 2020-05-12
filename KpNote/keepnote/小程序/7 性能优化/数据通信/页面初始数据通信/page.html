@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>页面初始数据通信</title>
+</head><body>在小程序启动或一个新的页面被打开时，<span style="color: #ff0000">页面的初始数据（data）和路径等相关信息</span>会从逻辑层发送给视图层，用于视图层的初始渲染。<br/>
+<span style="color: #ff0000">Native层</span>会将这些数据直接传递给视图层，同时向用户展示一个新的页面层级，视图层在这个页面层级上进行界面绘制。<br/>
+视图层接收到相关数据后，根据页面路径来选择合适的WXML结构，WXML结构与初始数据相结合，得到页面的第一次渲染结果。<br/>
+<br/>
+<img src="screenshot.png" /><br/>
+<br/>
+图7-4 初始数据通信时序图<br/>
+<br/>
+分析这个流程不难得知：<br/>
+<span style="color: #ff0000">页面初始化的时间</span>大致由<span style="color: #ff0000">页面初始数据通信时间</span>和<span style="color: #ff0000">初始渲染时间</span>两部分构成。<br/>
+其中，数据通信的时间指<span style="color: #ff0000">数据从逻辑层开始组织数据</span>到<span style="color: #ff0000">视图层完全接收完毕</span>的时间，数据量<span style="color: #ff0000">小于64KB时总时长可以控制在30ms</span>内。<br/>
+传输时间与数据量大体上呈现正相关关系，<span style="color: #ff0000">传输过大的数据将使这一时间显著增加</span>。因而减少传输数据量是降低数据传输时间的有效方式。<br/>
+<br/>
+<img src="screenshot 2.png" /><br/>
+<br/>
+图7-5 数据传输时间与数据量关系图</body></html>

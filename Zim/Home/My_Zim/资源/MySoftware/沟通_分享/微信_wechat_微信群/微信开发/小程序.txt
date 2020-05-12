@@ -1,0 +1,32 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-27T20:48:19+08:00
+
+====== 小程序 ======
+Created 星期四 27 二月 2020
+
+https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
+
+wxss 样式优先级：!important	style=""	#id	.class	element	（级别： 无穷大；1000 递减10倍)。
+page.wxss 会覆盖 app.wxss 中相同的选择器。
+
+条件渲染：
+<view wx:if="{{条件}}"> 呈现</view>
+<view wx:elif="{{条件2}}">呈现2</view>
+<view wx:else="{{其他}}">其他</view>
+
+css 选择器：
+	   ::after:
+<view>这是view.</view>
+wxss:
+view:after {
+content: '这是在view 后的内容'
+}
+呈现：这是view.这是在view 后的内容
+
+behaviors  ： 可以用来让多个页面有相同的数据字段和方法。
+API: 		基础库 2.10.2 版本起，异步 API 支持 callback & promise 两种调用方式.
+
+事件系统 ：	bind/catch/mut-bind
+capture-bind、capture-catch关键字，后者将中断捕获阶段和取消冒泡阶段。
+

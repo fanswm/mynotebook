@@ -7,3 +7,4 @@ Created Wednesday 21 February 2018
 
 http://mcool.appinn.me/
 
+Mcool 极简音乐播放器

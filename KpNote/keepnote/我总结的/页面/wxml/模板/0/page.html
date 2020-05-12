@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>0</title>
+</head><body>数据绑定<br/>
+&lt;!--wxml--&gt;<br/>
+&lt;view&gt; {{message}} &lt;/view&gt;<br/>
+// page.js<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; message: 'Hello MINA!'<br/>
+&nbsp; }<br/>
+})<br/>
+列表渲染<br/>
+&lt;!--wxml--&gt;<br/>
+&lt;view wx:for="{{array}}"&gt; {{item}} &lt;/view&gt;<br/>
+// page.js<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; array: [1, 2, 3, 4, 5]<br/>
+&nbsp; }<br/>
+})<br/>
+条件渲染<br/>
+&lt;!--wxml--&gt;<br/>
+&lt;view wx:if="{{view == 'WEBVIEW'}}"&gt; WEBVIEW &lt;/view&gt;<br/>
+&lt;view wx:elif="{{view == 'APP'}}"&gt; APP &lt;/view&gt;<br/>
+&lt;view wx:else="{{view == 'MINA'}}"&gt; MINA &lt;/view&gt;<br/>
+// page.js<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; view: 'MINA'<br/>
+&nbsp; }<br/>
+})<br/>
+模板<br/>
+&lt;!--wxml--&gt;<br/>
+&lt;template name="staffName"&gt;<br/>
+&nbsp; &lt;view&gt;<br/>
+&nbsp; &nbsp; FirstName: {{firstName}}, LastName: {{lastName}}<br/>
+&nbsp; &lt;/view&gt;<br/>
+&lt;/template&gt;<br/>
+<br/>
+&lt;template is="staffName" data="{{...staffA}}"&gt;&lt;/template&gt;<br/>
+&lt;template is="staffName" data="{{...staffB}}"&gt;&lt;/template&gt;<br/>
+&lt;template is="staffName" data="{{...staffC}}"&gt;&lt;/template&gt;<br/>
+// page.js<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; staffA: {firstName: 'Hulk', lastName: 'Hu'},<br/>
+&nbsp; &nbsp; staffB: {firstName: 'Shang', lastName: 'You'},<br/>
+&nbsp; &nbsp; staffC: {firstName: 'Gideon', lastName: 'Lin'}<br/>
+&nbsp; }<br/>
+})<br/>
+具体的能力以及使用方式在以下章节查看：<br/>
+<br/>
+数据绑定、列表渲染、条件渲染、模板、引用</body></html>

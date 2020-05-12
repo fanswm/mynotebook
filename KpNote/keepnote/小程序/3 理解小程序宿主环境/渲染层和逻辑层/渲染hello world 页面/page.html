@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>渲染Hello World 页面</title>
+</head><body>我们看看小程序是如何把脚本里边的数据渲染在界面上的。<br/>
+<span style="color: #ff0000">WXML模板使用 view 标签，其子节点用 {{ }} 的语法绑定一个 msg 的变量</span>，如代码清单3-1所示。<br/>
+<br/>
+代码清单3-1 渲染“Hello World”WXML代码<br/>
+<br/>
+&lt;view&gt;{{ msg }}&lt;/view&gt;<br/>
+<br/>
+<span style="color: #ff0000">在 JS 脚本使用 this.setData 方法把 msg 字段设置成 “Hello World” ，</span>如代码清单3-2所示。<br/>
+代码清单3-2 渲染“Hello World”JS脚本<br/>
+<br/>
+Page({<br/>
+&nbsp; onLoad: function () {<br/>
+&nbsp; &nbsp; this.setData({ msg: 'Hello World' })<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+<br/>
+<span style="color: #ff0000">从这个例子我们可以看到3个点：<br/>
+1.渲染层和数据相关。<br/>
+2.逻辑层负责产生、处理数据。<br/>
+</span><span style="color: #ff0000">3.逻辑层通过 Page 实例的 setData 方法传递数据到渲染层。</span><br/>
+关于第1点，涉及了“数据驱动”的概念，我们会在3.1.3节详细讨论，我们现在先看看第3点涉及的“通信模型”。</body></html>

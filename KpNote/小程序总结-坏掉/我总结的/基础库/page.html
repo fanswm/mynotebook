@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>基础库</title>
+</head><body>1. 版本号比较<br/>
+微信客户端和小程序基础库的版本号风格为 Major.Minor.Patch（主版本号.次版本号.修订版本号）。<br/>
+<br/>
+文档中会在组件，API等页面描述中带上各个功能所要求的最低基础库版本号。<br/>
+<br/>
+开发者可以在小程序中通过调用 wx.getSystemInfo 或者 wx.getSystemInfoSync 获取到当前小程序运行的基础库的版本号。通过版本号比较的方式进行运行低版本兼容逻辑。<br/>
+<br/>
+版本号比较适用于所有情况。部分场景下也可以使用后面提到的方法完成。<br/>
+<br/>
+注意：不要直接使用字符串比较的方法进行版本号比较。<br/>
+<br/>
+版本号比较可以参考以下代码：<br/>
+<br/>
+function compareVersion(v1, v2) {<br/>
+&nbsp; v1 = v1.split('.')<br/>
+&nbsp; v2 = v2.split('.')<br/>
+&nbsp; const len = Math.max(v1.length, v2.length)<br/>
+<br/>
+&nbsp; while (v1.length &lt; len) {<br/>
+&nbsp; &nbsp; v1.push('0')<br/>
+&nbsp; }<br/>
+&nbsp; while (v2.length &lt; len) {<br/>
+&nbsp; &nbsp; v2.push('0')<br/>
+&nbsp; }<br/>
+<br/>
+&nbsp; for (let i = 0; i &lt; len; i++) {<br/>
+&nbsp; &nbsp; const num1 = parseInt(v1[i])<br/>
+&nbsp; &nbsp; const num2 = parseInt(v2[i])<br/>
+<br/>
+&nbsp; &nbsp; if (num1 &gt; num2) {<br/>
+&nbsp; &nbsp; &nbsp; return 1<br/>
+&nbsp; &nbsp; } else if (num1 &lt; num2) {<br/>
+&nbsp; &nbsp; &nbsp; return -1<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+<br/>
+&nbsp; return 0<br/>
+}<br/>
+<br/>
+compareVersion('1.11.0', '1.9.9') // 1<br/>
+const version = wx.getSystemInfoSync().SDKVersion<br/>
+<br/>
+if (compareVersion(version, '1.1.0') &gt;= 0) {<br/>
+&nbsp; wx.openBluetoothAdapter()<br/>
+} else {<br/>
+&nbsp; // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示<br/>
+&nbsp; wx.showModal({<br/>
+&nbsp; &nbsp; title: '提示',<br/>
+&nbsp; &nbsp; content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'<br/>
+&nbsp; })<br/>
+}<br/>
+2. API 存在判断<br/>
+对于新增的 API，可以通过判断该API是否存在来判断是否支持用户使用的基础库版本。例如：<br/>
+<br/>
+if (wx.openBluetoothAdapter) {<br/>
+&nbsp; wx.openBluetoothAdapter()<br/>
+} else {<br/>
+&nbsp; // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示<br/>
+&nbsp; wx.showModal({<br/>
+&nbsp; &nbsp; title: '提示',<br/>
+&nbsp; &nbsp; content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'<br/>
+&nbsp; })<br/>
+}<br/>
+3. wx.canIUse<br/>
+除了直接通过版本号判断，也可以通过 wx.canIUse 来判断是否可以在该基础库版本下直接使用。例如：<br/>
+<br/>
+API 参数或返回值<br/>
+<br/>
+对于 API 的参数或者返回值有新增的参数，可以判断用以下代码判断。<br/>
+<br/>
+wx.showModal({<br/>
+&nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; if (wx.canIUse('showModal.success.cancel')) {<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.cancel)<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+})<br/>
+组件<br/>
+<br/>
+对于组件，新增的组件或属性在旧版本上不会被处理，不过也不会报错。如果特殊场景需要对旧版本做一些降级处理，可以这样子做。<br/>
+<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; canIUse: wx.canIUse('cover-view')<br/>
+&nbsp; }<br/>
+})<br/>
+&lt;video controls="{{!canIUse}}"&gt;<br/>
+&nbsp; &lt;cover-view wx:if="{{canIUse}}"&gt;play&lt;/cover-view&gt;<br/>
+&lt;/video&gt;<br/>
+canIUse 的数据文件随基础库进行更新，新版本中的新功能可能出现遗漏的情况，建议开发者在使用时提前测试。<br/>
+<br/>
+设置最低基础库版本<br/>
+需要 iOS 6.5.8 / 安卓 6.5.7 及以上版本微信客户端支持<br/>
+<br/>
+为便于开发者解决低版本基础库无法兼容小程序的新功能的问题，开发者可设置小程序最低基础库版本要求。<br/>
+<br/>
+开发者可以登录小程序管理后台，进入「设置 - 基本设置 - 基础库最低版本设置」进行配置。在配置前，开发者可查看近 30 天内访问当前小程序的用户所使用的基础库版本占比，以帮助开发者了解当前用户使用的情况。<br/>
+<br/>
+<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html">https://developers.weixin.qq.com/miniprogram/dev/framework/compatibility.html</a>&nbsp; </body></html>

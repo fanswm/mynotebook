@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>跳转</title>
+</head><body>&nbsp;bindViewTap: function() {<br/>
+&nbsp; &nbsp; wx.navigateTo({<br/>
+&nbsp; &nbsp; &nbsp; url: '../logs/logs'<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+<hr/>&lt;navigator url="../child-page/child-page?last=leaf&amp;rand={{rand}}"&gt;<br/>
+&nbsp; &lt;view class="intro"&gt;点击跳转到 child-page&lt;/view&gt;<br/>
+&lt;/navigator&gt;<hr/>imrdr: 其他：<br/>
+<br/>
+const page = getCurrentPages()<br/>
+if (page.length &gt; 1) {<br/>
+&nbsp; page[page.length - 2].setData({<br/>
+&nbsp; &nbsp; 收货人: 选中的某个收货人详情 &nbsp; //[object]<br/>
+&nbsp; })<br/>
+&nbsp; wx.navigateBack({<br/>
+&nbsp; &nbsp; delta: 1<br/>
+&nbsp; })<br/>
+}<br/>
+<br/>
+上面例子中提到过，在页面中通过 getCurrentPages() 方法来获取当前页面栈，并且获取到的是一个数组，其中每个item都是每个页面的Page对象，那么我们就可以使用 setData 方法直接改变上一个页面展示的数据，并且直接退回上一个页面。<br/>
+<br/>
+此时官方提醒：<br/>
+<br/>
+<br/>
+虽然这种方法简便，但是官方也给出提醒，页面栈数据可以自行修改，但是！一定要慎重，否则会导致页面状态错误。<br/>
+<br/>
+总结：<br/>
+总觉得漏了点啥，又想不起来……<br/>
+官方文档应有尽有，多研究官方文档，多引发思考并手写demo尝试，总会有一些新的发现，另外，方法千万条，随便选一条，根据自己业务逻辑选用合适的方法。<br/>
+<br/>
+作者：任呵呵<br/>
+链接：https://juejin.im/post/5d47d7326fb9a06af2385b00<br/>
+来源：掘金<br/>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br/>
+作者：任呵呵<br/>
+链接：https://juejin.im/post/5d47d7326fb9a06af2385b00<br/>
+来源：掘金<br/>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</body></html>

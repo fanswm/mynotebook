@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>通讯模拟</title>
+</head><body>from <a href="https://developers.weixin.qq.com/ebook?action=get_post_info&token=935589521&volumn=1&lang=zh_CN&book=miniprogram&docid=000a80769707d86b008602a955b80a&pass_ticket=CZtoFnIgy1o4sM4K%2FKU5q6iUYk89wZrgwmACm7IKQENuJLQCtn6SITW1J1y9v3%2B8">developers.weixin.qq.com</a>:<br/>
+上文已经叙述了小程序的逻辑层、渲染层以及客户端在微信开发者工具上的模拟实现，除此之外，我们需要一个有效的<span style="color: #ff0000">通讯方案</span>使得小程序的<span style="color: #ff0000">逻辑层、渲染层和客户</span>端之间进行数据交流，才能将这三个部分串联成为一个有机的整体。<br/>
+<br/>
+微信开发者工具的有一个<span style="color: #ff0000">消息中心底层模块</span>维持着一个<span style="color: #ff0000">WebSocket服务器</span>，<br/>
+小程序的<span style="color: #ff0000">逻辑层的WebView</span>和<span style="color: #ff0000">渲染层页面的WebView</span>通过WebSocket与开发者工具底层建立长连，使用WebSocket的protocol字段来区分Socket的来源。<br/>
+<br/>
+代码清单10-2 逻辑层中的消息模块<br/>
+<br/>
+// &lt;webview/&gt;的userAgent是可定制的<br/>
+// 通过userAgent中获取开发者工具WebSocket服务器监听的端口<br/>
+var port = window.navigator.userAgent.match(/port\/(\d*)/)[1]<br/>
+// 通过指定 protocol == 'APPSERVICE' 告知开发者工具这个链接是来自逻辑层<br/>
+var ws = new WebSocket(`ws://127.0.0.1:${port}`, 'APPSERVICE')<br/>
+ws.onmessage = (evt) =&gt; {<br/>
+&nbsp; let msg = JSON.parse(evt.data)<br/>
+&nbsp; // …处理来自开发者工具的信息<br/>
+&nbsp; &nbsp;}<br/>
+// 调用API接口 wx.navigateBack<br/>
+ws.send(JSON.stringify({<br/>
+&nbsp; command: 'APPSERVICE_INVOKE'，<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; &nbsp;api: 'navigateBack',<br/>
+&nbsp; &nbsp; &nbsp;args: {}<br/>
+&nbsp; }<br/>
+}))<br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

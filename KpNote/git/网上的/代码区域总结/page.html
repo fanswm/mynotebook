@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>代码区域总结</title>
+</head><body><span style="font-size: 11pt"><span style="font-family: Microsoft YaHei"><img src="screenshot.png" /><br/>
+<span style="color: #ff0000">1.提交 代码到远程仓库：</span><br/>
+git init<br/>
+git add README.md<br/>
+git commit -m "first commit"<br/>
+git remote add origin https://github.com/wteam-xq/testGit.git<br/>
+git push -u origin master<br/>
+<br/>
+<img src="screenshot 2.png" /><br/>
+<span style="color: #ff0000">2.将远程仓库代码更新到本地：</span><br/>
+git clone https://github.com/wteam-xq/testGit<br/>
+<br/>
+讨论`git pull`、 `git fetch` 、 `git merge`的关系<br/>
+先抛简单结论:<br/>
+<br/>
+git pull<br/>
+#等同于下面命令<br/>
+git fetch<br/>
+git merge<hr/>git pull &nbsp;和（git fetch &amp;&amp; git merge）的区别是：<br/>
+<img src="screenshot 3.png" /><br/>
+<br/>
+<span style="color: #ff0000">3.更新到本地仓库时， 出现冲突，解决冲突；<br/>
+</span><img src="screenshot 4.png" /><br/>
+3.1 放弃本地修改<br/>
+放弃本地修改意味着将远程仓库的代码完全覆盖本地仓库以及本地工作区间， 如果对git的指令不熟悉那大可以将本地工程完全删除，然后再重新拷贝一次（`git clone`）。<br/>
+本地仓库代码完全覆盖本地工作区间，具体指令如下：<br/>
+<br/>
+<span style="color: #ff0000">git checkout head .</span><br/>
+(注意： 别遗漏 "head" 后的 " ." )<br/>
+<br/>
+3.2 解决冲突后提交本地修改<br/>
+<br/>
+除了上述说的4个区间外， 其实git还有第5个区：<span style="color: #ff0000">“工作现场”（dirty working directory）</span><br/>
+<br/>
+跟 缓存区 一样， 工作现场是 独立存在于本地仓库、工作区：<br/>
+<img src="screenshot 5.png" /><br/>
+<br/>
+解决冲突后提交本地修改的思路大概如下：<br/>
+<br/>
+将本地修改的代码放在<span style="color: #ff0000">工作现场</span>， 然后从远程仓库<span style="color: #ff0000">拉取最新代码</span>，拉取成功后再从工作现场将修改的代码取出， 这样最新代码跟本地修改的代码就会混杂在一起， 手工解决冲突后， 提交解决冲突后的代码。<br/>
+<br/>
+<br/>
+<span style="color: #ff0000">将本地修改放入工作现场(成功后本地工作区间的代码跟本地仓库代码会同步)</span>， 具体指令：<br/>
+<br/>
+<span style="color: #ff0000">git stash </span><br/>
+从远程仓库获取最新代码，具体指令：<br/>
+<br/>
+<span style="color: #ff0000">git pull</span><br/>
+然后， 取出本地修改的代码， 具体指令:<br/>
+<br/>
+<span style="color: #ff0000">git stash pop</span><br/>
+然后， git 自动合并冲突失败， 冲突的代码就很清晰的展现在我们面前了：<br/>
+告诉git， 这个文件（README.md）的冲突 已经解决:<br/>
+<span style="color: #ff0000">git add README.md</span><br/>
+提交代码（细节参考前述流程）：<br/>
+<span style="color: #ff0000"><br/>
+git commit -am '终于解决冲突啦！'<br/>
+</span><span style="color: #ff0000">git push origin master</span><br/>
+于是本地有冲突的代码就提交成功啦！<hr/>&nbsp;实际开发中当然是用图形化界面解决!<br/>
+<br/>
+例如： `git status`在window 中对应的就是右键-&gt;git GUI<br/>
+解决冲突之覆盖本地代码对应的是： 工程目录下tortoiseGit(git 小乌龟) “<span style="color: #ff0000">Revert</span>” ：<br/>
+解决冲突之解决冲突后提交本地修改对应的是： 手工合并冲突代码后，工程目录下tortoiseGit(git 小乌龟) “<span style="color: #ff0000">resolve</span>” ：<br/>
+<br/>
+<br/>
+</span></span><a href="https://zhuanlan.zhihu.com/p/20175919">https://zhuanlan.zhihu.com/p/20175919</a>&nbsp; <br/>
+<span style="font-size: 11pt"><span style="font-family: Microsoft YaHei"><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</span></span></body></html>

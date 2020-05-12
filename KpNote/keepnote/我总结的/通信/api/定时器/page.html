@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>定时器</title>
+</head><body><br/>
+timeTest: function () {<br/>
+<br/>
+&nbsp; var that = this<br/>
+&nbsp; var time1 = that.data.time1<br/>
+&nbsp; var buttonText = that.data.buttonText<br/>
+&nbsp; var arr = ['1', '2', '3', '4', '5', '6']<br/>
+<br/>
+&nbsp; if (buttonText == '开始') {<br/>
+&nbsp; &nbsp; time1 = <span style="color: #ff0000">setInterval</span>(function () {<br/>
+&nbsp; &nbsp; &nbsp; console.log(that.sendNum(arr))<br/>
+&nbsp; &nbsp; &nbsp; that.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; buttonText: '停止',<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; time1: time1<br/>
+&nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; }, 200)<br/>
+&nbsp; } else {<br/>
+&nbsp; &nbsp; that.setData({<br/>
+&nbsp; &nbsp; &nbsp; buttonText: '开始',<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; clearInterval(time1)<br/>
+&nbsp; }<br/>
+}</body></html>

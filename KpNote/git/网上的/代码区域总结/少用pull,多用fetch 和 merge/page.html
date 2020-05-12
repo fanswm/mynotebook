@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> 少用pull,多用fetch 和 merge</title>
+</head><body><a href="https://www.oschina.net/translate/git-fetch-and-merge?cmp">https://www.oschina.net/translate/git-fetch-and-merge?cmp</a>&nbsp; <br/>
+<br/>
+本文有点长而且有点乱，但就像Mark Twain Blaise Pascal的笑话里说的那样：我没有时间让它更短些。在Git的邮件列表里有很多关于本文的讨论，我会尽量把其中相关的观点列在下面。<br/>
+<hr/>如果你对分支在本地是如何存储感兴趣的话，看看下面文件：<br/>
+&nbsp;<span style="color: #ff0000">&nbsp;.git/refs/head/[本地分支]<br/>
+</span><span style="color: #ff0000">&nbsp; .git/refs/remotes/[正在跟踪的分支]</span><br/>
+<hr/>我最常说的关于git使用的一个经验就是：<br/>
+<br/>
+不要用git pull，用git fetch和git merge代替它。<br/>
+git pull的问题是它把过程的细节都隐藏了起来，以至于你不用去了解git中各种类型分支的区别和使用方法。当然，多数时候这是没问题的，<span style="color: #ff0000">但一旦代码有问题，你很难找到出错的地方</span>。看起来git pull的用法会使你吃惊，简单看一下git的使用文档应该就能说服你。<br/>
+<br/>
+将下载（fetch）和合并（merge）放到一个命令里的<span style="color: #ff0000">另外一个弊端是，你的本地工作目录在未经确认的情况下就会被远程分支更新</span>。当然，除非你关闭所有的安全选项，否则git pull在你本地工作目录还不至于造成不可挽回的损失，但很多时候我们宁愿做的慢一些，也不愿意返工重来。<br/>
+<br/>
+<span style="color: #ff0000">分支(Branches)</span><br/>
+<br/>
+在说git pull之前，我们需要先澄清分支的概念（branches）。很多人像写代码似的用一行话来描述分支是什么，例如:<br/>
+<br/>
+准确而言，分支的概念不是一条线，而类似于开发中的<span style="color: #ff0000">有向无环图</span><br/>
+分支类似于一个重量级的大对象集合。<br/>
+我认为你应该这样来理解分支的概念：<span style="color: #ff0000">它是用来标记特定的代码提交，每一个分支通过SHA1sum值来标识，所以对分支进行的操作是轻量级的--你改变的仅仅是SHA1sum值。</span><br/>
+<br/>
+这个定义或许会有意想不到的影响。比如，假设你有两个分支，“stable” 和 “new-idea”, 它们的顶端在版本 E 和 F:<br/>
+<br/>
+&nbsp; A-----C----E ("stable")<br/>
+&nbsp; &nbsp;\<br/>
+&nbsp; &nbsp; B-----D-----F ("new-idea")<br/>
+所以提交(commits) A,<span style="color: #ff0000">&nbsp;C和 E 属于“stable”</span>，而 A, B, D 和 F 属于 “new-idea”。如果之后你用下面的命令 将“new-idea” merge 到 “stable” ：<br/>
+<br/>
+&nbsp; &nbsp; git checkout stable &nbsp; # Change to work on the branch "stable"<br/>
+&nbsp; &nbsp; git merge new-idea &nbsp; &nbsp;# Merge in "new-idea"<br/>
+<br/>
+…那么你会得到这个：<br/>
+<br/>
+&nbsp; A-----C----E----G ("stable")<br/>
+&nbsp; &nbsp;\ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /<br/>
+&nbsp; &nbsp; B-----D-----F ("new-idea")<br/>
+<br/>
+要是你继续在“new idea” 和“stable”分支提交, 会得到：<br/>
+<br/>
+&nbsp; A-----C----E----G---H ("stable")<br/>
+&nbsp; &nbsp;\ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /<br/>
+&nbsp; &nbsp; B-----D-----F----I ("new-idea")<br/>
+因此现在A, B, C, D, E, F, G 和 H 属于 “stable”，而A, B, D, F 和 I 属于 “new-idea”。<br/>
+<br/>
+当然了，分支确实有些特殊的属性——其中最重要的是，<span style="color: #ff0000">如果你在一个分支进行作业并创建了一个新的提交(commits)，该分支的顶端将前进到那个提交(commits)。</span>这正是你所希望的。当用git merge 进行合并(merge)的时候，你只是指定了要合并到当前分支的那个并入分支，以及当前分支的当前进展。<br/>
+<br/>
+另一个表明使用分支会有很大帮助的观点的常见情形是：假设你直接工作在一个项目的主要分支（称为“主版本”），当你意识到你所做的可能是一个坏主意时已经晚了，这时你肯定宁愿自己是工作在一个主题分支上。如果提交图看起来像这样：<br/>
+<br/>
+&nbsp; &nbsp;last version from another repository<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;v<br/>
+&nbsp; M---N-----O----P---Q ("master")<br/>
+那么你把你的工作用下面的一组命令分开做（如图显示的是执行它们之后所更改的状态）：<br/>
+<br/>
+&nbsp; git branch dubious-experiment<br/>
+<br/>
+&nbsp; M---N-----O----P---Q ("master" and "dubious-experiment")<br/>
+<br/>
+&nbsp; git checkout master<br/>
+<br/>
+&nbsp; # Be careful with this next command: make sure "git status" is<br/>
+&nbsp; # clean, you're definitely on "master" and the<br/>
+&nbsp; # "dubious-experiment" branch has the commits you were working<br/>
+&nbsp; # on first...<br/>
+<br/>
+&nbsp; git reset --hard &lt;SHA1sum of commit N&gt;<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;("master")<br/>
+&nbsp; M---N-------------O----P---Q ("dubious-experiment")<br/>
+<br/>
+&nbsp; git pull # Or something that updates "master" from<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;# somewhere else...<br/>
+<br/>
+&nbsp; M--N----R---S ("master")<br/>
+&nbsp; &nbsp; &nbsp; \<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;O---P---Q ("dubious-experiment")<br/>
+<br/>
+</body></html>

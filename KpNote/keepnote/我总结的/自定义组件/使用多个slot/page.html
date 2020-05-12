@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>使用多个slot</title>
+</head><body>默认情况下，一个组件的wxml中只能有一个slot。需要使用多slot时，可以在组件js中声明启用。<br/>
+<br/>
+Component({<br/>
+&nbsp; options: {<br/>
+&nbsp; <span style="color: #ff0000">&nbsp; multipleSlots: true // 在组件定义时的选项中启用多slot支持</span><br/>
+&nbsp; },<br/>
+&nbsp; properties: { /* ... */ },<br/>
+&nbsp; methods: { /* ... */ }<br/>
+})<br/>
+此时，可以在这个组件的wxml中使用多个slot<span style="color: #ff0000">，以不同的 name 来区分。</span><br/>
+<br/>
+&lt;!-- 组件模板 --&gt;<br/>
+&lt;view class="wrapper"&gt;<br/>
+&nbsp; <span style="color: #ff0000">&lt;slot name="before"&gt;&lt;/slot&gt;</span><br/>
+&nbsp; &lt;view&gt;这里是组件的内部细节&lt;/view&gt;<br/>
+&nbsp;<span style="color: #ff0000">&nbsp;&lt;slot name="after"&gt;&lt;/slot&gt;</span><br/>
+&lt;/view&gt;<br/>
+使用时，用 slot 属性来将节点插入到不同的slot上。<br/>
+<br/>
+&lt;!-- 引用组件的页面模板 --&gt;<br/>
+&lt;view&gt;<br/>
+&nbsp; &lt;component-tag-name&gt;<br/>
+&nbsp; &nbsp; &lt;!-- 这部分内容将被放置在组件 &lt;slot name="before"&gt; 的位置上 --&gt;<br/>
+&nbsp; &nbsp;<span style="color: #ff0000">&nbsp;&lt;view slot="before"&gt;这里是插入到组件slot name="before"中的内容&lt;/view&gt;</span><br/>
+&nbsp; &nbsp; &lt;!-- 这部分内容将被放置在组件 &lt;slot name="after"&gt; 的位置上 --&gt;<br/>
+&nbsp; &nbsp; <span style="color: #ff0000">&lt;view slot="after"&gt;这里是插入到组件slot name="after"中的内容&lt;/view&gt;</span><br/>
+&nbsp; &lt;/component-tag-name&gt;<br/>
+&lt;/view&gt;</body></html>

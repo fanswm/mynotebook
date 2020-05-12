@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>动画</title>
+</head><body>&lt;view class="box {{extraClasses}}"<br/>
+&nbsp; bindtransitionend="transitionEnd"<br/>
+&nbsp; bindanimationstart="animationStart"<br/>
+&nbsp; bindanimationiteration="animationIteration"<br/>
+&gt;&lt;/view&gt;<br/>
+<br/>
+&lt;button class="btn" bindtap="triggerTransition"&gt;触发 CSS 渐变&lt;/button&gt;<br/>
+&lt;button class="btn" bindtap="triggerAnimation"&gt;触发 CSS 动画&lt;/button&gt;<hr/>const app = getApp()<br/>
+<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; extraClasses: '',<br/>
+&nbsp; },<br/>
+&nbsp; triggerTransition: function () {<br/>
+&nbsp; &nbsp; if (this.data.extraClasses == 'box-transition box-moved') {<br/>
+&nbsp; &nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; extraClasses: 'box-transition'<br/>
+&nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; } else {<br/>
+&nbsp; &nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; extraClasses: 'box-transition box-moved'<br/>
+&nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; },<br/>
+&nbsp; triggerAnimation: function () {<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; extraClasses: 'box-animation'<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+&nbsp; transitionEnd: function () {<br/>
+&nbsp; &nbsp; console.log('渐变已结束')<br/>
+&nbsp; },<br/>
+&nbsp; animationStart: function () {<br/>
+&nbsp; &nbsp; console.log('动画已开始')<br/>
+&nbsp; },<br/>
+&nbsp; animationIteration: function () {<br/>
+&nbsp; &nbsp; console.log('动画进行中')<br/>
+&nbsp; },<br/>
+})<hr/>.box {<br/>
+&nbsp; width: 100rpx;<br/>
+&nbsp; height: 100rpx;<br/>
+&nbsp; margin: 60rpx;<br/>
+&nbsp; background: red;<br/>
+}<br/>
+.btn {<br/>
+&nbsp; margin: 30rpx 60rpx 0;<br/>
+}<br/>
+<br/>
+.box-transition {<br/>
+&nbsp; transition: all 0.5s;<br/>
+}<br/>
+.box-moved {<br/>
+&nbsp; margin-left: 590rpx;<br/>
+}<br/>
+<br/>
+@keyframes box-ani {<br/>
+&nbsp; from {margin-left: 60rpx}<br/>
+&nbsp; to {margin-left: 590rpx}<br/>
+}<br/>
+.box-animation {<br/>
+&nbsp; animation: box-ani 1s alternate infinite;<br/>
+}<br/>
+<br/>
+框架： 动画<br/>
+<br/>
+<br/>
+</body></html>

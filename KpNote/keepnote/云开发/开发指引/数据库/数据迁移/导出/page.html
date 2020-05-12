@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>导出</title>
+</head><body>数据库导出<br/>
+云开发支持导出集合已有的数据。目前<span style="color: #ff0000">仅支持导出 CSV、JSON 格式的文件数据。</span>有<span style="color: #ff0000">云开发控制台和HTTP API两种导入方式</span>。<br/>
+<br/>
+<span style="color: #ff0000">使用云开发控制台导出</span><br/>
+要导出数据，需打开云开发控制台，切换到 “数据库” 标签页，并选择要导出数据的集合，点击 “导出” 链接。<br/>
+<br/>
+数据库<br/>
+<br/>
+选择要导出的格式、保存的位置，以及字段，点击 “导出” 按钮即可开始导出的过程。<br/>
+<br/>
+<span style="color: #ff0000">当选择导出格式为 JSON 时，若不填写字段项，则默认导出所有数据。</span><br/>
+<br/>
+当选择导出格式为 CSV 时，<span style="color: #ff0000">则字段为必填项</span>。字段之间<span style="color: #ff0000">使用英文逗号隔开</span>，例如：<br/>
+<br/>
+_id,name,age,gender<br/>
+<br/>
+使用 HTTP API 导出<br/>
+详情参考HTTP API 数据库导出文档 &nbsp;<a href="https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-http-api/database/databaseMigrateExport.html">https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-http-api/database/databaseMigrateExport.html</a>&nbsp; <br/>
+<br/>
+</body></html>

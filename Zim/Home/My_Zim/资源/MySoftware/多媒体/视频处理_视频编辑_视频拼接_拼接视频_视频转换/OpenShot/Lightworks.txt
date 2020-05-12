@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-10-24T14:45:46+08:00
+
+====== Lightworks ======
+Created Wednesday 24 October 2018
+
+Lightworks[54] 是一款功能强大、灵活美观的专业视频编辑工具。它拥有上百种配套的视觉效果功能，可以处理任何编辑任务，毕竟这个软件已经有长达 25 年的视频处理经验。
+
+参考阅读：在 Ubuntu 下载 Lightworks[55]
+https://www.lwks.com/
+https://www.lwks.com
+
+https://www.lwks.com/index.php?option=com_lwks&view=download&Itemid=206
+
+https://wiki.ubuntu.org.cn/LightWorks%E5%AE%8C%E5%85%A8%E6%95%99%E7%A8%8B

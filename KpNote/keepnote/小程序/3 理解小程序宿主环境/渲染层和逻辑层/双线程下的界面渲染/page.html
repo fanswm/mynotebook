@@ -1,0 +1,12 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>双线程下的界面渲染</title>
+</head><body>小程序的逻辑层和渲染层是分开的两个线程。在渲染层，宿主环境会把WXML转化成对应的JS对象，在逻辑层发生数据变更的时候，我们需要通过宿主环境提供的setData方法把数据从逻辑层传递到渲染层，再经过对比前后差异，把差异应用在原来的Dom树上，渲染出正确的UI界面，如图3-5所示。<br/>
+<br/>
+<br/>
+<img src="screenshot.png" /><br/>
+图3-5 逻辑层传递数据到渲染层<br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

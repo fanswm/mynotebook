@@ -1,0 +1,548 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>New Page</title>
+</head><body>程序：自定义组件<br/>
+ylbtech-小程序：自定义组件<br/>
+&nbsp;<br/>
+<br/>
+1. 自定义组件返回顶部<br/>
+自定义组件<br/>
+从小程序基础库版本 1.6.3 开始，小程序支持简洁的组件化编程。<br/>
+<br/>
+开发者可以将页面内的功能模块抽象成自定义组件，以便在不同的页面中重复使用；也可以将复杂的页面拆分成多个低耦合的模块，有助于代码维护。自定义组件在使用时与基础组件非常相似。<br/>
+<br/>
+创建自定义组件<br/>
+类似于页面，一个自定义组件由 json wxml wxss js 4个文件组成。要编写一个自定义组件，首先需要在 json 文件中进行自定义组件声明（将 component 字段设为 true 可这一组文件设为自定义组件）：<br/>
+<br/>
+{<br/>
+&nbsp; "component": true<br/>
+}<br/>
+同时，还要在 wxml 文件中编写组件模版，在 wxss 文件中加入组件样式，它们的写法与页面的写法类似。具体细节和注意事项参见 组件模版和样式 。<br/>
+<br/>
+代码示例：<br/>
+<br/>
+&lt;!-- 这是自定义组件的内部WXML结构 --&gt;<br/>
+&lt;view class="inner"&gt;<br/>
+&nbsp; {{innerText}}<br/>
+&lt;/view&gt;<br/>
+&lt;slot&gt;&lt;/slot&gt;<br/>
+/* 这里的样式只应用于这个自定义组件 */<br/>
+.inner {<br/>
+&nbsp; color: red;<br/>
+}<br/>
+注意：在组件wxss中不应使用ID选择器、属性选择器和标签名选择器。<br/>
+<br/>
+在自定义组件的 js 文件中，需要使用 Component() 来注册组件，并提供组件的属性定义、内部数据和自定义方法。<br/>
+<br/>
+组件的属性值和内部数据将被用于组件 wxml 的渲染，其中，属性值是可由组件外部传入的。更多细节参见 Component构造器 。<br/>
+<br/>
+代码示例：<br/>
+<br/>
+复制代码<br/>
+Component({<br/>
+&nbsp; properties: {<br/>
+&nbsp; &nbsp; // 这里定义了innerText属性，属性值可以在组件使用时指定<br/>
+&nbsp; &nbsp; innerText: {<br/>
+&nbsp; &nbsp; &nbsp; type: String,<br/>
+&nbsp; &nbsp; &nbsp; value: 'default value',<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; },<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; // 这里是一些组件内部数据<br/>
+&nbsp; &nbsp; someData: {}<br/>
+&nbsp; },<br/>
+&nbsp; methods: {<br/>
+&nbsp; &nbsp; // 这里是一个自定义方法<br/>
+&nbsp; &nbsp; customMethod: function(){}<br/>
+&nbsp; }<br/>
+})<br/>
+复制代码<br/>
+使用自定义组件<br/>
+使用已注册的自定义组件前，首先要在页面的 json 文件中进行引用声明。此时需要提供每个自定义组件的标签名和对应的自定义组件文件路径：<br/>
+<br/>
+{<br/>
+&nbsp; "usingComponents": {<br/>
+&nbsp; &nbsp; "component-tag-name": "path/to/the/custom/component"<br/>
+&nbsp; }<br/>
+}<br/>
+这样，在页面的 wxml 中就可以像使用基础组件一样使用自定义组件。节点名即自定义组件的标签名，节点属性即传递给组件的属性值。<br/>
+<br/>
+代码示例：<br/>
+<br/>
+&lt;view&gt;<br/>
+&nbsp; &lt;!-- 以下是对一个自定义组件的引用 --&gt;<br/>
+&nbsp; &lt;component-tag-name inner-text="Some text"&gt;&lt;/component-tag-name&gt;<br/>
+&lt;/view&gt;<br/>
+自定义组件的 wxml 节点结构在与数据结合之后，将被插入到引用位置内。<br/>
+<br/>
+Tips:<br/>
+<br/>
+对于基础库的1.5.x版本， 1.5.7 也同样支持自定义组件。<br/>
+因为WXML节点标签名只能是小写字母和下划线的组合，所以自定义组件的标签名也只能包含小写字母和下划线。<br/>
+自定义组件也是可以引用自定义组件的，引用方法类似于页面引用自定义组件的方式（使用 usingComponents 字段）。<br/>
+自定义组件和使用自定义组件的页面所在项目根目录名不能以“wx-”为前缀，否则会报错。<br/>
+旧版本的基础库不支持自定义组件，此时，引用自定义组件的节点会变为默认的空节点。<br/>
+2. 组件模版和样式返回顶部<br/>
+组件模版和样式<br/>
+类似于页面，自定义组件拥有自己的 wxml 模版和 wxss 样式。<br/>
+<br/>
+组件模版<br/>
+组件模版的写法与页面模板相同。组件模版与组件数据结合后生成的节点树，将被插入到组件的引用位置上。<br/>
+<br/>
+在组件模板中可以提供一个 &lt;slot&gt; 节点，用于承载组件引用时提供的子节点。<br/>
+<br/>
+代码示例：<br/>
+<br/>
+&lt;!-- 组件模板 --&gt;<br/>
+&lt;view class="wrapper"&gt;<br/>
+&nbsp; &lt;view&gt;这里是组件的内部节点&lt;/view&gt;<br/>
+&nbsp; &lt;slot&gt;&lt;/slot&gt;<br/>
+&lt;/view&gt;<br/>
+复制代码<br/>
+&lt;!-- 引用组件的页面模版 --&gt;<br/>
+&lt;view&gt;<br/>
+&nbsp; &lt;component-tag-name&gt;<br/>
+&nbsp; &nbsp; &lt;!-- 这部分内容将被放置在组件 &lt;slot&gt; 的位置上 --&gt;<br/>
+&nbsp; &nbsp; &lt;view&gt;这里是插入到组件slot中的内容&lt;/view&gt;<br/>
+&nbsp; &lt;/component-tag-name&gt;<br/>
+&lt;/view&gt;<br/>
+复制代码<br/>
+组件wxml的slot<br/>
+在组件的wxml中可以包含 slot 节点，用于承载组件使用者提供的wxml结构。<br/>
+<br/>
+默认情况下，一个组件的wxml中只能有一个slot。需要使用多slot时，可以在组件js中声明启用。<br/>
+<br/>
+复制代码<br/>
+Component({<br/>
+&nbsp; options: {<br/>
+&nbsp; &nbsp; multipleSlots: true // 在组件定义时的选项中启用多slot支持<br/>
+&nbsp; },<br/>
+&nbsp; properties: { /* ... */ },<br/>
+&nbsp; methods: { /* ... */ }<br/>
+})<br/>
+复制代码<br/>
+此时，可以在这个组件的wxml中使用多个slot，以不同的 name 来区分。<br/>
+<br/>
+&lt;!-- 组件模板 --&gt;<br/>
+&lt;view class="wrapper"&gt;<br/>
+&nbsp; &lt;slot name="before"&gt;&lt;/slot&gt;<br/>
+&nbsp; &lt;view&gt;这里是组件的内部细节&lt;/view&gt;<br/>
+&nbsp; &lt;slot name="after"&gt;&lt;/slot&gt;<br/>
+&lt;/view&gt;<br/>
+使用时，用 slot 属性来将节点插入到不同的slot上。<br/>
+<br/>
+复制代码<br/>
+&lt;!-- 引用组件的页面模版 --&gt;<br/>
+&lt;view&gt;<br/>
+&nbsp; &lt;component-tag-name&gt;<br/>
+&nbsp; &nbsp; &lt;!-- 这部分内容将被放置在组件 &lt;slot name="before"&gt; 的位置上 --&gt;<br/>
+&nbsp; &nbsp; &lt;view slot="before"&gt;这里是插入到组件slot name="before"中的内容&lt;/view&gt;<br/>
+&nbsp; &nbsp; &lt;!-- 这部分内容将被放置在组件 &lt;slot name="after"&gt; 的位置上 --&gt;<br/>
+&nbsp; &nbsp; &lt;view slot="after"&gt;这里是插入到组件slot name="after"中的内容&lt;/view&gt;<br/>
+&nbsp; &lt;/component-tag-name&gt;<br/>
+&lt;/view&gt;<br/>
+复制代码<br/>
+组件样式<br/>
+组件对应 wxss 文件的样式，只对组件wxml内的节点生效。编写组件样式时，需要注意以下几点：<br/>
+<br/>
+组件和引用组件的页面不能使用id选择器（#a）、属性选择器（[a]）和标签名选择器，请改用class选择器。<br/>
+组件和引用组件的页面中使用后代选择器（.a .b）在一些极端情况下会有非预期的表现，如遇，请避免使用。<br/>
+子元素选择器（.a&gt;.b）只能用于 view 组件与其子节点之间，用于其他组件可能导致非预期的情况。<br/>
+继承样式，如 font 、 color ，会从组件外继承到组件内。<br/>
+除继承样式外， app.wxss 中的样式、组件所在页面的的样式对自定义组件无效。<br/>
+#a { } /* 在组件中不能使用 */<br/>
+[a] { } /* 在组件中不能使用 */<br/>
+button { } /* 在组件中不能使用 */<br/>
+.a &gt; .b { } /* 除非 .a 是 view 组件节点，否则不一定会生效 */<br/>
+除此以外，组件可以指定它所在节点的默认样式，使用 :host 选择器（需要 1.7.2 或更高版本的开发者工具支持）。<br/>
+<br/>
+代码示例：<br/>
+<br/>
+复制代码<br/>
+/* 组件 custom-component.wxss */<br/>
+:host {<br/>
+&nbsp; color: yellow;<br/>
+}<br/>
+:host(.dark) {<br/>
+&nbsp; color: black;<br/>
+}<br/>
+复制代码<br/>
+&lt;!-- 页面的 WXML --&gt;<br/>
+&lt;custom-component&gt;这段文本是黄色的&lt;/custom-component&gt;<br/>
+&lt;custom-component class="dark"&gt;这段文本是黑色的&lt;/custom-component&gt;<br/>
+&nbsp;<br/>
+<br/>
+3. Component构造器返回顶部<br/>
+Component构造器<br/>
+Component构造器可用于定义组件，调用Component构造器时可以指定组件的属性、数据、方法等。<br/>
+<br/>
+定义段&#09;类型&#09;是否必填&#09;描述<br/>
+properties&#09;Object Map&#09;否&#09;组件的对外属性，是属性名到属性设置的映射表，属性设置中可包含三个字段， type表示属性类型、 value 表示属性初始值、 observer 表示属性值被更改时的响应函数<br/>
+data&#09;Object&#09;否&#09;组件的内部数据，和 properties 一同用于组件的模版渲染<br/>
+methods&#09;Object&#09;否&#09;组件的方法，包括事件响应函数和任意的自定义方法，关于事件响应函数的使用，参见 组件事件<br/>
+behaviors&#09;String Array&#09;否&#09;类似于mixins和traits的组件间代码复用机制，参见 behaviors<br/>
+created&#09;Function&#09;否&#09;组件生命周期函数，在组件实例进入页面节点树时执行，注意此时不能调用 setData<br/>
+attached&#09;Function&#09;否&#09;组件生命周期函数，在组件实例进入页面节点树时执行<br/>
+ready&#09;Function&#09;否&#09;组件生命周期函数，在组件布局完成后执行，此时可以获取节点信息（使用 SelectorQuery ）<br/>
+moved&#09;Function&#09;否&#09;组件生命周期函数，在组件实例被移动到节点树另一个位置时执行<br/>
+detached&#09;Function&#09;否&#09;组件生命周期函数，在组件实例被从页面节点树移除时执行<br/>
+relations&#09;Object&#09;否&#09;组件间关系定义，参见 组件间关系<br/>
+options&#09;Object Map&#09;否&#09;一些组件选项，请参见文档其他部分的说明<br/>
+生成的组件实例可以在组件的方法、生命周期函数和属性 observer 中通过 this 访问。组件包含一些通用属性和方法。<br/>
+<br/>
+属性名&#09;类型&#09;描述<br/>
+is&#09;String&#09;组件的文件路径<br/>
+id&#09;String&#09;节点id<br/>
+dataset&#09;String&#09;节点dataset<br/>
+data&#09;Object&#09;组件数据，包括内部数据和属性值<br/>
+&nbsp;<br/>
+<br/>
+方法名&#09;参数&#09;描述<br/>
+setData&#09;Object newData&#09;设置data并执行视图层渲染<br/>
+hasBehavior&#09;Object behavior&#09;检查组件是否具有 behavior （检查时会递归检查被直接或间接引入的所有behavior）<br/>
+triggerEvent&#09;String name, Object detail, Object options&#09;触发事件，参见 组件事件<br/>
+createSelectorQuery&#09; &#09;创建一个 SelectorQuery 对象，选择器选取范围为这个组件实例内<br/>
+selectComponent&#09;String selector&#09;使用选择器选择组件实例节点，返回匹配到的第一个组件实例对象<br/>
+selectAllComponents&#09;String selector&#09;使用选择器选择组件实例节点，返回匹配到的全部组件实例对象组成的数组<br/>
+getRelationNodes&#09;String relationKey&#09;获取所有这个关系对应的所有关联节点，参见 组件间关系<br/>
+代码示例：<br/>
+<br/>
+复制代码<br/>
+Component({<br/>
+<br/>
+&nbsp; behaviors: [],<br/>
+<br/>
+&nbsp; properties: {<br/>
+&nbsp; &nbsp; myProperty: { // 属性名<br/>
+&nbsp; &nbsp; &nbsp; type: String, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）<br/>
+&nbsp; &nbsp; &nbsp; value: '' // 属性初始值（可选），如果未指定则会根据类型选择一个<br/>
+&nbsp; &nbsp; &nbsp; observer: function(newVal, oldVal){} // 属性被改变时执行的函数（可选），也可以写成在methods段中定义的方法名字符串<br/>
+&nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; myProperty2: String // 简化的定义方式<br/>
+&nbsp; },<br/>
+&nbsp; data: {}, // 私有数据，可用于模版渲染<br/>
+<br/>
+&nbsp; // 生命周期函数，可以为函数，或一个在methods段中定义的方法名<br/>
+&nbsp; attached: function(){},<br/>
+&nbsp; moved: function(){},<br/>
+&nbsp; detached: function(){},<br/>
+<br/>
+&nbsp; methods: {<br/>
+&nbsp; &nbsp; onMyButtonTap: function(){<br/>
+&nbsp; &nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; // 更新属性和数据的方法与更新页面数据的方法类似<br/>
+&nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; _myPrivateMethod: function(){<br/>
+&nbsp; &nbsp; &nbsp; // 内部方法建议以下划线开头<br/>
+&nbsp; &nbsp; &nbsp; this.replaceDataOnPath(['A', 0, 'B'], 'myPrivateData') // 这里将 data.A[0].B 设为 'myPrivateData'<br/>
+&nbsp; &nbsp; &nbsp; this.applyDataUpdates()<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+<br/>
+})<br/>
+复制代码<br/>
+注意：在 properties 定义段中，属性名采用驼峰写法（propertyName）；在 wxml 中，指定属性值时则对应使用连字符写法（component-tag-name property-name="attr value"），应用于数据绑定时采用驼峰写法（attr="{{propertyName}}"）。<br/>
+<br/>
+Tips:<br/>
+<br/>
+Component 构造器构造的组件也可以作为页面使用。<br/>
+使用 this.data 可以获取内部数据和属性值，但不要直接修改它们，应使用 setData 修改。<br/>
+生命周期函数无法在组件方法中通过 this 访问到。<br/>
+属性名不要命名成 dataXyz 这样的形式，因为在 WXML 中， data-xyz="" 会被作为节点 dataset 来处理，而不是组件属性。<br/>
+在一个组件的定义和使用时，组件的属性名和data字段相互间都不能冲突（尽管它们位于不同的定义段中）。<br/>
+4. 组件事件返回顶部<br/>
+组件事件<br/>
+事件系统是组件间交互的主要形式。自定义组件可以触发任意的事件，引用组件的页面可以监听这些事件。关于事件的基本概念和用法，参见 事件 。<br/>
+<br/>
+监听自定义组件事件的方法与监听基础组件事件的方法完全一致：<br/>
+<br/>
+代码示例：<br/>
+<br/>
+&lt;!-- 当自定义组件触发“myevent”事件时，调用“onMyEvent”方法 --&gt;<br/>
+&lt;component-tag-name bindmyevent="onMyEvent" /&gt;<br/>
+&lt;!-- 或者可以写成 --&gt;<br/>
+&lt;component-tag-name bind:myevent="onMyEvent" /&gt;<br/>
+Page({<br/>
+&nbsp; onMyEvent: function(e){<br/>
+&nbsp; &nbsp; e.detail // 自定义组件触发事件时提供的detail对象<br/>
+&nbsp; }<br/>
+})<br/>
+自定义组件触发事件时，需要使用 triggerEvent 方法，指定事件名、detail对象和事件选项：<br/>
+<br/>
+代码示例：<br/>
+<br/>
+&lt;!-- 在自定义组件中 --&gt;<br/>
+&lt;button bindtap="onTap"&gt;点击这个按钮将触发“myevent”事件&lt;/button&gt;<br/>
+复制代码<br/>
+Component({<br/>
+&nbsp; properties: {}<br/>
+&nbsp; methods: {<br/>
+&nbsp; &nbsp; onTap: function(){<br/>
+&nbsp; &nbsp; &nbsp; var myEventDetail = {} // detail对象，提供给事件监听函数<br/>
+&nbsp; &nbsp; &nbsp; var myEventOption = {} // 触发事件的选项<br/>
+&nbsp; &nbsp; &nbsp; this.triggerEvent('myevent', myEventDetail, myEventOption)<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+})<br/>
+复制代码<br/>
+触发事件的选项包括：<br/>
+<br/>
+选项名&#09;类型&#09;是否必填&#09;默认值&#09;描述<br/>
+bubbles&#09;Boolean&#09;否&#09;false&#09;事件是否冒泡<br/>
+composed&#09;Boolean&#09;否&#09;false&#09;事件是否可以穿越组件边界，为false时，事件将只能在引用组件的节点树上触发，不进入其他任何组件内部<br/>
+capturePhase&#09;Boolean&#09;否&#09;false&#09;事件是否拥有捕获阶段<br/>
+关于冒泡和捕获阶段的概念，请阅读 事件 章节中的相关说明。<br/>
+<br/>
+代码示例：<br/>
+<br/>
+// 页面 page.wxml<br/>
+&lt;another-component bindcustomevent="pageEventListener1"&gt;<br/>
+&nbsp; &lt;my-component bindcustomevent="pageEventListener2"&gt;&lt;/my-component&gt;<br/>
+&lt;/another-component&gt;<br/>
+// 组件 another-component.wxml<br/>
+&lt;view bindcustomevent="anotherEventListener"&gt;<br/>
+&nbsp; &lt;slot /&gt;<br/>
+&lt;/view&gt;<br/>
+// 组件 my-component.wxml<br/>
+&lt;view bindcustomevent="myEventListener"&gt;<br/>
+&nbsp; &lt;slot /&gt;<br/>
+&lt;/view&gt;<br/>
+复制代码<br/>
+// 组件 my-component.js<br/>
+Component({<br/>
+&nbsp; methods: {<br/>
+&nbsp; &nbsp; onTap: function(){<br/>
+&nbsp; &nbsp; &nbsp; this.triggerEvent('customevent', {}) // 只会触发 pageEventListener2<br/>
+&nbsp; &nbsp; &nbsp; this.triggerEvent('customevent', {}, { bubbles: true }) // 会依次触发 pageEventListener2 、 pageEventListener1<br/>
+&nbsp; &nbsp; &nbsp; this.triggerEvent('customevent', {}, { bubbles: true, composed: true }) // 会依次触发 pageEventListener2 、 anotherEventListener 、 pageEventListener1<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+})<br/>
+复制代码<br/>
+&nbsp;<br/>
+<br/>
+5. behaviors返回顶部<br/>
+behaviors<br/>
+定义和使用 behaviors<br/>
+behaviors 是用于组件间代码共享的特性，类似于一些编程语言中的“mixins”或“traits”。<br/>
+<br/>
+每个 behavior 可以包含一组属性、数据、生命周期函数和方法，组件引用它时，它的属性、数据和方法会被合并到组件中，生命周期函数也会在对应时机被调用。每个组件可以引用多个 behavior 。 behavior 也可以引用其他 behavior 。<br/>
+<br/>
+behavior 需要使用 Behavior() 构造器定义。<br/>
+<br/>
+代码示例：<br/>
+<br/>
+复制代码<br/>
+// my-behavior.js<br/>
+module.exports = Behavior({<br/>
+&nbsp; behaviors: [],<br/>
+&nbsp; properties: {<br/>
+&nbsp; &nbsp; myBehaviorProperty: {<br/>
+&nbsp; &nbsp; &nbsp; type: String<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; },<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; myBehaviorData: {}<br/>
+&nbsp; },<br/>
+&nbsp; attached: function(){},<br/>
+&nbsp; methods: {<br/>
+&nbsp; &nbsp; myBehaviorMethod: function(){}<br/>
+&nbsp; }<br/>
+})<br/>
+复制代码<br/>
+组件引用时，在 behaviors 定义段中将它们逐个列出即可。<br/>
+<br/>
+代码示例：<br/>
+<br/>
+复制代码<br/>
+// my-component.js<br/>
+var myBehavior = require('my-behavior')<br/>
+Component({<br/>
+&nbsp; behaviors: [myBehavior],<br/>
+&nbsp; properties: {<br/>
+&nbsp; &nbsp; myProperty: {<br/>
+&nbsp; &nbsp; &nbsp; type: String<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; },<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; myData: {}<br/>
+&nbsp; },<br/>
+&nbsp; attached: function(){},<br/>
+&nbsp; methods: {<br/>
+&nbsp; &nbsp; myMethod: function(){}<br/>
+&nbsp; }<br/>
+})<br/>
+复制代码<br/>
+在上例中， my-component 组件定义中加入了 my-behavior ，而 my-behavior 中包含有 myBehaviorProperty 属性、 myBehaviorData数据字段、 myBehaviorMethod 方法和一个 attached 生命周期函数。这将使得 my-component 中最终包含 myBehaviorProperty 、 myProperty 两个属性， myBehaviorData 、 myData 两个数据字段，和 myBehaviorMethod 、 myMethod 两个方法。当组件触发 attached 生命周期时，会依次触发 my-behavior 中的 attached 生命周期函数和 my-component 中的 attached 生命周期函数。<br/>
+<br/>
+字段的覆盖和组合规则<br/>
+组件和它引用的 behavior 中可以包含同名的字段，对这些字段的处理方法如下：<br/>
+<br/>
+如果有同名的属性或方法，组件本身的属性或方法会覆盖 behavior 中的属性或方法，如果引用了多个 behavior ，在定义段中靠后 behavior 中的属性或方法会覆盖靠前的属性或方法；<br/>
+如果有同名的数据字段，如果数据是对象类型，会进行对象合并，如果是非对象类型则会进行相互覆盖；<br/>
+生命周期函数不会相互覆盖，而是在对应触发时机被逐个调用。如果同一个 behavior 被一个组件多次引用，它定义的生命周期函数只会被执行一次。<br/>
+内置 behaviors<br/>
+自定义组件可以通过引用内置的 behavior 来获得内置组件的一些行为。<br/>
+<br/>
+代码示例：<br/>
+<br/>
+Component({<br/>
+&nbsp; behaviors: ['wx://form-field']<br/>
+})<br/>
+在上例中， wx://form-field 代表一个内置 behavior ，它使得这个自定义组件有类似于表单控件的行为。<br/>
+<br/>
+内置 behavior 往往会为组件添加一些属性。在没有特殊说明时，组件可以覆盖这些属性来改变它的 type 或添加 observer 。<br/>
+<br/>
+wx://form-field<br/>
+使自定义组件有类似于表单控件的行为。 form 组件可以识别这些自定义组件，并在 submit 事件中返回组件的字段名及其对应字段值。这将为它添加以下两个属性。<br/>
+<br/>
+属性名&#09;类型&#09;描述&#09;最低版本<br/>
+name&#09;String&#09;在表单中的字段名&#09;1.6.7<br/>
+value&#09;任意&#09;在表单中的字段值&#09;1.6.7<br/>
+&nbsp;<br/>
+6. 组件间关系返回顶部<br/>
+组件间关系<br/>
+定义和使用组件间关系<br/>
+有时需要实现这样的组件：<br/>
+<br/>
+&lt;custom-ul&gt;<br/>
+&nbsp; &lt;custom-li&gt; item 1 &lt;/custom-li&gt;<br/>
+&nbsp; &lt;custom-li&gt; item 2 &lt;/custom-li&gt;<br/>
+&lt;/custom-ul&gt;<br/>
+这个例子中， custom-ul 和 custom-li 都是自定义组件，它们有相互间的关系，相互间的通信往往比较复杂。此时在组件定义时加入 relations 定义段，可以解决这样的问题。示例：<br/>
+<br/>
+复制代码<br/>
+// path/to/custom-ul.js<br/>
+Component({<br/>
+&nbsp; relations: {<br/>
+&nbsp; &nbsp; './custom-li': {<br/>
+&nbsp; &nbsp; &nbsp; type: 'child', // 关联的目标节点应为子节点<br/>
+&nbsp; &nbsp; &nbsp; linked: function(target) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; // 每次有custom-li被插入时执行，target是该节点实例对象，触发在该节点attached生命周期之后<br/>
+&nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; linkChanged: function(target) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; // 每次有custom-li被移动后执行，target是该节点实例对象，触发在该节点moved生命周期之后<br/>
+&nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; unlinked: function(target) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; // 每次有custom-li被移除时执行，target是该节点实例对象，触发在该节点detached生命周期之后<br/>
+&nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; },<br/>
+&nbsp; methods: {<br/>
+&nbsp; &nbsp; _getAllLi: function(){<br/>
+&nbsp; &nbsp; &nbsp; // 使用getRelationNodes可以获得nodes数组，包含所有已关联的custom-li，且是有序的<br/>
+&nbsp; &nbsp; &nbsp; var nodes = this.getRelationNodes('path/to/custom-li')<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; },<br/>
+&nbsp; ready: function(){<br/>
+&nbsp; &nbsp; this._getAllLi()<br/>
+&nbsp; }<br/>
+})<br/>
+复制代码<br/>
+复制代码<br/>
+// path/to/custom-li.js<br/>
+Component({<br/>
+&nbsp; relations: {<br/>
+&nbsp; &nbsp; './custom-ul': {<br/>
+&nbsp; &nbsp; &nbsp; type: 'parent', // 关联的目标节点应为父节点<br/>
+&nbsp; &nbsp; &nbsp; linked: function(target) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; // 每次被插入到custom-ul时执行，target是custom-ul节点实例对象，触发在attached生命周期之后<br/>
+&nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; linkChanged: function(target) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; // 每次被移动后执行，target是custom-ul节点实例对象，触发在moved生命周期之后<br/>
+&nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; unlinked: function(target) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; // 每次被移除时执行，target是custom-ul节点实例对象，触发在detached生命周期之后<br/>
+&nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+})<br/>
+复制代码<br/>
+注意：必须在两个组件定义中都加入relations定义，否则不会生效。<br/>
+<br/>
+关联一类组件<br/>
+有时，需要关联的是一类组件，如：<br/>
+<br/>
+复制代码<br/>
+&lt;custom-form&gt;<br/>
+&nbsp; &lt;view&gt;<br/>
+&nbsp; &nbsp; input<br/>
+&nbsp; &nbsp; &lt;custom-input&gt;&lt;/custom-input&gt;<br/>
+&nbsp; &lt;/view&gt;<br/>
+&nbsp; &lt;custom-submit&gt; submit &lt;/custom-submit&gt;<br/>
+&lt;/custom-form&gt;<br/>
+复制代码<br/>
+custom-form 组件想要关联 custom-input 和 custom-submit 两个组件。此时，如果这两个组件都有同一个behavior：<br/>
+<br/>
+// path/to/custom-form-controls.js<br/>
+module.exports = Behavior({<br/>
+&nbsp; // ...<br/>
+})<br/>
+复制代码<br/>
+// path/to/custom-input.js<br/>
+var customFormControls = require('./custom-form-controls')<br/>
+Component({<br/>
+&nbsp; behaviors: [customFormControls],<br/>
+&nbsp; relations: {<br/>
+&nbsp; &nbsp; './custom-form': {<br/>
+&nbsp; &nbsp; &nbsp; type: 'ancestor', // 关联的目标节点应为祖先节点<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+})<br/>
+复制代码<br/>
+复制代码<br/>
+// path/to/custom-submit.js<br/>
+var customFormControls = require('./custom-form-controls')<br/>
+Component({<br/>
+&nbsp; behaviors: [customFormControls],<br/>
+&nbsp; relations: {<br/>
+&nbsp; &nbsp; './custom-form': {<br/>
+&nbsp; &nbsp; &nbsp; type: 'ancestor', // 关联的目标节点应为祖先节点<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+})<br/>
+复制代码<br/>
+则在 relations 关系定义中，可使用这个behavior来代替组件路径作为关联的目标节点：<br/>
+<br/>
+复制代码<br/>
+// path/to/custom-form.js<br/>
+var customFormControls = require('./custom-form-controls')<br/>
+Component({<br/>
+&nbsp; relations: {<br/>
+&nbsp; &nbsp; 'customFormControls': {<br/>
+&nbsp; &nbsp; &nbsp; type: 'descendant', // 关联的目标节点应为子孙节点<br/>
+&nbsp; &nbsp; &nbsp; target: customFormControls<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+})<br/>
+复制代码<br/>
+relations 定义段<br/>
+relations 定义段包含目标组件路径及其对应选项，可包含的选项见下表。<br/>
+<br/>
+选项&#09;类型&#09;是否必填&#09;描述<br/>
+type&#09;String&#09;是&#09;目标组件的相对关系，可选的值为 parent 、 child 、 ancestor 、 descendant<br/>
+linked&#09;Function&#09;否&#09;关系生命周期函数，当关系被建立在页面节点树中时触发，触发时机在组件attached生命周期之后<br/>
+linkChanged&#09;Function&#09;否&#09;关系生命周期函数，当关系在页面节点树中发生改变时触发，触发时机在组件moved生命周期之后<br/>
+unlinked&#09;Function&#09;否&#09;关系生命周期函数，当关系脱离页面节点树时触发，触发时机在组件detached生命周期之后<br/>
+target&#09;String&#09;否&#09;如果这一项被设置，则它表示关联的目标节点所应具有的behavior，所有拥有这一behavior的组件节点都会被关联<br/>
+&nbsp;<br/>
+<br/>
+7.返回顶部<br/>
+&nbsp;<br/>
+8.返回顶部<br/>
+&nbsp;<br/>
+9.返回顶部<br/>
+&nbsp;<br/>
+10.返回顶部<br/>
+1、<br/>
+https://mp.weixin.qq.com/debug/wxadoc/dev/framework/custom-component/<br/>
+2、<br/>
+&nbsp;<br/>
+11.返回顶部<br/>
+&nbsp;<br/>
+warn&#09;作者：ylbtech<br/>
+出处：http://ylbtech.cnblogs.com/<br/>
+本文版权归作者和博客园共有，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。</body></html>

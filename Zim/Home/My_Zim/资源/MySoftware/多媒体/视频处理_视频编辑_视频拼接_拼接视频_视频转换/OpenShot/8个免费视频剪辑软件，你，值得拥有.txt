@@ -1,0 +1,83 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-05-01T10:27:31+08:00
+
+====== 8个免费视频剪辑软件，你，值得拥有 ======
+创建日期 星期五 01 五月 2020
+
+提到视频剪辑软件，大家首先想到的就是Final Cut 、Premiere、Edius等等。然而这些软件实在是太！贵！了！啊！破解的话实在是太！麻！烦！了！啊！难道就没有免费又好用的剪辑软件吗？
+
+当然有，今天doyoudo给大家推荐8款免费的视频剪辑软件，希望你能找到顺手的那个。
+
+1、HitFilm 3 Express
+网址：https://hitfilm.com/express
+
+适用平台：Windows/Mac OS
+
+
+HitFilm 3 Express可以说是目前市面上最好的免费视频剪辑软件，除了基础的视频剪辑功能外，你还可以用它来制作动画、2D或者3D建模、或者添加特效。该软件免费版本包含完整的视频剪辑功能、内建100个特效、动态跟踪等功能，当然你也可以通过内购下载额外的过场动画和特效。
+
+2、DaVinci Resolve 12
+网址：https://www.blackmagicdesign.com/products/davinciresolve
+
+适用平台：Windows/Mac OS
+
+
+DaVinci Resolve 12.5是一个将专业的视频剪辑功能和调色系统集于一身的软件，它支持不限分辨率的窗口缩放，可在现场、狭小工作室使用。和HitFilm 3 Express相比DaVinci在视频剪辑和动画制作方面并不出色，假如你更倾向调色后期那么DaVinci肯定是你的不二选择。
+
+3、Movie Maker
+网址：https://support.microsoft.com/en-us/help/14220/windows-movie-maker-download
+
+适用平台：Windows
+
+
+Movie Maker Live是windows附带的一个影视剪辑小软件，它功能比较简单，可以组合镜头，声音，加入镜头切换的特效，只要将镜头片段拖入就行，很简单，适合家用摄像后的一些小规模的处理，操作简单非常适合视频剪辑小白使用。
+
+4、iMoive
+网址：http://www.apple.com/mac/imovie/
+
+适用平台：Mac OS
+
+
+iMovie是一款由苹果电脑编写的视频剪辑软件，之后于WWDC 2010推出了iOS版本。iMovie'11是目前最新的版本，新增功能有影片预告、全新音频编辑、一步特效、人物查找器、运动与新闻主题、全球首映等等，imovie免费且容易上手，不过你得花钱买一台昂贵的Mac。
+
+5、Lightworks
+网址：https://www.lwks.com/
+
+适用平台：Windows, Mac OS, Linux
+
+
+在HitFilm 3 Express上市之前Lightworks一直都是视频剪辑爱好者的第一选择，它在2011年的时候成为了一款开源软件并提供免费下载，唯一的缺点就是免费版最高只能导出720P的视频。
+
+6、ivsEdits LE
+网址：http://www.ivsedits.com/default/
+
+适用平台：Windows
+
+
+LE是ivsEdits的免费版本，它支持处理4K级别的视频并且可以以无损的格式(AVI、MOV)导出，尽管免费版会有种种限制你仍然可以通过第三方插件完成你所需的操作。
+
+7、Shotcut
+网址：https://www.shotcut.org/
+
+适用平台：Windows, Mac, Linux
+
+
+及其简洁、易上手的视频剪辑软件，开源、免费。适合初学者或者是不喜欢特别复杂操作的用户使用。
+
+8、Avid Free DV
+适用平台：Windows
+
+
+Avid Free DV是专业视频剪辑软件Avid video editor的免费版本，然而在AVE收购了Pinnacle后他们停止了对这款软件的维护，不过你仍然可以在百度上找到免费下载的版本。不过Avid Free DV不适合业余视频剪辑爱好者。
+
+
+Orginal author: TOMISLAV ZLATIC | Accessed from: BPB Blog| Authority accessed.
+
+原作者：TOMISLAV ZLATIC｜来源: BPB Blog| 已获得转载权限
+
+
+http://doyoudo.com ｜ 创意设计软件学习平台，看幽默、超清、高效的视频教程，学习也会上瘾。
+
+
+https://zhuanlan.zhihu.com/p/21879714

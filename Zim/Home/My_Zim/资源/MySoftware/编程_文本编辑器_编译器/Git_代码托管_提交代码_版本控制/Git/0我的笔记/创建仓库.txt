@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-11-05T16:25:30+08:00
+
+====== 创建仓库 ======
+Created Monday 05 November 2018
+
+```
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+
+```
+```
+mkdir git_dir
+cd git_dir
+git init
+```

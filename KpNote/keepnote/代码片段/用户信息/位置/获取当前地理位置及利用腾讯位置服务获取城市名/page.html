@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>获取当前地理位置及利用腾讯位置服务获取城市名</title>
+</head><body><a href="https://juejin.im/post/5cef8399f265da1bd4246460">https://juejin.im/post/5cef8399f265da1bd4246460</a>&nbsp; <br/>
+<a href="https://blog.csdn.net/Magic_Ninja/article/details/81509545">https://blog.csdn.net/Magic_Ninja/article/details/81509545</a>&nbsp; <br/>
+<br/>
+<br/>
+<br/>
+<a href="https://lbs.qq.com/dev/console/key/add">https://lbs.qq.com/dev/console/key/add</a>&nbsp; <br/>
+<br/>
+开发步骤：<br/>
+1.申请开发者密钥（key）lbs.qq.com/console/key…<br/>
+2.开通webserviceAPI服务：控制台 -&gt; key管理 -&gt; 设置（使用该功能的key）-&gt; 勾选webserviceAPI -&gt; 保存<br/>
+3.下载微信小程序JavaScriptSDK，微信小程序JavaScriptSDK v1.2<br/>
+4.安全域名设置，在“设置” -&gt; “开发设置”中设置request合法域名，添加https://apis.map.qq.com<br/>
+引入 微信小程序JavaScriptSDK，<br/>
+var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');<br/>
+实例化API核心类<br/>
+var qqmapsdk = new QQMapWX({<br/>
+&nbsp; key: 'UNKBZ-Z373V-STPPW-UZW77-JLMQ6-7UFTQ' // 必填<br/>
+});<br/>
+复制代码调用微信接口<br/>
+wx.getLocation({<br/>
+&#09;sucess: function(res) {<br/>
+&nbsp; &nbsp; &#09;//获取到经纬度<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; var latitude = res.latitude<br/>
+&nbsp; &nbsp;&#09;&#09;var longitude = res.longitude<br/>
+&nbsp; &nbsp; }<br/>
+})<br/>
+复制代码调用微信位置服务<br/>
+qqmapsdk.reverseGeocoder({<br/>
+&nbsp; &nbsp; location: {<br/>
+&nbsp; &nbsp; &nbsp; latitude: latitude,<br/>
+&nbsp; &nbsp; &nbsp; longitude: longitude<br/>
+&nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; success: function(location) {<br/>
+&nbsp; &nbsp; &nbsp; console.log(location)<br/>
+&nbsp; &nbsp; &nbsp; //返回真实地理位置<br/>
+&nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; fail: function(error) {<br/>
+<br/>
+&nbsp; &nbsp; }<br/>
+})<br/>
+复制代码注意一点：必须将https://apis.map.qq.com 添加到微信小程序request合法域名中。<br/>
+<br/>
+作者：科技男<br/>
+链接：https://juejin.im/post/5cef8399f265da1bd4246460<br/>
+来源：掘金<br/>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</body></html>

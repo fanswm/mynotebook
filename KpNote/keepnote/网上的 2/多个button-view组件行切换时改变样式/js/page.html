@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>js</title>
+</head><body>Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; // 数据列表<br/>
+&nbsp; &nbsp; list:[<br/>
+&nbsp; &nbsp; &nbsp; {id: 0,&#09;title: "36",&#09;stock: 10&#09;},<br/>
+&nbsp; &nbsp; &nbsp; {id: 1,&#09;title: "37",&#09;stock: 0&#09;},<br/>
+&nbsp; &nbsp; &nbsp; {id: 2,&#09;title: "38",&#09;stock: 0&#09;},<br/>
+&nbsp; &nbsp; &nbsp; {id: 3,&#09;title: "39",&#09;stock: 10&#09;},<br/>
+&nbsp; &nbsp; &nbsp; {id: 4,&#09;title: "40",&#09;stock: 6&#09;},<br/>
+&nbsp; &nbsp; &nbsp; {id: 5,&#09;title: "41",&#09;stock: 10&#09;},<br/>
+&nbsp; &nbsp; &nbsp; {id: 6,&#09;title: "42", &nbsp; &nbsp;stock: 10 &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; {id: 7, &nbsp; title: "43", &nbsp; &nbsp;stock: 10 &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; {id: 8, &nbsp; title: "44", &nbsp; &nbsp;stock: 0 &nbsp; &nbsp;},<br/>
+&nbsp; &nbsp; ],<br/>
+&nbsp; &nbsp; // 当前选中的号码<br/>
+&nbsp; &nbsp; current_tag:null,<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; /**<br/>
+&nbsp; &nbsp;* 库存为0，不可选<br/>
+&nbsp; &nbsp;*/<br/>
+&nbsp; clickedBtn: function (responseObject) {<br/>
+&nbsp; &nbsp; util.progressTips("补货中，请耐心等待")<br/>
+&nbsp; &nbsp; let that = this;<br/>
+&nbsp; &nbsp; var id = responseObject.currentTarget.dataset.id; &nbsp;//获取自定义的ID值 <br/>
+&nbsp; &nbsp; console.log("current_tag", id)<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; current_tag: id,<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; /**<br/>
+&nbsp; &nbsp;* 库存大于0，可选，选中变色<br/>
+&nbsp; &nbsp;*/<br/>
+&nbsp; clickedAction: function (responseObject){<br/>
+&nbsp; &nbsp; let that = this;<br/>
+&nbsp; &nbsp; var id = responseObject.currentTarget.dataset.id; &nbsp;//获取自定义的ID值 <br/>
+&nbsp; &nbsp; console.log("current_tag", id)<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; current_tag: id,<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; }<br/>
+<br/>
+})</body></html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>0</title>
+</head><body>一、loadFontFace接口<br/>
+小程序官方提供的接口，最便捷的加载字体的方法，不过限制颇多。必须https且同源，canvas等原生组件不支持。注意！！使用本地文件无效，必须使用网络地址。<br/>
+官方文档<br/>
+演示代码：<br/>
+wx.loadFontFace({<br/>
+&nbsp; family: 'FZSuXSLSJW',<br/>
+&nbsp; source: 'url("https://we7.stuyun.com/FZSuXSLSJW.ttf")',<br/>
+&nbsp; success: res =&gt; {<br/>
+&nbsp; &nbsp; console.log('font load success', res)<br/>
+&nbsp; },<br/>
+&nbsp; fail: err =&gt; {<br/>
+&nbsp; &nbsp; console.log('font load fail', err)<br/>
+&nbsp; }<br/>
+})<br/>
+复制代码二、face-font url<br/>
+传统的css规则，跟loadFontFace限制一样，必须https且同源，不支持canvas等原生组件，不支持本地文件。<br/>
+菜鸟教程<br/>
+演示代码：<br/>
+@font-face {<br/>
+&nbsp; &nbsp; font-family: 'FZSuXSLSJW';<br/>
+&nbsp; &nbsp; src: url("https://we7.stuyun.com/FZSuXSLSJW.ttf")<br/>
+}<br/>
+复制代码三、face-font base64<br/>
+网上教程常介绍的方法，到transfonter上传文件，formats只勾选ttf就行。可以将字体转换成base64的face-font，复制到wxss里面就可以使用。但是缺点也很明显，小程序最大体积限制只能2m，随便一个中文字体就超过了。<br/>
+<br/>
+<br/>
+四、总结<br/>
+原本计划是使用canvas实现图片编辑，并且添加可自定义文字，然后就尝试一下能否更换字体，无奈尝试了上面的三种方法都不和我意。前两种方法在工具上预览是可以的，但是在安卓和iOS真机上，canvas上都无效。而第三种方法太浪费空间资源，2m的包大小限制直接淘汰了。<br/>
+<br/>
+作者：郭靈纹<br/>
+链接：https://juejin.im/post/5cd0402bf265da038932a88e<br/>
+来源：掘金<br/>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</body></html>

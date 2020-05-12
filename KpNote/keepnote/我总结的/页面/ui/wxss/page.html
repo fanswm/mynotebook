@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>wxss</title>
+</head><body>使用@import语句可以导入外联样式表，@import后跟需要导入的外联样式表的相对路径，用;表示语句结束。<hr/><br/>
+/** common.wxss **/<br/>
+.small-p {<br/>
+&nbsp; padding:5px;<br/>
+}<hr/>/** app.wxss **/<br/>
+@import "common.wxss";<br/>
+.middle-p {<br/>
+&nbsp; padding:15px;<br/>
+}<hr/><span style="color: #800000"><span style="font-size: 12pt"><span style="font-family: Consolas"><span style="background-color: #fffffe"><span style="color: #000000">imrdr: template</span></span></span></span></span>&nbsp; 没有 class 属性；<br/>
+@import 之后的路径必须是完整的路径；<br/>
+</body></html>

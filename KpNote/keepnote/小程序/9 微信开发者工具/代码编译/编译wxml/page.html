@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>编译WXML</title>
+</head><body>from <a href="https://developers.weixin.qq.com/ebook?action=get_post_info&token=935589521&volumn=1&lang=zh_CN&book=miniprogram&docid=0006ca569f43d8cb0086824b15180a&pass_ticket=CZtoFnIgy1o4sM4K%2FKU5q6iUYk89wZrgwmACm7IKQENuJLQCtn6SITW1J1y9v3%2B8">developers.weixin.qq.com</a>:<br/>
+WXML（<span style="color: #ff0000">WeiXin Markup Language</span>）是小程序框架设计的一套标签语言，用于构建出页面的结构。小程序的渲染层的运行环境是一个WebView，而<span style="color: #ff0000">WebView无法直接理解WXML标签，所以需要经过编译。</span><br/>
+微信开发者工具内置了一个二进制的WXML编译器，这个编译器接受WXML代码文件列表，处理完成之后输出JavaScript代码，这段代码是各个页面的结构生成函数。<br/>
+<br/>
+<img src="screenshot.png" /><br/>
+<br/>
+图9-3 WXML的编译过程<br/>
+<br/>
+编译过程<span style="color: #ff0000">将所有的WXML代码最终变成一个JavaScript 函数，</span>预先注入在WebView中。<br/>
+在运行时确定了页面路径之后，<span style="color: #ff0000">将路径作为参数</span>传递给这个函数<span style="color: #ff0000">得到该页面的结构生成函数</span>，页面结构生成函数接受页面数据，输出一段描述页面结构的JSON，最终通过小程序组件系统生成对应的HTML。<br/>
+<br/>
+代码清单10-1 如何使用<span style="color: #ff0000">页面结构生成函数</span><br/>
+<br/>
+//<span style="color: #ff0000">$gwx 是WXML编译后得到的函数</span><br/>
+//根据页面路径获取页面结构生成函数<br/>
+var generateFun = $gwx('name.wxml')<br/>
+//页面结构生成函数接受页面数据，得到描述页面结构的JSON<br/>
+var virtualTree = generateFun({<br/>
+&nbsp; &nbsp;name: &nbsp;'miniprogram'<br/>
+})<br/>
+/** virtualTree == {<br/>
+&nbsp; &nbsp;tag: 'view'，<br/>
+&nbsp; &nbsp;children: [{<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;tag: 'view',<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;children: ['miniprogram']<br/>
+&nbsp; &nbsp; &nbsp;}]<br/>
+&nbsp;}**/<br/>
+&nbsp;//小程序组件系统在虚拟树对比后将结果渲染到页面上<br/>
+&nbsp;virtualDom.render(virtualTree)<br/>
+上传代码时，微信开发者工具直接将本地的WXML代码文件提交到后台，由后台进行WXML编译，<span style="color: #ff0000">后台的WXML编译器</span>和开发者工具本地内置的WXML编译器<span style="color: #ff0000">是同一套代码生成的。</span></body></html>

@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-04-25T16:45:06+08:00
+
+====== myBase ======
+创建日期 星期六 25 四月 2020
+
+http://wjjsoft.com/

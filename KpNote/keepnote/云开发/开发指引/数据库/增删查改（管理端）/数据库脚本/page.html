@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>数据库脚本</title>
+</head><body>数据库脚本<br/>
+数据库脚本是<span style="color: #ff0000">用来执行数据库 CRUD &amp; 聚合 操作的脚本</span>，语法同云开发 SDK 数据库语法，目前可应用数据库脚本在以下场景：<br/>
+<br/>
+<span style="color: #ff0000">控制台中可以使用数据库脚本进行高级数据库 CRUD &amp; 聚合 管理操作 文档（ https://developers.weixin.qq.com/miniprogram/dev/wxcloud/guide/database/console-dbscript.html ）<br/>
+HTTP API 中的数据库接口 文档 &nbsp;（https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-http-api/database/）<br/>
+<br/>
+</span><br/>
+<span style="color: #ff0000">数据库脚本语法</span><br/>
+<br/>
+数据库脚本语法同 SDK 数据库语法<span style="color: #ff0000">，是 JavaScript 的真子集，</span>出于安全考虑在语法上带有一定的限制性，以下是一个查询的脚本示例：<br/>
+<br/>
+db.collection('test')<br/>
+&nbsp; .where({<br/>
+&nbsp; &nbsp; price: _.gt(10)<br/>
+&nbsp; })<br/>
+&nbsp; .field({<br/>
+&nbsp; &nbsp; name: true,<br/>
+&nbsp; &nbsp; price: true,<br/>
+&nbsp; })<br/>
+&nbsp; .<span style="color: #ff0000">orderBy</span>('price', 'desc')<br/>
+&nbsp; .skip(1)<br/>
+&nbsp; .limit(100)<br/>
+&nbsp; .get()<br/>
+<br/>
+<span style="color: #ff0000"><b>全局变量</b></span><br/>
+在脚本中提供以下全局变量：<br/>
+<br/>
+变量名&#09;说明<br/>
+db&#09;&#09;等于 wx.cloud.database() 的结果 (不区分环境)<br/>
+_&#09;&#09;等于 db.command<br/>
+<br/>
+<span style="color: #ff0000"><b>语法规则</b></span><br/>
+以下列举以 JavaScript 语法表达式出发解释主要的语法异同点（规则和限制）：<br/>
+<br/>
+表达式&#09;&#09;支持性&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;示例<br/>
+获取属性&#09;&#09;支持获取对象的合法属性，对象如 db、_，合法属性如 db 的 collection 属性&#09;db.collection<br/>
+函数调用&#09;&#09;支持&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;db.collection()<br/>
+new&#09;&#09;支持&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;new db.Geo.Point(113, 23)<br/>
+变量声明&#09;&#09;支持变量声明，同时支持对象解构器的声明方式&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;const Geo = db.Geo<ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none">&nbsp; &nbsp;const { Point } = db.Geo</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+对象声明&#09;&#09;支持&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;const obj = { age: _.gt(10) }<br/>
+常量声明&#09;&#09;支持&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;const max = 10<br/>
+负数&#09;&#09;支持&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;const min = -5<br/>
+注释&#09;&#09;支持&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;&#09;// comment<ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none"><ul><li style="list-style-type: none">&nbsp; /* comment */</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+其他&#09;不支持&#09;<br/>
+<br/>
+<span style="color: #ff0000">不支持表达式简要一览：</span><br/>
+<span style="color: #ff0000"><br/>
+函数声明<br/>
+类声明<br/>
+变量赋值（不能声明后重新赋值）<br/>
+算术运算（+, -...）<br/>
+三值表达式（a ? b : c）<br/>
+条件表达式（if, else）<br/>
+switch 表达式<br/>
+遍历表达式（for...in, for...of, ...）<br/>
+数组解构器<br/>
+</span><span style="color: #ff0000">try catch</span><br/>
+<br/>
+<span style="color: #ff0000">报错提示</span><br/>
+如果语法不正确，在错误信息中会给出<span style="color: #ff0000">错误原因及出错的行列号</span>，示例：<br/>
+<br/>
+</body></html>

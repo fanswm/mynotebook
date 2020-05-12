@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>原生组件运行机制</title>
+</head><body>要介绍原生组件的运行机制，我们需要从一行代码看起。<br/>
+<br/>
+代码清单6-8 展示一个地图组件<br/>
+<br/>
+&lt;map latitude="39.92" longtitude="116.46"&gt;&lt;/map&gt;<br/>
+<br/>
+在原生组件内部，其节点树非常简单，基本上可以认为<span style="color: #ff0000">只有一个div元素</span>。上面这行代码在渲染层开始运行时，会经历以下几个步聚：<br/>
+<br/>
+<span style="color: #ff0000">组件被创建</span>，包括组件属性会依次赋值。<br/>
+<span style="color: #ff0000">组件被插入到DOM树里</span>，浏览器内核会立即计算布局，此时我们可以读取出组件相对页面的位置（x, y坐标）、宽高。<br/>
+<span style="color: #ff0000">组件通知客户端</span>，客户端在相同的位置上，根据宽高插入一块原生区域，之后客户端就在这块区域渲染界面<br/>
+当位置或宽高发生变化时，组件会通知客户端做相应的调整<br/>
+<br/>
+<br/>
+我们可以看出，<span style="color: #ff0000">原生组件在WebView这一层的渲染任务是很简单，只需要渲染一个占位元素</span>，之后客户端在这块占位元素之上叠了一层原生界面。因此，原生组件的层级会比所有在WebView层渲染的普通组件要高。<br/>
+<br/>
+<br/>
+<span style="color: #ff0000">引入原生组件主要有3个好处：<br/>
+<br/>
+扩展Web的能力。比如像输入框组件（input, textarea）有更好地控制键盘的能力。<br/>
+体验更好，同时也减轻WebView的渲染工作。比如像地图组件（map）这类较复杂的组件，其渲染工作不占用WebView线程，而交给更高效的客户端原生处理。<br/>
+</span><span style="color: #ff0000">绕过setData、数据通信和重渲染流程，使渲染性能更好。比如像画布组件（canvas）可直接用一套丰富的绘图接口进行绘制。</span><br/>
+<br/>
+表6-1 常用的几个原生组件<br/>
+<br/>
+<span style="color: #ff0000">组件名&#09;名称&#09;&#09;是否有**context**&#09;描述</span><br/>
+video&#09;视频&#09;&#09;是&#09;&#09;&#09;&#09;&#09;播放视频<br/>
+map&#09;地图&#09;&#09;是&#09;&#09;&#09;&#09;&#09;展示地图<br/>
+canvas&#09;画布&#09;&#09;是&#09;&#09;&#09;&#09;&#09;提供一个可以自由绘图的区域<br/>
+picker&#09;弹出式选择器&#09;否&#09;&#09;&#09;&#09;&#09;初始时没有界面，点击时弹出选择器<br/>
+<br/>
+交互比较复杂的原生组件都会提供“context”，用于直接操作组件。<br/>
+以canvas为例，小程序提供了wx.createCanvasContext方法来创建canvas的context。这是一个可以用于操作canvas的对象，对象下提供了很多绘图的方法，如“setFillStyle”方法可以设置填充样式，“fillRect”方法用于绘制矩形（这些方法与HTML DOM Canvas兼容）。<br/>
+<br/>
+<span style="color: #ff0000">代码清单6-9 canvas组件context对象示例（WXML代码）</span><br/>
+<br/>
+&lt;canvas canvas-id="myCanvas"&gt;&lt;/canvas&gt;<br/>
+<br/>
+代码清单6-10 <span style="color: #ff0000">canvas组件context对象示例（JS代码）</span><br/>
+<br/>
+const ctx = wx.createCanvasContext('myCanvas')<br/>
+ctx.setFillStyle('red')<br/>
+ctx.fillRect(10, 10, 150, 75)<br/>
+ctx.draw()<br/>
+<br/>
+这段代码可以创建WXML中对应canvas节点的context，通过调用context中的方法，在画布上绘制一个矩形。<br/>
+<br/>
+类似于canvas，video、map等原生组件都可以创建context，context中提供的方法非常丰富，这里就不一一列举了。<br/>
+</body></html>

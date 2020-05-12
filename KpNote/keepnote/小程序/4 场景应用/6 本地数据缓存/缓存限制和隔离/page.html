@@ -1,0 +1,11 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>缓存限制和隔离</title>
+</head><body>小程序<span style="color: #ff0000">宿主环境</span>会管理不同小程序的数据缓存，<span style="color: #ff0000">不同小程序的本地缓存空间是分开的</span>，<br/>
+每个小程序的<span style="color: #ff0000"><span style="font-size: 14pt">缓存空间上限为10MB</span></span>，如果当前缓存已经达到10MB，再通过wx.setStorage写入缓存会触发fail回调。<br/>
+<br/>
+小程序的本地缓存<span style="color: #ff0000">不仅仅通过小程序这个维度来隔离空间</span>，考虑到同一个设备可以登录不同微信用户，宿主环境<span style="color: #ff0000">还对不同用户的缓存进行了隔离</span>，避免用户间的数据隐私泄露。<br/>
+<br/>
+由于<span style="color: #ff0000">本地缓存是存放在当前设备</span>，用户换设备之后无法从另一个设备读取到当前设备数据，<span style="color: #ff0000">因此用户的关键信息不建议只存在本地缓存，应该把数据放到服务器端进行持久化存储。</span></body></html>

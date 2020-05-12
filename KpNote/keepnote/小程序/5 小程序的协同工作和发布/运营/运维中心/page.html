@@ -1,0 +1,8 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>运维中心</title>
+</head><body>5.4.2 运维中心<br/>
+我们的程序变更总会伴随一些Bug产生，小程序的逻辑代码由JavaScript脚本编写，JavaScript可以通过一些方法[7]来检测运行时异常的发生，小程序宿主环境已经内置了异常检测的模块，并且上报到小程序平台，开发者可以通过小程序平台的“运维中心”查看具体的错误日志，开发者根据日志详细定位自己代码的异常处并及时修复。通过开发者自己主动去查阅日志定位错误的方式会显得比较被动，因为开发者不可能时时刻刻都在电脑前关注这个日志的变化曲线，因此比较推荐的方法是<span style="color: #ff0000">通过运维中心的监控告警功能</span>，开发者设置合理的<span style="color: #ff0000">错误阈值</span>，再通过加入微信告警群，当小程序运行发生大量异常现象时，微信告警群会提醒开发者，此时开发者再登录小程序管理平台查阅错误日志。小程序平台目前只提供了脚本错误告警，如果需要监控异常的访问或者服务接口耗时时，需要开发者自行开发监控系统，并在小程序逻辑代码加上对应的数据上报。<br/>
+</body></html>

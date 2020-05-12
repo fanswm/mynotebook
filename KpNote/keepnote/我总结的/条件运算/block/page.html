@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>block</title>
+</head><body>&lt;block/&gt; 并不是一个组件，它仅仅是一个包装元素，不会在页面中做任何渲染<span style="color: #ff0000">，只接受控制属性。</span><br/>
+因为 wx:if 是一个控制属性，需要将它添加到一个标签上。<span style="color: #ff0000">如果要一次性判断多个组件标签，可以使用一个 &lt;block/&gt; 标签将多个组件包装起来，</span>并在上边使用 wx:if 控制属性。<br/>
+&nbsp;&lt;block wx:if="{{true}}"&gt;<br/>
+&nbsp; &nbsp; &nbsp; &lt;view&gt; view1 &lt;/view&gt;<br/>
+&nbsp; &nbsp; &nbsp;&lt;view&gt; view2 &lt;/view&gt;<br/>
+&lt;/block&gt;<br/>
+<br/>
+类似 block wx:if，也可以将 wx:for 用在&lt;block/&gt;标签上，以渲染一个包含多节点的结构块。例如：<br/>
+<br/>
+&lt;block wx:for="{{[1, 2, 3]}}"&gt;<br/>
+&nbsp; &nbsp; &lt;view&gt; {{index}}: &lt;/view&gt;<br/>
+&nbsp; &nbsp; &lt;view&gt; {{item}} &lt;/view&gt;<br/>
+&lt;/block&gt;<br/>
+<br/>
+作者：幸宇<br/>
+链接：https://www.jianshu.com/p/1ca1787990a9<br/>
+来源：简书<br/>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br/>
+<br/>
+<span style="color: #ff0000">block配合wx:if、wx:for使用，标明if、for的作用范围</span></body></html>

@@ -1,0 +1,10 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>原生组件渲染限制</title>
+</head><body>原生组件脱离在WebView渲染流程外，这带来了一些限制。最主要的限制是一些CSS样式无法应用于原生组件，例如，不能在父级节点使用overflow:hidden来裁剪原生组件的显示区域；不能使用transformrotate让原生组件产生旋转等。<br/>
+<br/>
+开发者最为常见的问题是，原生组件会浮于页面其他组件之上（相当于拥有正无穷大的z-index值）使其它组件不能覆盖在原生组件上展示。想要解决这个问题，可以考虑使用cover-view和cover-image组件。这两个组件也是原生组件，同样是脱离WebView的渲染流程外，而原生组件之间的层级就可以按照一定的规则控制。<br/>
+<br/>
+最后一次编辑于 &nbsp;2019年08月19日 &nbsp;（未经腾讯允许，不得转载）</body></html>

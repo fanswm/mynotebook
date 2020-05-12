@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>网络图片本地缓存</title>
+</head><body>在开发项目的过程中，微信小程序需要实现网络图片的本地缓存。因为图片大小&gt;1M,所以用户每次打开小程序都要重新下载，由于图片比较大，下载时间比较久，就容易造成不好的用户体验。那么，在小程序里面具体怎么实现图片的缓存呢，接下来看具体实现代码逻辑。<br/>
+刚看到这个需求的时候，我的第一反应是通过小程序提供的数据缓存api来实现，<br/>
+wx.setStorageSync(string key, any data)<br/>
+<br/>
+但是api的限制就是data只能是原生类型，date，或者可以JSON序列化的对象。这样的话就不可能把 image 当成文件来存储了。那么，我们怎么实现把 image 当成一个文件来存储到本地缓存呢?接下来，将介绍如何使用小程序的文件系统来实现图片的文件缓存。<br/>
+// 第一步： 既然要缓存图片，那么我们要先将图片下载下来。<br/>
+// wx.downloadFile 必填参数url: 图片的地址。<br/>
+//当图片下载成功以后，会返回给我们一个 tempFilePath 。临时的文件路径<br/>
+//那么问题来了，这个临时的文件路径到底怎么理解呢？<br/>
+//本地临时文件只能通过调用特定接口产生，不能直接写入内容。本地临时文件产生后，<br/>
+//仅在当前生命周期内有效，重启之后即不可用。因此，不可把本地临时文件路径存储起来下次使用<br/>
+//上面的是微信小程序 文档对临时的文件路径的解释。<br/>
+//所以到这一步， 这个临时的文件路径不满足我们的需求。那么接下来我们怎么利用这个临时文件路径实现本地缓存呢？<br/>
+wx.downloadFile({<br/>
+&nbsp; &nbsp; &nbsp; url: 'xxxxxxx',<br/>
+&nbsp; &nbsp; &nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; if (res.statusCode === 200) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log('图片下载成功' + res.tempFilePath)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 第二步: 使用小程序的文件系统，通过小程序的api获取到全局唯一的文件管理器<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const fs = wx.getFileSystemManager()<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // &nbsp;fs为全局唯一的文件管理器。那么文件管理器的作用是什么，我们可以用来做什么呢？<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// &nbsp; 文件管理器的作用之一就是可以根据临时文件路径，通过saveFile把文件保存到本地缓存.<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fs.saveFile({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tempFilePath: res.tempFilePath, // 传入一个临时文件路径<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; success(res) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log('图片缓存成功', res.savedFilePath) // res.savedFilePath 为一个本地缓存文件路径 &nbsp;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 此时图片本地缓存已经完成，res.savedFilePath为本地存储的路径。<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //小程序的本地文件路径标准： {{协议名}}://文件路径<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //协议名在 iOS/Android 客户端为 "wxfile"，在开发者工具上为 "http"，<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //开发者无需关注这个差异，也不应在代码中去硬编码完整文件路径。<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //好了，到此为止，我们已经把图片缓存到本地了，而且我们也得到了本地缓存的路径。<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 那么我们把本地缓存的路径，通过小程序的数据缓存服务保存下来。<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 下次打开小程序 首先去缓存中检查是否存在本地文件的缓存路径<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 如果有，直接image src赋值本地缓存路径。<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //如果没有，则是第一次下载图片，或者用户手动清理缓存造成的。<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.setStorageSync('image_cache', res.savedFilePath)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; }else {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log('响应失败', res.statusCode)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; }<br/>
+<br/>
+下面代码是使用缓存给Image赋值的简短逻辑<br/>
+/// 重新启动小程序，去缓存中获取图片的缓存地址。 然后给Imagesrc赋值<br/>
+const path = wx.getStorageSync('image_cache')<br/>
+&nbsp; &nbsp; if (path != null) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; console.log('path====', path)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; image_filepath: path<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; }else {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;console.log('去缓存图片') &nbsp;<br/>
+&nbsp; &nbsp; }<br/>
+}<br/>
+&nbsp; &nbsp; <br/>
+&lt;image src="{{image_filepath}}"&gt;&lt;/image&gt;<br/>
+<br/>
+接下来用一张图片来解释一下整体缓存思路。<br/>
+<br/>
+<br/>
+<br/>
+作者：嗨呀好开心<br/>
+链接：https://www.jianshu.com/p/c07c0c81986f<br/>
+来源：简书<br/>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</body></html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>组件系统</title>
+</head><body><span style="color: #ff0000">小程序的视图是在WebView里渲染的</span>，那搭建视图的方式自然就需要用到HTML语言。如果我们直接提供HTML的能力，那前面章节所介绍的为解决管控与安全而建立的双线程模型就成为摆设了。开发者可以利用A标签实现跳转到其它在线网页，也可以动态执行JavaScript等。除管控与安全外，还有一些的不足之处：<br/>
+<br/>
+<span style="color: #ff0000">l 标签众多，增加理解成本；<br/>
+<br/>
+l 接口底层，不利于快速开发；<br/>
+<br/>
+</span><span style="color: #ff0000">l 能力有限，会限制小程序的表现形式。</span><br/>
+<br/>
+因此，我们设计<span style="color: #ff0000">一套组件框架——Exparser</span>。基于这个框架，内置了一套组件，以涵盖小程序的基础功能，便于开发者快速搭建出任何界面。同时也提供了自定义组件的能力，开发者可以自行扩展更多的组件，以实现代码复用。<br/>
+<br/>
+<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/component.html">https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/component.html</a>&nbsp; </body></html>

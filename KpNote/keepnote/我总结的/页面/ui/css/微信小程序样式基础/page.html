@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>微信小程序样式基础</title>
+</head><body>一、<span style="color: #ff0000">样式基础</span>（wxss）<br/>
+<br/>
+在wxss文件中编写样式内容，使用class等为组建指定样式<br/>
+样式的属性：<br/>
+<span style="color: #ff0000">尺寸</span>:width,height,min-width,max-width,min-height,max-height等<br/>
+<span style="color: #ff0000">背景</span>:background-color,background-image,background-repeat等<br/>
+<span style="color: #ff0000">边框</span>:border,border-radius,border-width,border-color,border-style,border等<br/>
+<span style="color: #ff0000">边距</span>:margin(), padding等<br/>
+<span style="color: #ff0000">文本</span>:color, font-size等<br/>
+其他（列表、内容、表格...）<br/>
+<br/>
+二、<span style="color: #ff0000">样式选择器</span><br/>
+<span style="color: #ff0000">基本选择器</span>：<br/>
+1）<span style="color: #ff0000">类选择器</span>&nbsp;(.name{})）<br/>
+2）<span style="color: #ff0000">ID选择器</span>&nbsp;(#name{})<br/>
+3）<span style="color: #ff0000">元素选择器</span>&nbsp;(name{})<br/>
+4）<span style="color: #ff0000">通配符选择器</span>&nbsp;({})（给所有控件设置样式，<span style="color: #ff0000">小程序不能用这个</span>）<br/>
+5）<span style="color: #ff0000"><b>包含选择器</b></span>&nbsp;(p c{})(p表示parent, c 是chidren)<br/>
+6）<span style="color: #ff0000">子元素选择器</span>&nbsp;(p &gt; c{})(<span style="color: #ff0000">小程序不支持，只有子层才包含</span>，孙子层不包含)<br/>
+7）<span style="color: #ff0000">临近兄弟选择器</span>&nbsp;(c + c{})<br/>
+8）<span style="color: #ff0000">通用兄弟元素选择器</span>&nbsp;(c ~c{})<br/>
+<span style="color: #ff0000">属性选择器</span>：<br/>
+1）E[attr]<br/>
+2）E[attr="value"]<br/>
+3）E[attr~="value"]<br/>
+4）E[attr|="value"]<br/>
+5）E[attr^="value"]<br/>
+6）E[attr$="value"]<br/>
+7）E[attr="value"]<br/>
+<span style="color: #ff0000">伪类选择器</span>：<br/>
+1）<span style="color: #ff0000">动态伪类选择器</span>（:link, :visited, :hover, :active, :focus）<br/>
+2）状态伪类选择器 (:enabled, :disabled, :checked)<br/>
+3）选择伪类选择器 (:first-child, :last-child, :nth-child(), :nth-last-child(), :nth-of-type(), :nth-last-of-type(), :first-of-type, :last-of-type, :only-child, :only-of-type)<br/>
+4）空内容伪类选择器 (:empty)<br/>
+5）否定伪类选择器(:not)<br/>
+6）<span style="color: #ff0000">伪元素</span>（::first-line, ::first-letter, ::before, ::after, ::selection)<br/>
+<br/>
+作者：qinqinqinqin0<br/>
+链接：https://www.jianshu.com/p/c45dcaebac47<br/>
+来源：简书<br/>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</body></html>

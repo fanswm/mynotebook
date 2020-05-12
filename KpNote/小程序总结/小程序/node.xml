@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+<version>6</version>
+<dict>
+  <key>duplicate_of</key><string>a501a971-1a7c-4c2f-b615-773d1cdb243b</string>
+  <key>title</key><string>小程序</string>
+  <key>nodeid</key><string>81e91124-7d0e-41bc-95cf-4f8b479207b8</string>
+  <key>modified_time</key><integer>1586932990</integer>
+  <key>version</key><integer>6</integer>
+  <key>content_type</key><string>text/xhtml+xml</string>
+  <key>created_time</key><integer>1585662915</integer>
+  <key>info_sort_dir</key><integer>1</integer>
+  <key>order</key><integer>0</integer>
+  <key>info_sort</key><string>order</string>
+  <key>icon</key><string>check.png</string>
+</dict>
+</node>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+<version>6</version>
+<dict>
+  <key>title</key><string>管理云函数</string>
+  <key>nodeid</key><string>30a0fda0-775d-4f70-9658-7d21bf573917</string>
+  <key>modified_time</key><integer>1586271547</integer>
+  <key>version</key><integer>6</integer>
+  <key>content_type</key><string>text/xhtml+xml</string>
+  <key>created_time</key><integer>1585971219</integer>
+  <key>info_sort_dir</key><integer>1</integer>
+  <key>order</key><integer>10</integer>
+  <key>info_sort</key><string>order</string>
+</dict>
+</node>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>覆盖 悬浮 悬停</title>
+</head><body><a href="https://www.jb51.net/css/167026.html">https://www.jb51.net/css/167026.html</a>&nbsp; <br/>
+<br/>
+一般来说，DIV没有悬浮一说，更准确的应为层叠或者固定。最简单的方法是采用CSS定位属性。<br/>
+<br/>
+1、DIV层叠，即一个层叠加在另外一个层上<br/>
+<br/>
+利用相对定位和绝对定位来实现:<br/>
+<br/>
+在父对象上设置：position:relative; 在子对象上设置：position:absolute; top: 10px; left: 10px;<br/>
+<br/>
+这样如果父对象里面有其他元素的话。上面设置的子对象就可以"悬浮"在父对象上面了。<br/>
+<br/>
+2、元素固定在窗口的某个位置<br/>
+<br/>
+使用固定定位:<br/>
+<br/>
+在需要悬浮的元素上设置：position:fixed; top: 10px; left: 10px;<br/>
+<br/>
+3、以body为父对象<br/>
+<br/>
+如果不存在上述的父对象，则依据 body 对象。而其层叠通过 z-index 属性定义，fixed :未支持。对象定位遵从绝对(absolute)方式。但是要遵守一些规范，relative :对象不可层叠，但将依据 left, right , top , bottom 等属性在正常文档流中偏移位置。<br/>
+<br/>
+说明：检索对象的定位方式。设置此属性值为 absolute 会将对象拖离出正常的文档流绝对定位而不考虑它周围内容的布局。假如其他具有不同 z-index 属性的对象已经占据了给定的位置，他们之间不会相互影响，而会在同一位置层叠。此时对象不具有外补丁 margin ，但仍有内补丁 padding 和边框 border 。<br/>
+<br/>
+要激活对象的绝对(absolute)定位，必须指定 left, right , top , bottom 属性中的至少一个，并且设置此属性值为 absolute 。否则上述属性会使用他们的默认值 auto ，这将导致对象遵从正常的HTML布局规则，在前一个对象之后立即被呈递。设置此属性值为 relative 会保持对象在正常的HTML流中，但是它的位置可以根据它的前一个对象进行偏移。在相对(relative)定位对象之后的文本或对象占有他们自己的空间而不会覆盖被定位对象的自然空间。与此不同的，在绝对(absolute)定位对象之后的文本或对象在被定位对象被拖离正常文档流之前会占有它的自然空间。放置绝对(absolute)定位对象在可视区域之外会导致滚动条出现。而放置相对(relative)定位对象在可视区域之外，滚动条不会出现。内容的尺寸会根据布局确定对象的尺寸。<br/>
+<br/>
+例如，设置一个 div 对象的 height 和 position 属性，则 div 对象的内容将决定它的宽度( width )。此属性对于 currentStyle 对象而言是只读的。对于其他对象而言是可读写的。对应的脚本特性为 position 。</body></html>

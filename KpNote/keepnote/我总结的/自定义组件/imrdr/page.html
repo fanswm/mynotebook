@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>imrdr</title>
+</head><body>comp.wxml<br/>
+&lt;view&gt;hello {{<span style="color: #ff0000">nameText</span>}}&lt;/view&gt;<hr/>comp.js<br/>
+properties: {<br/>
+&nbsp; &nbsp; <span style="color: #ff0000">nameText</span>: {<br/>
+&nbsp; &nbsp; &nbsp; type: String,<br/>
+&nbsp; &nbsp; &nbsp; value: '<span style="color: #ff0000">default name</span>'<br/>
+&nbsp; &nbsp; }<br/>
+}<hr/>index.wxml:<br/>
+&lt;me-comp <span style="color: #ff0000">name-text</span>="imrdr"&gt;&lt;/me-comp&gt;<br/>
+&lt;me-comp&gt;&lt;/me-comp&gt;<hr/>outpout:<br/>
+hello imrdr.<br/>
+hello <span style="color: #ff0000">default name</span>.<hr/><br/>
+子组件 me-picker-item ：<br/>
+bindtap = "checkIt" &lt;!-- 子组件的物理点击 --&gt;<br/>
+<br/>
+// 子组件的物理点击 js文件<br/>
+checkIt: function(e) {<br/>
+&#09;//做一些事情<br/>
+<br/>
+&#09;var myEventDetail = {<br/>
+&#09;&#09;exampleVar:'exampleValue' ,<br/>
+&#09;&#09;//想要向父组件提交的数据 <br/>
+&#09;} // detail对象，提供给事件监听函数<br/>
+&#09;<br/>
+&#09;var myEventOption = {} // 触发 checkedResult 事件的选项<br/>
+&#09;this.triggerEvent('checkedResult', myEventDetail, myEventOption)<br/>
+}<br/>
+<br/>
+父组件:<br/>
+&lt;me-picker-item &nbsp;bindcheckedResult="faterTap"&gt;&lt;/me-picker-item&gt;<br/>
+<br/>
+// js 文件<br/>
+&nbsp;fatherTap: function (e) {<br/>
+&#09;// e.detail.exampleVar === exampleValue<br/>
+&#09;// 做一些事情 &nbsp; <br/>
+<br/>
+&#09;var myEventDetail = { list: this.data.checkedList } // detail对象，提供给事件监听函数<br/>
+&#09;var myEventOption = {} // 触发事件的选项<br/>
+&#09;this.triggerEvent('checkedGroupResult', myEventDetail, myEventOption) // imrdr: getRoomType 没有用到<br/>
+}</body></html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>利用微信扫码能力</title>
+</head><body>为了让用户减少输入，我们<span style="color: #ff0000">可以把复杂的信息编码成一个二维码</span>，利用宿主环境<span style="color: #ff0000">wx.scanCode</span>这个API调起微信扫一扫，用户扫码之后，wx.scanCode的success回调会收到这个二维码所对应的字符串信息。<br/>
+<br/>
+例如餐厅点餐的小程序，我们给餐厅中每个餐桌编号1-100号，把这个数字编码到二维码中[11]，扫码获得编号之后，就可以知道是哪一桌点的菜，大大提高点餐体验和效率。<br/>
+<br/>
+代码清单4-19<span style="color: #ff0000">&nbsp;利用wx.scanCode获取二维码的数据</span><br/>
+<br/>
+//page.js<br/>
+<br/>
+Page({<br/>
+<br/>
+&nbsp; <span style="color: #ff0000">// 点击“扫码订餐”的按钮，触发tapScan回调<br/>
+</span><br/>
+&nbsp; tapScan: function() {<br/>
+<br/>
+&nbsp; &nbsp; // 调用wx.login获取微信登录凭证<br/>
+<br/>
+&nbsp; &nbsp; wx.scanCode({<br/>
+&nbsp; &nbsp; &nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; var num = res.result /<span style="color: #ff0000">/ 获取到的num就是餐桌的编号</span><br/>
+&nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; })<br/>
+<br/>
+&nbsp; }<br/>
+<br/>
+})<br/>
+<br/>
+还有很多场景可以结合微信扫码能力做到很好的体验，例如<span style="color: #ff0000">通过扫商品上的一维码做一个商品展示的小程序</span>；通过扫共享单车上的二维码去开启单车。我们可以多思考如何利用这个扫码能力去替代一些繁琐的输入操作，让我们的小程序变得更加便捷。</body></html>

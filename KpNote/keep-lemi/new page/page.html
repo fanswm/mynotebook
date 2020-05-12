@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>New Page</title>
+</head><body>vim 替换成 换行<br/>
+原创jstkss 最后发布于2016-01-07 10:26:25 阅读数 4929 &nbsp;收藏<br/>
+展开<br/>
+/r 是换行 不是/n<br/>
+<br/>
+<br/>
+<br/>
+windows 中将空格符替换为换行符的方法：<br/>
+：%s/xx/\r/g(因为windows的CTRL+V是粘贴的功能，所以不能输入^M)<br/>
+<br/>
+linux中方法：<br/>
+1、%s/xx/\r/g<br/>
+2、%s/xx/^M/g(^M的输入方法是：先按CTRL+V，松开然后按回车键）<br/>
+<br/>
+</body></html>

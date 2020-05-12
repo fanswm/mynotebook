@@ -9,6 +9,6 @@ Creation-Date: 2019-02-12T11:34:29+08:00
 + bash `echo $?`
 + fish: `echo $status`
 
-> 成功： return 0
+__> 成功： return 0__
 else return 非0
 

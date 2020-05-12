@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>wxs</title>
+</head><body>目录结构：<br/>
+<br/>
+index.js<br/>
+index.wxml<br/>
+index.wxs<hr/>&lt;!--index.wxml--&gt;<br/>
+&lt;wxs module="testWxs" src="./index.wxs"&gt;&lt;/wxs&gt; <br/>
+&lt;view bindtap="{{testWxs.hello}}"&gt;Hello Wxs&lt;/view&gt;<hr/>// index.wxs<br/>
+function hello(){<br/>
+&nbsp; console.log('this is index.wx test.')<br/>
+}<br/>
+module.exports = {<br/>
+&nbsp; hello: hello,<br/>
+}<hr/>imrdr:<br/>
+不需要 Js 文件，点击 Hello Wxs 就可以在终端输出：this is index.wx test.<br/>
+<span style="color: #ff0000">从基础库版本2.4.4开始，支持使用WXS函数绑定事件</span><br/>
+参考：<br/>
+<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/interactive-animation.html">https://developers.weixin.qq.com/miniprogram/dev/framework/view/interactive-animation.html</a>&nbsp; <br/>
+</body></html>

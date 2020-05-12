@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>使用 wx-server-sdk</title>
+</head><body>在云函数中使用 wx-server-sdk<br/>
+<br/>
+<span style="color: #ff0000">云函数属于管理端</span>，在云函数中运行的代码<span style="color: #ff0000">拥有不受限的数据库读写权限</span>和云文件读写权限。需特别注意，<span style="color: #ff0000"><b>云函数运行环境即是管理端</b></span><b>，<span style="color: #ff0000">与云函数中的传入的 openId 对应的微信用户是否是小程序的管理员 / 开发者无关。</span></b><br/>
+<br/>
+<span style="color: #ff0000">云函数中使用 wx-server-sdk 需在对应云函数目录下安装 wx-server-sdk 依赖</span>，在创建云函数时会在云函数目录下默认新建一个<span style="color: #ff0000">&nbsp;package.json 并提示用户是否立即本地安装依赖</span>。请注意云函数的运行环境是 Node.js，因此在本地安装依赖时务必保证已安装 Node.js，同时 node 和 npm 都在环境变量中。<span style="color: #ff0000">如不本地安装依赖，可以用命令行在该目录下运行：<br/>
+</span><span style="color: #ff0000"><br/>
+<b>npm install --save wx-server-sdk@latest</b><br/>
+</span><br/>
+<span style="color: #ff0000">在云函数中调用其他 API 前，同小程序端一样，也需要执行一次初始化方法：</span><br/>
+<br/>
+const cloud = require('wx-server-sdk')<br/>
+// 给定字符串环境 ID：接下来的 API 调用都将请求到环境 some-env-id<br/>
+cloud.init({<br/>
+&nbsp; env: 'some-env-id'<br/>
+})<br/>
+或：<br/>
+<br/>
+const cloud = require('wx-server-sdk')<br/>
+// <span style="color: #ff0000">给定 DYNAMIC_CURRENT_ENV 常量：接下来的 API 调用都将请求到与该云函数当前所在环境相同的环境</span><br/>
+// 请安装 wx-server-sdk v1.1.0 或以上以使用该常量<br/>
+cloud.init({<br/>
+&nbsp; env: cloud.DYNAMIC_CURRENT_ENV<br/>
+})<br/>
+<br/>
+wx-server-sdk 与小程序端的云 API 以同样的风格提供了数据库、存储和云函数的 API。下面提供几个简单的操作数据库、存储和云函数的示例：<br/>
+<br/>
+<span style="color: #ff0000"><b>云函数中调用数据库</b></span><br/>
+假设在数据库中已有一个 todos 集合，我们可以如下方式取得 todos 集合的数据：<br/>
+<br/>
+const cloud = require('wx-server-sdk')<br/>
+<br/>
+cloud.init({<br/>
+&nbsp; env: cloud.DYNAMIC_CURRENT_ENV<br/>
+})<br/>
+<br/>
+const db = cloud.database()<br/>
+exports.main = <span style="color: #ff0000">async</span>&nbsp;(event, context) =&gt; {<br/>
+&nbsp; // collection 上的 get 方法会返回一个 Promise，因此云函数会在数据库异步取完数据后返回结果<br/>
+&nbsp; return db.collection('todos').get()<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000"><b>云函数中调用存储</b></span><br/>
+假设我们要上传在云函数目录中包含的一个图片文件（demo.jpg）：<br/>
+<br/>
+const cloud = require('wx-server-sdk')<br/>
+const fs = require('fs')<br/>
+const path = require('path')<br/>
+<br/>
+cloud.init({<br/>
+&nbsp; env: cloud.DYNAMIC_CURRENT_ENV<br/>
+})<br/>
+<br/>
+exports.main = <span style="color: #ff0000">async</span>&nbsp;(event, context) =&gt; {<br/>
+&nbsp; const fileStream = fs.createReadStream(path.join(__dirname, 'demo.jpg'))<br/>
+&nbsp; return await cloud.uploadFile({<br/>
+&nbsp; &nbsp; cloudPath: 'demo.jpg',<br/>
+&nbsp; &nbsp; fileContent: fileStream,<br/>
+&nbsp; })<br/>
+}<br/>
+<br/>
+在云函数中，<span style="color: #ff0000">__dirname 的值是云端云函数代码所在目录</span><br/>
+<br/>
+<b><span style="color: #ff0000">云函数中调用其他云函数</span></b><br/>
+假设我们要在云函数中调用另一个云函数 sum 并返回 sum 所返回的结果：<br/>
+<br/>
+const cloud = require('wx-server-sdk')<br/>
+<br/>
+cloud.init({<br/>
+&nbsp; env: cloud.DYNAMIC_CURRENT_ENV<br/>
+})<br/>
+<br/>
+exports.main = async (event, context) =&gt; {<br/>
+&nbsp; return await cloud.callFunction({<br/>
+&nbsp; &nbsp; name: 'sum',<br/>
+&nbsp; &nbsp; data: {<br/>
+&nbsp; &nbsp; &nbsp; x: 1,<br/>
+&nbsp; &nbsp; &nbsp; y: 2,<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; })<br/>
+}<br/>
+更多的文档可参见API 文档。<a href=" https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/Cloud.init.html">&nbsp;https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-sdk-api/Cloud.init.html</a></body></html>

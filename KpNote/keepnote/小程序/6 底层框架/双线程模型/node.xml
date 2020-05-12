@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+<version>6</version>
+<dict>
+  <key>expanded</key><false/>
+  <key>title</key><string>双线程模型</string>
+  <key>nodeid</key><string>abe93657-1fb1-444b-bb0f-a5c3ce9c4473</string>
+  <key>modified_time</key><integer>1583201364</integer>
+  <key>version</key><integer>6</integer>
+  <key>content_type</key><string>text/xhtml+xml</string>
+  <key>created_time</key><integer>1583076158</integer>
+  <key>info_sort_dir</key><integer>1</integer>
+  <key>order</key><integer>0</integer>
+  <key>info_sort</key><string>order</string>
+</dict>
+</node>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>导入</title>
+</head><body>使用云开发控制台导入<br/>
+<br/>
+要导入数据，需打开云开发控制台，切换到 “数据库” 标签页，并选择要导入数据的集合，点击 “导入” 按钮。<br/>
+<br/>
+<span style="color: #ff0000">数据库</span><br/>
+<br/>
+选择要导入的 CSV 或者 JSON 文件，以及冲突处理模式，点击 “导入” 按钮即可开始导入。<br/>
+<br/>
+<span style="color: #ff0000">使用 HTTP API 导入</span><br/>
+详情参考HTTP API 数据库导入文档 &nbsp; https://developers.weixin.qq.com/miniprogram/dev/wxcloud/reference-http-api/database/databaseMigrateImport.html<br/>
+<br/>
+文件格式<br/>
+<span style="color: #ff0000">JSON、CSV 文件必须是 UTF-8 的编码格式，且其内容类似 MongoDB 的导出格式</span>，例如：<br/>
+<br/>
+JSON：<br/>
+<br/>
+{<br/>
+&nbsp; &nbsp; "_id": "xxxxxx",<br/>
+&nbsp; &nbsp; "age": 45<br/>
+}<br/>
+{<br/>
+&nbsp; &nbsp; "_id": "yyyyyy",<br/>
+&nbsp; &nbsp; "age": 21<br/>
+}<br/>
+CSV：<br/>
+<br/>
+_id,age<br/>
+xxxxxx,45<br/>
+yyyyyy,21<br/>
+<br/>
+需要注意以下几点：<br/>
+<br/>
+1、JSON 数据不是数组，而是类似 JSON Lines，<span style="color: #ff0000">即各个记录对象之间使用 \n 分隔，而非逗号</span>；<br/>
+<br/>
+2、JSON 数据<span style="color: #ff0000">每个键值对</span>的<span style="color: #ff0000">键名首尾不能是 .</span>，例如 ".a"、"abc."，<span style="color: #ff0000">且不能包含多个连续的 .</span>，例如 "a..b"；<br/>
+<br/>
+3、<span style="color: #ff0000">键名不能重复，且不能有歧义</span>，例如 {"a": 1, "a": 2} 或 {"a": {"b": 1}, "a.b": 2}；<br/>
+<br/>
+4、<span style="color: #ff0000">时间格式</span>须为 ISODate 格式，例如 "date": { "$date" : "2018-08-31T17:30:00.882Z" }；<br/>
+<br/>
+5、当使用<span style="color: #ff0000">&nbsp;Insert 冲突处理模式</span>时，<span style="color: #ff0000">同一文件不能存在重复的 _id 字段</span>，或<span style="color: #ff0000">与数据库已有记录相同的 _id 字段</span>；<br/>
+<br/>
+6、CSV 格式的数据<span style="color: #ff0000">默认以第一行作为导入后的所有键名</span>，<span style="color: #ff0000">余下的每一行</span>则是与<span style="color: #ff0000">首行键名</span>一一对应的<span style="color: #ff0000">键值记录</span>。<br/>
+<br/>
+目前提供了<span style="color: #ff0000">&nbsp;Insert、Upsert 两种冲突处理模式</span>。<br/>
+Insert 模式会在导入时总是插入新记录，<br/>
+Upsert 则会判断有无该条记录，如果有则更新记录，否则就插入一条新记录。<br/>
+<br/>
+导入完成后，可以在提示信息中看到本次导入记录的情况。</body></html>

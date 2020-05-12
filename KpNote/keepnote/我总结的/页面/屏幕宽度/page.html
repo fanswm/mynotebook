@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>屏幕宽度</title>
+</head><body>//获取手机信息<br/>
+&nbsp; getSys:function() {<br/>
+&nbsp; &nbsp; var that = this;<br/>
+&nbsp; &nbsp; // &nbsp;这里要非常注意，<span style="color: #ff0000">微信的scroll-view必须要设置高度才能监听滚动事件</span>，所以，需要在页面的onLoad事件中给scroll-view的高度赋值<br/>
+&nbsp; &nbsp; wx.<span style="color: #ff0000">getSystemInfo</span>({<br/>
+&nbsp; &nbsp; success: function(res) {<br/>
+//设置变量值<br/>
+&nbsp; &nbsp; &nbsp; that.globalData.sysInfo=res; &nbsp;//直接使用this就可以调用本页面的全局变量<br/>
+&nbsp; &nbsp; &nbsp; that.globalData.windowW=res.windowWidth;<br/>
+&nbsp; &nbsp; &nbsp; that.globalData.windowH=res.windowHeight;<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; }<br/>
+<br/>
+<a href="https://www.jianshu.com/p/925aad432874">https://www.jianshu.com/p/925aad432874</a>&nbsp; <hr/></body></html>

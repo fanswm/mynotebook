@@ -9,7 +9,7 @@ Trash-Cli：Linux 上的命令行回收站工具
 2018-09-19 08:28
 
 译自：https://www.2daygeek.com/trash-cli-command-line-trashcan-linux-system/%E4%BD%9C%E8%80%85： 2daygeek
-原创：LCTT https://linux.cn/article-10029-1.html%E8%AF%91%E8%80%85： Lv Feng
+原创：LCTT https://linux.cn/article-10029-1.html 译者： Lv Feng
 
 
 

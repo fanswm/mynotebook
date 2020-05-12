@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+<version>6</version>
+<dict>
+  <key>title</key><string>纯数据字段</string>
+  <key>nodeid</key><string>445b1a06-0629-4ab4-b04d-5a79a2d74bb0</string>
+  <key>modified_time</key><integer>1585814302</integer>
+  <key>version</key><integer>6</integer>
+  <key>content_type</key><string>text/xhtml+xml</string>
+  <key>created_time</key><integer>1585751135</integer>
+  <key>info_sort_dir</key><integer>1</integer>
+  <key>order</key><integer>8</integer>
+  <key>info_sort</key><string>order</string>
+</dict>
+</node>

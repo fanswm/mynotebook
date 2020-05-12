@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>this 和 that</title>
+</head><body><br/>
+一：this和that<br/>
+<br/>
+微信小程序中，在wx.request({});方法调用成功或者失败之后，有时候会需要获取页面初始化数据data的情况，这个时候，如果使用，this.data来获取，会出现获取不到的情况，调试页面也会报undefiend。<span style="color: #ff0000">原因是，在javascript中，this代表着当前对象</span>，会随着程序的执行过程中的上下文改变，在wx.request({});方法的回调函数中，对象已经发生改变，所以已经不是wx.request({});方法对象了，data属性也不存在了。官方的解决办法是，复制一份当前的对象，如下：<br/>
+<br/>
+var that=this;//把this对象复制到临时变量that <br/>
+<br/>
+<span style="color: #ff0000">在success回调函数中使用that.data就能获取到数据了。</span><br/>
+<br/>
+不过，<span style="color: #ff0000">还有另外一种方式，也很特别，是将success回调函数换一种声明方式，如下：</span><br/>
+<br/>
+success: res =&gt;{<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; loadingHidden: true,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; hideCommitSuccessToast: false<br/>
+&nbsp; &nbsp; })<br/>
+}<br/>
+在这种方式下，this可以直接使用，完全可以获取到data数据。<br/>
+<br/>
+再给一个完整的例子：<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; success: res =&gt; {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; if (res.data.code != 0) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 提交失败<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; loadingHidden: true,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; hiddenTips: false,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tipsContent: res.data.message<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; } else {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 提交成功<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; loadingHidden: true,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; hideCommitSuccessToast: false<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; subBtn = false;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 定时，3秒消失<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; setTimeout(() =&gt; {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; hideCommitSuccessToast: true<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.navigateBack({ delta: 2 });<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 2000);<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; }</body></html>

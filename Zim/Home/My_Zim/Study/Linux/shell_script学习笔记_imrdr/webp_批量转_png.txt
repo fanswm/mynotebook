@@ -1,0 +1,56 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-04-09T15:29:09+08:00
+
+====== webp 批量转 png ======
+Created 星期四 09 四月 2020
+
+*.webp 所在目录： webp-dir
+
+--------------------
+# __webp2png.sh__
+
+#!/bin/bash
+
+path='./webp-dir'
+
+[ -d $path ] && cd $path
+
+for file in `ls`
+	do 
+		ffmpeg -i $file `echo ${file}.png` 
+done
+--------------------
+
+把 webp2png.sh 放在 webp-dir 的上一级目录。
+执行： webp2png.sh
+
+--------------------
+__批量去旧文件名中的固定字符：__
+1.webp.png
+10.webp.png
+11.webp.png
+12.webp.png
+13.webp.png
+2.webp.png
+3.webp.png
+4.webp.png
+5.webp.png
+6.webp.png
+7.webp.png
+8.webp.png
+9.webp.png
+--------------------
+同级目录下：del-png.sh
+
+#!/bin/bash	
+for file in `ls`
+	do 
+		mv $file `echo $file| sed 's/.webp//g'`
+done
+--------------------
+
+
+
+
+

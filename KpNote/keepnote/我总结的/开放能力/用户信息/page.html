@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户信息</title>
+</head><body>一个好的app.js<br/>
+小程序中经常需要使用该设备的信息以及用户的信息，所以app.js最好这样写：<br/>
+<br/>
+//app.js<br/>
+App({<br/>
+//全局变量<br/>
+&nbsp; <span style="color: #ff0000">globalData</span>:{<br/>
+&nbsp; &nbsp; userInfo:null,<br/>
+&nbsp; &nbsp; sysInfo:null,<br/>
+&nbsp; &nbsp; windowW:null,<br/>
+&nbsp; &nbsp; windowH:null<br/>
+&nbsp; },<br/>
+&nbsp; //启动<br/>
+&nbsp; onLaunch: function () {<br/>
+&nbsp; &nbsp; // 获取用户信息<br/>
+&nbsp; &nbsp;this.getUserInfo();<br/>
+&nbsp; &nbsp;this.getSys();<br/>
+&nbsp; },<br/>
+&nbsp; //获取用户信息<br/>
+&nbsp;getUserInfo:function(cb){<br/>
+&nbsp; &nbsp; var that = this<br/>
+&nbsp; &nbsp; wx.login({<br/>
+&nbsp; &nbsp; &nbsp; success: function () {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; wx.getUserInfo({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; success: function (res) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; that.globalData.userInfo = res.userInfo<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log(res.userInfo);<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; typeof cb == "function" &amp;&amp; cb(that.globalData.userInfo)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+&nbsp; //获取手机信息<br/>
+&nbsp; getSys:function() {<br/>
+&nbsp; &nbsp; var that = this;<br/>
+&nbsp; &nbsp; // &nbsp;这里要非常注意，微信的scroll-view必须要设置高度才能监听滚动事件，所以，需要在页面的onLoad事件中给scroll-view的高度赋值<br/>
+&nbsp; &nbsp; wx.getSystemInfo({<br/>
+&nbsp; &nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.model)<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.pixelRatio)<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.windowWidth)<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.windowHeight)<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.language)<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.version)<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.platform)<br/>
+//设置变量值<br/>
+&nbsp; &nbsp; &nbsp; that.globalData.sysInfo=res;<br/>
+&nbsp; &nbsp; &nbsp; that.globalData.windowW=res.windowWidth;<br/>
+&nbsp; &nbsp; &nbsp; that.globalData.windowH=res.windowHeight;<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; }<br/>
+&nbsp; <br/>
+})<br/>
+<br/>
+作者：王月_92f2<br/>
+链接：https://www.jianshu.com/p/925aad432874<br/>
+来源：简书<br/>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</body></html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>反顿号</title>
+</head><body>// mydata = 5<br/>
+<br/>
+&lt;block wx:for=<span style="color: #ff0000">"{{mydata}}" </span>wx:key="*this"&gt;<br/>
+&lt;view&gt;{{mydata}}数据&lt;/view&gt;<br/>
+&lt;/block&gt;<br/>
+// "{{mydata}}" &nbsp;=== 5, 显示： 5数据<hr/>&lt;block wx:for="<span style="color: #ff0000">`</span>{{mydata}}<span style="color: #ff0000">`</span>" wx:key="*this"&gt;<br/>
+&lt;view&gt;{{mydata}}数据&lt;/view&gt;<br/>
+&lt;/block&gt;<br/>
+<br/>
+// 显示： 5数据 5数据 5数据 5数据 5数据</body></html>

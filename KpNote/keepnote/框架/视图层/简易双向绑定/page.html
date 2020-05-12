@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简易双向绑定</title>
+</head><body><span style="color: #ff0000">双向绑定语法<br/>
+</span><br/>
+在 WXML 中，<span style="color: #ff0000">普通的属性的绑定是单向</span>的。例如：<br/>
+<br/>
+&lt;input value="{{value}}" /&gt;<br/>
+<br/>
+如果使用 this.setData({ value: 'leaf' }) 来更新 value ，this.data.value 和输入框的中显示的值都会被更新为 leaf ；但如果用户修改了输入框里的值，却不会同时改变 this.data.value 。<br/>
+<br/>
+如果需要在用户输入的同时改变 this.data.value ，需要借助简易双向绑定机制。此时，可以在对应项目之前加入 model: 前缀：<br/>
+<br/>
+<span style="color: #ff0000">&lt;input model:value="{{value}}" /&gt;</span><br/>
+<br/>
+这样，如果<span style="color: #ff0000">输入框的值被改变了，</span>&nbsp;<span style="color: #ff0000">this.data.value 也会同时改变</span>。同时， WXML 中<span style="color: #ff0000">所有绑定了 value 的位置也会被一同更新</span>， <span style="color: #ff0000">数据监听器 也会被正常触发。</span><br/>
+<br/>
+在开发者工具中预览效果<br/>
+<br/>
+用于双向绑定的表达式有<span style="color: #ff0000">如下限制</span>：<br/>
+<br/>
+<span style="color: #ff0000">只能是一个单一字段的绑定，</span>如<br/>
+&lt;input model:value="值为 {{value}}" /&gt;<br/>
+&lt;input model:value="{{ a + b }}" /&gt;<br/>
+都是非法的；<br/>
+<br/>
+目前，<span style="color: #ff0000">尚不能 data 路径</span>，如<br/>
+&lt;input model:value="{{ a.b }}" /&gt;<br/>
+这样的表达式目前暂不支持。<br/>
+<br/>
+<span style="color: #ff0000">在自定义组件中传递双向绑定<br/>
+</span><br/>
+双向绑定同样可以使用在自定义组件上。如下的自定义组件：<br/>
+<br/>
+// custom-component.js<br/>
+Component({<br/>
+&nbsp; properties: {<br/>
+&nbsp; &nbsp;<span style="color: #ff0000">&nbsp;myValue:</span>&nbsp;String<br/>
+&nbsp; }<br/>
+})<br/>
+&lt;!-- custom-component.wxml --&gt;<br/>
+&lt;input model:value="{<span style="color: #ff0000">{myValue</span>}}" /&gt;<br/>
+<br/>
+这个自定义组件<span style="color: #ff0000">将自身的 myValue 属性双向绑定到了组件内输入框的 value 属性上</span>。这样，如果页面这样使用这个组件：<br/>
+<br/>
+&lt;custom-component model:<span style="color: #ff0000">my-value</span>="{{pageValue}}" /&gt;<br/>
+<br/>
+当输入框的值变更时，<span style="color: #ff0000">自定义组件的 myValue 属性会同时变更，这样，页面的 this.data.pageValue 也会同时变更，页面 WXML 中所有绑定了 pageValue 的位置也会被一同更新。</span><br/>
+<br/>
+<span style="color: #ff0000">在自定义组件中触发双向绑定更新</span><br/>
+<br/>
+自定义组件还可以自己触发双向绑定更新，<span style="color: #ff0000">做法就是：使用 setData 设置自身的属性</span>。例如：<br/>
+<br/>
+// custom-component.js<br/>
+Component({<br/>
+&nbsp; properties: {<br/>
+&nbsp; &nbsp; <span style="color: #ff0000">myValue</span>: String<br/>
+&nbsp; },<br/>
+&nbsp; methods: {<br/>
+&nbsp; &nbsp; update: function() {<br/>
+&nbsp; &nbsp; &nbsp; // 更新 myValue<br/>
+&nbsp; &nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #ff0000">myValue</span>: 'leaf'<br/>
+&nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+如果页面这样使用这个组件：<br/>
+<br/>
+&lt;custom-component model:<span style="color: #ff0000">my-value</span>="{{pageValue}}" /&gt;<br/>
+<br/>
+当组件使用 setData 更新 myValue 时，页面的 this.data.pageValue 也会同时变更，页面 WXML 中所有绑定了 pageValue 的位置也会被一同更新。<br/>
+</body></html>

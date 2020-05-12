@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>根据id改变子元素的css样式</title>
+</head><body>html<hr/>&lt;view class="hot-text"&gt;<br/>
+&nbsp; &lt;text class="{{Item==index?'color':''}}" &nbsp;catchtap='hot_search' &nbsp;wx:for="{{hotarr}}" data-index='{{index}}' data-text='{{item}}'&gt;{{item}}&lt;/text&gt;<br/>
+&lt;/view&gt;<hr/>css<br/>
+<br/>
+.color{<br/>
+color: #02D2FF;<br/>
+}<hr/>js<br/>
+data: {<br/>
+hotarr:[‘小红书’,‘书’,‘的的’,‘书架’, ‘桌椅’],<br/>
+Item: ‘-1’, // 修改css样式 下表为-1 暂时不选中<br/>
+},<br/>
+<br/>
+// 获得值 改变颜色 改变自身的颜色<br/>
+hot_search(e){<br/>
+console.log(e);<br/>
+let that = this;<br/>
+console.log(e.target.dataset.text) // 获得内容<br/>
+console.log(e.target.dataset.index)<br/>
+const id = e.target.dataset.index // 获得下标<br/>
+that.setData({<br/>
+Item: id<br/>
+})<br/>
+},<hr/>版权声明：本文为CSDN博主「嘿，苹果，苹果，小苹果」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br/>
+原文链接：https://blog.csdn.net/AAAXiaoApple/java/article/details/93889000</body></html>

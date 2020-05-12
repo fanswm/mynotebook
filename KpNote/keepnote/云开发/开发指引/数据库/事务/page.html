@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>事务</title>
+</head><body>事务<br/>
+<span style="color: #ff0000">仅支持云函数端使用</span>，wx-server-sdk 最低版本要求<span style="color: #ff0000">&nbsp;1.7.0</span><br/>
+<br/>
+介绍<br/>
+如果<span style="color: #ff0000">原子操作符</span>（如 inc、mul、addToSet）和嵌套记录的<span style="color: #ff0000">数据结构设计</span>无法满足需求，需要更高可自定义的事务操作，如<span style="color: #ff0000">跨多个记录或跨多集合的原子操作时</span>（比如两个账户之间转账），可以使用云数据库<span style="color: #ff0000">事务能力</span>。<br/>
+<br/>
+<span style="color: #ff0000">快照隔离</span><br/>
+事务过程采用的是快照隔离，在快照隔离中会保证：<br/>
+<br/>
+事务期间，<span style="color: #ff0000">读操作返回的是对象的快照，而非实际数据</span><br/>
+事务期间，<span style="color: #ff0000">写操作</span>会：1. <span style="color: #ff0000">改变快照，保证接下来的读的一致性；2. 给对象加上事务锁</span><br/>
+<span style="color: #ff0000">事务锁</span>：如果对象上存在事务锁，那么：1. <span style="color: #ff0000">其它事务的写入会直接失败</span>；2. <span style="color: #ff0000">普通的更新操作会被阻塞</span>，直到事务锁释放或者超时<br/>
+事务提交后，<span style="color: #ff0000">操作完毕的快照会被原子性地写入数据库中</span><br/>
+<br/>
+<b><span style="color: #ff0000">单记录操作</span></b><br/>
+<br/>
+在事务中<span style="color: #ff0000">不支持批量操作（where 语句），只支持单记录操作</span>（collection.doc, collection.add），这可以避免大量锁冲突、保证运行效率，并且大多数情况下单记录操作足够满足需求，因为在事务中是<span style="color: #ff0000">可以对多个单个记录进行操作的</span>，也就是可以比如说在一个事务中同时对集合 A 的记录 x 和 y 两个记录操作、又对集合 B 的记录 z 操作。<br/>
+<br/>
+<span style="color: #ff0000">API</span><br/>
+事务提供<span style="color: #ff0000">两种操作风格的接口，</span><ul><span style="color: #ff0000"><li style="list-style-type: none">一个是简易的、带有冲突自动重试的 runTransaction 接口，</li>
+</span><li style="list-style-type: none"><span style="color: #ff0000">一个是流程自定义控制的 startTransaction 接口。</span>详细定义可参见 API 文档。</li>
+</ul>
+<br/>
+通过 runTransaction 回调中获得的参数 transaction 或通过 startTransaction 获得的返回值 transaction，我们将其类比为<span style="color: #ff0000">&nbsp;db 对象</span>，只是在其上进行的操作将在事务内的快照完成，保证原子性。<span style="color: #ff0000">transaction 上提供的接口树形图一览：</span><br/>
+<br/>
+transaction<br/>
+|-- collection &nbsp; &nbsp; &nbsp; 获取集合引用<br/>
+| &nbsp; |-- doc &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;获取记录引用<br/>
+| &nbsp; | &nbsp; |-- get &nbsp; &nbsp; &nbsp;获取记录内容<br/>
+| &nbsp; | &nbsp; |-- update &nbsp; 更新记录内容<br/>
+| &nbsp; | &nbsp; |-- set &nbsp; &nbsp; &nbsp;替换记录内容<br/>
+| &nbsp; | &nbsp; |-- remove &nbsp; 删除记录<br/>
+| &nbsp; |-- add &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;新增记录 &nbsp; <br/>
+|-- rollback &nbsp; &nbsp; &nbsp; &nbsp; 终止事务并回滚<br/>
+|-- commit &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 提交事务（仅在使用 startTransaction 时需调用） &nbsp;<br/>
+<br/>
+以下提供一个使用 runTransaction 接口的，两个账户之间进行转账的简易示例。注意<span style="color: #ff0000">使用 runTransaction 时</span>，<span style="color: #ff0000">传入的回调即事务执行函数必须为 async 异步函数或返回 Promise 的函数</span>，当事务执行函数返回时，SDK 会认为用户逻辑已完成，自动提交（commit）事务，因此<span style="color: #ff0000">务必确保用户事务逻辑完成后才在 async 异步函数中返回或 resolve Promise</span>。<span style="color: #ff0000">同时在使用事务时建议初始化 db 时指定 throwOnNotFound 为 false，指定 false 后可使得 doc.get 在找不到记录时不抛出异常。</span><br/>
+<br/>
+const cloud = require('wx-server-sdk')<br/>
+cloud.init({<br/>
+&nbsp; env: cloud.<span style="color: #ff0000">DYNAMIC_CURRENT_ENV</span><br/>
+})<br/>
+const db = cloud.database({<br/>
+&nbsp; // 该参数从 wx-server-sdk 1.7.0 开始支持，默认为 true，指定 false 后可使得 doc.get 在找不到记录时不抛出异常<br/>
+&nbsp; throwOnNotFound: false,<br/>
+})<br/>
+const _ = db.command<br/>
+<br/>
+exports.main = <span style="color: #ff0000">async</span>&nbsp;(event) =&gt; {<br/>
+&nbsp; try {<br/>
+&nbsp; &nbsp; const result = await db.runTransaction(<span style="color: #ff0000">async</span>&nbsp;transaction =&gt; {<br/>
+&nbsp; &nbsp; &nbsp; const aaaRes = <span style="color: #ff0000">await</span>&nbsp;transaction.collection('account').doc('aaa').get()<br/>
+&nbsp; &nbsp; &nbsp; const bbbRes = <span style="color: #ff0000">await</span>&nbsp;transaction.collection('account').doc('bbb').get()<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; if (aaaRes.data &amp;&amp; bbbRes.data) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; const updateAAARes = <span style="color: #ff0000">await</span>&nbsp;transaction.collection('account').doc('aaa').update({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; data: {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; amount: _.inc(-10)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; const updateBBBRes = <span style="color: #ff0000">await</span>&nbsp;transaction.collection('account').doc('bbb').update({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; data: {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; amount: _.inc(10)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; console.log(`transaction succeeded`, result)<br/>
+<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; // 会作为 runTransaction resolve 的结果返回<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; return {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; aaaAccount: aaaRes.data.amount - 10,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; } else {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; // 会作为 runTransaction reject 的结果出去<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #ff0000">await</span>&nbsp;transaction.rollback(-100)<br/>
+&nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; })<br/>
+<br/>
+&nbsp; &nbsp; return {<br/>
+&nbsp; &nbsp; &nbsp; success: true,<br/>
+&nbsp; &nbsp; &nbsp; aaaAccount: result.aaaAccount,<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; } catch (e) {<br/>
+&nbsp; &nbsp; console.error(`transaction error`, e)<br/>
+<br/>
+&nbsp; &nbsp; return {<br/>
+&nbsp; &nbsp; &nbsp; success: false,<br/>
+&nbsp; &nbsp; &nbsp; error: e<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+}<br/>
+<br/>
+<span style="color: #ff0000">隔离等级</span><br/>
+目前数据库是快照隔离，没有串行化隔离，无法避免写偏（write skew）的情况。<br/>
+<br/>
+FAQ<br/>
+部分环境的数据库可能会无法使用，可以在社区发帖，我们会有专人处理。当报错信息是 [object Object](callback err is not instance of Error) 或 [BadRequest] Not Found 时，请到社区反馈。</body></html>

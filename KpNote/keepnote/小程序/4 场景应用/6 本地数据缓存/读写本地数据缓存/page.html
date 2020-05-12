@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>读写本地数据缓存</title>
+</head><body>小程序提供了读写本地数据缓存的接口，<br/>
+通过<span style="color: #ff0000">wx.getStorage/wx.getStorageSync读取本地缓存</span>，<br/>
+通过wx.setStorage/wx.setStorageSync写数据到缓存，其中Sync后缀的接口表示是同步接口[9]，执行完毕之后会立马返回，示例代码和参数说明如下所示。<br/>
+<br/>
+代码清单4-13<span style="color: #ff0000">&nbsp;wx.getStorage/wx.getStorageSync<b>读取本地数据缓存</b></span><br/>
+<br/>
+wx.getStorage({<br/>
+&nbsp; key: 'key1',<br/>
+&nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; // 异步接口在success回调才能拿到返回值<br/>
+&nbsp; &nbsp; var value1 = res.data<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; fail: function() {<br/>
+&nbsp; &nbsp; console.log('读取key1发生错误')<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+try{<br/>
+&nbsp; // 同步接口立即返回值<br/>
+&nbsp; var value2 = wx.getStorageSync('key2')<br/>
+}catch (e) {<br/>
+&nbsp; console.log('读取key2发生错误')<br/>
+}<br/>
+<br/>
+表4-4 wx.getStorage/wx.getStorageSync详细参数<br/>
+<br/>
+<span style="color: #ff0000">参数名&#09;&#09;类型&#09;&#09;&#09;必填&#09;&#09;描述</span><br/>
+key&#09;&#09;&#09;String&#09;&#09;&#09;是&#09;&#09;本地缓存中指定的 key<br/>
+success&#09;&#09;Function&#09;&#09;否&#09;&#09;异步接口调用成功的回调函数，<span style="color: #ff0000">回调参数格式: {data: key对应的内容}</span><br/>
+fail&#09;&#09;&#09;Function&#09;&#09;否&#09;&#09;异步接口调用失败的回调函数<br/>
+complete&#09;Function&#09;&#09;否&#09;&#09;异步接口调用结束的回调函数（调用成功、失败都会执行）<br/>
+<br/>
+<br/>
+代码清单4-14 wx.setStorage/wx.setStorageSync<span style="color: #ff0000">写入本地数据缓存</span><br/>
+<br/>
+// 异步接口在success/fail回调才知道写入成功与否<br/>
+<br/>
+wx.setStorage({<br/>
+&nbsp; key:"key",<br/>
+&nbsp; data:"value1"<br/>
+&nbsp; success: function() {<br/>
+&nbsp; &nbsp; console.log('写入value1成功')<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; fail: function() {<br/>
+&nbsp; &nbsp; console.log('写入value1发生错误')<br/>
+&nbsp; }<br/>
+})<br/>
+<br/>
+try{<br/>
+&nbsp; // 同步接口立即写入<br/>
+&nbsp; wx.setStorageSync('key', 'value2')<br/>
+&nbsp; console.log('写入value2成功')<br/>
+}catch (e) {<br/>
+&nbsp; console.log('写入value2发生错误')<br/>
+}<br/>
+<br/>
+表4-5 wx.setStorage/wx.setStorageSync详细参数<br/>
+<br/>
+<span style="color: #ff0000">参数名&#09;&#09;类型&#09;&#09;&#09;必填&#09;描述</span><br/>
+key&#09;&#09;&#09;String&#09;&#09;&#09;是&#09;&#09;本地缓存中指定的 key<br/>
+data&#09;&#09;Object/String&#09;是&#09;&#09;需要存储的内容<br/>
+success&#09;&#09;Function&#09;&#09;否&#09;&#09;异步接口调用成功的回调函数<br/>
+fail&#09;&#09;&#09;Function&#09;&#09;否&#09;&#09;异步接口调用失败的回调函数<br/>
+complete&#09;Function&#09;&#09;否&#09;&#09;异步接口调用结束的回调函数（调用成功、失败都会执行）<br/>
+</body></html>

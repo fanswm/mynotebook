@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>icon</title>
+</head><body>属性&#09;类型&#09;默认值&#09;必填&#09;说明&#09;最低版本<br/>
+type&#09;string&#09;&#09;是&#09;icon的类型，有效值：success, success_no_circle, info, warn, waiting, cancel, download, search, clear&#09;1.0.0<br/>
+size&#09;number/string&#09;23&#09;否&#09;icon的大小&#09;1.0.0<br/>
+color&#09;string&#09;&#09;否&#09;icon的颜色，同css的color&#09;1.0.0<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+from <a href="">unknown source</a>:<br/>
+&lt;view class="group"&gt;<br/>
+&nbsp; &lt;block wx:for="{{iconSize}}"&gt;<br/>
+&nbsp; &nbsp; &lt;icon type="cancel" size="{{item}}"/&gt;<br/>
+&nbsp; &lt;/block&gt;<br/>
+&lt;/view&gt;<br/>
+<br/>
+&lt;view class="group"&gt;<br/>
+&nbsp; &lt;block wx:for="{{iconType}}"&gt;<br/>
+&nbsp; &nbsp; &lt;icon type="{{item}}" size="40"/&gt;<br/>
+&nbsp; &lt;/block&gt;<br/>
+&lt;/view&gt;<br/>
+<br/>
+&lt;view class="group"&gt;<br/>
+&nbsp; &lt;block wx:for="{{iconColor}}"&gt;<br/>
+&nbsp; &nbsp; &lt;icon type="success" size="40" color="{{item}}"/&gt;<br/>
+&nbsp; &lt;/block&gt;<br/>
+&lt;/view&gt;</body></html>

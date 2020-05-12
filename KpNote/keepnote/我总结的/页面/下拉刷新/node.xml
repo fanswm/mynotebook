@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<node>
+<version>6</version>
+<dict>
+  <key>expanded</key><false/>
+  <key>title</key><string>下拉刷新</string>
+  <key>nodeid</key><string>c0807ec7-7448-4bd0-b9ad-8f121f4ae1e9</string>
+  <key>modified_time</key><integer>1587479939</integer>
+  <key>version</key><integer>6</integer>
+  <key>content_type</key><string>text/xhtml+xml</string>
+  <key>created_time</key><integer>1587473718</integer>
+  <key>info_sort_dir</key><integer>1</integer>
+  <key>order</key><integer>12</integer>
+  <key>info_sort</key><string>order</string>
+</dict>
+</node>

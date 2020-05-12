@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>官网示例</title>
+</head><body>&lt;!-- 组件模板 --&gt;<br/>
+&lt;view class="wrapper"&gt;<br/>
+&nbsp; &lt;view&gt;这里是组件的内部节点&lt;/view&gt;<br/>
+&nbsp; &lt;slot&gt;&lt;/slot&gt;<br/>
+&lt;/view&gt;<hr/>{<br/>
+&nbsp; "component": true,<br/>
+&nbsp; "usingComponents": {}<br/>
+}<hr/>&lt;!-- 引用组件的页面模板 --&gt;<br/>
+&lt;view&gt;<br/>
+&nbsp; &lt;component-tag-name&gt;<br/>
+&nbsp; &nbsp; &lt;!-- 这部分内容将被放置在组件 &lt;slot&gt; 的位置上 --&gt;<br/>
+&nbsp; &nbsp; &lt;view&gt;这里是插入到组件slot中的内容&lt;/view&gt;<br/>
+&nbsp; &lt;/component-tag-name&gt;<br/>
+&lt;/view&gt;<br/>
+<hr/>{<br/>
+&nbsp; "usingComponents": {<br/>
+&nbsp; &nbsp; "my-component": "/components/component-tag-name"<br/>
+&nbsp; }<br/>
+}<hr/>// 官网示例：<br/>
+<br/>
+Component({<br/>
+<br/>
+&nbsp; behaviors: [],<br/>
+<br/>
+&nbsp; // 属性定义（详情参见下文）<br/>
+&nbsp; properties: {<br/>
+&nbsp; &nbsp; myProperty: { // 属性名<br/>
+&nbsp; &nbsp; &nbsp; type: String,<br/>
+&nbsp; &nbsp; &nbsp; value: ''<br/>
+&nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; myProperty2: String // 简化的定义方式<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; data: {}, // 私有数据，可用于模板渲染<br/>
+<br/>
+&nbsp; lifetimes: {<br/>
+&nbsp; &nbsp; // 生命周期函数，可以为函数，或一个在methods段中定义的方法名<br/>
+&nbsp; &nbsp; attached: function () { },<br/>
+&nbsp; &nbsp; moved: function () { },<br/>
+&nbsp; &nbsp; detached: function () { },<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; // 生命周期函数，可以为函数，或一个在methods段中定义的方法名<br/>
+&nbsp; attached: function () { }, // 此处attached的声明会被lifetimes字段中的声明覆盖<br/>
+&nbsp; ready: function() { },<br/>
+<br/>
+&nbsp; pageLifetimes: {<br/>
+&nbsp; &nbsp; // 组件所在页面的生命周期函数<br/>
+&nbsp; &nbsp; show: function () { },<br/>
+&nbsp; &nbsp; hide: function () { },<br/>
+&nbsp; &nbsp; resize: function () { },<br/>
+&nbsp; },<br/>
+<br/>
+&nbsp; methods: {<br/>
+&nbsp; &nbsp; onMyButtonTap: function(){<br/>
+&nbsp; &nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; // 更新属性和数据的方法与更新页面数据的方法类似<br/>
+&nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; // 内部方法建议以下划线开头<br/>
+&nbsp; &nbsp; _myPrivateMethod: function(){<br/>
+&nbsp; &nbsp; &nbsp; // 这里将 data.A[0].B 设为 'myPrivateData'<br/>
+&nbsp; &nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; 'A[0].B': 'myPrivateData'<br/>
+&nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; _propertyChange: function(newVal, oldVal) {<br/>
+<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; }<br/>
+<br/>
+})<hr/><br/>
+</body></html>

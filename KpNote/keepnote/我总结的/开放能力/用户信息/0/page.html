@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>0</title>
+</head><body>微信小程序，全局变量方法的使用<br/>
+方法一：app.js 内设置全局变量（如屏宽，屏高的设置）<br/>
+1、app.js文件，定义全局变量<br/>
+<br/>
+/定义全局变量<br/>
+globalData:{<br/>
+&nbsp; &nbsp; userInfo:null,<br/>
+&nbsp; &nbsp; sysInfo:null,<br/>
+&nbsp; &nbsp; windowW:null,<br/>
+&nbsp; &nbsp; windowH:null<br/>
+}<br/>
+　　设置全局变量<br/>
+<br/>
+<br/>
+//举例获取手机信息<br/>
+getSys:function() {<br/>
+&nbsp; &nbsp; var that = this;<br/>
+&nbsp; &nbsp; // &nbsp;这里要非常注意，微信的scroll-view必须要设置高度才能监听滚动事件，所以，需要在页面的onLoad事件中给scroll-view的高度赋值<br/>
+&nbsp; &nbsp; wx.getSystemInfo({<br/>
+&nbsp; &nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; //设置变量值<br/>
+&nbsp; &nbsp; &nbsp; that.globalData.sysInfo=res;<br/>
+&nbsp; &nbsp; &nbsp; that.globalData.windowW=res.windowWidth;<br/>
+&nbsp; &nbsp; &nbsp; that.globalData.windowH=res.windowHeight;<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; })<br/>
+}<br/>
+　　最后的app.js文件<br/>
+<br/>
+//app.js<br/>
+App({<br/>
+//全局变量<br/>
+&nbsp; globalData:{<br/>
+&nbsp; &nbsp; userInfo:null,<br/>
+&nbsp; &nbsp; sysInfo:null,<br/>
+&nbsp; &nbsp; windowW:null,<br/>
+&nbsp; &nbsp; windowH:null<br/>
+&nbsp; },<br/>
+&nbsp; //启动<br/>
+&nbsp; onLaunch: function () {<br/>
+&nbsp; &nbsp; // 获取用户信息<br/>
+&nbsp; &nbsp;this.getUserInfo();<br/>
+&nbsp; &nbsp;this.getSys();<br/>
+&nbsp; },<br/>
+&nbsp; //获取用户信息<br/>
+&nbsp;getUserInfo:function(cb){<br/>
+&nbsp; &nbsp; var that = this<br/>
+&nbsp; &nbsp; wx.login({<br/>
+&nbsp; &nbsp; &nbsp; success: function () {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; wx.getUserInfo({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; success: function (res) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; that.globalData.userInfo = res.userInfo<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log(res.userInfo);<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; typeof cb == "function" &amp;&amp; cb(that.globalData.userInfo)<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+&nbsp; //获取手机信息<br/>
+&nbsp; getSys:function() {<br/>
+&nbsp; &nbsp; var that = this;<br/>
+&nbsp; &nbsp; // &nbsp;这里要非常注意，微信的scroll-view必须要设置高度才能监听滚动事件，所以，需要在页面的onLoad事件中给scroll-view的高度赋值<br/>
+&nbsp; &nbsp; wx.getSystemInfo({<br/>
+&nbsp; &nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.model)<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.pixelRatio)<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.windowWidth)<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.windowHeight)<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.language)<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.version)<br/>
+&nbsp; &nbsp; &nbsp; console.log(res.platform)<br/>
+//设置变量值<br/>
+&nbsp; &nbsp; &nbsp; that.globalData.sysInfo=res;<br/>
+&nbsp; &nbsp; &nbsp; that.globalData.windowW=res.windowWidth;<br/>
+&nbsp; &nbsp; &nbsp; that.globalData.windowH=res.windowHeight;<br/>
+&nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; }<br/>
+&nbsp; &nbsp;<br/>
+})<br/>
+　　使用app全局变量<br/>
+<br/>
+<br/>
+//获取app变量<br/>
+var app = getApp()<br/>
+Page({<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; &nbsp;barItems:[<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;{id:0,title:"订单",enable:true,icon:'../../images/1.png'},<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;{id:1,title:"退房",enable:false,icon:'../../images/2.png'},<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;{id:2,title:"续住",enable:false,icon:'../../images/3.png'}<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;],<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;hasLive:true,<br/>
+&nbsp; },<br/>
+&nbsp; onLoad:function(){<br/>
+&nbsp; &nbsp; &nbsp;var that = this;<br/>
+&nbsp; &nbsp; // 取值全局变量<br/>
+&nbsp; &nbsp; var sysInfo = app.globalData.sysInfo;<br/>
+&nbsp; &nbsp; &nbsp;console.log(app.globalData)；<br/>
+&nbsp; &nbsp; &nbsp;that.setData({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; windowH:sysInfo.windowHeight-44,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; windoww:sysInfo.windowWidth<br/>
+&nbsp; &nbsp; &nbsp; });<br/>
+&nbsp;}<br/>
+})<br/>
+　　<br/>
+<br/>
+方法二：全局js设置常用值<br/>
+全局js文件（data.js）<br/>
+<br/>
+<br/>
+//对外提供接口 &nbsp;需要暴露在外面才能调用<br/>
+module.exports = {<br/>
+&nbsp; &nbsp; getUserKey : getUserKey,//保存登录的用户信息<br/>
+&nbsp; &nbsp; getOpenPwKey : getOpenPwKey,//保存开门的钥匙<br/>
+&nbsp; &nbsp; getUrl:getUrl,//host接口<br/>
+}<br/>
+&nbsp;<br/>
+//接口URL==============<br/>
+function getUrl(){<br/>
+&nbsp; &nbsp; return "http://localhost/userapp";<br/>
+}<br/>
+&nbsp;<br/>
+//本地保存数据的key==============<br/>
+//保存登录的用户信息<br/>
+function getUserKey(){<br/>
+&nbsp; &nbsp; return "xxx";<br/>
+}<br/>
+//保存开门的钥匙<br/>
+function getOpenPwKey() {<br/>
+&nbsp; &nbsp; return "xxx";<br/>
+}<br/>
+　　全局js使用方法<br/>
+<br/>
+//获得全局js变量<br/>
+var Data = require('../../../utils/data.js');<br/>
+//调用js文件方法<br/>
+&nbsp;Data.getUrl()+'/user/loginCommon',<br/>
+&nbsp;Data.getUserKey(),//"userInfo",<br/>
+　　data.js文件使用文件js<br/>
+<br/>
+<br/>
+var app = getApp();<br/>
+//获得全局js变量<br/>
+var Data = require('../../../utils/data.js');<br/>
+&nbsp;<br/>
+Page( {<br/>
+&nbsp; data: {<br/>
+&nbsp; &nbsp; <br/>
+&nbsp; },<br/>
+&nbsp;<br/>
+&nbsp; changeInputUser: function(e) {<br/>
+&nbsp; &nbsp; var value = e.detail.value;<br/>
+&nbsp; &nbsp; // console.log(value);<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; userName : value,<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+&nbsp;<br/>
+&nbsp; changeInputPw: function(e) {<br/>
+&nbsp; &nbsp; var value = e.detail.value;<br/>
+&nbsp; &nbsp; // console.log(value);<br/>
+&nbsp; &nbsp; this.setData({<br/>
+&nbsp; &nbsp; &nbsp; password : value,<br/>
+&nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+&nbsp;<br/>
+&nbsp; loginAction: function (event) {<br/>
+&nbsp; &nbsp; console.log("dsadsad");<br/>
+&nbsp; &nbsp; var pw = this.data.password;<br/>
+&nbsp; &nbsp; var user = this.data.userName;<br/>
+&nbsp; &nbsp; &nbsp; console.log(user);<br/>
+&nbsp; &nbsp; &nbsp; console.log(pw);<br/>
+&nbsp; &nbsp; &nbsp;wx.showLoading({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; title: '加载中',<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; mask: true<br/>
+&nbsp; &nbsp; &nbsp; });<br/>
+&nbsp; &nbsp; &nbsp; wx.request({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url: Data.getUrl()+'/user/loginCommon',<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; method: 'POST',<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; data: {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; phone:user,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; password:pw<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; header: {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'content-type': 'application/x-www-form-urlencoded'<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // 'Accept': 'application/x-www-form-urlencoded'<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; complete: function(res) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.hideLoading();<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; success: function(res) {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.log(res);<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.hideLoading();<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if(res.data.status==500){<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.setStorage({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; key:Data.getUserKey(),//"userInfo",<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; data:res.data.data<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.showToast({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; title: '请求成功',<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; icon: 'success',<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mask: true,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.navigateBack({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; delta: 1<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }else {<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; wx.showToast({<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; title: res.data.data,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; icon: 'error',<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mask: true,<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp;<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br/>
+&nbsp; &nbsp; &nbsp; &nbsp; })<br/>
+&nbsp; },<br/>
+})<br/>
+　　<br/>
+<br/>
+来源: https://www.jianshu.com/p/e3de2c605506</body></html>
