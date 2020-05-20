@@ -1,0 +1,1420 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-05-13T11:39:14+08:00
+
+====== 1 ======
+Created 星期三 13 五月 2020
+
+
+本文由知名博主Dog250投稿Linux阅码场原创发表。
+
+浙江温州皮鞋湿，下雨进水不会胖。     
+
+- Dog250
+
+华为鸿蒙OS发布已经一周了，在这一周中发生了很多事情，有人对华为路转粉，也有人对华为粉转黑，在时下，只要是华为的任何动作，背后都早已预备好某种正确，当然，所有事先备好的正确，必然不是客观的，所以为了不浪费时间和精力，避开那些争端即可。
+
+所谓的“正确”便是，只要是华为的，就是好的，谁哪怕说一句不好，那就是谁不好。然而，事情在悄悄地起变化，当舆论清一色一边倒向利好华为时，反对的声音便形成了新的“正确”，这个时候，只要谁说一句好，那就是谁不好。有意思，无意义。
+
+这一周，借助鸿蒙操作系统把一个计算机领域内非常专业的词带到了几乎所有人的视线内，这就是 微内核 ，一瞬间，网上铺天盖地的关于鸿蒙操作系统微内核，全场景，分布式的文章，携带着纷至沓来数以千百的评论，把所有人淹没，搞得好像是所有人早就知道微内核这个概念了似的，全民科普非常之优秀。
+
+公众号职业写手们加班加点围绕着余大嘴那仅有的PPT或捧或杀大肆造势渲染，然后以评论的数量而非质量论成败，无非是沽名钓誉的一种形式罢了。毕竟，当出现某种话题式概念时，这是他们作文的最佳时机。说鸿蒙发布会PPT空洞无内容的同时，也证实了这些文章的空洞无内容。
+
+我不是职业写手，我也不是华为员工，我更不是鸿蒙生态的开发者，我只是一名操作系统爱好者或者说普通玩家，虽然我不是职业的，但是和那些写公众号为生的写手们相比，我比他们更专业，所以，和那些文章不同，我想写一篇关于技术的，关于微内核技术的。
+
+如果说华为鸿蒙发布会真的在吹水(是不是吹水我不多评论，我只是说如果)，那么还必须承认两点：
+
+围绕吹水的鸿蒙PPT而写的评论性软文也是在吹水，并且连个PPT都没有。
+
+包括那些公众号写手在内的绝大多数人根本就不懂什么是微内核，甚至不知道操作系统内核的概念。
+
+不懂就不要跟风。
+
+关于微内核的资源，并不是很多，在实际工作和生活中，大型互联网公司的研发都并没有什么机会接触到微内核，更别说普通用户了，就连很多资深程序员都很少有人能接触到微内核的操作系统，互联网公司普遍使用的Linux内核是一个典型的宏内核，而Windows则是一个混合内核，若要学习微内核，还真没有什么好的平台。
+
+Wiki是一个不错的起始点(打不开也可以百度百科)：https://zh.wikipedia.org/wiki/%E5%BE%AE%E5%85%A7%E6%A0%B8%E6%91%98%E5%BD%95%E4%B8%80%E5%BC%A0%E7%BB%8F%E5%85%B8%E7%9A%84%E5%AF%B9%E6%AF%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%BE%AE%E5%86%85%E6%A0%B8%E5%92%8C%E5%AE%8F%E5%86%85%E6%A0%B8%E7%9A%84%E5%9B%BE%E7%A4%BA：
+
+几乎所有讲微内核的文章都采用以上这个图，但是除此之外，基本就是空洞的总结了，无外乎微内核更加容易扩展，更稳定，而宏内核则性能优越之类云云。但这些并不能让读者体会微内核的实质，因为这些总结性的理论通常是给已经懂的人看的，它无法给初学者带来感官上的感受。
+
+下面这几个资源还不错，可以一读：
+
+微内核IPC/RPC等 ：https://pdfs.semanticscholar.org/1cd7/edefcdd4cec5babb6b5b2d9e6572aa27a046.pdf
+
+微内核网络相关 ：https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=275670
+
+微内核IO相关 ：https://pdfs.semanticscholar.org/8559/e6c101b14511002dd5178097f7d2d2acb247.pdf
+
+QNX体系结构 ：https://cseweb.ucsd.edu/~voelker/cse221/papers/qnx-paper92.pdf
+
+除了这些空洞的操作系统理论概念，我们还有一个活生生的Minix。
+
+Minix介绍
+
+Minix是Andrew S. Tanenbaum所著《操作系统：设计与实现》教材的示例代码。喜欢操作系统的都应该去读一下这本书。这本书是非常少见的以一个完整的操作系统实现来讲操作系统原理的教材，风格非常不一般。\
+Linus的Linux内核本身就参考了Minix，如果你去看Linux 0.1/1.0等早期的代码，就会发现它和Minix是多么的相似，很多函数名字都是一样的。\
+更多详情，参见：Minix的Wiki页面：https://zh.wikipedia.org/wiki/MINIX%E4%B8%80%E4%B8%AA%E4%BB%8B%E7%BB%8DMinix3%E7%9A%84ppt%EF%BC%9Ahttp://www.minix3.org/docs/jorrit-herder/disi08-talk.pdf
+
+按照理解一个操作系统的常规步骤，首先，你要先让一个系统跑起来再说其它，至少你要知道它长什么样子吧。
+
+Minix目前有三个主要的版本：
+
+Minix1 https://github.com/gdevic/minix1 也就是《操作系统：设计与实现》教材的演示代码，侧重于教学和学习。年代久远，很难编译安装。
+
+Minix 2.0.4 http://download.minix3.org/previous-versions/Intel-2.0.4/%E4%BE%A7%E9%87%8D%E4%BA%8E%E8%87%AA%E5%AD%A6%E7%9A%84%E4%B8%80%E4%B8%AA%E7%89%88%E6%9C%AC%EF%BC%8C%E5%AE%89%E8%A3%85%E7%A8%8D%E5%BE%AE%E9%BA%BB%E7%83%A6%EF%BC%8C%E9%9C%80%E8%A6%81%E8%87%AA%E5%B7%B1%E5%81%9A%E8%BD%AF%E7%9B%98%E3%80%82%E4%B8%8D%E8%BF%87%E8%BF%99%E9%87%8C%E6%9C%89%E4%B8%AA%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%8F%82%E8%80%83%EF%BC%9Ahttps://mmmyddd.github.io/wiki/debian/minixonbochs.html 读它的源码感觉也是不错的。
+
+Minix 3.2.1 http://download.minix3.org/iso/minix_R3.2.1-972156d.iso.bz2 这是个实用版本，也就是说，它是实际可用的，有iso映像可供下载，安装非常方便。
+
+我基本上三个版本都试了，对于Minix1，我只是通读了源码，而对于后面两个版本，都均进行了安装测试。
+
+下面是Minix2.0.4版本的 ps ax 命令的结果界面：我们对照着上面Wiki的图示，可以看到文件系统，进程内存管理这些都已经是系统独立进程的形式存在了，我们在ps中可以看到FS，MM。但是Minix2版本无法让我们操作这些进程，可以看到它们的pid都是0。这是因为ps程序将这些系统进程的真实pid隐藏了，毕竟没事你操作它们干嘛，随便杀掉一个系统就不可用了。
+
+下面的图示是Minix3的，同样是 ps 的返回结果：可以看到，即便是系统进程也暴露给我们了，FS变成了VFS，但实质上一样，只是换了个名字。试着杀掉VFS进程，系统马上就不可用而重启了。
+
+好了，我们已经看过了一个真实的微内核操作系统到底长什么样子了，试着折腾个把小时，把你觉得好奇的地方都摸摸清楚，基础的第一步已经完成，接下来就要去看看冰山下面了。
+
+要想快速理解什么是微内核，了解一个常用的场景在微内核中是如何表现的，便是最有效率的方法了，加以和宏内核同样的场景进行对比，基本就了解微内核行为的大概了。是为情景分析。
+
+我就以普通的读取文件的read调用，以Minix为例，展示一下其行为：这里需要解释的是，上述情景的每一个步骤看样子都在进行进程间通信(IPC)。确实，这就是微内核的特色之所在。
+
+为了让系统核心的服务进程比如FS，MM更好的对每一个用户进程服务，在这些进程内部，均保存着系统所有进程的当前与本服务进程相关信息的快照。
+
+FS进程请求SYS进程将从磁盘读取的内容复制到用户进程P的缓冲区，这一步是没有用户进程参与的，所以FS进程至少要知道用户进程P的内存信息元数据，这样才可以让内核态的SYS进程完成复制操作。
+
+关于这一点，可以通过源码来确认。我们看MM服务进程，该进程为用户进程的fork，exec，exit，wait等调用管理内存，在该服务进程中，系统所有进程的快照保存在mproc数组中，详见mm/mproc.h文件：
+
+/* This table has one slot per process.  It contains all the memory management
+
+ * information for each process.  Among other things, it defines the text, data
+
+ * and stack segments, uids and gids, and various flags.  The kernel and file
+
+ * systems have tables that are also indexed by process, with the contents
+
+ * of corresponding slots referring to the same process in all three.
+
+ */
+
+
+
+EXTERN 
+struct
+ mproc 
+{
+
+  
+struct
+ mem_map mp_seg
+[
+NR_SEGS
+];
+/* points to text, data, stack */
+
+  
+char
+ mp_exitstatus
+;
+           
+/* storage for status when process exits */
+
+  
+char
+ mp_sigstatus
+;
+            
+/* storage for signal # for killed procs */
+
+  
+pid_t
+ mp_pid
+;
+                 
+/* process id */
+
+  
+pid_t
+ mp_procgrp
+;
+             
+/* pid of process group (used for signals) */
+
+  
+pid_t
+ mp_wpid
+;
+                
+/* pid this process is waiting for */
+
+  
+int
+ mp_parent
+;
+                
+/* index of parent process */
+
+  
+...
+ 
+// 进程控制块中其它与进程内存相关的管理数据
+
+}
+ mproc
+[
+NR_PROCS
+];
+ 
+// 一个数组保存系统所有的进程当前的内存快照。
+
+同样，在FF服务进程中，系统进程的快照保存在fproc数组中，见fs/fproc.h：
+
+/* This is the per-process information.  A slot is reserved for each potential
+
+ * process. Thus NR_PROCS must be the same as in the kernel. It is not possible
+
+ * or even necessary to tell when a slot is free here.
+
+ */
+
+
+
+
+
+EXTERN 
+struct
+ fproc 
+{
+
+  
+mode_t
+ fp_umask
+;
+              
+/* mask set by umask system call */
+
+  
+struct
+ inode 
+*
+fp_workdir
+;
+     
+/* pointer to working directory's inode */
+
+  
+struct
+ inode 
+*
+fp_rootdir
+;
+     
+/* pointer to current root dir (see chroot) */
+
+  
+struct
+ filp 
+*
+fp_filp
+[
+OPEN_MAX
+];
+/* the file descriptor table */
+
+  
+...
+ 
+// 进程控制块中其它与文件系统相关的管理数据。
+
+}
+ fproc
+[
+NR_PROCS
+];
+ 
+// 一个数组保存系统所有的进程当前的文件系统信息快照。
+
+其实，可以这样理解，在微内核中，FS，MM这些服务进程的逻辑以及快照数据在宏内核中就是对应内核本身的，只不过它们的访问方式不同：
+
+宏内核通过函数调用访问特定的逻辑和数据。
+
+微内核通过IPC(进程间通信)访问特定的逻辑和数据。
+
+作为对比，我们看一下宏内核Linux是如何完成与上面的情景IPC等价的操作步骤的：
+
+看样子同样是read读取文件，微内核只是把宏内核的纵向通信换成了横向通信而已。然而这个一纵一横的背后，却隐藏着大不同。
+
+纵向通信是实际发生的服务调用，即物理通信。
+
+横向通信是对等层通信，即逻辑通信。【这也是影响性能的核心因素】采用横向通信方案，固然损害了性能，但得到的更多。
+
+对照OSI以及TCP/IP分层模型，以上的说辞便再熟悉不过了。
+
+如果只是为介绍微内核的运行原理和流程，我想到这里已经结束了，下面该可以愉快地看代码了。然而微内核在现实中并非可以和宏内核平起平坐，我们不使用它，不接受它，除了商业和生态因素导致的先入为主之外，还有一个更加重要的因素，即 性能。
+
+微内核性能太差了！ 所有人都认为微内核性能差是因为IPC开销大，系统调用开销大所导致。当然，我也是这么认为。但是这只是事情的一面，事情还有另一面。
+
+关于微内核的话题，无外乎就是：
+
+内核精简，仅保留最核心的，其它全部给用户态。
+
+模块化，可插拔，易于扩展。
+
+安全，相互隔离，互不影响，可以采取不同的安全策略。
+
+数学可证明。
+
+性能...
+
+...
+
+好多话题网上一搜一箩筐，大多数都是形而上的套话，也不想在这里再次复制粘贴。
+
+接下来我仅仅针对 性能 方面来对微内核进行一个定性的评估。另外，我尝试为微内核的性能表现做一番洗白。
+
+一说到对等层的逻辑通信，最终还是要落实到纵向的物理通信来落地，仍然以我比较熟悉的网络方面来类比。典型的TCP/IP的通信模型如下：对于Minix微内核的read场景，和TCP/IP的模型几乎一致，在横向对等IPC之下，真正落地的是纵向通信。对应上述IPC横向逻辑通信过程的纵向实际流程如下图所示：只要稍微一看这个图，第一个个感觉就是 这太TM繁琐了！ 宏内核一个系统调用的事，微内核的IPC竟然要12个系统调用，而且仅仅是send/receive重复6对！如此设计性能显然好不了，意义何在呢？这个后面会讲。
+
+对于微内核而言，只需要send，receive两个系统调用就够了，所有的系统功能都可以通过send/receive两个系统调用封装IPC消息来完成：
+
+int
+ read
+(
+param
+)
+
+{
+
+	msg
+.
+from 
+=
+ me
+;
+
+	msg
+.
+to 
+=
+ FS
+;
+
+	msg
+.
+param 
+=
+ param
+;
+
+	send
+(
+FS
+,
+ 
+&
+msg
+);
+
+}
+
+int
+ fork
+()
+
+{
+
+	msg
+.
+from 
+=
+ me
+;
+
+	msg
+.
+to 
+=
+ MM
+;
+
+	msg
+.
+param 
+=
+ NULL
+;
+
+	send
+(
+MM
+,
+ 
+&
+msg
+);
+
+}
+
+...
+
+对应的，类似FS，MM这样的服务进程，就像普通的Web服务器守护进程那样，在一个大循环里等待receive就好了：
+
+processIO
+(...)
+
+{
+
+    
+...
+
+	msg
+.
+func 
+=
+ READ
+;
+
+	send
+(
+IDE
+,
+ msg
+);
+
+	receive
+(
+IDE
+,
+ 
+&
+ide_from
+);
+
+    
+// 将IO驱动进程返回的数据连同read发起进程的内存元数据信息打包发给SYS进程进行数据拷贝。
+
+    
+...
+
+	send
+(
+SYS
+,
+ 
+&
+ide_from
+);
+
+	receive
+(
+SYS
+,
+ 
+&
+sys_from
+);
+
+}
+
+void
+ FS_main
+(...)
+
+{
+
+    
+...
+
+    
+while
+ 
+(
+true
+)
+ 
+{
+
+		receive
+(&
+from
+,
+ 
+&
+msg
+);
+
+		processIO
+(&
+msg
+,
+ 
+&
+reply_msg
+);
+
+		send
+(
+from
+,
+ 
+&
+reply_msg
+);
+
+    
+}
+
+}
+
+极简主义的典范，不是吗？这让我们可以联想到RISC处理器，看它们的汇编指令时，访存寻址只有load/store两个指令，也是极简主义的典范。
+
+极简归极简，但是请看看上面那繁琐的流程，在宏内核中一个read系统调用的事，在Minix微内核中竟然要整整12个系统调用才能完成。回到上面的话题， 性能何在？效率何在？意义何在？
+
+这是微内核饱受诟病的核心。
+
+确实，纯传统IPC的方案，如此多的系统调用，开销是非常可观的。然而，通过以太网的发展史，我们或许可以看到曙光。
+
+我们看看早期的共享总线式以太网：我们对比一下宏内核：也许是我们对宏内核太熟悉了，我们天天都在用Linux内核，不是吗？这导致我们可能看不到别的可能性，这个事实将我们蒙蔽在真相之下，使我们看不到宏内核其实是有很大问题的，比如多核的不可扩展性。【当然，Linux内核在多核扩展性方面一致在持续优化，这无可厚非，但是始终没有一个让人哇塞的方案...】
+
+宏内核缺乏访问共享资源的有序仲裁机制，因此同步开销会非常大，最直接的后果就是宏内核随着处理器核心的增加而不可扩展。这个现状和早期以太网是多么相似， “以太网随着共享总线上接入的计算机数量的增加而性能陡降”。
+
+所有使用内核服务的进程都在各自 隔离的上下文(现代操作系统之所以现代的原因) 中访问底层的共享资源，这是无法仲裁的根源。
+
+说回以太网，当事情发展到交换式以太网的时候，问题解决了，因为冲突域坍缩到了交换机的背板总线，作为具备二层逻辑处理能力的交换机，它便可以进行必要的资源仲裁，比如排队以及队列的调度，实现数据包的存储转发：数据包的有序排队代替了对总线的无序争抢，从而避免了冲突。
+
+让我们看看微内核，与此是多么相似：
+
+我们回看并思考一下以太网进化到交换式以太网时的情形。
+
+面对交换式以太网，有人肯定会质疑， 原来数据包可以直接通过一根线飞到目的地，现在还要去交换机里走一遭，还有经由交换机逻辑的处理，多了这么多的步骤，如何能和曾经共享总线时一根线相比呢？
+
+质疑者明显是忽略了CSMA/CD的开销。相比CSMA/CD的开销，交换机的处理开销与之做减法，最终化作了收益。【交换式以太网从此飞起，如今万兆以太网都已经是标配了】
+
+类比以太网的发展历史，如果我们考虑多核处理器上宏内核的无序同步开销，在微内核中加入带有仲裁功能的服务进程后竟然大大降低甚至消失了，是不是有一丝的欣慰呢？
+
+有了交换机之后，人们忘记了CSMA/CD(虽然还是要考试)，那么若干年后，是不是也能忘掉spinlock呢？
+
+其实，在我们使用宏内核时也不是不明白专门进程处理专门事情的重要性，只是这种感觉来得比较自发罢了，并没有形成书面上的方法论。典型的例子就是最近几年非常风靡的Linux用户态协议栈。
+
+为什么要构建用户态协议栈，那明显是因为内核协议栈性能低。用户态协议栈可以做到专核专用，进程上下文可以完全掌握数据包收包逻辑的全过程，更便于仲裁和协作。
+
+如果用户态协议栈抽象成一个服务，这是不是就和微内核思想一致呢？
+
+此外，除了协议栈，很多别的逻辑也纷纷往用户态搬迁，并且，在内核态本身，中断也越来越线程化了，以便统一参与内核的调度。微内核的思想一直在背后起着作用。
+
+本来微内核的性能是软肋，结果被我说的好像成了它的优势，有点不太雅。但其实，我表达的更多的是微内核表现出来的一种潜力。站在多核心可扩展性角度，多核平台，无疑微内核的设计会更好，服务进程的仲裁可以让应用在多核平台无锁运行。
+
+不过无论如何，我承认性能确实是微内核的软肋，特别是Minix的性能确实不咋地，但这也同样意味着微内核可以针对性能这个软肋集中地进行优化。业界公认的性能比较好的微内核当属QNX了，它被广泛部署在黑莓手机和汽车上，时间和存在可以证明，它守住了它承诺的。
+
+在UNIX历史的长河中，一开始的系统就是奔着微内核的思想去的，比如最初的UNIX系统中会拥有一个专门负责调度和交换的swapper进程，直到现在，我们依然可以在UNIX/Linux中找到一个0号的swapper/idle进程，虽然它早就被淹没在宏内核之中，再也不行调度以及交换之事务了。
+
+说到微内核的性能问题，我认为在经过了30多年的发展后，微内核，宏内核之间的性能差距已经大大缩小了，这个关于两种由于设计理念的不同导致的性能差异话题在计算机的发展史上，从来就没有停止过：
+
+微内核和宏内核。
+
+跨平台的Java语言和C语言。
+
+跨平台的语言Java和跨语言的平台.NET。
+
+解释型脚本Python和C语言。
+
+CISC体系结构和RISC体系结构。
+
+...
+
+但是无一例外，最终谁也吊打不了谁，收益必有代价，大多数的纷争最终走向了融合。
+
+硬件技术的发展往往落后于软件技术的发展，但是硬件技术却是始终不断发展的，在此期间，软件技术往往陷入了两种理念的纷争而稍有停滞，最终硬件技术跟上，弥补软件性能的缺陷。甚至硬件可以针对软件的需求作出特殊的支持。
+
+软件提出需求，硬件实现。如果微内核在理论上证明确实好，仅仅IPC是个瓶颈的话，直接从硬件上着手优化，岂不是更好吗？我想QNX，鸿蒙的设计应该也是这么考虑的吧。
+
+软件硬件统一支持，我想微内核和宏内核之间最终也会是某种融合，我说的并非Windows作为混合内核的那种马赛克式的融合，而是熔炉式的融合。
+
+具体到微内核性能差的根因，我们来聊一下IPC的优化。
+
+如果实现一个最基本最简单的IPC，那么内存拷贝就够了。这一般是0.1到1.0的做法。先让系统跑起来是最重要的， 完成比完美更重要 。【GNU Hurd内核的失败就是因为斯托曼太过理想主义，追求完美...反例则是李纳斯，追求完成。】
+
+随着硬件技术的发展，随着系统对性能要求不断提高，IPC必然要不断优化，内存拷贝不再适用，共享内存则更好，最终，可能直接使用硬件的某种机制，比如寄存器，DMA等机制来帮助实现IPC。如果有硬件机制直接提供IPC的支持，问题就解决了。
+
+这个过程非常类似sendfile/splice系统调用的设计过程。
+
+sendfile/splice的设计\
+起初，Web服务器需要先将文件拷贝到Web服务器内部buffer，然后再将buffer拷贝到用户的socket。这很类似传统的IPC方案。\
+然而随着HTTP逐渐主宰互联网，几乎每一个Linux服务器上均部署有Web服务器，谁还能忍受两次拷贝的瓶颈，于是sendfile就呼之欲出了。sendfile仅仅提供一个外部把手，真正的数据并不需要拷贝到Web服务器的buffer，通过这个把手，数据可以从文件直通到socket。\
+用的人多了，需求在了，问题自然也就解决了，而且是从底层根本上解决。微内核的IPC也会是这样的路子。
+
+不过，目前还没有一个通用的使用在微内核上的IPC机制，相信QNX是有优化过的IPC的，但是不够通用，而Android系统的Binder够通用也还不错，但是它并不针对微内核。倒是非常希望能看看鸿蒙是怎么去优化的。
+
+好了，现在我在想，我们是不是可以去看看Minix的源码了。好吧，Let's go！
+
+还是情景分析的方式，我们先看read。在Linux的glibc上，read的实现都是 SYSENTER，SYSCALL或者int 0x80 来直接陷入系统调用的。而在Minix中， 以下以Minix1为例 ，我们看看其库函数的实现：
+
+// h/callnr.h
+
+#define
+ READ               
+3
+ 
+// READ的服务号是3
+
+// lib/read.c
+
+PUBLIC 
+int
+ read
+(
+fd
+,
+ buffer
+,
+ nbytes
+)
+
+int
+ fd
+;
+
+char
+ 
+*
+buffer
+;
+
+int
+ nbytes
+;
+
+{
+
+  
+int
+ n
+;
+
+  
+// 目标是FS服务进程，需要的服务是READ
+
+  n 
+=
+ callm1
+(
+FS
+,
+ READ
+,
+ fd
+,
+ nbytes
+,
+ 
+0
+,
+ buffer
+,
+ NIL_PTR
+,
+ NIL_PTR
+);
+
+  
+return
+(
+n
+);
+
+}
+
+我们展开callm1：
+
+// lib/call.c
+
+PUBLIC 
+int
+ callm1
+(
+proc
+,
+ syscallnr
+,
+ 
+int1
+,
+ 
+int2
+,
+ 
+int3
+,
+ ptr1
+,
+ ptr2
+,
+ ptr3
+)
+
+int
+ proc
+;
+            
+/* FS or MM */
+
+int
+ syscallnr
+;
+            
+/* which system call */
+
+int
+ 
+int1
+;
+            
+/* first integer parameter */
+
+int
+ 
+int2
+;
+            
+/* second integer parameter */
+
+int
+ 
+int3
+;
+            
+/* third integer parameter */
+
+char
+ 
+*
+ptr1
+;
+            
+/* pointer parameter */
+
+char
+ 
+*
+ptr2
+;
+            
+/* pointer parameter */
+
+char
+ 
+*
+ptr3
+;
+            
+/* pointer parameter */
+
+{
+
+/* Send a message and get the response.  The 'M.m_type' field of the
+
+ * reply contains a value (>= 0) or an error code (<0). Use message format m1.
+
+ */
+
+  M
+.
+m1_i1 
+=
+ 
+int1
+;
+
+  M
+.
+m1_i2 
+=
+ 
+int2
+;
+
+  M
+.
+m1_i3 
+=
+ 
+int3
+;
+
+  M
+.
+m1_p1 
+=
+ ptr1
+;
+
+  M
+.
+m1_p2 
+=
+ ptr2
+;
+
+  M
+.
+m1_p3 
+=
+ ptr3
+;
+
+  
+// 最终将参数打包完毕后，所有需要系统服务的库函数都要调用callx。
+
+  
+return
+ callx
+(
+proc
+,
+ syscallnr
+);
+
+}
+
+
+
+PUBLIC 
+int
+ callx
+(
+proc
+,
+ syscallnr
+)
+
+int
+ proc
+;
+            
+/* FS or MM */
+
+int
+ syscallnr
+;
+            
+/* which system call */
+
+{
+
+/* Send a message and get the response.  The 'M.m_type' field of the
+
+ * reply contains a value (>= 0) or an error code (<0).
+
+ */
+
+  
+int
+ k
+;
+
+
+
+  
+// 打包系统服务类型，以往在宏内核中，这就是一个独立的系统调用。
+
+  M
+.
+m_type 
+=
+ syscallnr
+;
+
+  
+// 最终落地的是send系统调用。proc是目标服务进程，M是打包后的参数。send/receive是IPC的核心。
+
+  k 
+=
+ sendrec
+(
+proc
+,
+ 
+&
+M
+);
+
+  
+if
+ 
+(
+k 
+!=
+ OK
+)
+ 
+return
+(
+k
+);
+    
+/* send itself failed */
+
+  
+if
+ 
+(
+M
+.
+m_type 
+<
+ 
+0
+)
+ 
+{
+errno 
+=
+ 
+-
+M
+.
+m_type
+;
+ 
+return
+(-
+1
+);}
+
+  
+return
+(
+M
+.
+m_type
+);
+
+}
+
+另一边，FS作为系统内核的文件系统服务进程，它就像一个普通的守护进程一样，执行一个大循环：
+
+// fs/main.c
+
+PUBLIC main
+()
+
+{
+
+/* This is the main program of the file system.  The main loop consists of
+
+ * three major activities: getting new work, processing the work, and sending
+
+ * the reply.  This loop never terminates as long as the file system runs.
+
+ */
+
+  
+int
+ error
+;
+
+  
+extern
+ 
+int
+ 
+(*
+call_vector
+[
+NCALLS
+])();
+
+
+
+  fs_init
+();
+
+
+
+  
+/* This is the main loop that gets work, processes it, and sends replies. */
+
+  
+while
+ 
+(
+TRUE
+)
+ 
+{
+
+    
+// 执行receive系统调用，获取请求
+
+	get_work
+();
+     
+/* sets who and fs_call */
+
+
+
+	fp 
+=
+ 
+&
+fproc
+[
+who
+];
+   
+/* pointer to proc table struct */
+
+	super_user 
+=
+ 
+(
+fp
+->
+fp_effuid 
+==
+ SU_UID 
+?
+ TRUE 
+:
+ FALSE
+);
+   
+/* su? */
+
+	dont_reply 
+=
+ FALSE
+;
+ 
+/* in other words, do reply is default */
+
+
+
+    
+/* Call the internal function that does the work. */
+
+    
+if
+ 
+(
+fs_call 
+<
+ 
+0
+ 
+||
+ fs_call 
+>=
+ NCALLS
+)
+
+		error 
+=
+ E_BAD_CALL
+;
+
+    
+else
+
+        
+// 调用READ服务的回调do_read，call_vector见下图
+
+		error 
+=
+ 
+(*
+call_vector
+[
+fs_call
+])();
+
+
+
+    
+/* Copy the results back to the user and send reply. */
+
+    
+if
+ 
+(
+dont_reply
+)
+ 
+continue
+;
+
+	reply
+(
+who
+,
+ error
+);
+
+    
+if
+ 
+(
+rdahed_inode 
+!=
+ NIL_INODE
+)
+ read_ahead
+();
+ 
+/* do block read ahead */
+
+  
+}
+
+}
+
+我们知道，READ服务的服务号是3，在FS服务进程中，将有3号服务为其服务：进一步看doread，它最终要调用readwrite函数：
+
+PUBLIC 
+int
+ read_write
+(
+rw_flag
+)
+
+int
+ rw_flag
+;
+            
+/* READING or WRITING */
+
+{
+
+/* Perform read(fd, buffer, nbytes) or write(fd, buffer, nbytes) call. */
+
+    
+...
+
+	dev_io
+(...);
+ 
+// dev_io会向IDE服务进程send消息，获取需要读的数据。
+
+    
+...
+
+	sys_copy
+(...);
+ 
+// sys_copy会向内核态SYSTASK进程send消息，请求将数据复制给用户进程。
+
+    
+...
+
+}
+
+注意，由于FS进程保有任意用户进程的文件系统请求快照，在调用sys_copy时，它会将用户的接收buffer一并提供给SYSTASK，内核态的SYSTASK操作用户进程的内存地址空间，将文件内容放进去。
+
+这个read的过程是不是很炫酷呢？到此为止，我们还没有深入到内核里面看看究竟发生了什么。可能会让人失望，内核里的逻辑非常简单，这是微内核，大多数复杂的逻辑都在内核外的服务进程里做了，比如上面说的的FS进程，这不像宏内核，内核里超级复杂。
+
+前面知道，理论上讲，微内核只需要提供send/receive两个系统调用就OK了，那么这两个系统调用都是如何实现的呢？
+
+看kernel/proc.c文件：
+
+PUBLIC sys_call
+(
+function
+,
+ caller
+,
+ src_dest
+,
+ m_ptr
+)
+
+int
+ function
+;
+           
+/* SEND, RECEIVE, or BOTH */
+
+int
+ caller
+;
+         
+/* who is making this call */
+
+int
+ src_dest
+;
+           
+/* source to receive from or dest to send to */
+
+message 
+*
+m_ptr
+;
+         
+/* pointer to message */
+
+{
+
+/* The only system calls that exist in MINIX are sending and receiving
+
+ * messages.  These are done by trapping to the kernel with an INT instruction.
+
+ * The trap is caught and sys_call() is called to send or receive a message (or
+
+ * both).
+
+ */
+
+
+
+  
+register
+ 
+struct
+ proc 
+*
+rp
+;
+
+  
+int
+ n
+;
+
+
+
+  
+/* Check for bad system call parameters. */
+
+  rp 
+=
+ proc_addr
+(
+caller
+);
+
+  
+...
+
+
+
+  
+/* The parameters are ok. Do the call. */
+
+  
+if
+ 
+(
+function 
+&
+ SEND
+)
+ 
+{
+ 
+// send系统调用的处理
+
+	n 
+=
+ mini_send
+(
+caller
+,
+ src_dest
+,
+ m_ptr
+);
+ 
+/* func = SEND or BOTH */
+
+    
+if
+ 
+(
+function 
+==
+ SEND 
+||
+ n 
+!=
+ OK
+)
+ rp
+->
+p_reg
+[
+RET_REG
+]
+ 
+=
+ n
+;
+
+    
+if
+ 
+(
+n 
+!=
+ OK
+)
+ 
+return
+;
+    
+/* SEND failed */
+
+  
+}
+
+
+
+  
+if
+ 
+(
+function 
+&
+ RECEIVE
+)
+ 
+{
+ 
+// receive系统调用的处理
+
+	n 
+=
+ mini_rec
+(
+caller
+,
+ src_dest
+,
+ m_ptr
+);
+      
+/* func = RECEIVE or BOTH */
+
+	rp
+->
+p_reg
+[
+RET_REG
+]
+ 
+=
+ n
+;
+
+  
+}
+
+}
+
+接下来minisend和minirec的处理也非常对称，就是参数的拷贝：
+
+mini_send
+(...)
+
+{
+
+	cp_mess
+(
+caller
+,
+ caller_ptr
+->
+p_map
+[
+D
+].
+mem_phys
+,
+ m_ptr
+,
+
+				dest_ptr
+->
+p_map
+[
+D
+].
+mem_phys
+,
+ dest_ptr
+->
+p_messbuf
+);
+
+}
+
+mini_rec
+(...)
+
+{
+
+	cp_mess
+(
+sender
+,
+ sender_ptr
+->
+p_map
+[
+D
+].
+mem_phys
+,
+ sender_ptr
+->
+p_messbuf
+,
+
+					caller_ptr
+->
+p_map
+[
+D
+].
+mem_phys
+,
+ m_ptr
+);
+
+}
+
+别的就不说什么了。因为我不太喜欢源码分析。这么极简主义的代码，还是自己看比较带感。
+
+Minix2的实现和Minix1的实现稍有不同，大概如下的Change：
+
+对函数进行了更好的封装。代码看起来更让人舒服了。
+
+优化了时钟中断，将IPC调用CLOCK进程改为直接调用处理函数。这显然让Minix不那么纯粹了，为了性能...
+
+最后，我们分别看一下Minix1和Minix2的系统服务进程都有哪些，先看Minix1的：再看Minix2的：
+
+最后，我想说点儿有意思但是大家不怎么关注的东西。
+
+内核态访问到空指针，系统就一定会崩溃panic吗？ 并不是！只要内核不想panic就不会panic崩溃。只要错误不足以影响硬件状态，系统就不会无条件崩溃。内核之所以panic(或者蓝屏)是因为它认为这样最安全。就像用户态可以捕获SEGV信号一样，内核照样也能捕获空指针访问。然后恢复。前提是，你要确保即使发生了空指针错误，系统也是稳定的，即没有数据结构被破坏。而这个在宏内核里很难保证，因为所有东西都在一起。在微内核中，事情反而更简单些。首先，内核很小，出现问题的概率自然小，即便出现问题，也很容易知道如何去恢复而不会对其它结构造成损害；其次，很多重要的数据结构以及逻辑都在用户态的服务进程中，比如文件系统，网络协议栈，甚至驱动，这种服务进程拥有自己隔离的地址空间，即便是出现再严重的问题，也不会污染到操作系统其它的部分。
+
+将Linux改成微内核有多难？ 很难，但也不是不可能。首先，需要改变Linux特定代码和数据的地址空间结构，说到底就是将它们映射在用户态的空间并且给它们一套独立的页表。其次，为它们分配好task_t并处理好调度。最终，最难的是调用方式，这意味着你需要徒手将函数调用改成IPC，这让人觉得还不如基于Minix改呢。把Linux的好的代码移植进Linux？？
+
+微内核不被人知真的是因为它的性能差吗？ 我倒是觉得这个跟Linux内核关系很大。Linux内核太出名了，以至于几乎所有人都认为作为一个操作系统内核就应该长得和Linux内核那样。这个和Linux内核开源是分不开的。除了Linux内核，很难再看到其它的流行内核是开源的。遵循POSIX的QNX作为一个类UNIX系统，它本身就是微内核的，如果QNX在1990i 年出现并且开源，可能大家眼里的操作系统内核就应该是微内核了。什么事情，只要说多了，那便是对的了。
+
+文章终于写完了, 本来想就此结束的，但还是想说点心里话。
+
+最开头说了，希望能通过本文里的东西给大家带来点 技术 ，也确实，我专门为此在文中加入了源码分析。希望真的是把技术讲明白了，但毕竟这仅仅只是一篇文章，所以也就不能面面俱到，但即便是如此，我也希望本文至少可以作为关于微内核的科普，也就倍感欣慰了。
+
+本文以鸿蒙操作系统作为引子，但也只是引子，我没见过鸿蒙系统真正的样子，所以我也不去过多猜测，没见过的东西，也没参与，事后去指点江山，总觉得缺了点什么。鸿蒙一出，发现网上瞬间出现这么多精通操作系统设计和开发的专家，原来大家以前真的都是潜龙勿用啊，如今变身，飞龙在天了。
+
+也真是替华为感到遗憾，当年招聘的时候，有这么多专家都化名为鲲，潜在北冥不应召，如今一张PPT就让他们集体化而为鸟，怒而飞，改名为鹏了...
+
+操作系统这门学科在即使计算机专业内部也并不算大众，因为它太底层，并且太复杂太无趣了，偏学术，让人觉得老套。没有漂亮产品妹子蹦蹦哒哒过来跟你对需求，也没什么班可加，完事后大家一起去啤酒撸串，更多的时候是你自己一个人大半夜在家里debug或者思考。
+
+很难出成绩，这意味着加薪周期会比较长。
+
+动辄以两年为单位的研发周期长，不符合BAT等大型互联网公司一年两次考核的快速迭代小步快跑理念，这意味着你可能连自己的工作都保不住。
+
+多年不变的夯实的架构让操作系统领域显然没有更多新的东西可做，这就像TCP/IP协议栈一样，千年不变的底层架构显然让你的职业生涯并没有多少机会去拥抱变化，这显然和互联网理念是背道而驰的。
+
+说白了，很多人对此并不感兴趣。
+
+鸿蒙发布之后，突然发现很多人都是操作系统专家了，我想这是在蹭华为的热度而不是鸿蒙操作系统本身吧，因为操作系统自Windows 95，Windows XP之后，从来都没有再热过。不信你回家问问自己的家人，除了Windows 95/XP之外，还听说过哪个划时代的操作系统。
+
+最后，想喷我站队华为的，先给在下演示一下如何在鸿蒙操作系统上写hello world再说吧，反正我没见过，等我看见了，如果它真的不如人所愿，我和你一起喷。打架不会，喷人还是有一套的。
+https://mp.weixin.qq.com/s?__biz=MzAwMDUwNDgxOA==&mid=2652666131&idx=1&sn=7cb56350104265c289809fe3b9a03256&chksm=810f3f8eb678b698433c62d3118ad1e5a3c49e3dd6fd6c019b28966ee69629ad63f9aaedf27b&scene=21#wechat_redirect&utm_oi=33829276352512

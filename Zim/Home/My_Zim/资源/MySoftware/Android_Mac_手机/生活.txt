@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-24T11:21:44+08:00
-
-====== 生活 ======
-Created Wednesday 24 January 2018
-
-习惯养成: streaks

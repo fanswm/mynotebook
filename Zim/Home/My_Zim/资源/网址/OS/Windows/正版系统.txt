@@ -1,0 +1,18 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-05-13T13:58:11+08:00
+
+====== 正版系统 ======
+Created 星期三 13 五月 2020
+
+
+https://www.microsoftstore.com.cn/windows/windows-10-home/p/kw9-00265?Icid=storerecommendation_win10_20170424_HomeC5
+https://www.microsoftstore.com.cn/windows/windows10pro/p/micjs0334
+
+
+
+
+
+有个网站，http://getitfree.cn ，是个软件商城，经常有正版Windows10和office打折卖，可以去看看。
+
+买一个序列号，从微软官方下载一个系统文件。安装，激活即可

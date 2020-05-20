@@ -1,0 +1,80 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-05-13T11:59:24+08:00
+
+====== 0 ======
+Created 星期三 13 五月 2020
+
+
+https://github.com/claudiodangelis/qrcp
+
+Usage
+
+Send a file
+qrcp MyDocument.pdf
+Send multiple files at once
+When sending multiple files at once, qrcp creates a zip archive of the files or folders you want to transfer, and deletes the zip archive once the transfer is complete.
+
+# Multiple files
+qrcp MyDocument.pdf IMG0001.jpg
+# A whole folder
+qrcp Documents/
+Zip a file before transferring it
+You can choose to zip a file before transferring it.
+
+qrcp --zip LongVideo.avi
+Receive files
+When receiving files, qrcp serves an "upload page" through which you can choose files from your mobile.
+
+Receive files to the current directory
+qrcp receive
+Receive files to a specific directory
+# Note: the folder must exist
+qrcp receive --output=/tmp/dir
+Options
+qrcp works without any prior configuration, however, you can choose to configure to use specific values. The config command launches a wizard that lets you configure parameters like interface, port, fully-qualified domain name and keep alive.
+
+qrcp config
+Note: if some network interfaces are not showing up, use the --list-all-interfaces flag to suppress the interfaces' filter.
+
+qrcp --list-all-interfaces config 
+Port
+By default qrcp listens on a random port. Pass the --port (or -p) flag to choose a specific one:
+
+qrcp --port 8080 MyDocument.pdf
+Network Interface
+qrcp will try to automatically find the suitable network interface to use for the transfers. If more than one suitable interface is found, it asks you to choose one.
+
+If you want to use a specific interface, pass the --interface (or -i) flag:
+
+# The webserver will be visible by
+# all computers on the tun0's interface network
+qrcp -i tun0 MyDocument.dpf
+You can also use a special interface name, any, which binds the web server to 0.0.0.0, making the web server visible by everyone on any network, even from an external network.
+
+This is useful when you want to transfer files from your Amazon EC2, Digital Ocean Droplet, Google Cloud Platform Compute Instance or any other VPS.
+
+qrcp -i any MyDocument.pdf
+URL
+qrcp uses two patterns for the URLs:
+
+send: http://{ip address}:{port}/send/{random path}
+receive: http://{ip address}:{port}/receive/{random path}
+A few options are available that override these patterns.
+
+Pass the --path flag to use a specific path for URLs, for example:
+
+# The resulting URL will be
+# http://{ip address}:{port}/send/x
+qrcp --path=x MyDocument.pdf
+Pass the --fqdn (or -d) to use a fully qualified domain name instead of the IP. This is useful in combination with -i any you are using it from a remote location:
+
+# The resulting URL will be
+# http://example.com:8080/send/xYz9
+qrcp --fqdn example.com -i any -p 8080 MyRemoteDocument.pdf
+Keep the server alive
+It can be useful to keep the server alive after transferring the file, for example, when you want to transfer the same file to multiple devices. You can use the --keep-alive flag for that:
+
+# The server will not shutdown automatically
+# after the first transfer
+qrcp --keep-alive MyDocument.pdf
