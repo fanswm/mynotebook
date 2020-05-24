@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-05-23T12:53:01+08:00
+
+====== 沙拉查词 ======
+Created 星期六 23 五月 2020
+
+https://saladict.crimx.com/notice.html
+
+Edge 插件。

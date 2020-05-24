@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-05-23T21:16:54+08:00
+
+====== 开机启动 ======
+Created 星期六 23 五月 2020
+
+msconfig
+
+
+C:\Users\ray\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+
