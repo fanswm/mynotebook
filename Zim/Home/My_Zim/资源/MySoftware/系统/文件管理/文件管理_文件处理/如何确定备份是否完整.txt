@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2019-02-15T16:54:36+08:00
+
+====== 如何确定备份是否完整 ======
+创建日期 星期五 15 二月 2019
+
+`diff <(ls /SourceFolder/) <(ls /DistFolder/) `
+
+< 和 （ 之间没有空格
+
+[[Study:Linux:点 的意义 点命令:尖括号:Bash 中尖括号的更多用法]]

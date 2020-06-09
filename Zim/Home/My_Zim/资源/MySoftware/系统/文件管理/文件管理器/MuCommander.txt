@@ -1,0 +1,18 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-05-28T14:06:23+08:00
+
+====== MuCommander ======
+Created 星期四 28 五月 2020
+
+MuCommander 是一款特别小巧的文件管理器。
+
+它支持双面板显示，可以浏览不同的内容。
+
+他支持打开FTP，Http 等各种远程内容。
+
+还可以轻松复制，粘贴，移动，重命名，各种压缩包也可以浏览解压，一键全屏浏览图片。
+
+唯一的缺点就是它依赖Java 环境。
+
+不过是免费跨平台软件，支持Windows，Mac 和Linux。

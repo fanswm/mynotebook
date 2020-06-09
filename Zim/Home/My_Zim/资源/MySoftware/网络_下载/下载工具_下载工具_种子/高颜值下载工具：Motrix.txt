@@ -12,17 +12,3 @@ Motrix
 Motrix 支持 macOS、Windows 及 Linux 系统，你可以在 GitHub 或 官网 下载 Motrix。
 https://github.com/agalwood/Motrix
 https://motrix.app/
-
-
-
-Motrix是一个免费好用的下载工具。
-
-它的界面特别清爽简洁，支持HTTP，FTP，BT磁力下载。最重要的，它也支持百度云高速下载。
-
-支持多任务同时下载和多线程下载，最好支持10 个任务和64 个线程。
-
-可以自定义修改浏览器标识。
-
-如果你懂技术的话，它也是开源免费，可以自己研究研究。
-
-支持Win，Mac 和Linux。

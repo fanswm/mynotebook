@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2020-02-21T11:38:06+08:00
-
-====== idm ======
-Created 星期五 21 二月 2020
-

@@ -1,0 +1,18 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-05-28T13:50:12+08:00
+
+====== Brave ======
+Created 星期四 28 五月 2020
+
+https://mp.weixin.qq.com/s/-lNJ8NxUh3EkHykfBkh3pg
+
+Brave是一款基于Chromium 的开源浏览器软件。
+
+它针对chrome 做了很多改进，可以防止程序追踪，同时优化了Https 网络请求。
+
+它还特别安全，可以轻松过滤广告，网站Cookie 和各种脚本。它还内置了Tor，可以让你浏览更加私密。
+
+还有阅读模式，让阅读更加专注方便。
+
+支持电脑版和手机版。

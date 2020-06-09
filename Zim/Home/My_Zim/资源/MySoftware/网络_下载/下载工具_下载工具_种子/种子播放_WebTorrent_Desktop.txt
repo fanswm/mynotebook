@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-05-28T14:00:21+08:00
+
+====== 种子播放 WebTorrent Desktop ======
+Created 星期四 28 五月 2020
+
+WebTorrent Desktop 是一个在线播放种子的软件。
+
+你可以通过添加磁力链或者种子，它就可以直接播放了，还能显示实时加载的进度。
+
+有的种子可能不能播放，可以使用 https://instant.io/  这个网站添加一下，就可以解决不能播放的问题了。
+
+有了很多高清的内容都可以轻松播放。
+
+而且还可以通过WebRTC，Node.js 搭建自己的专属网站。
+
+不过作为小白，用它的电脑版客户端就可以了。
+
+同时支持Windows，Mac 和Linux。
