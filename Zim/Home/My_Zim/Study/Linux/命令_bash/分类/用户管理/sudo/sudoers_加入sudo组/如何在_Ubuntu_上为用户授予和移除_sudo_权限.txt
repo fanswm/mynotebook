@@ -18,7 +18,7 @@ Creation-Date: 2019-03-01T16:43:30+08:00
 在 Linux 上向普通用户授予 sudo 权限
 通常，我们使用 adduser 命令创建新用户，如下所示。
 
-$ sudo adduser ostechnix
+$ sudo adduser __ostechnix__
 如果你希望新创建的用户使用 sudo 执行管理任务，只需使用以下命令将它添加到 sudo 组：
 
 $ sudo usermod -a -G sudo hduser

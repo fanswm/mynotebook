@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-01-07T12:55:14+08:00
-
-====== 卸载 ======
-Created 星期日 07 一月 2018
-
-sudo apt-get remove gimp xfburn inkscape thunderbird transmission

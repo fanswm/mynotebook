@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-06-15T11:38:53+08:00
+
+====== 云服务器 ======
+Created 星期一 15 六月 2020
+
+入门中心
+帮助您了解如何在腾讯云上开始使用和搭建云服务
+https://cloud.tencent.com/guide
+
+
+控制台:https://console.cloud.tencent.com/vpc/vpc?rid=4

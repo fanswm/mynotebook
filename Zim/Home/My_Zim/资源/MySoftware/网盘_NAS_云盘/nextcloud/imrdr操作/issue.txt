@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-06-15T08:57:54+08:00
+
+====== issue ======
+Created 星期一 15 六月 2020
+
+您的数据目录无效
+
+请确定在根目录下有一个名为".ocdata"的文件。
+
+无法创建“data”目录
+
+这个通常可以通过赋予根目录写入权限来修复。查看：https://docs.nextcloud.com/server/16/go.php?to=admin-dir_permissions
+

@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-06-13T22:21:00+08:00
+
+====== 域名控制台 ======
+Created 星期六 13 六月 2020
+
+域名控制台： https://dc.console.aliyun.com/next/index#/domain/list/all-domain

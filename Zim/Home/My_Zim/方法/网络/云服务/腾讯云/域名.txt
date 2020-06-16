@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-06-15T11:30:13+08:00
+
+====== 域名 ======
+Created 星期一 15 六月 2020
+
+原备案不在腾讯云
+https://cloud.tencent.com/document/product/243/19147?fromSource=gwzcw.1293314.1293314.1293314&cps_key=42c9b322fd48ff0ce405a0c7d78612fd

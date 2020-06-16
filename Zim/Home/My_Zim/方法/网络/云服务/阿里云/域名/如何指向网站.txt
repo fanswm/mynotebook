@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-06-13T22:25:45+08:00
+
+====== 如何指向网站 ======
+Created 星期六 13 六月 2020
+
+https://help.aliyun.com/knowledge_detail/39783.html?spm=5176.200122.n2.4.6dea2f5bwQgB3p

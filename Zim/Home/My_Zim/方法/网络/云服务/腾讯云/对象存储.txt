@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-06-13T22:55:56+08:00
+
+====== 对象存储 ======
+Created 星期六 13 六月 2020
+
+https://cloud.tencent.com/document/product/436/6240
+

@@ -8,8 +8,7 @@ Creation-Date: 2019-05-16T07:04:49+08:00
 # vim ~/.zshrc
 # 一级：
 alias vi='vim'
-alias h='tldr'
-alias c='clear'
+alias h='tldr'alias c='clear'
 alias ins='sudo pacman -S'
 
 alias ipe='curl ipinfo.io/ip'

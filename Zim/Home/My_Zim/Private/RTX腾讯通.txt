@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2017-11-24T16:36:26+08:00
-
-====== RTX腾讯通 ======
-Created Friday 24 November 2017
-
-219.134.61.11:8000
-10.102.9.1
