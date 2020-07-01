@@ -1,0 +1,20 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-06-30T11:43:51+08:00
+
+====== 蜜蜂剪辑 ======
+创建日期 星期二 30 六月 2020
+
+https://beecut.cn/
+
+蜜蜂剪辑是一款简单易用的视频剪辑软件。
+
+它支持16:9、4:3、1:1等各种屏幕比例，除了基础编辑功能，还有多层叠加，滤镜功能。
+
+还可以插入文本、动画、声音，同时还可以添加马赛克（这个是不是特别熟悉）。
+
+当然它还可以调色，动态对比前后，插入画中画也是很实用的功能。
+
+对于我们非专业人士，这款足够用了。
+
+https://beecut.cn/install-beecut?apptype=saas&appver=1.6.0.27&language=zh&product_id=221&type=install
