@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2018-09-20T12:57:45+08:00
 
 ====== 免输入账号和密码方法 ======
@@ -15,10 +15,10 @@ touch .git-credentials
 vim .git-credentials
     
 ##################添加以下：
-https://{username}:{password}@github.com
+[[https://{username}:{password}@github.com]]
     
 # for example:
-# https://xiaoming:passwd@github.com
+# [[https://xiaoming:passwd@github.com]]
 ##################
 # 在终端下输入：
 git config --global credential.helper store
@@ -32,7 +32,7 @@ __Windows方法：__
 方法同上面，只是第一步创建git-credentials有点不同。
 在%HOME%目录中，一般为C:\users\Administrator，也可以是你自己创建的系统用户名目录，反正都在C:\users\中。
 
-文件名为.git-credentials,
+文件名为 .git-credentials
 
 由于在Window中不允许直接创建以"."开头的文件，所以需要借助git bash进行，打开git bash客户端，进行%HOME%目录，然后用touch创建文件 .git-credentials, 然后后面的操作同上面。
 
@@ -54,7 +54,7 @@ __Windows方法：__
 输入内容格式：
 touch .git-credentials
 vim .git-credentials
-https://{username}:{password}@github.com
+[[https://{username}:{password}@github.com]]
 
 重新打开git bash即可，无需再输入用户名和密码
 1.2 添加Git Config 内容
