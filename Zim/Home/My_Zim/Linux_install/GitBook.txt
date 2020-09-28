@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2017-11-21T18:29:57+08:00
 
 ====== GitBook ======
@@ -30,23 +30,23 @@ Creation-Date: 2017-11-21T18:29:57+08:00
 
 + 根据目录生成图书结构
   + README.md 与 SUMMARY编写
-    ```
-    # README.md 这个文件相当于一本Gitbook的简介。 
-    touch README.md
-    # SUMMARY.md 这个文件是一本书的目录结构，使用Markdown语法 
-    touch SUMMARY.md
-    ```
+	```
+	# README.md 这个文件相当于一本Gitbook的简介。 
+	touch README.md
+	# SUMMARY.md 这个文件是一本书的目录结构，使用Markdown语法 
+	touch SUMMARY.md
+	```
   + SUMMARY.md
-    ```
-    * [简介](README.md)
-    * [第一章](chapter1/README.md)
-     - [第一节](chapter1/section1.md)
-     - [第二节](chapter1/section2.md)
-    * [第二章](chapter2/README.md)
-     - [第一节](chapter2/section1.md)
-     - [第二节](chapter2/section2.md)
-    * [结束](end/README.md)12345678
-    ```
+	```
+	* [简介](README.md)
+	* [第一章](chapter1/README.md)
+	 - [第一节](chapter1/section1.md)
+	 - [第二节](chapter1/section2.md)
+	* [第二章](chapter2/README.md)
+	 - [第一节](chapter2/section1.md)
+	 - [第二节](chapter2/section2.md)
+	* [结束](end/README.md)12345678
+	```
 + 生成图书结构
   ```
   gitbook init
@@ -58,24 +58,24 @@ Creation-Date: 2017-11-21T18:29:57+08:00
   + 输出为静态网站
     `gitbook serve .`
   + 直接生成静态网站
-    `gitbook build .`
-    > 可以指定输出目录 gitbook build . /home/michael/book_output
+	`gitbook build .`
+	> 可以指定输出目录 gitbook build . /home/michael/book_output
 + 输出PDF
   + `sudo npm install gitbook-pdf -g`
   + 这个命令会出现错误,需要手动下载及编译phantomjs工具
-    `git clone git://github.com/ariya/phantomjs.git`
+	`git clone git://github.com/ariya/phantomjs.git`
   + 安装编译需要的工具和依赖
-    ```
-    sudo apt-get install ruby bison flex gperf m4 python 
-    sudo apt-get install libbison-dev libfl-dev libruby1.9.1 libyaml-0-2 
-    sudo apt-get install libssl-dev libpng-dev libjpeg-dev 
-    sudo apt-get install libicu-dev libx11-dev libxext-dev 
-    sudo apt-get install libfontconfig1-dev libfreetype6 libsqlite3-dev 
-    sudo apt-get install libasound2-dev 
-    sudo apt-get install libwayland-dev
-    ```
+	```
+	sudo apt-get install ruby bison flex gperf m4 python 
+	sudo apt-get install libbison-dev libfl-dev libruby1.9.1 libyaml-0-2 
+	sudo apt-get install libssl-dev libpng-dev libjpeg-dev 
+	sudo apt-get install libicu-dev libx11-dev libxext-dev 
+	sudo apt-get install libfontconfig1-dev libfreetype6 libsqlite3-dev 
+	sudo apt-get install libasound2-dev 
+	sudo apt-get install libwayland-dev
+	```
   + 最后，安装生成PDF依赖库
-    `sudo apt-get install calibre`
+	`sudo apt-get install calibre`
   + 使用命令gitbook pdf .生成pdf文档，此时会出现更新步骤
 
 
@@ -101,7 +101,7 @@ sudo npm install -g gitbook-cli
 │ │ │ └── stream-shift@1.0.0 
 │ │ ├── end-of-stream@1.4.0 
 │ │ ├── flush-write-stream@1.0.2 
-│ │ ├── from2@2.3.0 
+│ │ ├── from2 @ 2.3.0 
 │ │ ├─┬ parallel-transform@1.1.0 
 │ │ │ └── cyclist@0.2.2 
 │ │ ├── pump@1.0.2 
