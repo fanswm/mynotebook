@@ -1,0 +1,90 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2020-10-01T22:41:15+08:00
+
+====== hello world ======
+Created 星期四 01 十月 2020
+
+刚刚用鸿蒙跑了个“hello world”！跑通后，我特么开始怀疑人生....
+大侠学JAVA 今天
+
+
+
+
+
+
+作者丨一个俗人 
+
+来源：
+
+https://my.oschina.net/u/169565/blog/4557279
+
+
+
+最近华为鸿蒙OS 2.0正式开源！关于鸿蒙的教程其实网上也已经有一些尝鲜的小伙伴分享的相关文章了，编者我按照步骤一步步跑下来，整个流程还是非常简单的，尤其是对Android开发的小伙伴来说，从IDE到项目的创建及项目的编译安装简直是一模一样呀。我特么的都有点怀疑人生了...感兴趣的读者也可以试试哦。
+
+再贴一下鸿蒙的源码地址：https://openharmony.gitee.com
+
+
+
+咱们一起来跟着一位网友学习一下如何跑起来第一个“hello world”，原文如下：
+
+1.前序
+1.1 官网：
+https://www.harmonyos.com 网上搜索第一个不是官方是三方的
+1.2.IDE下载位置：
+源码编译的下载： https://device.harmonyos.com/cn/ide 
+开发应用的下载：https://developer.harmonyos.com/cn/develop/deveco-studio#download
+1.3.源码位置：
+https://device.harmonyos.com/cn/docs/start/get-code/oem_sourcecode_guide-0000001050769927
+2. 开发应用部分
+2.1 安装时候启动会提示下载SDK，点击取消，搜索SDK，重新自定义SDK路径。
+
+
+我把所有的SDK都按照上，打勾会自动下载。
+2.2 创建的项目
+点击创建项目，发现现在支持有三种类型
+2.2.1 TV 设备应用
+
+2.2.2 Wearable 可穿戴设备应用
+
+2.2.3 Lite Wearable 可穿戴设备(Lite)应用
+
+2.2.4 创建TV项目 （Java），选了一个列表模板。
+
+创建中：
+
+下载gradle-5.4.1-all.zip慢得等等。（ 默认下载到： 
+
+这个应该有办法直接下载好
+
+设置里面很全面都能进行设置，可以探索探索 ） grade 源已经正确的切换到华为国内
+
+2.2.5 下载模拟器
+
+弹窗点击确认就可以下载了 （此处下载速度略慢，下载失败点击 downloadagain 继续下载 估计下载人太多，失败了十几次把）
+
+
+刷新以后：
+
+使用自己的华为账号登录（此处注意有坑，如果默认使用Chrome可能授权会失败，使用Windows自带的浏览器进行登录）
+
+（开发者账号实名认证，我填写的是银行卡验证速度很快） 
+进行授权：
+
+授权成功：
+
+同意协议：
+
+罗列了可用的模拟器：
+
+TV模拟器启动了
+
+运行就可以看到模拟器了
+
+运行成功：
+
+
+操作下来！全程无沸点和无尿点，最后发现 ，这不就是一个套了Android的壳吗！我特么开始怀疑人生....
+
+https://mp.weixin.qq.com/s/NmYyuShl2lJST32UXOi0QQ
