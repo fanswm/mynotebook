@@ -1,0 +1,42 @@
+win10 2016长期服务版激活和解决错误的方法
+
+李芳_三月
+2020.02.05 14:32:42
+字数 438
+阅读 1,324
+win10企业版 2016长期服务版激活错误0xC004f069，下面一个解决方法，亲测有效。
+
+错误0xc004F069在运行Microsoft Windows非核心版本的计算机上，运行slui.exe 0x2a 0xc004F069以显示错误文本
+
+方法/步骤
+
+1.首先右击桌面左下角的“Windows”按钮（即开始按钮），选择点击“命令提示符（管理员）”，
+
+以管理员身份启动cmd
+
+
+，输入SLMGR -REARM，根据提示，再次重启电脑。
+
+2、弹出窗口后输入命令：slmgr.vbs /upk，按回车，卸载原来的产品激活，即提示“已成功卸载了产品密钥”。 
+
+
+3.继续我们输入如下命令：slmgr /ipk DCPHK-NFMTC-H88MJ-PFHPY-QJ4BJ（此为版本对应的密钥，自己查看并按上面对应选择），接着回车键后弹出“成功的安装了产品密钥”。
+
+
+4.继续以下命令：slmgr /skms zh.us.to，回车弹出“密钥管理服务计算机名成功的设置为zh.us.to”的提示。
+
+
+5.当再输入以下命令时：slmgr /ato，回车键后将弹出“成功的激活了产品”的提示窗口。
+
+
+6、如果没有成功，显示错误提示非核心版本时候，进去注册表编辑器修改SkipRearm值。
+
+
+7、输入Windows + R然后输入Regedit回车打开注册表编辑器。
+
+
+8、修改SkipRearm 的值为1；（在HKEY_LOCAL_MACHINE–》SOFTWARE–》Microsoft–》Windows NT–》CurrentVersion–》SoftwareProtectionPlatform里面，将SkipRearm的值修改为1）–》然后重启电脑！
+
+
+再重复2—5步，就OK啦 ！！！
+https://www.jianshu.com/p/fb1eb68e4970
