@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2020-10-24T17:27:32+08:00
+
+====== issue ======
+Created 星期六 24 十月 2020
+
+# SSL 接收到一个超出最大准许长度的记录:
+未安装 ssl 证书；
+
+
+
+
+
+
+
+
+
+
