@@ -1,0 +1,144 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-05T15:26:46+08:00
+
+====== ImHex ======
+创建日期 星期二 05 一月 2021
+
+21 岁理工男开源的这个编辑器火了，登上GitHub 热榜：
+开发者技术前线 Today
+点击“开发者技术前线”，选择“星标🔝”
+让一部分开发者看到未来
+
+来自：机器之心
+最近在 GitHub 上最火的项目是一个对视力友好的十六进制编辑器，它上线仅 5 天就收获了 2500 star，最近 24 小时涨了 1600 star 量。
+
+十六进制编辑器是用于编辑单个字节数据的软件应用程序，主要由程序员或系统管理员使用。
+
+常规文本编辑器和十六进制编辑器之间的区别在于常规编辑器表示文件的逻辑内容，而十六进制编辑器表示文件的物理内容。十六进制编辑器可以让你以十六进制的形式查看或编辑文件的二进制数据，并用较为友好的界面来编辑二进制数据。对于需要处理二进制数据的用户，它非常受欢迎，例如使用十六进制编辑器可以更改游戏中的部分设置。
+
+常用的十六进制编辑器有 Bless Hex Editor、GNOME Hex Editor、Okteta 等。和大多数编辑器一样，人们对于十六进制编辑器的要求包括功能强大、可定制性、界面美观。近日，GitHub 上开源了一款名为 ImHex 的十六进制编辑器，上线 5 天，狂揽 2500 star。
+
+
+
+项目地址：https://github.com/WerWolv/ImHex
+
+十六进制编辑器 ImHex
+
+项目作者在 readme 文件中首先介绍了 ImHex 编辑器实现的功能特性。
+
+特征
+
+十六进制视图
+字节补丁
+补丁管理
+复制字节作为特征
+字节
+十六进制字符串
+C、C++、 c#、 Rust、Python、Java 和 JavaScript 数组
+ASCII-Art 十六进制视图
+HTML 自包含 div
+字符串和十六进制搜索
+彩色高亮显示
+从开始、结束以及当前光标位置 goto
+
+类似于 C++ 的自定义语言，用于突出显示文件内容
+基于 MIME 类型的自动加载
+数组、指针、结构，共用体，枚举，位段，使用声明，大小端支持
+有用的 error 信息，语法高亮显示和 error 标记
+
+数据导入
+Base64 文件
+IPS 和 IPS32 补丁
+
+数据导出
+IPS 和 IPS32 补丁
+
+数据 Exporting
+数据检查器允许将数据解析为多种类型（小端和大端）
+支持并能快速有效地加载大型文件
+
+
+字符串搜索
+复制字符串
+复制 demangled 字符串
+
+文件哈希支持
+具有自定义初始值和多项式的 CRC16 和 CRC32
+MD4, MD5
+SHA-1, SHA-224, SHA-256, SHA-384, SHA-512
+
+支持多种架构的反汇编器
+ARM32 (ARM, Thumb, Cortex-M, aarch32)
+ARM64
+MIPS (MIPS32, MIPS64, MIPS32R6, Micro)
+x86 (16 bit, 32 bit, 64 bit)
+PowerPC (32 bit, 64 bit)
+Sparc
+SystemZ
+XCore
+M68K
+TMS320C64X
+M680X
+Ethereum
+
+自定义视图
+区域突出显示
+注释
+
+数据分析
+基于文件解析器和 MIME 类型的数据库的 file magic
+字节分布图
+熵图
+最大熵和平均熵
+加密 / 压缩文件检测
+
+实用工具
+Itanium 和 MSVC demangler
+ASCII 表
+正则表达式替换
+数学表达式评估器（计算器）
+十六进制颜色选择器
+
+为模式语言和数学评估内置速查表
+在深夜使用时对视网膜友好
+
+界面美观
+
+每款编辑器都有自己的风格，越来越多的开发者青睐于黑色背景、彩色高亮显示的界面风格，ImHex 就是如此：
+
+
+
+
+编译
+
+假设你在 Windows 或者 Arch Linux 中使用 mingw，需要兼容 C++20 的编辑器（例如 GCC 10.2.0）来编译 ImHex。编译 ImHex 需要的库都可以在 pacman 包中找到，如下所示：
+GLFW3                                             ( (sudo) pacman -S glfw )
+libmagic, libgnurx, libtre, libintl, libiconv     ( (sudo) pacman -S file )
+libcrypto                                         ( (sudo) pacman -S openssl )
+capstone                                          ( (sudo) pacman -S capstone )
+libLLVMDemangle                                   ( (sudo) pacman -S llvm llvm-libs )
+nlohmann json                                     ( (sudo) pacman -S nlohmann-json )
+Python3                                           ( (sudo) pacman -S python3 )
+All in one for Arch Linux: sudo pacman -S glfw file openssl capstone llvm llvm-libs nlohmann-json python3
+All in one for Fedora: sudo dnf install cmake gcc-c++ capstone-devel glfw-devel glm-devel json-devel llvm-devel mesa-libGL-devel openssl-devel python-devel
+All in one for MinGW: pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-make mingw-w64-x86_64-capstone mingw-w64-x86_64-glfw mingw-w64-x86_64-glm mingw-w64-x86_64-file mingw-w64-x86_64-llvm mingw-w64-x86_64-nlohmann-json mingw-w64-x86_64-openssl mingw-w64-x86_64-polly mingw-w64-x86_64-python
+
+安装完这些库之后，运行以下命令来构建 ImHex：
+
+mkdir build
+cd build
+cmake ..
+make -j
+
+该项目的作者 WerWolv 来自瑞士，今年仅 21 岁，是一名在读本科生。
+
+参考链接：
+https://zhuanlan.zhihu.com/p/59119723
+https://www.howtoing.com/best-hex-editors-for-linux
+如果刷题还是建议去Leetcode刷。除此之外，这里再跟大家推荐一本前不久火爆 GitHub 的 LeetCode 中文刷题手册：LeetCode Cookbook。
+GitHub：https://github.com/halfrost/LeetCode-Go
+
+扫描关注公众号；
+在 面试现场 公众号后台回复关键词「刷题」获取下载地址。
+

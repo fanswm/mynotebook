@@ -1,0 +1,88 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-05T15:29:37+08:00
+
+====== 月刊最受欢迎的开源项目 Top10（2020 年） ======
+创建日期 星期二 05 一月 2021
+
+我们月刊最受欢迎的开源项目 Top10（2020 年）
+Original HelloGitHub HelloGitHub Yesterday
+收录于话题
+#HelloGitHub 月刊
+21个
+
+作者：HelloGitHub-卤蛋
+2020 年已成往事，2021 年悄然而至。
+在已经过完的 2020 年里 HelloGitHub 共发布了 12 期月刊，推荐了 419 个开源项目。每个月的 28 号，最开心的事情就是和大家像老朋友一样，有默契地在 HelloGitHub 月刊“见面”，聊聊这个月有趣的开源项目。在这一年的月刊中，你最喜欢哪个开源项目呢？
+下面就让我们来回顾下 2020 年《HelloGitHub 月刊》最受欢迎的 10 个开源项目，统计时间从 2020.1.28-2020.12.28（第 45-57 期），受欢迎程度统计自 HelloGitHub 全网所有平台。为了尽量涵盖较多的类别，从 C++、C、Python、Java、机器学习、JavaScript、Go、C#、CSS 每个类别仅挑选一个，组成 Top10 开源项目。
+接下来 2020 年《HelloGitHub 月刊》最受欢迎的开源项目——yuzu 登场！
+No.1 Switch 模拟器（C++ 项目）
+yuzu 是免费开源的 Nintendo Switch 模拟器。目前仅支持 Windows、Linux，部分主流游戏：塞尔达传说、宠物小精灵、马里奥等。
+项目地址：https://github.com/yuzu-emu/yuzu
+
+No.2 贪吃蛇新玩法（C 项目）
+DungeonRush 是元气贪吃蛇游戏。作者受到元气骑士的启发，基于贪吃蛇进行一些玩法上的创新。该项目适用于 C 语言初学者、第一次尝试使用跨平台图形库的同学，参考本项目就可以写出一个可玩性高的游戏，收获满满成就感。
+项目地址：https://github.com/Rapiz1/DungeonRush
+
+No.3 复制即食的代码片段集合（Python 项目）
+python-small-examples 是有趣、实用的 Python 代码示例集合。包含：Python 基础、小技巧、坑、文件操作、机器学习、绘图等，代码如下：
+# pyecharts 绘制水球图示例
+from pyecharts import options as opts
+from pyecharts.charts import Liquid, Page
+from pyecharts.globals import SymbolType
+
+def liquid() -> Liquid:
+	c = (
+		Liquid()
+		.add("lq", [0.67, 0.30, 0.15])
+		.set_global_opts(title_opts=opts.TitleOpts(title="Liquid"))
+	)
+	return c
+
+liquid().render('./img/liquid.html')
+项目地址：https://github.com/jackzhenguo/python-small-examples
+
+No.4 如何设计秒杀系统（Java 项目）
+miaosha 是一款秒杀系统设计与实现。高并发大流量的秒杀是面试常见问题，该项目不仅有具体问题的解决思路，还有具体代码实现和示例 demo，全部理解、学习后相信秒杀问题再也拦不住你啦！
+项目地址：https://github.com/qiurunze123/miaosha
+
+No.5 AI 入门指南（机器学习项目）
+faceai 是一款优秀入门级 AI 项目以及教程，内容涵盖：人脸、视频、文字的检测和识别。他不仅包含最基本的人脸检测、识别（图片、视频）、轮廓标识、头像合成（给人戴帽子），还有表情识别（生气、厌恶、恐惧等）、视频对象提取、图片修复（可用于水印去除）、图片自动上色等等。推荐这个开源项目不是因为它的内容强大，而是它的教程写的实在太好了，真 · 入门级。手把手教你如何使用这个项目，做出上述功能来。在每篇功能文章的教程里，不仅仅写了每个功能的技术实现方案，还有具体重点关键代码的注释和解释以及具体实现，让你非常轻松的能够看懂、学习和使用。对于想要入门或者了解机器学习的初学者不能再友好了。示例代码：
+# Tesseract Ocr文字识别
+from PIL import Image
+import pytesseract
+
+path = "img\\text-img.png"
+text = pytesseract.image_to_string(Image.open(path), lang='chi_sim')
+print(text)
+项目地址：https://github.com/vipstone/faceai
+
+No.6 动手用 Go 做点什么（Go 项目）
+7days-golang 是用 Go 在 7 天时间内实现 Web 框架、分布式缓存等应用的实战教程。例如：
+项目地址：https://github.com/geektutu/7days-golang
+
+No.7 在线文档项目（JavaScript 项目）
+showdoc 是一款基于 JavaScript 实现的开源在线文档工具。支持：多端编辑查看、权限管理、文档导出、Markdown 语法等，功能虽不多但已足够用了。推荐自建自用、小团队内部使用。
+项目地址：https://github.com/star7th/showdoc
+
+No.8 macOS 软件集合（其它）
+my-mac-os 项目罗列了作者自用、收集的 macOS 上实用、炫酷的软件。我从中找到好几个炫酷、实用提高工作效率的工具，你也赶快来挑挑吧！
+项目地址：https://github.com/nikitavoloboev/my-mac-os
+
+No.9 防撤回工具（C# 项目）
+RevokeMsgPatcher 是适用于 Windows 系统下电脑版微信、QQ 的防撤回工具。
+项目地址：https://github.com/huiyadanli/RevokeMsgPatcher
+
+No.10 免费图标（CSS 项目）
+开源图标 UI 库。支持 CSS、SVG、Figma、NPM 等~
+项目地址：https://github.com/astrit/css.gg
+
+最后
+从这个 Top10 榜单里，可以看出来 HelloGitHub 读者大部分比较喜欢游戏、工具、集合类开源项目，像框架和服务这类项目受欢迎程度较低，比较遗憾并未出现在榜单中，往期月刊尽在《HelloGitHub 月刊》专辑。
+如果这里没有找到你喜欢的开源项目，欢迎留言把你喜欢的项目分享出来～
+
+
+
+
+关注公众号第一时间收到推送
+Read more
