@@ -1,0 +1,23 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-12T17:54:13+08:00
+
+====== 配置音频输出 ======
+Created 星期二 12 一月 2021
+
+终端命令行通过命令选择音频的输出接口。
+HDMI输出：
+
+amixer cset numid=3 2
+
+耳机接口输出：
+
+amixer cset numid=3 1
+
+自动选择：
+
+amixer cset numid=3 0
+
+https://blog.csdn.net/u010299133/article/details/105773002
+
+

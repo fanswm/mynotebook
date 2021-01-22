@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2020-02-14T19:40:39+08:00
 
 ====== 0 ======
@@ -53,7 +53,7 @@ Created 星期五 14 二月 2020
 
 在shell的配置文件中加入脚本开机自动进入图形界面
 
-if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+if systemctl -q is-active graphical.target &&  ! $DISPLAY && $XDG_VTNR -eq 1 ; then
   exec startx
 fi
 

@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2020-02-15T17:34:39+08:00
 
 ====== me ======
@@ -87,9 +87,9 @@ https://userbase.kde.org/Applications/Utilities/zh-cn
  __我的gpg:__
 
 更改姓名（N）、注释（C）、电子邮件地址（E）或确定（O）/退出（Q）？ E
-电子邮件地址：MyEmailUser[[@gmail.com ]]
+电子邮件地址：MyEmailUser@ gmail.com 
 您选定了此用户标识：
-	“MyEmailUser <MyEmailUser@gmail.com>”
+	“MyEmailUser <MyEmailUser@   gmail.com>”
 
 更改姓名（N）、注释（C）、电子邮件地址（E）或确定（O）/退出（Q）？ O
 我们需要生成大量的随机字节。在质数生成期间做些其他操作（敲打键盘
@@ -105,7 +105,7 @@ gpg: 吊销证书已被存储为‘/home/MyUserName/.gnupg/openpgp-revocs.d/xxxx
 
 pub   rsa2048 2020-02-15 [SC] [有效至：2022-02-14]
 	  xxxxxxxxxxxxxx
-uid                     MyEmailUser <MyEmailUser@gmail.com>
+uid                     MyEmailUser <MyEmailUser@ gmail.com>
 sub   rsa2048 2020-02-15 [E] [有效至：2022-02-14]
 
 

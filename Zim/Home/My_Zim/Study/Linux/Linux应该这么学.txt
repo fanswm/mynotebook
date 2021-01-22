@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2018-12-06T11:35:20+08:00
 
 ====== Linux应该这么学 ======
@@ -88,7 +88,7 @@ RPM:
 $ date -s"201509001 8:30:00"
 
 递归下载<linux就该这么学>的整站页面与所有的资料,
-下载完成后保存到"www.linuxprobe.com"的目录:
+下载完成后保存到" http://www.linuxprobe.com "的目录:
 $ wget -r -p http://www.linuxprobe.com
 
 纯文本浏览器elinks:
@@ -1122,7 +1122,7 @@ $ scp /root/out.txt 192.168.10.20:/home
 格式为”scp [参数] 远程用户@远程IP地址:远程文件本地目录“。
 
 将远程主机的/etc/issue.net文件下载到本地的/root目录：
-$ scp linuxprobe@192.168.10.20:/etc/issue.net /root
+$ scp linuxprobe @ 192.168.10.20:/etc/issue.net /root
 
 使用Apache服务部署静态网站:
 目前提供WEB网络服务的程序有Apache、Nginx或IIS等等
@@ -1243,7 +1243,7 @@ $ mkdir /home/wwwroot
 $ echo "The New Web Directory" > /home/wwwroot/index.html
 重新启动Apache服务：
 $ systemctl restart httpd
-再来打开浏览器看下效果吧，依然是键入   http://127.0.0.1：
+再来打开浏览器看下效果吧，依然是键入   http://127.0.0.1%EF%BC%9A
 好奇怪!!为什么会是默认页面？只有首页页面不存在或有问题才会显
 示Apache服务程序的默认页面啊。
 Apache默认页面那么进一步来访问”   http://127.0.0.1/index.html
@@ -1287,7 +1287,7 @@ $ setenforce 0
 $ getenforce
 Permissive
 
-打开浏览器再键入  http://127.0.0.1，果然成功了！
+打开浏览器再键入  http://127.0.0.1 ，果然成功了！
 果然是因为没有配置好SELinux服务，再次开启它吧：
 $ setenforce 1
 
@@ -1378,7 +1378,7 @@ $ echo "This is linuxprobe's website" > public_html/index.html
 给予网站目录755的访问权限：
 $ chmod -Rf 755 ./
 
-我们打开浏览器，访问地址为”  http://127.0.0.1/~用户名“，
+我们打开浏览器，访问地址为”  http://127.0.0.1/  ~ 用户名“，
 不出意外果然是报错页面，肯定是SELinux服务在捣蛋。
 
 第3步:设置SELinux允许策略。

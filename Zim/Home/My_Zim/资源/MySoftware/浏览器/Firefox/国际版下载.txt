@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T15:40:03+08:00
+
+====== 国际版下载 ======
+创建日期 星期二 19 一月 2021
+
+国际版：
+http://ftp.mozilla.org/pub/firefox/releases/

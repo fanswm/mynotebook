@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2019-05-01T18:35:05+08:00
+
+====== nmap 扫描 ======
+创建日期 星期三 01 五月 2019
+
+nmap   网络扫描命令。
+利用nmap扫描整个局域网活动主机的IP-MAC和Port：
+`nmap -sP 172.17.148.0/24 `
+nmap -sP 10.102.9.0/24

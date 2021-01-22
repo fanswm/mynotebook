@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T09:37:27+08:00
+
+====== Rocky ======
+Created 星期二 19 一月 2021
+
+不会的，创始人又搞了一个开源版本出来。叫Rocky。
+
+在短短两天时间里，Rocky项目已经获得了超过2.7k个star。今天早些时候，Kurtzer更新了Rocky的项目描述信息，解释了项目名称的由来以及回答了一些开发者关注的问题，同时上线了项目官网。
+
+Rocky Linux：https://github.com/rocky-linux/rocky
+
+项目官网：https://rockylinux.org/

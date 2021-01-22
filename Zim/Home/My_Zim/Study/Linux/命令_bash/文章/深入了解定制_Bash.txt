@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T11:51:30+08:00
+
+====== 深入了解定制 Bash ======
+Created 星期二 19 一月 2021
+
+{{.\pasted_image.png}}

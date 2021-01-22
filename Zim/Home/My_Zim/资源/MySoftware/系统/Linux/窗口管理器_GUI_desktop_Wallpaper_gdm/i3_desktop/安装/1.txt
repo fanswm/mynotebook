@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2020-02-14T19:41:00+08:00
 
 ====== 1 ======
@@ -75,7 +75,7 @@ exec i3
 
 如果想要登陆tty之后自动进入桌面。使用Bash, 编辑 ~/.bash_profile。如果使用 zsh，则编辑 ~/.zprofile。文件不存在则新建。加入一下内容，自动运行startx。
 
-	if [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+	if  ! $DISPLAY && $XDG_VTNR -eq 1 ; then
 	  exec startx
 	fi
 

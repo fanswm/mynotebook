@@ -1,0 +1,46 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-18T02:13:45+08:00
+
+====== 1 ======
+创建日期 星期一 18 一月 2021
+
+MTProxy 服务器列表
+中国大陆地区最新可用 MTProxy 代理分享 ，更新于 2021年1月13日。
+
+代理1：🇺🇸 平均161.7ms
+
+Copy
+[[tg://proxy?server=45.144.176.40&port=8443&secret=7hu0e2sChNRtcKW0by2CfXB0Zy5sc3dsZGluZ3poaS54eXo]]
+代理2：🇸🇬平均114.8ms
+
+Copy
+https://t.me/socks?server=3.1.222.81&port=999&user=vpn-4.xyz&pass=vpn-4.xyz
+代理3：🇭🇰 平均57.5ms
+
+Copy
+[[tg://proxy?server=35.241.121.29&port=443&secret=ee1f4db7ef14ee0049448338d084808fcb686b2e616c6962616261636c6f75642e636f6d]]
+代理4：🇸🇬 平均114.5ms
+
+Copy
+[[tg://proxy?server=13.250.52.71&port=443&secret=7js8bDqL8uM9BDBS%2BC%2BxfwZhenVyZS5taWNyb3NvZnQuY29t]]
+代理5：🇭🇰 平均46ms
+
+Copy
+[[tg://proxy?server=a132897735e18281a.awsglobalaccelerator.com&port=443&secret=eef943b7565311a54cbda26087abd6e32f6a642e636f6d]]
+所有MTProxy代理地址来自第三方免费分享，部分代理包含推广信息，你可以在代理发布频道页面找到它们。
+代理延迟为全国PING平均延迟，选择延迟较低的服务器一般情况下可获得更好的体验。
+
+Telegram 中推广信息不可移除，若你讨厌看到这些推广信息，建议自行搭建  MTProxy 使用。
+
+快速设置 Telegram 语言为中文：Chinese Simplified (Beta)
+
+如何使用 MTProxy？
+首次使用：你可以直接点击链接跳转到 Telegram 应用中，选择开启代理即可。或复制代理链接，在 Telegram 应用内，选择 设置（Setttings）>> 储存与用量（Data and Storage）>> 连接类型（CONNECTION TYPE）>> 添加代理（Add Proxy）
+
+若你已复制代理链接，此时会有从剪切板粘贴（Paste From ClipBoard）的选项，无需手动进行输入。
+
+MTProxy 只能在 Telegram 软件内使用，若你想拥有更好的翻墙体验，建议使用 VPN 访问 Telegram。
+
+ 
+https://mtproto.cc/

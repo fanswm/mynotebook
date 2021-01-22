@@ -1,0 +1,57 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T15:53:47+08:00
+
+====== 比 ping 强大百倍的 gping ======
+创建日期 星期二 19 一月 2021
+
+GitHub 霸榜！比 ping 强大百倍的 gping 一天拿下 2.5k Star
+大家平常测试网络连接的 ping 命令，有哪些缺点呢？
+
+本期前哨君给大家推荐一个比 ping 强大百倍的实用工具 gping，已经连两天登上 GitHub 日榜，收获 2800+ Star。
+
+
+
+gping 的开发小哥是 Tom Forbes，当前版本采用用 Rust 实现，以前老版本是用 Python 实现的。
+
+项目链接：
+https://github.com/orf/gping
+
+安装方式
+
+MacOS 和  Linux 系统，执行下面两个命令
+brew tap orf/brewbrew install gping
+
+Windows 系统则需要先下载二进制源文件，
+
+https://github.com/orf/gping/releases
+
+解压缩后挪到系统路径 Path 路径下，然后执行下面这个命令安装：
+cargo install gping
+
+gping 用法
+$ gping --helpgping 0.1.7Ping, but with a graph.
+USAGE:    gping [OPTIONS] <hosts>...
+FLAGS:    -h, --help       Prints help information    -V, --version    Prints version information
+OPTIONS:    -b, --buffer <buffer>    Determines the number pings to display. [default: 100]
+ARGS:    <hosts>...    Hosts or IPs to ping
+
+使用感受
+
+gping 的优点实在太明显了，大家请直接看对比。
+
+ping 命令
+
+
+gping 命令
+
+图表比纯文字提醒的体验强多了，太好用了，已安利给同事~
+
+11 月 16 日刚上架的时候，gping 还只支持 ping 单个目标网址。今天新版优化后，已支持同时 ping 两个目标网址。
+
+
+
+
+- EOF - 
+
+更多优秀开源项目（点击下方图片可跳转）

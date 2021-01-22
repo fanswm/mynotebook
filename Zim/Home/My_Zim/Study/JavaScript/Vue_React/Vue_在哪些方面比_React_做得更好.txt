@@ -1,0 +1,287 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T15:48:21+08:00
+
+====== Vue 在哪些方面比 React 做得更好 ======
+创建日期 星期二 19 一月 2021
+
+Vue 在哪些方面比 React 做得更好？
+Original v2li 前端大全 Today
+（给前端大全加星标，提升前端技能）
+英文：Harry Wolff，翻译：前端大全 /  v2li
+在过去的 5 年中，我一直是一名 React 工程师。我爱 React，我爱开发 React 应用。我认为它是现存最好的 UI 框架之一。
+然而，React 在这个领域中有一些竞争对手，其中最大的就是 Vue.js。
+我曾玩过一阵 Vue.js，但我认为那时的经验已经过时了。因为我将要深入研究 Vue.js 的工作原理以及了解它是如何让我的工作变得更简单。
+在深入研究 Vue.js 文档并使用之后（注意：我绝对不是 Vue.js 的专家），我惊奇地发现有些方面 Vue.js 甚至比 React 做得更好。
+最后，我希望 React 能受到 Vue.js 的启发并且也开始这么做。
+1、不同的理念
+Vue.js 和 React 之间的一个主要区别是它们对自己的定位不同。
+从它们官网直观来看，React 把自己描述为 “一个用于构建用户界面的 JavaScript 库”，而 Vue.js 则把自己描述为“渐进式 JavaScript 框架”。
+React 是一个库，而 Vue.js 是一个框架。我认为从很多方面来说，这是导致这些 UI 框架在执行方式上有所不同的根本原因。
+我想强调这一点，以便您在阅读本文时随时牢记这一点。 从历史上看，库和框架都专注于让它们的工作表现得更出色，但框架的要求和提供的能力更全面详尽，而库则更少更轻量。
+2、单文件组件
+Vue 和 React 都有用来创建 UI 的组件。
+组件通常由 3 部分组成：
+UI (HTML)
+行为 (JavaScript)
+外观 (CSS)
+Vue.js 的理念是使用单文件组件，用一种开箱即用的方式来编写涵盖所有 3 个部分的组件。
+看起来像这样：
+<template>
+  <p>{{ greeting }} World!</p>
+</template>
+
+<script>
+  module.exports = {
+	data() {
+	  return {
+		greeting: 'Hello',
+	  };
+	},
+  };
+</script>
+
+<style scoped>
+  p {
+	font-size: 2em;
+	text-align: center;
+  }
+</style>
+即便你不是一个 Vue.js 的工程师也可以理解这里的代码。
+React 组件提供了开箱即用的 UI 和 行为部分，但是样式在很大程度上不受限制：
+import React, { useState } from 'react';
+
+function Button() {
+  const [count, setCount] = useState(0);
+
+  return (
+	<button onClick={() => setCount(count + 1)}>
+	  Current count: {count}
+	  <br />
+	  Click me
+	</button>
+  );
+}
+当然了，React 有一个非常活跃的社区，所以如果你想包含样式，可以轻松使用 Emotion 或 Styled Components 来填补样式的空缺，但是：
+它们是非内置的；
+你必须知道这些库才能使用他们。
+这正好与默认提供了这些的 Vue.js 相反。
+3、官方支持的相关库
+任何足够大且复杂的 UI 应用都需要两个附加功能的支持：
+路由
+状态管理
+Vue.js 官方支持的库分别覆盖了这两个场景： Vue Router 和 Vuex 。
+这些库明确地在 Vue.js 文档中提及，并且由 Vue.js 核心组开发和维护。这太神奇了。
+它为刚使用 Vue.js 的工程师提供了解决问题的明确方法，并让他们相信这些库是长期维护的。
+拥有第一方支持的库并不会限制社区解决方案，但确实为新用户提供了入门解决方案
+4、风格指南
+嗯，我非常希望 React 也有风格指南，在阅读本节之前，请单击链接并浏览Vue.js的样式指南。
+它回答了很多 Vue.js 新手可能遇到的问题，并提供了如何编写 “适当的” 和易于访问的 Vue.js 的最佳实战。
+它分享了经过实战检验的以及社区中的最佳实践和模式。
+最重要的是：它是由 Vue.js 官方维护和支持的！这太棒了！
+5、类和样式绑定
+如上所述，Vue.js 内置了对样式的支持。此外，Vue.js 本质上是内置 classNames 的。
+Classnmes 是一个很棒的库，可以方便地连接和动态构造应用于 HTML 元素的 CSS 类名。
+而在 React 中，你需要知道这个库，然后安装它。
+在 Vue.js 中，这只是另一个内置特性：参考文档:
+Vue.js 模板：
+<div
+  class="static"
+  :class="{ active: isActive, 'text-danger': hasError }"
+></div>
+data 内容：
+data() {
+  return {
+	isActive: true,
+	hasError: false
+  }
+}
+渲染出的 UI：
+<div class="static active"></div>
+有这个内置项真好。
+Vue.js 进一步支持内联样式。Vue.js 和 React 一样，都支持内联样式，但是 Vue.js 比 React 更棒的地方就是它能够自动为需要的 CSS 加上前缀。
+参考文档:
+当使用 :style 时，需要添加浏览器引擎前缀的 CSS 属性，拿 transform 举例，Vue.js 会自动侦测并添加相应的前缀。
+真正显示框架控制自己的模板语法的优势。
+6、插槽
+React 中一切都是 prop。
+如果要在 React 组件中渲染多个子节点，只需添加多个 prop：
+function Nav({ left, right }) {
+  return (
+	<nav>
+	  <div className="left">{left}</div>
+	  <div className="right">{right}</div>
+	</nav>
+  );
+}
+
+function App() {
+  return (
+	<main>
+	  <Nav left={<Logo />} right={<UserDropdown />} />
+	</main>
+  );
+}
+但如果内部内容边庞大之后，虽然能很好运行，但有一点尴尬。
+Vue.js 采用了插槽的方法，我认为它的 API 更简洁。
+<!-- A Vue.js component template named "base-layout" -->
+<div class="container">
+  <header>
+	<slot name="header"></slot>
+  </header>
+  <main>
+	<slot></slot>
+  </main>
+  <footer>
+	<slot name="footer"></slot>
+  </footer>
+</div>
+
+<!-- When "base-layout" is used -->
+<base-layout>
+  <template v-slot:header>
+	<h1>Here might be a page title</h1>
+  </template>
+
+  <template v-slot:default>
+	<p>A paragraph for the main content.</p>
+	<p>And another one.</p>
+  </template>
+
+  <template v-slot:footer>
+	<p>Here's some contact info</p>
+  </template>
+</base-layout>
+Vue.js 使用插槽（受Web Component 规则草案的启发）清楚地指明内容在组件内部的位置。
+Vue.js 为反复执行的任务提供了捷径。在这种情况下，可以使用插槽来简化上面的示例：
+<base-layout>
+  <template #header>
+	<h1>Here might be a page title</h1>
+  </template>
+
+  <template #default>
+	<p>A paragraph for the main content.</p>
+	<p>And another one.</p>
+  </template>
+
+  <template #footer>
+	<p>Here's some contact info</p>
+  </template>
+</base-layout>
+7、指令修饰符
+我认为 Vue.js 指令修饰符的功能真的很酷。
+在讨论指令修饰符之前，让我快速介绍一下指令是什么。
+指令 v- 是你在 Vue.js 模板中使用的“带有前缀的特殊属性”。
+指令的作用是在表达式的值发生变化时以响应地方式将副作用施加到 DOM
+例如:
+// If "seen" variable is false then this p tag is not rendered
+<p v-if="seen">Now you see me</p>
+针对事件地指令：
+<!-- full syntax -->
+<a v-on:click="doSomething"> ... </a>
+
+<!-- shorthand -->
+<a @click="doSomething"> ... </a>
+还有其他更多的指令。
+指令还支持修饰符。
+使用通用指令执行通用操作很开发友好。
+对于事件处理指令（v-on），有很多修饰符：
+<!-- the click event's propagation will be stopped -->
+<a @click.stop="doThis"></a>
+
+<!-- the submit event will no longer reload the page -->
+<form @submit.prevent="onSubmit"></form>
+
+<!-- modifiers can be chained -->
+<a @click.stop.prevent="doThat"></a>
+
+<!-- just the modifier -->
+<form @submit.prevent></form>
+
+...and more!
+如果你想在 React 中执行这样的操作，可以创建一个辅助函数或一个自定义组件。但与指令修饰符地方式相比并不简洁。
+我很好奇是否有人可以开发一个 Babel JSX 超集，然后就可以编写如下代码了：
+<form onSubmit.prevent={onSubmit} />
+它将转换为：
+React.createElement(form, { onSubmit: preventWrapper(onSubmit) });
+这不在 React 的讨论范围内，但我仍然认为这会是一次生产效率地大提升。
+还有更多的 Vue.js 修饰符。比如按键修饰符：
+<!-- only call `submit()` when the `key` is `Enter` -->
+<input @keyup.enter="submit" />
+
+<input @keyup.page-down="onPageDown" />
+太酷了。
+8、表单输入绑定
+当将数据绑定到输入元素时，v-model 指令会有非常有趣的特性。
+从文档中发现，v-model 内部使用了不同的属性，并为不同的输入元素发出不同的事件:
+text 和 textarea 元素使用 value 属性和 input 事件；
+复选框和单选按钮使用 checked 属性和 change 事件；
+select 使用 value 用作属性和 change事件。
+这样做的好处是，您无需关心数据是如何同步的，您只需关心它是如何为你服务的。
+让我们比较一下 React 和 Vue.js 是如何进行绑定：
+// Input
+////////
+
+// React
+<input type="input" value={message} onChange={onChange} />
+
+// Vue.js
+<input type="input" v-model="message" />
+
+// Checkboxes and Radiobuttons
+////////
+
+// React
+<input type="checkbox" checked={message != null} onChange={onChange} />
+
+// Vue.js
+<input type="checkbox" v-model="message" />
+
+// Select
+////////
+
+// React
+<select value={message} onChange={onChange}>
+	<option>A</option>
+</select>
+
+// Vue.js
+<select v-model="message">
+	<option>A</option>
+</select>
+发现其中的不同了吗？
+现在，我要为 React 辩护了，React 鼓励（并要求）您学习学习数据实际是如何设置以及它是如何变化的。这意味着，如果您曾经用普通 JS 写过一个表单，您将更了解其运行原理。 与 Vue.js 不同，后者帮您把这些特性都抽象出来了。
+9、自定义指令
+像任何好的框架一样，您可以在 Vue.js 中创建自己的自定义指令。
+Vue.js 确实关注“代码重用和抽象的主要形式是组件”，但这里有一个使用自定义指令不错的例子，通过v-focus在 mount 时自动聚焦到元素上：
+const app = Vue.createApp({})
+// Register a global custom directive called `v-focus`
+app.directive('focus', {
+  // When the bound element is mounted into the DOM...
+  mounted(el) {
+	// Focus the element
+	el.focus()
+  }
+})
+
+<input v-focus />
+在 React 中，你可能会编写一个自定义组件来完成相同的事情，但对于这种简单任务而言有些重
+10、用 TypeScript 编写
+最后，Vue.js 最近正在用 TypeScript 重写。
+这意味着它们对 TypeScript 支持都是一流的，因为框架本身是就是用 TypeScript 编写的。
+其实 React 用什么编写并不重要，我也不认为它有什么太大的区别，但看到 Vue.js 也用 TypeScript 编写仍然是一件很不错事。
+总结
+我是要放弃 React 并开始专门使用 Vue.js 吗？不，我仍然非常喜欢作为“库”的 React 并且坦率地讲，我已经很精通编写 React 程序了。
+但是，我很希望看到 React 能从 Vue.js 中汲取一些灵感并整合到其中，如果只能从本文中提到的几个点中选择一个，我绝对选风格指南。我很期盼能看到 React 有一个官方支持和维护的风格指南。
+希望我能让你看到一些你不知道 Vue.js！我很确信自己真的很喜欢 Vue.js 的哲学！
+- EOF -
+推荐阅读  点击标题可跳转
+1、Vue 新语法糖魔改 JavaScript 引争议
+2、Vue 中 Axios 的封装和 API 接口的管理
+3、海贼王 One Piece，一起康康 Vue 版本号中的彩蛋
+
+觉得本文对你有帮助？请分享给更多人
+推荐关注「前端大全」，提升前端技能
+
+点赞和在看就是最大的支持❤️
+喜欢此内容的人还喜欢

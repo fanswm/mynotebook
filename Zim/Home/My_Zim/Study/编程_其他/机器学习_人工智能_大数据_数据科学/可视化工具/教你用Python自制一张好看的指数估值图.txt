@@ -1,0 +1,119 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T15:43:25+08:00
+
+====== 教你用Python自制一张好看的指数估值图 ======
+创建日期 星期二 19 一月 2021
+
+教你用Python自制一张好看的指数估值图
+大邓和他的Python Yesterday
+The following article is from Python读财 Author 易执
+
+Python读财
+分享Python编程、数据分析、数据可视化以及金融量化研究的相关干货！
+腾讯课堂 | Python网络爬虫与文本分析(戳一戳)~~
+
+对于以定投指数的方式理财的朋友，最需要关注的指标便是各个指数的估值，在指数低估时买入，高估时卖出，那如何制作一张估值图来跟踪指数的估值情况呢？本文就从0到1介绍如何用Matplotlib画一张漂亮的指数估值图。
+准备数据
+首先，准备我们需要的数据，一般来说，经历了一轮牛熊周期的历史估值更具比较意义，所以，这里以上证指数2013年到目前为止的行情数据为例进行演示，同时，采用滚动市盈率为估值指标。数据来源为tushare。
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import tushare as ts
+from datetime import *
+%matplotlib inline
+#设置显示中文
+plt.rcParams['font.sans-serif'] = 'FangSong'
+
+pro = ts.pro_api()
+
+index_df = pro.index_dailybasic(ts_code = "000001.SH",start_date = "20130101",
+								end_date = "20200311",fields="trade_date,pe_ttm")
+index_df.sort_values(by="trade_date",inplace=True)
+x = pd.to_datetime(index_df["trade_date"]).values
+y = index_df["pe_ttm"].values
+根据得到的数据，可以绘制出上证指数市盈率的走势图：
+fig,ax = plt.subplots(figsize=(12,8))
+ax.plot(x,y)
+
+接下来便需要根据一定的规则，将估值划分为高估区、正常区以及低估区。
+估值区间划分
+参照比较常见的划分方法，本文将大于80%分位数的区域视为高估区间，低于20%分位数的区域视为低估区间，位于两者之间的，则为正常区间。下面的代码算出了这几个关键数据点
+max = np.max(y)
+pe_80 = np.percentile(y,80)
+pe_20 = np.percentile(y,20)
+min = np.min(y)
+now = y[-1]   #为了后续标出当日估值
+绘图
+根据分割的数据点，就可以进行绘图了，这里主要用到fill_between函数绘制各区域的颜色分割，将高估区域用红色块填充，正常区间用黄色块填充，低估值区域用绿色块填充。同时为了显示效果，将图的上下限分别设置为最大值+1和最小值-1。
+fig,ax = plt.subplots(figsize=(12,8))
+ax.plot(x,y,linewidth=3)
+ax.fill_between(x,min-1,pe_20,facecolor = "#00ff80",alpha=0.2)
+ax.fill_between(x,pe_20,pe_80,facecolor = "#ffff4d",alpha=0.2)
+ax.fill_between(x,pe_80,max+1,facecolor = "#ff69b4",alpha=0.2)
+
+整个图形的大致轮廓已经出来了，为了更好的显示效果，接下来还需要对图形进行微调。比如：
+去掉坐标轴的刻度并将相应字体放大-->ax.tick_params()
+去掉图形与坐标轴之间的空白-->ax.margins()
+在图中标出当日市盈率-->ax.text()
+将图形的方框去掉-->plt.box()
+为图标添加标题-->plt.title
+所以，在之前代码的基础上，加入下面的调整代码，就可以得到最终的成品图
+fig,ax = plt.subplots(figsize=(12,8))
+ax.plot(x,y,linewidth=3)
+ax.fill_between(x,min-1,pe_20,facecolor = "#00ff80",alpha=0.2)
+ax.fill_between(x,pe_20,pe_80,facecolor = "#ffff4d",alpha=0.2)
+ax.fill_between(x,pe_80,max+1,facecolor = "#ff69b4",alpha=0.2)
+ax.tick_params(axis='both', which='both',length=0)
+ax.tick_params(axis='both', which='major', labelsize=16)
+ax.margins(0.01,0)
+ax.text(0.75,0.9,"市盈率 = {}".format(now),transform=ax.transAxes,fontdict={'size':18})
+plt.xticks(rotation=45)
+plt.box(False)
+plt.title("上证指数估值图",fontdict={'size':24})
+
+函数封装
+进一步地，为了将上面的代码复用，可以将所有绘图的代码封装成函数，之后只需要输入相应的指数代码（可以值宽基指数、行业板块指数）和时间范围，即可快速生成一张估值图。
+def pe_plot(ts_code = "",name="",period=5):
+	#准备数据
+	now = datetime.now()
+	end_date = str(now.date()).replace("-","")
+	start_date = str(now.year-period)+end_date[4:]
+	index_df = pro.index_dailybasic(ts_code = ts_code,start_date = start_date,
+									end_date = end_date,fields="trade_date,pe_ttm")
+	index_df.sort_values(by="trade_date",inplace=True)
+	x = pd.to_datetime(index_df["trade_date"]).values
+	y = index_df["pe_ttm"].values
+
+	#划定分割范围
+	max = np.max(y)
+	pe_80 = np.percentile(y,80)
+	pe_20 = np.percentile(y,20)
+	min = np.min(y)
+	now = y[-1]
+
+	#绘图
+	fig,ax = plt.subplots(figsize=(12,8))
+	ax.plot(x,y,linewidth=3)
+	ax.fill_between(x,min-1,pe_20,facecolor = "#00ff80",alpha=0.2)
+	ax.fill_between(x,pe_20,pe_80,facecolor = "#ffff4d",alpha=0.2)
+	ax.fill_between(x,pe_80,max+1,facecolor = "#ff69b4",alpha=0.2)
+	ax.tick_params(axis='both', which='both',length=0)
+	ax.tick_params(axis='both', which='major', labelsize=16)
+	ax.margins(0.01,0)
+	ax.text(0.75,0.9,"市盈率 = {}".format(now),
+			transform=ax.transAxes,fontdict={'size':18})
+	plt.xticks(rotation=45)
+	plt.box(False)
+	plt.title("{}估值图".format(name),fontdict={'size':24})
+	plt.show()
+比如，生成一张创业板指数近5年的估值图
+pe_plot(ts_code="399006.SZ",name="创业板指",period=5)
+
+
+-END-
+--------------------
+
+
+
+https://mp.weixin.qq.com/s/bj3dLsJdwieulYNyZgvSPQ

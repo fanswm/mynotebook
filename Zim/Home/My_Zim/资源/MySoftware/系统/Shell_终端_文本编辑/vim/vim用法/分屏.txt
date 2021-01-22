@@ -1,0 +1,98 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T12:49:14+08:00
+
+====== 分屏 ======
+Created 星期二 19 一月 2021
+
+5分钟学会 Vim 分屏操作方方面面
+良许Linux 2020-12-01
+
+
+作者：Linux迷
+来自：https://www.linuxmi.com/vim-fenping.html
+Vim分屏功能是通过分割窗口来实现的，这是提高工作效率的一大利器。无论我们想同时显示两个文件，或者同时显示一个文件的两个不同的位置，又或者并排比较两个文件，等等，这些都能通过分屏来实现，这样子很方便代码的比对和复制粘贴
+水平方向分屏打开新文件
+:sp linuxmi.py
+或者
+:split linuxmi.py
+这个命令把窗口横向切分为两个窗口，并把光标置于上面的窗口中。
+
+垂直方向分屏打开新文件
+:vsp linux.py
+:vsplit linux.py
+
+:sview linux.py ->只读分屏打开文件
+另外，要打开窗口编辑一个新的文件时，可以用以下命令：
+:new
+从命令行直接打开多个文件且是分屏
+vim -On file1, file2 ... ->垂直分屏
+vim -on file1, file2 ... ->水平分屏
+[[linuxmi@linuxmi:~/www.linuxmi.com]]$ vim -O3 linux.py linuxmi.py linuxmi.cpp
+
+
+注：-O垂直分屏，-o水平分屏，n表示分几个屏
+实时调整当前窗口的宽度
+ctrl-w > //向右加宽，默认值为1
+ctrl-w N > //向右加宽宽度N
+ctrl-w < // 同理
+横屏/竖屏分屏打开当前文件
+ctrl+w s
+ctrl+w v
+切换分屏
+ctrl+w h,j,k,l
+ctrl+w 上下左右键
+crtl+w进行分屏窗口的切换 按完以后再按一个w
+crtl+w进行分屏窗口的切换 按完以后再按一个r 互换窗口
+crtl+w进行分屏窗口的切换 按完以后再按一个c 关闭窗口
+关闭分屏
+关闭窗口有以下几个个命令：
+ctrl+W c 关闭当前窗口
+ctrl+w q 关闭当前窗口，若只有一个分屏且退出vim
+:only 仅保留当前分屏
+:hide 关闭当前分屏
+调整分屏的大小（宽度与高度）
+ctrl+w = 所有分屏都统一高度
+ctrl+w + 增加高度，默认值为1
+ctrl+w - 减少高度
+10 ctrl+w + 增加10行高度
+ctrl-w N + //当前屏高度加N
+使用指定当前屏的调整高度
+: res[ize] N
+示例：
+:resize 30
+移动分屏
+ctrl+W H,J,K,L
+将屏幕移动到最顶端
+ctrl-w + K
+将屏幕移动到最低端
+ctrl-w + J
+将屏幕移动到最左边
+ctrl-w + H
+将屏幕移动到最右边
+ctrl-w + L
+总结
+由于平时使用Vim比较多，每次都要同时打开多个文件进行操作，打开多个会话有比较麻烦，所以专门学习了一下有关Vim的一些分屏技巧并记录此文章。
+
+良许个人微信
+
+添加良许个人微信即送3套程序员必读资料
+
+→ 精选技术资料共享
+→ 高手如云交流社群
+
+
+
+--------------------
+
+本公众号全部博文已整理成一个目录，请在公众号里回复「m」获取！
+推荐阅读：
+万字长文，别再说你不懂Linux内存管理了（合辑），30 张图给你安排的明明白白
+神器 Typora ！
+TCP/IP 基础知识总结
+
+5T技术资源大放送！包括但不限于：C/C++，Linux，Python，Java，PHP，人工智能，单片机，树莓派，等等。在公众号内回复「1024」，即可免费获取！！
+
+
+Read more
+https://mp.weixin.qq.com/s/fgTECOYajlyawha80wkEEw

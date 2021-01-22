@@ -1,0 +1,268 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T14:49:59+08:00
+
+====== 滴滴十大技术方向开源项目出炉 ======
+Created 星期二 19 一月 2021
+
+滴滴十大技术方向开源项目出炉！
+开发者技术前线 2020-11-29
+点击“开发者技术前线”，选择“星标🔝”
+在看|星标|留言,  真爱
+
+作者 | 滴滴技术   出品 | 滴滴技术
+
+作为卓越的一站式移动出行和生活平台，滴滴在亚洲、拉美和澳洲为超过5.5亿用户提供出租车、快车、专车、豪华车、公交、代驾、企业级、共享单车、共享电单车、汽车服务、外卖、支付等多元化的服务。滴滴平台上，有数千万车主及司机获得灵活的工作和收入机会，年运送乘客超过100亿人次。
+ 
+滴滴开源的三年时间里，在滴滴高级副总裁、开源委员会主席章文嵩博士的倡导下，秉持「拥抱开放、合作共赢、创造价值」的理念。滴滴积极参与业界的开源项目，并不断对外输出内部的优秀项目。自2017年6月30日，滴滴首个开源项目VirtualAPK发布起，滴滴已发布了40+个项目，获得了 6.3W star，在社区获得了良好反响。以下小编将带大家速览滴滴的40+开源项目。（按首字母先后排序）
+
+
+1. 
+人工智能
+
+▍AoE  
+AoE 取名自AI on Edge，是一个终端侧AI集成运行时环境(IRE)。AoE 以“稳定性、易用性、安全性”为设计原则，帮助开发者将不同框架的深度学习算法轻松部署到终端高效执行。
+项目地址：https://github.com/didi/aoe
+
+▍Athena
+Athena是端到端自动语音识别（ASR）引擎的开源实现。目前，该项目支持基于连接器时间分类（CTC）的模型，基于变压器的编解码器模型和基于混合CTC /注意的模型以及基于MPC的无监督预转换的训练和解码。我们的愿景是增强语音识别的端到端模型的工业应用和学术研究。为了使所有人都能使用ASR，我们还发布了一些示例示例，这些示例实现基于一些开源数据集，例如HKSUT，Librispeech我们所有的模型都在Tensorflow> = 2.0.0中实现。
+项目地址：https://github.com/didi/athena
+
+▍Chinese NLP
+中文自然语言处理（NLP）的相关链接：数据集和最新结果。
+项目地址：https://github.com/didi/ChineseNLP
+
+▍Delta  
+DELTA是一个基于深度学习的语音和自然语言理解模型平台，旨在打造一个便捷使用、简洁上线、快捷开发的工业级的语音和自然语言理解的模型框架。
+项目地址：https://github.com/didi/delta
+
+▍DLFlow
+DLFlow是一套深度学习pipeline，它结合了Spark的大规模特征处理能力和Tensorflow模型构建能力。利用DLFlow可以快速处理原始特征、训练模型并进行大规模分布式预测，十分适合离线环境下的生产任务。
+项目地址：https://github.com/didi/dlflow
+
+▍HetSANN
+AAAI'20论文中的HetSANN的源代码：异构结构学习的基于注意力的图神经网络。
+项目地址：https://github.com/didi/hetsann
+
+▍maskdetection
+为了进一步帮助抵抗冠状病毒，滴滴出行决定向公众免费开放其面罩检测技术。由DiDi AI团队开发的遮罩检测技术基于DFS面部检测算法，DiDi在其平台上采用了面部属性识别算法。该模型克服了一些困难，例如白天复杂的光照变化，面部姿势变化，面部比例等。它使用加权损失函数和数据增强方法来处理白天和晚上的不同蒙版类型和不均匀蒙版数据。
+该系统可以使用上传的图像识别非掩膜驾驶员，其准确度为99.5％，并且在DiDi车载摄像头的现场检查中，可以达到98％的准确度。该模型在200,000张面孔的数据集上进行了训练，以确保其鲁棒性。
+这种快速检测系统可广泛用于旅行场景中，包括手机照片，监视图像等，并且能够全天候工作。
+项目地址：https://github.com/didi/maskdetection
+
+▍SQLFlow
+滴滴DS统计科学团队立足于公司内部常用业务场景的需求出发，与蚂蚁金服SQLFlow初始研发团队之间从模型、社区、与文化上全方位合作共建。双方能力优势互补，资源协同性强，旨在推进并实现只要懂商业逻辑就能用上人工智能，让最懂业务的人也能无障碍地使用人工智能。
+项目地址：https://github.com/sql-machine-learning/sqlflow
+
+
+2. 
+智慧交通
+
+▍ALITA/ALITA-UI
+ALITA（A Layered Instrument To Analyze）是由小桔车服数据部出品的一种基于图层展示数据分析工具，我们通过大量业务需求实现沉淀抽象出通用化的“点”、“线”、“面”三种数据模型，和地图丰富的点、线、面设计元素完美融合，设计并封装前后端通用的模块化组件，实现快速搭建地图应用。
+项目地址：https://github.com/didi/ALITA
+
+▍mtmc-vt
+该代码用于AI City Challenge 2019 Track1，MTMC Vehicle Tracking。
+项目地址：https://github.com/didi/mtmc-vt
+
+▍TrafficIndex
+TTI是业内使用较多的城市拥堵程度的评价指标，是反应实际花费的行程时间与自由流花费行程时间的比值关系，值越大表示交通运行状态越差，一般与拥堵程度正相关，其它如异常天气（如雨、雪、雾等）或者异常道路情况也可能对TTI的数值产生影响。
+项目地址：https://github.com/didi/TrafficIndex
+
+
+3. 
+中间件与架构
+
+▍Booster
+Booster 是一款专门为移动应用设计的易用、轻量级且可扩展的质量优化框架，通过动态发现和加载机制提供可扩展的能力。它不仅仅是一个框架，更内置了丰富的质量优化工具。
+项目地址：https://github.com/didi/booster
+
+▍DDMQ
+DDMQ 是滴滴出行架构部基于 Apache RocketMQ 构建的消息队列产品。作为分布式消息中间件，DDMQ 为滴滴出行各个业务线提供了低延迟、高并发、高可用、高可靠的消息服务。DDMQ 提供了包括实时消息、延迟消息和事务消息在内的多种消息类型以满足不同的业务需求。用户通过统一的 Web 控制台和傻瓜式的 SDK 即可轻松接入 DDMQ 生产和消费消息，体验功能丰富、稳定的消息服务。
+项目地址：https://github.com/didi/DDMQ
+
+▍Go-Spring
+Go-Spring 的愿景是让 GoLang 程序员也能用上如 Java Spring 那般威力强大的编程框架。特性：提供完善的 IoC 容器，支持依赖注入、属性绑定；提供强大的启动器框架，支持自动装配、开箱即用；提供常见组件的抽象层，支持灵活地替换底层实现；Go-Spring 当前使用 Go1.12 进行开发，使用 Go Modules 进行依赖管理。
+项目地址：https://github.com/didi/go-spring
+
+
+4. 
+大数据
+
+▍ES-Fastloader
+ES-Fastloader是一种能够快速地为海量离线数据生成索引的方案，采用了一种Build & Push的机制，利用Hadoop强大的并行计算能力，可在1-2小时内极快速构建几十TB级的数据,解决海量数据构建ES时，索引文件构建时效低的问题。
+项目地址：https://github.com/didi/ES-Fastloader
+
+▍Levin
+Levin是针对低频更新、静态使用、大规模数据的快速加载解决方案。Levin实现了一套使用在shm共享内存片段上的STL-like容器，高效托管大规模静态数据，加速大内存服务冷启动和热加载。具备简单易用、效率高、性能好、内存省的优点。
+项目地址：https://github.com/didi/levin
+
+
+5. 
+运维监控
+
+▍Elastic-trib
+Elastic-trib是一个Elasticsearch集群管理命令行工具，用于管理公司内部30多个Elasticsearch集群，方便用于集成到shell脚本及通过命令行终端对集群进行管控。
+项目地址：https://github.com/ didi/elastic-trib
+
+▍falcon-log-agent
+falcon-log-agent是一个开源版的日志采集工具，旨在从流式的日志中抓取、统计日志中的特征信息。获取的特征信息，与开源版Open-Falcon监控系统打通。可用于业务指标的衡量、也可用于稳定性的建设。
+项目地址：https://github.com/didi/falcon-log-agent
+
+▍Kafka-Manager
+一站式Apache Kafka集群指标监控与运维管控平台。
+项目地址：https://github.com/didi/kafka-manager
+
+▍Nightingale
+夜莺（Nightingale）是滴滴基础平台联合滴滴云研发和开源的企业级监控解决方案。旨在满足云原生时代企业级的监控需求。Nightingale 在产品完成度、系统高可用、以及用户体验方面，达到了企业级的要求，可满足不同规模用户的场景，小到几台机器，大到数十万都可以完美支撑。兼顾云原生和裸金属，支持应用监控和系统监控，插件机制灵活，插件丰富完善，具有高度的灵活性和可扩展性。
+项目地址：https://github.com/didi/nightingale
+
+▍sqt
+此进程在滴滴云上用于管理机器上面的其他agent，比如监控的agent、安全的agent，管理主要是：安装、升级、卸载、查看启动状态，不做其他事情。省去客户手工安装其他agent的工作。
+项目地址：https://github.com/didi/sgt
+
+
+6. 
+小程序
+
+▍Chameleon
+cml作为真正让一套代码运行多端的框架，提供标准的 MVVM 模式，统一开发各类终端。同时，拥有各端独立的运行时框架 (runtime)、数据管理 (store)、组件库 (ui)、接口 (api)。此外，cml在跨端能力加强、能力统一、表现一致等方面做了许多工作。
+项目地址：https://github.com/didi/chameleon
+
+▍Mpx
+Mpx是一款致力于提高小程序开发体验和开发效率的增强型小程序框架，通过Mpx，我们能够高效优雅地开发出具有极致性能的优质小程序应用，并将其输出到各大小程序平台和web平台中运行。
+项目地址：https://github.com/didi/mpx
+
+
+7. 
+移动开发
+
+▍Echo
+Echo是一款简单易用、插件化易扩展、大屏显示和操作的调试工具，旨在提高移动端的研发调试效率。基于现有的一些问题和团队需求，我们开发了一款桌面端的调试工具Echo，它可以帮助我们实时查看App各类数据（网络请求、日志、埋点等），也可以无须改动代码快速修改调试App的UI效果，提高我们的开发调试效率。
+项目地址：https://github.com/didi/echo
+
+▍DoraemonKit
+简称DoKit，中文名哆啦A梦，意味着能够像哆啦A梦一样提供给他的主人各种各样的工具。是一款功能齐全的客户端（ iOS 、Android ）研发助手。能够让每一个 App 快速接入一些常用的或者你没有实现的一些辅助开发工具、测试效率工具、视觉辅助工具，而且能够完美在 Doraemon 面板中接入你已经实现的与业务紧密耦合的一些非通用的辅助工具，并搭配我们的dokit平台，让功能得到延伸，接入方便，便于扩展。
+项目地址：https://github.com/didi/DoraemonKit
+
+▍DroidAssist
+DroidAssist 是一个轻量级的 Android 字节码编辑插件，通过在 xml 进行简单的配置即可实现对 class 文件进行动态修改。
+项目地址：https://github.com/didichuxing/DroidAssist
+
+▍VirtualAPK
+VirtualAPK是滴滴出行自研的一款优秀的插件化框架，通过将业务模块插件化，可随时更新插件来发布新功能，具备版本随时发布的能力。该款插件化框架可帮助企业随时通过更新插件的方式来发布新功能，包括修复严重Crash或进行业务“试错”，拥有功能完备、基本无入侵、插件可轻松访问宿主代码和资源、高兼容性这四大核心优势。
+项目地址：https://github.com/didi/VirtualAPK
+
+
+8. 
+系统工具
+
+▍Collection
+Collection包目标是用于替换golang原生的Slice，使用场景是在大量不追求极致性能，追求业务开发效能的场景。Collection包目前支持的元素类型：int, int64, float32, float64, string, struct。
+项目地址：https://github.com/didi/collection
+
+▍GateKeeper
+GateKeeper 是一个使用 Go (golang) 编写的不依赖分布式数据库的 API 网关, 使用它可以高效进行服务代理 以及 在线化服务配置并且你无需重启服务器。
+项目地址：https://github.com/didi/gatekeeper
+
+▍Gendry
+Gendry是一个用于辅助操作数据库的Go包。基于go-sql-driver/mysql，它提供了一系列的方法来为你调用标准库database/sql中的方法准备参数。
+项目地址：https://github.com/didi/gendry
+
+▍JuShaTa
+JuShaTa是一个Java容器，提供模块隔离及模块热加载能力。我们提供了一个类似于Tomcat的Java容器JuShaTa，在JuShaTa容器中每个SpringBoot服务都是一个独立的模块。通过自定义ClassLoader，不同模块使用不同的ClassLoader进行加载，解决jar包冲突；使用Spring Context进行上下文隔离，每个模块对应一个Context，解决bean冲突。
+项目地址：https://github.com/didi/JuShaTa
+
+▍Kemon
+一个用于macOS内核监视的基于开源前后回调的框架。kemon是一个基于macOS的内核监控框架，在Windows上内核监控有很好的基础，但在Mac上还没有一个较成熟的hook框架，去跟踪更多的进程内核事件的产生。Kemon进一步完善，为macOS的内核安全性的提高作出应有的贡献。
+项目地址：https://github.com/didi/kemon
+
+▍SDS
+SDS（即 Service Downgrade System）是一个轻量级、简单、易用的限流、熔断、降级系统，能让Java应用做到自动限流、熔断和快速恢复，提升应用整体的“弹性”。现在服务端通过采用流行的微服务架构来应对错综复杂的大流量场景，并能在业务高速发展时仍然能做到较强的快速迭代能力和可扩展性。微服务架构并不是将整个系统变得更简单，相反，微服务架构的管理难度高于普通的集中式架构，所以，如何保证系统的每个节点在错综复杂的环境下能稳定提供服务，需要借助工具来让服务节点能抵挡流量冲击、熔断依赖坏点。
+项目地址：https://github.com/didi/sds
+
+▍Tinyid
+Tinyid是用Java开发的一款分布式id生成系统，基于数据库号段算法实现，关于这个算法可以参考美团leaf或者tinyid原理介绍。Tinyid扩展了leaf-segment算法，支持了多db(master)，同时提供了java-client(sdk)使id生成本地化，获得了更好的性能与可用性。Tinyid在滴滴客服部门使用，均通过tinyid-client方式接入，每天生成亿级别的id。
+项目地址：https://github.com/didi/tinyid
+
+
+9. 
+前端
+
+▍cube-ui
+应用Vue构建的的出色移动端ui库工具。该技术拥有质量可靠、体验极致、标准规范和强扩展性这四大特点，并拥有独特的后编译技术方案帮助大幅优化性能。cube-ui 的目标是让移动端的开发更容易，让开发人员更加专注于业务逻辑的开发，提升研发效率。
+项目地址：https://github.com/didi/cube-ui
+
+▍di18n
+di18n 是一个自动转换、基于配置的前端国际化方案。它能自动扫描代码中的中文文案，将其替换成国际化标记；同时将语言抽取成配置，可以放到服务端保存及更新。
+项目地址：https://github.com/didi/di18n
+
+▍Epage
+Epage是一款基于schema的可视化页面配置工具。由工单系统流程表单场景抽象而来，升级成为支持跨框架、组件库渲染、可定制的通用页面配置工具。常用于流程表单、中后台页面配置。
+项目地址：https://github.com/didi/epage
+
+▍Mand Mobile
+Mand Mobile提供了30+的实用组件，能够满足移动端页面开发中的大部分需求。其中的业务类组件还针对金融领域，提取了包括图表、数字键盘等，从而更好地满足相关产品的开发需要。
+项目地址：https://github.com/didi/mand-mobile
+
+▍Mand Mobile-RN
+Mand Mobile RN 是 Mand Mobile for React Native 的简称。作为 Mand Mobile 系列的React Native 组件库，在聚焦金融场景的同时，还提供了一些在 RN 项目中特有的组件和解决方案，皆在提升跨端项目的开发效率和UI体验。
+项目地址：https://github.com/didi/mand-mobile-rn
+
+▍Pile.js
+使用React构建的轻量级移动组件库。设计、前端高效协同，快速搭建移动端组件库。
+项目地址：https://github.com/didi/pile.js
+
+▍Tips
+Tips是一个静态文案管理平台。用于修改Web页面的静态文案，支持文案国际化，并提供提示信息的UI展示。它的目的是解决前端开发者频繁的静态文案修改问题，避免因为简单的文案修改而发起复杂的上线流程。
+项目地址：https://github.com/didi/Tips
+
+
+10. 
+研发测试
+
+▍benchmark-thrift
+benchmark-thrift是一款测试Thrift应用程序性能的工具，开箱即用，高效简单。
+项目地址：https://github.com/didi/benchmark-thrift
+▍Rdebug
+Rdebug 是滴滴开源的一款用于 RD 研发、自测、调试的实用工具，可以被用来提升 RD 研发效率、保障代码质量进而减少线上事故。
+项目地址：https://github.com/didi/rdebug
+
+▍Sharingan
+Sharingan是一个基于golang的流量录制回放工具，录制线上真实请求流量进行回放测试，适合项目重构、回归测试等。随着微服务架构的兴起，服务之间的依赖关系变的越来越复杂，系统升级频繁导致维护测试用例成本高，依赖下游众多也很难提供稳定的测试环境，为此，我们开发这套工具来缓解上述问题。
+项目地址：https://github.com/didi/sharingan
+
+▍thrift-mock
+thrift-mock是一款轻量级的Java测试工具，用来模拟thrift服务。通过它可以轻松的将依赖的thrift服务接口进行mock，获得指定的接口返回，从而极大的提升了联调、测试阶段的开发效率。
+项目地址：https://github.com/didi/thrift-mock
+
+--------------------
+
+
+在这里，我为大家准备了一份2020年最新最全的《Java面试题及答案V3.0》，这套电子书涵盖了诸多后端技术栈的面试题和答案，相信可以帮助大家在最短的时间内复习Java后端的大多数面试题，从而拿到自己心仪的offer。
+截了张图，大家可以仔细查看左边的菜单栏，覆盖的知识面真的很广，而且质量都很不错。
+
+
+资料获取方法
+扫描下方二维码
+后台回复关键词：Java核心整理
+
+
+
+
+
+开发者技术前线 ，汇集技术前线快讯和关注行业趋势，大厂干货，是开发者经历和成长的优秀指南。
+历史阅读
+
+
+
+如果再写for循环，我就锤自己
+全球26个主流视频网站全搞定，都可以用这个神器下载原版高清视频， 包括你们最爱的P站！
+滴滴业务中台构建，到底有多牛？
+Github 标星 3w+，热榜第一，实现所有算法！
+
+
+在看点一下
+
+

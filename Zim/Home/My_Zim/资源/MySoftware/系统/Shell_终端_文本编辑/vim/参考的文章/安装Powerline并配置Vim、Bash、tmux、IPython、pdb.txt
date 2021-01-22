@@ -1,0 +1,94 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T15:34:57+08:00
+
+====== 安装Powerline并配置Vim、Bash、tmux、IPython、pdb ======
+创建日期 星期二 19 一月 2021
+
+安装Powerline并配置Vim、Bash、tmux、IPython、pdb
+
+
+来自：https://note.qidong.name/2020/09/install-powerline/
+作者：零壹軒
+使用Bash，是Linux下开发的基本技能。虽然也有zsh、fish等流行Shell，但Bash是多数情况下的默认，基本中的基本。
+Shell的提示符（Prompt），默认在root下是#，在普通用户下是$，但这只能提示用户权限信息。Bash默认情况下做了一些强化，但信息较少，而且不够美观。
+本文主要介绍基于Powerline的CLI美化配置。
+Powerline简介
+Powerline一开始是一个Vim的状态栏插件，后来发展成为Bash、zsh、fish等Shell的终端提示工具。此外，还支持tmux、IPython、Awesome、i3、Qtile等软件。
+
+Powerline in Vim (and tmux)
+在这个增强的状态栏中，我们可以看到Vim模式、Git分支、文件路径、Git状态等信息。不仅美观，而且实用。
+在Bash中，Powerline也同样强大。由于场景与Vim不同，因此显示内容也不同，默认有用户名、当前路径、后台任务数等，远程模式下还有hostname。根据需要，也可以添加更多的系统元素，如上一命令返回值、时间、电池等。
+
+Powerline in Bash (and tmux)
+在tmux中，默认有Window编号、开机时间、日期、hostname等信息。
+安装软件
+一般情况下，直接使用pip即可安装。为了便于多用户使用，通常全局安装。需要特别注意的是，包被占，因在pypi.org的包名是powerline-status。
+sudo pip install powerline-status
+似乎是由于作者失联，powerline-status的版本停留在了2.7，目前最新是2.8.1。如果需要更新，可以使用develop或master分支。
+sudo pip install [[git+https://github.com/powerline/powerline.git@develop]]
+安装字体
+Powerline在显示时，使用了特殊字体。一般的字体配置，不能正确地展示。因此，需要安装其字体。
+sudo apt install fonts-powerline
+如果在其它系统与环境，可以参考powerline-fonts的指导，手动安装。
+git clone https://github.com/powerline/fonts.git
+cd fonts
+./install.sh
+配置
+Powerline支持多种使用场景。其中，不同场景下需要不同的配置。
+以下介绍五个场景的配置：
+Vim
+Bash
+tmux
+IPython
+pdb
+Vim
+Vim中，Powerline只是其状态栏插件。在~/.vimrc中，可以使用插件的方式添加。
+Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim'}
+" or
+Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim'}
+也可以直接复用系统安装的powerline-status。
+python3 << endpython
+from powerline.vim import setup as powerline_setup
+powerline_setup()
+del powerline_setup
+endpython
+以上两种配置方式，流行的是第一种，但这里推荐第二种。第一种有若干问题，某些场景下会报错提示有两个powerline。
+Bash
+POWERLINE_HOME=$(python3 -c "
+import pkg_resources
+
+try:
+	dist = pkg_resources.get_distribution('powerline-status')
+	print(dist.location)
+except pkg_resources.DistributionNotFound:
+	raise SystemExit(1)
+")
+if [ -d "$POWERLINE_HOME" ]
+then
+	source "$POWERLINE_HOME/powerline/bindings/bash/powerline.sh"
+	export POWERLINE_HOME
+fi
+tmux
+在~/.tmux.conf文件中，添加一行：
+source "$POWERLINE_HOME/powerline/bindings/tmux/powerline.conf"
+其中，$POWERLINE_HOME是前面Bash配置中export的那个变量。因此，tmux的这个配置依赖于Bash的配置。
+IPython
+新增文件~/.ipython/profile_default/ipython_config.py，添加以下内容：
+from powerline.bindings.ipython.since_7 import PowerlinePrompts
+c = get_config()
+c.TerminalInteractiveShell.simple_prompt = False
+c.TerminalInteractiveShell.prompts_class = PowerlinePrompts
+不同IPython版本，需要使用不同的配置。这里是针对最新的7.x版本的配置，所以是since_7。对旧版本，需要使用旧的配置，可参考《other.rst#ipython-prompt》。
+注意：由于since_7是在Powerline 2.8加入的功能，因此必须使用源码安装的方式。由于相同原因，官方文档也无法更新，因此最新文档只能查看源码中的文档文件。
+pdb
+使用以下命令，替代pdb，即可获得Powerline效果：
+python3 -m powerline.bindings.pdb
+当然，这个命令比较长，不方便。可以使用以下alias。
+alias pdb='python3 -m powerline.bindings.pdb'
+结语
+在Powerline的这些增强与美化中，Vim、Bash和tmux是最有用的，另外两个纯粹只是美化而已。
+CLI本身是高效的，但是也未免乏味。有了Powerline，不仅显著提高了颜值，更是提供了更多相关信息。习惯之后，会大幅提高工作效率。
+良许个人微信
+
+添加良许个人微信即送3套程序员必读资

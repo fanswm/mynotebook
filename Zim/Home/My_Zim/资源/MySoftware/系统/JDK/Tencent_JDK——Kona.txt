@@ -1,0 +1,75 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T12:28:04+08:00
+
+====== Tencent JDK——Kona ======
+Created 星期二 19 一月 2021
+
+腾讯牛逼！终于开源了自家的 Tencent JDK——Kona！！
+快学Java 2020-12-15
+The following article is from Java技术栈 Author 栈长
+Java技术栈
+专注分享Java技术干货，包括多线程、JVM、Spring Boot、Spring Cloud、Intellij IDEA、Dubbo、Zookeeper、Redis、架构设计、微服务、消息队列、Git、面试题、程序员攻略、最新动态等。
+点击上方蓝字设为星标
+
+
+每天傍晚18:00一起成长！
+
+
+
+是的，继阿里 2019/03 开源基于 OpenJDK 的长期支持版本 Alibaba Dragonwell 之后，腾讯也发布了自家的开源免费的 JDK 版本——Tencent Kona，必须替小马哥宣传一波。
+看了下 Github 腾讯开源版 JDK 的发布记录：
+
+最早是在 2019/11/04 这天发布的 Tencent Kona  v8.0.0 版本，没错，最近栈长村里通网了，最近才知道腾讯自家版 JDK 这个东东，不办法，我是村网通，我为我自己带盐。
+Tencent Kona 8
+Tencent Kona 是腾讯开源的、免费的、基于 OpenJDK 的发行版本，并且受腾讯长期支持（LTS）和季度更新，目前由腾讯专业的 JVM 技术团队进行维护和开发。
+开源地址：
+https://github.com/Tencent/TencentKona-8
+在腾讯内部，Kona 就是默认使用的 JDK，主要应用于腾讯云业务场景及其他 Java 应用场景，并且针对超大规模的大数据、机器学习和云计算进行了深度优化。
+另外，Kona 还为那些想用 OpenJDK 的客户和合作伙伴提供一个基于 OpenJDK 的构建、长期维护支持的腾讯版 OpenJDK 版本。
+为什么是 Tencent Kona 8？
+因为腾讯 Kona-8 是基于 OpenJDK 8 开发的，所以叫 Kona-8，8 这个数字是跟 OpenJDK 的版本走的。
+Tencent Kona 当前只支持 Linux/x86_64 平台，现在绝大部分企业系统应用都运行在这个平台，不是面向基础用户，所以没有必要再开发 Windows 这种没有意义的多余的维护成本。
+Tencent Kona 8 扩展特性
+腾讯 Kona 基于 OpenJDK 提供了许多的扩展功能及维护特性，通过腾讯 Kona 可以获得更为先进的功能及性能优化，进而提高用户和开发者的使用体验。
+Tencent Kona 8 主要支持以下两个特性:
+1）Default CDS Archive
+这个特性用于提高 JVM 的启动速度， 默认为打开状态，可以通过以下命令启动打开/关闭该特性：
+java -Xshare:off 
+2）Java Flight Recorder（JFR）
+这个特性用于采集 Java 应用程序的诊断信息，默认为关闭状态。
+启动的时候可以通过以下命令启用 JFR：
+java -XX:+FlightRecorder
+应用程序运行时，使用以下命令采集 JFR 数据：
+jcmd <your_pid> JFR.start name=<record_name> filename=<dump_file_name>.jfr 
+使用以下命令停止 JFR 采集数据:
+jcmd <your_pid> JFR.stop
+JFR 数据处理可以使用 java mission control (jmc) 7.0以上版本打开*.jfr文件，更多可以参考 Oracle 的 JFR 官方文档。
+Tencent Kona 8 安装
+下载最新的腾讯 Kona 二进制文件，地址：
+https://github.com/Tencent/TencentKona-8/releases
+cd /usr/local/
+tar -xvf TencentKona8.0.3.b2_jdk_linux-x86_64_8u262.tar.gz
+export JAVA_HOME=/user/local/TencentKona8
+export PATH=${JAVA_HOME}/bin:$PATH
+export CLASSPATH=.:${JAVA_HOME}/lib
+和官方命令一样用 java -version 查看版本:
+bash#> java -version
+openjdk version "1.8.0_262"
+OpenJDK Runtime Environment (Tencent Kona 8.0.3) (build 1.8.0_262-18)
+OpenJDK 64-Bit Server VM (Tencent Kona 8.0.3) (build 25.262-b18, mixed mode, sharing)
+为什么大厂都搞定制 JDK？
+大家都知道，JDK 8 是现在的绝对主流应用版本（关注公众号Java技术栈回复：java，可以获取 8 系列实战教程），但 Oracle 作死啊，JDK 8 在 2019/01之后就被宣布停止更新了，另外， JDK 11 及以后的版本也不再提供免费的长期支持（LTS）。
+Oracle JDK 的收费，从网上就可以看到很多用户抱怨不止，毕竟 Oracle JDK 收费版的支持维护费用不是一般企业和个人能负担得起的，很多企业和个人开发者也从而转向其他的免费开源 JDK 版本。
+大厂一方面是有钱、有精力、有技术实力，另一方面 Oracle JDK 也不一定符合咱们互联网大厂的性能要求，如果把收费的钱用来搞自研，不用受制于人，不是更香？所以，为什么大厂都搞定制 JDK 也就不奇怪了。
+可以看到的趋势，未来将会有越来越多的企业和 Java 开发者进而放弃 Oracle JDK，转而使用 OpenJDK 或者其他开源复本，又或者基于 OpenJDK 进行自家定制，当然这得有技术实力、有钱的大厂才行。
+随着各大厂都推出自家的 JDK，Oracle JDK 的收费之路还能走多远？
+
+往期好文合集
+
+
+2020新款笔记本真香，包邮送一台！
+SpringBoot集成Swagger-Bootstrap-UI，页面更清爽！
+微服务架构：注册中心 ZooKeeper、Eureka、Consul 、Nacos 对比！
+
+关注快哥，快学Java！

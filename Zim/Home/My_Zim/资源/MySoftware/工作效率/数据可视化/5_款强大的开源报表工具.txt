@@ -1,0 +1,60 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T16:21:51+08:00
+
+====== 5 款强大的开源报表工具 ======
+创建日期 星期二 19 一月 2021
+
+5 款强大的开源报表工具
+Github中文社区 1周前
+点击上方“Github中文社区”，关注
+
+看遍Github好玩的项目
+
+
+
+图片
+编辑：Huber
+huber最近发现几款不错的开源报表，还提供源码，现在给大家分享一下，希望能给你带来帮助！
+
+
+
+1、项目名称：积木报表
+项目简介：积木报表，免费的企业级WEB报表工具。专注于“专业、 易用 、优质”的报表设计器和大屏设计器。支持打印设计、数据报表、图形报表、大屏设计器，重点是免费的。
+
+项目地址：https://github.com/zhangdaiscott/JimuReport/issues/new
+
+体验地址：http://www.jimureport.com/
+
+图片
+
+图片
+
+2、项目名称：UReport2
+项目简介：UReport2是一款高性能的Java报表引擎，提供完善的基于网页的报表设计器，可快速做出各种复杂的中式报表。在UReport2中，提供了全新的基于网页的报表设计器，可以在Chrome、Firefox、Edge等各种主流浏览器运行（IE浏览器除外）,打开浏览器即可完成各种复杂报表的设计制作。UReport2是第一款基于Apache-2.0协议开源的中式报表引擎。
+
+项目地址：https://gitee.com/youseries/ureport
+
+图片
+
+3、项目名称：EasyReport
+项目简介：EasyReport 是一个简单易用的 Web 报表工具，它的主要功能是把 SQL 语句查询出的行列结构转换成 HTML 表格(Table)，并支持表格的跨行(RowSpan)与跨列(ColSpan)。同时它还支持报表 Excel 导出、图表显示及固定表头与左边列的功能。
+
+项目地址：https://gitee.com/xianrendzw/EasyReport
+
+图片
+
+4、项目名称：报表设计工具 Reportico
+项目简介：Reportico 是一个报表设计工具，可用来设计报表、创建报表菜单和配置，支持图形、分组、下钻、表达式处理和数据转换，可导出 HTML、PDF 和 CSV 格式，可通过 CSS 修改报表外观。
+
+项目地址：https://gitee.com/luob/reportico
+
+图片
+
+5、项目名称：ECharts
+项目简介：ECharts 是一款由百度前端技术部开发的，基于 Javascript 的数据可视化图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。涵盖各行业图表，满足各种需求。
+
+项目地址：https://gitee.com/echarts/echarts
+
+
+https://mp.weixin.qq.com/s/JFiThiIWw8XaM-lQa0ZIDg

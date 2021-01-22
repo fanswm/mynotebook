@@ -1,0 +1,85 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T11:40:34+08:00
+
+====== Grub2引导硬盘安装Windows ======
+Created 星期二 19 一月 2021
+
+http://blog.xiaoyu.im/post_43.html?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
+Grub2引导硬盘安装Windows
+4条回复
+此方法适应于Windows vista及以上版本的安装（如Win 7、Win 2008、Win 2008 R2等）。
+
+先介绍我的分区以及系统情况：
+
+硬盘共有三个主分区、四个逻辑分区：
+
+(hd0,1)——安装Win7——C:
+
+(hd0,2)——安装ubuntu10.04——/
+
+(hd0,3)——空白，安装新系统
+
+(hd0,5)——Win各种数据——D:
+
+(hd0,6)——ubuntu各种数据——/home
+
+(hd0,7)——其他（FAT32）——E:
+
+(hd0,8)——交换空间——swap
+
+Win7与ubuntu10.04由Grub2引导。
+
+现有Win2008 Server R2安装镜像，将其安装至(hd0,3)。
+
+另外，需要从网上下载最新版的Grub4Dos，从中提取出grub.exe文件待用。
+
+以下安装过程是按照我的分区来写的，参考时要根据自己实际情况修改分区。
+
+一、准备：
+1、将Win2008安装镜像中所有文件释放到(hd0,7)根目录里，注意不要改变镜像中原本的目录结构。
+
+2、将Grub4Dos的grub.exe文件复制到(hd0,7)根目录下。
+
+3、在(hd0,7)根目录下创建文件menu.lst，内容如下：
+
+title Win2008 R2 Installation
+set root=(hd0,7)
+chainloader /bootmgr
+boot
+1
+2
+3
+4
+title Win2008 R2 Installation
+set root=(hd0,7)
+chainloader /bootmgr
+boot
+二、安装：
+1、重启，在Grub2的菜单中按c，进入Grub命令行，输入以下命令：
+
+insmod ntfs
+set root=(hd0,7)
+linux /grub.exe
+boot
+1
+2
+3
+4
+insmod ntfs
+set root=(hd0,7)
+linux /grub.exe
+boot
+2、接下来会进入Grub4Dos的菜单，如果有发现了多个menu.lst的提示菜单，则选择/menu.lst。接下来在Grub4Dos的引导菜单中选择
+
+Win2008 R2 Installation
+
+3、接下来会启动Win2008的安装程序。
+
+4、安装完成后，ubuntu无法启动，参照 http://blog.tiddler.me/2010/07/ubuntu-fix-grub2  修复Grub2的引导即可。
+
+三、链接：
+参考：http://blog.sina.com.cn/s/blog_49f914ab0100hcd7.html
+
+本条目发布于2010 年 7 月 23 日。属于技术笔记分类。

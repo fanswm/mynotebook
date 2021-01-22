@@ -1,7 +1,9 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2017-12-05T14:27:06+08:00
 
 ====== 项目 ======
 Created Tuesday 05 December 2017
+
+腾讯最新开源IoT操作系统: https://zhuanlan.zhihu.com/p/83622055?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
 
