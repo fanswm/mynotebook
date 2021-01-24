@@ -2,7 +2,7 @@ Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
 Creation-Date: 2018-11-02T15:58:40+08:00
 
-====== Home ======
+====== qHome ======
 Created Friday 02 November 2018
 
 #!/bin/bash
