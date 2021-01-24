@@ -1,0 +1,157 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-22T22:04:44+08:00
+
+====== 创建 bot ======
+Created 星期五 22 一月 2021
+
+教程|Telegram Bot 搭建
+零和默
+零和默
+某在斯 致良知
+​关注他
+40 人赞同了该文章
+好久没上知乎，突然发现还有个专栏...反省 所以时隔n个月我来更新一下了
+
+最近对COC（克苏鲁的呼唤）感兴趣，想写个小玩具实现线上玩耍。然后我就对着规则书开始敲代码，敲着敲着朋友过来了，说“你整这些多麻烦，要不我直接拉个骰娘（Bot）进群？”
+
+我：。。。
+
+是啊我干啥不魔改下群聊机器人呢？
+
+以上是闲聊，下面就进入正题开始搭Telegram Bot，至于为啥不选QQ/微信的机器人呢？
+
+因为Telegram Bot的创建非常简单，Bot的API非常全面，并且完全免费。
+QQ/微信的机器人用起来限制太多啦...
+
+
+
+前期准备：
+telegram账号
+谷歌账号
+一丢丢的编程基础
+酸酸乳或其它魔法小道具（大陆）
+搭建步骤：
+登录Telegram，并找到@BotFather
+我们使用/new bot指令 ，并按照指示为你的Bot取个昵称以及用户名（Bot的用户名必需以bot结尾）
+然后你就创建好了你的第一个Telegram Bot！恭喜，是不是特别简单？
+此时BotFather会给你一个非常非常重要的东西——Bot token，注意千万要保管好它哦！
+
+就是红色的那串东西，格式为数字:xxx
+OK，我们有了Bot和操作它使用的token之后能做些什么了呢？
+https://core.telegram.org/bots/api
+​
+core.telegram.org
+↑来，点进去，然后你就能看见密密麻麻Telegram官方发布支持其Bot的所有API
+别慌！我们需要用的方法只有一点点，别急着关文章，我们继续往下操作...
+
+其实这时我们的Bot已经可以取得用户发的讯息了，我们先向Bot随便发点什么东西（当然此时它还不会回复），然后在浏览器中输入：
+https://api.telegram.org/bot%EF%BC%88token%EF%BC%89/getUpdates
+（token）请换成上面或取的token
+你就能看见自己和Bot的对话记录，例如：
+
+{
+  ok: true,
+  result: [
+	{
+	  update_id: xxx,
+	  message: {
+		message_id: 2,
+		from: {
+		  id: xxx,
+		  is_bot: false,
+		  first_name: "xxx",
+		  username: "xxx",
+		  language_code: "zh-hans"
+		},
+		chat: {
+		  id: xxx,
+		  first_name: "xxx",
+		  username: "xxx",
+		  type: "private"
+		},
+		date: xxx,
+		text: "Hello"
+	  }
+	}
+  ]
+}
+这种方法虽然可以或取讯息，但是要做到Bot随时使用，频繁调用getUpdates方法会非常浪费资源。因此我们使用另一种方法设置Webhook，即向 Telegram 设定一组 callback url，只要有用户向你的Bot发送讯息，Telegram 就会把用户讯息连同元数据 传送到你设定的 url 。
+
+
+
+
+
+这时就轮到咱们的谷歌账号派上用场啦，Telegram要求callback url所在的服务器必需要有SSL证书，而我们目前并没有也没打算去搭建服务器。所以...
+
+打开浏览器，输入 http://script.google.com 新建脚本
+
+我们直接使用gs开发就可以啦，谷歌的服务器自然是有SSL证书的。
+关于Telegram Bot所支持的程序语言，虽然官方手册的案例上并没有gs，但我们打开GitHub，搜索telegram-bot-gscript，还是能找到案例的哦。
+
+function doPost(e){
+  var estringa = JSON.parse(e.postData.contents);
+  var payload = identificar(estringa);
+  var data = {
+	"method": "post",
+	"payload": payload
+  }
+  UrlFetchApp.fetch("https://api.telegram.org/botYOUR-API-HERE/", data);
+}
+
+function identificar(e){
+  if (e.message.text){
+	var mensaje = {
+	  "method": "sendMessage",
+	  "chat_id": e.message.chat.id,
+	  "text": e.message.text,
+	} 
+  }
+  else if (e.message.sticker){
+	var mensaje = {
+	  "method": "sendSticker",
+	  "chat_id": e.message.chat.id,
+	  "sticker": e.message.sticker.file_id
+	}
+   }
+  else if (e.message.photo){
+	var array = e.message.photo;
+	var text = array[1];
+	var mensaje = {
+	  "method": "sendPhoto",
+	  "chat_id": e.message.chat.id,
+	  "photo": text.file_id
+	}
+   }
+	else {
+	var mensaje = {
+	  "method": "sendMessage",
+	  "chat_id": e.message.chat.id,
+	  "text": "Try other stuff"
+	}
+   }
+  return mensaje
+}
+我们把案例中的代码复制到上面新建的脚本当中，保存并点击左上角的发布-部署为网络应用，把权限改为任何人甚至匿名，确定。
+
+你就得到了具有SSL凭证的callback url啦！
+
+
+
+最后一步：set Webhook
+
+打开浏览器，把上面或取的token和callback url放到下边网址对应的位置
+https://api.telegram.org/bot%EF%BC%88token%EF%BC%89/setwebhook?url=callback url
+
+随后浏览器便会返回
+{"ok":true,"result":true,"description":"Webhook was set"}
+恭喜！Bot搭建完成。
+再次打开Bot的聊天界面，你会发现它已经会鹦鹉学舌啦！
+
+
+
+
+更多的功能扩展就等诸位自己利用API去开发啦，只有想不到没有Bot实现不了的功能哦~
+
+-end-
+

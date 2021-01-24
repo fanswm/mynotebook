@@ -1,0 +1,141 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-22T21:47:28+08:00
+
+====== 使用搬瓦工 VPS 搭建 Telegram RSS 订阅机器人（rssbot） ======
+Created 星期五 22 一月 2021
+
+使用搬瓦工 VPS 搭建 Telegram RSS 订阅机器人（rssbot）
+2018-05-27 分类：搬瓦工 / 随笔
+搬瓦工
+前几天介绍了两家靠谱的 VPS 商家，拥有 CN2 GIA 路线（好用性价比高的美国洛杉矶 CN2 GIA 便宜 VPS 推荐）。我自己当然也是买了正在用。但是 VPS 不能只用来建站，还应该做一些有趣的事情，比如搭建一个 rssboot。
+
+通过搭建一个 Telegram 的 rssbot，我们可以在 Telegram 上订阅我们感兴趣的网站，并实时接收 RSS 推送。今天先介绍一下如何搭建，后续再介绍如何将 bot 添加到频道，并自动推送频道数据。
+
+
+
+文章目录  隐藏 
+准备工作
+申请 Telegram bot
+安装 rssbot
+手动编译 rssbot（可选）
+订阅网站
+参考文章
+准备工作
+一台海外的 VPS（好用性价比高的美国洛杉矶 CN2 GIA 便宜 VPS 推荐），我用的是搬瓦工；
+一个 Telegram 账号；
+一个 SSH 客户端。
+申请 Telegram bot
+首先我们需要申请一个 Telegram 的机器人，也就是 bot。我们在 Telegram 里找到 @BotFather，开始对话即可。
+
+输入 /newbot，即可创建一个新的 bot，记住你的 API TOKEN。
+
+输入 /mybots 找到自己的 bot，选择他，然后选择 Edit Bot，选择 Edit Commands 就可以输入你的指令了。
+
+例如：
+
+/rss       - 显示当前订阅的 RSS 列表，加 raw 参数显示链接
+/sub       - 订阅一个 RSS: /sub http://example.com/feed.xml
+/unsub     - 退订一个 RSS: /unsub http://example.com/feed.xml
+/unsubthis - 使用此命令回复想要退订的 RSS 消息即可退订, 不支持 Channel
+/export    - 导出为 OPML
+安装 rssbot
+接下来我们需要在我们的 VPS 上安装 rssbot。
+
+这里使用的是 GitHub 上的 rssbot 这个项目：
+
+https://github.com/iovxw/rssbot
+
+我们直接下载预编译版本即可，一般来说预编译版本就能用，如果不能用，再尝试自己编译。
+
+下载预编译版本：
+
+https://github.com/iovxw/rssbot/releases
+
+在上面的 releases 页面找到最新的发行版，下载到 VPS 即可，然后在 VPS 上面进行解压。操作命令一般如下：
+
+wget https://github.com/iovxw/rssbot/releases/download/v1.4.3/rssbot-v1.4.3-linux.zip
+apt install unzip
+unzip rssbot-v1.4.3-linux.zip
+解压完成后，直接运行：
+
+./rssbot DATAFILE TELEGRAM-BOT-TOKEN
+DATAFILE 为数据库保存路径(其实就是一个 json 文件, 不需要手动创建), TELEGRAM-BOT-TOKEN 就是刚刚上面申请的 API TOKEN。
+
+如果预编译版本运行不了，我们尝试手动编译（一般来说预编译版本都没问题，所以下面的只有上面的预编译版本用不了才需要尝试）。
+
+手动编译 rssbot（可选）
+安装依赖：
+
+apt-get install git openssl libssl-dev pkg-config
+下载源码：
+
+下载地址：https://github.com/iovxw/rssbot/releases
+
+git clone https://github.com/iovxw/rssbot.git
+安装 Rust Nightly：
+
+curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain nightly
+source $HOME/.cargo/env
+进入目录编译
+
+cd rssbot #进入目录
+cargo build --release #编译安装
+订阅网站
+最后，我们就可以在 Telegram 上订阅我们需要的网站了。输入 /sub <RSS 地址>，即可完成订阅。比如：
+
+
+
+是不是很简单呢？到这里我们就可以完成一个 Telegram bot 的申请和进行 RSS 订阅，接下来会继续讲解如何将 bot 添加到频道并自动更新频道内容。
+
+参考文章
+https://www.sabia.cc/rss-chinese-subscription-robot-using-vps-20180329.html
+https://github.com/iovxw/rssbot
+AD：【老唐推荐】最好用的便宜 VPS 推荐，买一台开始搭建自己的博客吧！
+赞(0)
+
+--------------------
+
+
+I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual (https://core.telegram.org/bots).
+
+You can control me by sending these commands:
+
+/newbot - create a new bot
+/mybots - edit your bots [beta]
+
+Edit Bots
+/setname - change a bot's name
+/setdescription - change bot description
+/setabouttext - change bot about info
+/setuserpic - change bot profile photo
+/setcommands - change the list of commands
+/deletebot - delete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode (https://core.telegram.org/bots/inline)
+/setinlinegeo - toggle inline location requests (https://core.telegram.org/bots/inline#location-based-results)
+/setinlinefeedback - change inline feedback (https://core.telegram.org/bots/inline#collecting-feedback) settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode (https://core.telegram.org/bots#privacy-mode) in groups
+
+Games
+/mygames - edit your games (https://core.telegram.org/bots/games) [beta]
+/newgame - create a new game (https://core.telegram.org/bots/games)
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game
+
+
+ImYourFatherbot
+
+Done! Congratulations on your new bot. You will find it at t.me/ImYourFatherbot. You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you've finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this.
+
+Use this token to access the HTTP API:
+1558482124:AAFcxk9NJNwY13Iq-iEUOt1FRRA6AG4Rcc8
+Keep your token secure and store it safely, it can be used by anyone to control your bot.
+
+For a description of the Bot API, see this page: https://core.telegram.org/bots/api
+

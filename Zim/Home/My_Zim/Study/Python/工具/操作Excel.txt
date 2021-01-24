@@ -1,0 +1,183 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-22T19:39:11+08:00
+
+====== 操作Excel ======
+Created 星期五 22 一月 2021
+
+python 读写 Excel文件
+ 
+
+　一、用xlrd和xlwt读写excel
+　　　　首先下载安装xlrd和xlwt这两个库。
+
+　　1、打开excel
+
+　　　　readbook = xlrd.open_workbook(r'\test\canying.xlsx')
+　　2、获取读入的文件的sheet
+
+　　　　sheet = readbook.sheet_by_index(1)#索引的方式，从0开始
+　　　　sheet = readbook.sheet_by_name('sheet2')#名字的方式
+　　3、获取sheet的最大行数和列数
+
+　　　　nrows = sheet.nrows#行
+　　　　ncols = sheet.ncols#列
+　　4、获取某个单元格的值
+
+　　　　lng = table.cell(i,3).value#获取i行3列的表格值
+　　　　lat = table.cell(i,4).value#获取i行4列的表格值
+　　5、打开将写的表并添加sheet
+
+　　　　writebook = xlwt.Workbook()#打开一个excel
+　　　　sheet = writebook.add_sheet('test')#在打开的excel中添加一个sheet
+　　6、将数据写入excel
+
+ 　　　　sheet.write(i,0,result[0])#写入excel，i行0列
+ 　　　　sheet.write(i,1,result[1])
+　　7、保存
+
+　　　　 writebook.save('answer.xls')#一定要记得保存
+　　相关代码
+
+ View Code
+ 
+
+ 　二、使用openpyxl库读写excel
+　　　　xlrd和xlwt处理的是xls文件，单个sheet最大行数是65535，如果有更大需要的，建议使用openpyxl函数，最大行数达到1048576。 
+　　　　如果数据量超过65535就会遇到：ValueError: row index was 65536, not allowed by .xls format
+
+　　　　首先需要导入 import openpyxl
+
+　　　　1、打开excel
+
+　　　　　　
+
+　　　　2、获取打开的excel的sheet内容
+
+ 
+
+ 　　　　　　
+
+　　　　3、获取sheet的最大行数和列数
+
+　　　　　　
+
+　　　　4、获取某个单元格的值
+
+　　　　　　print(ws.cell(1,1).value)
+
+　　　　5、打开将写的表并添加sheet
+
+　　　　　　
+
+　　　　6、保存
+
+　　　　　　
+
+ 
+
+ 　　　　完整代码
+
+
+复制代码
+	def readExel(self):
+		filename = r'D:\work\Excel_txtProcesss\new-微博-合并\58.xlsx'
+		inwb = openpyxl.load_workbook(filename)  # 读文件
+
+		sheetnames = inwb.get_sheet_names()  # 获取读文件中所有的sheet，通过名字的方式
+		ws = inwb.get_sheet_by_name(sheetnames[0])  # 获取第一个sheet内容
+
+		# 获取sheet的最大行数和列数
+		rows = ws.max_row
+		cols = ws.max_column
+		for r in range(1,rows):
+			for c in range(1,cols):
+				print(ws.cell(r,c).value)
+			if r==10:
+				break
+
+	def writeExcel(self):
+		outwb = openpyxl.Workbook()  # 打开一个将写的文件
+		outws = outwb.create_sheet(index=0)  # 在将写的文件创建sheet
+		for row in range(1,70000):
+			for col in range(1,4):
+				outws.cell(row, col).value = row*2  # 写文件
+			print(row)
+		saveExcel = "D:\\work\\Excel_txtProcesss\\test.xlsx"
+		outwb.save(saveExcel)  # 一定要记得保存
+复制代码
+ 
+
+ 
+
+　三、
+　　style2 = xlwt.easyxf('pattern: pattern solid, fore_colour yellow; font: bold on;')
+
+　　在设置上Excel单元格的背景色时，fore_colour 支持的颜色是有限的，仅支持一下颜色
+
+　　aqua 0x31
+　　black 0x08
+　　blue 0x0C
+　　blue_gray 0x36
+　　bright_green 0x0B
+　　brown 0x3C
+　　coral 0x1D
+　　cyan_ega 0x0F
+　　dark_blue 0x12
+　　dark_blue_ega 0x12
+　　dark_green 0x3A
+　　dark_green_ega 0x11
+　　dark_purple 0x1C
+　　dark_red 0x10
+　　dark_red_ega 0x10
+　　dark_teal 0x38
+　　dark_yellow 0x13
+　　gold 0x33
+　　gray_ega 0x17
+　　gray25 0x16
+　　gray40 0x37
+　　gray50 0x17
+　　gray80 0x3F
+　　green 0x11
+　　ice_blue 0x1F
+　　indigo 0x3E
+　　ivory 0x1A
+　　lavender 0x2E
+　　light_blue 0x30
+　　light_green 0x2A
+　　light_orange 0x34
+　　light_turquoise 0x29
+　　light_yellow 0x2B
+　　lime 0x32
+　　magenta_ega 0x0E
+　　ocean_blue 0x1E
+　　olive_ega 0x13
+　　olive_green 0x3B
+　　orange 0x35
+　　pale_blue 0x2C
+　　periwinkle 0x18
+　　pink 0x0E
+　　plum 0x3D
+　　purple_ega 0x14
+　　red 0x0A
+　　rose 0x2D
+　　sea_green 0x39
+　　silver_ega 0x16
+　　sky_blue 0x28
+　　tan 0x2F
+　　teal 0x15
+　　teal_ega 0x15
+　　turquoise 0x0F
+　　violet 0x14
+　　white 0x09
+　　yellow 0x0D"""
+
+另外一种方式是 用pyExcelerator 
+ View Code
+ 
+
+ https://www.cnblogs.com/shaosks/p/6098282.html
+
+
+分类: python
+标签: python 读写 Excel文件

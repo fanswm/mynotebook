@@ -1,0 +1,104 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-22T18:36:57+08:00
+
+====== 在B站24小时直播音乐 ======
+Created 星期五 22 一月 2021
+
+用树莓派在B站24小时直播音乐
+2017年6月5日 Spoony 未分类 6
+
+
+
+感谢IT之家网友 晨旭喵 的投稿
+
+为何要用树莓直播？
+因为我的树莓基本在吃灰，而且它运行起来省电，直播放音乐什么的又完全能够胜任，所以它就被我硬点来当作直播的主机了
+
+需要注意的事项：
+天气较热，树莓如果打开了超频，请装散热风扇。建议不开超频
+
+最终效果：
+点击这里（不保证我以后不改直播内容哈）
+
+下面是正文~
+第一步：安装ffmpeg和解码器
+先安装解码器（注意要一句一句执行……）
+
+1
+2
+3
+4
+5
+6
+7
+sudo git clone git://git.videolan.org/x264
+cd x264
+./configure --host=arm-unknown-linux-gnueabi --enable-static --disable-opencl
+make
+sudo make install
+cd ..
+rm -rf x264
+再安装ffmpeg（一句一句执行……）
+
+1
+2
+3
+4
+5
+6
+7
+sudo git clone git://source.ffmpeg.org/ffmpeg.git
+cd ffmpeg
+sudo ./configure --arch=armel --target-os=linux --enable-gpl --enable-libx264 --enable-nonfree
+make
+sudo make install
+cd ..
+rm -rf ffmpeg
+有两个地方需要注意：
+1、git下载慢的话可以先导入到gitosc再clone；
+2、编译ffmpeg的过程在树莓上十分漫长。。。我的花了两个半小时，所以建议使用screen扔到后台，以免断网导致需要重来。
+
+第二步：准备直播所需要的视频文件
+我们需要制作一个只有背景音乐的视频，一般会做一个一图流的视频（整个视频画面就是一张图），
+这里我使用了小丸工具箱（点我下载），
+先要合并一堆mp3文件，具体方法：
+全选这些mp3文件；
+右击添加到压缩文件；
+文件类型选择zip，压缩类型选择“储存”；
+将压缩好的xxx.zip拓展名改为. mp3即可（是不是很神奇hhhhh）。
+接下来照一张图片，打开小丸工具箱，选择“常用”选项卡；
+把图片拖到“一图流”的“图片”框里，把整合好的音乐拖到“音频”框里，点击“压制”（水印是我自己打的哈哈哈哈）；
+
+
+这样我们就得到了我们需要的文件。
+
+第三步：进行推流
+把文件传到树莓上，使用下面的命令即可推流：
+
+1
+ffmpeg -re -i "1.mp4" -vcodec copy -acodec aac -b:a 192k -f flv "你的rtmp地址/你的直播码"
+由于此命令只能运行一次，播放完就停了，所以要实现无限循环播放的话就需要编写一个sh文件，内容如下：
+
+1
+2
+3
+4
+5
+#!/bin/bash
+while true
+do
+ffmpeg -re -i "1.mp4" -vcodec copy -acodec aac -b:a 192k -f flv "你的rtmp地址/你的直播码"
+done
+保存为live.sh，使用下面的命令运行即可（如果没有screen，先使用sudo apt-get install screen安装）：
+
+1
+screen nohup sh live.sh &
+参考文献：
+树莓派安装ffmpeg
+使用FFmpeg在B站直播的姿势
+
+出处：https://www.chenxublog.com
+
+文章标题：用树莓派在B站24小时直播音乐 - 树莓派实验室
+固定链接：https://shumeipai.nxez.com/2017/06/05/use-raspberry-pi-to-send-music-to-the-bilibili-for-24-hours.html
