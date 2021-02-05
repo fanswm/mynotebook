@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-03T07:54:24+08:00
+
+====== 开源硬件 ======
+Created 星期三 03 二月 2021
+
+https://mp.weixin.qq.com/s/sIN87g43kBayBEwJuczCEg

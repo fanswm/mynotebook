@@ -1,0 +1,175 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-28T10:16:53+08:00
+
+====== 基于树莓派和Tor搭建匿名代理 ======
+创建日期 星期四 28 一月 2021
+
+基于树莓派和Tor搭建匿名代理
+2014年2月28日 Spoony 未分类 0
+
+20140228224531881-0
+
+本例使用安装了Debian的树莓派和Tor的SOCKS5代理端口实现。目标：让树莓派作为SOCKS 5代理端口的中转以实现匿名浏览上网。我不希望写一篇枯燥无比的教程，所以我觉得一般用户应该都能看得懂这篇教程。同时作为福利，我会教你们如何在iPhone或者iPad上使用Tor的socks代理端口实现匿名浏览，不需要越狱哦。有问题的话请随时留言告诉我！
+
+简介
+可能有时候你希望能匿名上网，或者你总是偏执的认为你被人盯上了。不管怎样，使用代理端口来实现匿名是一种不错的方法。如果你的需求仅仅是匿名浏览网页的话，那么可以下载Tor的完整包，其中内含了一个叫做Tor浏览器的精简版火狐。该浏览器支持Linux, OS X和Windows。也许你不想在设备上安装东西，或者想在iPhone或者安卓设备上也能匿名上网，那你就来对地方了。
+
+Tor是怎么工作的？
+Tor通过在多个服务器上转发你的连接来实现匿名。举个栗子，在浏览facebook的时候，服务器会在建立连接时记录你的IP。使用代理端口登陆的话，被记录下的就是代理服务器的IP了，而你的真实IP会隐藏起来。
+经由Tor的连接会在到达目标服务器前经过3次中转，当目标服务器想回溯的话，需要经过3次不同的服务器中转。
+
+20140228224531222
+
+Tor内置强大的socks 5代理端口，无需polipo或proxychains等外部工具便可完成安装设置。
+
+在树莓派上安装Tor
+本文默认你已经有了一部安装了最新版本debian的，能联网的树莓派。最新版本的debian代号为Wheezy(Version 7.1)，在此之前的版本为Squeeze(Version 6.xxx)。
+编译了一个树莓派版本的Tor，接下来就是一般的安装步骤：
+
+1
+$ sudo dpkg -i tor_*.deb
+然后在 /etc/apt/sources.list 这个文件中加上这几行：（可以用nano编辑器，比vi要好用点）
+
+1
+2
+3
+Deb http://deb.torproject.org/torproject.org <DISTRIBUTION> main
+deb-src http://deb.torproject.org/torproject.org <DISTRIBUTION> main
+deb-src http://deb.torproject.org/torproject.org tor-experimental-0.2.5.x-<DISTRIBUTION> main
+<DISTRIBUTION>可换成你系统发行版的代号名。
+比如你用的是Wheezy的话，那就像这样：
+
+1
+2
+3
+4
+Deb http://deb.torproject.org/torproject.org wheezy main
+Deb http://deb.torproject.org/torproject.org tor-experimental-0.2.5.x-wheezy main
+deb-src http://deb.torproject.org/torproject.org wheezy main
+deb-src http://deb.torproject.org/torproject.org tor-experimental-0.2.5.x-wheezy main
+升级并安装依赖关系：
+
+1
+2
+3
+# apt-get update
+# sudo apt-get install build-essential fakeroot devscripts
+# sudo apt-get build-dep tor
+然后从源代码开始构建Tor，编译的时候泡杯茶休息下吧：
+
+1
+2
+3
+4
+5
+$ mkdir ~/debian-packages; cd ~/debian-packages
+$ apt-get source tor
+$ cd tor-*
+$ debuild -rfakeroot -uc -us
+$ cd ..
+如果出现了依赖关系缺失错误，试着安装以下的包依赖然后重试上一步：
+
+1
+$ sudo apt-get install quilt libssl-dev libevent-dev asciidoc docbook-xml docbook-xsl xmlto dh-apparmor
+没错误的话就可以继续安装了：
+
+1
+$ sudo dpkg -i tor_*.deb
+配置Tor
+这步可能会有点麻烦，跟随教程的话应该问题不大，所以不用怕。用你喜欢的编辑器打开 /etc/tor/torrc。
+把这行的注释去掉:
+
+1
+SocksPort 9050
+加上这行：
+
+1
+SocksListenAddress 192.168.1.10:9050
+此处的192.168.1.10是你的树莓派的内网IP地址，9050指定了sock需要监听的端口。接着编辑SocksPolicy指定哪些客户端可以连接到树莓派的端口，由于是从上往下读取的，所以在hosts的上方指定哪些可以连接，其他的则不能连接。假设你的地址在 192.168.1.1 – 192.168.1.254内，那么就加上：
+
+1
+SocksPolicy accept 192.168.1.0/24
+有其他的VPN需要连接的话，也可以在这加上。一定记得，如果写在最后一行的话将被拒绝连接（这是默认设置）。Tor将会使你安装了它的设备作为一个转发节点。这样是没有安全问题的，同时你可以自行分配带宽给它。Tor是依赖大家贡献的带宽的。分配带宽太少的话体验就会不好。把这些去掉注释：
+
+1
+2
+3
+ORPort 9001
+ORPort 443 NoListen
+ORPort 127.0.0.1:9090 NoAdvertise
+设置好贡献给Tor的带宽参数即可。如果设置的太高的话可能会影响其他程序的正常带宽使用。自行斟酌吧，总带宽的20%左右是较为合适的。
+谨记Tor是为了匿名访问的存在的，所以别过分追求速度。
+
+1
+2
+RelayBandwidthRate 500 KB
+RelayBandwidthBurst 700 KB
+这里参数的单位是千字节每秒，但一般运营商标注的是千比特每秒。比如你的是12M的网络的话，那么换算过来就是12000/8约等于1500KBps。上例中，则是贡献出500KB/s的带宽，瞬发不超过700KB/s的带宽出来。设置文件的其他部分你可以设置类似流量限制啦，或者只能在午夜连接啦等等参数，这个文件写的很清楚。
+把下面的去掉注释：
+
+1
+ExitPolicy reject *:*
+最后加上：
+
+1
+2
+3
+4
+NSPort 53
+DNSListenAddress 192.168.1.10
+AutomapHostsOnResolve 1
+AutomapHostsSuffixes .exit,.onion
+搞定了！
+
+ExitPolicy参数会拒绝他人访问你的节点，这样会安全一点。最后一段将会监听标准端口53和树莓派的内网IP地址的DNS请求，使你可以解析现实网络并不存在而Tor网络独有的 .exit 和 .onion 为后缀的域名。重启下服务(sudo /etc/init.d/tor)，来试试吧。
+
+测试
+测试前首先需要将你的浏览器端口为刚刚我们弄好的。大部分浏览器基本都是到 设置=>高级=>网络=>连接设置。这是火狐的设置截图。
+
+20140228224531419
+
+当然你也可以设置成系统全局代理，这样的话所有程序都能匿名访问网络了。点这里查看如何在Windows7， ubuntu和OS X上设置。其他系统的话谷歌下应该就能找到。
+
+在SOCKS5的文本框里面填上你的树莓派的内网地址，并设置为9050端口。
+
+最后访问  https://check.torproject.org ，应该能看到一个设置成功的界面。
+
+20140228224531160
+
+福利：其他设备上实现代理上网
+iPhone讨厌之处就在于只能设置HTTP代理而非SOCKS代理。这里我就不赘述了，仅仅给出基本步骤。
+1> 安装类似LigHTTPd等类似的网页服务，然后在树莓派上放上一个测试页面。
+
+1
+sudo apt-get install lighttpd
+2>如果都完成的话，创建一个端口自动设置文档。弄一个奇怪而秘密的名字，保存到 /var/www下。比如我的就是mysupersecretproxy.pac。
+
+1
+nano /var/www/mysupersecretproxy.pac
+3>把下面的内容放到刚才的文档里。
+
+1
+2
+3
+4
+function FindProxyForURL(url, host)
+{
+	return "SOCKS 192.168.1.10:9050";
+}
+4>在你的iPhone中如下设置
+设置>Wifi，点你网络旁边的箭头(iOS 7是小感叹号)，滚到底端，在http代理那里选自动，然后填上刚才的PAC文件地址(如 http://192.168.1.10/mysupersecretproxy.pac)。
+
+福利2：通过VPN匿名上网
+如果你有一台VPN能使你通过外网连接你的树莓派的话，那你就可以随时随地实现匿名上网了。
+
+这次同样不会详细描述每一步，只要你有VPN下面的步骤应该都不是问题。假设你的树莓派地址为192.168.1.10，你的VPN地址在192.168.2.x段内，编辑/etc/tor/torrc 加上这一行：
+
+1
+SocksPolicy accept 192.168.2.0/24
+用 sudo /etc/init.d/tor restart 重启一下，就大功告成了。
+
+现在你的VPN可以连接你的树莓派，并作为其转发节点了。
+
+文章标题：基于树莓派和Tor搭建匿名代理 - 树莓派实验室
+固定链接：https://shumeipai.nxez.com/2014/02/28/based-on-anonymous-proxy-raspberry-pi-and-tordajian.html

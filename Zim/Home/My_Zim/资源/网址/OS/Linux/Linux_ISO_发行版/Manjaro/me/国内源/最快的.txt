@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-25T07:16:49+08:00
+
+====== 最快的 ======
+Created 星期一 25 一月 2021
+
+pacman-mirrors -c China

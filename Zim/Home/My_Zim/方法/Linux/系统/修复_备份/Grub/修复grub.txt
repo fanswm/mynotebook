@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2017-11-24T11:48:59+08:00
 
 ====== 修复grub ======
@@ -14,7 +14,7 @@ update-grub2
 
 + CentOS:
 # 背景描述：
-# 我的电脑上以前装着 CentOS 7，最近安装上： Manjaro 之后 ，引导菜单中 [[资源:网址:OS:Linux:Linux 发行版 ISO:CentOS]] 不再能进去。
+# 我的电脑上以前装着 CentOS 7，最近安装上： Manjaro 之后 ，引导菜单中 资源:网址:OS:Linux:Linux 发行版 ISO:CentOS 不再能进去。
 
 # 引导错误提示：
 ```

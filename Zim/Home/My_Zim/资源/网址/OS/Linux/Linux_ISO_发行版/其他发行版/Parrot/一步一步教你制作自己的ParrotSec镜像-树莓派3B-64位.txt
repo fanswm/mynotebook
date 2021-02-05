@@ -1,0 +1,310 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-09T14:56:32+08:00
+
+====== 一步一步教你制作自己的ParrotSec镜像-树莓派3B-64位 ======
+创建日期 星期日 09 二月 2020
+
+运行系统: Parrot amd64
+
+树莓派3B
+
+主机环境需求
+
+初始化环境
+
+准备需要的文件
+
+编译内核
+
+配置引导
+
+制作rootfs
+
+制作镜像
+
+挂载镜像
+
+把引导和rootfs拷贝到镜像
+
+卸载镜像
+
+刷入测试
+
+树莓派3B
+CPU: 4核 1.2Ghz Cortex-a53
+内存: 1GB
+USB接口: 4
+网口: 1
+3.5mm输出口: 1
+HDMI输出口: 1
+GPIO: 40Pin
+供电方式: microusb,GPIO
+WIFI: 1
+蓝牙: 1
+屏幕接口: 1
+摄像头接口: 1
+SD卡槽: 1
+OTG: 无
+主机环境需求
+编译内核需要:
+
+build-essential
+
+bc
+
+libssl-dev
+
+aarch64-linux-gnu-gcc
+
+aarch64-linux-gnu-binutils
+
+安装:
+
+# apt-get install build-essential gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu bc libssl-dev -y
+制作rootfs需要:
+
+debootstrap
+
+qemu-user-static
+
+# apt-get install debootstrap qemu-user-static -y
+初始化环境
+设置工作目录:
+
+# mkdir -p /mnt/parrotsec/rpi3-64bit/
+设置工作目录变量:
+
+# export WORKDIR="/mnt/parrotsec/rpi3-64bit/"
+创建需要的文件夹:
+
+# mkdir -p $WORKDIR/kernel
+# mkdir -p $WORKDIR/bootloader
+# mkdir -p $WORKDIR/firmware
+# mkdir -p $WORKDIR/rootfs
+# mkdir -p $WORKDIR/images
+准备需要的文件
+内核源码:
+
+# cd ${WORKDIR}/kernel/
+# git clone https://github.com/raspberrypi/linux/
+引导文件:
+
+# cd ${WORKDIR}/bootloader
+# git clone --depth=1 https://github.com/raspberrypi/firmware
+设备固件:
+
+# cd ${WORKDIR}/firmware
+# git clone --depth=1 https://github.com/RPi-Distro/bluez-firmware
+# git clone --depth=1 https://github.com/RPi-Distro/firmware-nonfree
+编译内核
+进入源码目录
+
+# cd ${WORKDIR}/kernel/linux
+设置环境变量
+
+# export ARCH=arm64
+# export CROSS_COMPILE=aarch64-linux-gnu-
+载入默认配置
+
+# make bcmrpi3_defconfig
+编译
+
+# make -j4
+收集编译出来的东西:
+
+# mkdir ${WORKDIR}/kernel/output
+内核:
+
+# cp arch/arm64/boot/Image ${WORKDIR}/kernel/output
+内核模块:
+
+# make INSTALL_MOD_PATH=${WORKDIR}/kernel/output modules_install
+dtb:
+
+# cp arch/arm64/boot/dts/broadcom/*.dtb ${WORKDIR}/kernel/output
+配置引导
+# cd $WORKDIR/bootloader/firmware/boot
+删除没有必要的文件
+
+# rm *.dtb cmdline.txt config.txt kernel.img kernel7.img
+新建cmdline.txt
+
+# touch cmdline.txt
+写入新系统的内核参数
+
+# echo 'root=/dev/mmcblk0p2 rootwait console=tty1' > cmdline.txt
+制作rootfs
+# cd ${WORKDIR}/rootfs/
+创建存放 rootfs 的文件夹
+
+# mkdir ${WORKDIR}/rootfs/parrotsec_arm64
+使用debootstrap制作rootfs
+
+# qemu-debootstrap --arch arm64 parrot parrotsec_arm64 https://mirrors.ustc.edu.cn/parrot
+rootfs的调整
+
+挂载虚拟文件系统并chroot
+
+# mount -B /dev ${WORKDIR}/rootfs/parrotsec_arm64/dev
+# mount -B /sys ${WORKDIR}/rootfs/parrotsec_arm64/sys
+# mount -t proc /proc ${WORKDIR}/rootfs/parrotsec_arm64/proc
+# mount -t devpts devpts ${WORKDIR}/rootfs/parrotsec_arm64/dev/pts
+# mount -t tmpfs tmpfs ${WORKDIR}rootfs/parrotsec_arm64/tmp
+复制qemu-aarch64-static 以用来chroot
+
+# cp /usr/bin/qemu-aarch64-static ${WORKDIR}/rootfs/parrotsec_arm64/usr/bin
+复制网络需要的文件
+
+# cp /etc/hosts ${WORKDIR}/rootfs/parrotsec_arm64/etc
+# cp /etc/resolv.conf ${WORKDIR}/rootfs/parrotsec_arm64/etc
+使qemu注册binfmt
+
+# service binfmt-support start
+chroot进root
+
+# chroot ${WORKDIR}/rootfs/parrotsec_arm64/
+# source /etc/profile
+# export PS1="(in chroot) ${PS1}"
+设置root密码
+
+(in chroot) # passwd root
+添加新用户
+
+(in chroot) # useradd 用户名
+(in chroot) # passwd 用户名
+设置主机名
+
+(in chroot) # echo '主机名' > /etc/hostname
+添加包
+
+(in chroot) # apt update
+(in chroot) # apt install wpa_supplicant             # wifi连接支持
+(in chroot) # apt install nano vim                   # 编辑器
+(in chroot) # apt install net-tools wget curl        # 基础网络工具
+(in chroot) # apt install openssh-server             # ssh服务
+(in chroot) # apt install 包名                       # 添加你需要的包
+启用开机自启服务
+
+(in chroot) # systemctl enable ssh    # 启用开机自启ssh
+开机自动连接指定wifi, 开机自动连接usb网络, 开机自动扩展文件系统, 这里不会多说，因为它涉及脚本的知识太多
+
+退出
+
+(in chroot) # exit
+
+# umount -l ${WORKDIR}/rootfs/parrotsec_arm64/dev/pts
+# umount -l ${WORKDIR}/rootfs/parrotsec_arm64/dev
+# umount -l ${WORKDIR}/rootfs/parrotsec_arm64/sys
+# umount -l ${WORKDIR}/rootfs/parrotsec_arm64/proc
+# umount -l ${WORKDIR}/rootfs/parrotsec_arm64/tmp
+制作镜像
+计算镜像大小
+
+# du -sh ${WORKDIR}/rootfs/parrotsec_arm64/
+# du -sh ${WORKDIR}/kernel/output/
+# du -sh ${WORKDIR}/bootloader/boot/
+将得出的3个数字加起来再加300M就是镜像的大小
+并换算成 M 为单位的数字
+
+# export IMAGESIZE=换算出来的数字
+创建空镜像
+
+# mkdir ${WORKDIR}/images/rpi3b-64/
+# cd ${WORKDIR}/images/rpi3b-64/
+# dd bs=1M count=${IMAGESIZE} if=/dev/zero of=rpi3b-64.img status=progress
+在空镜像中创建分区表和分区
+
+# parted rpi3b-64.img --script -- mklable msdos # 创建MBR分区表
+# parted rpi3b-64.img --script -- mkpart fat32 0 100 # 创建第一个分区并且标识为FAT32
+# parted rpi3b-64.img --script -- set 1 boot # 将第一个分区标识为可启动
+# parted rpi3b-64.img --script -- mkpart ext4 100 -1 # 创建第二个分区用来放rootfs
+-1 这个用法是从kali的jio本学来的,意思为全部
+
+将镜像内的分区挂载到loop设备上
+
+查看一下分区的位置
+
+# parted rpi3b-64.img --script -- unit b print
+显示第一个分区的start记录一下:
+
+# export BOOTSTART=数字
+一般为512
+
+显示第一个分区的size记录一下:
+
+# export BOOTSIZE=数字
+按100M换算来是99999744
+
+显示第二个分区start记录一下:
+
+# export ROOTSTART=数字
+显示第二个分区size记录一下:
+
+# export ROOTSIZE=数字
+挂载boot分区到loop0:
+
+# losetup --offset=${BOOTSTART} --sizelimit=${BOOTSIZE} loop0 rpi3b-64.img
+挂载boot分区到loop1:
+
+# losetup --offset=${ROOTSTART} --sizelimit=${ROOTSIZE} loop1 rpi3b-64.img
+格式化boot分区
+
+# mkfs.vfat -F32 /dev/loop0
+格式化rootfs分区
+
+# mkfs.ext4 /dev/loop1
+挂载镜像
+创建挂载点
+
+# mkdir -p ${WORKDIR}/mount
+# mkdir -p ${WORKDIR}/mount/boot
+# mkdir -p ${WORKDIR}/mount/root
+挂载boot
+
+# mount /dev/loop0 ${WORKDIR}/mount/boot
+挂载root
+
+# mount /dev/loop1 ${WORKDIR}/mount/root
+把引导和rootfs拷贝到镜像
+将固件放进rootfs
+
+# mkdir -p ${WORKDIR}/rootfs/parrot_arm64/lib/firmware
+# cp ${WORKDIR}/firmware/bluez-firmware/broadcom/* ${WORKDIR}/rootfs/parrot_arm64/lib/firmware/
+# cp -r ${WORKDIR}/firmware/firmware-nonfree/brcm/ ${WORKDIR}/rootfs/parrot_arm64/lib/firmware/
+将内核模块放进rootfs
+
+# cp -r ${WORKDIR}/kernel/output/lib/modules ${WORKDIR}/rootfs/parrot_arm64/lib/
+将rootfs打包
+
+# cd ${WORKDIR}/rootfs/parrot_arm64
+# tar cpf ${WORKDIR}/rootfs/rpi3b_parrot_arm64.tar .
+将内核放进引导
+
+# cp ${WORKDIR}/kernel/output/Image ${WORKDIR}/bootloader/firmware/boot/kernel8.img
+将dtb放进引导
+
+# cp ${WORKDIR}/kernle/output/*.dtb ${WORKDIR}/bootloader/firmware/boot/
+打包引导
+
+# cd ${WORKDIR}/bootloader/firmware/boot
+# tar cf ${WORKDIR}/bootloader/rpi3b64.tar ./
+将引导放进boot分区
+
+# cd ${WORKDIR}/mount/boot
+# tar xf ${WORKDIR}/bootloader/rpi3b64.tar -C .
+将rootfs放进root分区
+
+# cd ${WORKDIR}/mount/root
+# tar xpf ${WORKDIR}/rootfs/rpi3b_parrot_arm64.tar -C .
+卸载镜像
+# sync    # 同步写入
+# umount ${WORKDIR}/mount/boot  # 卸载分区挂载
+# umount ${WORKDIR}/mount/root  # 卸载分区挂载
+# losetup -d /dev/loop0 #卸载loop挂载
+# losetup -d /dev/loop1 #卸载loop挂载
+刷入测试
+# ls ${WORKDIR}/images/rpi3b-64.img # 最终产物
+
+# dd bs=1M status=progress if=${WORKDIR}/images/rpi3b-64.img of=/dev/sdX
+不出意外的话你的树莓派已经启动并且显示tty登录界面了

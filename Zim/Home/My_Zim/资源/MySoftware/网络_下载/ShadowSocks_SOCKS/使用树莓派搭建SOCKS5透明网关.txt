@@ -1,0 +1,329 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-28T20:16:36+08:00
+
+====== 使用树莓派搭建SOCKS5透明网关 ======
+创建日期 星期四 28 一月 2021
+
+
+ Raspberry Pi  少儿编程  2年前 (2018-10-20)  2476浏览  0评论
+这是个什么东西？
+简单来说，我们要做一台比较特别的”路由器”
+
+什么是树莓派？
+Raspberry Pi，中文名为“树莓派”，可以认为是一个功能强大的ARM单片机开发板，也可以认为是一台只有信用卡大小的电脑。因为可以安装嵌入式Linux，所以扩展性极强。
+
+这里是树莓派的官网
+
+这里是树莓派的WIKI
+
+这里是树莓派在知乎上的问答
+
+外观大概是这个样子，只是一块电路版，但是麻雀虽小，五脏俱全：
+
+使用树莓派搭建SOCKS5透明网关
+markdown-img-paste-20161124093334647.png
+下面是3代ModelB的硬件配置，可以用奢侈来形容了：
+
+使用树莓派搭建SOCKS5透明网关
+913XYU1VtjL._SL1500_.jpg
+树莓派因为有强大的硬件做为支撑，还提供了CPIO、摄像头等丰富的接口，我们可以随意发挥想像力去折腾了。
+和外部硬件的结合也很方便，只需要用Python就可以控制CPIO引脚的电平，从而控制外围硬件，再也不用像51单片机时代一样去写汇编或者C了。
+
+树莓派可以这样玩：
+
+使用树莓派搭建SOCKS5透明网关
+98b2620baa5d63a815caf0565fa2a02d_b.jpg
+也可以这样玩：
+
+使用树莓派搭建SOCKS5透明网关
+41886c07243cb518287279c69ba8ad85_b.png
+还可以这样玩：
+
+使用树莓派搭建SOCKS5透明网关
+20150102_234407_53.jpg
+什么是SOCKS5透明网关？
+还是先扔几个名词解释出来：
+
+代理服务器：ProxyServer，其功能就是代理用户去取得网络信息，它是网络信息的中转站。按类型分，有HTTP、HTTPS、FTP、SOCKS等。我们使用浏览器在内网环境中上网时，大概都会接触到它，应该并不陌生。
+SOCKS代理：SOCKS是”SOCKetS”的缩写。它是一种网络传输协议，主要用于客户端与外网服务器之间通讯的中间传递。当防火墙后的客户端要访问外部的服务器时，就跟SOCKS代理服务器连接。这个代理服务器控制客户端访问外网的资格，允许的话，就将客户端的请求发往外部的服务器。它分SOCKS4和SOCKS5两种类型，SOCKS4只支持TCP协议而SOCKS5支持TCP/UDP协议，还支持各种身份验证机制等协议。其标准端口为1080。但这里注意一下，SOCKS5仍然是不支持ICMP的，这就意味着我们接下来做的网关有一个硬伤：没办法ping了。。。不过还好影响不大。
+透明网关： 透明网关，也可以叫透明代理，它的意思是客户端根本不需要知道有代理服务器的存在，你只需要把网关的IP改成它的IP，对客户端来说，它就是一台路由器。
+所以综合来说，我们如果想要在内网环境中，以直连的方式访问Internet，但又不想在每个客户端上手工配置SOCKS5代理的话，就需要搭建这样一台透明网关，它把SOCKS5变得透明化，从而让客户端们意识不到是在使用代理服务器在上网。
+
+其实，如果把这个工作（代理透明化）放在客户端（PC/Mac）上来做的话，办法还是很多的，例如像Proxifier这样的商业软件，还有Linux下的proxychains这样的小工具。
+但现在我们要制做一台”路由器”，使其下的所有设备，包括PC、也包括手机、iPad等移动设备，无须设置，就可以直连上网。
+
+搞这么麻烦，目的是什么？
+因为在办公区的DCN内网中，正常来说，是无法连接到Internet的，唯一合法的途径是使用一台已知的代理服务器（非法途径也有很多，暂且不表）。
+工作中编译出来的APP经常需要安装到手机中进行真机调试，而调试是需要直连Internet的。
+在开发资源有限，使用我们自已的SIM卡流量费用太高负担不起，所以搭建一台合法的透明网关几乎成了唯一的选择。
+
+实现思路
+使用iptables，将本机所有TCP流量转发到RedSocks的端口
+RedSocks将所有流量转发到内网的SOCKS5代理服务器
+使用dnsmasq对外提供DNS服务
+还有其它的方案吗？
+有。其实之前已经使用小米路由器mini，将固件刷成OpenWrt（PandoraBox），配置了一台透明网关，里面跑了一个RedSocks。
+但无奈路由器的性能太差，CPU常常跑满，连接设备过多的时候会进程还会挂掉。
+正好手头有一个树莓派，顺势折腾一下吧。因为有Raspbian系统，比起OpenWrt来还是要简单不少的。
+
+正式开始，首先，你需要购买一台树莓派
+在马云家搜索树莓派即可，最新的型号是3代ModelB，价格大约200RMB左右。
+另外需要买一张TF卡，或者用以前淘汰下来的卡也行，容量不用太大，8G以上就可以。
+电源基本上不用另配，使用普通的手机充电器。另外买一个亚克力的盒子，稍微保护一下电路版即可。
+因为3代的SOC发热量比较大，夏天可以考虑加装一个风扇，可以在CPIO口上取5V的电。
+
+点亮树莓派
+树莓派的官方支持非常好，目前已经有多个Linux系统可以选，官方主推的是Raspbian，一个基于Debian的发行版。
+如果之前玩过Ubuntu的话，上手应该非常容易了。如果之前常用RedHat/CentOS/Fedora的话，大概要适应一会儿，毕竟是不同派系。
+
+这里是Raspbian的NOOBS的下载地址
+
+这个NOOBS是一个傻瓜版的安装镜像，将它放到SD卡的根目录（SD卡可以使用FAT32格式化），记得接上鼠标和键盘，用HDMI连接显示器。
+然后，开机，自动运行安装程序，图形界面点两下鼠标，不能再简单。这也是树莓派比其它类似产品，比如香蕉派好的地方：官方良好的支持，还有非常活跃的社区，出了问题很容易找到答案。
+
+安装过程大概是这个样子，10分钟左右就结束了：
+
+使用树莓派搭建SOCKS5透明网关
+markdown-img-paste-20161124103859429.png
+运行系统设置工具
+进入系统之后，第一件事当然是运行sudo raspi-config，进行一些基本的设置，例如初始化密码，设置时区等
+
+使用树莓派搭建SOCKS5透明网关
+markdown-img-paste-20161124104202535.png
+在这里可以顺便改改runlevel，选第一项。修改/etc/inittab，也可以达到同样目的。
+
+使用树莓派搭建SOCKS5透明网关
+markdown-img-paste-20161124104313544.png
+另外建议将语言改为英文，因为你会发现中文报错才是真心看不懂，而且出了问题不方便在社区或google中搜索。
+
+配置网络连接
+vi /etc/network/interfaces
+
+auto eth0
+iface eth0 inet static
+address xxx.xxx.xxx.xxx
+netmask 255.255.xxx.xxx
+gateway xxx.xxx.xxx.xxx
+dns-nameservers xxx.xxx.xxx.xxx
+记得一定加上auto eth0，否则重启后，网卡不会自动启动，如果没有接显示器就麻烦了。
+
+手工启动网卡：
+
+sudo ifup eth0
+手工重启网络服务：
+
+sudo /etc/init.d/networking restart
+配置好网络后，终于可以将显示器、键盘鼠标拨掉了。从现在开始，可以把树莓派单独扔到一个小角落里，用SSH远程连接了。
+
+SSH远程连接
+默认用户名是pi
+
+ssh pi@xxx.xxx.xxx.xxx
+另外还可以建立信任关系，免密码登录
+
+ssh-keygen -t rsa
+ssh-copy-id -i pi@xxx.xxx.xxx.xxx
+还可以建一个别外，SSH连IP都不用输了，直接ssh raspi登录
+vi ~/.ssh/config
+
+Host raspi
+  HostName xxx.xxx.xxx.xxx
+  User pi
+修复ping权限
+目前最新版本的Raspbian中，有一个BUG，非ROOT用户无法使用ping，通过chmod改下权限即可
+
+ls -lsa /bin/ping
+sudo chmod 4711 /bin/ping
+设置代理服务器
+由于我们的PI目前是处在内网环境的，如果想连网更新软件包，或者wget下载的话，就需要先设置代理
+
+设置环境变量：
+sudo vi /etc/environment
+export http_proxy="http://xxx.xxx.xxx.xxx:xxxx"
+export https_proxy="http://xxx.xxx.xxx.xxx:xxxx"
+设置apt代理：
+sudo vi /etc/apt/apt.conf.d/10proxy
+Acquire::http::Proxy "http://xxx.xxx.xxx.xxx:xxxx/";
+Acquire::https::Proxy "http://xxx.xxx.xxx.xxx:xxxx/";
+从现在开始，我们就可以愉快的使用apt-get下载安装软件包了。
+
+apt-get使用阿里云镜像
+因为国情关系，我们访问apt源时总会被各种干扰，DNS污染和一定概率的丢包等。
+这里可以把apt源的地址指向阿里云的镜像，阿里云速度还是很快的，同步也很及时。感谢阿里为开源社区所做的贡献。
+
+sudo vi /etc/apt/sources.list
+
+deb http://mirrors.aliyun.com/raspbian/raspbian/ wheezy main non-free contrib
+deb-src http://mirrors.aliyun.com/raspbian/raspbian/ wheezy main non-free contrib
+用apt安装一些常用工具吧
+这里推荐一下oh-my-zsh，来替代bash，可以让接下来操作酸爽无比。
+
+sudo apt-get install zsh git wget
+wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+其它的，比如build-essential,pip,node之类的按需安装即可。
+
+开启IPV4转发
+Linux系统实现路由功能简单的很，内核默认就支持，只要开启路由转发功能可以了。
+
+临时修改：sudo echo "1" > /proc/sys/net/ipv4/ip_forward
+
+永久修改：sudo vi /etc/sysctl.conf
+添加一行：net.ipv4.ip_forward=1
+使其生效：sysctl -p /etc/sysctl.conf
+
+编译安装redsocks
+接下来终于轮到我们这次实现透明网关的主角：redsocks
+这里是redsocks的GitHub主页
+直接贴简介，懒得翻译了：
+This tool allows you to redirect any TCP connection to SOCKS or HTTPS
+proxy using your firewall, so redirection is system-wide.
+
+PI上的apt源里的redsocks版本可能比较老，最好不要通过apt安装，可以直接在github上下载源码编译安装。
+
+首先将源码克隆到本地：
+git clone https://github.com/darkk/redsocks
+编译
+没有configure，直接make即可。如果缺少依赖的话，使用apt安装即可。
+安装
+将编译出来的redsocks二进制文件扔到/usr/local/bin下
+配置
+sudo vi /etc/redsocks.conf
+下面是一个最简配置，注意一下local_port = 3128是在本机开的端口，接下来配置iptables时要用到
+base {
+	log_debug = off;
+	log_info = on;
+	log = "file:/home/pi/redsocks/logs/redsocks.log";
+	daemon = off;
+	redirector = iptables;
+}
+redsocks {
+	local_ip = xxx.xxx.xxx.xxx;
+	local_port = 3128;
+	ip = xxx.xxx.xxx.xxx;
+	port = 1080;
+	type = socks5;
+}
+将redsocks做成系统服务
+可以顺便写一下init.d脚本，将redsocks做成系统服务。配置成开机自启就可以了。
+
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          redsocks
+# Required-Start:    $network
+# Required-Stop:     $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start redsocks daemon.
+### END INIT INFO
+
+SERVICE_NAME=redsocks
+SERVICE_PATH=/usr/local/bin/redsocks
+SERVICE_PARAM="-c /etc/redsocks.conf"
+SERVICE_HOME=/home/pi
+SERVICE_USER=pi
+SERVICE_PID_FILE=/var/run/${SERVICE_NAME}.pid
+
+start() {
+	start-stop-daemon --start 
+	--chdir  "${SERVICE_HOME}" 
+	--chuid "${SERVICE_USER}" 
+	--user "${SERVICE_USER}" 
+	-b -m -p "${SERVICE_PID_FILE}" 
+	--exec ${SERVICE_PATH} -- ${SERVICE_PARAM}
+}
+
+stop() {
+	start-stop-daemon --stop 
+	--chdir "${SERVICE_HOME}" 
+	--chuid "${SERVICE_USER}" 
+	--user "${SERVICE_USER}" 
+	-p "${SERVICE_PID_FILE}"
+}
+
+case "$1" in
+	start)
+	   start
+	   ;;
+	stop)
+	   stop
+	   ;;
+	restart)
+	   stop
+	   start
+	   ;;
+	status)
+	   # code to check status of app comes here
+	   # example: status program_name
+	   ;;
+	*)
+	   echo "Usage: $0 {start|stop|status|restart}"
+esac
+
+exit 0
+配置iptables规则
+然后是iptables实现NAT的配置。
+iptables的东西太多太复杂了，好多东西我都是一知半解。
+下面贴一下最简配置吧：
+
+iptables -F
+iptables -X
+iptables -Z
+
+iptables -P INPUT DROP
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD ACCEPT
+
+iptables -A INPUT -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p icmp -j ACCEPT
+iptables -A INPUT -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p tcp --dport 3128 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -j MASQUERADE
+iptables -t nat -N REDSOCKS
+
+iptables -t nat -A REDSOCKS -d 127.0.0.1 -j RETURN
+iptables -t nat -A REDSOCKS -d 10.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 172.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 192.168.0.0/16 -j RETURN
+iptables -t nat -A REDSOCKS -d 132.0.0.0/8 -j RETURN
+iptables -t nat -A REDSOCKS -d 134.0.0.0/8 -j RETURN
+
+iptables -t nat -A SS -p tcp -j REDIRECT --to-port 3128
+
+iptables -t nat -A PREROUTING -p tcp -j SS
+iptables -t nat -A OUTPUT -p tcp -j SS
+注意：
+
+使用iptables -t nat -A REDSOCKS -d 134.0.0.0/8 -j RETURN，将不需要走代理的网段剔除
+使用iptables -t nat -A SS -p tcp -j REDIRECT --to-port 3128，将TCP包指向刚才redsocks的3128端口
+尽量不要在rc.local中使用iptables-restore方式自动执行，做成shell脚本手工启动比较保险。如果是在没有外接显示器的路由器openwrt中，配错了iptables，就等于变砖了，只能重刷。
+使用dnsmasq架设DNS服务器
+额外想提供一下DNS服务的话，装一个dnsmasq即可。
+
+sudo apt install dnsmasq
+如果想翻填，对付GFW的污染，dnsmasq具体配置还是比较麻烦的。但现在只需要向上级DNS转发即可，不需要配置，装好后直接启服务。
+
+大功告成
+接下来，把我们自已的PC上的网关，改为树莓派的IP，就可以透明上网了。
+类似的，可以将无线路由器的WAN口配置成static，网关IP填成树莓派的IP，手机就可以使用WIFI了。
+
+接下来还能玩什么
+使用openvpn并配置iptables规则，不需要在PC上使用VPN客户端拨号，直接连入公司172.X内网。
+使用shadowsocks客户端，并配合国外VPS上的搭建的服务端翻墙。加入iptables规则后，可以只针对国外IP段，有选择性的翻墙。
+使用chinadns配合dnsmasq解决GFW的DNS污染问题。
+使用ssh隧道进行内网渗透，绕过防火墙限制（这个貌似非法，暂不尝试了）
+使用ngrok实现内网穿透（这个风险太大，千万不要尝试）
+参考文献
+Raspberry Pi入门指南
+
+TCP/IP入门经典
+
+关于作者
+BlueXIII，一枚喜欢折腾软硬件的小Geek，ACG死宅，懂点汽车驾驶以及摩托车维修，能写代码，会修电脑。
+GitHub
+
+
+https://www.kidscoding8.com/30154.html
+

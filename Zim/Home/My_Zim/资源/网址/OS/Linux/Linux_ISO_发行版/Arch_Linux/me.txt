@@ -507,8 +507,3 @@ systemctl restart netctl-auto@wlp3s0.service
 ip link show wlp3s0
 
 __#######################以上联网操作最终没有成功__
-
-# 安装字体：
-ns noto-fonts-emoji-blob ttf-joypixels
-
-

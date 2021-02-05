@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-28T20:59:15+08:00
+
+====== Volumio ======
+创建日期 星期四 28 一月 2021
+
+声音改变外放端口：
+	amixer cset numid=3 1
+	

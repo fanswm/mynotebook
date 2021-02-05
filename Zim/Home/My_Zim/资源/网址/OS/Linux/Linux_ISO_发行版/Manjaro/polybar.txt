@@ -1,0 +1,95 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-07T21:15:04+08:00
+
+====== polybar ======
+创建日期 星期五 07 二月 2020
+
+正在安装 polybar [########################################################] 100%
+
+Get started with the example configuration:
+
+$ install -Dm644 /usr/share/doc/polybar/config $HOME/.config/polybar/config
+$ polybar example
+
+For more information, see https://github.com/jaagr/polybar/wiki
+
+polybar 的可选依赖
+i3-wm: i3 module support [已安装]
+ttf-unifont: Font used in example config
+siji-git: Font used in example configf
+xorg-fonts-misc: Font used in example config 
+
+ins xorg-fonts-misc
+
+yay -S ttf-unifont # 下载速度太慢，中止。
+
+install -Dm644 /usr/share/doc/polybar/config $HOME/.config/polybar/config
+
+vim .config/polybar/config
+
+```shell
+
+border-size = 0
+
+[colors]
+
+...
+
+background = #cc222222
+
+``` 
+
+# 如果不能正确显示，查看自己设备的名称：
+
+polybar -m
+
+# output:  LVDS-1: 1440x900+0+0 (primary)
+
+```shell
+
+minitor = ${env:MONITOR:HDMI-1}
+
+# 把HDMI-1 修改成： 上面输出的：LVDS-1。
+
+``` 
+
+# 安装emoji字体：
+
+pacman -Ss emoji
+
+ins haskell-emojis nodejs-emojione rofimoji noto-fonts-emoji
+
+ins wqy-microhei  wqy-zenhei
+
+```shell
+
+wqy-zenhei post install message
+==> Special Note: By default, we disabled the embedded bitmaps, so that the
+characters will be displayed as anti-aliased glyphs. Those who want to 
+use bitmap font rendering (for 9pt-12pt) can do the following:
+
+cd /etc/fonts/conf.d
+rm 65-wqy-zenhei.conf
+ln -s ../conf.avail/43-wqy-zenhei-sharp.conf .
+
+Remove the symlinks 43-wqy-zenhei-sharp.conf and 65-wqy-zenhei.conf from 
+/etc/fonts/conf.d if you have problems with this package.
+
+```
+
+vim .cofnig/polybar/launch.sh
+
+```shell
+
+killall -q polybar
+while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+polybar example
+
+``` 
+
+vim .config/i3/config
+
+```add 
+
+```

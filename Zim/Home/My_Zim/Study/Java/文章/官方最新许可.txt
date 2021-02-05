@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-27T11:12:31+08:00
+
+====== 官方最新许可 ======
+Created 星期三 27 一月 2021
+
+https://www.oracle.com/cn/downloads/licenses/javase-license1.html

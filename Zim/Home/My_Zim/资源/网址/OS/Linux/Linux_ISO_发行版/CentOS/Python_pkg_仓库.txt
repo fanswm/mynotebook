@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-07T16:55:50+08:00
+
+====== Python pkg 仓库 ======
+创建日期 星期五 07 二月 2020
+
+https://centos.pkgs.org/7/puias-unsupported-x86_64/python-distutils-extra-2.38-1.sdl7.noarch.rpm.html

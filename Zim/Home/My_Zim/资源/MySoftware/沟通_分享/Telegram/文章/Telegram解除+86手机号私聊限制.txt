@@ -1,0 +1,29 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-28T09:56:12+08:00
+
+====== Telegram解除+86手机号私聊限制 ======
+创建日期 星期四 28 一月 2021
+
+Telegram解除+86手机号私聊限制
+Telegram 给某人发送私聊消息时遇到如下提示：
+
+Sorry,you can only send messages to mutual contacts at the momet.
+
+（中文：抱歉，您现在只能给双向联系人发送消息。）
+
+原因：
+前段时间币圈利用Telegram 的便利，大量发广告和拉人进群。
+Telegram 限制了+86 大陆手机号绑定的账号的私聊。
++86 的账号不能给非+86 的账号主动发起私聊，+86 的账号能给+86 主动发起私聊的；
+刚刚注册的+86 账号也不能发起私聊的，过段时间就OK了。
+
+解决办法:
+向官方 @SpamBot 发送消息申请(跟着提示操作就行) ，半小时左右即可解除限制
+
+步骤:
+发送内容 /start
+点击按钮 But I can’t message non-contacts!
+点击按钮 NO,I’ll never do any of this!
+发送内容 accident
+一般半小时后即可解除限制

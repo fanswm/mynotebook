@@ -1,0 +1,163 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-29T19:31:42+08:00
+
+====== Linux 下载 ======
+创建日期 星期五 29 一月 2021
+
+Linux 下载
+2015-07-22 12:31
+
+原创：Linux中国 https://linux.cn/article-4130-1.html
+
+经常有新接触 Linux 的同学问，“Linux 从哪里下载啊？”这种问题，对于熟手来说要么不屑一提，要么就引来了各种 Linux 发行版之争，让初学者无所适从。
+
+其实，对于新接触 Linux 的人来说，很多人都不知道 “Linux” 原来不是一个！而是有林林总总上千种发行版，甚至你乐意的话，都可以制作发行自己的发行版。而各种不同的发行版也各有特色，还层出不穷的推出新版本。这简直让初学者如置身森林，茫然不知所措~
+
+
+
+所以，这里我整理了一份最新、最热的 Linux 发行版的下载链接，可以让初学者能够快速领略到 Linux 的风采。
+
+简单的来说，Linux 是以 Linux 内核Kernel为基础，集成了各种开源软件、和/或商业软件的一个操作系统。这个将各个组件整合成一个完整的操作系统过程就称之为“制作发行版”，因此，不同的组织/公司和个人就可以制作各具特色的、可以安装或运行的操作系统的软件包——通常是 ISO 镜像——可以刻录到光盘、写入到 USB 启动盘、或者直接通过 ISO 文件来安装/运行。
+
+一般来说，初接触 Linux，从桌面版开始比较好，几个主流的发行版，都可以尝试一下，如 Ubuntu、Debian、Fedora、CentOS、openSUSE 等；而 Linux 的一个重要领域——服务器领域——可以在你对 Linux 有了初步认识之后，再来学习和了解。当然，往往一个 Linux 发行版会同时发布桌面版和服务器版，其使用习惯也相近，所以熟悉桌面版之后，对使用和维护其相应的服务器版本会更容易一些。
+
+好了，言归正传，您可以从下面挑个顺眼的下载安装试试了，建议你各种都体验下，最后你会选定一个适合你的！
+
+Ubuntu[1]
+是当前最流行的 Linux 发行版之一，是 Debian  Linux 的主要衍生版本，用户众多，以桌面系统所著称，适于刚刚接触 Linux 的初学者。
+
+对于新手，安装 Ubuntu 可以参考《新手指南： 手把手教你安装 Ubuntu 和 Fedora[2]》。
+
+16.04.2 LTS
+桌面版本可以从此下载：http://www.ubuntu.com/download/desktop 
+
+Intel & AMD/ 兼容 PC 64 位 点此下载[3] 
+（MD5: 1400884cec8e40a1a876b2678f81494b）
+Intel & AMD/ 兼容 PC 32 位 点此下载[4] 
+（MD5: e14b5f2177b00dac3edc94b0e806f857）
+服务器版本可以从此下载：http://www.ubuntu.com/download/server 
+
+Intel & AMD/ 兼容 PC 64 位 点此下载[5] 
+（MD5: 2bce60d18248df9980612619ff0b34e6）
+Intel & AMD/ 兼容 PC 32 位 点此下载[6] 
+（MD5: c32ba78bf6bdae6627b1e717d33eb7ae）
+17.04
+桌面版本可以从此下载：http://www.ubuntu.com/download/desktop 
+
+Intel & AMD/ 兼容 PC 64 位 点此下载[7] 
+（MD5: 18cc54af55d7ca931bbb8588e8d9c1bd）
+Intel & AMD/ 兼容 PC 32 位 点此下载[8] 
+（MD5: eb6c4ea889f5ab44f77c9d1cde6a8818）
+服务器版本可以从此下载：http://www.ubuntu.com/download/server 
+
+Intel & AMD/ 兼容 PC 64 位 点此下载[9] 
+（MD5: 4672ce371fb3c1170a9e71bc4b2810b9）
+Intel & AMD/ 兼容 PC 32 位 点此下载[10] 
+（MD5: 8e82de7efa4b1bf159b4be325e952eb1）
+Fedora[11]
+在 Red Hat Linux 终止发布后，由 RedHat 推出的替代品，在新技术方面跟进较快。是 RedHat 系列的典型代表，和 CentOS / RHEL 源出一脉，如果将来使用 CentOS 作为服务器，使用 Fedora 作为个人桌面使用比较习惯。 
+
+对于新手，安装 Fedora 可以参考《新手指南： 手把手教你安装 Ubuntu 和 Fedora[12]》。
+
+Fedora 25 Workstation Live 
+Intel & AMD/ 兼容 PC 32，适用于 32-bit 位 PC  点此下载[13]
+Intel & AMD/ 兼容 PC 64，适用于 64-bit 位 PC  点此下载[14]
+Fedora 25 Server
+Intel & AMD/ 兼容 PC 32 位，适用于 32-bit 位 PC  点此下载[15]
+Intel & AMD/ 兼容 PC 64 位，适用于 64-bit 位 PC  点此下载[16]
+Linux Mint[17]
+基于 Ubuntu 的一个衍生版，以高效易用著称。
+
+Cinnamon 桌面
+
+Intel & AMD/ 兼容 PC 32 位 1.4GB ISO 镜像，适用于 32-bit 位 PC  点此下载[18] 
+（MD5: 6e7f7e03500747c6c3bfece2c9c8394f）
+Intel & AMD/ 兼容 PC 64 位 1.5GB ISO 镜像，适用于 64-bit 位 PC  点此下载[19] 
+（MD5: e71a2aad8b58605e906dbea444dc4983）
+MATE 桌面
+
+Intel & AMD/ 兼容 PC 32 位 1.4GB ISO 镜像，适用于 32-bit 位 PC  点此下载[20] 
+（MD5: ad46900208e69a952b3c4e1bc7f941e5）
+Intel & AMD/ 兼容 PC 64 位 1.6GB ISO 镜像，适用于 64-bit 位 PC  点此下载[21] 
+（MD5: d3c0ef9d0c0c93ab7109fa2ef1db0c28）
+Deepin[22]
+国内发展最好的 Linux 发行版，主要关注在桌面使用方面，在外观、易用性、本土化应用方面值得称道。
+
+Intel & AMD/ 兼容 PC 32 位 4.4GB ISO 镜像，适用于 32-bit 位 PC  点此下载[23] 
+（MD5: e9b6145ba9c0d21632936361dbe74a18）
+Intel & AMD/ 兼容 PC 64 位 4.3GB ISO 镜像，适用于 64-bit 位 PC  点此下载[24] 
+（MD5: 036dda2007b0bf325b97ab3e0fe4a85a）
+openSUSE[25]
+Novell 所开发的 Linux 桌面发行版，继承于 Slackware，有很大技术创新，如 YaST。其企业版 SLES 和 RHEL/CentOS 、Ubuntu 共同占据了 Linux 服务器市场的较大份额。
+
+DVD ISO
+Intel & AMD/ 兼容 PC 32 位 4.7GB ISO 镜像，适用于 32-bit 位 PC  点此下载[26] 
+（MD5: 43869f9b9b944adc1b210649d3730980）
+Intel & AMD/ 兼容 PC 64 位 4.7GB ISO 镜像，适用于 64-bit 位 PC 点此下载[27] 
+（MD5: 350b8cb014a4e342cc9a7cc9df891b99）
+CentOS 7[28]
+RedHat 的 Linux 企业版 RHEL 的社区重新打包版本，与 RHEL 相比，只是缺少 RedHat 的商业支持而已。主要用于服务器方面。CentOS 7 采用了一些新的技术，因此和 CentOS 6 有较大差异。
+
+DVD ISO
+Intel & AMD/ 兼容 PC 64 位 4GB ISO 镜像，适用于 64-bit 位 PC ，点此下载
+[29]（SHA256： c455ee948e872ad2194bdddd39045b83634e8613249182b88f549bb2319d97eb）
+Everything ISO
+Intel & AMD/ 兼容 PC 64 位 8GB ISO 镜像，适用于 64-bit 位 PC ，点此下载[30]
+（SHA256： af4969ebbdc479d330de97c5bfbb37eedc64c369f009cb15a97f9553ba441c88）
+CentOS 6[31]
+由于 CentOS 7 采用了一系列 systemd 相关的技术，因此还有相当多的产品环境的 Linux 服务器依旧使用 CentOS 6。
+
+Intel & AMD/ 兼容 PC 64 位 ISO 镜像，适用于 64-bit 位 PC ，DVD 1[32]，DVD 2[33] 
+（SHA256：1dda55622614a8b43b448a72f87d6cb7f79de1eff49ee8c5881a7d9db28d4e35 ，0aba869427b4ce04e100d72744daf7fea1f7be2e4be56b658095bd9e99e04e6d）
+Intel & AMD/ 兼容 PC 32 位 ISO 镜像，适用于 32-bit 位 PC ，DVD 1[34]，DVD 2[35]
+（MD5：720d185fdf063383a4471657076b72fc162d3c3c3bca2e5e5ae13a25b3046519 ，0c1a498a469214f276b4390a9ac2111fe8eb89084f7921d2eced659ada09e1a9）
+LFS[36]
+Linux From Scratch，简称 LFS，不同于其它的 Linux 发行版，它是一种给使用者指导建议，由使用者自行从头开始自己构建的发行版。
+
+Systemd 版本（简体中文翻译版本）：
+LCTT 对 LFS 7.7 systemd 版本进行了翻译，并且 LFS 官方网站收录[37]了相应链接：
+
+在线版本： https://linux.cn/lfs/LFS-BOOK-7.7-systemd/index.html 
+PDF ： https://img.linux.net.cn/lfs/LFS-BOOK-7.7-systemd.pdf 
+CHM ：  https://img.linux.net.cn/lfs/LFS-BOOK-7.7-systemd.chm 
+[1]: http://linux.cn/article-3238-1.html
+[2]: https://linux.cn/article-5893-1.html
+[3]: http://releases.ubuntu.com/16.04.2/ubuntu-16.04.2-desktop-amd64.iso
+[4]: http://releases.ubuntu.com/16.04.2/ubuntu-16.04.2-desktop-i386.iso
+[5]: http://releases.ubuntu.com/16.04.2/ubuntu-16.04.2-server-amd64.iso
+[6]: http://releases.ubuntu.com/16.04.2/ubuntu-16.04.2-server-i386.iso
+[7]: http://releases.ubuntu.com/17.04/ubuntu-17.04-desktop-amd64.iso
+[8]: http://releases.ubuntu.com/17.04/ubuntu-17.04-desktop-i386.iso
+[9]: http://releases.ubuntu.com/17.04/ubuntu-17.04-server-amd64.iso
+[10]: http://releases.ubuntu.com/17.04/ubuntu-17.04-server-i386.iso
+[11]: http://linux.cn/article-3237-1.html
+[12]: https://linux.cn/article-5893-1.html
+[13]: https://download.fedoraproject.org/pub/fedora/linux/releases/25/Workstation/i386/iso/Fedora-Workstation-Live-i386-25-1.3.iso
+[14]: https://download.fedoraproject.org/pub/fedora/linux/releases/25/Workstation/i386/iso/Fedora-Workstation-Live-i386-25-1.3.iso
+[15]: https://download.fedoraproject.org/pub/fedora/linux/releases/25/Server/i386/iso/Fedora-Server-dvd-i386-25-1.3.iso
+[16]: https://download.fedoraproject.org/pub/fedora/linux/releases/25/Server/x86_64/iso/Fedora-Server-dvd-x86_64-25-1.3.iso
+[17]: http://linux.cn/article-3260-1.html
+[18]: http://mirrors.ustc.edu.cn/linuxmint-cd//stable/17.3/linuxmint-17.3-cinnamon-32bit.iso
+[19]: http://mirrors.ustc.edu.cn/linuxmint-cd//stable/17.3/linuxmint-17.3-cinnamon-64bit.iso
+[20]: http://mirrors.ustc.edu.cn/linuxmint-cd//stable/17.3/linuxmint-17.3-mate-32bit.iso
+[21]: http://mirrors.ustc.edu.cn/linuxmint-cd//stable/17.3/linuxmint-17.3-mate-64bit.iso
+[22]: http://linux.cn/article-3441-1.html
+[23]: http://cdimage.linuxdeepin.com/releases/2014.3/deepin_2014.3_i386.iso
+[24]: http://cdimage.linuxdeepin.com/releases/2014.3/deepin_2014.3_amd64.iso
+[25]: http://linux.cn/article-4143-1.html
+[26]: http://download.opensuse.org/distribution/13.2/iso/openSUSE-13.2-DVD-i586.iso
+[27]: http://download.opensuse.org/distribution/13.2/iso/openSUSE-13.2-DVD-x86_64.iso
+[28]: http://linux.cn/article-3351-1.html
+[29]: http://buildlogs.centos.org/rolling/7/isos/x86_64/CentOS-7-x86_64-DVD.iso
+[30]: http://buildlogs.centos.org/rolling/7/isos/x86_64/CentOS-7-x86_64-Everything.iso
+[31]: http://linux.cn/article-3351-1.html
+[32]: http://mirrors.aliyun.com/centos/6.8/isos/x86_64/CentOS-6.8-x86_64-bin-DVD1.iso
+[33]: http://mirrors.aliyun.com/centos/6.8/isos/x86_64/CentOS-6.8-x86_64-bin-DVD2.iso
+[34]: http://mirrors.aliyun.com/centos/6.8/isos/i386/CentOS-6.8-i386-bin-DVD1.iso
+[35]: http://mirrors.aliyun.com/centos/6.8/isos/i386/CentOS-6.8-i386-bin-DVD2.iso
+[36]: https://linux.cn/article-5865-1.html
+[37]: http://www.linuxfromscratch.org/lfs/read.html
+
+https://linux.cn/article-4130-1.html?pr
+

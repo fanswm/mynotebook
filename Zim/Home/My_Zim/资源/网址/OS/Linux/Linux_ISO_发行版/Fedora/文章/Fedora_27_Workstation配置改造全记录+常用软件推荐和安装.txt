@@ -1,0 +1,395 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-23T14:08:31+08:00
+
+====== Fedora 27 Workstation配置改造全记录+常用软件推荐和安装 ======
+Created 星期日 23 二月 2020
+
+https://zhuanlan.zhihu.com/p/35586400?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+这篇文章就是在fedora27下写作的。先晒一下桌面图（晒桌面不等于只注重外表，喷子务必注意）
+
+PS: Fedora 28 Workstation虽然已发布，但是自己在全新安装一遍后发现流畅度还是不如27的，所以回到27版本。
+
+PS：Ubuntu18.04虽然换回了gnome，但是流畅度还是不如fedora的gnome。亲身体会。
+
+
+下面记录整个配置过程。
+
+
+
+1 配置软件源
+先联网，然后打开终端，输入
+
+sudo dnf localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-27.noarch.rpm  http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-27.noarch.rpm
+稍等其完成。这样就可以添加成功RPM fushion源。Fedora虽然自己的仓库也有将近五万多个软件包，但是很多音视频解码器，播放器，以及其它软件都没有收录。
+
+另外，还需要设置一个文件，从而可以在下载的时候，自动选择最快的服务器，这样国内的软件源就完全不需要添加了。（网上很多教程和博客都提到添加国内源，就自己使用来看，完全没必要。按照下面说的设置后，会自己选择最快的镜像地址的）
+
+sudo dnf install nano
+打开并设置dnf.conf文件，
+
+sudo nano /etc/dnf/dnf.conf
+在最后一行，添加
+
+fastestmirror=true
+最后ctrl+X，Y，回车，保存退出。
+
+为了使上面修改都生效，更新软件源缓存。并更新系统。
+
+sudo dnf makecache
+sudo dnf upgrade
+这个过程时间久一些，请耐心等待。更新完后请重起系统。
+
+
+
+2 配置浏览器
+Fedora27 Workstation自带Firefox浏览器，完全够用，不过还要进行一些简单的配置，使其用起来更顺手。
+
+进入浏览器首选项界面，先将其设置为默认浏览器（一千个读者一千个哈姆雷特，如果你不喜欢这个浏览器，可以自己做其他设置，可以跳过这个小节）。然后设置自己喜欢的首页。
+
+
+Firefox没有自带flash插件。解决办法是上如下网站
+
+Adobe Flash Player
+​
+get.adobe.com
+图标
+如下图所示
+
+
+下载完后，直接双击打开这个rpm安装包，安装即可。这样Firefox浏览器就可以播放视频等媒体资源了。
+
+
+
+3 社交工具--微信
+由于linux下主力工作并不是聊天，加上QQ安装比较棘手，而且微信用的人也越来越多，因此精挑细选，选择了electronic wechat，经过使用，问题不大。这款软件是绿色版，不需要额外做什么就可以直接运行。
+
+打开终端，
+
+wget https://github.com/geeeeeeeeek/electronic-wechat/releases/download/V2.0/linux-x64.tar.gz
+等一段时间后，下载完成。到/home/你的用户名文件夹下，找到它，解压缩，进入解压出来的文件夹，找到electronic-wechat程序，双击他即可打开微信。手机扫玛即可登陆。（如果第一次打不开，可关闭在重新打开软件。就可以了。）
+
+
+为了使用方便，可以制作一个桌面快捷方式文件，方便实用。打开系统自带的文本编辑器，输入
+
+[Desktop Entry]
+
+Name=Electronic Wechat
+
+Name[zh_CN]=微信电脑版
+
+Name[zh_TW]=微信电脑版
+
+Exec=/home/dell/linux-x64/electronic-wechat-linux-x64/electronic-wechat（根据实际情况修改，不要照搬）
+
+Icon=/home/dell/electronic-wechat.png（自己找图标，也是根据实际情况修改路径）
+
+Terminal=false
+
+X-MultipleArgs=false
+
+Type=Application
+
+Encoding=UTF-8
+
+Categories=Application;Utility;Network;InstantMessaging;
+
+StartupNotify=false
+
+
+
+保存成wechat.desktop，然后鼠标右击它，点击属性，在可执行程序打勾。这样桌面快捷方式就做好了。可以双击一下这个快捷方式看是否启动程序，如果没有，说明文件制作有错误，去检查一下错误的地方。以后可以轻松的拖动到dock上。
+
+
+
+4 办公套件--WPS Office
+下载地址：
+
+http://kdl.cc.ksosoft.com/wps-community/download/a21/wps-office-10.1.0.5672-1.a21.x86_64.rpm
+​
+kdl.cc.ksosoft.com
+
+
+双击打开即可安装。不过存在一个问题，字体的缺失。解决办法可参考这篇博客
+
+ubuntu 16.04安装WPS出现系统缺失字体
+​
+blog.csdn.net
+另外也可以根据自己需要，从windows系统下的fonts文件夹中有选择的拷贝一些字体到fedora的~/.fonts下。这样文档显示效果会更逼真。
+
+
+
+
+5 音乐软件--网易云音乐
+网易云音乐官方并没有推出rpm格式的安装包，所以就需要有些变通的方法了。首先，网易云音乐依托于VLC播放器组件，因此，打开终端输入
+
+sudo dnf install vlc
+安装完后，到
+
+http://d1.music.126.net/dmusic/netease-cloud-music_1.1.0_amd64_ubuntu.deb
+​
+d1.music.126.net
+下载deb安装包。把这个压缩包解压，得到这些文件，如箭头所示，解压箭头所指示的压缩包，得到左边这个文件夹data。
+
+
+进入Data文件夹。会看到usr文件夹，进入/usr/share/applications/，用文本编辑器打开这个快捷方式，在icon那一行改成：
+
+Icon=/usr/share/icons/hicolor/scalable/apps/netease-cloud-music.svg
+
+保存退出文本编辑器。
+
+
+
+返回到能看得到usr文件夹的地方，在这里右击鼠标打开终端，
+
+sudo cp -r usr /
+这样网易云音乐即可安装完成。去看看程序列表，图标也出来了。经过测试，完美使用。听歌看MV 都很正常。不得不说官方真的很给力，虽然没有提供rpm包，但是在这个Deb包里，囊括了程序运行的全部运行库，因此得以直接打开运行。
+
+
+
+
+6 笔记软件--cherry tree和retext
+按照自己之前的使用习惯，本来是想安装配置为知笔记的，无奈为知笔记在fedora下编译死活通不过，虽然fedora FZUG中文社区有提供安装包，但经过测试安装完了打不开（这个社区貌似都没怎么维护）。在三考虑，决定放弃。改用其他开源软件。当然也不是乱选的，首先笔记软件最起码要支持语法高亮，其次最好支持markdown方便我记笔记。由于是开源软件，就不苛求功能很多了。满足基本需求即可。
+
+cherry tree是出了名的层级结构笔记软件。在程序员当中很有名气。支持语法高亮。安装方法也很简单。比较遗憾的是导出格式太少，而且导出格式不太常见。另外也没有markdown实时预览。所以仅作为备选。
+
+sudo dnf install cherrytree
+
+
+
+retext是一款轻量级开源markdown编辑器，经过上手使用，效果不错。不过默认情况下不支持代码高亮和数学公式。我们可以通过安装相应插件弥补这些缺憾。
+
+sudo dnf install retext
+sudo dnf install mathjax(数学公式插件)
+sudo dnf install python2-pygments
+sudo dnf install python3-pygments(语法高亮插件）
+安装完后，进入软件编辑菜单--个人偏好，如下图设置，注意用英文逗号分隔。确定退出。把这款软件关闭，在打开。
+
+
+最终效果如下图所示。效果还是可以的。而且这款编辑器还能导出pdf HTML等格式。对一款开源软件来说，完全够用了。如果配合网络云盘，效果更佳。
+
+
+目前我在fedora下的首选笔记软件就是ReText。毕竟体积小，markdown语法也基本都具备。做笔记再合适不过。本来还发现一个叫做remarkable的小巧的markdown软件，但是官方提供的rpm包装上后点击程序图标一直打不开。遂放弃。
+
+
+
+7 绘图软件三剑客--GIMP Dia Inkscape
+这三个大名鼎鼎，GIMP就相当于Linux下的Photoshop，Dia相当于Linux下的微软Visio，Inkscape相当于Linux下的Ilustrator。当然因为都是开源软件，功能上肯定不可能都能与商业软件相比，但是大部分的功能足够使用了。安装方法也很简单。
+
+sudo dnf install gimp dia inkscape
+
+
+
+
+
+8 视频播放器--VLC
+开箱即可用的一款很不错的视频播放器。在安装完后，基本上很多格式的视频都能直接打开播放。甚至包括mp4,RMVB格式等。播放高码率视频也不卡。值得称赞。
+
+sudo dnf install vlc
+
+
+
+9 截图工具--shutter
+这篇文章的所有图片，就是用这个工具截取出来的。效率高，选好区域后，能快速响应并把图片及时保存下来，无需点击太多鼠标。是我最欣赏的一点。而且图片还能随时编辑处理（比如加箭头等）。如果在寻找高效率的截图工具，这款软件值得考虑。
+
+sudo dnf install shutter
+
+
+
+10 英汉词典--GoldenDict
+本来自己比较习惯的是有道词典，没办法的是有道词典同样无法编译通过，而且还缺少很多组件无法下载，因此只能想其他办法。所幸，这款开源软件结合一定的设置，可以解决燃眉之急。起码可以查词典了。
+
+首先
+
+sudo dnf install goldendict
+打开软件，点击编辑菜单--词典
+
+
+点击网站选项卡，在点击添加按钮。如图所示。地址输入（请复制连接的地址）
+
+【%gdword%】什么意思_英语%gdword%的翻译_音标_读音_用法_例句_在线翻译_有道词典
+​
+dict.youdao.com
+名称可以随便输入，我输入的是youdao，最后给自己添加的这个网站词典打勾。
+
+
+为了加快词典查询速度，我们还要取消软件默认勾选的查询内容。到维基百科选项卡，把这个默认的选项取消勾选。这样在查询单词的时候，就不会默认先从维基百科查询了。大大提高查询速度。
+
+
+点击确定按钮，保存设置。现在去查询一个单词，回车后，很快就会出现查询结果。到此自己打造的英汉词典就做好了。
+
+
+
+
+11 思维导图软件--VYM和Freemind
+思维导图软件能在Linux下用的还不少，像国产的Xmind,MindMaster等等。但是这些软件都是比较大的块头，启动速度也慢一些。本人不是很满意。经过搜索和使用，觉得开源的这两个软件作思维导图完全足够。而且也能输出比较多的格式。在知乎上看到有些所谓的大神鄙视这些开源的思维导图软件，一个劲的推荐这些收费的国产软件，我真的很呵呵。不是鄙视国产的软件，毕竟是在linux下，要的就是效率，轻便，简洁，快速。启动这些大块头的软件花的时间人家都画图画得差不多了（当然是夸张的说法）。而且免费功能也不差，免费的大餐不要白不要。
+
+sudo dnf install freemind vym
+大家可以看看这两款软件官方自带的示范图，效果也不差吧？免费开源能达到这种绘图水准，我看也足够了。
+
+
+
+
+
+
+
+12 下载工具--Uget+aria2和qbittorrent
+uget作为常规文件下载器，一般都是搭配aria2来使用。aria2可以起到加速的作用。qbittorrent用来作为bt文件下载器。有些下载地址提供的是bt种子文件，这种情况一般就需要这款软件来打开进行下载。
+
+sudo dnf install uget aria2 qbittorrent
+在安装完后，uget还需要做一些设置才会调用aria2进行加速。设置步骤：
+
+打开uget，点击编辑菜单--设置。如图所示设置。点击确定按钮。
+
+
+点击分类菜单--属性，如图设置，点击确定按钮。这样uget就算设置好了。
+
+
+qbittorrent界面：
+
+
+目前ed2k协议的下载软件还没有找到合适的。好在自己也使用双系统，ed2k大不了在Windows下下载好了，或者在fedora安装虚拟机virtualbox，装个Windows来下载。等等。很多方法都可以解决。不急。
+
+
+
+13 开发工具--Eclipse CodeBlocks VSCode SublimeText Atom
+eclipse是比较好用的Java编程工具，Fedora官方仓库有比较新的版本4.7。这里要提醒一下，如果有其他额外的开发需求，请不要dnf install来安装eclipse，会导致自动安装上openjdk。请到这些软件的官网手动下载和配置eclipse和JDK环境。这里为了方便初学者，就采用了dnf install来安装eclipse的方式。这样会同时安装配置好openJDK。
+
+sudo dnf install eclipse
+
+CodeBlocks是学习C/C++语言的好工具。不过要提醒的是，如果是C++，Fedora默认没有自带gcc-c++库，需要手动安装一下。否则无法编译运行。
+
+sudo dnf install gcc-c++ codeblocks
+
+其他的开发工具都可以在官网下载到。
+
+VSCode（官网提供了下载方法，没直接提供安装包）
+
+Running Visual Studio Code on Linux
+​
+code.visualstudio.com
+图标
+Atom：
+
+https://atom-installer.github.com/v1.25.1/atom.x86_64.rpm?s=1522933786&ext=.rpm
+​
+atom-installer.github.com
+sublime text:（官网提供了安装方法，没提供安装包）
+
+Linux Package Manager Repositories
+​
+www.sublimetext.com
+
+
+
+至于怎么配置这些代码编辑器更顺手，萝卜白菜各有所爱。这里就不详细展开了。
+
+
+
+14 视频编辑--OpenShot
+开源的轻量级视频编辑器。一看这个界面，相信很多人都可以轻松上手。linux下的开源软件就是这些特色，够用轻量简洁美观。
+
+
+sudo dnf install openshot
+
+
+15 CHM文件阅读--kchmviewer
+在编程开发时，有时候需要参考一些chm格式的帮助手册，比如python手册，jdk api手册等。kchmviewer是一个小巧的chm阅读器。而且安装完后会自动跟chm文件关联。阅读起来很是舒适。值得推荐。
+
+sudo dnf install kchmviewer
+
+
+
+16 PDF阅读--okular
+okular这款软件名气也不低。PDF阅读必备。而且一直是我很喜欢的PDF阅读软件。其他的PDF阅读器或多或少都有些小问题。只有在okular下才比较稳定。也不得不承认，KDE下诞生出来的这些软件是有多么高大上了。
+
+sudo dnf install okular
+
+
+
+17 完善压缩解压缩功能
+sudo dnf install zip unzip unrar p7zip p7zip-plugins
+安装完后基本上大多数压缩包格式都可以支持了，比如.7z rar等。
+
+
+
+18 桌面美化
+sudo dnf install gnome-tweak-tool numix-gtk-theme numix-icon-theme-circle
+打开tweak，在外观里面设置主题和图标。numix一直是自己很喜欢的图标。不但统一都是圆的，而且设计上也是非常时尚。
+
+
+桌面底部的dock的实现就是安装了cairo-dock实现的。不过这个插件不会开机启动。请在gnome tweak工具的开机启动程序中添加cairo-dock即可。
+
+sudo dnf install cairo-dock
+
+
+19 数学软件--Octave
+功能类似于matlab，从这个画图质量可见一斑。拿来作数学运算绘图等问题不大。而且小巧方便。
+
+sudo dnf install octave
+
+
+
+20 Gnome扩展推荐
+gnome可以通过扩展增强很多功能。下面是我用到的扩展。
+
+扩展官网：
+
+GNOME Shell Extensions
+​
+extensions.gnome.org
+提醒一下，这个网站安装扩展的时候会需要安装插件，请按照提示来做即可。
+
+OpenWeather扩展：显示天气的详细信息。一直是我的最爱。
+
+
+Removable Drive Menu扩展：类似于windows的usb驱动器弹出。很实用。
+
+
+sound input output device chooser扩展：可以选择输入输出音频设备。是在原来的gnome桌面的声音功能的一个扩展。也同样很实用。
+
+
+applications menu扩展：类似于windows开始菜单。这样点一下鼠标就能查看分类了的程序，也算是在gnome3桌面上提供了一个比较友好的程序查看方式。每一次找程序，gnome3默认桌面下，都要把鼠标点到左上角，然后才能进一步查找程序。很是啰嗦。
+
+
+alternate Tab扩展：按下alt+tab后可以以缩略图形式呈现程序切换界面。类似于Windows7
+
+
+
+21 解决风扇一直转的问题
+fedora27在我的2013年的戴尔笔记本上安装完后，风扇一直转个不停，用手摸出风口也不是很热，说白了，就是没达到风扇转起来的热度。以前用ubuntu的时候，装一个i8kutils就可以解决这个问题了，装上去后风扇就不会响了，只有很热的时候才会响起来。可是在fedora27的仓库里已经没了这个软件了，没法直接dnf install。郁闷了蛮久的时间。
+
+后面不死心再去国外fedora论坛帖子去看看，终于看到一个提问题的老外他后面自己解决了这个问题。其实这个问题也很简单，就是从GitHub上获取i8kutils源代码文件自己编译。方法如下。
+
+sudo dnf groupinstall "Development Tools"
+sudo dnf install glibc-devel.i686 libstdc++-devel.i686 glibc-devel libstdc++-devel acpi
+mkdir ~/Sources
+cd ~/Sources
+git clone https://github.com/vitorafsr/i8kutils.git
+cd i8kutils
+make
+sudo cp i8kfan i8kctl i8kmon /usr/bin
+sudo cp i8kmon.conf /etc/
+sudo cp dell-smm-hwmon.conf /etc/modprobe.d/
+sudo nano /etc/systemd/system/i8kmon.service
+把下面这些文字复制进去，再保存退出。
+[Unit]
+Description=i8kmon
+
+[Service]
+#ExecStartPre=/usr/sbin/smm 30a3  # uncomment to disable BIOS fan control
+#ExecStopPost=/usr/sbin/smm 31a3  # ... and re-enable it afterwards
+ExecStart=/usr/bin/i8kmon -nc
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+
+最后
+sudo systemctl enable i8kmon.service
+经过以上操作，在重启一下电脑。就会惊喜的发现戴尔笔记本风扇不会一直转了。安静了很多。风扇老嗡嗡响的话，相信谁也不会有心思再用电脑了。
+
+
+
+到此fedora27的配置全过程记录就大致写这么多了。希望能或多或少起到抛砖引玉的作用。写在这里也是为了以后万一重装的时候有个参考，节约时间。不得不说的是Fedora27用起来真的很流畅，gnome3其实还是很好用的，当然刚开始装fedora27之后，gnome3经常会崩溃，但是在进行系统大更新后，gnome3就稳定得多了。起码在我写这个文章一整天下来的过程中，只崩溃一两次。而且都会自动恢复，正在打开的程序文件都没有影响。这个值得称赞。fedora真的是值得一试的系统。毕竟它的前身就是Red Hat Linux，肯定不会差。

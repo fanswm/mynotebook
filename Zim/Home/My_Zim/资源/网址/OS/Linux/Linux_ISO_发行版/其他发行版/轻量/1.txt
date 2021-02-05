@@ -1,0 +1,242 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-29T19:28:21+08:00
+
+====== 1 ======
+创建日期 星期五 29 一月 2021
+
+适用于旧计算机的10款最佳轻量级Linux发行版
+[日期：2019-10-07]	来源：Linux公社  作者：醉落红尘	[字体：大 中 小]
+简介：先别把你的旧电脑扔了。使用以下一款轻量级的Linux发行版，让这个有几十年历史的系统重新焕发生机。
+
+你怎样处理你的旧电脑?一个曾经有良好的硬件配置，但现在那些被认为是过时的。为什么不用Linux来重启你的旧电脑呢? 我将列出您可以在旧PC上使用的最佳轻量级Linux发行版。
+
+虽然我们的重点是老式计算机，但您也可以在相对较新的硬件上使用这些轻量级Linux。如果您使用您的计算机进行资源密集型操作，例如在Linux上进行视频编辑，那么这将为您提供更好的性能。
+
+让我们看看应该使用哪个轻量级Linux发行版。
+
+适用于旧笔记本电脑和台式机的最佳轻量级Linux发行版
+
+我会试着按硬件需求的递减顺序来排列这个列表。这意味着排名第一的轻量级Linux发行版需要最少的硬件。
+
+10、Peppermint
+
+Peppermint是一个专注于云计算的Linux发行版，不需要高端硬件。它基于Ubuntu，使用LXDE桌面环境，为您提供更流畅的体验。
+
+
+
+最初是基于以网络为中心的上网本开发的，Peppermint开发了ICE应用程序，可以将任何网站集成为桌面应用程序。
+
+它还有一个不错的入门指南来帮助新用户。还有一个专门的论坛帮助解决问题和回答您的问题。
+
+Peppermint操作系统的最低系统要求:
+
+内存:1gb内存(推荐2g)
+CPU:基于Intel x86架构的处理器
+磁盘空间:至少4 GB可用磁盘空间
+你可以在它的网站上获得更多关于Peppermint的信息:https://peppermintos.com/
+
+相关：
+
+Peppermint OS 10 发布，基于Ubunt轻量级桌面发行版  https://www.linuxidc.com/Linux/2019-05/158724.htm
+
+9、Lubuntu
+
+下一个最好的轻量级Linux发行版是Lubuntu。顾名思义，它是基于LXDE桌面环境的Ubuntu家族的一员。事实上，它是Ubuntu的官方版本之一。
+
+Lubuntu还支持被埋起来的旧电脑(开玩笑的!)你也可以在现代的硬件上使用Lubuntu)。Lubuntu是Ubuntu中最轻量级的衍生产品，所以速度特别快，支持较老的硬件。
+
+
+
+Lubuntu的默认包比较少，大部分是轻量级的Linux应用程序。
+
+GPicView用于图像查看，MTPaint用于绘图，Evince用于PDF, Audacious用于音乐，Gnome-Player用于视频，guvcview用于网络摄像头，Chromium用于网络浏览，Sylpheed用于电子邮件，Pidgin用于即时消息传递，Pidgin用于torrent, Gnumeric用于电子表格，Abiword用于办公，Xpad用于笔记，等等。
+
+如果你之前使用过Ubuntu，你就不会觉得Lubuntu很陌生。软件和软件库是一样的，所以你可以从他们的软件库中获得你在Ubuntu上使用的所有软件。但是，在安装任何应用程序时，请注意您的系统。选择一个可以消耗旧计算机较少资源的应用程序。不要使用资源密集型应用。
+
+Lubuntu的最低硬件要求:
+
+内存:512 MB内存(推荐1GB)
+CPU:奔腾4或奔腾M或AMD K8或更高
+网站：https://lubuntu.me/
+
+相关：
+
+Lubuntu 19.04 发布，LXQt桌面环境  https://www.linuxidc.com/Linux/2019-04/158227.htm
+
+8、Linux Lite
+
+Linux lite欢迎画面
+
+顾名思义，Linux Lite是轻量级Linux发行版，不需要高端硬件即可运行。即使是初学者，也希望能够在较旧的计算机上轻松使用它。 Linux Lite基于Ubuntu LTS（长期支持）发行版。 LTS版本提供5年的支持，这意味着在计算机上安装Linux Lite后，它应该提供5年的更新。
+
+
+
+Linux Lite团队说：“ Linux Lite具备开箱即用的全部功能，这意味着您无需在首次启动计算机时安装额外的软件。”这对于新手来说非常有用，因为他们不需要需要去一些基本的应用程序搜索安装。大多数基本应用程序都是通过操作系统内置的。
+
+一些预安装的应用程序包括用于Web浏览的Firefox，用于电子邮件的Thunderbird，用于云存储的Dropbox，用于音乐的VLC Media Player，用于办公室的LibreOffice，用于图像编辑的Gimp以及用于调整桌面的Lite tweaks。
+
+考虑到它基于Ubuntu，您可以在线学习Ubuntu教程，从而获得大量的支持和资源。
+
+Linux Lite的最低硬件要求：
+
+RAM：512 MB RAM（建议1 GB）
+CPU：700MHz处理器
+显示：VGA屏幕1024×768分辨率（推荐的VGA，DVI或HDMI屏幕1366×768）
+磁盘空间：至少5 GB可用磁盘空间
+网站：https://www.linuxliteos.com/
+
+相关：
+
+Linux Lite 4.6 发布，基于Ubuntu 18.04.3 LTS  https://www.linuxidc.com/Linux/2019-09/160456.htm
+
+7、LXLE
+
+LXLE是轻量级Linux发行版的不错选择
+
+LXLE实际上是Lubuntu LTS版本的翻版。这意味着Lubuntu基本上是Lubuntu，但是为了一个特定的目的进行了调整，在这个例子中是为了恢复旧电脑。
+
+
+
+尽管LXLE是轻量级的Linux发行版，但它试图提供直观的用户界面和视觉效果。该系统经过调整以提高性能，并默认安装了大量轻量级应用程序。
+
+LXLE的最低硬件要求:
+
+内存:512 MB(推荐1gb)
+CPU:奔腾3(推荐奔腾4)
+磁盘空间:8 GB
+相关：
+
+LXLE 18.04.3 Beta 发布，基于Lubuntu 18.04 LTS  https://www.linuxidc.com/Linux/2019-08/160223.htm
+
+6、CrunchBang++
+
+CrunchBang++也被称为CBPP 或 #!++ 或 CrunchBang Plus Plus。CrunchBang++是已死的Linux发行版Crunchbang Linux的翻版，以简单和轻量级著称。CrunchBang++支持旧电脑，运行没有任何问题。CrunchBang++目前基于Debian 10，具有最小的设计界面，围绕最小和轻量级的Openbox窗口管理器构建。
+
+CrunchBang++
+
+适用于旧计算机的10款最佳轻量级Linux发行版
+
+这个项目继续与相同的目标，提供易于使用的轻量级Linux与良好的功能。这就是为什么Crunchbang++包括一个最小的设计，简单和圆滑的界面。
+
+该项目旨在提供具有良好功能的易于使用且轻便的Linux。这就是为什么CrunchBang++包含最小的设计，简单而时尚而流畅的用户界面
+
+CrunchBang++的一些应用程序包括：Geany IDE，Terminator终端仿真器，Thunar File Manager，用于图像编辑的Gimp，Viewnior图像查看器，用于音乐的VLC Media Player，数值电子表格编辑器，Evince pdf查看器，gftp文件传输客户端，Xchat IRC客户端，办公软件AbiWord。
+
+CrunchBang++的最低硬件要求:
+
+CrunchBang++没有官方的硬件推荐。理想情况下，它应该使用512 MB RAM和Pentium 4 CPU。
+
+Openbox对初学者不是很友好，但这并不意味着你应该害怕去尝试: https://crunchbangplusplus.org/
+
+5、Bodhi Linux
+
+另一个轻量级的Linux发行版是Bodhi Linux，它为老式的电脑和笔记本电脑带来了生机。Bodhi Linux因其轻巧而闻名。在Bodhi Linux上预装的软件不多，所以ISO的尺寸不是很大，当安装在旧电脑上时，它可以在不占用太多内存的情况下自由运行。但是不要以为你安装不了其他的应用程序，你可以安装任何你需要的应用程序。
+
+Bodhi Linux
+
+除此之外，Enlightenment使发行版更快。Enlightenment比其他Linux发行版中使用的窗口管理器要快。
+
+有一些基本的应用程序，如用于图形的Ephoto，用于Web浏览的Midori，用于ePad文本编辑器，但遗憾的是，没有用于多媒体的应用程序。但别担心!如前所述，您可以通过App Center安装其他应用程序。大多数情况下，针对Ubuntu的PPAs也适用于菩提Linux。
+
+Bodhi Linux的最低硬件要求:
+
+内存:256 MB内存
+CPU: 1.0 GHz
+磁盘空间:4 GB的驱动器空间
+相关：
+
+Bodhi Linux 5.0发布，在Ubuntu 18.04 LTS之上推出安全可靠的Moksha桌面  https://www.linuxidc.com/Linux/2018-08/153652.htm
+
+4、antiX Linux
+
+对于轻量级的Linux发行版来说，antiX Linux是一个不错的选择
+
+antiX是一个基于Debian Linux的轻量级Linux发行版。它以拥有一个没有systemd的Linux发行版而自豪。如果您不知道systemd这个术语，那么antiX不使用systemd对您来说应该没什么关系。
+
+antiX 19 Beta 2 发布，基于Debian 10
+
+antiX使用icewm窗口管理器来保持系统在低端硬件上运行。它默认不提供许多软件，所以ISO的大小比较小。如果你有一个活跃的互联网连接，你总是可以下载和安装更多的软件。
+
+antiX Linux的最低硬件要求:
+
+内存:256 MB内存
+CPU:机器系统
+磁盘空间:2.7 GB的驱动器空间
+相关：
+
+antiX 19 Beta 2 发布，基于Debian 10  https://www.linuxidc.com/Linux/2019-07/159349.htm
+
+3、SparkyLinux
+
+我们的轻量级Linux发行版列表中的第三个位置是SparkyLinux。SparkyLinux是另一个轻量级的，但同时，SparkyLinux也瞄准了现代计算机，所以它有另一个版本，它装载了应用程序，使发行版在安装后立即运行。
+
+SparkyLinux 2019.09 发布，基于Debian 11 与 Xfce 4.14
+
+我告诉过你SparkyLinux基于什么发行版吗?没有?糟糕!实际上，SparkyLinux是基于Debian测试分支的，它有几个桌面环境，包括LXDE、OpenBox/JWM、e17、MATE、LXQt、Cli和GameOver edition。除了Cli(命令行接口)之外，LXQt比其他提到的都要快。
+
+如前所述，它有两个版本:完整版和基础版。完整版是加载的应用程序，所以你不必手动安装他们，但这不是为我们的旧电脑。基本版没有加载太多的应用程序，所以它很轻，也不需要使用太多的系统资源。尽管Sparky有自己的库来安装大多数应用程序。
+
+默认安装的应用程序列表对于不同的Sparky、Full、Base和Gaming edition是不同的，可以在下载页面的每个版本下面找到。
+
+SparkyLinux的最低硬件要求:
+
+内存:256 MB内存用于LXDE, e17, Openbox, GameOver, 384MB内存用于MATE, LXQt
+CPU: i486 / amd64
+磁盘空间:5 GB的驱动器空间
+相关：
+
+SparkyLinux 2019.09 发布，基于Debian 11 与 Xfce 4.14  https://www.linuxidc.com/Linux/2019-09/160483.htm
+
+2、Puppy Linux
+
+正如我上面提到的，现在的发行版将会更小，但是速度更快。Puppy Linux就是其中之一，Puppy Linux最新版本是Puppy Linux 6.0.2 tahrpup CE，只有199 - 201MB大小。是的!这是非常小的。这个小的Linux发行版可以用一个小尺寸的U盘启动。
+
+Puppy Linux可以使用CD/DVD/USB进行实时引导，一旦引导成功，就可以弹出CD/DVD/USB, Puppy Linux可以顺利运行。它是如此的小，它保存在RAM中的一切，这使它非常快。你甚至可以保存任何数据在同一USB，你正在启动小狗Linux从。古怪的7.0.3版本甚至比tahrpup CE还小，只有176MB。
+
+
+
+Puppy Linux默认使用JWM和Openbox窗口管理器，这使得它非常容易消耗资源。如果你在旧的电脑上使用Puppy Linux，那么这将更有可能适用于它，但不需要那些高级的图形应用程序。尝试使用轻量级应用程序和工具来完成您的工作。
+
+由于Puppy Linux的构建速度很快，所以它没有附带大量的应用程序。不过它有一些基本的应用程序。例如，Abiword用于字处理，Gnumeric用于电子表格和各种图形编辑和媒体播放程序。就我个人而言，我使用Puppy Linux来恢复数据或者修复我的操作系统，相信我，这对我很有帮助。
+
+Puppy Linux的最低硬件要求:
+
+RAM: 64MB(推荐256 MB)
+CPU: 333 mhz
+相关：
+
+Puppy Linux 8.0 发布，轻量级发行版  https://www.linuxidc.com/Linux/2019-03/157725.htm
+
+1、Tiny Core
+
+准备好被这个Tiny Core所震撼吧。我敢打赌，Windows最小的图像编辑应用程序将比 Tiny Core Linux大。是的!它只有16MB大小!惊讶吗?
+
+这大概是这个发行版的大小，但是里面的东西也会让你大吃一惊。它具有最小的接口和很少安装的应用程序。如果你有一台古老的电脑，试试这个，看看它的神奇之处。它的启动速度比任何其他操作系统都要快。
+
+Tiny Core Linux是从Damn Small项目派生的，但现在它是完全独立的。默认情况下，此小型发行版随附FLTK / FKWM和BusyBox桌面。您可以找到许多缺少的东西，例如，硬件图形，但是如果需要，你可以手动安装它们。
+
+Tiny Core
+
+Tiny Core有三个版本分别是Core, Tiny Core和CorePlus。Core是只有CLI(命令行接口)的基本系统。这将惊人地适合在旧电脑，但因为这是一个CLI，所以一个经验丰富/先进的用户可以操作它。当前版本的核心版只有11MB。:)
+
+TinyCore版是为熟悉GUI(图形用户界面)的普通用户设计的。初学者可以熟悉这个版本的小内核Linux。目前发布的TinyCore只有16MB大小。你说是不是很小。
+
+CorePlus是一个安装映像，而不是发行版。建议只使用无线网络或使用非美国键盘布局的新用户使用。它包括基础核心系统和安装工具，为设置提供以下选项:选择7个窗口管理器，通过许多固件文件和ndlswrapper的无线支持，非美国键盘支持，和一个重定向工具。当前版本的CorePlus只有106MB大小。
+
+
+Tiny Core Linux的最低硬件要求:
+
+RAM: 46 MB(推荐64 MB)
+CPU:奔腾2
+网址：http://www.tinycorelinux.net/
+
+总结
+
+在旧的硬件上安装以上任何一个Linux都非常容易。而且团队本身提供了许多教程或指南来帮助新用户。此外，您还需要对希望安装在非常小的发行版上的应用程序做一些研究。更喜欢使用较少系统资源和具有简单用户界面的应用程序。如果您维护这些安装，那么使用上面列出的任何轻量级Linux发行版都没有问题。
+
+Linux公社的RSS地址：https://www.linuxidc.com/rssFeed.aspx
+
+本文永久更新链接地址：https://www.linuxidc.com/Linux/2019-10/160938.htm
+
+https://www.linuxidc.com/Linux/2019-10/160938.htm
