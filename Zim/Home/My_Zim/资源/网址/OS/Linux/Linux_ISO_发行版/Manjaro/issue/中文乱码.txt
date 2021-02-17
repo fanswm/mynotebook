@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-08-12T22:24:30+08:00
-
-====== 中文乱码 ======
-创建日期 星期一 12 八月 2019
-
-sudo pacman -S wqy-zenhei ttf-fireflysung firefox-i18n-zh-cn thunderbird-i18n-zh-cn gimp-help-zh_cn man-pages-zh_cn wqy-microhei-lite wqy-bitmapfont adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts noto-fonts-cjk wqy-microhei && fc-cache -fv && locale-gen
-然后重启。

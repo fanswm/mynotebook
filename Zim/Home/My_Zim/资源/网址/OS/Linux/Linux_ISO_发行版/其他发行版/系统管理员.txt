@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-01T10:55:00+08:00
-
-====== 系统管理员 ======
-Created Thursday 01 November 2018
-

@@ -1,0 +1,66 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-15T23:13:37+08:00
+
+====== CentOS 8 明年年底就停止支持了，Linux怎么选？ ======
+Created 星期一 15 二月 2021
+
+有这样几个选择：Rocky Linux / Debian / openSUSE Leap
+
+关于Rocky Linux，这里引用marguerite的话：
+
+而且我理解 Rocky 并不是 CentOS 的完全替代，只是炒热度你们还没反应过来…之前的模式是 RHEL -> CentOS，意思是 CentOS 的更新来自于 RHEL 系统已经采用的更新。Rocky 宣称的模式是 CentOS stream -> RHEL -> rocky。而市场要的是 Debian -> Ubuntu 这种稳定性很强的直接 downstream。要不然跟 Rocky 同样模式甚至要好一些的 Leap 早火了。
+
+个人感觉这个模式是有问题的。就好比过筛子，真正到最后剩下的没那么多用户。Rocky 学的其实是 SUSE。openSUSE 是 Tumbleweed -> Leap <-> SUSE Linux Enterprise。我是 Tumbleweed，这个坛子里有一半的人得是 TW。长期看 CentOS Stream 它就也得筛掉一半人，它就相当于一个不怎么更新的 Tumbleweed 啊（激进性排序：Arch -> Tumbleweed -> CentOS Stream）。我们这个模式三个环里都是一家公司，是 SUSE 主动把 SUSE Linux Enterprise 的东西推出来给 Leap。SLE 你直接去找它的 patch 是很难的。
+
+RHEL 也是如此，它之前没有开放的 Upstream OS，Fedora 与它之间步子大了点不能完全算，所以 CentOS 还能够接触到点东西。现在是红帽想填前面那个大步子，CentOS Stream 出来了 RHEL 应该会变得更封闭，从里面取东西可能就不如 CentOS 时期方便了。以前 Novell 时代我还能看见 SUSE 内部 bugzilla，Leap 出来就没有访问权了。已经证实的东西应该大公司都差不多一样，开源也得可控不是？那么 Rocky 以后还能不能从 RHEL 自由的取东西呢？表示怀疑。如果慢慢变成 CentOS Stream -> Rocky，它的愿景就没了更没人用。毕竟原来的模式，CentOS 其实是骑在 RHEL 脖子上拉*…所以它能那么成功，谁不想要免费的企业版呢？但这本来就是不正常的，不能怪红帽拿它开刀，成也萧何 败也萧何。
+
+其次 CentOS Stream 是一个不怎么更新的 Tumbleweed。喜欢 Rolling release 的人不会选，喜欢稳定的人也不会选（因为不测试，这正是 Rocky 创立的原因，它还要做 RHEL 的 downstream 就是想把测试工作丢给红帽）。本身就是一个没什么受众的发行版，只有红帽死忠粉才会去用。
+
+另外发现没有，RHEL 要拿 CentOS Stream 做上游，那原来的上游 Fedora 干嘛去？所以红帽的战略其实搞反了吧，Fedora 是一个激进的固定发行版，CentOS Stream 却是一个保守的滚动版。拿滚动版做上游，Fedora 的支持就会变弱，拿 Fedora 做上游，CentOS Stream 就完全没用。这个问题的处理肯定会带来摇摆甚至社区分裂的。要我说一手好牌打稀烂，直接 CentOS 做更新勤快一些的 RHEL 多好。把测试前置到 CentOS Stream。变成 Fedora -> CentOS Stream -> RHEL
+
+有时候我感觉出这个策略的可能是 SUSE 派过去的卧底，有些抄 SUSE 作业没抄明白的感觉。我们是用户先创造了 TW，然后 Factory -> openSUSE Release -> SUSE Linux Enterprise 的模式不变，发现有时候 openSUSE 新版本都出来了 TW 还在前一个版本基础上 roll。就直接把 openSUSE Factory 改成 TW。全在激进版上改，最后把 openSUSE Release 变名为 Leap 实现统一。
+
+红帽正常应该这么抄，第一步 CentOS 和 RHEL 都用 Fedora Release 做基础，相当于把 CentOS 提前一个身位（这步其实只需要发通告，因为本来就是这样，RHEL 是 Fedora 为基础，CentOS 只是 RHEL 重编译）；第二步，CentOS 和 RHEL 都从 Fedora Release 取 Patch，身位取齐；第三步，RHEL 从 CentOS 取 patch 同时安全更新反馈到 CentOS，身位拉后。变成跟我们现在一样的模式。
+
+它并不需要凭空创造一个滚动版，因为 Fedora 就是固定版里的滚动版，很激进了。现在是学我们创造一个滚动版，但是它是拆了 CentOS 去拿一个最稳定的去当滚动版，Fedora 不当上游不满意 CentOS 当上游也不满意，相当于把房子拆了重新盖。同时把自己已经有的半稳定版 Fedora 给扔了，相当于把院子也刨了。田忌赛马不是这么玩的，解决 CentOS 骑脖子拉*也不应该是这么解决的…
+
+所以说，Rocky Linux不一定能起得来，当然维护力度没之前那么强；但是这事都快一个月了，Rocky Linux也没搞出什么东西：
+
+下一个选择，就是Debian
+
+Debian stable的软件包版本通常都很老，其实是因为它们都被测试了很久，所以非常稳定
+
+Debian testing的软件包不新不旧，是正在测试中的软件，还没有进入稳定版
+
+Debian unstable就是现在最新的包，是上游发布后，未经测试就加入的包；Ubuntu就是基于此，所以Ubuntu的稳定性较差。。
+
+接下来就是openSUSE Leap
+
+openSUSE Leap和SLE共用底层，连内核都是共用的，并且这些都是有SUSE在维护，所以稳定性接近SLE。
+
+SLE的稳定性又怎样呢？很简单，看了这句话你就能明白：
+
+“Red Hat在服务器领域唯一的竞争对手就是SUSE。”
+
+是的，RH和SUSE的Linux产品都是对标的：
+
+SLE <--> RHEL
+
+openSUSE Leap <--> CentOS/Rocky Linux
+
+openSUSE Tumbleweed <--> Fedora Linux
+
+openSUSE有万能的管理工具YaST
+
+
+也有类似于AUR的Open Build Service
+
+喜欢滚动发行的话，可以用Tumbleweed，滚动发行，软件新旧和Arch差不多
+
+从CentOS转到openSUSE Leap，一定比转到Debian更容易，因为它们同用rpm包，都使用sysconfig，而且openSUSE还带有YaST。
+
+openSUSE会给您带来全新的体验，用久了您会觉得openSUSE各方面都非常合理，这时您会受不了Ubuntu那个渣渣。
+
+
+https://www.zhihu.com/question/434050351/answer/1668885157?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

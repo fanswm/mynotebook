@@ -10,8 +10,8 @@ https://linux.cn/article-12886-1.html?pr
 scanimage：从命令行扫描！
 2020-12-05 10:58
 
-译自：https://jvns.ca/blog/2020/07/11/scanimage--scan-from-the-command-line/%E4%BD%9C%E8%80%85： Julia Evans
-原创：LCTT https://linux.cn/article-12886-1.html%E8%AF%91%E8%80%85： geekpi
+译自：https://jvns.ca/blog/2020/07/11/scanimage--scan-from-the-command-line/ 作者： Julia Evans
+原创：LCTT https://linux.cn/article-12886-1.html 译者： geekpi
 
 
 

@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2020-03-12T09:26:06+08:00
 
 ====== error ======
@@ -28,3 +28,10 @@ https://www.youtube.com/watch?v=MfPiWFyAnGQ
 
 performance: 性能
 adjust the appearance and performance of windows: 外观和性能
+
+
+imrdr:
+System can't keep up with the Recording. Frames are not being written. Retry again or try with a smaller region, lower Frame Rate or another Codec.
+
+我把 Codec 由 ultrafast 改成了 fast.
+

@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.6
-Creation-Date: 2021-01-14T17:57:05+08:00
-
-====== 文档 ======
-Created 星期四 14 一月 2021
-
-https://documentation.suse.com/

@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2020-02-16T14:18:56+08:00
-
-====== 寻求帮助的方法 ======
-创建日期 星期日 16 二月 2020
-
-https://xyne.archlinux.ca/etc/dyn/img/graphviz/Arch_Linux_Help_Guide.svg
-这是一个流程图。

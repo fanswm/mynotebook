@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2020-02-15T23:37:57+08:00
-
-====== me ======
-Created 星期六 15 二月 2020
-
-# Linux mint 笔记本：
-sudo apt install laptop-mode-tools sdparm python-qt4

@@ -1,0 +1,22 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2020-02-07T18:39:43+08:00
+
+====== error ======
+Created Friday 07 February 2020
+
+```shell
+$ crontab -e                                       127 ↵
+no crontab for myname - using an empty one
+```
+# 开启crond 服务：
+
+systemctl enable cronie.service
+
+```shell
+/bin/sh: /usr/bin/vi: No such file or directory
+crontab: "/usr/bin/vi" exited with status 127
+```
+
+sudo ln -s /usr/bin/vim /usr/bin/vi 
+crontab -e

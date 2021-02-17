@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-01T10:58:50+08:00
-
-====== Gentoo ======
-Created Thursday 01 November 2018
-
-https://www.gentoo.org/
-https://archives.gentoo.org/gentoo-dev/message/2812c9b9e768f64b46360ab17b9d0024

@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2020-02-13T13:17:26+08:00
-
-====== OpenSUSE ======
-Created 星期四 13 二月 2020
-

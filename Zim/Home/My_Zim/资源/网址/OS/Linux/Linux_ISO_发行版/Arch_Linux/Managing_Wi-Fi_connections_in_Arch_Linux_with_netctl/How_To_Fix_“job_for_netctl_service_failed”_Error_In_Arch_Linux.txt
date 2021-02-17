@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2020-02-23T15:04:52+08:00
-
-====== How To Fix “job for netctl service failed” Error In Arch Linux ======
-Created 星期日 23 二月 2020
-
-https://www.ostechnix.com/fix-job-netctl-service-failed-error-arch-linux/
