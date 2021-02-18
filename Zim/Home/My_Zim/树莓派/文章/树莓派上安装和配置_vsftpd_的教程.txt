@@ -1,0 +1,134 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-15T22:52:22+08:00
+
+====== 树莓派上安装和配置 vsftpd 的教程 ======
+Created 星期一 15 二月 2021
+
+https://shumeipai.nxez.com/2021/02/04/tutorial-for-installing-vsftpd-on-raspberry-pi.html
+
+树莓派上安装和配置 vsftpd 的教程
+2021年2月4日 Spoony 未分类 2
+
+
+
+在网盘流行的当下，FTP 这种文件传输协议似乎有些「古老」。但是无论如何，FTP 方案有成熟的软件生态、完善的权限控制。你几乎无需做任何开发，只需要选择适合的软件即可创建一个文件共享服务器。可以用于工作文档的存储、分享，或者是数字产品的发布。如果你也和我一样，想在树莓派上搭建 FTP 服务器，下面以 vsftpd 为例，介绍如何安装和配置一个带完整权限控制的 FTP 服务。
+
+对于不同用户进行不同的权限控制。考虑到服务器的安全性，所以关闭实体用户登录，使用虚拟帐号验证机制，并对不同虚拟帐号设置不同的权限。为了保证服务器的性能，还需要根据用户的等级，限制客户端的连接数及下载速度。
+
+安装 vsftpd
+sudo apt-get install vsftpd vim db-util
+创建用户数据库
+1、创建用户文本文件
+先建立用户文本文件 vsftpd_virtualuser.txt，添加两个虚拟帐号，公共帐号 share 及客户帐号 upload。
+
+sudo mkdir /etc/vsftpd
+touch /etc/vsftpd/vsftpd_virtualuser.txt
+vim /etc/vsftpd/vsftpd_virtualuser.txt
+格式：
+
+虚拟帐号 1
+密码
+虚拟帐号 2
+密码
+例如：
+
+share
+123456
+upload
+456789
+保存退出。
+2、生成数据库
+保存虚拟帐号和密码的文本文件无法被系统帐号直接调用。我们需要使用 db_load 命令生成 db 数据库文件。
+
+sudo db_load -T -t hash -f /etc/vsftpd/vsftpd_virtualuser.txt /etc/vsftpd/vsftpd_virtualuser.db
+3、修改数据库文件访问权限
+数据库文件中保存着虚拟帐号的密码信息，为了防止非法用户盗取，我们可以修改该文件的访问权限。生成的认证文件的权限应设置为只对 root 用户可读可写，即 600。
+
+sudo chmod 600 /etc/vsftpd/vsftpd_virtualuser.db
+配置 PAM 文件
+为了使服务器能够使用数据库文件，对客户端进行身份验证，需要调用系统的 PAM 模块.PAM(Plugable Authentication Module)为可插拔认证模块，不必重新安装应用系统，通过修改指定的配置文件，调整对该程序的认证方式。PAM 模块配置文件路径为/etc/pam.d/目录，此目录下保存着大量与认证有关的配置文件，并以服务名称命名。
+修改 vsftpd 对应的 PAM 配置文件 /etc/pam.d/vsftpd，将默认配置使用“#”全部注释，添加相应字段。
+
+auth       required     pam_userdb.so   db=/etc/vsftpd/vsftpd_virtualuser
+account    required     pam_userdb.so   db=/etc/vsftpd/vsftpd_virtualuser
+创建虚拟帐号对应的系统用户
+对于公共帐号和客户帐号，因为需要配置不同的权限，所以可以将两个帐号的目录进行隔离，控制用户的文件访问。公共帐号 share 对应系统帐号 ftpshare，并指定其主目录为 /home/pi/ftp/share，而客户帐号 upload 对应系统帐号 ftpupload，指定主目录为 /home/pi/ftp/upload。
+
+如果不设置可执行用户登录会报不能更改目录错误。
+
+mkdir /home/pi/ftp
+mkdir /home/pi/ftp/share
+mkdir /home/pi/ftp/upload
+
+sudo useradd -d /home/pi/ftp/share ftpshare
+sudo useradd -d /home/pi/ftp/upload ftpupload
+sudo chmod -R 500 /home/pi/ftp/share/
+sudo chmod -R 700 /home/pi/ftp/upload/
+公共帐号 share 只允许下载，修改 share 目录其他用户权限为 rx 可读可执行。
+客户帐号 upload 允许上传和下载，所以对 upload 目录权限设置为 rwx，可读可写可执行。
+
+建立配置文件
+设置多个虚拟帐号的不同权限，若使用一个配置文件无法实现此功能，需要为每个虚拟帐号建立独立的配置文件，并根据需要进行相应的设置。
+1、修改 vsftpd.conf 主配置文件
+配置主配置文件 /etc/vsftpd.conf 添加虚拟帐号的共同设置并添加 user_config_dir 字段，定义虚拟帐号的配置文件目录。
+禁用匿名用户登录并启用本地用户登录设置：
+
+anonymous_enable=NO
+local_enable=YES
+# 将所有本地用户限制在家目录中，NO 则不限制
+chroot_local_user=YES
+# 配置 vsftpd 使用的 PAM 模块为 vsftpd
+pam_service_name=vsftpd
+# 设置虚拟帐号的主目录为/vuserconfig
+user_config_dir=/etc/vsftpd/vuserconfig
+# 设置 FTP 服务器最大接入客户端数为 300 个
+max_clients=300
+# 设置每个 IP 地址最大连接数为 10 个
+max_per_ip=10
+allow_writeable_chroot=YES
+pasv_enable=YES
+pasv_min_port=10000
+pasv_max_port=20000
+2、建立虚拟帐号配置文件
+在 user_config_dir 指定路径下，建立与虚拟帐号同名的配置文件并添加相应的配置字段。
+首先建立公共帐号 share 的配置文件：
+
+sudo mkdir /etc/vsftpd/vuserconfig
+sudo vi /etc/vsftpd/vuserconfig/share
+# 开启虚拟帐号登录
+guest_enable=yes
+# 设置 ftp 对应的系统帐号为 ftpshare
+guest_username=ftpshare
+# 允许匿名用户浏览器整个服务器的文件系统
+anon_world_readable_only=no
+# 限定传输速率为 500KB/s
+anon_max_rate=500000
+注意：
+vsftpd 对于文件传输速度限制并不是绝对锁定在一个数值上哈，而是在 80%~120%之间变化。比如设置 100KB/s ，则实际是速度在 80KB/s~120KB/s 之间变化。
+
+下面是客户帐号的配置文件 upload：
+
+sudo vi /etc/vsftpd/vuserconfig/upload
+# 开启虚拟帐号登录
+guest_enable=yes
+# 设置 ftp 对应的系统帐号为 ftpupload
+guest_username=ftpupload
+# 允许匿名用户浏览器整个服务器的文件系统
+anon_world_readable_only=no
+# 允许在文件系统写入权限
+write_enable=yes
+# 允许创建文件夹
+anon_mkdir_write_enable=yes
+# 开启匿名帐号的上传功能
+anon_upload_enable=yes
+# 限定传输速度为 1000KB/s
+anon_max_rate=1000000
+如果需要删除权限，可在配置中添加：
+anon_other_write_enable=YES
+重启 vsftpd 使配置生效
+sudo systemctl restart vsftpd
+sudo service vsftpd restart
+文章标题：树莓派上安装和配置 vsftpd 的教程 - 树莓派实验室
+固定链接：https://shumeipai.nxez.com/2021/02/04/tutorial-for-installing-vsftpd-on-raspberry-pi.html
+

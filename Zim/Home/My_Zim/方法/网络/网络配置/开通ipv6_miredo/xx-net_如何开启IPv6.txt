@@ -1,0 +1,89 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T14:55:53+08:00
+
+====== xx-net 如何开启IPv6 ======
+Created 星期二 19 一月 2021
+
+https://github.com/XX-net/XX-Net/wiki/%E5%A6%82%E4%BD%95%E5%BC%80%E5%90%AFIPv6
+
+IPv6 Win10
+Emphasia edited this page on 16 Jan 2018 · 29 revisions
+提示：本文基于Teredo隧道开启IPv6，其他开启IPv6的方法暂待完善。
+
+特别重要：找到 网络和共享中心 - 更改适配器设置 - 本地连接（无线网络则找到WLAN或蓝牙网络连接）- 属性，把 IPv6协议 前面的勾去掉，确定。否则会出现一些奇怪的问题。
+
+家庭版
+命令行：
+同专业版或企业版的命令行方法
+
+专业版或企业版
+命令行：
+Win+X 打开CMD 或 Windows PowerShell（管理员），输入命令：
+
+  // 设置 Teredo 服务器，默认为：win10.ipv6.microsoft.com
+  netsh interface teredo set state enterpriseclient server=default
+  
+  // 测试 IPv6 连接
+  ping -6 ipv6.test-ipv6.com
+  ping -6 [2001:470:1:18::125]
+
+  // 重置 IPv6 配置
+  netsh interface ipv6 reset
+重启系统
+
+通过命令ipconfig /all 查看当前网络信息，看到 Teredo Tunneling Pseudo-Interface 有以 2001 开头的IPv6地址即可。 启动IE浏览器，访问 http://test-ipv6.com 或 http://ipv6.test-ipv6.com%EF%BC%8C%E5%A6%82%E6%9E%9C%E9%80%89%E9%A1%B9%E5%8D%A1 “测试项目” 下面的 “不使用域名的 IPv6 测试” 显示成功，则隧道建立成功。Chrome浏览器的测试结果可能和IE不一样，请注意
+
+如果经过上面操作后仍无法启用 IPv6，可能是 Teredo 服务器无法正常连接，也可能是 Windows 自身配置问题，可尝试以下两种方法：
+
+  __// 第一种：修改 Teredo 服务器为 teredo.remlab.net__
+  netsh interface teredo set state server=teredo.remlab.net
+
+  __// 第二种：先卸载当前 Teredo 适配器再重新启用__
+  netsh interface Teredo set state disable
+  netsh interface Teredo set state type=default
+  ping -6 ipv6.test-ipv6.com
+dormant
+
+脚本：
+打开XX-Net目录，切换到 code\default\gae_proxy\local\ipv6_tunnel，执行 enable_ipv6.bat
+
+组策略方法:
+建议不要混用两种方法
+
+Win+R 打开 组策略 gpedit.msc
+
+组策略
+
+打开 “计算机配置” - “管理模板” - “网络” - “TCPIP 设置” - “IPv6 转换技术” ，
+
+“6to4 状态” 和 “ISATAP 状态” 都配置为 “已禁用状态” ，
+
+“Teredo 状态” 配置为 “企业客户端”，“Teredo 默认限定” 配置为 “已启用状态”
+
+IPv6 转换技术
+
+Teredo 状态
+
+提示：如按照教程设置无效出现其他莫名其妙的问题，建议：
+
+管理员模式运行disable_ipv6.bat。（如是用的组策略模式，请把所有更改过的组策略改成未配置）
+
+删除regedit：计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ 下面的Tcpip6和TCPIP6TUNNEL两个选项。（改动注册表之前请备份）
+
+在自动禁用或重新启用 IPv6 或其组件下载 "在非隧道接口和 IPv6 隧道接口上重新启用 IPv6" ，运行后重启电脑，然后按照组策略教程再重做一遍。（切记：组策略方法开启IPv6必须指定服务器名称）
+
+文章开头提示的：禁用IPv6协议。
+
+其他参考
+https://support.xbox.com/zh-CN/xbox-on-windows/social/troubleshoot-party-chat
+
+https://support.xbox.com/zh-HK/xbox-on-windows/social/troubleshoot-party-chat
+
+http://www.windows7en.com/jiaocheng/26518.html
+
+Launch the Windows Settings app
+
+ms-settings:gaming-xboxnetworking
+
+[[ms-settings:network-proxy]]

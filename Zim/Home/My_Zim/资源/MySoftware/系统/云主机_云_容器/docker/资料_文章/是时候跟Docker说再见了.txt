@@ -1,0 +1,132 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T09:10:35+08:00
+
+====== 是时候跟Docker说再见了 ======
+Created 星期二 19 一月 2021
+
+是时候跟Docker说再见了
+
+
+
+作者 | Martin Heinz
+译者 | 王者
+策划 | Tina
+原文链接：https://towardsdatascience.com/its-time-to-say-goodbye-to-docker-5cfec8eff833
+在容器的远古时代 (差不多就是 4 年前)，Docker 是这场游戏的唯一玩家。但现在情况已经不一样了，Docker 不再是唯一玩家，而只是一个容器引擎而已。我们可以用 Docker 构建、运行、拉取、推送或检查容器镜像，但对于这里的每一项任务，都有其他可替代的工具，它们可能比 Docker 做得更好。所以，让我们来探究一下它们，然后卸载和忘掉 Docker……
+为什么说不要用 Docker 了？
+如果你已经使用 Docker 很长时间了，那么要说服你考虑使用其他的工具可能需要费点唇舌。
+首先，Docker 是一个整体性的工具，它试图做所有的事情，但这通常不是最好的方法。大多数情况下，选择一种专门的工具会更好，它可能只做一件事，但会做到最好。
+如果你害怕使用不同的工具，可能是因为你要学习使用不同的 CLI、不同的 API 或接受不同的概念。不过请放心，选择本文介绍的工具都是完全无缝衔接的，因为它们 (包括 Docker) 都遵循 OCI (Open Container Initiative) 规范。OCI 包含了容器运行时、容器分发和容器镜像的规范，涵盖了使用容器所需的所有特性。
+多亏了 OCI，你可以选择一套最适合自己的工具，同时又能够继续使用与 Docker 一样的 API 和 CLI 命令。
+所以，如果你愿意尝试新的工具，那么就让我们来比较一下 Docker 和其他工具的优缺点和特性，看看是否有必要考虑放弃 Docker，并转向其他一些新的工具。
+容器引擎
+在比较 Docker 和其他工具时，我们需要将其分解为组件，首先我们要讨论的是容器引擎。容器引擎是一种工具，它为处理镜像和容器提供了用户界面，这样你就不需要处理 SECCOMP 规则或 SELinux 策略之类的事情。它的工作还包括从远程存储库提取镜像并将其解压到磁盘。它似乎也运行容器，但实际上它的工作是创建容器清单和包含了镜像层的目录。然后它将它们传到容器运行时，例如使用 runc 或 crun(稍后我们将讨论这个)。
+目前有很多可用的容器引擎，不过 Docker 最突出的竞争对手是由 Red Hat 开发的 Podman。与 Docker 不同，Podman 不需要守护进程，也不需要 root 特权，这是 Docker 长期以来一直存在的问题。从它的名字就可以看出来，Podman 不仅可以运行容器，还可以运行 Pod。Pod 是 Kubernetes 的最小计算单元，由一个或多个容器 (主容器和所谓的边车) 组成，Podman 用户在以后可以更容易地将他们的工作负载迁移到 Kubernetes。以下演示了如何在一个 Pod 中运行两个容器：
+~ $ podman pod create --name mypod~ $ podman pod listPOD ID NAME STATUS CREATED # OF CONTAINERS INFRA ID211eaecd307b mypod Running 2 minutes ago 1 a901868616a5~ $ podman run -d --pod mypod nginx # First container~ $ podman run -d --pod mypod nginx # Second container~ $ podman ps -a --podCONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES POD POD NAME3b27d9eaa35c docker.io/library/nginx:latest nginx -g daemon o... 2 seconds ago Up 1 second ago brave_ritchie211eaecd307b mypodd638ac011412 docker.io/library/nginx:latest nginx -g daemon o... 5 minutes ago Up 5 minutes ago cool_albattani211eaecd307b mypoda901868616a5 k8s.gcr.io/pause:3.2 6 minutes ago Up 5 minutes ago 211eaecd307b-infra 211eaecd307b mypod
+Podman 提供了与 Docker 完全相同的 CLI 命令，因此你只需执行 alias Docker=Podman，然后就像什么都没有发生改变一样。
+除了 Docker 和 Podman 之外，还有其他容器引擎，但我认为它们没有出路或者都不适合用于本地开发。不过如果你想要对容器引擎有一个较为完整的了解，我们可以列出一些：
+LXD——是 LXC (Linux 容器) 的容器管理器 (守护进程)。这个工具提供了运行系统容器的能力，这些系统容器提供了类似于 VM 的容器环境。它比较小众，没有很多用户，所以除非你有特定的用例，否则最好使用 Docker 或 Podman。
+CRI-O——如果你在网上搜索 cri-o 是什么东西，你可能会发现它被描述为一种容器引擎。不过，它实际上是一种容器运行时。除了不是容器引擎之外，它也不适合用于“一般”的情况。我的意思是，它是专门为 Kubernetes 运行时 (CRI) 而构建的，并不是给最终用户使用的。
+rkt——rkt(“rocket”) 是由 CoreOS 开发的容器引擎。这里提到这个项目只是为了清单的完整性，因为这个项目已经结束了，它的开发也停止了——因此它不应该再被使用。
+镜像的构建
+从容器引擎方面来说，除了 Docker 之外只有一种选择。但是，在构建镜像方面，我们有很多选择。
+首先是 Buildah（https://buildah.io%EF%BC%89%E3%80%82Buildah 是 Red Hat 开发的一款工具，可以很好地与 Podman 配合使用。如果你已经安装了 Podman，可能会注意到 podman build 子命令，它实际上是经过包装的 Buildah。
+在特性方面，Buildah 遵循了与 Podman 相同的路线——它是无守护进程的，可以生成符合 OCI 的像，并保证以相同的方式来运行使用 Docker 构建的镜像。它还能基于 Dockerfile 或 Containerfile（它们实际上是同一个东西，只是叫法不一样）构建镜像。除此之外，Buildah 还提供了对镜像层更精细的控制，支持提交大量的变更到单个层。在我看来，它与 Docker 之间有一个出乎人意料的区别，使用 Buildah 构建的镜像是特定于用户的，因此你可以只列出自己构建的镜像。
+你可能会问，既然 Buildah 已经被包含在 Podman CLI 中，为什么还要使用单独的 Buildah CLI？buildah CLI 是 podman build 所包含的命令的超集，你可能不需要使用 buildah CLI，但是通过使用它，你可能会发现一些额外有用的特性 (有关 podman build 和 buildah 之间的差异的细节，请参考 https://podman.io/blogs/2018/10/31/podman-buildah-relationship.html)。
+我们来看看一个小演示：
+~ $ buildah bud -f Dockerfile .~ $ buildah from alpine:latest  # Create starting container - equivalent to "FROM alpine:latest"
+Getting image source signatures
+Copying blob df20fa9351a1 done
+Copying config a24bb40132 done
+Writing manifest to image destination
+Storing signatures
+alpine-working-container  # Name of the temporary container
+~ $ buildah run alpine-working-container -- apk add --update --no-cache python3  # equivalent to "RUN apk add --update --no-cache python3"
+
+
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/APKINDEX.tar.gz
+
+
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/community/x86_64/APKINDEX.tar.gz
+
+
+...
+
+
+~ $ buildah commit alpine-working-container my-final-image  # Create final image
+Getting image source signatures
+Copying blob 50644c29ef5a skipped: already exists
+Copying blob 362b9ae56246 done
+Copying config 1ff90ec2e2 done
+Writing manifest to image destination
+Storing signatures
+1ff90ec2e26e7c0a6b45b2c62901956d0eda138fa6093d8cbb29a88f6b95124c
+~ # buildah images
+REPOSITORY               TAG     IMAGE ID      CREATED         SIZE
+localhost/my-final-image latest  1ff90ec2e26e  22 seconds ago  51.4 MB
+从上面的脚本可以看到，你可以直接使用 buildah bud 构建镜像，其中 bud 表示使用 Dockerfile 来构建镜像，你也可以使用其他更多的命令，如 from、run 和 copy，它们分别对应 Dockerfile 中的 FROM、RUN、COPY。
+第二个工具是谷歌的 Kaniko
+（https://github.com/GoogleContainerTools/kaniko%EF%BC%89%E3%80%82Kaniko 也基于 Dockerfile 构建容器镜像，而且与 Buildah 类似，它也不需要守护进程。与 Buildah 的主要区别在于，Kaniko 更专注于在 Kubernetes 中构建镜像。
+Kaniko 本身是作为镜像 (gcr.io/kaniko-project/executor) 运行的，这对于 Kubernetes 来说是没有问题，但对于本地构建来说不是很方便，并且在某种程度上违背了构建镜像的目的，因为你需要使用 Docker 来运行 Kaniko 镜像来构建镜像。如果你正在寻找在 Kubernetes 集群中构建镜像的工具 (例如在 CI/CD 管道中)，那么 Kaniko 可能是一个不错的选择，因为它是无守护进程的，而且 (可能) 更安全。
+从我个人的经验来看——我在 Kubernetes/OpenShift 集群中使用了 Kaniko 和 Buildah 来构建镜像，我认为两者都能很好地完成任务，但在使用 Kaniko 时会随机出现构建故障，在将镜像推送到注册表时也会随机地出现失败的情况。
+第三个是 buildkit（https://github.com/moby/buildkit%EF%BC%89%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E7%A7%B0%E4%B9%8B%E4%B8%BA%E4%B8%8B%E4%B8%80%E4%BB%A3 docker build。它是 Moby 项目的一部分，在运行 Docker 时通过 DOCKER_BUILDKIT=1 docker build 就可以启用它，作为 Docker 的一个实验性特性。那么，这到底会给你带来什么呢？它带来了很多改进和很酷的特性，包括并行构建步骤、跳过未使用的阶段、更好的增量构建和无根构建。但是，它仍然需要运行守护进程 (buildkitd)。所以，如果你不想摆脱 Docker，同时又想要一些新的特性和更好的改进，那么使用 buildkit 可能是最好的选择。
+跟之前的章节一样，这里也将提及一些工具，它们满足了一些特定的使用场景，但并不是我的首选：
+Source-To-Image (S2I，https://github.com/openshift/source-to-image) 是一个不使用 Dockerfile 直接从源代码构建镜像的工具包。这个工具在简单可预期的场景和工作流中表现良好，但如果你需要多一些定制化，或者你的项目没有预期的结构，那么它就会变得烦人和笨拙。如果你对 Docker 还不是很有信心，或者如果你在 OpenShift 集群上构建镜像，可能可以考虑使用 S2I，因为使用 S2I 构建镜像是它的一个内置特性。
+Jib（https://github.com/GoogleContainerTools/jib%EF%BC%89%E6%98%AF%E8%B0%B7%E6%AD%8C%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E6%AC%BE%E5%B7%A5%E5%85%B7%EF%BC%8C%E4%B8%93%E9%97%A8%E7%94%A8%E4%BA%8E%E6%9E%84%E5%BB%BA Java 镜像。它提供了 Maven 和 Gradle 插件，可以让你轻松地构建镜像，不需要理会 Dockerfile。
+最后一个是 Bazel（https://github.com/bazelbuild/bazel%EF%BC%89%EF%BC%8C%E5%AE%83%E6%98%AF%E8%B0%B7%E6%AD%8C%E7%9A%84%E5%8F%A6%E4%B8%80%E6%AC%BE%E5%B7%A5%E5%85%B7%E3%80%82%E5%AE%83%E4%B8%8D%E4%BB%85%E7%94%A8%E4%BA%8E%E6%9E%84%E5%BB%BA%E5%AE%B9%E5%99%A8%E9%95%9C%E5%83%8F%EF%BC%8C%E8%80%8C%E4%B8%94%E6%98%AF%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84%E6%9E%84%E5%BB%BA%E7%B3%BB%E7%BB%9F%E3%80%82%E5%A6%82%E6%9E%9C%E4%BD%A0%E5%8F%AA%E6%98%AF%E6%83%B3%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F%EF%BC%8C%E9%82%A3%E4%B9%88%E4%BD%BF%E7%94%A8 Bazel 可能有点大材小用，但这绝对是一个很好的学习体验，所以如果你愿意，可以将 rules_docker
+(https://github.com/bazelbuild/rules_docker) 为入手点。
+容器运行时
+最后一个是负责运行容器的容器运行时。容器运行时是整个容器生命周期的一部分，除非你对速度、安全性等有一些非常具体的要求，否则你很可能不会对其加以干扰。所以，如果你已经感到厌倦了，可以跳过这一部分。但是，如果你想知道有哪些可选择的容器运行时，可以看看以下这些：
+runc（https://github.com/opencontainers/runc%EF%BC%89%E6%98%AF%E7%AC%A6%E5%90%88 OCI 容器运行时规范的容器运行时。Docker(通过 containerd)、Podman 和 CRI-O 都在使用它，它是 (几乎) 所有东西的默认配置，所以即使你在阅读本文后放弃使用 Docker，很可能仍然会使用 runc。
+runc 的另一种替代品是 crun（https://github.com/containers/crun%EF%BC%89%E3%80%82%E8%BF%99%E6%98%AF Red Hat 开发的一款工具，完全用 C 语言开发 (runc 是用 Go 开发的)，所以它比 runc 更快，内存效率更高。因为它也是兼容 OCI 的运行时，所以你应该可以很容易上手。尽管它现在还不是很流行，但作为 RHEL 8.3 版本的技术预览，它将作为一个可选的 OCI 运行时，又因为它是 Red Hat 的产品，它可能最终会成为 Podman 或 CRI-O 的默认配置。
+前面我说过，CRI-O 实际上不是容器引擎，而是容器运行时。这是因为 CRI-O 没有提供诸如镜像推送之类的特性，而这些特性是容器引擎应该具备的。CRI-O 在内部使用 runc 来运行容器。你不应该在自己的机器上尝试使用这个运行时，因为它是作为运行在 Kubernetes 节点上的运行时而设计的，并被描述为“Kubernetes 所需的运行时”。因此，除非你正在运行 Kubernetes 集群 (或 OpenShift 集群——CRI-O 已经是默认设置了)，否则不应该接触这个。
+最后一个是 containerd（https://containerd.io%EF%BC%89%EF%BC%8C%E5%AE%83%E6%98%AF CNCF 的一个毕业项目。它是一个守护进程，作为各种容器运行时和操作系统的 API 外观。在后台，它依赖 runc，是 Docker 引擎的默认运行时。谷歌 Kubernetes 引擎 (GKE) 和 IBM Kubernetes 服务 (IKS) 也在使用它。它是 Kubernetes 容器运行时接口的一个实现 (与 CRI-O 一样)，因此它是 Kubernetes 集群运行时的一个很好的候选对象。
+镜像的检查与分发
+最后一部分内容是镜像的检查与分发，主要是替代 docker inspect，并 (可选地) 增加远程注册表之间复制镜像的能力。
+我这里要提到的一个可以完成这些任务的工具是 Skopeo（https://github.com/containers/skopeo%EF%BC%89%E3%80%82%E5%AE%83%E7%94%B1 Red Hat 公司开发，可以与 Buildah、Podman 和 CRI-O 配套使用。除了基本的 inspect 之外，Skopeo 还提供了 skopeo copy 命令来复制镜像，可以直接在远程注册表之间复制镜像，无需将它们拉取到本地注册表。如果你使用了本地注册表，这个命令也可以作为拉取 / 推送的替代方案。
+另外，我还想提一下 Dive(https://github.com/wagoodman/dive)%EF%BC%8C%E8%BF%99%E6%98%AF%E4%B8%80%E4%B8%AA%E6%A3%80%E6%9F%A5%E3%80%81%E6%8E%A2%E7%B4%A2%E5%92%8C%E5%88%86%E6%9E%90%E9%95%9C%E5%83%8F%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%82%E5%AE%83%E5%AF%B9%E7%94%A8%E6%88%B7%E6%9B%B4%E5%8F%8B%E5%A5%BD%E4%B8%80%E4%BA%9B%EF%BC%8C%E6%8F%90%E4%BE%9B%E4%BA%86%E6%9B%B4%E5%8F%AF%E8%AF%BB%E7%9A%84%E8%BE%93%E5%87%BA%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%9B%B4%E6%B7%B1%E5%85%A5%E5%9C%B0%E6%8C%96%E6%8E%98%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E5%88%86%E6%9E%90%E5%92%8C%E8%A1%A1%E9%87%8F%E5%85%B6%E6%95%88%E7%8E%87%E3%80%82%E5%AE%83%E4%B9%9F%E9%80%82%E5%90%88%E8%A2%AB%E7%94%A8%E5%9C%A8 CI 管道中，用于衡量你的镜像是否“足够高效”，或者换句话说——它是否浪费了太多空间。
+结      论
+本文的目的并不是要说服你完全抛弃 Docker，而是向你展示构建、运行、管理和分发容器及其镜像的整个场景和所有可选项。包括 Docker 在内的每一种工具都有其优缺点，评估哪一组工具最适合你的工作流程和场景才是最重要的，希望本文能在这方面为你提供一些帮助。
+良许个人微信
+
+添加良许个人微信即送3套程序员必读资料
+
+→ 精选技术资料共享
+→ 高手如云交流社群
+
+
+
+--------------------
+
+本公众号全部博文已整理成一个目录，请在公众号里回复「m」获取！
+推荐阅读：
+Linux系统inodes资源耗尽问题
+如何从一张外国军车照片，判断它要去哪里？
+如何辨别二逼互联网公司！？
+
+5T技术资源大放送！包括但不限于：C/C++，Linux，Python，Java，PHP，人工智能，单片机，树莓派，等等。在公众号内回复「1024」，即可免费获取！！
+
+
+喜欢此内容的人还喜欢
+干货：Linux 查询 OS、CPU、内存、硬盘信息
+干货：Linux 查询 OS、CPU、内存、硬盘信息
+...
+Linux就该这么学
+不看的原因
+内容质量低
+不看此公众号
+B 站，真滴牛逼！
+B 站，真滴牛逼！
+...
+小林coding
+不看的原因
+内容质量低
+不看此公众号
+假如计算机是中国人发明的，那代码应该这么写
+假如计算机是中国人发明的，那代码应该这么写
+...
+Linux学习
+不看的原因
+内容质量低
+不看此公众号

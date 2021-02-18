@@ -1,0 +1,62 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-05T15:37:32+08:00
+
+====== Rsync 秒杀一切备份工具，你能手动屏蔽某些目录吗 ======
+创建日期 星期二 05 一月 2021
+
+Rsync 秒杀一切备份工具，你能手动屏蔽某些目录吗？
+良许Linux 4 days ago
+
+
+
+转自：高效运维
+引言
+Rsync 是一种快速且通用的命令行实用程序，可通过远程shell在两个位置之间同步文件和文件夹。
+使用 Rsync，可以镜像数据，创建增量备份，并在系统之间复制文件。复制数据时，你可能要根据文件名或位置排除一个或多个文件或目录。
+在本文中，我们将展示如何使用rsync排除文件和目录。
+准备工作
+先简要说一下 rsync 的工作流程和使用方法。
+在下面的示例中，我们使用rsync 的-a选项，这会递归同步目录，传输特殊设备和块设备，并保留符号链接，修改时间，组，所有权和权限。
+当排除文件或目录时，需要使用它们到源目录的相对路径。
+有两个选项可以指定要排除的文件和目录：
+在命令行中，使用--exclude选项。
+在文件中，使用--exclude-from选项。
+排除特定文件
+要排除特定文件，请将文件的相对路径传递给该--exclude选项。在以下示例中，文件 src_directory/file.txt 将不会被传输：
+rsync -a --exclude 'file.txt' src_directory/ dst_directory/
+排除特定目录
+排除特定目录与排除文件相同，只需将目录的相对路径传递给该--exclude选项，如下所示：
+rsync -a --exclude 'dir1' src_directory/ dst_directory/
+如果要排除目录内容但不排除目录本身，请使用dir1/*代替dir1：
+rsync -a --exclude 'dir1/*' src_directory/ dst_directory/
+排除多个文件或目录
+要排除多个文件或目录，只需指定多个--exclude选项：
+rsync -a --exclude 'file1.txt' --exclude 'dir1/*' --exclude 'dir2' src_directory/ dst_directory/
+如果您希望使用单个--exclude选项，则可以用{}将要排除的文件和目录列出，并用逗号分隔，如下所示：
+rsync -a --exclude={'file1.txt','dir1/*','dir2'} src_directory/ dst_directory/
+如果要排除的文件和/或目录的数量很多，则—exclude可以使用要在文件中排除的文件和目录，而不是使用多个选项。只需将文件传递给该—exclude-from选项。
+下面的命令与上面的命令完全相同：
+rsync -a --exclude-from='exclude-file.txt' src_directory/ dst_directory/
+在 exclude-file.txt 内存储这些内容：
+file1.txtdir1/*dir2
+根据正则模式排除多个文件或目录
+使用rsync，你还可以根据与文件或目录名称匹配的模式排除文件和目录。
+例如，要排除所有.jpg文件，请运行：
+rsync -a --exclude '*.jpg*' src_directory/ dst_directory/
+排除与特定模式匹配的文件和目录之外的其他所有文件和目录并不困难。假设你要排除所有其他文件和目录，但以 .jpg 结尾的文件除外。
+一种选择是使用以下命令：
+rsync -a -m --include='*.jpg' --include='*/' --exclude='*' src_directory/ dst_directory/
+使用多个 include/exclude 选项时，将应用第一个匹配规则。参数含义：
+--include='*.jpg'-首先，我们包括所有.jpg文件。
+--include='*/'然后，我们将所有目录都包含在in src_directory目录中。
+没有这个rsync只会复制*.jpg顶级目录中的文件。
+-m -删除空目录
+另一个选择是将 find 命令的输出传递给 rsync：
+find src_directory/ -name "*.jpg" -printf %P\\0\\n | rsync -a --files-from=- src_directory/ dst_directory/
+参数含义：
+-printf %P\\0\\n 将从src_directory/文件路径中删除。
+--files-from=- 表示仅包含来自标准输入的文件（从find命令传递的文件）。
+如果第一张方式难以掌控的话，那么这个 find 指令所做的筛选，对于运维同学应该友好的多了。
+写在最后
+rsync 一旦数量使用了之后，甚至应该替代 scp ，成为我们日常在本地到服务器，服务器之间，目录和文件同步的标准工具。

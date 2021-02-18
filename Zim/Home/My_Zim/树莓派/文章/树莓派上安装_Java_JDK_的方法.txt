@@ -1,0 +1,65 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-15T22:53:35+08:00
+
+====== 树莓派上安装 Java JDK 的方法 ======
+Created 星期一 15 二月 2021
+
+树莓派上安装 Java JDK 的方法
+2021年1月20日 Spoony 未分类 0
+
+
+
+Java 是用于构建各种应用程序和系统的最流行的编程语言之一。Java 有两种不同的实现，Oracle Java 和 OpenJDK。其中 OpenJDK 是 Java 平台的开源实现。Oracle Java 具有其他一些商业功能，并且许可仅允许非商业用途。下面介绍如何在树莓派的 Raspbian OS 上安装Java（OpenJDK）。
+
+运行以下命令安装最新的 JDK 版本，目前是 OpenJDK 11 JDK：
+
+sudo apt update
+sudo apt install default-jdk
+安装完成后，通过命令可以检查 Java 版本进行验证：
+
+java -version
+输出：
+
+openjdk version "11.0.5" 2019-10-15
+OpenJDK Runtime Environment (build 11.0.5+10-post-Raspbian-1deb10u1)
+OpenJDK Server VM (build 11.0.5+10-post-Raspbian-1deb10u1, mixed mode)
+安装 Java 8
+Java 8 目前依然被广泛使用。如果你需要 Java 8，安装命令为：
+
+sudo apt update
+sudo apt install openjdk-8-jdk
+检查 Java 版本：
+
+java -version
+多个 Java 版本并不会冲突，如果需要设置默认的版本，可以使用下面的方法。运行 java -version 命令确认默认的版本。如果需要修改默认版本，可以用 update-alternatives 工具：
+
+sudo update-alternatives --config java
+您将看到已安装的 Java 版本的。
+
+There are 2 choices for the alternative java (providing /usr/bin/java).
+ 
+  Selection    Path                                            Priority   Status
+--------------------
+* 0            /usr/lib/jvm/java-11-openjdk-armhf/bin/java      1111      auto mode
+  1            /usr/lib/jvm/java-11-openjdk-armhf/bin/java      1111      manual mode
+  2            /usr/lib/jvm/java-8-openjdk-armhf/jre/bin/java   1081      manual mode
+ 
+Press  to keep the current choice[*], or type selection number: 
+输入要设置的默认版本的版本号，然后按回车。
+
+如果安装了多个 JDK 版本，要设置 JAVA_HOME 环境变量的话，则需要编辑 /etc/environment 文件：
+
+sudo nano /etc/environment
+假设要将 JAVA_HOME 设置为 OpenJDK 11，那么可以在文件末尾添加：
+
+JAVA_HOME="/usr/lib/jvm/java-11-openjdk-armhf/bin/java"
+后面的路径就是 update-alternatives 命令所输出的。
+然后运行命令：
+
+source /etc/environment
+最后，要卸载 default-jdk 软件包，只需运行：
+
+sudo apt remove default-jdk
+文章标题：树莓派上安装 Java JDK 的方法 - 树莓派实验室
+固定链接：https://shumeipai.nxez.com/2021/01/20/how-to-install-java-jdk-on-raspberry-pi.html

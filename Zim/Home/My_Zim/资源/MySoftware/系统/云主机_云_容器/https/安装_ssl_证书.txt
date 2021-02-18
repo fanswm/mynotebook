@@ -1,0 +1,45 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2020-10-25T08:56:52+08:00
+
+====== 安装 ssl 证书 ======
+Created 星期日 25 十月 2020
+
+安装：
+https://blog.csdn.net/maxer025/article/details/84807770
+https://cloud.tencent.com/document/product/400/4143
+
+sudo yum install httpd
+sudo yum install mod_ssl
+sudo cp /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.old  # 备份
+
+# 下载 证书文件 www.xxx.com.zip
+#解压： 
+unzip www.xxx.com.zip
+sudo cp www.xxx.com/Apache/* /etc/ssl/
+sudo vim /etc/httpd/conf.d/ssl.conf
+
+
+sudo vim ssl.conf #取消以下两行的注释， 大约是 59，60 行；
+# DocumentRoot "/var/www/html"
+# ServerName www.example.com:443
+
+SSLCertificateFile [[/etc/pki/tls/certs/localhost.crt]]
+SSLCertificateKeyFile [[/etc/pki/tls/private/localhost.key]]
+SSLCertificateChainFile [[/etc/pki/tls/certs/server-chain.crt]]
+改为：
+SSLCertificateFile [[/etc/ssl/2_lemi-loveme.ink.crt]]
+SSLCertificateKeyFile [[/etc/ssl/3_lemi-loveme.ink.key]]
+SSLCertificateChainFile [[/etc/ssl/1_root_bundle.crt]]
+
+sudo service httpd restart
+#  sudo systemctl restart httpd.service 
+
+mv [[./Apache]]
+cp ./1_root_bundle.crt  2_lemi-loveme.ink.crt  3_lemi-loveme.ink.key /etc/ssl
+
+
+修改 ssh 默认端口：
+
+
+netstat -tunlp | grep 22

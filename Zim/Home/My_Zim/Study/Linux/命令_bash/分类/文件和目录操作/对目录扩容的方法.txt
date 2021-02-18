@@ -1,0 +1,60 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T16:33:56+08:00
+
+====== 对目录扩容的方法 ======
+创建日期 星期二 19 一月 2021
+
+Linux 系统下对目录扩容的方法
+
+
+作者：马哥Linux运维
+链接：http://a.wz2.in/0L0
+1、现象：
+日志服务器当初考虑不周，分区划分不太合理：
+
+2、目标：
+将/home磁盘空间缩减  并将新的磁盘分区扩充到/根目录
+卸载/home分区并压缩分区
+卸载/home时 提示目标忙，fuser -m /home查看谁用/home时提示没有fuser命令
+[root@localhost zabbix]# umount /home
+
+umount: /home：目标忙。
+(有些情况下通过 lsof(8) 或 fuser(1) 可以找到有关使用该设备的进程的有用信息)
+[root@localhost zabbix]# fuser -m /home
+
+-bash: fuser: 未找到命令
+解决没有fuser命令的问题：
+在CentOS/RHEL 7上找不到fuser命令
+-bash: fuser: command not found 
+
+yum install psmisc 
+
+fuser -m /home   //继续查找谁在用/home
+
+kill -9 11757    //停止进程
+
+umount /home    //卸载/home文件系统
+
+压缩分区：
+resize2fs -p /dev/mapper/centos-home 100G
+
+确认是xfs格式系统
+cat /etc/fstab|grep centos-home
+
+xfs文件系统扩容必须安装xfsdump工具
+yum install xfsdump -y
+减少/home空间到100GB，增大根目录，延伸/目录空间
+
+
+
+然后重新挂载/home
+[root@localhost ~]# mount /home
+
+mount: /dev/mapper/centos-home：不能读超级块
+必须格式化/home分区，才能挂载----所以缩减/home分区之前必须备份/home的内容（切记！！！）
+
+重新挂载mount /home
+
+
+https://mp.weixin.qq.com/s/01k4slb4AMFJ_POUq_8HoA

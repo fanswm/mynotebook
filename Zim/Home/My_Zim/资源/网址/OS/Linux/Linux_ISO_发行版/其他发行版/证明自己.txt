@@ -1,8 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-01T10:58:29+08:00
-
-====== 证明自己 ======
-Created Thursday 01 November 2018
-
-很长一段时间内，Gentoo 都稳坐“展现你技能”的发行版的首座。但是，我认为现在 Gentoo 是时候让出“证明自己”的宝座给 Linux From Scratch（LFS）。你可能认为这不公平，因为 LFS 实际上不是一个发行版，而是一个帮助用户创建自己的 Linux 发行版的项目。但是，有什么能比你自己创建一个自己的发行版更能证明自己所学的 Linux 知识的呢？在 LFS 项目中，你可以从头开始构建自定义的 Linux 系统，而且是从源代码开始。 所以，如果你真的想证明些什么，请下载 Linux From Scratch Book 并开始构建。

@@ -1,0 +1,14 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2020-10-31T21:54:57+08:00
+
+====== 跨平台 ======
+创建日期 星期六 31 十月 2020
+
+编译出来的二进制程序,要实现跨Linux发行版,我的做法有两种(亲身实践,以PHP为例):方法1: ldd 找出二进制程序依赖的库,然后把它们复制出来,然后给程序指定依赖库加载位置就行.原理就是一个简简单单的命令的事:alias php="/path/to/ld-linux.so --library-path /path/to/deps /path/to/php"方法2: 修改程序的库链接器和库加载位置,这样就不用设置alias别名:patchelf --set-interpreter '/path/to/ld-linux.so' /path/to/php
+patchelf --set-rpath '$ORIGIN/deps' --force-rpath /path/to/php
+
+作者：eechen
+链接：https://www.zhihu.com/question/408788919/answer/1362505304
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

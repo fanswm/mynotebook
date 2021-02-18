@@ -1,3 +1,6 @@
 [submodule "Zim/story"]
 	path = Zim/story
-	url = https://gitlab.com/abstracthex/story
+	url = https://github.com/fanswm/story
+[submodule "hb"]
+	path = hb
+	url = https://github.com/fanswm/hb

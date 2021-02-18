@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2019-11-26T16:38:27+08:00
 
 ====== 后台运行 正确关闭数据库 ======
@@ -9,3 +9,11 @@ nohup revel run github.com/leanote/leanote
 setsid mongod --dbpath /home/pi/data
 > 使用：`nohup mongod --dbpath [[/home/pi/data]] `是不行的。
 
+setsid mongod --dbpath /home/yourCloudHostUserName/data
+setsid mongod --dbpath /home/lemi/data
+mongorestore -h localhost -d leanote --dir /home/lemi/gopackage/src/github.com/leanote/leanote/mo
+ngodb_backup/leanote_install_data
+
+
+# 腾讯云：
+nohup revel run github.com/leanote/leanote &

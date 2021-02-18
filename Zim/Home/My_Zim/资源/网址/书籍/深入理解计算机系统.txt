@@ -1,0 +1,46 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-18T22:21:26+08:00
+
+====== 深入理解计算机系统 ======
+Created 星期一 18 一月 2021
+
+有up主做了精校的中英字幕，不过没有习题课的字幕
+
+【精校中英字幕】2015 CMU 15-213 CSAPP 深入理解计算机系统 课程视频_哔哩哔哩 (゜-゜)つロ 干杯~-bilibili​www.bilibili.com
+
+有人用类似3Blue1Brown的方法做了讲解视频
+
+【CSAPP-深入理解计算机系统】1-1.计算机系统漫游_哔哩哔哩 (゜-゜)つロ 干杯~-bilibili​www.bilibili.com
+
+也有国人做了讲解视频
+
+深入理解计算机系统[00] - 无符号整数、二进制补码_哔哩哔哩 (゜-゜)つロ 干杯~-bilibili​www.bilibili.com
+
+还有这个
+
+解读《深入理解计算机系统》一_哔哩哔哩 (゜-゜)つロ 干杯~-bilibili​www.bilibili.com
+
+我在b站搬运了原始视频包含习题课
+
+卡内基梅隆大学 Introduction to Computer Systems CMU 15-213 Fall_哔哩哔哩 (゜-゜)つロ 干杯~-bilibili​www.bilibili.com
+
+华盛顿大学的课程覆盖了核心部分，包含实验部分
+
+华盛顿大学软硬件接口 The Hardware/Software Interface_哔哩哔哩 (゜-゜)つロ 干杯~-bilibili​www.bilibili.com
+
+
+--------以下是原回答-----------------
+
+15-213/18-218/15-513: Introduction to Computer Systems / Schedule Fall 2016
+
+CMU15-213的课程主页，有ppt，代码还有录像，主讲人就是这本书的作者。
+
+下图显示了213这门课在整个课程体系中的重要性，它是众多课程的先修要求。至于15213的先修课程则是122使用C0语言教学（C语言的一个子集）15-122 S16。 如果没有编程基础则可先修15112，使用Python教学（15-112 Schedule (Fall 16)）。
+
+
+下面是两位作者讲课时的截图
+
+
+
+https://www.zhihu.com/question/20402534/answer/124950081?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512

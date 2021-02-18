@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2020-02-16T16:33:09+08:00
 
 ====== xz ======
@@ -14,7 +14,7 @@ tar -xf linux-3.12.tar
  
  
 方法二（推荐）
-tar -Jxf linux-3.12.tar.xz
+__tar -Jxf linux-3.12.tar.xz__
  
 __2. 创建 xz 格式文件__
 方法一：

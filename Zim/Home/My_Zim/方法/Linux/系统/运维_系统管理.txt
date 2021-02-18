@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-30T14:42:17+08:00
-
-====== 运维 系统管理 ======
-Created Friday 30 November 2018
-

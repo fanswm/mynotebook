@@ -1,0 +1,101 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T12:47:47+08:00
+
+====== 自动安全审计工具 Lynis ======
+Created 星期二 19 一月 2021
+
+Lynis – 用于aLinux服务器的自动安全审计工具
+良许Linux 2020-12-01
+
+
+作者：Linux就该这么学
+来自：https://www.linuxprobe.com/lynis-accouting-tools.html
+Lynis是Unix/Linux等操作系统的一款安全审计工具，它可以发现基于Linux系统中的恶意软件和安全漏洞。Lynis是免费开源的服务器审计工具，一旦审计完成，我们可以审查结果、警告和建议，然后我们可以根据它实现我们的安全策略。它将显示一个报告，该报告可以被分成几个部分。
+通常我们在Linux服务器上运行很多东西，比如网络服务、数据库服务、电子邮件服务、FTP服务等等。通过在所有Linux机器上进行自动的安全审计和渗透测试，Lynis可以简化管理员的工作。
+
+
+环    境
+
+Centos8
+lynis-3.0.0
+
+
+安装Lynix
+
+Lynis是一款轻量级的软件，它不会破坏系统，也不会影响Linux系统上的任何应用程序或服务。首先，我们将为Lynis的安装创建一个目录，进入该目录，wget下载最新的Lynis源代码：
+[root@localhost ~]# mkdir /usr/local/lynis
+[root@localhost ~]# cd /usr/local/lynis/
+[root@localhost lynis]# wget https://downloads.cisofy.com/lynis/lynis-3.0.0.tar.gz
+<以上代码可复制粘贴，可往左滑>
+
+
+
+解压压缩包，进入解压出来的目录
+[root@localhost lynis]# tar xvf lynis-3.0.0.tar.gz 
+[root@localhost lynis]# cd lynis
+<以上代码可复制粘贴，可往左滑>
+运行lynis显示帮助信息。具有管理员权限的用户可以运行该脚本，所有日志和输出将保存在/var/log/lynis.log文件中：
+[root@localhost lynis]# ./lynis
+<以上代码可复制粘贴，可往左滑>
+
+
+
+
+开始审计并查找漏洞
+
+执行本地安全扫描，所以使用‘audit system’参数来扫描整个系统。运行下面的命令来启动对整个系统的审计：
+[root@localhost lynis]# ./lynis audit system
+或者
+[root@localhost lynis]# ./lynis audit system --wait 
+<以上代码可复制粘贴，可往左滑>
+--wait选项：等待用户按回车键显示下一节的报告。
+有时我们不想扫描或审计整个系统的应用程序或服务，所以我们可以按类别审计自定义应用程序。我们可以先列出所有的组，然后选择需要审计或扫描的组。
+[root@localhost lynis]# ./lynis show groups
+<以上代码可复制粘贴，可往左滑>
+
+
+
+现在我们将对"kernel"和"firewalls"进行简单的审计，我们将使用下面的命令。
+[root@localhost lynis]# ./lynis --tests-from-group "kernel firewalls"
+<以上代码可复制粘贴，可往左滑>
+
+
+
+
+
+
+
+
+
+要查看更多的lynis命令选项，请参考它的手册页：
+[root@localhost lynis]# ./lynis --man
+<以上代码可复制粘贴，可往左滑>
+
+
+总    结
+
+Lynis是Unix/Linux等操作系统的一款安全审计工具，它可以发现基于Linux系统中的恶意软件和安全漏洞。
+
+良许个人微信
+
+添加良许个人微信即送3套程序员必读资料
+
+→ 精选技术资料共享
+→ 高手如云交流社群
+
+
+
+--------------------
+
+本公众号全部博文已整理成一个目录，请在公众号里回复「m」获取！
+推荐阅读：
+万字长文，别再说你不懂Linux内存管理了（合辑），30 张图给你安排的明明白白
+神器 Typora ！
+TCP/IP 基础知识总结
+
+5T技术资源大放送！包括但不限于：C/C++，Linux，Python，Java，PHP，人工智能，单片机，树莓派，等等。在公众号内回复「1024」，即可免费获取！！
+
+
+Read more
+https://mp.weixin.qq.com/s/kydSeO82unfWZU6yh_TQNA

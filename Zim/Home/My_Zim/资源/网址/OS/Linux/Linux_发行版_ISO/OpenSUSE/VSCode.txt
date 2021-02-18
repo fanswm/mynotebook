@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-12T22:34:22+08:00
+
+====== VSCode ======
+Created 星期五 12 二月 2021
+
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo zypper addrepo https://packages.microsoft.com/yumrepos/vscode vscode
+sudo zypper refresh
+sudo zypper install code﻿​
+
+
+<a href="https://en.opensuse.org/Visual_Studio_Code" data-mce-href="https://en.opensuse.org/Visual_Studio_Code">https://en.opensuse.org/Visual_Studio_Code</a>
+

@@ -1,0 +1,60 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-18T02:12:56+08:00
+
+====== 一些免费Telegram代理mtproxy节点分享 ======
+创建日期 星期一 18 一月 2021
+
+不用VPN，ss,SSR,v2ray等任何翻墙梯子软件即可正常使用telegram。只需要在 Telegram 设置专用 MTproto 即可。
+
+推荐一个mtproxy分享网站：mtproto.cc
+
+MTProto.CC 是一个免费分享mtproxy代理的网站，你可以在此即时获取最新最全的mtproxy代理，查看Telegram 教程，也可以很方便的下载到Telegram 安装包。
+
+代理1来自《MTPROTO公益TG代理发放频道 》，更新于2020年3月19日。
+
+mtproxy 代理 1
+[[tg://proxy?server=13.76.162.207&port=443&secret=ee000000000000000000000000000000017777772e62696e672e636f6d]]
+代理2来自 《LetITFly 》 ，更新于2020年7月2号。
+
+mtproxy 代理 2
+[[tg://proxy?server=us1.lif.asia&port=543&secret=eee8d83248150272d003d8039741fe135a62696e672e636f6d2e636f6d]]
+代理3地址来自《 浪花云》，更新于2020年6月8号。
+
+mtproxy 代理 3
+[[tg://proxy?server=mtp.langhuayun.ga&port=10086&secret=738e03a6d708ce025f6659d31e542bfd]]
+代理4地址来自《火箭酷TG代理》，更新于2020年7月1号。
+
+mtproxy 代理 4
+[[tg://proxy?server=sg4.rocketcool.space&port=443&secret=ee9888933806c552d5d613afae9c90f2a2617a7572652e6d6963726f736f66742e636f6d]]
+代理5地址来自《火箭酷TG代理》，更新于2020年7月1号。
+
+mtproxy 代理 5
+[[tg://proxy?server=sg7.rocketcool.space&port=443&secret=ee9888933806c552d5d613afae9c90f2a2617a7572652e6d6963726f736f66742e636f6d]]
+复制后在Telegram代理设置中会新增粘贴选项，若没有粘贴选项可依次填入服务器、端口和认证密钥手动填入。
+
+以代理5为例，需要填入的信息为：
+
+Server / 服务器	sg7.rocketcool.space
+Port / 端口	443
+Secret / 认证信息	ee9888933806c552d5d613afae9c90f2a2617a7572652e6d6963726f736f66742e636f6d
+ 
+
+ 
+
+以下这些都需要在telegram 频道中获取。如果你对这些分享的telegram不放心，推荐自己搭建mtproxy代理，快速搭建教程：抗封锁的Mtproxy代理MTG（最新mtproxy-go) 一键脚本安装教程
+
+更多TG代理请关注积木别倒 Telegram 频道：https://t.me/jimubiedao
+
+ 
+
+https://t.me/socks5list
+https://t.me/onessr
+https://t.me/flysocks
+https://t.me/MTProxy_westworldss
+https://t.me/langhuayun
+https://t.me/Rocketcool
+转载请注明：积木别倒 » 无惧被墙，一些免费Telegram代理mtproxy节点分享
+
+
+https://jimubiedao.com/396

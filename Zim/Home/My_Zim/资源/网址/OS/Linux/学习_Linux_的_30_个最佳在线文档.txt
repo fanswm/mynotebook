@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2018-12-17T16:21:30+08:00
 
 ====== 学习 Linux 的 30 个最佳在线文档 ======
@@ -9,7 +9,7 @@ Created Monday 17 December 2018
 
 学习 Linux/*BSD/Unix 的 30 个最佳在线文档
 2018-12-04 18:39
-编译自：https://www.cyberciti.biz/tips/linux-unix-bsd-documentations.html作者： Vivek Gite
+编译自：https://www.cyberciti.biz/tips/linux-unix-bsd-documentations.html 作者： Vivek Gite
 原创：LCTT https://linux.cn/article-10311-1.html 译者： 李明岳
 
 

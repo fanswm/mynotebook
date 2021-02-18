@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-11-12T15:44:48+08:00
-
-====== kali linux ======
-Created Monday 12 November 2018
-

@@ -1,0 +1,231 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-19T16:23:00+08:00
+
+====== 手把手教你学之golang反射（下） ======
+创建日期 星期二 19 一月 2021
+
+手把手教你学之golang反射（下）
+
+原文作者：柔顺的灵魂
+来源：简书
+Update方法
+分析update sql语句：
+1update user set first_name = "z", last_name = "zy" where first_name = "Tom" and last_name = "Curise"
+
+比较简单，直接复用之前写的sKV()和mKV()函数：
+
+ 1//Update src can be *user, user, map[string]interface{}, string
+ 2func (q *Query) Update(src interface{}) (int64, error) {
+ 3    if len(q.errs) != 0 {
+ 4        return 0, errors.New(strings.Join(q.errs, "
+ 5"))
+ 6    }
+ 7    v := reflect.ValueOf(src)
+ 8    for v.Kind() == reflect.Ptr {
+ 9        v = v.Elem()
+10    }
+11    var toBeUpdated, where string
+12    var keys, values []string
+13    switch v.Kind() {
+14    case reflect.String:
+15        toBeUpdated = src.(string)
+16    case reflect.Struct:
+17        keys, values = sKV(v)
+18    case reflect.Map:
+19        keys, values = mKV(v)
+20    default:
+21        return 0, errors.New("method Update error: type error")
+22    }
+23    if toBeUpdated == "" {
+24        if len(keys) != len(values) {
+25            return 0, errors.New("method Update error: keys not match values")
+26        }
+27        var kvs []string
+28        for idx, key := range keys {
+29            kvs = append(kvs, fmt.Sprintf("%s = %s", key, values[idx]))
+30        }
+31        toBeUpdated = strings.Join(kvs, ",")
+32    }
+33    if len(q.wheres) > 0 {
+34        where = fmt.Sprintf(`where %s`, strings.Join(q.wheres, " and "))
+35    }
+36    query := fmt.Sprintf("update %s set %s %s", q.table, toBeUpdated, where)
+37    st, err := q.DB.Prepare(query)
+38    if err != nil {
+39        return 0, err
+40    }
+41    result, err := st.Exec()
+42    if err != nil {
+43        return 0, err
+44    }
+45    return result.RowsAffected()
+46}
+
+调用方式：
+
+ 1u1 := "age = 100"
+ 2u2 := map[string]interface{}{
+ 3    "age":        100,
+ 4    "first_name": "z",
+ 5    "last_name":  "zy",
+ 6}
+ 7u3 := &User{
+ 8    Age:       100,
+ 9    FirstName: "z",
+10    LastName:  "zy",
+11}
+12_, _ = users().Where("age > 10").Update(u1)
+13_, _ = users().Where("age > 10").Update(u2)
+14_, _ = users().Where("age > 10").Update(u3)
+
+Delete方法
+这个最简单，没啥好说的：
+ 1//Delete no args
+ 2func (q *Query) Delete() (int64, error) {
+ 3    if len(q.errs) != 0 {
+ 4        return 0, errors.New(strings.Join(q.errs, "
+ 5"))
+ 6    }
+ 7    var where string
+ 8    if len(q.wheres) > 0 {
+ 9        where = fmt.Sprintf(`where %s`, strings.Join(q.wheres, " and "))
+10    }
+11    st, err := q.DB.Prepare(fmt.Sprintf(`delete from %s %s`, q.table, where))
+12    if err != nil {
+13        return 0, err
+14    }
+15    result, err := st.Exec()
+16    if err != nil {
+17        return 0, err
+18    }
+19    return result.RowsAffected()
+20}
+
+删除id为1，2，3，4，并且age大于10的用户的调用方式：
+
+1w := map[string]interface{}{
+2    "id": []int{1, 2, 3, 4},
+3}
+4_, _ = users().Where(w, "age > 10").Delete()
+
+最后，写一个简单的事务处理函数Transaction()。
+Transaction函数
+事务有三个关键动作begin，rollback，commit。
+begin后，要求所有操作要不全部成功，要不全部失败，所以我们要检查所有error，一旦出现错误就rollback，并且还要recover程序的panic，发现panic时也要rollback，直到最后确保无错，才能commit。
+调用*sql.DB.Begin()方法后，我们会得到一个事务具柄，事务内的mysql交互都要通过它来进行，它也实现了Query()、Prepare()等方法。
+所以我们定义一个接口：
+
+1//Dba *sql.DB or *sql.Tx
+2type Dba interface {
+3    Query(string, ...interface{}) (*sql.Rows, error)
+4    Prepare(string) (*sql.Stmt, error)
+5}
+
+然后把Query结构体的DB属性的类型改成这个接口：
+
+1//Query will build a sql
+2type Query struct {
+3    DB     Dba
+4    ...
+5}
+
+同时， 改造Table()函数：
+
+ 1//Table bind db and table
+ 2func Table(db *sql.DB, tableName string) func(...Dba) *Query {
+ 3    return func(tx ...Dba) *Query {
+ 4        if len(tx) == 1 {
+ 5            return &Query{
+ 6                DB:    tx[0],
+ 7                table: tableName,
+ 8            }
+ 9        }
+10        return &Query{
+11            DB:    db,
+12            table: tableName,
+13        }
+14    }
+15}
+
+这样我们就可以有选择性的和mysql进行普通交互或者事务交互。
+然后把Transaction()函数写成这样：
+
+ 1//Transaction .
+ 2func Transaction(db *sql.DB, f func(Dba) error) (err error) {
+ 3    tx, err := db.Begin()
+ 4    if err != nil {
+ 5        return err
+ 6    }
+ 7    defer func() {
+ 8        p := recover()
+ 9        if err != nil {
+10            if rerr := tx.Rollback(); rerr != nil {
+11                panic(rerr)
+12            }
+13            return
+14        }
+15        if p != nil {
+16            if rerr := tx.Rollback(); rerr != nil {
+17                panic(rerr)
+18            }
+19            err = fmt.Errorf("function Transaction error: %v", p)
+20            return
+21        }
+22        if cerr := tx.Commit(); cerr != nil {
+23            panic(cerr)
+24        }
+25    }()
+26    err = f(tx)
+27    return err
+28}
+
+第二个参数是一个接受事务具柄，返回error的函数，我们将需要事务的操作全部封装在这个函数里，就能抓到所有的panic和error。
+调用方式示例：
+
+ 1unc doTx() error {
+ 2    ormDB, err := Connect("[[root@tcp(127.0.0.1]]:3306)/orm_db?parseTime=true&loc=Local")
+ 3    if err != nil {
+ 4        panic(err)
+ 5    }
+ 6    users := Table(ormDB, "user")
+ 7    args := something()
+ 8    //利用闭包传递变量
+ 9    f := func(tx Dba) error {
+10        var id int
+11        //select语句无需在事务具柄上进行
+12        if err := users().Where(args).Select(&id); err != nil {
+13            return err
+14        }
+15        //增删改需要在事务上进行
+16        if _, err = users(tx).Insert(args); err != nil {
+17            return err
+18        }
+19        if _, err = users(tx).Update(args); err != nil {
+20            return err
+21        }
+22        if _, err = users(tx).Where(args).Delete(); err != nil {
+23            return err
+24        }
+25        return nil
+26    }
+27    //开始事务
+28    if err := Transaction(ormDB, f); err != nil {
+29        return err
+30    }
+31    return nil
+32}
+
+到此，这个迷你orm的增删改查和事务功能全部都实现了，代码大概600行，比我预想的多了一倍。
+后记
+golang的反射虽然强大（其实并不，没有ruby的元编程那么方便），但还是比较烦琐的，而且类型不对时动不动就panic，使用的时候要尽量检查一下Kind。
+版权申明：内容来源网络，版权归原创者所有。除非无法确认，我们都会标明作者及出处，如有侵权烦请告知，我们会立即删除并表示歉意。谢谢。
+
+
+Golang语言社区
+ID：GolangWeb
+www.ByteEdu.Com
+游戏服务器架构丨分布式技术丨大数据丨游戏算法学习
+
+
+喜欢此内容的人还喜欢

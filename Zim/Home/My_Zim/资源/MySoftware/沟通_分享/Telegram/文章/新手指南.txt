@@ -1,0 +1,17 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-28T09:54:15+08:00
+
+====== 新手指南 ======
+创建日期 星期四 28 一月 2021
+
+[转发自 Telegram 新手指南]
+#新闻 #iOS #中文化
+
+客户端版本高于 5.0.16 的 iOS 用户现在可以通过链接将 Telegram 设置为中文界面。
+
+简体中文：https://t.me/setlanguage/zh-hans-raw
+繁体中文：https://t.me/setlanguage/zh-hant-raw
+
+目前通过此链接设置的中文界面并非正式版本，推荐尝鲜用户及英文水平堪忧人士使用，最终版本请等待官方正式审核发布。
+

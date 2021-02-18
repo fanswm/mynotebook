@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-10T22:32:18+08:00
+
+====== TCC(Tiny C Compiler) ======
+Created 星期日 10 一月 2021
+
+https://blog.csdn.net/Cuixinyang19_/article/details/83514424
+
+tcc -run xxx.c

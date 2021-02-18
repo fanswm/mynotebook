@@ -1,0 +1,22 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-07T10:10:54+08:00
+
+====== 国内下载 ======
+Created 星期四 07 一月 2021
+
+
+https://mirrors.tuna.tsinghua.edu.cn/osdn/storage/g/m/ma/manjaro-archive/gnome/
+
+
+//以下不能用：
+architect版本：https://mirrors.tuna.tsinghua.edu.cn/osdn/storage/g/m/ma/manjaro/architect/20.0/manjaro-architect-20.0-200426-linux56.iso
+
+Gnome桌面版本：https://mirrors.tuna.tsinghua.edu.cn/osdn/storage/g/m/ma/manjaro/gnome/20.0/manjaro-gnome-20.0-200426-linux56.iso
+
+KDE桌面版本：
+
+https://mirrors.tuna.tsinghua.edu.cn/osdn/storage/g/m/ma/manjaro/kde/20.0/manjaro-kde-20.0-200426-linux56.iso
+
+Xfce桌面版本：
+

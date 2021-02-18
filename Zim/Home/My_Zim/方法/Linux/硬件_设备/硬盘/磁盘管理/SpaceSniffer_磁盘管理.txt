@@ -1,0 +1,16 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+Creation-Date: 2018-12-19T14:42:46+08:00
+
+====== SpaceSniffer 磁盘管理 ======
+Created Wednesday 19 December 2018
+
+http://www.uderzo.it/main_products/space_sniffer/
+
+C盘飘红却不知道被哪些文件占用了？不要怕，用这款软件扫描一下，不管你放的什么小电影，它都能给你扫出来！
+https://www.zhihu.com/question/21175572/answer/523548768?utm_source=com.youdao.note&utm_medium=social&utm_oi=33829276352512
+
+
+链接：https://www.zhihu.com/question/21065451/answer/713311358
+
+SpaceSniffer 是一款适用于 Windows 的免费磁盘空间分析器，绿色软件，无需安装，大小不到 2MB，占用的硬盘空间几乎可以忽略不计，毕竟，它检测硬盘的目的本来就是为了节约空间。运行软件，选择需要分析的盘符，SpaceSniffer 会以特别快的速度检索磁盘，酷炫的动态效果感觉就像是科幻电影里黑客操控电脑的感觉，极客范儿十足。​<img src="https://pic3.zhimg.com/50/v2-1879965ac1d671c2af02e5fe061de3b4_hd.gif" data-caption="" data-size="normal" data-rawwidth="1184" data-rawheight="616" data-thumbnail="https://pic3.zhimg.com/50/v2-1879965ac1d671c2af02e5fe061de3b4_hd.jpg" class="origin_image zh-lightbox-thumb" width="1184" data-original="https://pic3.zhimg.com/v2-1879965ac1d671c2af02e5fe061de3b4_r.jpg"/>​扫描结束后，它会根据文件夹的占用空间大小呈现出大大小小的板块。你可以一目了然的看出哪些文件夹占用了多大的空间，鼠标悬浮在文件块上可以显示文件大小。蓝色色块代表文件，黄色代表文件夹。同时还可以点击按钮用不同色块区分不同格式的文件。如果是多层级的文件夹，还会有子文件夹，你可以双击显示子文件夹内的占用情况。

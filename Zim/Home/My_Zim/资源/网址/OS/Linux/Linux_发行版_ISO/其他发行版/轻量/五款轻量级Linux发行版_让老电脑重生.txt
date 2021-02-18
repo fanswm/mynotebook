@@ -1,0 +1,43 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-29T19:29:45+08:00
+
+====== 五款轻量级Linux发行版 让老电脑重生 ======
+创建日期 星期五 29 一月 2021
+
+五款轻量级Linux发行版 让老电脑重生
+来源：互联网 作者：互联网 时间：2011-08-25 Tag：Linux   点击：
+
+
+	  有非常非常多的 Linux 发行版，比如我们可能会经常使用的 Ubuntu、CentOS、红帽、Debian Linux 等等，这些 Linux 系统几乎都是适合当前的硬件水平，而在一些老的 PC 上运行起来就非常吃力。本文向你介绍 5 个轻量级的 Linux 版本，让你的旧 PC 老树开花。
+　　1. CrunchBang Linux
+
+　　CrunchBang Linux是一份基于Ubuntu的发行，其特色在于轻量级的Openbox窗口管理器和GTK+应用程序。该发行从一份最小的Ubuntu系统创建，并 被定制为可以提供速度和功能两方面的一个良好均衡。CrunchBang Linux目前可以一份自启动运行光盘获得，然而为获得其最佳性能建议还是安装到硬盘上使用。
+
+ 
+
+　　2. Zenix
+
+　　ZENIX GNU/Linux是一份基于Linux From Scratch的发行。它是一份直接从无到有建立起来以面向可靠服务器场合的操作系统。ZENIX包括一套基本系统及一些附加软件包。这些单个的软件包提 供的是功能齐全的面向特定需求的服务器环境，例如域名解析服务器、web服务器及邮件服务器。
+
+ 
+
+　　3. antiX
+
+　　antiX是快捷、轻量级、易于安装的Linux自启动运行光盘发行，它基于MEPIS和Debian的测试分支，面向Intel/AMD x86兼容系统。
+
+　　antiX以一套适用于老旧计算机的环境为用户提供MEPIS的魔力。antiX的目标是向Linux的新手和老手提供一份轻巧但功能完 整的、灵活的免费操作系统。它应运行在绝大多数计算机上——从64 MB内存但带有128 MB交换分区的PII系统到最新的高端机器。为antiX推荐的最低内存配置是128 MB RAM，而安装程序则需要至少1.2 GB的硬盘空间。antiX也可以当作一张快速启动应急光盘来使用。
+
+ 
+
+　　4. Zenwalk
+
+　　Zenwalk Linux（以前叫做Minislack）是一份基于Slackware的GNU/Linux操作系统，其宗旨在于以每项任务只设置一个应用程序来保持精 简和快捷，它还着重于图形桌面及多媒体使用。Zenwalk的特色在于包含最新的Linux技术以及一整套编程环境和运行库，它能为应用程序开发人员提供 一份理想的平台。Zenwalk的模块化实现方法还提供了能将Zenwalk Linux转化为具有高度调节性的现代化服务器（如LAMP架构、通讯、文件共享）的简便方法。
+
+ 
+
+　　5. Xubuntu 或者 Lubuntu
+
+　　Xubuntu是一份基于Ubuntu的Linux发行。然而与Ubuntu不同的是，Xubuntu采用轻量级的XFce桌面环境，并面向低端机器作了优化。该发行尽可能地只包含GTK+应用软件。
+
+http://www.embeddedlinux.org.cn/html/xingyexinwen/201108/25-1511.html

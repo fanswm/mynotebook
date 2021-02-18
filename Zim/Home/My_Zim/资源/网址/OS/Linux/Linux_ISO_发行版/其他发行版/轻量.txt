@@ -1,9 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2018-10-22T09:56:16+08:00
-
-====== 轻量 ======
-Created Monday 22 October 2018
-
-10 Best Lightweight Linux Distributions For Older Computers
-https://itsfoss.com/lightweight-linux-beginners/

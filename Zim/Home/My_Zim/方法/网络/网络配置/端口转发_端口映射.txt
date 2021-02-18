@@ -1,0 +1,7 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2019-08-20T14:28:44+08:00
+
+====== 端口转发 端口映射 ======
+创建日期 星期二 20 八月 2019
+

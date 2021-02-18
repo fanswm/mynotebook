@@ -1,0 +1,139 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-01-25T07:32:16+08:00
+
+====== CPU 温度 ======
+Created 星期一 25 一月 2021
+
+
+
+
+实时的。https://www.techpowerup.com/realtemp/
+CPU温度曲线。http://www.cputhermometer.com/
+核心温度	https://www.alcpu.com/CoreTemp/
+
+
+https://ammonsonline.com/is-it-hot-in-here-or-is-it-just-my-cpu/
+
+
+
+Is It Hot In Here Or Is It Just My CPU?
+
+Computer With A Fever
+You know what’s LOTS of fun when you’re playing a game on your computer?
+
+Did you guess “Emergency Shut Down Due To Overheating?”
+
+That would not have been my first guess, either, but it did give me a good idea for a blog post. So there’s that.
+
+I’ve dual booted between Windows and Linux for a long time, and one thing I loved on Ubuntu that was missing from Windows was seeing the CPU temperature on my terminal window (check out Byobu).
+
+Normally that’s just a nifty fact, but once your computer begins to spontaneously shut off, you suddenly become much, much more interested in how hot it really is.
+
+That’s why I began searching the internets for a way to figure out the temp under Windows.
+
+Note: The code I’m about to share may well not work on your computer. I’m a programmer, so the best I can ever say is, “It works on my machine.” Seriously, though it will only work if your BIOS supports reporting the temperature. And, you know, your CPU has a thermometer.
+
+Also Note: I’m using CPU lightly here. This code has no idea where the manufacturer put the temp sensor.
+
+Long story short, the secret lies in Windows Management Instrumentation (WMI).
+
+WMI is a Microsoft initiative to implement a blah blah, Oh, my God, just go read the link.
+
+You can call WMI from .Net, but for you folks who don’t have or want Visual Studio, you can also call it from PowerShell.
+
+Since I want to use this multiple ways, I’m going to put it in a function.
+
+PowerShell likes things to be named with Verb - Noun format, let’s call our function
+
+Get-Temperature.
+
+Following their own convention, they named the commandlet we want
+
+Get-WmiObject.
+
+We’ll start off by creating an object we can reference that accesses the WMI Object we need:
+
+$t = Get-WmiObject MSAcpi_ThermalZoneTemperature -Namespace “root/wmi”
+
+As you can see, we are just passing into the commandlet the object and namespace where it can find it.
+
+Now we can ask for the current temperature.
+
+$t.CurrentTemperature
+
+No can do.
+
+NOTE: You must run as administrator to access this command.
+
+
+
+
+Right click PowerShell in task bar, Run As Administrator, etc.
+
+Now let’s just run that again and… well there’s the problem!
+
+My CPU is 3,442 degrees! No wonder it keeps shutting down.
+
+Hang on, the Sun is only about 5,500 degrees on the surface. I have trouble believing my notebook is that hot.
+
+Google, Google, Google.
+
+Ah, the results are in 10ths of Kelvins.
+
+That means the temperature is actually 344.2 degrees Kelvin.
+
+OK, zero Kelvin is absolute zero, so this is 344.2 degrees higher than that.
+
+Nope. I don’t normally think in Kelvin (although he was my favorite chipmunk).
+
+Let’s convert Kelvin to Celsius.
+
+$currentTempKelvin = $t.CurrentTemperature / 10
+$currentTempCelsius = $currentTempKelvin - 273.15
+
+Once we have that, we’ll go Farenheit.
+
+$currentTempCelsius = (9/5) * $currentTempCelsius + 32
+
+Great!
+
+__Now for the whole function:__
+
+
+```
+function Get-Temperature {
+	$t = Get-WmiObject MSAcpi_ThermalZoneTemperature -Namespace "root/wmi"
+	$currentTempKelvin = $t.CurrentTemperature / 10
+	$currentTempCelsius = $currentTempKelvin - 273.15
+	$currentTempFahrenheit = (9/5) * $currentTempCelsius + 32
+	return $currentTempCelsius.ToString() + " C : " + $currentTempFahrenheit.ToString() + " F : " + $currentTempKelvin + "K"  
+}
+# Save in your c:\users\yourName\Documents\WindowsPowerShell\modules\ directory
+# in sub directory get-temperature as get-temperature.psm1
+# You **must** run as Administrator.
+# It will only work if your system & BIOS support it. If it doesn't work, I can't help you.
+# Just type get-temperature in PowerShell and it will spit back the temp in Celsius, Farenheit and Kelvin.
+# More info on my blog: http://ammonsonline.com/is-it-hot-in-here-or-is-it-just-my-cpu/
+
+```
+
+
+Now if we just save that in a file in a subdirectory of our PowerShells Modules directory, we should be able to call it from PowerShell.
+
+Should be something like:
+
+C:\Users\yourUserName\Documents\WindowsPowerShell\Modules\Get-Temperature\Get-Temperature.psm1
+
+Now any time we start PowerShell as administrator, we will be able to call and see something likeget-temperature
+
+72.05 C : 161.69 F : 345.2K
+
+Sweet!
+
+Just for the record, I do actually know that Alvin was the Chipmunk, not Kelvin.
+
+Hey! Now that you can get PowerShell to tell you the temperature, why not teach it to speak?
+
+Share Comments
+Tags: PowerShell, Windows
