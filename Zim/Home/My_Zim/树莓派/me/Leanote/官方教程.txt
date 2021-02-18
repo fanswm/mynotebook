@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2019-02-10T21:30:55+08:00
 
 官方教程
@@ -114,7 +114,7 @@ $> bash run.sh
 TRACE 2013/06/06 15:01:27 watcher.go:72: Watching: /home/life/leanote/bin/src/github.com/leanote/leanote/conf/routes
 Go to /@tests to run the tests.
 Listening on :9000...
-恭喜你, 打开浏览器输入: http://localhost:9000 体验leanote吧!
+恭喜你, 打开浏览器输入: [[http://localhost:9000]] 体验leanote吧!
 
 注意!!!!!!!!!!!!!!
 
@@ -175,8 +175,8 @@ db.dbname=leanote # required
 db.username= # if not exists, please leave it blank
 db.password= # if not exists, please leave it blank
 # or you can set the mongdb url for more complex needs the format is:
-# mongodb://myuser:mypass@localhost:40001,otherhost:40001/mydb
-# db.url=mongodb://root:root123@localhost:27017/leanote
+# [[mongodb://myuser:mypass@localhost:40001,otherhost:40001/mydb]]
+# db.url=[[mongodb://root:root123@localhost:27017/leanote]]
 db.urlEnv=${MONGODB_URL} # set url from env
 即数据库名为leanote, 用户名和密码为空, 请检查是否正确.
 
@@ -193,8 +193,8 @@ Leanote运行成功, 但不能登录
 修改conf/app.conf:
 
 http.port=8080
-site.url= http://localhost:8080
-请重启Leanote, 使用 http://localhost:8080%E8%AE%BF%E9%97%AE.
+site.url= [[http://localhost:8080]]
+请重启Leanote, 使用 [[http://localhost:8080%E8%AE%BF%E9%97%AE]].
 
 如何绑定域名?
 
@@ -267,7 +267,7 @@ adminUsername=life
 
 # create self-signed server certificate:
 
-read -p "Enter your domain [www.example.com]: " DOMAIN
+read -p "Enter your domain [ www.example.com ]: " DOMAIN
 
 echo "Create server key..."
 
@@ -310,7 +310,7 @@ http {
         
 		# 强制https
 		# 如果不需要, 请注释这一行rewrite
-		rewrite ^/(.*) https://jp_linode2.com/$1 permanent;
+		rewrite ^/(.*) [[https://jp_linode2.com/$1]] permanent;
         
 		location / {
 			proxy_pass        http://a.com;
