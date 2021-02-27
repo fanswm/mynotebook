@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-26T13:53:04+08:00
+
+====== php ======
+创建日期 星期五 26 二月 2021
+sudo apt install php php-common
+
+The following additional packages will be installed:
+  apache2 apache2-bin apache2-data apache2-utils libapache2-mod-php7.3 libapr1
+  libaprutil1 libaprutil1-dbd-sqlite3 libaprutil1-ldap liblua5.2-0 php7.3
+  php7.3-cli php7.3-common php7.3-json php7.3-opcache php7.3-readline ssl-cert
+Suggested packages:
+  apache2-doc apache2-suexec-pristine | apache2-suexec-custom www-browser
+  php-pear openssl-blacklist
+The following NEW packages will be installed:
+  apache2 apache2-bin apache2-data apache2-utils libapache2-mod-php7.3 libapr1
+  libaprutil1 libaprutil1-dbd-sqlite3 libaprutil1-ldap liblua5.2-0 php
+  php-common php7.3 php7.3-cli php7.3-common php7.3-json php7.3-opcache
+  php7.3-readline ssl-cert
+0 upgraded, 19 newly installed, 0 to remove and 0 not upgraded.
+Need to get 5,054 kB of archives.
+After this operation, 20.6 MB of additional disk space will be used.
+Do you want to continue? [Y/n]

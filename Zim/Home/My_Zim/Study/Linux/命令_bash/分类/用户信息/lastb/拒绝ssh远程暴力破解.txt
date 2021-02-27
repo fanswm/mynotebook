@@ -1,0 +1,143 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-18T21:14:33+08:00
+
+====== 拒绝ssh远程暴力破解 ======
+Created 星期四 18 二月 2021
+
+拒绝ssh远程暴力破解
+
+简介
+
+在网络技术日益发展的今天，网络上的安全问题日益严重。当你在公网上使用Linux服务器时，很有可能你的服务器正在遭受ssh暴力破解。
+
+曾经有一次我的同伴将给客户提供监控服务的服务器架设在公共网络上，同时设置了弱密码。没过一天，客户的内网出现了严重的问题。我们用了一晚上在研究网络上的问题，结果最后发现就是因为这台新创建的服务器导致客户内网瘫痪，而服务器是被黑客通过ssh暴力破解进入并植入了ARP攻击的病毒工具。
+
+所以对于服务器最为基本的远程登录进行保护，往往反而是最重要的，也是最容易被新手们忽略的。
+
+如何判断自己正在遭受ssh暴力破解
+
+ssh登录服务器后使用lastb命令，命令会显示最近错误登录的日志，包括通过ssh服务错误登录的日志。
+
+admin ssh:notty191.201.86.105 Thu May 3 05:11 - 05:11 (00:00)
+admin ssh:notty 191.201.86.105 Thu May 3 05:11 - 05:11 (00:00)
+admin ssh:notty 191.201.86.105 Thu May 3 05:11 - 05:11 (00:00)
+admin ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+admin ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+admin ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+admin ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+admin ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+admin ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:10 - 05:10 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:09 - 05:09 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:09 - 05:09 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:09 - 05:09 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:09 - 05:09 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:09 - 05:09 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:09 - 05:09 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:09 - 05:09 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:09 - 05:09 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:09 - 05:09 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:09 - 05:09 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:08 - 05:08 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:08 - 05:08 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:08 - 05:08 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:08 - 05:08 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:08 - 05:08 (00:00)
+root ssh:notty 191.201.86.105 Thu May 3 05:08 - 05:08 (00:00)
+
+如果得到和我上方显示差不多的情况，出现大量的输出说明你的服务器正在遭受黑客们的暴力破解。
+
+如何防范暴力破解
+
+__方法一：修改远程登录端口__
+
+修改/etc/ssh/sshd_config文件中的Port 将前方的#注释删除，并将22修改为你想要使用远程登录的端口，例如54231。
+
+在防火墙上添加运行端口：
+iptables -I INPUT -p tcp --dport 54231 -j ACCEPT
+
+如果您使用的ubuntu系统并使用ufw，可以使用命令：sudo ufw allow 54231
+
+如果您使用CentOS7系统并使用firewalld,可以使用命令：
+firewall-cmd --zone=public --add-port=54231/tcp --permanent
+
+如果是使用云服务器，云服务商有提供外部防火墙，例如阿里云的安全组的情况下还要在外部的安全组中修改允许tcp端口54231端口的策略。
+
+最后使用serivce sshd restart重启sshd服务即可。
+
+CentOS7用户使用systemctl restart sshd。
+
+重启服务之后登录服务器都需要输入指定的远程端口才能够登录服务器，大大降低了黑客攻击服务器的概率。
+
+__方法二：限制登录IP__
+
+如果你的公司或者常常需要登录服务器的工作网络环境拥有固定的IP地址时，限制登录IP地址就可以很好的保护服务器免受黑客攻击。如果没有上述的条件，我们也可以通过搭建堡垒机，将所有服务器都设置为允许堡垒机的IP地址登录即可保护您的服务器。
+
+操作起来相当简单，首先在/etc/hosts.allow中加入如下信息：
+
+sshd:172.16.*.*
+
+这条信息表示sshd服务允许向IP地址为172.16开头的IP地址提供服务。
+
+其次在/etc/hosts.deny中加入如下信息：
+
+sshd:all:deny
+
+这条信息表示sshd服务不允许向所有IP地址提供服务。
+
+如此一来服务器将只有指定的IP地址可以访问。
+
+__方法三：使用非root用户登录__
+
+禁止root用户登录并且设置允许其他用户登录后切换至root进行操作。这样黑客如果想要通过ssh登录服务器除了密码之外首先他还需要知道服务器允许登录的用户，这样将大大降低黑客攻破ssh的可能性。
+
+首先，在服务器内创建一个用户，learntop:useradd learntop
+并且设置密码：passwd learntop ,当然密码需要尽量复杂。
+
+接下来我们需要允许此用户能够以root用户身份运行命令。
+使用visudo命令进入文本编辑模式，于92行附近
+
+## Syntax:
+##
+## user MACHINE=COMMANDS
+##
+## The COMMANDS section may have other options added to it.
+##
+## Allow root to run any commands anywhere
+root ALL=(ALL) ALL
+learntop ALL=(ALL) NOPASSWD:ALL
+
+添加红色字体信息："ALL=(ALL) NOPASSWD:ALL"，保存退出后可以验证一下。
+
+[root@localhost ~]#visudo
+[root@localhost ~]# su learntop
+[learntop@localhost root]$ sudo su -
+Last login: Tue May 22 12:55:36 CST 2018 on pts/1
+[root@localhost ~]#whoami
+root
+
+首先使用su learntop切换至learntop用户,接下来我们可以使用sudo su -命令切换到root用户。
+
+同样我们也可以通过远程登录方式验证，使用ssh客户端以learntop用户登录系统后，再使用sudo su -命令进行切换。
+
+在设置可以通过learntop用户登录系统并能够自由切换至管理员用户操作后，我们需要禁止root用户通过远程方式登录系统。
+
+在/etc/ssh/sshd_config文件内添加“PermitRootLoginno”，后重启sshd服务。启动后，root用户就将无法通过ssh服务直接连接到服务器。
+
+ 
+
+当然除此之外还有许多可以限制黑客通过ssh暴力破解登录服务器的方法。例如使用密钥登录服务器等。但保护整个业务系统的安全最为重要的不是几个技术点，而是在结构设计的时候就预先考虑到安全的因素，例如不需要向公网提供服务的服务器就不设置公网IP地址，配置安全可靠的堡垒机。
+
+ 
+
+ 
+https://blog.csdn.net/gammey/article/details/80404375
+

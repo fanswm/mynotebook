@@ -1,7 +1,9 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2018-01-11T11:20:59+08:00
 
 ====== 树莓派 ======
 Created Thursday 11 January 2018
+
+https://shumeipai.nxez.com/2013/09/07/how-to-install-and-activate-raspberry-pi.html
 

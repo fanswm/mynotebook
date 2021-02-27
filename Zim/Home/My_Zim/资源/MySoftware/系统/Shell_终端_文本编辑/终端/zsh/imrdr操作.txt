@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2019-11-25T16:37:56+08:00
 
 ====== imrdr操作 ======
@@ -12,6 +12,9 @@ go version
 
 #安装zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+imrdr:
+git clone https://github.com/ohmyzsh/ohmyzsh
 
 # 安装atuojump插件：
 git clone git://github.com/wting/autojump.git $ZSH_CUSTOM/plugins/autojump

@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2019-04-24T05:19:35+08:00
 
 ====== Ubuntu ======
@@ -7,11 +7,11 @@ Creation-Date: 2019-04-24T05:19:35+08:00
 
 # vim ~/.bashrc
 # 一级：
-alias apt='apt-get'
+alias apt-get='apt'
 alias vi='vim'
 alias h='tldr'
 alias c='clear'
-alias ins='sudo apt-get install'
+alias ins='sudo apt install'
 
 alias ipe='curl ipinfo.io/ip'
 alias meminfo='free -m -l -t'

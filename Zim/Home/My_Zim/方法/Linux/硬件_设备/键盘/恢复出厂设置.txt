@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.6
+Wiki-Format: zim 0.4
 Creation-Date: 2019-02-19T14:39:17+08:00
 
 ====== 恢复出厂设置 ======

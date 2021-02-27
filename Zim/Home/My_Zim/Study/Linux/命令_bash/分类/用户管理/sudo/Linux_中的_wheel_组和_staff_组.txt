@@ -1,0 +1,49 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-18T21:57:07+08:00
+
+====== Linux 中的 wheel 组和 staff 组 ======
+Created 星期四 18 二月 2021
+
+https://www.cnblogs.com/jan5/p/3359421.html
+
+wheel 组的概念
+
+　　wheel 组的概念继承自 UNIX。当服务器需要进行一些日常系统管理员无法执行的高级维护时，往往就要用到 root 权限；而“wheel” 组就是一个包含这些特殊权限的用户池；也就是说，如果你不是“wheel”组的成员，就无法取得 root 权限进行一些特权的操作；
+
+ 
+
+为什么需要 wheel 组？
+　　通常在UNIX下，即使我们是系统的管理员，也不推荐用 root 用户登录来进行系统管理。一般情况下用普通用户登录，在需要 root 权限执行一些操作时，再 su 登录成为 root 用户。但是，任何人只要知道了 root 的密码，就都可以通过 su 命令来登录为 root 用户——这无疑为系统带来了安全隐患。所以，将普通用户加入到 wheel 组，被加入的这个普通用户就成了管理员组内的用户，但如果不对一些相关的配置文件进行配置，这个管理员组内的用户与普通用户也没什么区别——就像警察下班后，没有带枪、穿这便衣和普通人（用户）一样，虽然他的的确确是警察。
+
+ 
+
+如何把用户加入 wheel 组？
+
+　　前面说了，除了 root 用户，只有 wheel 组的成员有特权执行高级操作，那么怎么把用户提升成为 wheel 用户组成员呢？
+
+　　可以使用 vigr 来编辑 /etc/group 文件，将新的用户名追加到 wheel 组的末尾，就像这样：
+
+　　wheel::10:root,kc
+
+ 
+
+　　对于服务器来说，我们希望的是剥夺被加入到 wheel 组用户以外的普通用户通过 su 命令来登录为 root 的机会（即只有属于 wheel 组的用户才可以用 su 登录为 root）。这样就进一步增强了系统的安全性。具体步骤如下：
+1）修改 /etc/pam.d/su 文件，找到“#auth required /lib/security/$ISA/pam_wheel.so use_uid ”这一行，将行首的“#”去掉。
+
+2）修改 /etc/login.defs 文件，在最后一行增加“SU_WHEEL_ONLY yes”语句。
+
+然后，用“usermod -G wheel 用户名”将一个用户添加到 wheel 组中；
+然后，用刚刚被添加到 wheel 组的用户登录，并执行 su 命令登录为 root 用户；这时，输入了正确的 root 密码就可以正常的登录为 root 用户了。
+
+ 
+
+知识延展：staff 和 wheel 的区别
+
+下面是一段关于staff 和 wheel 区别的解释，原文来自 http://forums.macnn.com/90/mac-os-x/108958/group-permissions-wheel-vs-staff-whats/
+
+The wheel group is used to control those people that can su to the root user (though this is made irrelevant by the sudo command).
+
+All of the users on your system will be in the staff group, so by changing group ownership of files to staff the group permissions will apply to all users. All of the administrators on your system will be in the wheel group, so by changing group ownership of the files to wheel group permissions will apply to all of the administrators, global permissions will apply to any other users.
+
+My advice is that, except for files that you have created, you leave the group ownership and permissions alone. Unix is very particular about file ownership and permissions in certain areas and changing them only leads to trouble.

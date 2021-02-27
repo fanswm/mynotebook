@@ -1,0 +1,138 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-21T05:36:50+08:00
+
+====== 搭建LNMP环境 ======
+创建日期 星期日 21 二月 2021
+
+树莓派搭建LNMP环境
+2013年8月25日 Spoony 未分类 14
+
+Raspberry Pi的固件有很多，我安装的是官方的Raspbian。配置ip。然后ssh上去后开始安装。
+
+推荐root权限执行
+
+1
+2
+sudo apt-get update
+sudo apt-get install nginx php5-fpm php5-cli php5-curl php5-gd php5-mcrypt php5-mysql php5-cgi mysql-server
+首次安装mysql的时候会提示输入密码，密码不要忘记就行了。
+接下来我们来配置Nginx，首先打开配置文件，/etc/nginx/nginx.conf ，按照下面的配置进行修改。
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+worker_processes 1;
+ 
+worker_connections 256;
+ 
+gzip on;
+gzip_disable "msie6";
+ 
+gzip_vary on;
+gzip_proxied any;
+gzip_comp_level 6;
+gzip_buffers 16 8k;
+gzip_http_version 1.1;
+gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+接下来打开/etc/nginx/sites-available/default也是按照下面的配置进行修改。
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+server {
+	listen 80;#Web服务端口号,大陆用户可能需要修改为81或8080等
+	server_name raspiweb.dyndns.org;
+	root /media/usb/www/;
+ 
+	access_log  /var/log/nginx/localhost.access.log;
+	#error_page 404 /404.html;
+ 
+	if (!-e $request_filename)
+	{
+		rewrite ^(.*)$ /index.php$1 last;
+	}
+ 
+	location / {
+		index  index.html index.htm index.php default.html default.htm default.php;
+	}
+ 
+	location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico|xml)$ {
+		access_log  off;
+		expires 1d;
+	}
+ 
+	location ~ .*\.php(\/.*)*$ {
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		include fastcgi_params;
+	}
+}
+下面是对mysql的调优，打开配置文件/etc/mysql/my.cnf修改以下几处。
+
+1
+2
+3
+4
+5
+6
+7
+[mysqld]
+key_buffer = 16k
+max_allowed_packet = 1M
+thread_stack = 64K
+thread_cache_size = 4
+query_cache_limit = 1M
+default-storage-engine = MYISAM
+最后我们来配置php.ini，php-fpm，打开配置文件/etc/php5/fpm/php.ini和/etc/php5/fpm/php-fpm.conf修改以下几处。
+
+1
+2
+memory_limit=16M
+process.max=4
+重启nginx。
+
+1
+sudo /usr/sbin/nginx -s reload
+到这里我们的lnmp环境配置已经大功告成！接下来是安装phpmyadmin到指定目录~这里只讲如何配置lnmp。
+via
+
+文章标题：树莓派搭建LNMP环境 - 树莓派实验室
+固定链接：https://shumeipai.nxez.com/2013/08/25/install-and-config-lnmp.html

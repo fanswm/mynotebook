@@ -1,0 +1,181 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-18T21:22:32+08:00
+
+====== 0 ======
+Created 星期四 18 二月 2021
+
+linux：last和lastb
+
+随风化作雨
+2017.11.24 14:41:13
+字数 1,218
+阅读 2,954
+last是linux的一个内置工具，可以用来查看最后登录服务器的用户。它对于追踪非常有用。
+如果你是一个服务器管理员，你或许知道你要保护你的服务器的话，不仅是从外部，还要从内部保护。linux有一个内置工具来看到最后登陆服务器的用户，可以帮助你保护服务器。
+
+last命令的功能是什么
+
+last显示的是自/var/log/wtmp文件创建起所有登录(和登出)的用户。这个文件是二进制文件，它不能被文本编辑器浏览，比如vi、Joe或者其他软件。这是非常有用的，因为用户(或者root)不能像他们希望的那样修改这个文件。
+
+last会给出所有已登录用户的用户名、tty、IP地址(如果用户是远程连接的话)、日期-时间和用户已经登录的时间。
+
+如何运行last
+
+你只要在控制台中输入last即可。这是个例子：
+
+$ last
+root     pts/1        192.168.100.136  Wed Jun 21 18:29 - down   (00:11)    
+root     pts/0        :0               Wed Jun 21 18:27 - 18:41  (00:13)    
+root     :0           :0               Wed Jun 21 18:27 - 18:41  (00:14)    
+(unknown :0           :0               Wed Jun 21 05:34 - 18:27  (12:53)    
+reboot   system boot  3.10.0-327.el7.x Wed Jun 21 05:33 - 18:41  (13:07)    
+root     pts/1        192.168.1.121    Wed Jun 21 04:57 - down   (00:23)    
+root     pts/0        :0               Wed Jun 21 04:55 - 05:20  (00:24)    
+root     :0           :0               Wed Jun 21 04:55 - 05:20  (00:25)    
+(unknown :0           :0               Wed Jun 21 04:55 - 04:55  (00:00)    
+reboot   system boot  3.10.0-327.el7.x Wed Jun 21 04:53 - 05:20  (00:27)    
+reboot   system boot  3.10.0-327.el7.x Wed Jun 21 04:49 - 05:20  (00:30)
+这里是如何阅读last信息：
+
+第一列告诉谁是用户
+第二列给出了用户如何连接的信息
+pts/0 (伪终端) 意味着从诸如SSH或telnet的远程连接的用户
+tty (teletypewriter) 意味着直接连接到计算机或者本地连接的用户
+除了重启活动,所有状态会在启动时显示
+
+第三列显示用户来自哪里。如果用户来自于远程计算机，你会看到一个主机名或者IP地址。如果你看见:0.0 或者什么都没有，这意味着用户通过本地终端连接。除了重启活动，内核版本会显示在状态中。
+剩下的列显示日志活动发生在何时。括号中的数字告诉我们连接持续了多少小时和分钟。
+日常操作中last的一些示例
+限制显示行的数目
+当你有很多行要显示时,你可以限制你想看到的行的数目.使用 -n 参数来这么做。
+
+[root@localhost ~]# last -n 3
+root     pts/3        192.168.100.136  Fri Nov 24 11:03   still logged in   
+root     pts/2        192.168.100.136  Fri Nov 24 10:56   still logged in   
+root     pts/1        192.168.101.136  Fri Nov 24 10:55   still logged in
+-n 参数会使last显示从当前时间到以后的3条记录。
+
+不显示主机名
+使用 -R 参数来这么做。这里是例子 :
+
+$ last -R
+reboot   system boot  Wed Jun 21 05:33 - 18:41  (13:07)    
+root     pts/1        Wed Jun 21 04:57 - down   (00:23)    
+root     pts/0        Wed Jun 21 04:55 - 05:20  (00:24)    
+root     :0           Wed Jun 21 04:55 - 05:20  (00:25)    
+(unknown :0           Wed Jun 21 04:55 - 04:55  (00:00)    
+reboot   system boot  Wed Jun 21 04:53 - 05:20  (00:27)    
+reboot   system boot  Wed Jun 21 04:49 - 05:20  (00:30) 
+如你所见,现在在也没有关于主机或者IP地址的信息了。
+
+最后一列显示主机名
+要这么做,我们使用 -a参数
+
+[root@eGW WCG-1.4.3]# last -a
+root     pts/2        Thu Nov 23 17:42   still logged in    192.168.101.136
+root     pts/1        Thu Nov 23 17:27   still logged in    192.168.101.136
+root     pts/2        Wed Nov 22 11:29 - 18:01  (06:32)     192.168.100.66
+root     pts/1        Tue Nov 21 10:53 - 18:01 (1+07:08)    192.168.100.66
+root     pts/4        Mon Nov 20 10:00   still logged in    192.168.101.136
+root     pts/5        Mon Nov 13 15:15   still logged in    192.168.100.106
+root     pts/4        Mon Nov 13 09:51 - 09:52 (7+00:01)    192.168.101.136
+root     pts/3        Sat Nov 11 16:49 - 18:32 (9+01:42)    192.168.100.136
+现在主机信息诸如10.0.76.162 会放在最后一列。
+
+显示完整登入登出时间日期
+对于此,你可以使用 -F 参数。这个是个示例:
+
+[root@eGW WCG-1.4.3]# last -F
+root     pts/2        192.168.101.136  Thu Nov 23 17:42:23 2017   still logged in                      
+root     pts/1        192.168.101.136  Thu Nov 23 17:27:25 2017   still logged in                      
+root     pts/2        192.168.100.66   Wed Nov 22 11:29:13 2017 - Wed Nov 22 18:01:28 2017  (06:32)    
+root     pts/1        192.168.100.66   Tue Nov 21 10:53:21 2017 - Wed Nov 22 18:01:40 2017 (1+07:08)   
+root     pts/4        192.168.101.136  Mon Nov 20 10:00:19 2017   still logged in                      
+root     pts/5        192.168.100.106  Mon Nov 13 15:15:36 2017   still logged in                      
+root     pts/4        192.168.101.136  Mon Nov 13 09:51:09 2017 - Mon Nov 20 09:52:41 2017 (7+00:01)   
+root     pts/3        192.168.100.136  Sat Nov 11 16:49:29 2017 - Mon Nov 20 18:32:27 2017 (9+01:42)   
+root     pts/2        192.168.100.136  Fri Nov 10 10:59:32 2017 - Mon Nov 20 18:32:23 2017 (10+07:32)  
+root     pts/1        192.168.100.136  Fri Nov 10 10:51:13 2017 - Mon Nov 20 18:32:20 2017 (10+07:41)
+打印特定的用户名
+如果你想要追踪特定的用户,你可以特别打印它。在last命令后面输入用户名。
+
+[root@eGW WCG-1.4.3]# last reboot
+reboot   system boot  3.10.0-514.el7.c Fri Nov 10 10:45 - 14:24 (14+03:38)  
+reboot   system boot  3.10.0-514.el7.c Fri Nov 10 10:13 - 14:24 (14+04:10)  
+reboot   system boot  3.10.0-514.el7.c Fri Nov 10 10:02 - 14:24 (14+04:21)  
+reboot   system boot  3.10.0-514.el7.c Fri Nov 10 09:55 - 14:24 (14+04:28)  
+reboot   system boot  3.10.0-514.el7.c Fri Nov 10 09:50 - 09:54  (00:04)    
+reboot   system boot  3.10.0-514.el7.c Sat Oct 21 18:22 - 09:49 (19+15:27)  
+reboot   system boot  3.10.0-514.el7.c Sat Oct 21 16:08 - 09:49 (19+17:41)  
+reboot   system boot  3.10.0-514.el7.c Sat Oct 21 15:57 - 09:49 (19+17:52)  
+reboot   system boot  3.10.0-514.el7.c Fri Oct 20 10:36 - 09:49 (20+23:13)  
+reboot   system boot  3.10.0-514.el7.c Fri Sep 29 11:42 - 09:49 (41+22:07)  
+reboot   system boot  3.10.101         Thu Sep 28 13:39 - 09:49 (42+20:10)  
+reboot   system boot  3.10.101         Thu Sep 28 13:06 - 09:49 (42+20:43)  
+
+打印特定 / pts
+last同样可以打印特定tty/pts的信息. 只要在last命令后面输入tty名字或者pty名字。
+
+这里有一些例子:
+
+[root@eGW WCG-1.4.3]# last tty1
+root     tty1                          Fri Nov 10 10:46   still logged in   
+root     tty1                          Fri Nov 10 10:14 - 10:15  (00:00)    
+root     tty1                          Fri Nov 10 10:05 - 10:05  (00:00)    
+root     tty1                          Tue Apr 25 10:14 - 10:19  (00:05)    
+root     tty1                          Mon Apr 24 18:35 - 10:09  (15:34)    
+root     tty1                          Mon Apr 24 18:03 - 18:32  (00:28)    
+当你看到 down 的值 - ,它意味着用户从某个时间登录直到系统重启或关机。
+
+使用另一个文件而不是 /var/log/wtmp
+默认上，last命令会从/var/log/wtmp中解析信息。如果你想要last命令从另外一个文件解析，你可以使用-f 参数。比如，当日志切割后，让我们假设切割后，之前的文件名变为/var/log/wtmp.1。那么last命令会像这样。
+
+$ last -f  /var/log/wtmp.1
+显示运行级别改变
+这里有个-x参数来显示运行级别。这里示例输出:
+
+[root@eGW WCG-1.4.3]# last -x
+root     pts/0        192.168.100.106  Fri Sep  1 12:20 - 10:21 (6+22:00)   
+runlevel (to lvl 3)   3.10.101         Fri Sep  1 11:57 - 11:04 (23+23:06)  
+reboot   system boot  3.10.101         Fri Sep  1 11:56 - 11:29 (23+23:32)  
+root     pts/1        192.168.100.106  Fri Sep  1 11:12 - crash  (00:43)    
+root     pts/0        192.168.100.106  Fri Sep  1 10:57 - crash  (00:58)    
+runlevel (to lvl 3)   3.10.101         Fri Sep  1 10:57 - 11:57  (00:59)    
+reboot   system boot  3.10.101         Fri Sep  1 10:55 - 11:29 (24+00:33)  
+runlevel (to lvl 3)   3.10.101         Fri Sep  1 10:11 - 10:57  (00:46)    
+你可以看到这里有两个运行级别。运行级别to lvl 3的条目意味着系统运行在完整的控制台模式，而没在X window或者GUI中。同时,当系统关机时，实际上是切换为运行级别0，这就是为什么last会显示to lvl 0。
+
+查看失败登录
+last命令用了记录成功登录，而 lastb 命令记录失败的登录尝试。你必须拥有root权限才能运行lastb命令。这里有一个lastb命令的示例输出。lastb会解析/var/log/btmp的信息。
+
+[root@eGW WCG-1.4.3]# lastb
+root     ssh:notty    192.168.9.73     Thu Nov 23 17:45 - 17:45  (00:00)    
+root     ssh:notty    192.168.9.73     Thu Nov 23 17:44 - 17:44  (00:00)    
+root     ssh:notty    192.168.9.73     Thu Nov 23 17:44 - 17:44  (00:00)    
+root     ssh:notty    192.168.9.73     Thu Nov 23 17:44 - 17:44  (00:00)    
+root     ssh:notty    192.168.9.73     Thu Nov 23 17:43 - 17:43  (00:00)    
+root     ssh:notty    192.168.9.73     Thu Nov 23 17:43 - 17:43  (00:00)    
+root     ssh:notty    192.168.9.73     Thu Nov 23 17:43 - 17:43  (00:00)    
+root     ssh:notty    192.168.9.73     Thu Nov 23 17:43 - 17:43  (00:00)    
+root     ssh:notty    192.168.9.73     Thu Nov 23 17:43 - 17:43  (00:00)    
+root     ssh:notty    192.168.9.73     Thu Nov 23 17:43 - 17:43  (00:00)    
+root     ssh:notty    192.168.100.106  Mon Nov 13 15:15 - 15:15  (00:00)    
+root     tty3                          Fri Nov 10 10:48 - 10:48  (00:00)    
+root     tty3                          Fri Nov 10 10:48 - 10:48  (00:00)    
+(unknown tty1                          Fri Nov 10 10:04 - 10:04  (00:00)    
+root     ssh:notty    192.168.9.175    Fri Nov 10 09:54 - 09:54  (00:00)    
+
+btmp begins Fri Nov 10 09:54:19 2017
+
+切割日志
+
+因为/var/log/wtmp记录每次的登录活动，文件的大小可能会快速地增长。默认上，Linux会每月切割 /var/log/wtmp/。切割的策略放在/etc/logrotate.conf 文件中。这里是我/etc/logrotate.conf*文件的内容。
+
+/var/log/wtmp {　　monthly　　create 0664 root umtp　　minsize 1M　　rotate 1}
+对于 /var/log/btmp, 这里是默认的倒换活动配置
+
+/var/log/btmp {　　missingok　　monthly　　create 0600 root umtp　　minsize 1M　　rotate 1}
+你可以根据需要自己修改。
+
+https://www.jianshu.com/p/3041b3c6a1b9

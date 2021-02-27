@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-18T22:09:32+08:00
+
+====== 禁止root登录 ======
+Created 星期四 18 二月 2021
+
+vi [[/etc/ssh/sshd_config]]
+
+禁止root登陆
+
+查找“#PermitRootLogin yes”，将前面的“#”去掉，短尾“Yes”改为“No”，并保存文件。
+
+3、重启sshd服务生效。
+serivce sshd restart

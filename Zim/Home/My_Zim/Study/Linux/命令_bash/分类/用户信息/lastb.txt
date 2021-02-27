@@ -1,0 +1,9 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-18T21:13:59+08:00
+
+====== lastb ======
+Created 星期四 18 二月 2021
+
+单独执行lastb指令，它会读取位于/var/log/btmp的文件，并把该文件内容记录的登入系统失败的用户名单，全部显示出来。
+

@@ -1,0 +1,87 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-21T05:24:45+08:00
+
+====== 部署 LNMP + Pi Dashboard ======
+创建日期 星期日 21 二月 2021
+
+https://shumeipai.nxez.com/2020/03/21/install-pi-dashboard-with-nginx-php73-on-pi.html
+
+在 Raspbian 上部署 LNMP + Pi Dashboard
+2020年3月21日 Spoony 未分类 16
+
+
+
+来自 RaspiSQH 的投稿，原文。
+
+前言
+之前我们介绍过给树莓派安装 Nginx + PHP7.0 + Pi Dashboard 的方法。
+
+Raspbian Buster 用 PHP7.1(2,3) 替代了 PHP7.0，有很多群友说找不到软件包了。因此我来介绍如何用在树莓派上部署新的 LNMP 环境(PHP7.3)，并部署好 Pi Dashboard 的方法。下面假设你已经刷好了 Raspbian Buster 系统。最好是把apt软件源也换过了。
+
+安装 Nginx 和 PHP7
+安装软件包
+在 Pi 的终端运行以下命令。
+
+sudo apt-get update
+sudo apt-get install nginx php7.3-fpm php7.3-cli php7.3-curl php7.3-gd php7.3-cgi
+sudo service nginx start
+sudo service php7.3-fpm restart
+如果安装成功，可通过 http://树莓派IP/ 访问到 Nginx 的默认页。Nginx 的根目录在 /var/www/html。
+
+让 Nginx 能处理 PHP
+sudo nano /etc/nginx/sites-available/default
+将其中的如下内容
+
+location / {
+				# First attempt to serve request as file, then
+				# as directory, then fall back to displaying a 404.
+				try_files $uri $uri/ =404;
+		}
+替换为
+
+location / {
+index  index.html index.htm index.php default.html default.htm default.php;
+}
+ 
+location ~\.php$ {
+fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+#fastcgi_pass 127.0.0.1:9000;
+fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+include fastcgi_params;
+}
+Ctrl + O 保存再 Ctrl + X 退出。
+
+sudo service nginx restart
+最后重启 Nginx 即可，以上步骤在树莓派3B + Raspbian Buster 系统版本上测试通过。4B也可以用的，别瞎想了。不能用一定是因为你漏掉了什么，再仔细检查一下。
+
+安装配置MySQL
+安装软件包
+sudo apt-get install mariadb-server-10.0
+更改密码
+执行 mysql 命令。
+
+MariaDB [(none)]> use mysql;
+MariaDB [mysql]> update user set plugin='mysql_native_password' where user='root';
+MariaDB [mysql]> UPDATE user SET password=PASSWORD('你要设定的密码') WHERE user='root';
+MariaDB [mysql]> flush privileges;
+MariaDB [mysql]> exit;
+重启服务
+
+service mysql restart
+mysql配置就完成了。
+
+Pi Dashboard 介绍
+请移步项目主页：http://make.quwj.com/project/10
+
+部署 Pi Dashboard
+GitHub 部署
+
+cd /var/www/html
+sudo git clone https://github.com/nxez/pi-dashboard.git
+即可通过 [[http://%E6%A0%91%E8%8E%93%E6%B4%BEIP/pi-dashboard]] 访问部署好了的 Pi Dashboard。
+
+以上步骤在树莓派3B + Raspbian Buster 系统版本上测试通过，每条都亲自验证过。
+
+文章标题：在 Raspbian 上部署 LNMP + Pi Dashboard - 树莓派实验室
+固定链接：https://shumeipai.nxez.com/2020/03/21/install-pi-dashboard-with-nginx-php73-on-pi.html

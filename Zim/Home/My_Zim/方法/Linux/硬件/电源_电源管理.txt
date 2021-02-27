@@ -1,7 +1,0 @@
-Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-Creation-Date: 2019-05-29T15:00:13+08:00
-
-====== 电源 电源管理 ======
-创建日期 星期三 29 五月 2019
-

@@ -1,0 +1,62 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-02-19T15:26:04+08:00
+
+====== 安全系统（软件锁许可管理器）不起作用或未正确安装 ======
+Created 星期五 19 二月 2021
+
+https://knowledge.autodesk.com/zh-hans/support/autocad/troubleshooting/caas/sfdcarticles/sfdcarticles/CHS/Error-The-security-system-Softlock-license-manager-is-not-functioning-or-is-improperly-installed-while-launching-AutoCAD.html
+
+原因：
+此错误可能有几种原因：
+
+许可服务已禁用。
+Autodesk 产品安装已损坏，包括重要的注册表信息。
+已通过调整 Windows 注册表更改许可方法。
+受信任的存储文件已损坏。
+用于管理许可机制的重要位置存在权限问题。
+解决方案：
+检查以确保服务未禁用，如果已禁用，请重新启动：
+在 Windows 的“控制面板”中，搜索“__服务__”。 
+在“__管理工具__”下，选择“__查看本地服务__”。 
+在“__服务(本地)__”列表中，找到“__FlexNet Licensing Service 64__”。
+在此条目上单击鼠标右键，然后选择“__属性__”。
+将“__启动类型__”设置为“自动”。
+在“服务状态”下，确定服务当前是否正在运行。
+如果服务未运行，请单击“启动”，然后单击“确定”。
+如果服务已成功启动，请单击“停止”，然后单击“启动”以再次重新启动。
+尝试重新启动失败的程序。
+如果重新启动 FlexNet Licensing Service 不起作用， 请重新生成 adskflex tsf 数据文件：
+在 Windows 上启用隐藏的文件和文件夹
+删除以 adskflex 开头的文件（例如 ADSKFLEX_NUMBERS_TSF.data），或将其移动到其他文件夹。
+C:\ProgramData\FLEXnet
+
+启动该程序。 将创建一个新的 xxx_TSF.data 文件（也有可能还创建一个日志文件）。
+
+按要求注册程序。
+
+如果重新生成 adskflex tsf 数据文件不起作用，请使用系统管理员帐户重新安装 Autodesk 软件，如下所示：
+
+删除 Autodesk 软件 (Windows)
+开始之前，请以管理员身份登录并确认您对以下位置具有完全访问权限：
+注册表项：
+HKEY_CURRENT_USER>SOFTWARE>AUTODESK
+HKEY_LOCAL_MACHINE>SOFTWARE>AUTODESK
+
+文件夹：
+程序安装所在的文件夹，例如，C:\program files\Autodesk\AutoCAD 2015
+
+C:\ProgramData\Autodesk
+C:\Users\<当前用户>\AppData\Local\Autodesk
+C:\Users\<当前用户>\AppData\Roaming\Autodesk
+C:\Program Files\Common Files\Autodesk Shared
+C:\ProgramData\Flexnet
+C:\ProgramData\Autodesk\Adlm\ProgramInformation.pit
+
+按照 Autodesk 产品的常规安装工作流执行操作。
+启动该软件并继续进行激活。
+
+另请参见：
+安全系统不起作用或未正确安装（论坛帖子）
+软件锁许可管理器错误消息（论坛帖子）
+（软件锁许可管理器）不起作用或未正确安装（论坛帖子）

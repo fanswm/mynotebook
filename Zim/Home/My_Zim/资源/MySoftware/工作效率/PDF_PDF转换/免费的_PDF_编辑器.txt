@@ -1,11 +1,11 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2019-01-25T16:38:14+08:00
 
 ====== 免费的 PDF 编辑器 ======
 创建日期 星期五 25 一月 2019
 
-这款免费的 PDF 编辑器，或许能满足大部分人的需求：Icecream PDF Editor | App+1
+这款免费的 PDF 编辑器，或许能满足大部分人的需求：__Icecream PDF Editor__ | App+1
 01月20日
 Umi Umi
 少数派曾经介绍过 PDF Expert、PDFelement 等多款 PDF 专业编辑器，但如果你只是偶尔需要对 PDF 动些手脚，花数百元购买以上 App 就有点不值了。这种情况下，完全免费的 Icecream PDF Editor 或许能博得你的青睐。
@@ -27,3 +27,5 @@ Icecream PDF Editor 的 UI 设计中规中矩，没有多余的元素点缀。�
 在 1.17 版本的更新中，Icecream PDF Editor 还新增了对中文的支持，对于国内用户来说无疑是一个好消息。
 
 https://sspai.com/post/52591
+
+https://icecreamapps.com/PDF-Editor/
