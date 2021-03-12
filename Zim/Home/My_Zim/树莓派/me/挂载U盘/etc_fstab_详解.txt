@@ -1,5 +1,5 @@
 Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
+Wiki-Format: zim 0.6
 Creation-Date: 2018-11-30T23:20:48+08:00
 
 ====== etc fstab 详解 ======
@@ -98,29 +98,17 @@ auto/noauto   当下载mount -a 的命令时，此文件系统是否被主动挂
 
 rw/ro          是否以以只读或者读写模式挂载
 
-exec/noexec        
+exec/noexec        限制此文件系统内是否能够进行"执行"的操作
 
- 限制此文件系统内是否能够进行"执行"的操作
+user/nouser 是否允许用户使用mount命令挂载
 
-user/nouser
+suid/nosuid 是否允许SUID的存在
 
-是否允许用户使用mount命令挂载
+Usrquota 启动文件系统支持磁盘配额模式
 
-suid/nosuid
+Grpquota 启动文件系统对群组磁盘配额模式的支持
 
-是否允许SUID的存在
-
-Usrquota
-
-启动文件系统支持磁盘配额模式
-
-Grpquota
-
-启动文件系统对群组磁盘配额模式的支持
-
-Defaults
-
-同事具有rw,suid,dev,exec,auto,nouser,async等默认参数的设置
+Defaults 同事具有rw,suid,dev,exec,auto,nouser,async等默认参数的设置
 
  
 
